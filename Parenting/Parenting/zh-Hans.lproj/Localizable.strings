@@ -1,0 +1,322 @@
+/* 
+  Localizable.strings
+  Amoy Baby Care
+
+  Created by user on 13-6-18.
+  Copyright (c) 2013年 家明. All rights reserved.
+*/
+"reviewstitle" = "去给'%@'打分吧";
+"reviewsmsg"="您的评价对我们很重要";
+"reviewscancel"="稍后评价";
+"reviewsok"="去评价";
+
+"tabbarhome"="首页";
+"tabbarsummary"="总结";
+"tabbaradvise"="建议";
+"tabbarsettings"="设置";
+"navback"="返回";
+"navsummary"="总结";
+"navLogin"="登录";
+"navRegister" = "注册";
+
+"All"="全部";
+"Feed"="喂养";
+"Diaper"="尿布";
+"Sleep"="睡觉";
+"Bath"="洗澡";
+"Play"="玩耍";
+
+"FeedTable"="Feed";
+"DiaperTable"="Diaper";
+"SleepTable"="Sleep";
+"BathTable"="Bath";
+"PlayTable"="Play";
+
+"btnenvironment"="环境";
+"btnadvise"="建议";
+
+"Baby information"="宝宝信息";
+"Metric/Imperial"="公制/英制";
+"Notifications"="通知";
+"Facebook"="Facebook";
+"Review App"="检查应用";
+"Submit feedback/improvements"="联系我们";
+"Submit feedback online"="在线反馈";
+
+"My Devices" = "我的配件";
+
+"UMSend"="发送";
+"UMFeedback"="在线反馈";
+"UMBaseinfo"="性别/年龄";
+"UMAge"="年龄";
+"UMSex"="性别";
+"UMUnder15"="15岁以下";
+"UMAbove61"="61岁以上";
+"Copyright"="版权信息";
+"Clear all logged data"="清除数据记录";
+"Delete"="删除";
+"Sign in"="登录";
+"Sign out"="退出";
+"Metric"="公制";
+"Imperial"="英制";
+
+"Name:"="姓名:";
+"Birthday:"="生日:";
+"Height:"="身高:";
+"Weight:"="体重:";
+"HC:"="头围:";
+"Average:"="平均:";
+"Gender:"="性别:";
+"Male"="男";
+"Female"="女";
+"Save"="保存";
+
+"Week"="周";
+"Month"="月";
+
+"Sun"="日";
+"Mon"="一";
+"Tue"="二";
+"Wed"="三";
+"Thu"="四";
+"Fri"="五";
+"Sat"="六";
+
+"Camera"="拍照";
+"Photo"="相册";
+"Cancle"="取消";
+
+"Dirty"="脏";
+"Dry"="干";
+"Wet"="湿";
+"Submit"="提交";
+"Share"="分享";
+
+"TimerTipsTile" = "计时器激活状态" ;
+"TimerMessage" = "请关闭其他计时器";
+"Dismiss"="确认";
+
+"FeedSaveTips"="粑粑/麻麻,好像忘了帮我记录吃了多少哦!";
+
+"Clear all logged data"="清空记录";
+"YES"="是";
+"NO"="否";
+
+"CloseTimerMsg" = "请先关闭当前计时!";
+
+"Temperature"="温度";
+"Humidity"="湿度";
+"Light"="光照";
+"Sound"="噪音";
+"PM2.5"="空气质量";
+"UV"="紫外线指数";
+
+"Breast"="母乳";
+"Bottle"="奶瓶";
+
+
+"Comments:"="备注:";
+"Date:"="日期:";
+"Start Time:"="开始时间";
+"Activity:"="活动:";
+"Confirm your activity"="确认您的活动";
+"Duration:"="持续时间:";
+"Mls:"="毫升:";
+"Oz:"="盎司:";
+
+"Right"="右";
+"Left"="左";
+
+"Hours/h"="小时/h";
+"Count"="次数";
+
+"Save_Success"="保存成功";
+
+"Years" = "岁";
+"Months"= "月";
+"Days"  = "天";
+
+"Wait" = "准备计时...";
+"Counting" = "正在计时...";
+"Over" = "计时结束,总共进行%.1f小时";
+
+"DayTips" = "%d天前";
+"HourTips" = "%d小时前";
+"MinuteTips" = "%d分钟前";
+"SecondTips" = "%d秒前";
+
+"BabyInfoTips" = "粑粑/麻麻,我的信息还没有填好哦!";
+
+"WeatherDetail"= "未有数据获取";
+
+"Sunday"   = "星期日";
+"Monday"   = "星期一";
+"Tuesday"  = "星期二";
+"Wednesday"= "星期三";
+"Thursday" = "星期四";
+"Friday"   = "星期五";
+"Saturday" = "星期六";
+
+"DurationHour" = "小时";
+"DurationMin"  = "分钟";
+"DurationSec"  = "秒";
+
+"Add" = "添加";
+
+"InformationCenter"="发现";
+
+"Circle"  = "我的圈子";
+"Mission" = "我的任务";
+"Notify"  = "我的消息";
+"Tips"    = "小贴士";
+
+"PlotLoading" = "加载中...";
+"LocalNotify" = "我的提醒";
+
+"CopyRight" = "
+Copyright © [2013-2018] [厦门爱摩信息科技有限公司]
+
+(1) Ownership Of Copyright
+We Own The Copyright In:
+(a) This Ios Application;
+(b) The Material On This Application (Including, Without Limitation, The Text, Computer Code, Artwork, Photographs, Images, Music, Audio Material, Video Material And Audio-Visual Material On This Application).
+
+(2) Credit
+This Document Was Created Using An Seq Legal Template.
+
+(3) Copyright Licence
+We Grant To You a Worldwide, Non-Exclusive, Royalty-Free, Revocable Licence
+To:
+(a)	View This Application And The Material On This Application On a Computer Or Mobile Device;
+(b)	Copy And Store The Material On This Application In Your Device Cache Memory;
+(c)	Print Pages From This Application For Your Own [Personal And Non-Commercial] Use.
+We Do Not Grant You Any Other Rights In Relation To This Website Or The
+Material On This Application. In Other Words, All Other Rights Are
+Reserved.
+For The Avoidance Of Doubt, You Must Not Adapt, Edit, Change,
+Transform,
+Publish, Republish, Distribute, Redistribute, Broadcast, Rebroadcast,
+Or Show Or Play In Public This Website Or The Material On This Application
+(In Any Form Or Media) Without Our Prior Written Permission.
+
+(4) Data Mining
+The Automated And/Or Systematic Collection Of Data From This.Application Is Prohibited.
+
+(5) Permissions
+You May Request Permission To Use The Copyright Materials On This Application By Writing To
+[Service@Amoycare.Com] Or By Post To.[Chuang Ye Da Sha #304, Gao Xin Chuang Ye Yuan Qu, Xiamen,China ].
+
+(6) Enforcement Of Copyright
+We Take The Protection Of Our Copyright Very Seriously.
+If We Discover That You Have Used Our Copyright Materials In Contravention Of The Licence
+Above, We May Bring Legal Proceedings Against You, Seeking Monetary Damages And/Or An Injunction To
+Stop.You Using Those Materials. You Could Also Be Ordered To Pay Legal Costs.
+If You Become Aware Of Any Use Of Our Copyright Materials That Contravenes Or May ContraveneThe
+Licence Above, Please Report This By Email To [Service@Amoycare.Com] Or By Post To [Chuang Ye Da
+Sha #304, Gao Xin Chuang Ye Yuan Qu, Xiamen, China].
+
+(7) Infringing Material
+If You Become Aware Of Any Material On Our Application That You Believe Infringes Your Or Any
+Other Person's Copyright, Please Report This By Email To [service@amoycare.com] Or By Post To
+[ChuangYeDaSha #304, Gao Xin Chuang Ye Yuan Qu, Xiamen, China].
+
+Disclaimers
+This Software And Documentation Is Provided “As Is,” And Copyright Holders Make No
+Representations Or Warranties, Express Or Implied, Including But Not Limited To, Warranties Of
+Merchantability Or Fitness For Any Particular Purpose Or That The Use Of The Software Or
+Documentation Will Not Infringe Any Third Party Patents, Copyrights, Trademarks Or Other Rights.
+
+Copyright Holders Will Not Be Liable For Any Direct, Indirect, Special Or Consequential Damages
+Arising Out Of Any Use Of The Software Or Documentation.
+
+The Name And Trademarks Of Copyright Holders May Not Be Used In Advertising Or Publicity
+Pertaining To The Software Without Specific, Written Prior Permission. Title To Copyright In This
+Software And Any Associated Documentation Will At All Times Remain With Copyright Holders.
+";
+
+"Feed_1"="http://www.birth.com.au/baby/feeding-your-baby/choosing-to-breastfeed/top-breastfeeding-tips-(1)";
+"Feed_2"="http://www.birth.com.au/baby/feeding-your-baby/breastfeeding/how-often-to-feed-your-baby";
+"Feed_3"="http://www.birth.com.au/Baby/Feeding-your-baby/Breastfeeding/Breastfeeding-the-early-days";
+"Feed_4"="http://www.birth.com.au/Baby/Feeding-your-baby/Bottle-feeding/Bottle-feeding-about";
+"Feed_5"="http://www.birth.com.au/Pregnancy-(1)/Pregnancy-12-28-weeks/Preparing-for-new-baby/Choosing-how-to-feed-your-baby";
+
+"Feed_T1"="Top breastfeeding tips";
+"Feed_T2"="How often to feed your baby";
+"Feed_T3"="Breastfeeding, the early days";
+"Feed_T4"="Bottle feeding your baby";
+"Feed_T5"="Choosing how to feed your baby";
+
+"Sleep_1"="http://www.birth.com.au/Baby/Baby-sleep-settling-and-wrapping/Getting-your-baby-to-sleep/Teach-your-baby-good-sleep-patterns";
+"Sleep_2"="http://www.birth.com.au/settling-your-baby/sleep-and-settle";
+"Sleep_3"="http://www.birth.com.au/getting-your-baby-to-sleep/getting-your-baby-to-sleep";
+"Sleep_4"="http://www.birth.com.au/getting-your-baby-to-sleep/babys-sleep-and-wake-patterns";
+"Sleep_5"="http://www.birth.com.au/Baby/Baby-sleep-settling-and-wrapping/Settling-your-baby/Support-strategies-for-unsettled-and-crying-period";
+
+"Sleep_T1"="Teach your baby good sleep patterns";
+"Sleep_T2"="Getting your baby to sleep";
+"Sleep_T3"="Baby's sleep and wake patterns";
+"Sleep_T4"="Support strategies for unsettled and crying periods";
+"Sleep_T5"="Sleep and settle tips";
+
+"Bath_1"="http://www.birth.com.au/Baby/Newborn-needs-and-care/Baby-care/Top-10-tips-for-wash-and-change-time";
+"Bath_2"="http://www.birth.com.au/bathing-your-newborn/what-you-will-need-to-bathe-baby";
+"Bath_3"="http://www.birth.com.au/bathing-your-newborn/in-the-beginning-when-to-bath";
+"Bath_4"="http://www.birth.com.au/baby/newborn-needs-and-care/bathing-your-newborn/parents-babies-reactions-responses";
+"Bath_5"="http://www.birth.com.au/bathing-your-newborn/top-and-tailing";
+"Bath_6"="http://www.birth.com.au/bathing-your-newborn/bathing-your-baby-step-by-step";
+
+"Bath_T1"="Top 10 tips for washing and changing your baby";
+"Bath_T2"="What you will need to bathe baby";
+"Bath_T3"="When to bathe your baby";
+"Bath_T4"="Making bathtime fun for everyone";
+"Bath_T5"="Top and tailing baby wash";
+"Bath_T6"="Bathing your baby - step by step";
+
+"Diaper_1"="http://www.birth.com.au/changing-nappies/how-to-change-a-nappy-step-by-step";
+"Diaper_2"="http://www.birth.com.au/Pregnancy/Pregnancy-12-28-weeks/Preparing-for-new-baby/Nappies-or-Diapers";
+"Diaper_3"="http://www.birth.com.au/baby/newborn-needs-and-care/changing-nappies/choosing-disposable-nappies";
+"Diaper_4"="http://www.birth.com.au/baby/newborn-needs-and-care/changing-nappies/nappy-rash-and-your-baby";
+"Diaper_5"="http://www.birth.com.au/baby/newborn-needs-and-care/changing-nappies/cloth-nappies-and-your-baby";
+
+"Diaper_T1"="How to change a nappy";
+"Diaper_T2"="All about nappies";
+"Diaper_T3"="Choosing disposable nappies";
+"Diaper_T4"="Nappy rash and your baby";
+"Diaper_T5"="Cloth nappies and your baby";
+
+"Play_1"="http://www.birth.com.au/early-nurturing-of-your-baby/bonding-with-your-baby";
+"Play_2"="http://www.birth.com.au/early-nurturing-of-your-baby/the-1st-hour-with-your-newborn";
+"Play_3"="http://www.birth.com.au/wrapping-your-baby/wrapping-about";
+
+"Play_4"="http://www.birth.com.au/dressing-your-baby/dressing-undressing-baby-about";
+"Play_5"="http://www.birth.com.au/day-to-day-care/day-to-day-care-of-your-newborn";
+"Play_6"="http://www.birth.com.au/Baby/Baby-in-the-first-six-weeks/Your-babys-growth-and-development/Bonding-with-your-baby";
+
+"Play_7"="http://www.birth.com.au/baby/babys-growth-and-development/your-babys-growth-and-development/how-to-talk-to-your-baby";
+"Play_8"="http://www.birth.com.au/Baby/Newborn-needs-and-care/Dressing-your-baby/How-to-dress-your-baby";
+"Play_9"="http://www.birth.com.au/parenting/early-parenting/support-strategies-for-new-parents/top-10-tips-for-building-a-support-network";
+
+"Play_10"="http://www.birth.com.au/baby/babys-growth-and-development/your-babys-growth-and-development/baby-play";
+"Play_11"="http://www.birth.com.au/day-to-day-care/feeding-and-sleeping-patterns";
+"Play_12"="http://www.birth.com.au/parenting/early-parenting/survival-tips-for-new-parents/top-10-tips-for-you";
+
+"Play_13"="http://www.birth.com.au/baby-massage/infant-massage-about";
+
+
+"Play_T1"="Bonding with your baby";
+"Play_T2"="How to hold your new baby";
+"Play_T3"="Wrapping your baby";
+
+"Play_T4"="Dressing and undressing your baby";
+"Play_T5"="Day to day care of your newborn";
+"Play_T6"="How to do touch";
+
+"Play_T7"="How to talk to your baby";
+"Play_T8"="How to dress your baby";
+"Play_T9"="Top 10 tips for building a support network";
+
+"Play_T10"="Baby play";
+"Play_T11"="Baby feeding and sleeping patterns";
+"Play_T12"="Top 10 tips for you";
+
+"Play_T13"="Baby massage";

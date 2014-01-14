@@ -1,0 +1,150 @@
+//
+// Prefix header for all source files of the 'Parenting' target in the 'Parenting' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+#import "SuggestView.h"
+#import "AdviseScrollview.h"
+#import "feedViewController.h"
+#import "diaperViewController.h"
+#import "sleepViewController.h"
+#import "playViewController.h"
+#import "bathViewController.h"
+#import "currentdate.h"
+#import "save_feedview.h"
+#import "save_bathview.h"
+#import "save_playview.h"
+#import "save_sleepview.h"
+#import "save_diaperview.h"
+#import "DataBase.h"
+#import "ActivityItem.h"
+#import "WeatherView.h"
+#import "BLEWeatherView.h"
+#import "BLEWeatherController.h"
+#import "Weather.h"
+#import "BLEWeather.h"
+#import "FMDatabase.h"
+#import "SummaryItem.h"
+#import "OpenFunction.h"
+#import "ChineseToPinyin.h"
+#import "defaultAppDelegate.h"
+#import "RNGridMenu.h"
+#import "MobClick.h"
+#import "MBProgressHUD.h"
+#import "AdviseData.h"
+#import "AdviseLevel.h"
+#import "EnvironmentAdviceDataBase.h"
+#import "DXAlertView.h"
+#import "UartLib.h"
+
+#define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
+#define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
+#define DBPATH ([NSString stringWithFormat:@"%@/Documents/babycare.db",NSHomeDirectory()])
+
+#define SDBPATH ([NSString stringWithFormat:@"%@/Documents/BabySuggestion.rdb",NSHomeDirectory()])
+
+#define ADVISE_TYPE_DIAPER 1
+#define ADVISE_TYPE_SLEEP  2
+#define ADVISE_TYPE_PLAY   3
+#define ADVISE_TYPE_FEED   4
+#define ADVISE_TYPE_BATH   5
+#define ADVISE_TYPE_ALL    6
+
+#define ADVISE_TYPE_TEMP    11
+#define ADVISE_TYPE_HUMI    12
+#define ADVISE_TYPE_LIGHT   13
+#define ADVISE_TYPE_NOICE   14
+#define ADVISE_TYPE_UV      15
+#define ADVISE_TYPE_PM25    16
+
+/**
+ *	QuadCurveMenu
+ *
+ *	@param	...	选择项目id
+ *
+ *	@return	0~5（all,play,bath,feed,sleep,diaper）
+ */
+#define QCM_TYPE_ALL    -1
+#define QCM_TYPE_PLAY   0
+#define QCM_TYPE_BATH   1
+#define QCM_TYPE_FEED   2
+#define QCM_TYPE_SLEEP  3
+#define QCM_TYPE_DIAPER 4
+
+//去log
+#ifdef DEBUG
+#else
+#define NSLog(...){};
+#endif
+#define G_YADDONVERSION ([OpenFunction getSystemVersion] >= 7.0 ?0:0)
+
+#define SAVEVIEW_YADDONVERSION ([OpenFunction getSystemVersion] >= 7.0 ?64:0)
+
+#define G_XREDUCEONVERSION ([OpenFunction getSystemVersion] >= 7.0 ?20.0:0)
+
+#define CUSTOMER_COUNTRY 1 // US,1 CN
+
+#define PM25INTOKEN    @"xNKhsJsD9fM2yCU9mXvp"
+
+#define UMENGAPPKEY    @"5279b55f56240bf56c0886f6"
+
+#define JPUSHAPPKEY    @"415aa5c57db9b6d73d91c2af"
+
+#define GuideVerson    @"1.7.6"
+
+#define ASIHTTPADDRESS @"http://cbaisan.w82.dns87.com/babycare/WCF" //接口IP
+//#define ASIHTTPADDRESS @"http://192.168.1.138:8033/babycare/WCF"
+#define ASIHTTPTOKEN @"5788024"  //令牌
+
+#define SUGGESTION_TYPE_TEMP    2
+#define SUGGESTION_TYPE_HUMI    1
+#define SUGGESTION_TYPE_LIGHT   4
+#define SUGGESTION_TYPE_NOICE   3
+#define SUGGESTION_TYPE_UV      5
+#define SUGGESTION_TYPE_PM25    6
+
+//*** 蓝牙设备连接参数
+#define PRESS_KEY_DIAPER 1
+#define PRESS_KEY_SLEEP  2
+#define PRESS_KEY_FEED_BREAST 3
+#define PRESS_KEY_FEED_BOTTLE 4
+#define PRESS_KEY_BATH 5
+#define PRESS_KEY_PLAY 6
+
+#define GET_HISTORY_TYPE_START  0
+#define GET_HISTORY_TYPE_NEXT   1
+#define GET_HISTORY_TYPE_NEXT_DELETE_CURTERN 2
+
+#define PID_REQ_SET_SYS_TIME 1
+#define PID_RESP_SET_SYS_TIME 2
+#define PID_REQ_GET_HISTORY 3
+#define PID_RESP_GET_HISTORY 4
+
+#define PID_REQ_GET_TEMPHUMI 5
+#define PID_RESP_GET_TEMPHUMI 6
+#define PID_REQ_GET_LIGHT 7
+#define PID_RESP_GET_LIGHT 8
+#define PID_REQ_GET_UV 9
+#define PID_RESP_GET_UV 10
+#define PID_REQ_GET_MICROPHONE 11
+#define PID_RESP_GET_MICROPHONE 12
+
+#define PID_HEART_BEAT  254
+
+//五个按钮:喂食,换尿布,洗澡,睡觉,玩耍
+#define BLUETOOTH_BUTTON_FEED   @"04"
+#define BLUETOOTH_BUTTON_DIAPER @"05"
+#define BLUETOOTH_BUTTON_BATH   @"03"
+#define BLUETOOTH_BUTTON_SLEEP  @"01"
+#define BLUETOOTH_BUTTON_PLAY   @"02"
+//*** end
+
