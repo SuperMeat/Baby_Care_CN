@@ -32,18 +32,23 @@ typedef enum{
                   Week:(int)week
                WeekDay:(int)weekday
                 Status:(NSString*)status
+                 Color:(NSString*)color
                 Remark:(NSString*)remark;
 -(BOOL)insertsleepStarttime:(NSDate*)starttime
                  Month:(int)month
                   Week:(int)week
                 WeekDay:(int)weekday
               Duration:(int)duration
+                 Place:(NSString*)place
                 Remark:(NSString*)remark;
 -(BOOL)insertplayStarttime:(NSDate*)starttime
                       Month:(int)month
                        Week:(int)week
                     WeekDay:(int)weekday
                    Duration:(int)duration
+                     Place:(NSString*)place
+                   WithWho:(NSString*)withwho
+                    DoWhat:(NSString*)dowhat
                      Remark:(NSString*)remark;
 -(BOOL)insertbathStarttime:(NSDate*)starttime
                       Month:(int)month

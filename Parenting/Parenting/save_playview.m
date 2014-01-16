@@ -272,11 +272,11 @@
     
     //[db insertplayStarttime:[currentdate getStarttime] Month:[currentdate getMonth] Week:[currentdate getWeek] WeekDay:[currentdate getWeekDay] Duration:(duration) Remark:remarktext.text];
         if (curstarttime == nil) {
-            [db insertplayStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Duration:(duration) Remark:remarktext.text];
+            [db insertplayStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Duration:(duration) Place:@"" WithWho:@"" DoWhat:@"" Remark:remarktext.text];
         }
         else
         {
-            [db insertplayStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Duration:(duration) Remark:remarktext.text];
+            [db insertplayStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Duration:(duration) Place:@"" WithWho:@"" DoWhat:@"" Remark:remarktext.text];
             curstarttime = nil;
         }
 

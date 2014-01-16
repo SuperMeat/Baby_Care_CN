@@ -15,27 +15,25 @@
 
 #import "MMXTabBarController.h"
 
-
-
 @class defaultViewController;
 @interface defaultAppDelegate : UIResponder <UIApplicationDelegate>
 {
-    MMXTabBarController         *TabbarController;
-    SettingViewController       *settingViewController;
+    MMXTabBarController             *TabbarController;
+    SettingViewController           *settingViewController;
     InformationCenterViewController *icViewController;
-    SummaryViewController       *summaryViewController;
-    HomeViewController          *homeViewController;
-    GuideViewController         *guideViewController;
-    BLEWeatherController        *bleweatherController;
-    UINavigationController *settingNavigationViewController;
-    UINavigationController *adviseNavigationViewController;
-    UINavigationController *summaryNavigationViewController;
-    UINavigationController *homeNavigationViewController;
-    UINavigationController *icNavigationViewController;
+    SummaryViewController           *summaryViewController;
+    HomeViewController              *homeViewController;
+    GuideViewController             *guideViewController;
+    BLEWeatherController            *bleweatherCtrler;
+   
+    UINavigationController          *settingNavigationViewController;
+    UINavigationController          *adviseNavigationViewController;
+    UINavigationController          *summaryNavigationViewController;
+    UINavigationController          *homeNavigationViewController;
+    UINavigationController          *icNavigationViewController;
 }
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) defaultViewController *viewController;
 
--(BOOL)isBLEWeatherConnected;
 @end

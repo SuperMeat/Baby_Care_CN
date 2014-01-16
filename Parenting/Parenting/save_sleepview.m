@@ -297,11 +297,11 @@
     //[db insertsleepStarttime:[currentdate getStarttime] Month:[currentdate getMonth] Week:[currentdate getWeek] WeekDay:[currentdate getWeekDay] Duration:(duration) Remark:remarktext.text];
 
         if (curstarttime == nil) {
-            [db insertsleepStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Duration:(duration) Remark:remarktext.text];
+            [db insertsleepStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Duration:(duration) Place:@"" Remark:remarktext.text];
         }
         else
         {
-            [db insertsleepStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Duration:(duration) Remark:remarktext.text];
+            [db insertsleepStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Duration:(duration) Place:@""  Remark:remarktext.text];
             curstarttime = nil;
         }
 

@@ -324,11 +324,11 @@
         }
     //[db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Remark:remarktext.text];
         if (curstarttime == nil) {
-            [db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Remark:remarktext.text];
+            [db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Color:@""Remark:remarktext.text];
         }
         else
         {
-            [db insertdiaperStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Remark:remarktext.text];
+            [db insertdiaperStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Remark:remarktext.text];
             curstarttime = nil;
         }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
@@ -484,7 +484,7 @@
         NSTimeInterval animationDuration = 0.25f;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:animationDuration];
-        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y-150, 320, 460-44-49);
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y-150, 320, 460-44-49);
         [UIView commitAnimations];
         self.isshow=YES;
     }
@@ -497,7 +497,7 @@
         NSTimeInterval animationDuration = 0.25f;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:animationDuration];
-        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y+150, 320, 460-44-49);
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y+150, 320, 460-44-49);
         [UIView commitAnimations];
         self.isshow=NO;
     }
@@ -513,8 +513,8 @@
     [self keyboradhidden];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
     return YES;
 }
 

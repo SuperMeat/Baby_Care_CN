@@ -69,7 +69,8 @@
             if (scanCount>10) {
                 [self.bleControllerDelegate scanResult:NO with:nil];
             }
-        }else{
+        }else
+        {
             [[NSUserDefaults standardUserDefaults] setObject:[connectPeripheral name] forKey:@"BTNAME"];
             [self.bleControllerDelegate scanResult:YES with:foundPeripherals];
         }
@@ -185,18 +186,18 @@
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_DIAPER]) {
             //db insertDiaper
-            isSaved = [db insertdiaperStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime]  WeekDay:[currentdate getWeekDayFromDate:startTime] Status:@"" Remark:@""];
+            isSaved = [db insertdiaperStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime]  WeekDay:[currentdate getWeekDayFromDate:startTime] Status:@"" Color:@"" Remark:@""];
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_BATH]) {
             //db insertBath
             isSaved = [db insertbathStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime]   WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:hDuration Remark:@""];
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_SLEEP]) {
-            isSaved = [db insertsleepStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime] WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:hDuration Remark:@""];
+            isSaved = [db insertsleepStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime] WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:hDuration Place:@""  Remark:@""];
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_PLAY]) {
             //db insertPlay
-            isSaved = [db insertplayStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime] WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:(hDuration) Remark:@""];
+            isSaved = [db insertplayStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime] WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:(hDuration) Place:@"" WithWho:@"" DoWhat:@""  Remark:@""];
         }
         
         [self getPressKeyHistory:1];

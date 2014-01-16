@@ -48,6 +48,7 @@
     long highmaxphone;
     double maxphonethrans;
     
+    BOOL isFistTip;
     BOOL isTimeOut;
     BOOL isFound;
     BOOL isFistTime;
@@ -56,7 +57,6 @@
     NSTimer *checktimer;
     NSTimer *gettimer;
     NSTimeInterval getDataTimeInterval;
-
 }
 @property (strong, nonatomic) BLEController *blecontroller;
 @property (assign) id<BLEWeatherControllerDelegate> bleweatherControllerDelegate;
