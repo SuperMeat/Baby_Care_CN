@@ -78,28 +78,34 @@
 #pragma -mark bluetooth delegate
 -(void)BLEPowerOff:(BOOL)isPowerOff
 {
-    isBLEConnected = NO;
-    UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝没有足够电量,请充电" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alter show];
+    if (isBLEConnected) {
+        isBLEConnected = NO;
+        UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝没有足够电量,请充电" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alter show];
+    }
 }
 
 -(void)DidConnected:(BOOL)isConnected
 {
-    isBLEConnected = isConnected;
-    [self.blecontroller stopscan];
-    [checktimer invalidate];
-    UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝连接成功" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alter show];
-    [self sendData];
+    if (!isBLEConnected) {
+        isBLEConnected = isConnected;
+        [self.blecontroller stopscan];
+        [checktimer invalidate];
+        UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝连接成功" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alter show];
+        [self sendData];
+    }
 }
 
 -(void)DisConnected:(BOOL)isConnected
 {
-    isBLEConnected = isConnected;
-    [gettimer invalidate];
-    UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝已断开连接" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alter show];
-    [self checkbluetooth];
+    if (isBLEConnected) {
+        isBLEConnected = isConnected;
+        [gettimer invalidate];
+        UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝已断开连接" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alter show];
+        [self checkbluetooth];
+    }
 }
 
 -(void)scanResult:(BOOL)result with:(NSMutableArray  *)foundPeripherals
