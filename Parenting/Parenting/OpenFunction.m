@@ -209,13 +209,12 @@
     UILocalNotification *notification=[[UILocalNotification alloc] init];
     if (notification!=nil) {
         
-        notification.fireDate       = fireDate;
-        notification.repeatInterval = kCFCalendarUnitWeek;
+        notification.fireDate  = fireDate;
         notification.timeZone  = [NSTimeZone defaultTimeZone];
         notification.soundName = @"钟琴.m4a";
         notification.alertBody = message;
-        notification.hasAction = NO;
-        notification.userInfo  = [[NSDictionary alloc] initWithObjectsAndKeys:alarmKey,@"AlarmKey", nil];
+        notification.hasAction = YES;
+        notification.userInfo  = [[NSDictionary alloc] initWithObjectsAndKeys:alarmKey,alarmKey, nil];
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
     

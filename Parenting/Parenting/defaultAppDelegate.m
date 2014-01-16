@@ -109,7 +109,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     ASIHTTPController *aSIHTTPController = [[ASIHTTPController alloc] init];
     [aSIHTTPController getSyncCount];
 //    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"BLEPERIPHERAL_ACTIVITY" ];
-    bleweatherController = [[BLEWeatherController alloc]init];
+    bleweatherCtrler = [BLEWeatherController bleweathercontroller];
     
     return YES;
 }
@@ -364,12 +364,4 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
 }
 
--(BOOL)isBLEWeatherConnected
-{
-    if (bleweatherController) {
-        return [bleweatherController isConnected];
-    }
-    
-    return NO;
-}
 @end

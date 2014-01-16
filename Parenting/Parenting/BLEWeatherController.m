@@ -55,20 +55,23 @@
     self.blecontroller = [[BLEController alloc] init];
     self.blecontroller.bleControllerDelegate = self;
     getDataTimeInterval = 1.0;
-    
+    isFistTip = YES;
     [self checkbluetooth];
 }
 
 -(void)timeGo
 {
-    if (isTimeOut && !isFound) {
-        //连接失败,提醒距离
+    if (isTimeOut)
+    {
+        if (isFistTip) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"未搜索到相关设备,请确定\n①手机蓝牙已开启\n②环境监测配件已开启并在手机附近" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+            isFistTip = NO;
+        }
         [self.blecontroller stopscan];
         [checktimer invalidate];
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"同步失败,请确定\n①手机蓝牙已开启\n②配件已开启并在手机附近" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
         isFound = NO;
+        [self checkbluetooth];
     }
 }
 
@@ -76,17 +79,27 @@
 -(void)BLEPowerOff:(BOOL)isPowerOff
 {
     isBLEConnected = NO;
+    UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝没有足够电量,请充电" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alter show];
 }
 
 -(void)DidConnected:(BOOL)isConnected
 {
     isBLEConnected = isConnected;
+    [self.blecontroller stopscan];
+    [checktimer invalidate];
+    UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝连接成功" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alter show];
     [self sendData];
 }
 
 -(void)DisConnected:(BOOL)isConnected
 {
     isBLEConnected = isConnected;
+    [gettimer invalidate];
+    UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝已断开连接" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alter show];
+    [self checkbluetooth];
 }
 
 -(void)scanResult:(BOOL)result with:(NSMutableArray  *)foundPeripherals
@@ -97,21 +110,18 @@
     else
     {
         //Peripherals的名字跟配件名字匹配 如果不匹配还是提示错误
-        if (!isFound) {
-            //NSString *sysPeripheralsName =[[NSUserDefaults standardUserDefaults] objectForKey:@"BLEPERIPHERAL_ACTIVITY"];
-            //if ([sysPeripheralsName isEqualToString:[[foundPeripherals objectAtIndex:0] name]])
-            {
-                //同步数据
-                [checktimer invalidate];
-                [self.blecontroller bleconnect];
+        if (!isFound && !isBLEConnected) {
+            NSString *sysPeripheralsName =[[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"];
+            for (CBPeripheral *peripheral in foundPeripherals) {
+                if ([sysPeripheralsName isEqualToString:[[foundPeripherals objectAtIndex:0] name]])
+                {
+                    //同步数据
+                    [checktimer invalidate];
+                    [self.blecontroller bleconnect];
+                    isFound = YES;
+                    break;
+                }
             }
-            //            else
-            //            {
-            //                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"同步失败,请确定\n①手机蓝牙已开启\n②配件已开启并在手机附近" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            //                [alert show];
-            //            }
-            isFound = YES;
-            [self.blecontroller stopscan];
         }
     }
     
@@ -420,17 +430,19 @@
     }
     
     phonethrans = phonevalue*1.0*8192.0/3.32;
-    
+    if (maxphonethrans > 82) {
+        [OpenFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,林阿妈刀A音浪太强,不晃会被撞到地上 %lf",maxphonethrans] FireDate:[currentdate date] AlarmKey:@"phonewarning"];
+    }
     [BLEWeather setsoundfrombluetooth:phonethrans andmaxsound:maxphonethrans];
 }
 
 - (void)sendData{
     if (isBLEConnected) {
         if (isFistTime) {
-            [_blecontroller getTemperatureAndHumi];
-            [_blecontroller getLight];
-            [_blecontroller getMicrophone:0];
-            [_blecontroller getUV];
+            [self.blecontroller getTemperatureAndHumi];
+            [self.blecontroller getLight];
+            [self.blecontroller getMicrophone:0];
+            [self.blecontroller getUV];
             isFistTime = NO;
         }
         
@@ -462,11 +474,6 @@
     else if (getindex % 4 == 3)
     {
         [self.blecontroller getUV];
-    }
-    
-    if (isBLEConnected)
-    {
-        //[self.bleweatherControllerDelegate updatedataarray];
     }
 }
 
