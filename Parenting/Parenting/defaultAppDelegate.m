@@ -108,7 +108,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     //同步数据
     ASIHTTPController *aSIHTTPController = [[ASIHTTPController alloc] init];
     [aSIHTTPController getSyncCount];
-//    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"BLEPERIPHERAL_ACTIVITY" ];
+//    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"BLE_COM" ];
     bleweatherCtrler = [BLEWeatherController bleweathercontroller];
     
     return YES;
