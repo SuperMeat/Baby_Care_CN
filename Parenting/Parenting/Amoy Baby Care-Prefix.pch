@@ -9,8 +9,8 @@
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #endif
 #import "SuggestView.h"
 #import "AdviseScrollview.h"
@@ -95,7 +95,7 @@
 
 #define PM25INTOKEN    @"xNKhsJsD9fM2yCU9mXvp"
 
-#define UMENGAPPKEY    @"5279b55f56240bf56c0886f6"
+#define UMENGAPPKEY    @"52d8843456240b63fb07a8dc"
 
 #define JPUSHAPPKEY    @"415aa5c57db9b6d73d91c2af"
 
@@ -147,4 +147,3 @@
 #define BLUETOOTH_BUTTON_SLEEP  @"01"
 #define BLUETOOTH_BUTTON_PLAY   @"02"
 //*** end
-
