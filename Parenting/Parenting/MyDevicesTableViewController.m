@@ -80,6 +80,7 @@
 
 -(void)dataInitialize{
     //处理已绑定设备
+    arrMyDevices = [NSArray alloc];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_COM"] != nil) {
         arrMyDevices = [[NSArray alloc] initWithObjects:@"移动记录设备", nil];
     }
