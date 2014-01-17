@@ -42,7 +42,7 @@
 }
 
 -(void)dataInitialize{
-    NSArray *peripheral1 = [[NSArray alloc] initWithObjects:@"移动记录设备", nil];
+    NSArray *peripheral1 = [[NSArray alloc] initWithObjects:@"活动记录设备", nil];
     arrayData = [[NSMutableArray alloc]init];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_COM"] == nil) {
@@ -106,7 +106,12 @@
     
     //设备类型:1-生理环境记录设备  2-环境信息采集设备
     LookingForDeviceViewController *looking = [[LookingForDeviceViewController alloc] init];
-    looking.deviceId = indexPath.section;
+    NSString *selectedDevice = [[arrayData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if ([ selectedDevice isEqualToString:@"活动记录设备"]) {
+        looking.deviceId = 1;
+    }else if([selectedDevice isEqualToString:@"环境检测设备"]){
+        looking.deviceId = 2;
+    }
     [self.navigationController pushViewController:looking animated:YES];
 }
 

@@ -13,7 +13,7 @@
 #import "defaultAppDelegate.h"
 #import "UMFeedbackViewController.h"
 #import "MyLocalNofityViewController.h"
-#import "MyDevicesTableViewController.h"
+#import "MyDevicesViewController.h"
 #import "LoginViewController.h"
 
 @interface SettingViewController ()
@@ -394,7 +394,7 @@ messageView;
     }
     else if ([item.name isEqualToString:NSLocalizedString(@"My Devices", nil)]){
         //undone feedback
-        MyDevicesTableViewController *myDevicesViewController = [[MyDevicesTableViewController alloc] initWithNibName:@"MyDevicesTableViewController" bundle:nil];
+        MyDevicesViewController *myDevicesViewController = [[MyDevicesViewController alloc] initWithNibName:@"MyDevicesViewController" bundle:nil];
         [self.navigationController pushViewController:myDevicesViewController animated:YES];
     }
     else if([item.name isEqualToString:NSLocalizedString(@"Submit feedback/improvements",nil)]){

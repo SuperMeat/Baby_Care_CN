@@ -1,4 +1,4 @@
-    //
+//
 //  MyDevicesTableViewController.m
 //  Amoy Baby Care
 //
@@ -6,27 +6,16 @@
 //  Copyright (c) 2013年 爱摩科技有限公司. All rights reserved.
 //
 
-#import "MyDevicesTableViewController.h"
+#import "MyDevicesViewController.h"
 #import "MyDevicesTableCell.h"
 #import "BindingDeviceViewController.h"
 
-@interface MyDevicesTableViewController ()
+@interface MyDevicesViewController ()
 
 @end
 
-@implementation MyDevicesTableViewController
-@synthesize tableView;
+@implementation MyDevicesViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-        [self.view setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
-        self.hidesBottomBarWhenPushed=YES;
-    }
-    return self;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,6 +52,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    
+    [self.mTableView reloadData];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -73,20 +64,17 @@
     [super viewDidLoad];
     
     [self dataInitialize];
-    
-    tableView= [[UITableView alloc]initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStyleGrouped];
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
 }
 
 -(void)dataInitialize{
     //处理已绑定设备
     arrMyDevices = [[NSArray alloc] init];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_COM"] != nil) {
-        arrMyDevices = [arrMyDevices arrayByAddingObject:@"移动记录设备"];
+        arrMyDevices = [arrMyDevices arrayByAddingObject:@"活动记录设备"];
     }
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"] != nil) { 
-        arrMyDevices = [arrMyDevices arrayByAddingObject:@"环境记录设备"];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"] != nil) {
+        arrMyDevices = [arrMyDevices arrayByAddingObject:@"环境检测设备"];
     }
     
     arrAdd = [[NSArray alloc] initWithObjects:@"绑定配件",nil];
@@ -97,7 +85,6 @@
         arrData = [[NSMutableArray alloc] initWithObjects:arrMyDevices, arrAdd, nil];
     }
     
-    [tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -130,7 +117,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)ctableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MyDevicesTableCell *cell = (MyDevicesTableCell*) [tableView dequeueReusableCellWithIdentifier:@"MyDevicesTableCell"];
+    MyDevicesTableCell *cell = (MyDevicesTableCell*) [self.mTableView dequeueReusableCellWithIdentifier:@"MyDevicesTableCell"];
     if(cell == nil)
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MyDevicesTableCell" owner:[MyDevicesTableCell class] options:nil];
@@ -149,7 +136,7 @@
             //cell.imageViewLeft.image = [UIImage imageNamed:@"temp_icon_ADD.png"];
             cell.labelTitle.center = CGPointMake(48, 13);
             cell.labelTitle.text = [[arrData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-
+            
         }
     }
     return cell;
@@ -171,6 +158,45 @@
     
 }
 
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
 
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *strMsg =[NSString stringWithFormat:@"确定要移除%@的绑定",[[arrData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:strMsg  delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"移除", nil];
+    if ([[[arrData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] isEqualToString:@"活动记录设备"]) {
+        alertView.tag = 1;
+    }
+    else if([[[arrData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] isEqualToString:@"环境检测设备"]) {
+        alertView.tag = 2;
+    }
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        if (alertView.tag == 1) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"BLE_COM"];
+        }
+        else if (alertView.tag == 2){
+            [[BLEWeatherController bleweathercontroller] stopbluetooth];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"BLE_ENV"];
+        }
+        [self dataInitialize];
+        
+        [self.mTableView reloadData];
+    }
+}
 @end
