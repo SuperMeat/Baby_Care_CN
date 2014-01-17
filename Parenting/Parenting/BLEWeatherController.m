@@ -433,10 +433,10 @@
                 lowmaxphone = [BLEController hexStringToInt:newHexStr];
             }
             
-            if (4 == i) {
+            if (4 == i)
+            {
                 highmaxphone = [BLEController hexStringHighToInt:newHexStr];
             }
-            
             
             if (3 == i)
             {
