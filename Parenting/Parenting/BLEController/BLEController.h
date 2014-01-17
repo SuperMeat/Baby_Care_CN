@@ -10,11 +10,12 @@
 #import "UartLib.h"
 
 @protocol BLEControllerDelegate<NSObject>
-@optional
+@required
 -(void)scanResult:(BOOL)result with:(NSMutableArray  *)foundPeripherals;
 -(void)BLEPowerOff:(BOOL)isPowerOff;
 -(void)DidConnected:(BOOL)isConnected;
 -(void)DisConnected:(BOOL)isConnected;
+@optional
 -(void)RecvBTData:(NSData*)recvdata;
 -(void)RecvDataFinish:(BOOL)isFinished;
 -(void)RecvHumiAndTempDada:(NSData*)data;

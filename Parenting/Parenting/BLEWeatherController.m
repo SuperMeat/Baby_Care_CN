@@ -50,6 +50,13 @@
     }
 }
 
+-(void)stopbluetooth
+{
+    if (isBLEConnected) {
+        [self.blecontroller bledisconnect];
+    }
+}
+
 -(void)setbluetooth
 {
     self.blecontroller = [[BLEController alloc] init];
@@ -99,6 +106,10 @@
 
 -(void)DisConnected:(BOOL)isConnected
 {
+    isFound    = NO;
+    isTimeOut  = NO;
+    isFistTime = YES;
+    isFistTip  = YES;
     if (isBLEConnected) {
         isBLEConnected = isConnected;
         [gettimer invalidate];
