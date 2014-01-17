@@ -212,11 +212,11 @@
 		7215975417453C52006FD415 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7215975317453C52006FD415 /* libsqlite3.dylib */; };
 		72FAFD9D174694F500901B8B /* LogDBUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FAFD9C174694F500901B8B /* LogDBUtil.m */; };
 		72FAFDA01746A14400901B8B /* CacheFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FAFD9F1746A14400901B8B /* CacheFileUtil.m */; };
+		BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */; };
+		BE3D75CC1889199F00E1C391 /* MyDevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */; };
 		BE5997C71861930A008D3F6C /* BindingDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C01861930A008D3F6C /* BindingDeviceViewController.m */; };
 		BE5997C81861930A008D3F6C /* BindingDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */; };
 		BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */; };
-		BE5997CA1861930A008D3F6C /* MyDevicesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C51861930A008D3F6C /* MyDevicesTableViewController.m */; };
-		BE5997CB1861930A008D3F6C /* MyDevicesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5997C61861930A008D3F6C /* MyDevicesTableViewController.xib */; };
 		BE5997CF18619320008D3F6C /* TipsMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997CD18619320008D3F6C /* TipsMasterViewController.m */; };
 		BE5997D018619320008D3F6C /* TipsMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5997CE18619320008D3F6C /* TipsMasterViewController.xib */; };
 		BE5997D418619339008D3F6C /* lookingDevice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D218619339008D3F6C /* lookingDevice.jpg */; };
@@ -915,14 +915,14 @@
 		72FAFD9C174694F500901B8B /* LogDBUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogDBUtil.m; sourceTree = "<group>"; };
 		72FAFD9E1746A14400901B8B /* CacheFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheFileUtil.h; sourceTree = "<group>"; };
 		72FAFD9F1746A14400901B8B /* CacheFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheFileUtil.m; sourceTree = "<group>"; };
+		BE3D75C81889199F00E1C391 /* MyDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesViewController.h; sourceTree = "<group>"; };
+		BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesViewController.m; sourceTree = "<group>"; };
+		BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesViewController.xib; sourceTree = "<group>"; };
 		BE5997BF1861930A008D3F6C /* BindingDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingDeviceViewController.h; sourceTree = "<group>"; };
 		BE5997C01861930A008D3F6C /* BindingDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingDeviceViewController.m; sourceTree = "<group>"; };
 		BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingDeviceViewController.xib; sourceTree = "<group>"; };
 		BE5997C21861930A008D3F6C /* LookingForDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookingForDeviceViewController.h; sourceTree = "<group>"; };
 		BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookingForDeviceViewController.m; sourceTree = "<group>"; };
-		BE5997C41861930A008D3F6C /* MyDevicesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesTableViewController.h; sourceTree = "<group>"; };
-		BE5997C51861930A008D3F6C /* MyDevicesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesTableViewController.m; sourceTree = "<group>"; };
-		BE5997C61861930A008D3F6C /* MyDevicesTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesTableViewController.xib; sourceTree = "<group>"; };
 		BE5997CC18619320008D3F6C /* TipsMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsMasterViewController.h; sourceTree = "<group>"; };
 		BE5997CD18619320008D3F6C /* TipsMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsMasterViewController.m; sourceTree = "<group>"; };
 		BE5997CE18619320008D3F6C /* TipsMasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipsMasterViewController.xib; sourceTree = "<group>"; };
@@ -2443,12 +2443,12 @@
 				BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */,
 				BE5997C21861930A008D3F6C /* LookingForDeviceViewController.h */,
 				BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */,
-				BE5997C41861930A008D3F6C /* MyDevicesTableViewController.h */,
-				BE5997C51861930A008D3F6C /* MyDevicesTableViewController.m */,
-				BE5997C61861930A008D3F6C /* MyDevicesTableViewController.xib */,
 				BE7C698B1869977300C4B675 /* MyDevicesTableCell.h */,
 				BE7C698C1869977300C4B675 /* MyDevicesTableCell.m */,
 				BE7C698E186997AA00C4B675 /* MyDevicesTableCell.xib */,
+				BE3D75C81889199F00E1C391 /* MyDevicesViewController.h */,
+				BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */,
+				BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -3218,7 +3218,6 @@
 				CE016854174B49D300462363 /* btn_start_breast_focus@2x.png in Resources */,
 				CE016855174B49D300462363 /* btn_start_focus.png in Resources */,
 				48152E46184C65AE009A4900 /* 1136.2.png in Resources */,
-				BE5997CB1861930A008D3F6C /* MyDevicesTableViewController.xib in Resources */,
 				CE016856174B49D300462363 /* btn_start_focus@2x.png in Resources */,
 				CE016858174B49D300462363 /* btn_stop_breast.png in Resources */,
 				CE016859174B49D300462363 /* btn_stop_breast@2x.png in Resources */,
@@ -3383,6 +3382,7 @@
 				CE38278C174E1EDA009AD8DA /* btn1_focus.png in Resources */,
 				48DEA7C017F46C3E00A11316 /* Diaper_1.jpg in Resources */,
 				CE38278D174E1EDA009AD8DA /* btn1_focus@2x.png in Resources */,
+				BE3D75CC1889199F00E1C391 /* MyDevicesViewController.xib in Resources */,
 				CE38278E174E1EDA009AD8DA /* btn2.png in Resources */,
 				CE38278F174E1EDA009AD8DA /* btn2@2x.png in Resources */,
 				CE382790174E1EDA009AD8DA /* btn2_focus.png in Resources */,
@@ -3657,6 +3657,7 @@
 				485F3F4F17F16E3800BD876F /* DataCustomCell.m in Sources */,
 				CECE7F8E174A214F0036D0BC /* SettingItem.m in Sources */,
 				48F6ABC01883B9BE0032045E /* BLEWeatherController.m in Sources */,
+				BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */,
 				CE0167D4174B217C00462363 /* CopyrightViewController.m in Sources */,
 				CE0167DB174B45AB00462363 /* feedViewController.m in Sources */,
 				CE0168AB174B506A00462363 /* SuggestView.m in Sources */,
@@ -3719,7 +3720,6 @@
 				48152E3B18487EB0009A4900 /* DXAlertView.m in Sources */,
 				48F6AB931867D3AC0032045E /* LocalNotify.m in Sources */,
 				CE0C33DC17618AF100B1B683 /* SummaryViewController.m in Sources */,
-				BE5997CA1861930A008D3F6C /* MyDevicesTableViewController.m in Sources */,
 				CE69F1B6176AAAF600E26333 /* SummaryItem.m in Sources */,
 				F365CADC176C537900EA1406 /* CustumCell.m in Sources */,
 				CE239796176EE4A50096E033 /* BabyinfoViewController.m in Sources */,

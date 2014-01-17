@@ -7,7 +7,7 @@
 //
 
 #import "LookingForDeviceViewController.h"
-
+#import "MyDevicesViewController.h"
 @interface LookingForDeviceViewController ()
 {
     UartLib *uartLib;
@@ -53,11 +53,11 @@
         if (isFound) {
             peripherals=foundPeripherals;
             [_bleController stopscan];
-            if (_deviceId==0 && [[[peripherals objectAtIndex:0] name] isEqualToString:@"BLE_COM"]) {
+            if (_deviceId==1 && [[[peripherals objectAtIndex:0] name] isEqualToString:@"BLE_COM"]) {
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"搜索到活动记录设备" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",@"取消", nil];
                 [alert show];
             }
-            else if (_deviceId==1 && [[[peripherals objectAtIndex:0] name] isEqualToString:@"BLE_ENV"]) {
+            else if (_deviceId==2 && [[[peripherals objectAtIndex:0] name] isEqualToString:@"BLE_ENV"]) {
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"搜索到环境记录设备" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",@"取消", nil];
                 [alert show];
             }
@@ -72,10 +72,10 @@
 {
     //根据设备id加载背景图
     _imageView.image = [UIImage imageNamed:@"lookingDevice.jpg"];
-    if (_deviceId==0) {
+    if (_deviceId==1) {
         //_imageView.image = [UIImage imageNamed:@"lookingDevice.jpg"];
     }
-    else if (_deviceId==1){
+    else if (_deviceId==2){
         //
     }
     [self.view addSubview:_imageView];
@@ -116,21 +116,22 @@
     }
     if (buttonIndex==0) {
         //活动信息设备绑定
-        if (_deviceId==0 && [[[peripherals objectAtIndex:0] name] isEqualToString:@"BLE_COM"]) {
+        if (_deviceId==1 && [[[peripherals objectAtIndex:0] name] isEqualToString:@"BLE_COM"]) {
             [[NSUserDefaults standardUserDefaults] setObject:[[peripherals objectAtIndex:0] name] forKey:@"BLE_COM"];
             
             for (UIViewController *myDT in self.navigationController.viewControllers) {
-                if ([myDT isKindOfClass:[SettingViewController class]]) {
+                
+                if ([myDT isKindOfClass:[MyDevicesViewController class]]) {
                     [self.navigationController popToViewController:myDT animated:YES];
                     break;
                 }
             }
         }
-        else if (_deviceId==1 && [[[peripherals objectAtIndex:0] name] isEqualToString:@"BLE_ENV"]){
+        else if (_deviceId==2 && [[[peripherals objectAtIndex:0] name] isEqualToString:@"BLE_ENV"]){
             [[NSUserDefaults standardUserDefaults] setObject:[[peripherals objectAtIndex:0] name] forKey:@"BLE_ENV"];
             
             for (UIViewController *myDT in self.navigationController.viewControllers) {
-                if ([myDT isKindOfClass:[SettingViewController class]]) {
+                if ([myDT isKindOfClass:[MyDevicesViewController class]]) {
                     [self.navigationController popToViewController:myDT animated:YES];
                     break;
                 }
