@@ -33,6 +33,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     application.applicationIconBadgeNumber = 0;
 
@@ -115,13 +116,13 @@ void UncaughtExceptionHandler(NSException *exception) {
 
     }
     
-//    Class cls = NSClassFromString(@"UMANUtil");
-//    SEL deviceIDSelector = @selector(openUDIDString);
-//    NSString *deviceID = nil;
-//    if(cls && [cls respondsToSelector:deviceIDSelector]){
-//        deviceID = [cls performSelector:deviceIDSelector];
-//    }
-//    NSLog(@"{\"oid\": \"%@\"}", deviceID);
+    Class cls = NSClassFromString(@"UMANUtil");
+    SEL deviceIDSelector = @selector(openUDIDString);
+    NSString *deviceID = nil;
+    if(cls && [cls respondsToSelector:deviceIDSelector]){
+        deviceID = [cls performSelector:deviceIDSelector];
+    }
+    NSLog(@"{\"oid\": \"%@\"}", deviceID);
     
     return YES;
 }

@@ -135,6 +135,8 @@
                     break;
                 }
             }
+            
+            [[BLEWeatherController bleweathercontroller] checkbluetooth];
         }
     }
     else if (buttonIndex==1){

@@ -770,6 +770,10 @@
 }
 
 #pragma cwb:
+-(void)DisConnected:(BOOL)isConnected
+{
+}
+
 -(void)connectBLEController{
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_COM"] != nil) {
@@ -801,6 +805,7 @@
                 [bleController bleconnect];
             }else
             {
+                [timer invalidate];
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"同步失败,请确定\n①手机蓝牙已开启\n②配件已开启并在手机附近" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
             }
@@ -814,6 +819,7 @@
 -(void)DidConnected:(BOOL)isConnected
 {
     if (isConnected) {
+        [bleController setSystemTime];
         [bleController getPressKeyHistory:1];
     }
 }
@@ -822,6 +828,7 @@
     buttonSyncBLE.enabled=YES;
     isFound=YES;
     [bleController bledisconnect];
+    [timer invalidate];
     
     //重新加载数据
     [self LoadData];
