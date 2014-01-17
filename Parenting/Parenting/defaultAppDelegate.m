@@ -115,6 +115,14 @@ void UncaughtExceptionHandler(NSException *exception) {
 
     }
     
+//    Class cls = NSClassFromString(@"UMANUtil");
+//    SEL deviceIDSelector = @selector(openUDIDString);
+//    NSString *deviceID = nil;
+//    if(cls && [cls respondsToSelector:deviceIDSelector]){
+//        deviceID = [cls performSelector:deviceIDSelector];
+//    }
+//    NSLog(@"{\"oid\": \"%@\"}", deviceID);
+    
     return YES;
 }
 
