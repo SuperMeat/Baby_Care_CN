@@ -53,7 +53,7 @@
     BOOL isFound;
     BOOL isFistTime;
     BOOL isBLEConnected;
-    int  getindex;
+    long  getindex;
     NSTimer *checktimer;
     NSTimer *gettimer;
     NSTimeInterval getDataTimeInterval;
@@ -63,4 +63,5 @@
 +(id)bleweathercontroller;
 -(BOOL)isConnected;
 -(void)checkbluetooth;
+-(void)stopbluetooth;
 @end
