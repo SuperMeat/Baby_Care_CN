@@ -45,6 +45,24 @@
     [self startScanDevice];
 }
 
+-(void)BLEPowerOff:(BOOL)isPowerOff
+{
+    if (isPowerOff) {
+        UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"记录设备没有足够电量,请充电" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alter show];
+    }
+}
+
+-(void)DidConnected:(BOOL)isConnected
+{
+    NSLog(@"Look for device viewController!did connected");
+}
+
+-(void)DisConnected:(BOOL)isConnected
+{
+    NSLog(@"Look for device viewController!DisConnected");
+}
+
 -(void)scanResult:(BOOL)result with:(NSMutableArray  *)foundPeripherals{
     if (!result) {
         isTimeOut=YES;

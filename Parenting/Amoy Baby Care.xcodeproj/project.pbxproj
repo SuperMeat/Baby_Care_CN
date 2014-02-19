@@ -3838,7 +3838,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3871,7 +3871,7 @@
 					"-Objc",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "67584F10-2379-49BE-89A7-F89C442F605B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67584F10-2379-49BE-89A7-F89C442F605B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3883,8 +3883,8 @@
 		7215974217453680006FD415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3917,7 +3917,7 @@
 					"-Objc",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6067BBF7-17AA-4360-90F1-3C0785A36437";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6067BBF7-17AA-4360-90F1-3C0785A36437";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;

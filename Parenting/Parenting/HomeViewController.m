@@ -816,6 +816,14 @@
 }
 
 #pragma protocol
+-(void)BLEPowerOff:(BOOL)isPowerOff
+{
+    if (isPowerOff) {
+        UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"记录设备没有足够电量,请充电" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alter show];
+    }
+}
+
 -(void)DidConnected:(BOOL)isConnected
 {
     if (isConnected) {
