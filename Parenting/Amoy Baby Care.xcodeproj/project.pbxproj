@@ -1617,14 +1617,14 @@
 			path = UMFeedbackImg;
 			sourceTree = "<group>";
 		};
-		48152E2A18487204009A4900 /* Guide */ = {
+		48152E2A18487204009A4900 /* 引导 */ = {
 			isa = PBXGroup;
 			children = (
 				48152E2B1848721F009A4900 /* GuideViewController.h */,
 				48152E2C1848721F009A4900 /* GuideViewController.m */,
 				48152E2D1848721F009A4900 /* GuideViewController.xib */,
 			);
-			name = Guide;
+			name = "引导";
 			sourceTree = "<group>";
 		};
 		48152E3018487EB0009A4900 /* DXAlertView */ = {
@@ -2065,6 +2065,61 @@
 			path = SocialSDKXib;
 			sourceTree = "<group>";
 		};
+		488C894D18B497A80091C2BF /* LogicController */ = {
+			isa = PBXGroup;
+			children = (
+				4855BCA61830751B00F02A3E /* InformationCenter */,
+				72159749174536D6006FD415 /* PublicClass */,
+				BE5997BE1861927B008D3F6C /* Bluetooth */,
+				BE75CCFF1872C3CD001EF1C1 /* Login */,
+			);
+			name = LogicController;
+			sourceTree = "<group>";
+		};
+		488C894E18B497B10091C2BF /* UIController */ = {
+			isa = PBXGroup;
+			children = (
+				48152E2A18487204009A4900 /* 引导 */,
+				488C895318B498D60091C2BF /* 环境 */,
+				488C895118B4985E0091C2BF /* 生理 */,
+				488C895018B498460091C2BF /* 日历 */,
+				488C894F18B497ED0091C2BF /* 活动 */,
+				7215974F17453980006FD415 /* 首页 */,
+			);
+			name = UIController;
+			sourceTree = "<group>";
+		};
+		488C894F18B497ED0091C2BF /* 活动 */ = {
+			isa = PBXGroup;
+			children = (
+				7215975017453988006FD415 /* Summary */,
+				CE0168AC174B682E00462363 /* ActivityClass */,
+			);
+			name = "活动";
+			sourceTree = "<group>";
+		};
+		488C895018B498460091C2BF /* 日历 */ = {
+			isa = PBXGroup;
+			children = (
+				72159752174539A3006FD415 /* Settings */,
+			);
+			name = "日历";
+			sourceTree = "<group>";
+		};
+		488C895118B4985E0091C2BF /* 生理 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "生理";
+			sourceTree = "<group>";
+		};
+		488C895318B498D60091C2BF /* 环境 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "环境";
+			sourceTree = "<group>";
+		};
 		489AABEE180D2D1100EB607E /* ChineseToPinyin */ = {
 			isa = PBXGroup;
 			children = (
@@ -2316,16 +2371,9 @@
 		72159748174536C0006FD415 /* ClassFiles */ = {
 			isa = PBXGroup;
 			children = (
-				BE75CCFF1872C3CD001EF1C1 /* Login */,
-				BE5997BE1861927B008D3F6C /* Bluetooth */,
+				488C894E18B497B10091C2BF /* UIController */,
+				488C894D18B497A80091C2BF /* LogicController */,
 				4855BCAB183076BD00F02A3E /* Main */,
-				48152E2A18487204009A4900 /* Guide */,
-				7215974F17453980006FD415 /* Home */,
-				7215975017453988006FD415 /* Summary */,
-				4855BCA61830751B00F02A3E /* InformationCenter */,
-				72159752174539A3006FD415 /* Settings */,
-				CE0168AC174B682E00462363 /* ActivityClass */,
-				72159749174536D6006FD415 /* PublicClass */,
 				4855BCF21830AF3E00F02A3E /* ThirdSDK */,
 			);
 			name = ClassFiles;
@@ -2348,7 +2396,7 @@
 			name = PublicClass;
 			sourceTree = "<group>";
 		};
-		7215974F17453980006FD415 /* Home */ = {
+		7215974F17453980006FD415 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
 				485F3F4B17F16E3800BD876F /* DataCustomCell.h */,
@@ -2358,7 +2406,7 @@
 				F3F09B6A1745CC15006CB06D /* HomeViewController.m */,
 				F3F09B6B1745CC15006CB06D /* HomeViewController.xib */,
 			);
-			name = Home;
+			name = "首页";
 			sourceTree = "<group>";
 		};
 		7215975017453988006FD415 /* Summary */ = {
@@ -3838,7 +3886,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3871,7 +3919,7 @@
 					"-Objc",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "67584F10-2379-49BE-89A7-F89C442F605B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67584F10-2379-49BE-89A7-F89C442F605B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3883,8 +3931,8 @@
 		7215974217453680006FD415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3917,7 +3965,7 @@
 					"-Objc",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6067BBF7-17AA-4360-90F1-3C0785A36437";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6067BBF7-17AA-4360-90F1-3C0785A36437";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;

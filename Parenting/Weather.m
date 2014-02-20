@@ -62,10 +62,12 @@
                     [mutableString deleteCharactersInRange:NSMakeRange([mutableString length]-1, 1)];
                     
                     mycity = mutableString;
+                    [[NSUserDefaults standardUserDefaults] setObject:mycity forKey:@"mylocation"];
                 }
                 else
                 {
                     mycity = city;
+                    [[NSUserDefaults standardUserDefaults] setObject:mycity forKey:@"mylocation"];
                 }
 
             }
@@ -166,8 +168,10 @@
 
 -(NSDictionary *)getweather
 {
-    NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weather"]) {
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weather"])
+    {
+        NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
         NSString *str=[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",[self getWOEID]];
         
         str=[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -189,6 +193,7 @@
             
         }
         
+        mycity = [[NSUserDefaults standardUserDefaults] objectForKey:@"mylocation"];
         if (CUSTOMER_COUNTRY == 1 && mycity) {
             NSString *pm25value = [self getweatherfromPM25in:mycity];
             if (pm25value != nil) {
@@ -201,17 +206,22 @@
     }
     else
     {
-        envir=[[NSUserDefaults standardUserDefaults] objectForKey:@"weather"];
-        if (CUSTOMER_COUNTRY == 1 && mycity) {
-            if ([envir objectForKey:@"PM25"] == nil) {
-                [envir setObject:[self getweatherfromPM25in:mycity] forKey:@"PM25"];
-                [[NSUserDefaults standardUserDefaults] setObject:envir forKey:@"weather"];
+        NSDictionary *envir=[[NSUserDefaults standardUserDefaults] objectForKey:@"weather"];
+         mycity = [[NSUserDefaults standardUserDefaults] objectForKey:@"mylocation"];
+        if (CUSTOMER_COUNTRY == 1 && mycity)
+        {
+            if ([envir objectForKey:@"PM25"] == nil)
+            {
+                NSMutableDictionary *newenvir=[[NSMutableDictionary alloc]init];
+                [newenvir setObject:[envir objectForKey:@"humidity"] forKey:@"humidity"];
+                [newenvir setObject:[envir objectForKey:@"temp"] forKey:@"humidity"];
+                [newenvir setObject:[self getweatherfromPM25in:mycity] forKey:@"PM25"];
+                [[NSUserDefaults standardUserDefaults] setObject:newenvir forKey:@"weather"];
             }
         }
-        envir=[[NSUserDefaults standardUserDefaults] objectForKey:@"weather"];
     }
    
-    return envir;
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"weather"];
 }
 
 -(void)getweather:(Getweather) getweather
