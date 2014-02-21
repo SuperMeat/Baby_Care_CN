@@ -782,12 +782,14 @@
         bleController.bleControllerDelegate = self;
         timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeGo) userInfo:nil repeats:YES];
         isTimeOut=NO;
+        isFound = YES;
         [bleController startscan];
         buttonSyncBLE.enabled=NO;
     }else{
         //未绑定设备，提示并跳入绑定设备页面
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"转到引导介绍图或跳入绑定界面" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
+        buttonSyncBLE.enabled=YES;
     }
 }
 
@@ -808,6 +810,7 @@
                 [timer invalidate];
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"同步失败,请确定\n①手机蓝牙已开启\n②配件已开启并在手机附近" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
+                buttonSyncBLE.enabled=YES;
             }
             isFound = NO;
             [bleController stopscan];
@@ -821,6 +824,7 @@
     if (isPowerOff) {
         UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"记录设备没有足够电量,请充电" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alter show];
+        buttonSyncBLE.enabled=YES;
     }
 }
 
