@@ -15,6 +15,7 @@
     NSMutableArray *arrData;
 }
 
+
 @property (weak, nonatomic) IBOutlet UITableView *mTableView;
 
 @end

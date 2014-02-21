@@ -52,9 +52,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+    [self dataInitialize];
     [self.mTableView reloadData];
-}
+} 
 
 -(void)viewDidAppear:(BOOL)animated{
 }
@@ -63,7 +63,7 @@
 {
     [super viewDidLoad];
     
-    [self dataInitialize];
+    [self dataInitialize]; 
 }
 
 -(void)dataInitialize{
