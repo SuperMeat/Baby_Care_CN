@@ -46,7 +46,8 @@
 /****************************************************************************/
 /*                       UartDelegate Methods                        */
 /****************************************************************************/
-- (void) didBluetoothPoweredOff{
+- (void) didBluetoothPoweredOff
+{
     [self.bleControllerDelegate BLEPowerOff:YES];
     NSLog(@"power off");
 }

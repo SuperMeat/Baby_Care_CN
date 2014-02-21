@@ -98,8 +98,8 @@
         isBLEConnected = isConnected;
         [self.blecontroller stopscan];
         [checktimer invalidate];
-        UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝连接成功" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alter show];
+        //UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝连接成功" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        //[alter show];
         [self sendData];
     }
 }
@@ -113,8 +113,8 @@
     if (isBLEConnected) {
         isBLEConnected = isConnected;
         [gettimer invalidate];
-        UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝已断开连接" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alter show];
+        //UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:@"监测宝已断开连接" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        //[alter show];
         [self checkbluetooth];
     }
 }
@@ -447,9 +447,11 @@
     }
     
     phonethrans = phonevalue*1.0*8192.0/3.32;
-    if (maxphonethrans > 82) {
+    if (maxphonethrans > 90)
+    {
         [OpenFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,林阿妈刀A音浪太强,不晃会被撞到地上 %lf",maxphonethrans] FireDate:[currentdate date] AlarmKey:@"phonewarning"];
     }
+    
     [BLEWeather setsoundfrombluetooth:phonethrans andmaxsound:maxphonethrans];
 }
 
