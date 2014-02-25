@@ -77,6 +77,15 @@ messageView;
 }
 -(void)makeArray
 {
+    UIButton *tongbuBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [tongbuBtn setBackgroundImage:[UIImage imageNamed:@"all_toptongbu"] forState:UIControlStateNormal];
+    
+    [tongbuBtn addTarget:self action:@selector(tongbu) forControlEvents:UIControlEventTouchUpInside];
+    tongbuBtn.frame=CGRectMake(0, 0, 22, 22);
+    
+    UIBarButtonItem *rightbar=[[UIBarButtonItem alloc]initWithCustomView:tongbuBtn];
+    self.navigationItem.rightBarButtonItem=rightbar;
+
     NSMutableArray *_array1=[[NSMutableArray alloc]initWithCapacity:0];
     NSMutableArray *_array2=[[NSMutableArray alloc]initWithCapacity:0];
     NSMutableArray *_array3=[[NSMutableArray alloc]initWithCapacity:0];
@@ -92,6 +101,7 @@ messageView;
     SettingItem *_item9 = [[SettingItem alloc]init];
     //cwb-AccountManage
     SettingItem *_item10 = [[SettingItem alloc]init];
+    SettingItem *_item11 = [[SettingItem alloc] init];
     
     _item1.name=NSLocalizedString(@"Baby information",nil);
     _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
@@ -103,6 +113,7 @@ messageView;
     _item7.name=NSLocalizedString(@"Copyright",nil);
     _item8.name=NSLocalizedString(@"Clear all logged data",nil);
     _item9.name=NSLocalizedString(@"LocalNotify", nil);
+    _item11.name = @"2G/3G下自动备份";
     
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"]==nil) {
         _item10.name=@"账号登录";
@@ -190,6 +201,10 @@ messageView;
     switchForNotifications.onTintColor=[UIColor colorWithRed:1/255.0 green:161/255.0 blue:190/255.0 alpha:1.000];
     [switchForNotifications addTarget:self action:@selector(chageNotification:) forControlEvents:UIControlEventValueChanged];
     
+    UISwitch *switchForBackup=[[UISwitch alloc]init];
+    switchForBackup.on=NO;
+    switchForBackup.onTintColor=[UIColor colorWithRed:1/255.0 green:161/255.0 blue:190/255.0 alpha:1.000];
+    [switchForBackup addTarget:self action:@selector(chageBackUp:) forControlEvents:UIControlEventValueChanged];
     
     buttonForFacebook=[UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -217,11 +232,13 @@ messageView;
     _item7.accessView=detailforCopyright;
     _item8.accessView=buttonForClear;
     _item9.accessView=myreminder;
+    _item11.accessView = switchForBackup;
     
     [_array1 addObject:_item1];
     [_array1 addObject:_item9];
     
     [_array2 addObject:_item2];
+    [_array2 addObject:_item11];
     [_array2 addObject:_item3];
     [_array2 addObject:_item4];
 
@@ -416,14 +433,30 @@ messageView;
     [self.navigationController pushViewController:copyright animated:YES];
 }
 
--(void)chageNotification:(UISwitch*)sender
+-(void)chageBackUp:(UISwitch*)sender
 {
     if (sender.isOn) {
         NSLog(@"on");
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"2G/3GBackUp"];
     }
     else
     {
         NSLog(@"off");
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"2G/3GBackUp"];
+
+    }
+}
+
+-(void)chageNotification:(UISwitch*)sender
+{
+    if (sender.isOn) {
+        NSLog(@"on");
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"RemoteNotify"];
+    }
+    else
+    {
+        NSLog(@"off");
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"RemoteNotify"];
     }
 }
 
@@ -470,6 +503,11 @@ messageView;
 //在线反馈
 -(void)onlineFeedBack{
     
+}
+
+-(void)tongbu
+{
+    NSLog(@"tongbu record");
 }
 
 //点击按钮后，触发这个方法
