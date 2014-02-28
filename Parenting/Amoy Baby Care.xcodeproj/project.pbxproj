@@ -80,6 +80,7 @@
 		482791D61884DE1D003E9724 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791C41884DE1D003E9724 /* Icon@2x.png */; };
 		482791D71884DE1D003E9724 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791C51884DE1D003E9724 /* iTunesArtwork.png */; };
 		482791D81884DE1D003E9724 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791C61884DE1D003E9724 /* iTunesArtwork@2x.png */; };
+		482B34B118C032D500EFA963 /* UpLoadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 482B34B018C032D500EFA963 /* UpLoadController.m */; };
 		48357E231846ED2A00BCF799 /* EnvironmentAdviceDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */; };
 		48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2518472BB500BCF799 /* AdviseLevel.m */; };
 		48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2818473EC400BCF799 /* WeatherAdviseViewController.m */; };
@@ -728,6 +729,8 @@
 		482791C41884DE1D003E9724 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		482791C51884DE1D003E9724 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		482791C61884DE1D003E9724 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		482B34AF18C032D500EFA963 /* UpLoadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpLoadController.h; path = UpLoadController/UpLoadController.h; sourceTree = "<group>"; };
+		482B34B018C032D500EFA963 /* UpLoadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpLoadController.m; path = UpLoadController/UpLoadController.m; sourceTree = "<group>"; };
 		48357E211846ED2A00BCF799 /* EnvironmentAdviceDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvironmentAdviceDataBase.h; path = LocalData/EnvironmentAdviceDataBase.h; sourceTree = "<group>"; };
 		48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnvironmentAdviceDataBase.m; path = LocalData/EnvironmentAdviceDataBase.m; sourceTree = "<group>"; };
 		48357E2418472BB500BCF799 /* AdviseLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdviseLevel.h; path = AdviseLevel/AdviseLevel.h; sourceTree = "<group>"; };
@@ -1715,6 +1718,15 @@
 			path = icon;
 			sourceTree = "<group>";
 		};
+		482B34AE18C0329E00EFA963 /* UpLoadController */ = {
+			isa = PBXGroup;
+			children = (
+				482B34AF18C032D500EFA963 /* UpLoadController.h */,
+				482B34B018C032D500EFA963 /* UpLoadController.m */,
+			);
+			name = UpLoadController;
+			sourceTree = "<group>";
+		};
 		4855BC18182B237800F02A3E /* UMengfeedback */ = {
 			isa = PBXGroup;
 			children = (
@@ -2391,6 +2403,7 @@
 		72159749174536D6006FD415 /* PublicClass */ = {
 			isa = PBXGroup;
 			children = (
+				482B34AE18C0329E00EFA963 /* UpLoadController */,
 				BE75CCFB1872BEAC001EF1C1 /* MD5 */,
 				BE7C69311867D7D100C4B675 /* ASIHTTPController */,
 				48013D33185ADF7F00F483A6 /* BLEController */,
@@ -3733,6 +3746,7 @@
 				CE638AB3174F4899009A60AB /* FMDatabase.m in Sources */,
 				BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */,
 				CE638AB4174F4899009A60AB /* FMDatabaseAdditions.m in Sources */,
+				482B34B118C032D500EFA963 /* UpLoadController.m in Sources */,
 				BE7C69341867D87000C4B675 /* ASIHTTPController.m in Sources */,
 				485749A4183205A3000D921B /* NotifyItem.m in Sources */,
 				489AABF1180D2D1100EB607E /* ChineseToPinyin.m in Sources */,
