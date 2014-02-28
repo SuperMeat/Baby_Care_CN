@@ -25,13 +25,13 @@
 }
 
 -(BOOL)insertfeedStarttime:(NSDate*)starttime
-                 Month:(int)month
-                  Week:(int)week
+                     Month:(int)month
+                      Week:(int)week
                    WeekDay:(int)weekday
-              Duration:(int)duration
-               Feedway:(int)feedway
-                OzorLR:(NSString *)ozorlr
-                Remark:(NSString *)remark
+                  Duration:(int)duration
+                   Feedway:(int)feedway
+                    OzorLR:(NSString *)ozorlr
+                    Remark:(NSString *)remark
 {
     BOOL res;
     FMDatabase *db=[FMDatabase databaseWithPath:DBPATH];
@@ -41,7 +41,7 @@
         return res;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
-
+    
     if (!res) {
         NSLog(@"表格创建失败");
         return res;
@@ -61,7 +61,7 @@
 -(BOOL)insertdiaperStarttime:(NSDate*)starttime
                        Month:(int)month
                         Week:(int)week
-                        WeekDay:(int)weekday
+                     WeekDay:(int)weekday
                       Status:(NSString*)status
                        Color:(NSString *)color
                       Remark:(NSString *)remark
@@ -296,7 +296,7 @@
         NSLog(@"数据库打开失败");
         return nil;
     }
-
+    
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists sleep (starttime Date DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
@@ -332,12 +332,12 @@
     NSLog(@"type%@",type);
     
     if (![type isEqualToString:@"Diaper"]) {
-        FMResultSet *resultset=[db executeQuery:@"select * from(select starttime,duration,type from feed union all select starttime,duration,type from sleep union all select starttime,duration,type from bath union all select starttime,duration,type from play)where starttime=? and type=? order by starttime desc",start,type ];            
-
+        FMResultSet *resultset=[db executeQuery:@"select * from(select starttime,duration,type from feed union all select starttime,duration,type from sleep union all select starttime,duration,type from bath union all select starttime,duration,type from play)where starttime=? and type=? order by starttime desc",start,type ];
+        
         if ([resultset next]) {NSLog(@"duration%@",str);
             str= [currentdate getDurationfromdate:start second:[resultset intForColumn:@"duration"]];
         }
-       
+        
     }
     else {
         
@@ -345,10 +345,10 @@
         
         [set next];
         str= NSLocalizedString([set stringForColumn:@"status"], nil) ;
-
+        
     }
     
-     
+    
     return str;
 }
 
@@ -497,7 +497,7 @@
     while ([set next]) {
         NSDate *date=[set dateForColumn:@"starttime"];
         
-                NSLog(@"playdate %@",date);
+        NSLog(@"playdate %@",date);
         
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -521,7 +521,7 @@
         }
     }
     return @"NULL";
-
+    
 }
 -(NSString*)selectFromdiaper
 {
@@ -564,7 +564,7 @@
         }
     }
     return @"NULL";
-
+    
 }
 
 -(NSArray*)searchFromfeed:(NSDate*)start
@@ -751,8 +751,8 @@
             max = weekday;
         }
         for (int i = 1; i <= max; i++) {
-//            NSString *sql = [NSString stringWithFormat:@"select count(*) from %@ where week = %i and weekday = %i", table, week - scrollpage, i];
-//            NSString *sql1 = [NSString stringWithFormat:@"select sum(duration) from %@ where week = %i and weekday = %i", table, week - scrollpage, i];
+            //            NSString *sql = [NSString stringWithFormat:@"select count(*) from %@ where week = %i and weekday = %i", table, week - scrollpage, i];
+            //            NSString *sql1 = [NSString stringWithFormat:@"select sum(duration) from %@ where week = %i and weekday = %i", table, week - scrollpage, i];
             int curweek = 0;
             if (week <= scrollpage) {
                 curweek = 52- scrollpage + week;
@@ -761,7 +761,7 @@
             {
                 curweek = week;
             }
-
+            
             NSString *sql = [NSString stringWithFormat:@"select count(*) from %@ where week = %i and weekday = %i", table, curweek, i];
             NSString *sql1 = [NSString stringWithFormat:@"select sum(duration) from %@ where week = %i and weekday = %i", table, curweek, i];
             if ([table isEqualToString:@"Diaper"]) {
@@ -799,7 +799,7 @@
         {
             curmonth = month;
         }
-
+        
         int nowDay = [currentdate getday:[currentdate date]];
         if ((month-scrollpage) == [currentdate getCurrentMonth]) {
             for (int i = 0; i <= (nowDay - 1) / 7; i++) {
@@ -901,7 +901,7 @@
         max = range.length;
     }
     [db close];
-
+    
     return max;
 }
 
@@ -1092,8 +1092,8 @@
             ret = maxmonth + 12 * n - minmonth + 1;
         }
         //        if (max - min + 1 > ret) {
-//            ret = max - min + 1;
-//        }
+        //            ret = max - min + 1;
+        //        }
         NSLog(@"width:ret:%d", ret);
     }
     [db close];
@@ -1351,7 +1351,7 @@
     resultset=[db executeQuery:@"select * from weight where age=? and gender=?",[NSNumber numberWithInt:age],[NSNumber numberWithInt:gender]];
     if ([resultset next]) {
         NSString *str=[NSString stringWithFormat:@"%@%.1f~%.1f,%@%.1f",NSLocalizedString(@"Weight:", nil),[resultset doubleForColumn:@"min"],[resultset doubleForColumn:@"max"],NSLocalizedString(@"Average:", nil),[resultset doubleForColumn:@"avg"]];
-
+        
         [array addObject:str];
     }
     
@@ -1362,7 +1362,7 @@
         [array addObject:str];
     }
     NSLog(@"%@",array);
-
+    
     return array;
 }
 
@@ -1398,7 +1398,7 @@
         [array addObject:ad];
         i++;
     }
-
+    
     
     NSLog(@"%@",array);
     [db close];
@@ -1436,7 +1436,7 @@
         [array addObject:ad];
         i++;
     }
-
+    
     [db close];
     return array;
 }
@@ -1778,7 +1778,7 @@
         NSLog(@"表格创建失败");
         return res;
     }
-
+    
     res=[db executeUpdate:@"delete from feed where starttime=?",starttime];
     res=[db executeUpdate:@"delete from bath where starttime=?",starttime];
     res=[db executeUpdate:@"delete from diaper where starttime=?",starttime];
@@ -1786,8 +1786,8 @@
     res=[db executeUpdate:@"delete from play where starttime=?",starttime];
     [db close];
     return res;
-
-
+    
+    
 }
 
 +(BOOL)insertNotifyMessage:(NSString *)msg
@@ -1874,7 +1874,7 @@
         return nil;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists notify_message (msgid INTEGER PRIMARY KEY AUTOINCREMENT, message Varchar DEFAULT NULL, notify_time Timestamp DEFAULT NULL, status INTEGER NOT NULL)"];
-  
+    
     if (!res) {
         NSLog(@"表格创建失败");
         return nil;
@@ -1893,7 +1893,7 @@
             item.notify_time = [set dateForColumn:@"notify_time"];
             [array addObject:item];
         }
-
+        
     }
     else
     {
@@ -1907,12 +1907,12 @@
             item.notify_time = [set dateForColumn:@"notify_time"];
             [array addObject:item];
         }
-
+        
     }
     
     [db close];
     return  array;
-
+    
 }
 
 +(BOOL)deleteNotifyMessage:(NSDate*)date
@@ -1928,7 +1928,7 @@
     res=[db executeUpdate:@"delete from notify_message where notify_time < ?",date];
     [db close];
     return res;
-
+    
 }
 
 +(BOOL)deleteNotifyMessageById:(int)msgid
@@ -1968,7 +1968,7 @@
     [db close];
     
     return res;
-
+    
 }
 
 +(BOOL)updateNotifyTime:(NSDate*)createtime andNotifyTime:(NSString*)notifytime andRedundant:(NSString*) redundant andTitle:(NSString*)title
@@ -1982,10 +1982,10 @@
     }
     
     res=[db executeUpdate:@"update notify_time set notifytime = ?,redundant = ?,title = ? where createtime = ?",notifytime,redundant,title,createtime];
-
+    
     [db close];
     return res;
-
+    
 }
 
 +(BOOL)updateNotifyTimeStatus:(NSDate*)createtime andStatus:(int)status
@@ -2094,6 +2094,5 @@
     
     [db close];
     return res;
-
 }
 @end
