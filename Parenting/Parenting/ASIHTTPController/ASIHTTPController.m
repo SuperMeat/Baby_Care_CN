@@ -57,7 +57,7 @@
 #pragma 同步数据by开始位置&条数
 -(void)syncDataByBeginIndex:(int)beginIndex andCount:(int)count
 {
-    NSString* content = [@"/SyncSuggestionData.svc/GetSyncData/" stringByAppendingString:lastSyncTime];
+    NSString* content = [@"GetSyncData/" stringByAppendingString:lastSyncTime];
     content = [content stringByAppendingString:[NSString stringWithFormat:@"/%d/",beginIndex]];
     content = [content stringByAppendingString:[NSString stringWithFormat:@"%d",count]];
     NSString* strUrl = [ASIHTTPADDRESS stringByAppendingString:content];
@@ -84,7 +84,7 @@
 
 -(NSString*)getNewSyncTime
 {
-    NSString* content = [@"/SyncSuggestionData.svc/GetNewSyncTime/" stringByAppendingString:lastSyncTime];
+    NSString* content = [@"GetNewSyncTime/" stringByAppendingString:lastSyncTime];
     //token
     NSString* strUrl = [ASIHTTPADDRESS stringByAppendingString:content];
     strUrl = [strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -105,7 +105,7 @@
 #pragma 异步获取更新数量
 -(void)getSyncCount
 {
-    NSString* content = [@"/SyncSuggestionData.svc/GetSyncCount/" stringByAppendingString:lastSyncTime];
+    NSString* content = [@"GetSyncCount/" stringByAppendingString:lastSyncTime];
     //Token
     NSString* strUrl = [ASIHTTPADDRESS stringByAppendingString:content];
     strUrl = [strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -146,6 +146,4 @@
     }
     return NO;
 }
-
-
 @end
