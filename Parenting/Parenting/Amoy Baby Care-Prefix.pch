@@ -109,8 +109,12 @@
 
 #define GuideVerson    @"1.7.6"
 
+#ifdef DEBUG
+#define ASIHTTPADDRESS @"http://192.168.1.138:8033/babycare/WCF"
+#else
 #define ASIHTTPADDRESS @"http://cbaisan.w82.dns87.com/babycare/WCF" //接口IP
-//#define ASIHTTPADDRESS @"http://192.168.1.138:8033/babycare/WCF"
+#endif
+
 #define ASIHTTPTOKEN @"5788024"  //令牌
 
 #define SUGGESTION_TYPE_TEMP    2
