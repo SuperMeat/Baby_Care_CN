@@ -19,8 +19,6 @@
 /**
  *	更新宝宝信息
  */
-+(BOOL)updateBabyInfoName:(NSString*)name andId:(int)id
-{
-    
-}
++(BOOL)updateBabyInfoName:(NSString*)name andId:(int)id;
+
 @end
