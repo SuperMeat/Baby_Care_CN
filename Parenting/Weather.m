@@ -213,8 +213,13 @@
             if ([envir objectForKey:@"PM25"] == nil)
             {
                 NSMutableDictionary *newenvir=[[NSMutableDictionary alloc]init];
-                [newenvir setObject:[envir objectForKey:@"humidity"] forKey:@"humidity"];
-                [newenvir setObject:[envir objectForKey:@"temp"] forKey:@"humidity"];
+                if ([envir objectForKey:@"temp"] != nil) {
+                    [newenvir setObject:[envir objectForKey:@"temp"] forKey:@"temp"];
+                }
+                
+                if ([envir objectForKey:@"humidity"] != nil) {
+                    [newenvir setObject:[envir objectForKey:@"humidity"] forKey:@"humidity"];
+                }
                 [newenvir setObject:[self getweatherfromPM25in:mycity] forKey:@"PM25"];
                 [[NSUserDefaults standardUserDefaults] setObject:newenvir forKey:@"weather"];
             }
