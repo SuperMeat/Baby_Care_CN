@@ -130,5 +130,20 @@
 	[request startAsynchronous];
 }
 
-
+-(BOOL)postError:(NSString*)strError{
+    NSString* content = [@"/BaseService.svc/postErrorReport/" stringByAppendingString:strError];
+    //Token
+    NSString* strUrl = [ASIHTTPADDRESS stringByAppendingString:content];
+    strUrl = [strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:strUrl];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *response = [request responseString];
+        if([response isEqualToString:@"1"])
+            return YES;
+    }
+    return NO;
+}
 @end

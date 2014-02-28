@@ -61,6 +61,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [MobClick beginLogPageView:@"喂食"];
     
     if (self.weather) {
         if (self.weather.isHidden == YES) {
@@ -163,6 +164,8 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [MobClick endLogPageView:@"喂食"];
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"addfeednow"]){
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"timerOn"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ctl"];

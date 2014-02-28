@@ -61,10 +61,13 @@ messageView;
     }
     return self;
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     
     [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"设置页面"];
     
     [self makeArray];
     [self.settingTable reloadData];
@@ -75,6 +78,12 @@ messageView;
         buttonForFacebook.selected=YES;
     }
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"设置页面"];
+}
+
 -(void)makeArray
 {
     UIButton *tongbuBtn=[UIButton buttonWithType:UIButtonTypeCustom];

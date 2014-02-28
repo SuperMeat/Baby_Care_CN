@@ -52,7 +52,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-
+    [MobClick beginLogPageView:@"换尿布"];
   //  [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"weather"];
     if (self.weather) {
         self.weather.chooseType = QCM_TYPE_DIAPER;
@@ -74,6 +74,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [MobClick endLogPageView:@"换尿布"];
     [saveView removeFromSuperview];
 }
 

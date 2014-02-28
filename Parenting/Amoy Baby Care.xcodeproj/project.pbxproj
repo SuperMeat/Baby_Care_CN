@@ -193,6 +193,7 @@
 		48EC1DE01862F6E400965254 /* nofity_myadvise_day@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48EC1DDC1862F6E400965254 /* nofity_myadvise_day@2x.png */; };
 		48F47F0218BC7D74009A504B /* all_toptongbu.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F47F0018BC7D74009A504B /* all_toptongbu.png */; };
 		48F47F0318BC7D74009A504B /* all_toptongbu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F47F0118BC7D74009A504B /* all_toptongbu@2x.png */; };
+		48F47F0618BF1F9C009A504B /* BabyInfoManagerDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F47F0518BF1F9C009A504B /* BabyInfoManagerDB.m */; };
 		48F6AB931867D3AC0032045E /* LocalNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F6AB921867D3AC0032045E /* LocalNotify.m */; };
 		48F6AB9A186AD7470032045E /* task_top_delet.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F6AB99186AD7470032045E /* task_top_delet.png */; };
 		48F6ABA4186D191C0032045E /* AlarmKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F6ABA3186D191C0032045E /* AlarmKey.m */; };
@@ -887,6 +888,8 @@
 		48EC1DDC1862F6E400965254 /* nofity_myadvise_day@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nofity_myadvise_day@2x.png"; sourceTree = "<group>"; };
 		48F47F0018BC7D74009A504B /* all_toptongbu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = all_toptongbu.png; sourceTree = "<group>"; };
 		48F47F0118BC7D74009A504B /* all_toptongbu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "all_toptongbu@2x.png"; sourceTree = "<group>"; };
+		48F47F0418BF1F9C009A504B /* BabyInfoManagerDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyInfoManagerDB.h; path = BabyInfo/BabyInfoManagerDB.h; sourceTree = "<group>"; };
+		48F47F0518BF1F9C009A504B /* BabyInfoManagerDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyInfoManagerDB.m; path = BabyInfo/BabyInfoManagerDB.m; sourceTree = "<group>"; };
 		48F6AB911867D3AB0032045E /* LocalNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotify.h; sourceTree = "<group>"; };
 		48F6AB921867D3AC0032045E /* LocalNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotify.m; sourceTree = "<group>"; };
 		48F6AB99186AD7470032045E /* task_top_delet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = task_top_delet.png; sourceTree = "<group>"; };
@@ -1898,6 +1901,8 @@
 				48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */,
 				BE7C698218681A2000C4B675 /* SuggestionDataBase.h */,
 				BE7C698318681A2000C4B675 /* SuggestionDataBase.m */,
+				48F47F0418BF1F9C009A504B /* BabyInfoManagerDB.h */,
+				48F47F0518BF1F9C009A504B /* BabyInfoManagerDB.m */,
 			);
 			name = LocalData;
 			sourceTree = "<group>";
@@ -3776,6 +3781,7 @@
 				48152E3B18487EB0009A4900 /* DXAlertView.m in Sources */,
 				48F6AB931867D3AC0032045E /* LocalNotify.m in Sources */,
 				CE0C33DC17618AF100B1B683 /* SummaryViewController.m in Sources */,
+				48F47F0618BF1F9C009A504B /* BabyInfoManagerDB.m in Sources */,
 				CE69F1B6176AAAF600E26333 /* SummaryItem.m in Sources */,
 				F365CADC176C537900EA1406 /* CustumCell.m in Sources */,
 				CE239796176EE4A50096E033 /* BabyinfoViewController.m in Sources */,

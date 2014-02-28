@@ -79,6 +79,14 @@
 #define QCM_TYPE_FEED   2
 #define QCM_TYPE_SLEEP  3
 #define QCM_TYPE_DIAPER 4
+#define QCM_TYPE_CRY    5
+
+#define TABLE_NAME_DIAPER @"diaper"
+#define TABLE_NAME_PLAY   @"play"
+#define TABLE_NAME_BATH   @"bath"
+#define TABLE_NAME_FEED   @"feed"
+#define TABLE_NAME_SLEEP  @"sleep"
+#define TABLE_NAME_CRY    @"cry"
 
 //去log
 #ifdef DEBUG
