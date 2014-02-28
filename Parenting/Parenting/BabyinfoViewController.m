@@ -50,6 +50,8 @@ static int age = 0;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [MobClick beginLogPageView:@"宝宝信息"];
+    
     if ([UIApplication sharedApplication].statusBarStyle != UIStatusBarStyleLightContent) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
@@ -123,6 +125,7 @@ static int age = 0;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [MobClick endLogPageView:@"宝宝信息"];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -44,6 +44,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [MobClick beginLogPageView:@"首页"];
     isFound = YES;
     
     if ([UIApplication sharedApplication].statusBarStyle != UIStatusBarStyleLightContent) {
@@ -147,7 +148,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    
+    [MobClick endLogPageView:@"首页"];
 }
 
 -(void)setting

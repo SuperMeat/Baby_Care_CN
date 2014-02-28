@@ -53,6 +53,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [MobClick beginLogPageView:@"玩耍"];
     if (self.weather) {
         self.weather.chooseType = QCM_TYPE_PLAY;
         [self.weather refreshweather];
@@ -98,6 +99,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [saveView removeFromSuperview];
+    [MobClick endLogPageView:@"玩耍"];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"addplaynow"]){
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"timerOn"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ctl"];

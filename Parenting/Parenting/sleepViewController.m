@@ -52,6 +52,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [MobClick beginLogPageView:@"睡觉"];
     if (self.weather) {
         self.weather.chooseType = QCM_TYPE_SLEEP;
         [self.weather refreshweather];
@@ -97,6 +98,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [MobClick endLogPageView:@"睡觉"];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"addsleepnow"]){
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"timerOn"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ctl"];
