@@ -8,7 +8,7 @@
 
 #import "UpLoadController.h"
 #import "Reachability.h"
-
+#import "ASIHTTPRequest.h"
 @implementation UpLoadController
 +(id)uploadCtrller
 {
@@ -69,9 +69,38 @@
 
 }
 
-+(NSArray*)PostActivityRecord:(NSArray*) records Type:(int)type
++(NSArray*)PostActivityRecord:(NSArray*) records Type:(int)type;
 {
+    NSString *account = [[NSUserDefaults standardUserDefaults]stringForKey:@"ACCOUNT_NAME"];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:records,@"records",account,@"account", nil];
+    NSMutableArray *returnArr;
+    if ([NSJSONSerialization isValidJSONObject:dict])
+    {
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error: &error];
+        NSMutableData *tempJsonData = [NSMutableData dataWithData:jsonData];
+        NSString* strUrl;
+        if (type == 1) {
+            strUrl = [ASIHTTPADDRESS stringByAppendingString:@"/BabyActive.svc/postDiapers/"];
+            
+        }
+        strUrl = [strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *url = [NSURL URLWithString:strUrl];
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+        [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
+        [request addRequestHeader:@"Accept" value:@"application/json"];
+        [request setRequestMethod:@"POST"];
+        [request setPostBody:tempJsonData];
+        [request startSynchronous];
+        NSError *error1 = [request error];
+        if (!error1) {
+            NSData *data = [request responseData];
+            returnArr = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            return returnArr;
+        }
+    }
     return nil;
 }
+
 
 @end
