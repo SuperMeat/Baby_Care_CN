@@ -23,7 +23,7 @@
 
 +(void)checkDiaperUpload:(int)flag
 {
-    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_TYPE"])
+    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"])
     {
         UIAlertView *alert =[[UIAlertView alloc] initWithTitle:nil message:@"麻麻,您还没有登录呦!" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
         [alert show];
@@ -80,8 +80,8 @@
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error: &error];
         NSMutableData *tempJsonData = [NSMutableData dataWithData:jsonData];
         NSString* strUrl;
-        if (type == 1) {
-            strUrl = [ASIHTTPADDRESS stringByAppendingString:@"/BabyActive.svc/postDiapers/"];
+        if (type == 4) {
+            strUrl = [ASISYSTEMIP stringByAppendingString:@"/BabyActive.svc/postDiapers/"];
             
         }
         strUrl = [strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
