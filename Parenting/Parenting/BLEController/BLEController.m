@@ -187,7 +187,7 @@
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_DIAPER]) {
             //db insertDiaper
-            isSaved = [db insertdiaperStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime]  WeekDay:[currentdate getWeekDayFromDate:startTime] Status:@"" Color:@"" Remark:@""];
+            isSaved = [db insertdiaperStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime]  WeekDay:[currentdate getWeekDayFromDate:startTime] Status:@"" Color:@"" Hard:@"" Remark:@"" UploadTime:0];
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_BATH]) {
             //db insertBath

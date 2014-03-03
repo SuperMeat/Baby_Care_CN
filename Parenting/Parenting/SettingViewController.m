@@ -380,10 +380,10 @@ messageView;
             [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"] forKey:@"HISTORY_ACCOUNT_NAME"];
         }
 
-        //TODO:是否清楚本地数据
+        //TODO:是否清除本地数据
         if (buttonIndex==1) {
             //TODO:同步数据
-                       [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"ACCOUNT_NAME"];
+            [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"ACCOUNT_NAME"];
             [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"ACCOUNT_TYPE"];
             [self makeArray];
             [self.settingTable reloadData];
@@ -398,6 +398,7 @@ messageView;
         }
     }
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -406,7 +407,8 @@ messageView;
         BabyinfoViewController *baby=[[BabyinfoViewController alloc]initWithNibName:@"BabyinfoViewController" bundle:nil];
         [self.navigationController pushViewController:baby animated:YES];
     }
-    else if([item.name isEqualToString:NSLocalizedString(@"Review App",nil)]){
+    else if([item.name isEqualToString:NSLocalizedString(@"Review App",nil)])
+    {
         
     }
     else if ([item.name isEqualToString:NSLocalizedString(@"Submit feedback online", nil)]){
@@ -423,10 +425,12 @@ messageView;
         MyDevicesViewController *myDevicesViewController = [[MyDevicesViewController alloc] initWithNibName:@"MyDevicesViewController" bundle:nil];
         [self.navigationController pushViewController:myDevicesViewController animated:YES];
     }
-    else if([item.name isEqualToString:NSLocalizedString(@"Submit feedback/improvements",nil)]){
+    else if([item.name isEqualToString:NSLocalizedString(@"Submit feedback/improvements",nil)])
+    {
         [self sendEMail];
     }
-    else if([item.name isEqualToString:NSLocalizedString(@"Copyright",nil)]){
+    else if([item.name isEqualToString:NSLocalizedString(@"Copyright",nil)])
+    {
         [self showCopyright];
     }
     else if([item.name isEqualToString:NSLocalizedString(@"LocalNotify",nil)])
@@ -504,8 +508,6 @@ messageView;
                                           otherButtonTitles:nil];
     
     [alert show];
-    
-    
 }
 
 
@@ -517,6 +519,7 @@ messageView;
 -(void)tongbu
 {
     NSLog(@"tongbu record");
+    [[UpLoadController uploadCtrller] checkDiaperUpload:1];
 }
 
 //点击按钮后，触发这个方法

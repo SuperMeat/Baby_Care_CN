@@ -45,6 +45,7 @@
 #import "EnvironmentAdviceDataBase.h"
 #import "DXAlertView.h"
 #import "UartLib.h"
+#import "UpLoadController/UpLoadController.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
