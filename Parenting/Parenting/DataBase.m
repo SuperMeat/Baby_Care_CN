@@ -667,9 +667,8 @@
 
     if (set != Nil) {
         
-        [dic setValue:[NSNumber numberWithLong:[set longLongIntForColumn:@"diaper_id"]] forKey:@"diaper_id"];
-        
-        [dic setValue:[set dateForColumn:@"starttime"] forKey:@"starttime"];
+        [dic setValue:[NSNumber numberWithLong:[set longLongIntForColumn:@"diaper_id"]] forKey:@"id"];
+        [dic setValue:[NSNumber numberWithInt:[OpenFunction getTimeStampFromDate:[set dateForColumn:@"starttime"]]] forKey:@"starttime"];
         
         [dic setValue:[NSNumber numberWithInt:[set intForColumn:@"month"]] forKey:@"month"];
         [dic setValue:[NSNumber numberWithInt:[set intForColumn:@"week"]] forKey:@"week"];
@@ -682,7 +681,7 @@
         [dic setValue:[set stringForColumn:@"moreinfo"] forKey:@"moreinfo"];
         [dic setValue:[set stringForColumn:@"type"] forKey:@"type"];
         
-        [dic setValue:[set dateForColumn:@"upload"] forKey:@"upload"];
+        [dic setValue:[NSNumber numberWithInt:[OpenFunction getTimeStampFromDate:[set dateForColumn:@"upload"]]] forKey:@"upload"];
     }
     
     return dic;

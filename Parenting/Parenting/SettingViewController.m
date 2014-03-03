@@ -519,7 +519,7 @@ messageView;
 -(void)tongbu
 {
     NSLog(@"tongbu record");
-    [[UpLoadController uploadCtrller] checkDiaperUpload:1];
+    [UpLoadController checkDiaperUpload:1];
 }
 
 //点击按钮后，触发这个方法

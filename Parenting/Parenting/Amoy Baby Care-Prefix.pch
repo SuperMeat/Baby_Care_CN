@@ -112,8 +112,10 @@
 
 #ifdef DEBUG
 #define ASIHTTPADDRESS @"http://192.168.1.138:8033/babycare/WCF"
+#define ASISYSTEMIP @"http://192.168.1.138:8033/BC_System/WCF"
 #else
 #define ASIHTTPADDRESS @"http://cbaisan.w82.dns87.com/babycare/WCF" //接口IP
+#define ASISYSTEMIP @"http://cbaisan.w82.dns87.com/BC_System/WCF"
 #endif
 
 #define ASIHTTPTOKEN @"5788024"  //令牌
