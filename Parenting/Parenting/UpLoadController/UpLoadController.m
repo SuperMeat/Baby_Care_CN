@@ -23,33 +23,55 @@
 
 +(void)checkDiaperUpload:(int)flag
 {
-    //手动同步,直接同步
-    if (flag == 0)
+    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_TYPE"])
     {
-        
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:nil message:@"麻麻,您还没有登录呦!" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alert show];
     }
-    //自动同步,需要判断是否可以同步
     else
     {
-        Reachability *r=[Reachability reachabilityWithHostName:@"www.apple.com"];
-        switch ([r currentReachabilityStatus]) {
-            case NotReachable: // 没有网络连接
-                break;
-            case ReachableViaWWAN:
-            {
-                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"2G/3GBackUp"] == TRUE)
-                {
-                    
-                }
-            }
-                break;
-            case ReachableViaWiFi:
-            {
-                
-            }
-                break;
-        }
+        BOOL isCanupload = NO;
 
+        //手动同步,直接同步
+        if (flag == 0)
+        {
+            isCanupload = YES;
+        }
+        //自动同步,需要判断是否可以同步
+        else
+        {
+            Reachability *r=[Reachability reachabilityWithHostName:@"www.apple.com"];
+                        switch ([r currentReachabilityStatus]) {
+                case NotReachable: // 没有网络连接
+                    break;
+                case ReachableViaWWAN:
+                {
+                    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"2G/3GBackUp"] == TRUE)
+                    {
+                        isCanupload = YES;
+                    }
+                }
+                    break;
+                case ReachableViaWiFi:
+                {
+                    isCanupload = YES;
+                }
+                    break;
+            }
+        }
+        
+        if (isCanupload)
+        {
+            NSArray *array = [[DataBase dataBase] searchFromdiaperNoUpload];
+            [UpLoadController PostActivityRecord:array Type:QCM_TYPE_DIAPER];
+        }
     }
-   }
+
+}
+
++(NSArray*)PostActivityRecord:(NSArray*) records Type:(int)type
+{
+    return nil;
+}
+
 @end

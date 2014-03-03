@@ -35,7 +35,6 @@
         NSLog(@"表格创建失败");
         return res;
     }
-
     
     res=[db executeUpdate:@"insert into baby_manager(name, birth, tall,weight,hc,sex,head) values(?,?,?,?,?,?,?)",name,birthday,tall,weight,hc,sex,headphoto];
     if (!res)

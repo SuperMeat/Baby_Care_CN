@@ -321,14 +321,11 @@
         }
         //[db updatediaperStatus:self.status Remark:remarktext.text Starttime:start];
         if (curstarttime == nil) {
-            //ArviTODO:修改这个方法,最后带一个参数upload:upload
-            [db updatediaperStatus:self.start Month:[currentdate getMonthFromDate:self.start] Week:[currentdate getWeekFromDate:self.start] WeekDay:[currentdate getWeekDayFromDate:self.start] Status:self.status Remark:remarktext.text OldStartTime:self.start];
+            [db updatediaperStatus:self.start Month:[currentdate getMonthFromDate:self.start] Week:[currentdate getWeekFromDate:self.start] WeekDay:[currentdate getWeekDayFromDate:self.start] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text OldStartTime:self.start];
         }
         else
         {
-            //ArviTODO:修改这个方法,最后带一个参数upload:upload
-            [db updatediaperStatus:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Remark:remarktext.text OldStartTime:self.start];
-            curstarttime = nil;
+            [db updatediaperStatus:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text OldStartTime:self.start];
         }
         
         [self removeFromSuperview];
@@ -354,13 +351,11 @@
 
     //[db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Remark:remarktext.text];
         if (curstarttime == nil) {
-            //ArviTODO:修改这个方法,最后带一个参数upload:upload
-            [db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Color:@""Remark:remarktext.text];
+            [db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text UploadTime:0];
         }
         else
         {
-            //ArviTODO:修改这个方法,最后带一个参数upload:upload
-            [db insertdiaperStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Remark:remarktext.text];
+            [db insertdiaperStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text UploadTime:0];
             curstarttime = nil;
         }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];

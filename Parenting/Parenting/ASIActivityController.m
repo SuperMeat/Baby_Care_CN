@@ -72,7 +72,7 @@
 
 -(BOOL)CheckNetWorkStatus{
     Reachability *r=[Reachability reachabilityWithHostName:@"www.apple.com"];
-    BOOL status;
+    BOOL status = NO;
     switch ([r currentReachabilityStatus]) {
         case NotReachable: // 没有网络连接
         {

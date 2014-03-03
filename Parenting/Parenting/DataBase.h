@@ -27,13 +27,17 @@ typedef enum{
                Feedway:(int)feedway
                 OzorLR:(NSString*)ozorlr
                 Remark:(NSString*)remark;
+
 -(BOOL)insertdiaperStarttime:(NSDate*)starttime
                  Month:(int)month
                   Week:(int)week
                WeekDay:(int)weekday
                 Status:(NSString*)status
                  Color:(NSString*)color
-                Remark:(NSString*)remark;
+                  Hard:(NSString*)hard 
+                Remark:(NSString*)remark
+            UploadTime:(NSDate*)uploadtime;
+
 -(BOOL)insertsleepStarttime:(NSDate*)starttime
                  Month:(int)month
                   Week:(int)week
@@ -41,6 +45,7 @@ typedef enum{
               Duration:(int)duration
                  Place:(NSString*)place
                 Remark:(NSString*)remark;
+
 -(BOOL)insertplayStarttime:(NSDate*)starttime
                       Month:(int)month
                        Week:(int)week
@@ -50,6 +55,7 @@ typedef enum{
                    WithWho:(NSString*)withwho
                     DoWhat:(NSString*)dowhat
                      Remark:(NSString*)remark;
+
 -(BOOL)insertbathStarttime:(NSDate*)starttime
                       Month:(int)month
                        Week:(int)week
@@ -75,6 +81,8 @@ typedef enum{
 
 -(NSArray*)searchFromfeed:(NSDate*)start;
 -(NSArray*)searchFromdiaper:(NSDate*)start;
+-(int)searchIDFromdiaper:(NSDate*)start;
+-(NSArray*)searchFromdiaperNoUpload;
 -(NSArray*)searchFrombath:(NSDate*)start;
 -(NSArray*)searchFromplay:(NSDate*)start;
 -(NSArray*)searchFromsleep:(NSDate*)start;
@@ -95,6 +103,8 @@ typedef enum{
                      Week:(int)week
                   WeekDay:(int)weekday
                    Status:(NSString*)status
+                    Color:(NSString*)color
+                     Hard:(NSString*)hard
                    Remark:(NSString*)remark
              OldStartTime:(NSDate*)oldstarttime;
 
@@ -181,6 +191,6 @@ typedef enum{
 /**
  *	更新上传时间
  */
--(BOOL)updateUploadtime:(NSString*)tablename andUploadTime:(NSDate*)uploadtime andStarttime:(NSDate*)starttime;
+-(BOOL)updateUploadtime:(NSString*)tablename andUploadTime:(NSDate*)uploadtime andID:(long)upload_id;
 
 @end

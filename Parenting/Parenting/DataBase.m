@@ -64,7 +64,9 @@
                      WeekDay:(int)weekday
                       Status:(NSString*)status
                        Color:(NSString *)color
+                        Hard:(NSString*)hard
                       Remark:(NSString *)remark
+                  UploadTime:(NSDate *)uploadtime
 {
     BOOL res;
     FMDatabase *db=[FMDatabase databaseWithPath:DBPATH];
@@ -73,12 +75,12 @@
         NSLog(@"数据库打开失败");
         return res;
     }
-    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (diaper_id INTEGER PRIMARY KEY AUTOINCREMENT,starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     if (!res) {
         NSLog(@"表格创建失败");
         return res;
     }
-    res=[db executeUpdate:@"insert into diaper values(?,?,?,?,?,?,?,?,?,0)",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],status,remark,color,@"",@"Diaper"];
+    res=[db executeUpdate:@"insert into diaper(starttime,month,week,weekday,status,remark,color,hard,moreinfo,type,upload) values(?,?,?,?,?,?,?,?,?,?,?)",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],status,remark,color,hard,@"",@"Diaper",[NSNumber numberWithDouble:0]];
     if (!res) {
         NSLog(@"插入失败");
         return res;
@@ -298,7 +300,7 @@
     }
     
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
-    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (diaper_id INTEGER PRIMARY KEY AUTOINCREMENT,starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists sleep (starttime Date DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bath (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists play (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, withwho Varchar DEFAULT NULL, dowhat Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
@@ -608,6 +610,7 @@
     
     return  array;
 }
+
 -(NSArray*)searchFromdiaper:(NSDate*)start
 {
     
@@ -632,10 +635,81 @@
     }
     [array addObject:[set stringForColumn:@"status"]];
     [array addObject:[set stringForColumn:@"color"]];
+    [array addObject:[set stringForColumn:@"hard"]];
+    [array addObject:[set dateForColumn:@"upload"]];
+    [array addObject:[NSNumber numberWithLong:[set intForColumn:@"diaper_id"]]];
+    
     return  array;
-    
-    
 }
+
+-(int)searchIDFromdiaper:(NSDate *)start
+{
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:DBPATH];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        return nil;
+    }
+    int diaper_id = 0;
+    FMResultSet *set=[db executeQuery:@"select diaper_id from diaper where starttime=?",start];
+    while([set next])
+    {
+        diaper_id = [set intForColumn:@"diaper_id"];
+    }
+    
+    return  diaper_id;
+}
+
+-(NSDictionary*)createDiaperUploadData:(FMResultSet *)set
+{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:12];
+
+    if (set != Nil) {
+        
+        [dic setValue:[NSNumber numberWithLong:[set longLongIntForColumn:@"diaper_id"]] forKey:@"diaper_id"];
+        
+        [dic setValue:[set dateForColumn:@"starttime"] forKey:@"starttime"];
+        
+        [dic setValue:[NSNumber numberWithInt:[set intForColumn:@"month"]] forKey:@"month"];
+        [dic setValue:[NSNumber numberWithInt:[set intForColumn:@"week"]] forKey:@"week"];
+        [dic setValue:[NSNumber numberWithInt:[set intForColumn:@"weekday"]] forKey:@"weekday"];
+        
+        [dic setValue:[set stringForColumn:@"status"] forKey:@"status"];
+        [dic setValue:[set stringForColumn:@"remark"] forKey:@"remark"];
+        [dic setValue:[set stringForColumn:@"color"] forKey:@"color"];
+        [dic setValue:[set stringForColumn:@"hard"] forKey:@"hard"];
+        [dic setValue:[set stringForColumn:@"moreinfo"] forKey:@"moreinfo"];
+        [dic setValue:[set stringForColumn:@"type"] forKey:@"type"];
+        
+        [dic setValue:[set dateForColumn:@"upload"] forKey:@"upload"];
+    }
+    
+    return dic;
+}
+-(NSArray*)searchFromdiaperNoUpload
+{
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:DBPATH];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        return nil;
+    }
+    
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select * from diaper where upload=0"];
+    while ([set next])
+    {
+        NSDictionary *dic = [self createDiaperUploadData:set];
+        if ([dic count] > 0) {
+            [array addObject:dic];
+        }
+    }
+    
+    return  array;
+}
+
 -(NSArray*)searchFrombath:(NSDate*)start
 {
     BOOL res;
@@ -1212,6 +1286,8 @@
                      Week:(int)week
                   WeekDay:(int)weekday
                    Status:(NSString*)status
+                    Color:(NSString*)color
+                     Hard:(NSString *)hard
                    Remark:(NSString*)remark
              OldStartTime:(NSDate *)oldstarttime
 {
@@ -1227,7 +1303,7 @@
         NSLog(@"表格创建失败");
         return res;
     }
-    res=[db executeUpdate:@"update diaper set starttime=?, month=?, week=?, weekday=?, status=? ,remark=? where starttime=?",newstarttime, [NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday], status, remark, oldstarttime];
+    res=[db executeUpdate:@"update diaper set starttime=?, month=?, week=?, weekday=?, status=? ,remark=? , color = ?, hard = ?, upload = 0 where starttime=?",newstarttime, [NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday], status, remark, color,hard,oldstarttime];
     if (!res) {
         NSLog(@"更新失败");
         return res;
@@ -1565,7 +1641,7 @@
         return nil;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
-    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (diaper_id INTEGER PRIMARY KEY AUTOINCREMENT,starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists sleep (starttime Date DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bath (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists play (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, withwho Varchar DEFAULT NULL, dowhat Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
@@ -1599,7 +1675,7 @@
         return nil;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
-    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (diaper_id INTEGER PRIMARY KEY AUTOINCREMENT,starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists sleep (starttime Date DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bath (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists play (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, withwho Varchar DEFAULT NULL, dowhat Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
@@ -1633,7 +1709,7 @@
         return nil;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
-    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (diaper_id INTEGER PRIMARY KEY AUTOINCREMENT,starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists sleep (starttime Date DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bath (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists play (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, withwho Varchar DEFAULT NULL, dowhat Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
@@ -1668,7 +1744,7 @@
         return nil;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
-    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (diaper_id INTEGER PRIMARY KEY AUTOINCREMENT,starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists sleep (starttime Date DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bath (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists play (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, withwho Varchar DEFAULT NULL, dowhat Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
@@ -1703,7 +1779,7 @@
         return nil;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
-    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (diaper_id INTEGER PRIMARY KEY AUTOINCREMENT,starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists sleep (starttime Date DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bath (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists play (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, withwho Varchar DEFAULT NULL, dowhat Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
@@ -1739,7 +1815,7 @@
         return nil;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists feed (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, feedway INTEGER DEFAULT NULL, ozorlr Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
-    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists diaper (diaper_id INTEGER PRIMARY KEY AUTOINCREMENT,starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL,color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL, upload Timestamp DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists sleep (starttime Date DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bath (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists play (starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL, withwho Varchar DEFAULT NULL, dowhat Varchar DEFAULT NULL, type Varchar DEFAULT NULL)"];
@@ -2079,7 +2155,7 @@
     return array;
 }
 
--(BOOL)updateUploadtime:(NSString*)tablename andUploadTime:(NSDate *)uploadtime andStarttime:(NSDate*)starttime
+-(BOOL)updateUploadtime:(NSString*)tablename andUploadTime:(NSDate *)uploadtime andID:(long)upload_id
 {
     BOOL res;
     FMDatabase *db=[FMDatabase databaseWithPath:DBPATH];
@@ -2089,7 +2165,7 @@
         return res;
     }
     
-    NSString  *str = [NSString stringWithFormat:@"update %@ set upload = %@ where starttime = %@", tablename, uploadtime, starttime];
+    NSString  *str = [NSString stringWithFormat:@"update %@ set upload = %@ where %@_id = %ld", tablename, uploadtime,tablename, upload_id];
     res=[db executeUpdate:str];
     
     [db close];
