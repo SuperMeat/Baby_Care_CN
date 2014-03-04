@@ -697,7 +697,7 @@
     }
     
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
-    FMResultSet *set=[db executeQuery:@"select * from diaper where upload=0"];
+    FMResultSet *set=[db executeQuery:@"select * from diaper"];
     while ([set next])
     {
         NSDictionary *dic = [self createDiaperUploadData:set];
@@ -2164,7 +2164,7 @@
         return res;
     }
     
-    res = [db executeUpdate:@"update diaper set upload = ? where diaper_id = ?", uploadtime,[NSNumber numberWithLong:upload_id]];
+    res = [db executeUpdate:@"update ? set upload = ? where ? = ?", tablename, uploadtime,[NSString stringWithFormat:@"%@_id", tablename],[NSNumber numberWithLong:upload_id]];
     
     [db close];
     return res;
