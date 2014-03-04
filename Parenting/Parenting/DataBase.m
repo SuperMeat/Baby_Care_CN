@@ -2174,8 +2174,8 @@
 -(void)updateUploadtimeByList:(NSArray*)returnArray andTableName:(NSString*)tablename
 {
     for (NSDictionary *dic in returnArray) {
-        int  uploadid   = [[dic objectForKey:@"return_id"] intValue];
-        long uploadtime = [[dic objectForKey:@"upload_time"] longValue];
+        int  uploadid   = [[dic objectForKey:@"id"] intValue];
+        long uploadtime = [[dic objectForKey:@"upload"] longValue];
         NSDate *upload  = [OpenFunction getDateFromTimeStamp:uploadtime];
         [self updateUploadtime:tablename andUploadTime:upload andID:uploadid];
     }
