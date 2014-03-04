@@ -188,6 +188,8 @@ typedef enum{
  */
 +(NSArray*)selectNotifyTime:(NSDate*)createtime;
 
+-(void)updateUploadtimeByList:(NSArray*)returnArray andTableName:(NSString*)tablename;
+
 /**
  *	更新上传时间
  */
