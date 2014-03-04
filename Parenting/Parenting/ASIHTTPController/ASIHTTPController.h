@@ -18,5 +18,5 @@
 }
 
 -(void)getSyncCount;
-
+-(BOOL)postLoginState:(int)state;
 @end
