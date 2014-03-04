@@ -62,8 +62,12 @@
         
         if (isCanupload)
         {
+            //自动更新换尿布
             NSArray *array = [[DataBase dataBase] searchFromdiaperNoUpload];
-            [UpLoadController PostActivityRecord:array Type:QCM_TYPE_DIAPER];
+            NSArray *returnArray = [UpLoadController PostActivityRecord:array Type:QCM_TYPE_DIAPER];
+            if ([returnArray count] > 0) {
+                [[DataBase dataBase] updateUploadtimeByList:returnArray andTableName:TABLE_NAME_DIAPER];
+            }
         }
     }
 
