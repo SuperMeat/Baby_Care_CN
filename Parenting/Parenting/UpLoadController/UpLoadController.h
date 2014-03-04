@@ -10,6 +10,6 @@
 
 @interface UpLoadController : NSObject
 +(id)uploadCtrller;
-+(void)checkDiaperUpload:(int)flag;
++(BOOL)checkDiaperUpload:(int)flag;
 +(NSArray*)PostActivityRecord:(NSArray*) records Type:(int)type;
 @end

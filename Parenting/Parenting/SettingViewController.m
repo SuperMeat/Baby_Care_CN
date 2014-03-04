@@ -211,7 +211,16 @@ messageView;
     [switchForNotifications addTarget:self action:@selector(chageNotification:) forControlEvents:UIControlEventValueChanged];
     
     UISwitch *switchForBackup=[[UISwitch alloc]init];
-    switchForBackup.on=NO;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"2G/3GBackUp"] == TRUE)
+    {
+        switchForBackup.on = YES;
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"2G/3GBackUp"];
+        switchForBackup.on=NO;
+    }
+    
     switchForBackup.onTintColor=[UIColor colorWithRed:1/255.0 green:161/255.0 blue:190/255.0 alpha:1.000];
     [switchForBackup addTarget:self action:@selector(chageBackUp:) forControlEvents:UIControlEventValueChanged];
     
@@ -519,7 +528,22 @@ messageView;
 -(void)tongbu
 {
     NSLog(@"tongbu record");
-    [UpLoadController checkDiaperUpload:1];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.yOffset = -60.0f;
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.alpha = 0.5;
+    hud.color = [UIColor grayColor];
+    hud.labelText = @"数据同步中...";
+    BOOL res = [UpLoadController checkDiaperUpload:1];
+    if (res == NO) {
+        hud.labelText = @"同步失败,请确认是否已经登录或网络是否正常!";
+    }
+    else
+    {
+        hud.labelText = @"同步完成";
+    }
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 //点击按钮后，触发这个方法
