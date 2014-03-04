@@ -2164,8 +2164,7 @@
         return res;
     }
     
-    NSString  *str = [NSString stringWithFormat:@"update %@ set upload = %@ where %@_id = %ld", tablename, uploadtime,tablename, upload_id];
-    res=[db executeUpdate:str];
+    res = [db executeUpdate:@"update diaper set upload = ? where diaper_id = ?", uploadtime,[NSNumber numberWithLong:upload_id]];
     
     [db close];
     return res;
