@@ -701,7 +701,8 @@
     while ([set next])
     {
         NSDictionary *dic = [self createDiaperUploadData:set];
-        if ([dic count] > 0) {
+        if ([dic count] > 0)
+        {
             [array addObject:dic];
         }
     }
@@ -2164,7 +2165,8 @@
         return res;
     }
     
-    res = [db executeUpdate:@"update ? set upload = ? where ? = ?", tablename, uploadtime,[NSString stringWithFormat:@"%@_id", tablename],[NSNumber numberWithLong:upload_id]];
+    NSString* str = [NSString stringWithFormat:@"update %@ set upload = ? where %@_id = ?", tablename, tablename];
+    res = [db executeUpdate:str, uploadtime,[NSNumber numberWithLong:upload_id]];
     
     [db close];
     return res;
