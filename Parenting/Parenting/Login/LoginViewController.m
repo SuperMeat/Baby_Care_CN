@@ -144,6 +144,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if ([alertView.message isEqual: @"登录成功!"])
     {
+        isPushSocialView = NO;
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
