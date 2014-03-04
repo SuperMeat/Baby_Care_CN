@@ -361,6 +361,9 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
     }
     
+    //自动上传数据
+    [UpLoadController checkDiaperUpload:1];
+    
     [self.diaperSaveDelegate sendDiaperSaveChanged:self.status andstarttime:self.start];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"justdoit"];
 }

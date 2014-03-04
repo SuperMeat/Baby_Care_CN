@@ -21,12 +21,13 @@
     return _sharedObject;
 }
 
-+(void)checkDiaperUpload:(int)flag
++(BOOL)checkDiaperUpload:(int)flag
 {
     if (![[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"])
     {
         UIAlertView *alert =[[UIAlertView alloc] initWithTitle:nil message:@"麻麻,您还没有登录呦!" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
         [alert show];
+        return NO;
     }
     else
     {
@@ -65,13 +66,20 @@
             //自动更新换尿布
             NSArray *array = [[DataBase dataBase] searchFromdiaperNoUpload];
             NSArray *returnArray = [UpLoadController PostActivityRecord:array Type:QCM_TYPE_DIAPER];
+            if (returnArray == nil) {
+                return NO;
+            }
+            
+            
             if ([returnArray count] > 0)
             {
                [[DataBase dataBase] updateUploadtimeByList:returnArray andTableName:TABLE_NAME_DIAPER];
+                return YES;
             }
         }
     }
 
+    return NO;
 }
 
 +(NSArray*)PostActivityRecord:(NSArray*) records Type:(int)type;
@@ -97,6 +105,7 @@
         [request setRequestMethod:@"POST"];
         [request setPostBody:tempJsonData];
         [request startSynchronous];
+        [request setTimeOutSeconds:10];
         NSError *error1 = [request error];
         if (!error1) {
             NSData *data = [request responseData];
@@ -104,6 +113,7 @@
             return returnArr;
         }
     }
+    
     return nil;
 }
 
