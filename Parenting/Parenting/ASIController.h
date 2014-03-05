@@ -10,6 +10,6 @@
 
 @interface ASIController : NSObject
 
-+(id)ASIController;
++(id)asiController;
 -(BOOL)postLoginState:(int)state;
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "MyMapViewController.h"
-
+#import "POIAnnotation.h"
+#import "CommonUtility.h"
 @interface MyMapViewController ()
 
 @end
@@ -66,6 +67,20 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (void)modeAction
+{
+    [self.mapView setUserTrackingMode: MAUserTrackingModeFollow animated:YES];  //设置为地图跟着位置移动}
+}
+
+-(void)mapView:(MAMapView*)mapView didUpdateUserLocation:(MAUserLocation*)userLocation
+updatingLocation:(BOOL)updatingLocation
+{
+    if (userLocation.location != _mylocation) {
+        self.mylocation = userLocation.location;
+        [self searchPlaceByAround:userLocation andPlace:@"母婴"];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
@@ -75,21 +90,22 @@
     self.mapView.frame = self.view.bounds;
     
     self.mapView.delegate = self;
-    
-     self.mapView.showsCompass= NO;         //关闭指南针
-    self.mapView.showsScale= NO;         //关闭比例尺
-    self.mapView.scaleOrigin= CGPointMake(220, 420);    //设置比例尺位置
+    self.mapView.showsUserLocation = YES;    //YES 为打开定位，NO为关闭定位
+    self.mapView.showsCompass  = NO;          //关闭指南针
+    self.mapView.showsScale    = NO;         //关闭比例尺
+    self.mapView.scaleOrigin   = CGPointMake(220, 420);    //设置比例尺位置
     [self.view addSubview:self.mapView];
+    self.mapView.userTrackingMode = MAUserTrackingModeFollow;
+    
+    self.search = [[AMapSearchAPI alloc] initWithSearchKey:AMAP_KEY  Delegate:self];
 
-    //self.search.delegate = self;
-
-    //[self searchPlaceByPolygon];
+    self.mapView.rotateEnabled = NO;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self modeAction];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -117,6 +133,43 @@
     self.search.delegate = nil;
 }
 
+- (void)mapView:(MAMapView *)mapView annotationView:(MAAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    id<MAAnnotation> annotation = view.annotation;
+    if ([annotation isKindOfClass:[POIAnnotation class]])
+    {
+      //  POIAnnotation *poiAnnotation = (POIAnnotation*)annotation;
+        
+//        PoiDetailViewController *detail = [[PoiDetailViewController alloc] init];
+//        detail.poi = poiAnnotation.poi;
+//        
+//        /* 进入POI详情页面. */
+//        [self.navigationController pushViewController:detail animated:YES];
+    }
+
+}
+
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[POIAnnotation class]])
+    {
+        static NSString *poiIdentifier = @"poiIdentifier";
+        MAPinAnnotationView *poiAnnotationView = (MAPinAnnotationView*)[self.mapView dequeueReusableAnnotationViewWithIdentifier:poiIdentifier];
+        if (poiAnnotationView == nil)
+        {
+            poiAnnotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:poiIdentifier];
+            
+            poiAnnotationView.canShowCallout = YES;
+            
+            poiAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        }
+        
+        return poiAnnotationView;
+    }
+    
+    return nil;
+}
+
 #pragma mark - AMapSearchDelegate
 
 - (void)search:(id)searchRequest error:(NSString *)errInfo
@@ -133,48 +186,46 @@
     [self clearSearch];
 }
 
-- (void)searchPlaceByAround
+- (void)searchPlaceByAround:(MAUserLocation*)userLocation andPlace:(NSString*)place
 {
     AMapPlaceSearchRequest *poiRequest = [[AMapPlaceSearchRequest alloc] init];
     poiRequest.searchType = AMapSearchType_PlaceAround;
-    poiRequest.location = [AMapGeoPoint locationWithLatitude:39.990459 longitude:116.481476];
-    poiRequest.keywords = @"中国银行";
+    poiRequest.location = [AMapGeoPoint locationWithLatitude:userLocation.location.coordinate.latitude longitude:userLocation.location.coordinate.longitude];
+    poiRequest.keywords = place;
     poiRequest.radius= 1000;
     [self.search AMapPlaceSearch: poiRequest];
 }
 
-- (void)searchPlaceByPolygon
+- (void)onPlaceSearchDone:(AMapPlaceSearchRequest *)request response:(AMapPlaceSearchResponse *)respons
 {
-    AMapPlaceSearchRequest * poiRequest = [[AMapPlaceSearchRequest alloc] init];
-    poiRequest.searchType = AMapSearchType_PlacePolygon;
-    AMapGeoPoint *l1 = [AMapGeoPoint locationWithLatitude:39.990459 longitude:116.481476];
-    AMapGeoPoint *l2 = [AMapGeoPoint locationWithLatitude:39.990459 longitude:116.581476];
-    AMapGeoPoint *l3 = [AMapGeoPoint locationWithLatitude:39.890459 longitude:116.581476];
-    AMapGeoPoint *l4 = [AMapGeoPoint locationWithLatitude:39.890459 longitude:116.481476];
-    NSArray *points = @[l1, l2, l3, l4];
-    poiRequest.polygon = [AMapGeoPolygon polygonWithPoints:points];
-    poiRequest.keywords = @"中国银行";
-    [self.search AMapPlaceSearch: poiRequest];
-}
-
-- (void)searchPlaceByID
-{
-    AMapPlaceSearchRequest *poiRequest = [[AMapPlaceSearchRequest alloc] init];
-    poiRequest.searchType = AMapSearchType_PlaceID;
-    poiRequest.uid = @"B000A7ZQYC";
-    [self.search AMapPlaceSearch: poiRequest];
-}
-
-- (void)onPlaceSearchDone:(AMapPlaceSearchRequest *)request response:(AMapPlaceSearchResponse *)response
-{
-    NSString *strCount = [NSString stringWithFormat:@"count: %d",response.count];
-    NSString *strSuggestion = [NSString stringWithFormat:@"Suggestion: %@", response.suggestion];
-    NSString *strPoi = @"";
-    for (AMapPOI *p in response.pois) {
-        strPoi = [NSString stringWithFormat:@"%@\nPOI: %@", strPoi, p.description];
+    if (respons.pois.count == 0)
+    {
+        return;
     }
-    NSString *result = [NSString stringWithFormat:@"%@ \n %@ \n %@", strCount, strSuggestion, strPoi];
-    NSLog(@"Place: %@", result);
+    
+    NSMutableArray *poiAnnotations = [NSMutableArray arrayWithCapacity:respons.pois.count];
+    
+    [respons.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop) {
+        
+        
+        [poiAnnotations addObject:[[POIAnnotation alloc] initWithPOI:obj]];
+        
+    }];
+    
+    /* 将结果以annotation的形式加载到地图上. */
+    [self.mapView addAnnotations:poiAnnotations];
+    
+    /* 如果只有一个结果，设置其为中心点. */
+    if (poiAnnotations.count == 1)
+    {
+        POIAnnotation *poi= poiAnnotations[0];
+        self.mapView.centerCoordinate = [poi coordinate];
+    }
+    /* 如果有多个结果, 设置地图使所有的annotation都可见. */
+    else
+    {
+        [self.mapView showAnnotations:poiAnnotations animated:YES];
+    }
 }
 
 @end

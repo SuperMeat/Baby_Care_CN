@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) AMapSearchAPI *search;
 
+@property (nonatomic, strong) CLLocation *mylocation;
 - (void)returnAction;
 
 @end

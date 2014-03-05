@@ -113,8 +113,10 @@ void UncaughtExceptionHandler(NSException *exception) {
 
     }
     
-    //[MAMapServices sharedServices].apiKey =@"9a6333950c5bf17fdebaf72c68ef97eb";
-    AMapSearchAPI *search = [[AMapSearchAPI alloc] initWithSearchKey: @"9a6333950c5bf17fdebaf72c68ef97eb" Delegate:self];
+    [MAMapServices sharedServices].apiKey = AMAP_KEY;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ACCOUNT_NAME"] == TRUE) {
+        [[ASIController asiController] postLoginState:1];
+    }
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
 //    NSString *deviceID = nil;
@@ -267,6 +269,9 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ACCOUNT_NAME"] == TRUE) {
+        [[ASIController asiController] postLoginState:0];
+    }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"weather"]) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"weather"];
     }
@@ -286,6 +291,10 @@ void UncaughtExceptionHandler(NSException *exception) {
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ACCOUNT_NAME"] == TRUE) {
+        [[ASIController asiController] postLoginState:1];
+    }
+    
     application.applicationIconBadgeNumber = 0;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"weather"]) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"weather"];
@@ -296,8 +305,13 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ACCOUNT_NAME"] == TRUE) {
+        [[ASIController asiController] postLoginState:-1];
+    }
+    
     _uncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+    
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

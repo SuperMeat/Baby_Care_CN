@@ -70,7 +70,6 @@
                 return NO;
             }
             
-            
             if ([returnArray count] > 0)
             {
                [[DataBase dataBase] updateUploadtimeByList:returnArray andTableName:TABLE_NAME_DIAPER];

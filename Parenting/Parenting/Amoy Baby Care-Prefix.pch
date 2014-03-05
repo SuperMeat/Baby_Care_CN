@@ -49,6 +49,7 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import "MyMapViewController.h"
+#import "ASIController.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
@@ -124,6 +125,7 @@
 #endif
 
 #define ASIHTTPTOKEN @"5788024"  //令牌
+#define AMAP_KEY @"9a6333950c5bf17fdebaf72c68ef97eb"
 
 #define SUGGESTION_TYPE_TEMP    2
 #define SUGGESTION_TYPE_HUMI    1

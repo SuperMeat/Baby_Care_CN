@@ -199,6 +199,18 @@
 		48EF60FE18C5D373006C3D5C /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60FD18C5D373006C3D5C /* AMapSearchKit.framework */; };
 		48EF610018C5D6F7006C3D5C /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48EF60FF18C5D6F7006C3D5C /* AMap.bundle */; };
 		48EF610118C5D706006C3D5C /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60EE18C5BD7D006C3D5C /* MAMapKit.framework */; };
+		48EF611C18C6FAC7006C3D5C /* AnimatedAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610418C6FAC7006C3D5C /* AnimatedAnnotation.m */; };
+		48EF611D18C6FAC7006C3D5C /* AnimatedAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610618C6FAC7006C3D5C /* AnimatedAnnotationView.m */; };
+		48EF611E18C6FAC7006C3D5C /* BusStopAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610818C6FAC7006C3D5C /* BusStopAnnotation.m */; };
+		48EF611F18C6FAC7006C3D5C /* CusAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610A18C6FAC7006C3D5C /* CusAnnotationView.m */; };
+		48EF612018C6FAC7006C3D5C /* CustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610C18C6FAC7006C3D5C /* CustomCalloutView.m */; };
+		48EF612118C6FAC7006C3D5C /* FaceOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610E18C6FAC7006C3D5C /* FaceOverlay.m */; };
+		48EF612218C6FAC7006C3D5C /* FaceOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF611018C6FAC7006C3D5C /* FaceOverlayView.m */; };
+		48EF612318C6FAC7006C3D5C /* GeocodeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF611218C6FAC7006C3D5C /* GeocodeAnnotation.m */; };
+		48EF612418C6FAC7006C3D5C /* LineDashPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF611418C6FAC7006C3D5C /* LineDashPolyline.m */; };
+		48EF612518C6FAC7006C3D5C /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF611618C6FAC7006C3D5C /* POIAnnotation.m */; };
+		48EF612618C6FAC7006C3D5C /* ReGeocodeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF611818C6FAC7006C3D5C /* ReGeocodeAnnotation.m */; };
+		48EF612718C6FAC7006C3D5C /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF611B18C6FAC7006C3D5C /* CommonUtility.m */; };
 		48F47F0218BC7D74009A504B /* all_toptongbu.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F47F0018BC7D74009A504B /* all_toptongbu.png */; };
 		48F47F0318BC7D74009A504B /* all_toptongbu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F47F0118BC7D74009A504B /* all_toptongbu@2x.png */; };
 		48F47F0618BF1F9C009A504B /* BabyInfoManagerDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F47F0518BF1F9C009A504B /* BabyInfoManagerDB.m */; };
@@ -905,6 +917,30 @@
 		48EF60FA18C5C328006C3D5C /* MyMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyMapViewController.xib; path = "地图/MyMapViewController.xib"; sourceTree = "<group>"; };
 		48EF60FD18C5D373006C3D5C /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = AMap_iOS_API_Lib_V2.1.3/Search/AMapSearchKit.framework; sourceTree = "<group>"; };
 		48EF60FF18C5D6F7006C3D5C /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap_iOS_API_Lib_V2.1.3/3D/MAMapKit.framework/Versions/2.1.3/Resources/AMap.bundle; sourceTree = SOURCE_ROOT; };
+		48EF610318C6FAC7006C3D5C /* AnimatedAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedAnnotation.h; sourceTree = "<group>"; };
+		48EF610418C6FAC7006C3D5C /* AnimatedAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedAnnotation.m; sourceTree = "<group>"; };
+		48EF610518C6FAC7006C3D5C /* AnimatedAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedAnnotationView.h; sourceTree = "<group>"; };
+		48EF610618C6FAC7006C3D5C /* AnimatedAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedAnnotationView.m; sourceTree = "<group>"; };
+		48EF610718C6FAC7006C3D5C /* BusStopAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStopAnnotation.h; sourceTree = "<group>"; };
+		48EF610818C6FAC7006C3D5C /* BusStopAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopAnnotation.m; sourceTree = "<group>"; };
+		48EF610918C6FAC7006C3D5C /* CusAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CusAnnotationView.h; sourceTree = "<group>"; };
+		48EF610A18C6FAC7006C3D5C /* CusAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CusAnnotationView.m; sourceTree = "<group>"; };
+		48EF610B18C6FAC7006C3D5C /* CustomCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCalloutView.h; sourceTree = "<group>"; };
+		48EF610C18C6FAC7006C3D5C /* CustomCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutView.m; sourceTree = "<group>"; };
+		48EF610D18C6FAC7006C3D5C /* FaceOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceOverlay.h; sourceTree = "<group>"; };
+		48EF610E18C6FAC7006C3D5C /* FaceOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceOverlay.m; sourceTree = "<group>"; };
+		48EF610F18C6FAC7006C3D5C /* FaceOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceOverlayView.h; sourceTree = "<group>"; };
+		48EF611018C6FAC7006C3D5C /* FaceOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceOverlayView.m; sourceTree = "<group>"; };
+		48EF611118C6FAC7006C3D5C /* GeocodeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocodeAnnotation.h; sourceTree = "<group>"; };
+		48EF611218C6FAC7006C3D5C /* GeocodeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocodeAnnotation.m; sourceTree = "<group>"; };
+		48EF611318C6FAC7006C3D5C /* LineDashPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineDashPolyline.h; sourceTree = "<group>"; };
+		48EF611418C6FAC7006C3D5C /* LineDashPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineDashPolyline.m; sourceTree = "<group>"; };
+		48EF611518C6FAC7006C3D5C /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
+		48EF611618C6FAC7006C3D5C /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
+		48EF611718C6FAC7006C3D5C /* ReGeocodeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReGeocodeAnnotation.h; sourceTree = "<group>"; };
+		48EF611818C6FAC7006C3D5C /* ReGeocodeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReGeocodeAnnotation.m; sourceTree = "<group>"; };
+		48EF611A18C6FAC7006C3D5C /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
+		48EF611B18C6FAC7006C3D5C /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
 		48F47F0018BC7D74009A504B /* all_toptongbu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = all_toptongbu.png; sourceTree = "<group>"; };
 		48F47F0118BC7D74009A504B /* all_toptongbu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "all_toptongbu@2x.png"; sourceTree = "<group>"; };
 		48F47F0418BF1F9C009A504B /* BabyInfoManagerDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyInfoManagerDB.h; path = BabyInfo/BabyInfoManagerDB.h; sourceTree = "<group>"; };
@@ -2318,11 +2354,53 @@
 		48EF60F718C5BF0E006C3D5C /* 地图 */ = {
 			isa = PBXGroup;
 			children = (
+				48EF610218C6FAC7006C3D5C /* Models */,
+				48EF611918C6FAC7006C3D5C /* Utility */,
 				48EF60F818C5C328006C3D5C /* MyMapViewController.h */,
 				48EF60F918C5C328006C3D5C /* MyMapViewController.m */,
 				48EF60FA18C5C328006C3D5C /* MyMapViewController.xib */,
 			);
 			name = "地图";
+			sourceTree = "<group>";
+		};
+		48EF610218C6FAC7006C3D5C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				48EF610318C6FAC7006C3D5C /* AnimatedAnnotation.h */,
+				48EF610418C6FAC7006C3D5C /* AnimatedAnnotation.m */,
+				48EF610518C6FAC7006C3D5C /* AnimatedAnnotationView.h */,
+				48EF610618C6FAC7006C3D5C /* AnimatedAnnotationView.m */,
+				48EF610718C6FAC7006C3D5C /* BusStopAnnotation.h */,
+				48EF610818C6FAC7006C3D5C /* BusStopAnnotation.m */,
+				48EF610918C6FAC7006C3D5C /* CusAnnotationView.h */,
+				48EF610A18C6FAC7006C3D5C /* CusAnnotationView.m */,
+				48EF610B18C6FAC7006C3D5C /* CustomCalloutView.h */,
+				48EF610C18C6FAC7006C3D5C /* CustomCalloutView.m */,
+				48EF610D18C6FAC7006C3D5C /* FaceOverlay.h */,
+				48EF610E18C6FAC7006C3D5C /* FaceOverlay.m */,
+				48EF610F18C6FAC7006C3D5C /* FaceOverlayView.h */,
+				48EF611018C6FAC7006C3D5C /* FaceOverlayView.m */,
+				48EF611118C6FAC7006C3D5C /* GeocodeAnnotation.h */,
+				48EF611218C6FAC7006C3D5C /* GeocodeAnnotation.m */,
+				48EF611318C6FAC7006C3D5C /* LineDashPolyline.h */,
+				48EF611418C6FAC7006C3D5C /* LineDashPolyline.m */,
+				48EF611518C6FAC7006C3D5C /* POIAnnotation.h */,
+				48EF611618C6FAC7006C3D5C /* POIAnnotation.m */,
+				48EF611718C6FAC7006C3D5C /* ReGeocodeAnnotation.h */,
+				48EF611818C6FAC7006C3D5C /* ReGeocodeAnnotation.m */,
+			);
+			name = Models;
+			path = "地图/Models";
+			sourceTree = "<group>";
+		};
+		48EF611918C6FAC7006C3D5C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				48EF611A18C6FAC7006C3D5C /* CommonUtility.h */,
+				48EF611B18C6FAC7006C3D5C /* CommonUtility.m */,
+			);
+			name = Utility;
+			path = "地图/Utility";
 			sourceTree = "<group>";
 		};
 		48F6AB94186AD0000032045E /* 自定义提醒 */ = {
@@ -3748,12 +3826,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48EF612618C6FAC7006C3D5C /* ReGeocodeAnnotation.m in Sources */,
 				BE5997CF18619320008D3F6C /* TipsMasterViewController.m in Sources */,
 				48B78141182A20610073EEBD /* CustomURLCache.m in Sources */,
 				48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */,
 				485749961831C3D1000D921B /* NotifyViewController.m in Sources */,
 				BE7C697B1867F1B300C4B675 /* ASIFormDataRequest.m in Sources */,
 				7215972D17453680006FD415 /* main.m in Sources */,
+				48EF612718C6FAC7006C3D5C /* CommonUtility.m in Sources */,
 				48EC1DD01861772300965254 /* CustomNotifyViewController.m in Sources */,
 				48152DF318486B13009A4900 /* UMFeedbackTableViewCellRight.m in Sources */,
 				7215973117453680006FD415 /* defaultAppDelegate.m in Sources */,
@@ -3774,12 +3854,14 @@
 				4855BC9D182CCCB900F02A3E /* MMHud.m in Sources */,
 				4855BC9F182CCCB900F02A3E /* MMProgressHUD+Class.m in Sources */,
 				72FAFDA01746A14400901B8B /* CacheFileUtil.m in Sources */,
+				48EF612418C6FAC7006C3D5C /* LineDashPolyline.m in Sources */,
 				BE75CD0D1872C46E001EF1C1 /* RegisterViewController.m in Sources */,
 				BE75CCFE1872BEC7001EF1C1 /* MD5.m in Sources */,
 				4855BD071830D80300F02A3E /* InfomationItem.m in Sources */,
 				4855BCA5182CCCB900F02A3E /* MMVectorImage.m in Sources */,
 				BE7C697D1867F1B300C4B675 /* ASIInputStream.m in Sources */,
 				485F3F4F17F16E3800BD876F /* DataCustomCell.m in Sources */,
+				48EF612218C6FAC7006C3D5C /* FaceOverlayView.m in Sources */,
 				CECE7F8E174A214F0036D0BC /* SettingItem.m in Sources */,
 				48F6ABC01883B9BE0032045E /* BLEWeatherController.m in Sources */,
 				BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */,
@@ -3795,6 +3877,7 @@
 				CE3826F8174DEB0B009AD8DA /* playViewController.m in Sources */,
 				CE3826FD174DEB22009AD8DA /* bathViewController.m in Sources */,
 				CE638AB3174F4899009A60AB /* FMDatabase.m in Sources */,
+				48EF612118C6FAC7006C3D5C /* FaceOverlay.m in Sources */,
 				BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */,
 				CE638AB4174F4899009A60AB /* FMDatabaseAdditions.m in Sources */,
 				482B34B118C032D500EFA963 /* UpLoadController.m in Sources */,
@@ -3807,6 +3890,7 @@
 				48357E231846ED2A00BCF799 /* EnvironmentAdviceDataBase.m in Sources */,
 				CE638AB7174F4899009A60AB /* FMResultSet.m in Sources */,
 				48F6ABA4186D191C0032045E /* AlarmKey.m in Sources */,
+				48EF611C18C6FAC7006C3D5C /* AnimatedAnnotation.m in Sources */,
 				CE638B51174F5FCE009A60AB /* QuadCurveMenu.m in Sources */,
 				CE638B52174F5FCE009A60AB /* QuadCurveMenuItem.m in Sources */,
 				CE075A37175081AE00C57E27 /* save_feedview.m in Sources */,
@@ -3816,6 +3900,7 @@
 				CE075A401750822D00C57E27 /* save_playview.m in Sources */,
 				4855BC9E182CCCB900F02A3E /* MMProgressHUD+Animations.m in Sources */,
 				BE7C69811867F33100C4B675 /* Reachability.m in Sources */,
+				48EF612318C6FAC7006C3D5C /* GeocodeAnnotation.m in Sources */,
 				48013D37185ADFC300F483A6 /* BLEController.m in Sources */,
 				4855BD011830C8C000F02A3E /* InformationCenterViewController.m in Sources */,
 				CE075A431750824100C57E27 /* save_bathview.m in Sources */,
@@ -3830,7 +3915,9 @@
 				48152E2E1848721F009A4900 /* GuideViewController.m in Sources */,
 				CEDBEABE1755FD840006828A /* GDataXMLNode.m in Sources */,
 				BE7C69791867F1B300C4B675 /* ASIDataDecompressor.m in Sources */,
+				48EF612518C6FAC7006C3D5C /* POIAnnotation.m in Sources */,
 				489AABF5180E777200EB607E /* RNGridMenu.m in Sources */,
+				48EF612018C6FAC7006C3D5C /* CustomCalloutView.m in Sources */,
 				4855BCA0182CCCB900F02A3E /* MMProgressHUD.m in Sources */,
 				48F6ABBD187D2B6E0032045E /* BLEWeather.m in Sources */,
 				BE7C698D1869977300C4B675 /* MyDevicesTableCell.m in Sources */,
@@ -3838,6 +3925,7 @@
 				CE0D0EAD175735B3005A3200 /* WeatherView.m in Sources */,
 				CE0D0ECB17574AFF005A3200 /* Environmentitem.m in Sources */,
 				F3C321D7175DD2E500F2BD7F /* currentdate.m in Sources */,
+				48EF611F18C6FAC7006C3D5C /* CusAnnotationView.m in Sources */,
 				CE0C33CB176189CE00B1B683 /* MyCorePlot.m in Sources */,
 				CE0C33D017618A2100B1B683 /* MyCPTTheme.m in Sources */,
 				48152DF218486B13009A4900 /* UMFeedbackTableViewCellLeft.m in Sources */,
@@ -3848,9 +3936,11 @@
 				48F6AB931867D3AC0032045E /* LocalNotify.m in Sources */,
 				CE0C33DC17618AF100B1B683 /* SummaryViewController.m in Sources */,
 				48F47F0618BF1F9C009A504B /* BabyInfoManagerDB.m in Sources */,
+				48EF611E18C6FAC7006C3D5C /* BusStopAnnotation.m in Sources */,
 				CE69F1B6176AAAF600E26333 /* SummaryItem.m in Sources */,
 				F365CADC176C537900EA1406 /* CustumCell.m in Sources */,
 				CE239796176EE4A50096E033 /* BabyinfoViewController.m in Sources */,
+				48EF611D18C6FAC7006C3D5C /* AnimatedAnnotationView.m in Sources */,
 				BE5997C71861930A008D3F6C /* BindingDeviceViewController.m in Sources */,
 				BE7C697A1867F1B300C4B675 /* ASIDownloadCache.m in Sources */,
 				CE1D69C81772958900561EBF /* AdviseScrollview.m in Sources */,
@@ -4000,14 +4090,14 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
-					"-Objc",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
 				PROVISIONING_PROFILE = "67584F10-2379-49BE-89A7-F89C442F605B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67584F10-2379-49BE-89A7-F89C442F605B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4048,14 +4138,14 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
-					"-Objc",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
 				PROVISIONING_PROFILE = "6067BBF7-17AA-4360-90F1-3C0785A36437";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6067BBF7-17AA-4360-90F1-3C0785A36437";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
