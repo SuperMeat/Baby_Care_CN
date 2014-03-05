@@ -4063,8 +4063,8 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/UMSocial_Sdk_3.1/frameworks/TencentOpenAPI",
-					"/Users/vlll00/开发/Code/MyCode/Code/Baby_Care_CN/Parenting/AMap_iOS_API_Lib_V2.1.3/3D",
-					"/Users/vlll00/开发/Code/MyCode/Code/Baby_Care_CN/Parenting/AMap_iOS_API_Lib_V2.1.3/Search",
+					"$(SRCROOT)/AMap_iOS_API_Lib_V2.1.3/3D",
+					"$(SRCROOT)/AMap_iOS_API_Lib_V2.1.3/Search",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Parenting/Amoy Baby Care-Prefix.pch";
@@ -4111,8 +4111,8 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/UMSocial_Sdk_3.1/frameworks/TencentOpenAPI",
-					"/Users/vlll00/开发/Code/MyCode/Code/Baby_Care_CN/Parenting/AMap_iOS_API_Lib_V2.1.3/3D",
-					"/Users/vlll00/开发/Code/MyCode/Code/Baby_Care_CN/Parenting/AMap_iOS_API_Lib_V2.1.3/Search",
+					"$(SRCROOT)/AMap_iOS_API_Lib_V2.1.3/3D",
+					"$(SRCROOT)/AMap_iOS_API_Lib_V2.1.3/Search",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Parenting/Amoy Baby Care-Prefix.pch";
