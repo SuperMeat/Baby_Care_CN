@@ -8,8 +8,7 @@
 
 #import "defaultAppDelegate.h"
 #import "APService.h"
-#import "UMSocial.h"
-#import "ASIHTTPController.h"
+#import "UMSocial.h" 
 
 @implementation defaultAppDelegate
 
@@ -106,9 +105,6 @@ void UncaughtExceptionHandler(NSException *exception) {
         [fileManager copyItemAtPath:oldFile toPath:newFile error:nil];
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"ISEXISIT_SUGGESTION"];
     }
-    //同步数据
-    ASIHTTPController *aSIHTTPController = [[ASIHTTPController alloc] init];
-    [aSIHTTPController getSyncCount];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"] != nil)
     {

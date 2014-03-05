@@ -10,6 +10,7 @@
 #import "ASINetworkQueue.h"
 #import "ASIHTTPRequest.h"
 
+#pragma mark 弃用了,等待改装
 @interface ASIHTTPController : NSObject
 {
     int syncCount;
