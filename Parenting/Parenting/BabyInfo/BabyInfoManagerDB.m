@@ -46,4 +46,10 @@
     [db close];
     return res;
 }
+
++(BOOL)updateBabyInfoName:(NSString*)name andId:(int)id
+{
+    return TRUE;
+}
+
 @end

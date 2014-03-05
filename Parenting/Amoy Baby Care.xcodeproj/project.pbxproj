@@ -192,6 +192,13 @@
 		48EC1DDE1862F6E400965254 /* nofity_myadvise_day_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48EC1DDA1862F6E400965254 /* nofity_myadvise_day_up@2x.png */; };
 		48EC1DDF1862F6E400965254 /* nofity_myadvise_day.png in Resources */ = {isa = PBXBuildFile; fileRef = 48EC1DDB1862F6E400965254 /* nofity_myadvise_day.png */; };
 		48EC1DE01862F6E400965254 /* nofity_myadvise_day@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48EC1DDC1862F6E400965254 /* nofity_myadvise_day@2x.png */; };
+		48EF60F118C5BDAC006C3D5C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60F018C5BDAC006C3D5C /* OpenGLES.framework */; };
+		48EF60F318C5BDC8006C3D5C /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60F218C5BDC8006C3D5C /* libstdc++.6.0.9.dylib */; };
+		48EF60FB18C5C328006C3D5C /* MyMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF60F918C5C328006C3D5C /* MyMapViewController.m */; };
+		48EF60FC18C5C328006C3D5C /* MyMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EF60FA18C5C328006C3D5C /* MyMapViewController.xib */; };
+		48EF60FE18C5D373006C3D5C /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60FD18C5D373006C3D5C /* AMapSearchKit.framework */; };
+		48EF610018C5D6F7006C3D5C /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48EF60FF18C5D6F7006C3D5C /* AMap.bundle */; };
+		48EF610118C5D706006C3D5C /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60EE18C5BD7D006C3D5C /* MAMapKit.framework */; };
 		48F47F0218BC7D74009A504B /* all_toptongbu.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F47F0018BC7D74009A504B /* all_toptongbu.png */; };
 		48F47F0318BC7D74009A504B /* all_toptongbu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F47F0118BC7D74009A504B /* all_toptongbu@2x.png */; };
 		48F47F0618BF1F9C009A504B /* BabyInfoManagerDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F47F0518BF1F9C009A504B /* BabyInfoManagerDB.m */; };
@@ -890,6 +897,14 @@
 		48EC1DDA1862F6E400965254 /* nofity_myadvise_day_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nofity_myadvise_day_up@2x.png"; sourceTree = "<group>"; };
 		48EC1DDB1862F6E400965254 /* nofity_myadvise_day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nofity_myadvise_day.png; sourceTree = "<group>"; };
 		48EC1DDC1862F6E400965254 /* nofity_myadvise_day@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nofity_myadvise_day@2x.png"; sourceTree = "<group>"; };
+		48EF60EE18C5BD7D006C3D5C /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = AMap_iOS_API_Lib_V2.1.3/3D/MAMapKit.framework; sourceTree = "<group>"; };
+		48EF60F018C5BDAC006C3D5C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		48EF60F218C5BDC8006C3D5C /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		48EF60F818C5C328006C3D5C /* MyMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMapViewController.h; path = "地图/MyMapViewController.h"; sourceTree = "<group>"; };
+		48EF60F918C5C328006C3D5C /* MyMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMapViewController.m; path = "地图/MyMapViewController.m"; sourceTree = "<group>"; };
+		48EF60FA18C5C328006C3D5C /* MyMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyMapViewController.xib; path = "地图/MyMapViewController.xib"; sourceTree = "<group>"; };
+		48EF60FD18C5D373006C3D5C /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = AMap_iOS_API_Lib_V2.1.3/Search/AMapSearchKit.framework; sourceTree = "<group>"; };
+		48EF60FF18C5D6F7006C3D5C /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap_iOS_API_Lib_V2.1.3/3D/MAMapKit.framework/Versions/2.1.3/Resources/AMap.bundle; sourceTree = SOURCE_ROOT; };
 		48F47F0018BC7D74009A504B /* all_toptongbu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = all_toptongbu.png; sourceTree = "<group>"; };
 		48F47F0118BC7D74009A504B /* all_toptongbu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "all_toptongbu@2x.png"; sourceTree = "<group>"; };
 		48F47F0418BF1F9C009A504B /* BabyInfoManagerDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyInfoManagerDB.h; path = BabyInfo/BabyInfoManagerDB.h; sourceTree = "<group>"; };
@@ -1500,6 +1515,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48EF610118C5D706006C3D5C /* MAMapKit.framework in Frameworks */,
+				48EF60FE18C5D373006C3D5C /* AMapSearchKit.framework in Frameworks */,
+				48EF60F318C5BDC8006C3D5C /* libstdc++.6.0.9.dylib in Frameworks */,
+				48EF60F118C5BDAC006C3D5C /* OpenGLES.framework in Frameworks */,
 				BE7C69361867DCCE00C4B675 /* MobileCoreServices.framework in Frameworks */,
 				48013D3D185AE47900F483A6 /* CoreBluetooth.framework in Frameworks */,
 				7215972517453680006FD415 /* CoreGraphics.framework in Frameworks */,
@@ -2103,6 +2122,7 @@
 		488C894E18B497B10091C2BF /* UIController */ = {
 			isa = PBXGroup;
 			children = (
+				48EF60F718C5BF0E006C3D5C /* 地图 */,
 				48152E2A18487204009A4900 /* 引导 */,
 				488C895318B498D60091C2BF /* 环境 */,
 				488C895118B4985E0091C2BF /* 生理 */,
@@ -2287,6 +2307,24 @@
 			name = notify;
 			sourceTree = "<group>";
 		};
+		48EF60F418C5BDFD006C3D5C /* AMap */ = {
+			isa = PBXGroup;
+			children = (
+				48EF60FF18C5D6F7006C3D5C /* AMap.bundle */,
+			);
+			name = AMap;
+			sourceTree = "<group>";
+		};
+		48EF60F718C5BF0E006C3D5C /* 地图 */ = {
+			isa = PBXGroup;
+			children = (
+				48EF60F818C5C328006C3D5C /* MyMapViewController.h */,
+				48EF60F918C5C328006C3D5C /* MyMapViewController.m */,
+				48EF60FA18C5C328006C3D5C /* MyMapViewController.xib */,
+			);
+			name = "地图";
+			sourceTree = "<group>";
+		};
 		48F6AB94186AD0000032045E /* 自定义提醒 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2327,6 +2365,10 @@
 		7215971F17453680006FD415 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48EF60FD18C5D373006C3D5C /* AMapSearchKit.framework */,
+				48EF60F218C5BDC8006C3D5C /* libstdc++.6.0.9.dylib */,
+				48EF60F018C5BDAC006C3D5C /* OpenGLES.framework */,
+				48EF60EE18C5BD7D006C3D5C /* MAMapKit.framework */,
 				48013D38185AE3A000F483A6 /* UartLib */,
 				4855BCF91830B12700F02A3E /* IOSSDK */,
 				4855BCFC1830B1D100F02A3E /* Facebook */,
@@ -2366,6 +2408,7 @@
 		72159747174536B8006FD415 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				48EF60F418C5BDFD006C3D5C /* AMap */,
 				482791B41884DE1D003E9724 /* icon */,
 				BE75CD0F1872CBA5001EF1C1 /* 登录 */,
 				48F6AB94186AD0000032045E /* 自定义提醒 */,
@@ -3317,6 +3360,7 @@
 				CE016865174B49D300462363 /* feed_bottle_time@2x.png in Resources */,
 				CE016866174B49D300462363 /* feedway_left.png in Resources */,
 				CE016867174B49D300462363 /* feedway_left@2x.png in Resources */,
+				48EF610018C5D6F7006C3D5C /* AMap.bundle in Resources */,
 				CE016868174B49D300462363 /* feedway_left_focus.png in Resources */,
 				482791CA1884DE1D003E9724 /* 29.png in Resources */,
 				CE016869174B49D300462363 /* feedway_left_focus@2x.png in Resources */,
@@ -3549,6 +3593,7 @@
 				CE638B21174F4FC2009A60AB /* btn_more_focus@2x.png in Resources */,
 				CE638B22174F4FC2009A60AB /* btn_play.png in Resources */,
 				48EC1DE01862F6E400965254 /* nofity_myadvise_day@2x.png in Resources */,
+				48EF60FC18C5C328006C3D5C /* MyMapViewController.xib in Resources */,
 				CE638B23174F4FC2009A60AB /* btn_play@2x.png in Resources */,
 				482791D31884DE1D003E9724 /* Icon-Small.png in Resources */,
 				CE638B24174F4FC2009A60AB /* btn_play_focus.png in Resources */,
@@ -3722,6 +3767,7 @@
 				48EC1DD61862CE2000965254 /* CustonTimeViewController.m in Sources */,
 				48152DD318486AEA009A4900 /* UMEGORefreshTableHeaderView.m in Sources */,
 				48152DED18486B13009A4900 /* UMContactViewController.m in Sources */,
+				48EF60FB18C5C328006C3D5C /* MyMapViewController.m in Sources */,
 				72FAFD9D174694F500901B8B /* LogDBUtil.m in Sources */,
 				48DEA79317F4213500A11316 /* AdviseTableViewCell.m in Sources */,
 				4855BCA4182CCCB900F02A3E /* MMRadialProgressView.m in Sources */,
@@ -3927,6 +3973,8 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/UMSocial_Sdk_3.1/frameworks/TencentOpenAPI",
+					"/Users/vlll00/开发/Code/MyCode/Code/Baby_Care_CN/Parenting/AMap_iOS_API_Lib_V2.1.3/3D",
+					"/Users/vlll00/开发/Code/MyCode/Code/Baby_Care_CN/Parenting/AMap_iOS_API_Lib_V2.1.3/Search",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Parenting/Amoy Baby Care-Prefix.pch";
@@ -3973,6 +4021,8 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/UMSocial_Sdk_3.1/frameworks/TencentOpenAPI",
+					"/Users/vlll00/开发/Code/MyCode/Code/Baby_Care_CN/Parenting/AMap_iOS_API_Lib_V2.1.3/3D",
+					"/Users/vlll00/开发/Code/MyCode/Code/Baby_Care_CN/Parenting/AMap_iOS_API_Lib_V2.1.3/Search",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Parenting/Amoy Baby Care-Prefix.pch";

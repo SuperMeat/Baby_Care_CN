@@ -11,6 +11,7 @@
 #import "UMSocial.h"
 #import "ASIHTTPController.h"
 
+
 @implementation defaultAppDelegate
 
 NSUncaughtExceptionHandler* _uncaughtExceptionHandler = nil;
@@ -116,6 +117,8 @@ void UncaughtExceptionHandler(NSException *exception) {
 
     }
     
+    //[MAMapServices sharedServices].apiKey =@"9a6333950c5bf17fdebaf72c68ef97eb";
+    AMapSearchAPI *search = [[AMapSearchAPI alloc] initWithSearchKey: @"9a6333950c5bf17fdebaf72c68ef97eb" Delegate:self];
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
 //    NSString *deviceID = nil;
