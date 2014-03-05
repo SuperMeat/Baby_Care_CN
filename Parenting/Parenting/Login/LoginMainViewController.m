@@ -156,6 +156,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:@"APP" forKey:@"ACCOUNT_TYPE"];
             alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登录成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
+            [[ASIController asiController] postLoginState:1];
         }
     }
     else{

@@ -426,6 +426,7 @@ messageView;
             [self makeArray];
             [self.settingTable reloadData];
             
+            [[ASIController asiController] postLoginState:-1];
         }
         else if (buttonIndex==2){
             //TODO:不同步数据
@@ -433,6 +434,7 @@ messageView;
             [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"ACCOUNT_TYPE"];
             [self makeArray];
             [self.settingTable reloadData];
+            [[ASIController asiController] postLoginState:-1];
         }
     }
 }

@@ -114,7 +114,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
     
     [MAMapServices sharedServices].apiKey = AMAP_KEY;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ACCOUNT_NAME"] == TRUE) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil) {
         [[ASIController asiController] postLoginState:1];
     }
 //    Class cls = NSClassFromString(@"UMANUtil");
@@ -269,7 +269,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ACCOUNT_NAME"] == TRUE) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil) {
         [[ASIController asiController] postLoginState:0];
     }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"weather"]) {
@@ -291,7 +291,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ACCOUNT_NAME"] == TRUE) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil) {
         [[ASIController asiController] postLoginState:1];
     }
     
@@ -305,7 +305,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ACCOUNT_NAME"] == TRUE) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil) {
         [[ASIController asiController] postLoginState:-1];
     }
     
