@@ -116,9 +116,11 @@
 #ifdef DEBUG
 #define ASIHTTPADDRESS @"http://192.168.1.138:8033/babycare/WCF"
 #define ASISYSTEMIP @"http://192.168.1.138:8033/BC_System/WCF"
+#define ASIADDRESS @"http://192.168.1.138:8010/WCFService"
 #else
 #define ASIHTTPADDRESS @"http://cbaisan.w82.dns87.com/babycare/WCF" //接口IP
 #define ASISYSTEMIP @"http://cbaisan.w82.dns87.com/BC_System/WCF"
+#define ASIADDRESS @"http://cbaisan.w82.dns87.com/WCFService"
 #endif
 
 #define ASIHTTPTOKEN @"5788024"  //令牌
@@ -165,3 +167,5 @@
 #define BLUETOOTH_BUTTON_SLEEP  @"01"
 #define BLUETOOTH_BUTTON_PLAY   @"02"
 //*** end
+
+#define ACCOUNTNAME ([[NSUserDefaults standardUserDefaults]stringForKey:@"ACCOUNT_NAME"])
