@@ -218,6 +218,7 @@
 		72FAFDA01746A14400901B8B /* CacheFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FAFD9F1746A14400901B8B /* CacheFileUtil.m */; };
 		BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */; };
 		BE3D75CC1889199F00E1C391 /* MyDevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */; };
+		BE422ADB18C6B5580089219C /* ASIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE422ADA18C6B5580089219C /* ASIController.m */; };
 		BE5997C71861930A008D3F6C /* BindingDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C01861930A008D3F6C /* BindingDeviceViewController.m */; };
 		BE5997C81861930A008D3F6C /* BindingDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */; };
 		BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */; };
@@ -259,7 +260,6 @@
 		BE7C698F186997AA00C4B675 /* MyDevicesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7C698E186997AA00C4B675 /* MyDevicesTableCell.xib */; };
 		BE7C699218699B8C00C4B675 /* temp_icon_ADD.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7C699018699B8C00C4B675 /* temp_icon_ADD.png */; };
 		BE7C699318699B8C00C4B675 /* temp_icon_ADD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7C699118699B8C00C4B675 /* temp_icon_ADD@2x.png */; };
-		BEC3F67718C02DF500BF9A52 /* ASIActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3F67618C02DF500BF9A52 /* ASIActivityController.m */; };
 		CE0167B3174B059000462363 /* btn_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01679D174B059000462363 /* btn_delete.png */; };
 		CE0167B4174B059000462363 /* btn_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01679E174B059000462363 /* btn_delete@2x.png */; };
 		CE0167B5174B059000462363 /* btn_delete_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01679F174B059000462363 /* btn_delete_focus.png */; };
@@ -929,6 +929,8 @@
 		BE3D75C81889199F00E1C391 /* MyDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesViewController.h; sourceTree = "<group>"; };
 		BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesViewController.m; sourceTree = "<group>"; };
 		BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesViewController.xib; sourceTree = "<group>"; };
+		BE422AD918C6B5580089219C /* ASIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIController.h; sourceTree = "<group>"; };
+		BE422ADA18C6B5580089219C /* ASIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIController.m; sourceTree = "<group>"; };
 		BE5997BF1861930A008D3F6C /* BindingDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingDeviceViewController.h; sourceTree = "<group>"; };
 		BE5997C01861930A008D3F6C /* BindingDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingDeviceViewController.m; sourceTree = "<group>"; };
 		BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingDeviceViewController.xib; sourceTree = "<group>"; };
@@ -993,8 +995,6 @@
 		BE7C698E186997AA00C4B675 /* MyDevicesTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesTableCell.xib; sourceTree = "<group>"; };
 		BE7C699018699B8C00C4B675 /* temp_icon_ADD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_icon_ADD.png; sourceTree = "<group>"; };
 		BE7C699118699B8C00C4B675 /* temp_icon_ADD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "temp_icon_ADD@2x.png"; sourceTree = "<group>"; };
-		BEC3F67518C02DF500BF9A52 /* ASIActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIActivityController.h; sourceTree = "<group>"; };
-		BEC3F67618C02DF500BF9A52 /* ASIActivityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIActivityController.m; sourceTree = "<group>"; };
 		CE01679D174B059000462363 /* btn_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete.png; sourceTree = "<group>"; };
 		CE01679E174B059000462363 /* btn_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_delete@2x.png"; sourceTree = "<group>"; };
 		CE01679F174B059000462363 /* btn_delete_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete_focus.png; sourceTree = "<group>"; };
@@ -2584,8 +2584,8 @@
 			children = (
 				BE7C69321867D87000C4B675 /* ASIHTTPController.h */,
 				BE7C69331867D87000C4B675 /* ASIHTTPController.m */,
-				BEC3F67518C02DF500BF9A52 /* ASIActivityController.h */,
-				BEC3F67618C02DF500BF9A52 /* ASIActivityController.m */,
+				BE422AD918C6B5580089219C /* ASIController.h */,
+				BE422ADA18C6B5580089219C /* ASIController.m */,
 			);
 			name = ASIHTTPController;
 			sourceTree = "<group>";
@@ -3758,7 +3758,6 @@
 				48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */,
 				CE638AB5174F4899009A60AB /* FMDatabasePool.m in Sources */,
 				CE638AB6174F4899009A60AB /* FMDatabaseQueue.m in Sources */,
-				BEC3F67718C02DF500BF9A52 /* ASIActivityController.m in Sources */,
 				48357E231846ED2A00BCF799 /* EnvironmentAdviceDataBase.m in Sources */,
 				CE638AB7174F4899009A60AB /* FMResultSet.m in Sources */,
 				48F6ABA4186D191C0032045E /* AlarmKey.m in Sources */,
@@ -3789,6 +3788,7 @@
 				4855BCA0182CCCB900F02A3E /* MMProgressHUD.m in Sources */,
 				48F6ABBD187D2B6E0032045E /* BLEWeather.m in Sources */,
 				BE7C698D1869977300C4B675 /* MyDevicesTableCell.m in Sources */,
+				BE422ADB18C6B5580089219C /* ASIController.m in Sources */,
 				CE0D0EAD175735B3005A3200 /* WeatherView.m in Sources */,
 				CE0D0ECB17574AFF005A3200 /* Environmentitem.m in Sources */,
 				F3C321D7175DD2E500F2BD7F /* currentdate.m in Sources */,
