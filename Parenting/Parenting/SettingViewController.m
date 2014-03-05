@@ -112,6 +112,10 @@ messageView;
     SettingItem *_item10 = [[SettingItem alloc]init];
     SettingItem *_item11 = [[SettingItem alloc] init];
     
+    //高德地图
+    SettingItem *_item12 = [[SettingItem alloc] init];
+    SettingItem *_item13 = [[SettingItem alloc] init];
+    
     _item1.name=NSLocalizedString(@"Baby information",nil);
     _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
     _item3.name=NSLocalizedString(@"Notifications",nil);
@@ -123,6 +127,8 @@ messageView;
     _item8.name=NSLocalizedString(@"Clear all logged data",nil);
     _item9.name=NSLocalizedString(@"LocalNotify", nil);
     _item11.name = @"2G/3G下自动备份";
+    _item12.name = @"查看小区附近的麻麻们";
+    _item13.name = @"允许发布自己位置及状态";
     
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"]==nil) {
         _item10.name=@"账号登录";
@@ -224,6 +230,25 @@ messageView;
     switchForBackup.onTintColor=[UIColor colorWithRed:1/255.0 green:161/255.0 blue:190/255.0 alpha:1.000];
     [switchForBackup addTarget:self action:@selector(chageBackUp:) forControlEvents:UIControlEventValueChanged];
     
+    UISwitch *switchForOpenwild=[[UISwitch alloc]init];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"OpenWild"] == TRUE)
+    {
+        switchForOpenwild.on = YES;
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"OpenWild"];
+        switchForOpenwild.on=NO;
+    }
+    
+    switchForOpenwild.onTintColor=[UIColor colorWithRed:1/255.0 green:161/255.0 blue:190/255.0 alpha:1.000];
+    [switchForOpenwild addTarget:self action:@selector(chageOpenwild:) forControlEvents:UIControlEventValueChanged];
+    
+    UIButton *detailforMap=[UIButton buttonWithType:UIButtonTypeCustom];
+    [detailforMap setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
+    detailforMap.frame=CGRectMake(0, 0, 20, 20);
+    [detailforMap addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+    
     buttonForFacebook=[UIButton buttonWithType:UIButtonTypeCustom];
     
     
@@ -251,12 +276,16 @@ messageView;
     _item8.accessView=buttonForClear;
     _item9.accessView=myreminder;
     _item11.accessView = switchForBackup;
+    _item12.accessView = detailforMap;
+    _item13.accessView = switchForOpenwild;
     
     [_array1 addObject:_item1];
     [_array1 addObject:_item9];
+    [_array1 addObject:_item12];
     
     [_array2 addObject:_item2];
     [_array2 addObject:_item11];
+    [_array2 addObject:_item13];
     [_array2 addObject:_item3];
     [_array2 addObject:_item4];
 
@@ -442,6 +471,10 @@ messageView;
     {
         [self showCopyright];
     }
+    else if([item.name isEqualToString:NSLocalizedString(@"查看小区附近的麻麻们",nil)])
+    {
+        [self showMap];
+    }
     else if([item.name isEqualToString:NSLocalizedString(@"LocalNotify",nil)])
     {
         MyLocalNofityViewController *mynotify = [[MyLocalNofityViewController alloc]init];
@@ -453,6 +486,18 @@ messageView;
 {
     CopyrightViewController *copyright=[[CopyrightViewController alloc]initWithNibName:@"CopyrightViewController" bundle:nil];
     [self.navigationController pushViewController:copyright animated:YES];
+}
+
+-(void)chageOpenwild:(UISwitch*)sender
+{
+    if (sender.isOn) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"OpenWild"];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"OpenWild"];
+        
+    }
 }
 
 -(void)chageBackUp:(UISwitch*)sender
@@ -523,6 +568,14 @@ messageView;
 //在线反馈
 -(void)onlineFeedBack{
     
+}
+
+-(void)showMap
+{
+    NSLog(@"show map");
+    MyMapViewController *mymap = [[MyMapViewController alloc] init];
+    [self.navigationController pushViewController:mymap animated:YES];
+
 }
 
 -(void)tongbu

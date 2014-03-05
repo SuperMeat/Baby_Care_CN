@@ -7,7 +7,6 @@
 //
 
 #import "save_diaperview.h"
-#import "ASIActivityController.h"
 @implementation save_diaperview
 @synthesize status=_status,select,start,isshow;
 
@@ -303,22 +302,8 @@
 -(void)Save:(UIButton*)sender
 {
     DataBase *db=[DataBase dataBase];
-    int upload = 0; //新增时候upload初始值为0
     if (select)
     {
-        if ([[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"]!=nil)
-        {
-            NSString *account = [[NSUserDefaults standardUserDefaults] stringForKey:@"ACCOUNT_NAME"];
-            
-            ASIActivityController *ac = [ASIActivityController ASIActivityController];
-            if (curstarttime == nil)
-            {
-                upload = [ac postDiaperRecordAccount:account Upload:upload Starttime:self.start Month:[currentdate getMonthFromDate:self.start] Week:[currentdate getWeekFromDate:self.start] WeekDay:[currentdate getWeekDayFromDate:self.start] Status:self.status Color:@"" Remark:remarktext.text];
-            }
-            else{
-                upload = [ac postDiaperRecordAccount:account Upload:upload Starttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Remark:remarktext.text];
-            }
-        }
         //[db updatediaperStatus:self.status Remark:remarktext.text Starttime:start];
         if (curstarttime == nil) {
             [db updatediaperStatus:self.start Month:[currentdate getMonthFromDate:self.start] Week:[currentdate getWeekFromDate:self.start] WeekDay:[currentdate getWeekDayFromDate:self.start] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text OldStartTime:self.start];
@@ -335,20 +320,7 @@
             self.status=@"";
         }
         
-        if ([[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"]!=nil)
-        {
-            NSString *account = [[NSUserDefaults standardUserDefaults] stringForKey:@"ACCOUNT_NAME"];
-            
-            ASIActivityController *ac = [ASIActivityController ASIActivityController];
-            if (curstarttime == nil)
-            {
-                upload = [ac postDiaperRecordAccount:account Upload:upload Starttime:[currentdate date] Month:[currentdate getMonthFromDate:self.start] Week:[currentdate getWeekFromDate:self.start] WeekDay:[currentdate getWeekDayFromDate:self.start] Status:self.status Color:@"" Remark:remarktext.text];
-            }
-            else{
-                upload = [ac postDiaperRecordAccount:account Upload:upload Starttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Remark:remarktext.text];
-            }
-        }
-
+        
     //[db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Remark:remarktext.text];
         if (curstarttime == nil) {
             [db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text UploadTime:0];
