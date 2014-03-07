@@ -78,6 +78,7 @@ updatingLocation:(BOOL)updatingLocation
     if (userLocation.location != _mylocation) {
         self.mylocation = userLocation.location;
         [self searchPlaceByAround:userLocation andPlace:@"母婴"];
+//        [[ASIController asiController] createUserLocationMap:@"小李" andLocation:userLocation andStatus:@"吃奶"];
     }
 }
 
@@ -105,6 +106,7 @@ updatingLocation:(BOOL)updatingLocation
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self modeAction];
     // Do any additional setup after loading the view from its nib.
 }

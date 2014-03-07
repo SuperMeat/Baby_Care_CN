@@ -51,5 +51,33 @@
     return YES;
 }
 
+-(BOOL)createUserLocationMap:(NSString*)name andLocation:(MAUserLocation *)mylocation andStatus:(NSString*)status
+{
+    
+    NSString *str = [NSString stringWithFormat:@"key=%@&tableid=%d&loctype=1&data=%@",
+                     AMAP_KEY,
+                     123321,
+                     [NSString stringWithFormat:@"{\"_name\":\"%@\",\"_location\":\"%lf,%lf\",\"status\":\"%@\"}",name, mylocation.coordinate.latitude, mylocation.coordinate.longitude,status]];
+    NSData *jsonData = [[NSData alloc]initWithBase64Encoding:str];
+    NSMutableData *tempJsonData = [NSMutableData dataWithData:jsonData];
+    NSString* strUrl;
+    strUrl = @"http://yuntuapi.amap.com/datamanage/data/create";
+    strUrl = [strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:strUrl];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; encoding=utf-8"];
+    [request addRequestHeader:@"Accept" value:@"application/x-www-form-urlencoded"];
+    [request setRequestMethod:@"POST"];
+    [request setPostBody:tempJsonData];
+    
+    [request setCompletionBlock :^{
+    }];
+    [request setFailedBlock :^{
+    }];
+    [request setTimeOutSeconds:10];
+    [request startAsynchronous];
+    
+    return YES;
+}
 
 @end
