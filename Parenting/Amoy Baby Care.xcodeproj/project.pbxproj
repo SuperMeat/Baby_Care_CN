@@ -83,7 +83,7 @@
 		48152E47184C65AE009A4900 /* 1136.3.png in Resources */ = {isa = PBXBuildFile; fileRef = 48152E41184C65AE009A4900 /* 1136.3.png */; };
 		48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */; };
 		48152E4F1851B842009A4900 /* MyLocalNofityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */; };
-		481D919618D7DA590046A6B9 /* babycare_tip.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 481D919518D7DA590046A6B9 /* babycare_tip.sqlite */; };
+		481D919618D7DA590046A6B9 /* BC_Tips.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 481D919518D7DA590046A6B9 /* BC_Tips.sqlite */; };
 		482791C71884DE1D003E9724 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B51884DE1D003E9724 /* 114.png */; };
 		482791C81884DE1D003E9724 /* 120 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B61884DE1D003E9724 /* 120 2.png */; };
 		482791C91884DE1D003E9724 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B71884DE1D003E9724 /* 120.png */; };
@@ -103,7 +103,7 @@
 		482791D71884DE1D003E9724 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791C51884DE1D003E9724 /* iTunesArtwork.png */; };
 		482791D81884DE1D003E9724 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791C61884DE1D003E9724 /* iTunesArtwork@2x.png */; };
 		482B34B118C032D500EFA963 /* UpLoadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 482B34B018C032D500EFA963 /* UpLoadController.m */; };
-		48357E231846ED2A00BCF799 /* EnvironmentAdviceDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */; };
+		48357E231846ED2A00BCF799 /* EnvironmentAdviceDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E221846ED2A00BCF799 /* EnvironmentAdviceDB.m */; };
 		48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2518472BB500BCF799 /* AdviseLevel.m */; };
 		48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2818473EC400BCF799 /* WeatherAdviseViewController.m */; };
 		48357E2B18473EC400BCF799 /* WeatherAdviseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48357E2918473EC400BCF799 /* WeatherAdviseViewController.xib */; };
@@ -285,7 +285,6 @@
 		BE7C697E1867F1B300C4B675 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C69751867F1B300C4B675 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BE7C69811867F33100C4B675 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C69801867F33100C4B675 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BE7C698418681A2000C4B675 /* SuggestionDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C698318681A2000C4B675 /* SuggestionDataBase.m */; };
-		BE7C6986186836F000C4B675 /* Babyinfo-cwb.rdb in Resources */ = {isa = PBXBuildFile; fileRef = BE7C6985186836F000C4B675 /* Babyinfo-cwb.rdb */; };
 		BE7C698918692ED100C4B675 /* btn_syncBLE.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7C698718692ED100C4B675 /* btn_syncBLE.png */; };
 		BE7C698A18692ED100C4B675 /* btn_syncBLE@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7C698818692ED100C4B675 /* btn_syncBLE@2x.png */; };
 		BE7C698D1869977300C4B675 /* MyDevicesTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C698C1869977300C4B675 /* MyDevicesTableCell.m */; };
@@ -775,7 +774,7 @@
 		48152E4B1851B842009A4900 /* MyLocalNofityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLocalNofityViewController.h; path = LocalNofication/MyLocalNofityViewController.h; sourceTree = "<group>"; };
 		48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLocalNofityViewController.m; path = LocalNofication/MyLocalNofityViewController.m; sourceTree = "<group>"; };
 		48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyLocalNofityViewController.xib; path = LocalNofication/MyLocalNofityViewController.xib; sourceTree = "<group>"; };
-		481D919518D7DA590046A6B9 /* babycare_tip.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = babycare_tip.sqlite; sourceTree = "<group>"; };
+		481D919518D7DA590046A6B9 /* BC_Tips.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BC_Tips.sqlite; sourceTree = "<group>"; };
 		482791B51884DE1D003E9724 /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		482791B61884DE1D003E9724 /* 120 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120 2.png"; sourceTree = "<group>"; };
 		482791B71884DE1D003E9724 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
@@ -796,8 +795,8 @@
 		482791C61884DE1D003E9724 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		482B34AF18C032D500EFA963 /* UpLoadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpLoadController.h; path = UpLoadController/UpLoadController.h; sourceTree = "<group>"; };
 		482B34B018C032D500EFA963 /* UpLoadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpLoadController.m; path = UpLoadController/UpLoadController.m; sourceTree = "<group>"; };
-		48357E211846ED2A00BCF799 /* EnvironmentAdviceDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvironmentAdviceDataBase.h; path = LocalData/EnvironmentAdviceDataBase.h; sourceTree = "<group>"; };
-		48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnvironmentAdviceDataBase.m; path = LocalData/EnvironmentAdviceDataBase.m; sourceTree = "<group>"; };
+		48357E211846ED2A00BCF799 /* EnvironmentAdviceDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvironmentAdviceDB.h; path = LocalData/EnvironmentAdviceDB.h; sourceTree = "<group>"; };
+		48357E221846ED2A00BCF799 /* EnvironmentAdviceDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnvironmentAdviceDB.m; path = LocalData/EnvironmentAdviceDB.m; sourceTree = "<group>"; };
 		48357E2418472BB500BCF799 /* AdviseLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdviseLevel.h; path = AdviseLevel/AdviseLevel.h; sourceTree = "<group>"; };
 		48357E2518472BB500BCF799 /* AdviseLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdviseLevel.m; path = AdviseLevel/AdviseLevel.m; sourceTree = "<group>"; };
 		48357E2718473EC400BCF799 /* WeatherAdviseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherAdviseViewController.h; path = Weather/WeatherAdviseViewController.h; sourceTree = "<group>"; };
@@ -1066,7 +1065,6 @@
 		BE7C69801867F33100C4B675 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BE7C698218681A2000C4B675 /* SuggestionDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionDataBase.h; sourceTree = "<group>"; };
 		BE7C698318681A2000C4B675 /* SuggestionDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionDataBase.m; sourceTree = "<group>"; };
-		BE7C6985186836F000C4B675 /* Babyinfo-cwb.rdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Babyinfo-cwb.rdb"; sourceTree = "<group>"; };
 		BE7C698718692ED100C4B675 /* btn_syncBLE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_syncBLE.png; sourceTree = "<group>"; };
 		BE7C698818692ED100C4B675 /* btn_syncBLE@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_syncBLE@2x.png"; sourceTree = "<group>"; };
 		BE7C698B1869977300C4B675 /* MyDevicesTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesTableCell.h; sourceTree = "<group>"; };
@@ -1721,6 +1719,21 @@
 			path = ACViewController;
 			sourceTree = "<group>";
 		};
+		4800B14818D98F2B0093A6AF /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				CE0C33D617618AC200B1B683 /* DataBase.h */,
+				CE0C33D717618AC200B1B683 /* DataBase.m */,
+				48357E211846ED2A00BCF799 /* EnvironmentAdviceDB.h */,
+				48357E221846ED2A00BCF799 /* EnvironmentAdviceDB.m */,
+				BE7C698218681A2000C4B675 /* SuggestionDataBase.h */,
+				BE7C698318681A2000C4B675 /* SuggestionDataBase.m */,
+				48F47F0418BF1F9C009A504B /* BabyInfoManagerDB.h */,
+				48F47F0518BF1F9C009A504B /* BabyInfoManagerDB.m */,
+			);
+			name = DataController;
+			sourceTree = "<group>";
+		};
 		48013D33185ADF7F00F483A6 /* BLEController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2068,14 +2081,6 @@
 		4855BCF51830B03D00F02A3E /* LocalData */ = {
 			isa = PBXGroup;
 			children = (
-				CE0C33D617618AC200B1B683 /* DataBase.h */,
-				CE0C33D717618AC200B1B683 /* DataBase.m */,
-				48357E211846ED2A00BCF799 /* EnvironmentAdviceDataBase.h */,
-				48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */,
-				BE7C698218681A2000C4B675 /* SuggestionDataBase.h */,
-				BE7C698318681A2000C4B675 /* SuggestionDataBase.m */,
-				48F47F0418BF1F9C009A504B /* BabyInfoManagerDB.h */,
-				48F47F0518BF1F9C009A504B /* BabyInfoManagerDB.m */,
 			);
 			name = LocalData;
 			sourceTree = "<group>";
@@ -2575,8 +2580,7 @@
 		7215972717453680006FD415 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				481D919518D7DA590046A6B9 /* babycare_tip.sqlite */,
-				BE7C6985186836F000C4B675 /* Babyinfo-cwb.rdb */,
+				481D919518D7DA590046A6B9 /* BC_Tips.sqlite */,
 				CE23978C176EE37B0096E033 /* Babyinfo.rdb */,
 				7215972817453680006FD415 /* Amoy Baby Care-Info.plist */,
 				7215972917453680006FD415 /* InfoPlist.strings */,
@@ -2608,6 +2612,7 @@
 		72159748174536C0006FD415 /* ClassFiles */ = {
 			isa = PBXGroup;
 			children = (
+				4800B14818D98F2B0093A6AF /* DataController */,
 				4800B0E118D9392B0093A6AF /* ACBaseSDK */,
 				488C894E18B497B10091C2BF /* UIController */,
 				488C894D18B497A80091C2BF /* LogicController */,
@@ -3431,7 +3436,7 @@
 				48152E1818486C66009A4900 /* messages_right_bubble@2x.png in Resources */,
 				CE0167B7174B059000462363 /* btn_setting.png in Resources */,
 				CE0167B8174B059000462363 /* btn_setting@2x.png in Resources */,
-				481D919618D7DA590046A6B9 /* babycare_tip.sqlite in Resources */,
+				481D919618D7DA590046A6B9 /* BC_Tips.sqlite in Resources */,
 				CE0167B9174B059000462363 /* btn_setting_focus.png in Resources */,
 				48152DEE18486B13009A4900 /* UMContactViewController.xib in Resources */,
 				CE0167BA174B059000462363 /* btn_setting_focus@2x.png in Resources */,
@@ -3788,7 +3793,6 @@
 				48EC1DD11861772300965254 /* CustomNotifyViewController.xib in Resources */,
 				CE638B28174F4FC2009A60AB /* btn_sleep_focus.png in Resources */,
 				48DEA7AC17F467A000A11316 /* Sleep_3.jpg in Resources */,
-				BE7C6986186836F000C4B675 /* Babyinfo-cwb.rdb in Resources */,
 				CE638B29174F4FC2009A60AB /* btn_sleep_focus@2x.png in Resources */,
 				48F47F0218BC7D74009A504B /* all_toptongbu.png in Resources */,
 				CE638B2A174F4FC2009A60AB /* btn_year.png in Resources */,
@@ -3990,7 +3994,7 @@
 				48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */,
 				CE638AB5174F4899009A60AB /* FMDatabasePool.m in Sources */,
 				CE638AB6174F4899009A60AB /* FMDatabaseQueue.m in Sources */,
-				48357E231846ED2A00BCF799 /* EnvironmentAdviceDataBase.m in Sources */,
+				48357E231846ED2A00BCF799 /* EnvironmentAdviceDB.m in Sources */,
 				CE638AB7174F4899009A60AB /* FMResultSet.m in Sources */,
 				48F6ABA4186D191C0032045E /* AlarmKey.m in Sources */,
 				48EF611C18C6FAC7006C3D5C /* AnimatedAnnotation.m in Sources */,

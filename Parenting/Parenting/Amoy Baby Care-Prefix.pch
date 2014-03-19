@@ -43,7 +43,7 @@
 #import "MBProgressHUD.h"
 #import "AdviseData.h"
 #import "AdviseLevel.h"
-#import "EnvironmentAdviceDataBase.h"
+#import "EnvironmentAdviceDB.h"
 #import "DXAlertView.h"
 #import "UartLib.h"
 #import "UpLoadController/UpLoadController.h"
@@ -94,6 +94,12 @@
 #define TABLE_NAME_SLEEP  @"sleep"
 #define TABLE_NAME_CRY    @"cry"
 
+#define ENVIR_SUGGESTION_TYPE_TEMP  0
+#define ENVIR_SUGGESTION_TYPE_HUMI  1
+#define ENVIR_SUGGESTION_TYPE_LIGHT 2
+#define ENVIR_SUGGESTION_TYPE_NOICE 3
+#define ENVIR_SUGGESTION_TYPE_UV    4
+#define ENVIR_SUGGESTION_TYPE_PM25  5
 //去log
 #ifdef DEBUG
 #else

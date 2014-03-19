@@ -84,7 +84,8 @@
 }
 
 #pragma 判断记录是否存在
-+(BOOL)isExistisType:(int)type ID:(int)typeserial{
++(BOOL)isExistisType:(int)type ID:(int)typeserial
+{
     BOOL res;
     FMDatabase *db=[FMDatabase databaseWithPath:SDBPATH];
     res=[db open];

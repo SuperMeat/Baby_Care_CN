@@ -8,7 +8,7 @@
 
 #import "WeatherView.h"
 #import "Environmentitem.h"
-#import "EnvironmentAdviceDataBase.h"
+#import "EnvironmentAdviceDB.h"
 #import "WeatherAdviseViewController.h"
 
 @implementation WeatherView
@@ -154,30 +154,11 @@
         if([[dict objectForKey:@"temp"] length]>0)
         {
             temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
-            NSArray *arr;
-            switch (self.chooseType) {
-                case QCM_TYPE_BATH:
-                    arr = [EnvironmentAdviceDataBase selectBathSuggestionByTemp:[[dict objectForKey:@"temp"] intValue]];
-                    break;
-                case QCM_TYPE_DIAPER:
-                    arr = [EnvironmentAdviceDataBase selectDiaperSuggestionByTemp:[[dict objectForKey:@"temp"] intValue]];
-                    break;
-                case QCM_TYPE_FEED:
-                    arr = [EnvironmentAdviceDataBase selectFeedSuggestionByTemp:[[dict objectForKey:@"temp"] intValue]];
-                    break;
-                case QCM_TYPE_SLEEP:
-                    arr = [EnvironmentAdviceDataBase selectSleepSuggestionByTemp:[[dict objectForKey:@"temp"] intValue]];
-                    break;
-                case QCM_TYPE_PLAY:
-                    arr = [EnvironmentAdviceDataBase selectPlaySuggestionByTemp:[[dict objectForKey:@"temp"] intValue]];
-                    break;
-                default:
-                    break;
-            }
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_TEMP andValue:[NSNumber numberWithInt:[[dict objectForKey:@"temp"] intValue]]];
 
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDataBase selectsuggestiontemp:al.mAdviseId];
+                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_TEMP];
                 if ([a2 count]>0) {
                    AdviseData* ad = [a2 objectAtIndex:0];
                     tempcontent = ad.mContent;
@@ -190,30 +171,11 @@
         }
         if ([[dict objectForKey:@"humidity"] length]>0) {
             humi.detail=[NSString stringWithFormat:@"%@ %%",[dict objectForKey:@"humidity"]];
-            NSArray *arr;
-            switch (self.chooseType) {
-                case QCM_TYPE_BATH:
-                    arr = [EnvironmentAdviceDataBase selectBathSuggestionByHumi:[[dict objectForKey:@"humidity"] intValue]];
-                    break;
-                case QCM_TYPE_DIAPER:
-                    arr = [EnvironmentAdviceDataBase selectDiaperSuggestionByHumi:[[dict objectForKey:@"humidity"] intValue]];
-                    break;
-                case QCM_TYPE_FEED:
-                    arr = [EnvironmentAdviceDataBase selectFeedSuggestionByHumi:[[dict objectForKey:@"humidity"] intValue]];
-                    break;
-                case QCM_TYPE_SLEEP:
-                    arr = [EnvironmentAdviceDataBase selectSleepSuggestionByHumi:[[dict objectForKey:@"humidity"] intValue]];
-                    break;
-                case QCM_TYPE_PLAY:
-                    arr = [EnvironmentAdviceDataBase selectPlaySuggestionByHumi:[[dict objectForKey:@"humidity"] intValue]];
-                    break;
-                default:
-                    break;
-            }
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_HUMI andValue:[NSNumber numberWithInt:[[dict objectForKey:@"humidity"] intValue]]];
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDataBase selectsuggestionhumi:al.mAdviseId];
+                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_HUMI];
                 if ([a2 count]>0) {
                     AdviseData* ad = [a2 objectAtIndex:0];
                     tempcontent = ad.mContent;
