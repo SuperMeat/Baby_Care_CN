@@ -11,7 +11,7 @@
 @interface OpenFunction : NSObject
 
 + (float) getSystemVersion;
-+ (void) openUserReviews;
++ (void)  openUserReviews;
 + (NSString*)getpm25description:(int)value;
 + (NSString*)getopenudid;
 + (NSString*)getMonthBeginAndEndWith:(NSDate *)newDate;

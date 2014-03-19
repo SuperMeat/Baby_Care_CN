@@ -5,14 +5,14 @@
 //  Created by @Arvi@ on 14-3-19.
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 
-#import <UIKit/UIKit.h>
+#import "ACConfig.h"
 
 @interface ACTabBarController : UITabBarController<UITabBarControllerDelegate>{
     
-    NSArray *btnImages;
-    NSArray *btnHLightImages;
-    NSArray *titles;
-    int currentSelectedIndex;
+    NSArray *btnImages;           //图片默认
+    NSArray *btnHLightImages;     //图片高亮
+    NSArray *titles;              //标题
+    int     currentSelectedIndex;
 
 }
 
@@ -25,6 +25,5 @@
 - (void)setBtnImages:(NSArray*)theBtnImages;
 - (void)setBtnHLightImages:(NSArray*)theBtnHLightImages;
 - (void)setTabBarTitle:(NSArray*)theTitles;
-
 
 @end

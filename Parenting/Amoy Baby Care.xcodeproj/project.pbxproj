@@ -24,7 +24,10 @@
 		4800B0D818D822EF0093A6AF /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B0D718D822EF0093A6AF /* ActivityViewController.m */; };
 		4800B0DF18D931EF0093A6AF /* MyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B0DD18D931EF0093A6AF /* MyPageViewController.m */; };
 		4800B0E018D931EF0093A6AF /* MyPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4800B0DE18D931EF0093A6AF /* MyPageViewController.xib */; };
-		4800B0E618D93AD80093A6AF /* ACViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B0E518D93AD80093A6AF /* ACViewController.m */; };
+		4800B14418D9880B0093A6AF /* ACDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B13818D9880B0093A6AF /* ACDate.m */; };
+		4800B14518D9880B0093A6AF /* ACFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B13A18D9880B0093A6AF /* ACFunction.m */; };
+		4800B14618D9880B0093A6AF /* ACTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14018D9880B0093A6AF /* ACTabBarController.m */; };
+		4800B14718D9880B0093A6AF /* ACViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14318D9880B0093A6AF /* ACViewController.m */; };
 		48013D37185ADFC300F483A6 /* BLEController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48013D36185ADFC300F483A6 /* BLEController.m */; };
 		48013D3B185AE3A000F483A6 /* libUartLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48013D39185AE3A000F483A6 /* libUartLib.a */; };
 		48013D3D185AE47900F483A6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48013D3C185AE47900F483A6 /* CoreBluetooth.framework */; };
@@ -667,7 +670,6 @@
 		F3F09B5E1745CBCE006CB06D /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F09B5C1745CBCE006CB06D /* SettingViewController.xib */; };
 		F3F09B6C1745CC15006CB06D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F09B6A1745CC15006CB06D /* HomeViewController.m */; };
 		F3F09B6D1745CC15006CB06D /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F09B6B1745CC15006CB06D /* HomeViewController.xib */; };
-		F3F09B841745DE64006CB06D /* ACTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F09B831745DE64006CB06D /* ACTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -694,8 +696,15 @@
 		4800B0DC18D931EF0093A6AF /* MyPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageViewController.h; sourceTree = "<group>"; };
 		4800B0DD18D931EF0093A6AF /* MyPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageViewController.m; sourceTree = "<group>"; };
 		4800B0DE18D931EF0093A6AF /* MyPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPageViewController.xib; sourceTree = "<group>"; };
-		4800B0E418D93AD80093A6AF /* ACViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACViewController.h; sourceTree = "<group>"; };
-		4800B0E518D93AD80093A6AF /* ACViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACViewController.m; sourceTree = "<group>"; };
+		4800B13718D9880B0093A6AF /* ACDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDate.h; sourceTree = "<group>"; };
+		4800B13818D9880B0093A6AF /* ACDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDate.m; sourceTree = "<group>"; };
+		4800B13918D9880B0093A6AF /* ACFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFunction.h; sourceTree = "<group>"; };
+		4800B13A18D9880B0093A6AF /* ACFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFunction.m; sourceTree = "<group>"; };
+		4800B13C18D9880B0093A6AF /* ACConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACConfig.h; sourceTree = "<group>"; };
+		4800B13F18D9880B0093A6AF /* ACTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTabBarController.h; sourceTree = "<group>"; };
+		4800B14018D9880B0093A6AF /* ACTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTabBarController.m; sourceTree = "<group>"; };
+		4800B14218D9880B0093A6AF /* ACViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACViewController.h; sourceTree = "<group>"; };
+		4800B14318D9880B0093A6AF /* ACViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACViewController.m; sourceTree = "<group>"; };
 		48013D35185ADFC300F483A6 /* BLEController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEController.h; path = BLEController/BLEController.h; sourceTree = "<group>"; };
 		48013D36185ADFC300F483A6 /* BLEController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLEController.m; path = BLEController/BLEController.m; sourceTree = "<group>"; };
 		48013D39185AE3A000F483A6 /* libUartLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUartLib.a; sourceTree = "<group>"; };
@@ -1561,8 +1570,6 @@
 		F3F09B691745CC15006CB06D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		F3F09B6A1745CC15006CB06D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		F3F09B6B1745CC15006CB06D /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		F3F09B821745DE64006CB06D /* ACTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTabBarController.h; sourceTree = "<group>"; };
-		F3F09B831745DE64006CB06D /* ACTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1661,27 +1668,57 @@
 		4800B0E118D9392B0093A6AF /* ACBaseSDK */ = {
 			isa = PBXGroup;
 			children = (
-				4800B0E218D9396F0093A6AF /* ACBaseController */,
+				4800B13618D9880B0093A6AF /* ACClasses */,
+				4800B13B18D9880B0093A6AF /* ACConfig */,
+				4800B13D18D9880B0093A6AF /* ACUIController */,
 			);
 			name = ACBaseSDK;
 			sourceTree = "<group>";
 		};
-		4800B0E218D9396F0093A6AF /* ACBaseController */ = {
+		4800B13618D9880B0093A6AF /* ACClasses */ = {
 			isa = PBXGroup;
 			children = (
-				4800B0E318D93AC10093A6AF /* ACViewController */,
-				4855BCF81830B0CB00F02A3E /* ACTabBarController */,
+				4800B13718D9880B0093A6AF /* ACDate.h */,
+				4800B13818D9880B0093A6AF /* ACDate.m */,
+				4800B13918D9880B0093A6AF /* ACFunction.h */,
+				4800B13A18D9880B0093A6AF /* ACFunction.m */,
 			);
-			name = ACBaseController;
+			path = ACClasses;
 			sourceTree = "<group>";
 		};
-		4800B0E318D93AC10093A6AF /* ACViewController */ = {
+		4800B13B18D9880B0093A6AF /* ACConfig */ = {
 			isa = PBXGroup;
 			children = (
-				4800B0E418D93AD80093A6AF /* ACViewController.h */,
-				4800B0E518D93AD80093A6AF /* ACViewController.m */,
+				4800B13C18D9880B0093A6AF /* ACConfig.h */,
 			);
-			name = ACViewController;
+			path = ACConfig;
+			sourceTree = "<group>";
+		};
+		4800B13D18D9880B0093A6AF /* ACUIController */ = {
+			isa = PBXGroup;
+			children = (
+				4800B13E18D9880B0093A6AF /* ACTabBarController */,
+				4800B14118D9880B0093A6AF /* ACViewController */,
+			);
+			path = ACUIController;
+			sourceTree = "<group>";
+		};
+		4800B13E18D9880B0093A6AF /* ACTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				4800B13F18D9880B0093A6AF /* ACTabBarController.h */,
+				4800B14018D9880B0093A6AF /* ACTabBarController.m */,
+			);
+			path = ACTabBarController;
+			sourceTree = "<group>";
+		};
+		4800B14118D9880B0093A6AF /* ACViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4800B14218D9880B0093A6AF /* ACViewController.h */,
+				4800B14318D9880B0093A6AF /* ACViewController.m */,
+			);
+			path = ACViewController;
 			sourceTree = "<group>";
 		};
 		48013D33185ADF7F00F483A6 /* BLEController */ = {
@@ -2063,15 +2100,6 @@
 				485F3F4917F07CDA00BD876F /* OpenFunction.m */,
 			);
 			name = PublicFunction;
-			sourceTree = "<group>";
-		};
-		4855BCF81830B0CB00F02A3E /* ACTabBarController */ = {
-			isa = PBXGroup;
-			children = (
-				F3F09B821745DE64006CB06D /* ACTabBarController.h */,
-				F3F09B831745DE64006CB06D /* ACTabBarController.m */,
-			);
-			name = ACTabBarController;
 			sourceTree = "<group>";
 		};
 		4855BCF91830B12700F02A3E /* IOSSDK */ = {
@@ -3911,6 +3939,7 @@
 				48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */,
 				485749961831C3D1000D921B /* NotifyViewController.m in Sources */,
 				BE7C697B1867F1B300C4B675 /* ASIFormDataRequest.m in Sources */,
+				4800B14418D9880B0093A6AF /* ACDate.m in Sources */,
 				7215972D17453680006FD415 /* main.m in Sources */,
 				48EF612718C6FAC7006C3D5C /* CommonUtility.m in Sources */,
 				48EC1DD01861772300965254 /* CustomNotifyViewController.m in Sources */,
@@ -3921,7 +3950,6 @@
 				F3F09B5D1745CBCE006CB06D /* SettingViewController.m in Sources */,
 				F3F09B6C1745CC15006CB06D /* HomeViewController.m in Sources */,
 				BE7C697C1867F1B300C4B675 /* ASIHTTPRequest.m in Sources */,
-				F3F09B841745DE64006CB06D /* ACTabBarController.m in Sources */,
 				48EC1DD61862CE2000965254 /* CustonTimeViewController.m in Sources */,
 				48152DD318486AEA009A4900 /* UMEGORefreshTableHeaderView.m in Sources */,
 				48152DED18486B13009A4900 /* UMContactViewController.m in Sources */,
@@ -3952,6 +3980,7 @@
 				CE3826FD174DEB22009AD8DA /* bathViewController.m in Sources */,
 				CE638AB3174F4899009A60AB /* FMDatabase.m in Sources */,
 				48EF612118C6FAC7006C3D5C /* FaceOverlay.m in Sources */,
+				4800B14518D9880B0093A6AF /* ACFunction.m in Sources */,
 				BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */,
 				CE638AB4174F4899009A60AB /* FMDatabaseAdditions.m in Sources */,
 				482B34B118C032D500EFA963 /* UpLoadController.m in Sources */,
@@ -3975,7 +4004,6 @@
 				BE7C69811867F33100C4B675 /* Reachability.m in Sources */,
 				48EF612318C6FAC7006C3D5C /* GeocodeAnnotation.m in Sources */,
 				48013D37185ADFC300F483A6 /* BLEController.m in Sources */,
-				4800B0E618D93AD80093A6AF /* ACViewController.m in Sources */,
 				4855BD011830C8C000F02A3E /* InformationCenterViewController.m in Sources */,
 				CE075A431750824100C57E27 /* save_bathview.m in Sources */,
 				48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */,
@@ -4013,11 +4041,13 @@
 				48F47F0618BF1F9C009A504B /* BabyInfoManagerDB.m in Sources */,
 				48EF611E18C6FAC7006C3D5C /* BusStopAnnotation.m in Sources */,
 				CE69F1B6176AAAF600E26333 /* SummaryItem.m in Sources */,
+				4800B14718D9880B0093A6AF /* ACViewController.m in Sources */,
 				F365CADC176C537900EA1406 /* CustumCell.m in Sources */,
 				CE239796176EE4A50096E033 /* BabyinfoViewController.m in Sources */,
 				4800B0CB18D81A300093A6AF /* MyTabBarController.m in Sources */,
 				48EF611D18C6FAC7006C3D5C /* AnimatedAnnotationView.m in Sources */,
 				4800B0DF18D931EF0093A6AF /* MyPageViewController.m in Sources */,
+				4800B14618D9880B0093A6AF /* ACTabBarController.m in Sources */,
 				BE5997C71861930A008D3F6C /* BindingDeviceViewController.m in Sources */,
 				BE7C697A1867F1B300C4B675 /* ASIDownloadCache.m in Sources */,
 				CE1D69C81772958900561EBF /* AdviseScrollview.m in Sources */,
