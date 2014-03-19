@@ -6,13 +6,13 @@
 //
 //
 
-#import "MMXTabBarController.h"
+#import "ACTabBarController.h"
 
-@interface MMXTabBarController ()
+@interface ACTabBarController ()
 
 @end
 
-@implementation MMXTabBarController
+@implementation ACTabBarController
 @synthesize currentSelectedIndex=_currentSelectedIndex,buttons,lable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -146,10 +146,12 @@
 		[self.buttons addObject:btn];
         [self.tabBar addSubview:btn];
 
-        [btn setTitle:titles[i] forState:UIControlStateNormal];
-        
-        [btn setTitleColor:[UIColor colorWithRed:0x7B/255.0 green:0x7A/255.0 blue:0x75/255.0 alpha:0xFF/255.0] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor colorWithRed:0x55/255.0 green:0x54/255.0 blue:0x4A/255.0 alpha:1] forState:UIControlStateDisabled];
+        if ([titles count] > i) {
+            [btn setTitle:titles[i] forState:UIControlStateNormal];
+            
+            [btn setTitleColor:[UIColor colorWithRed:0x7B/255.0 green:0x7A/255.0 blue:0x75/255.0 alpha:0xFF/255.0] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor colorWithRed:0x55/255.0 green:0x54/255.0 blue:0x4A/255.0 alpha:1] forState:UIControlStateDisabled];
+        }
 	}
     
 

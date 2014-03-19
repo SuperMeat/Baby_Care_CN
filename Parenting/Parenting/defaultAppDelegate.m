@@ -66,7 +66,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     [[UINavigationBar appearance] setBarTintColor:[OpenFunction colorWithHexString:@"0x68bfcc"]];
     
-    [[UINavigationBar appearance] setBackgroundColor:[OpenFunction colorWithHexString:@"0x68bfcc"]];
+    //[[UINavigationBar appearance] setBackgroundColor:[OpenFunction colorWithHexString:@"0x68bfcc"]];
     
     [[UINavigationBar appearance] setAlpha:0.8];
     
@@ -133,21 +133,24 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 -(void)tap
 {
-    homeViewController    = [[HomeViewController alloc] init];
+    //homeViewController    = [[HomeViewController alloc] init];
     //summaryViewController = [[SummaryViewController alloc] init];
     //adviseViewController  = [[AdviseMasterViewController alloc] init];
     //settingViewController = [[SettingViewController alloc] init];
     //icViewController      = [[InformationCenterViewController alloc] init];
+    myPageViewController   = [[MyPageViewController alloc] init];
     envirViewController    = [[EnviromemtViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
     calendarViewController = [[CalendarViewController alloc] init];
     
-    homeNavigationViewController    = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    //homeNavigationViewController    = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     //summaryNavigationViewController = [[UINavigationController alloc] initWithRootViewController:summaryViewController];
     //adviseNavigationViewController  = [[UINavigationController alloc] initWithRootViewController:adviseViewController];
     //settingNavigationViewController = [[UINavigationController alloc] initWithRootViewController:settingViewController];
     //icNavigationViewController      = [[UINavigationController alloc] initWithRootViewController:icViewController];
+    myPageNavigationViewController   = [[UINavigationController alloc]
+                                        initWithRootViewController:myPageViewController];
     envirNavigationViewController    = [[UINavigationController alloc]
                                      initWithRootViewController:envirViewController];
     actNavigationViewController      = [[UINavigationController alloc]
@@ -158,12 +161,14 @@ void UncaughtExceptionHandler(NSException *exception) {
                                      initWithRootViewController:calendarViewController];
     
     
-    NSMutableArray *controllers = [[NSMutableArray alloc] init];
-    [controllers addObject:homeNavigationViewController];
+    
+    //[controllers addObject:homeNavigationViewController];
     //[controllers addObject:summaryNavigationViewController];
     //[controllers addObject:adviseNavigationViewController];
     //[controllers addObject:icNavigationViewController];
     //[controllers addObject:settingNavigationViewController];
+    NSMutableArray *controllers = [[NSMutableArray alloc] init];
+    [controllers addObject:myPageNavigationViewController];
     [controllers addObject:envirNavigationViewController];
     [controllers addObject:actNavigationViewController];
     [controllers addObject:phyNavigationViewController];

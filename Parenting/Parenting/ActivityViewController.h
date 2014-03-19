@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ActivityViewController : UIViewController
+@interface ActivityViewController : ACViewController
 
 @end

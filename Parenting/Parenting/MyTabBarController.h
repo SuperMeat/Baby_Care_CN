@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
-#import "MMXTabBarController.h"
+#import "ACTabBarController.h"
 
-@interface MyTabBarController : MMXTabBarController
+@interface MyTabBarController : ACTabBarController
 
 @end

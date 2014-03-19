@@ -19,6 +19,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self setTitle:@"日历"];
+
     }
     return self;
 }

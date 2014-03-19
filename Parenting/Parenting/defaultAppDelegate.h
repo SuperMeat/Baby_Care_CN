@@ -13,19 +13,20 @@
 #import "InformationCenterViewController.h"
 #import "GuideViewController.h"
 
-#import "MMXTabBarController.h"
+#import "ACTabBarController.h"
 #import "MyTabBarController.h"
 #import "EnviromemtViewController.h"
 #import "ActivityViewController.h"
 #import "PhysiologyViewController.h"
 #import "CalendarViewController.h"
-
+#import "MyPageViewController.h"
 
 @class defaultViewController;
 @interface defaultAppDelegate : UIResponder <UIApplicationDelegate>
 {
-    MMXTabBarController             *TabbarController;
+    ACTabBarController              *TabbarController;
     MyTabBarController              *myTabController;
+    MyPageViewController            *myPageViewController;
     EnviromemtViewController        *envirViewController;
     ActivityViewController          *actViewController;
     PhysiologyViewController        *phyViewController;
@@ -44,6 +45,7 @@
     UINavigationController          *homeNavigationViewController;
     UINavigationController          *icNavigationViewController;
     
+    UINavigationController          *myPageNavigationViewController;
     UINavigationController          *envirNavigationViewController;
     UINavigationController          *actNavigationViewController;
     UINavigationController          *phyNavigationViewController;

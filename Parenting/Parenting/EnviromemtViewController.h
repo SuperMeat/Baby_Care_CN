@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EnviromemtViewController : UIViewController
+@interface EnviromemtViewController : ACViewController
 
 @end
