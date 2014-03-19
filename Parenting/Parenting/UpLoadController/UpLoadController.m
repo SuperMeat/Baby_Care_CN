@@ -79,6 +79,7 @@
     }
 
     return NO;
+    
 }
 
 +(NSArray*)PostActivityRecord:(NSArray*) records Type:(int)type;
@@ -104,7 +105,7 @@
         [request setRequestMethod:@"POST"];
         [request setPostBody:tempJsonData];
         [request startSynchronous];
-        [request setTimeOutSeconds:10];
+        [request setTimeOutSeconds:10];       
         NSError *error1 = [request error];
         if (!error1) {
             NSData *data = [request responseData];

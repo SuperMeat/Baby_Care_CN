@@ -207,11 +207,9 @@ updatingLocation:(BOOL)updatingLocation
     
     NSMutableArray *poiAnnotations = [NSMutableArray arrayWithCapacity:respons.pois.count];
     
-    [respons.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop) {
-        
-        
+    [respons.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop)
+     {
         [poiAnnotations addObject:[[POIAnnotation alloc] initWithPOI:obj]];
-        
     }];
     
     /* 将结果以annotation的形式加载到地图上. */

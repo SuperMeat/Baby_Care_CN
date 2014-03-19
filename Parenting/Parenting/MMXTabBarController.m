@@ -39,47 +39,36 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)initResourece
+{
     
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:NO];
-    [self setBtnImages:nil];
-    [self setBtnHLightImages:nil];
     static dispatch_once_t pred = 0;
-    
     dispatch_once(&pred, ^{
         [self initCustomTabbar];
         
     });
-
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-//    CGRect frame = [[UIScreen mainScreen] bounds];
-//    self.view.frame = CGRectMake(0, 0, 320, frame.size.height+4);
-//    [super viewDidAppear:YES];
-//    [self setBtnImages:nil];
-//    [self setBtnHLightImages:nil];
-//    static dispatch_once_t pred = 0;
-//    
-//    dispatch_once(&pred, ^{
-//        [self initCustomTabbar];
-//        
-//    });
-
 }
 
 - (void)setBtnImages:(NSArray*)theBtnImages
 {
-    btnImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"menu1.png"],[UIImage imageNamed:@"menu2.png"],[UIImage imageNamed:@"menu3.png"],[UIImage imageNamed:@"menu4.png"], nil];
+    btnImages = [NSArray arrayWithArray:theBtnImages];
 }
 
 - (void)setBtnHLightImages:(NSArray*)theBtnHLightImages
 {
-    btnHLightImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"menu1_focus.png"],[UIImage imageNamed:@"menu2_focus.png"],[UIImage imageNamed:@"menu3_focus.png"],[UIImage imageNamed:@"menu4_focus.png"], nil];
+    btnHLightImages = [NSArray arrayWithArray:theBtnHLightImages];
+}
+
+- (void)setTabBarTitle:(NSArray*)theTitles
+{
+    titles = [NSArray arrayWithArray:theTitles];
 }
 
 - (void)hideRealTabBar{
@@ -127,10 +116,6 @@
 	}
 }
 
-//- (void)setViewControllers:(NSArray *)viewControllers{
-//    
-//}
-
 - (void)initCustomTabbar
 {
     UIView *tab_view = [[UIView alloc] init];
@@ -147,13 +132,6 @@
     int viewCount = self.viewControllers.count > 5 ? 5 : self.viewControllers.count;
 	self.buttons = [NSMutableArray arrayWithCapacity:viewCount];
     
-    NSString *home=NSLocalizedString(@"tabbarhome", nil);
-    NSString *summary=NSLocalizedString(@"tabbarsummary", nil);
-    NSString *advise=NSLocalizedString(@"InformationCenter", nil);
-    NSString *settings=NSLocalizedString(@"tabbarsettings", nil);
-    
-    NSArray *ta=@[home,summary,advise,settings];
-    
 	for (int i = 0; i < viewCount; i++) {
 		UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(320/self.viewControllers.count*i, -4, 320/self.viewControllers.count, self.tabBar.frame.size.height+4)];
         [btn setBackgroundImage:[btnImages objectAtIndex:i] forState:UIControlStateNormal];
@@ -168,13 +146,10 @@
 		[self.buttons addObject:btn];
         [self.tabBar addSubview:btn];
 
-        [btn setTitle:ta[i] forState:UIControlStateNormal];
+        [btn setTitle:titles[i] forState:UIControlStateNormal];
         
         [btn setTitleColor:[UIColor colorWithRed:0x7B/255.0 green:0x7A/255.0 blue:0x75/255.0 alpha:0xFF/255.0] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor colorWithRed:0x55/255.0 green:0x54/255.0 blue:0x4A/255.0 alpha:1] forState:UIControlStateDisabled];
-        
-        
-
 	}
     
 

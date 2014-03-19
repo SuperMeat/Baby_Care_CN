@@ -62,10 +62,13 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,nil] forState:UIControlStateNormal];
     
+    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
     
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBarTintColor:[OpenFunction colorWithHexString:@"0x68bfcc"]];
     
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
+    [[UINavigationBar appearance] setBackgroundColor:[OpenFunction colorWithHexString:@"0x68bfcc"]];
+    
+    [[UINavigationBar appearance] setAlpha:0.8];
     
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor whiteColor],
@@ -131,34 +134,48 @@ void UncaughtExceptionHandler(NSException *exception) {
 -(void)tap
 {
     homeViewController    = [[HomeViewController alloc] init];
-    summaryViewController = [[SummaryViewController alloc] init];
+    //summaryViewController = [[SummaryViewController alloc] init];
     //adviseViewController  = [[AdviseMasterViewController alloc] init];
-    settingViewController = [[SettingViewController alloc] init];
-    icViewController      = [[InformationCenterViewController alloc] init];
-    
+    //settingViewController = [[SettingViewController alloc] init];
+    //icViewController      = [[InformationCenterViewController alloc] init];
+    envirViewController    = [[EnviromemtViewController alloc] init];
+    actViewController      = [[ActivityViewController alloc] init];
+    phyViewController      = [[PhysiologyViewController alloc] init];
+    calendarViewController = [[CalendarViewController alloc] init];
     
     homeNavigationViewController    = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-    summaryNavigationViewController = [[UINavigationController alloc] initWithRootViewController:summaryViewController];
+    //summaryNavigationViewController = [[UINavigationController alloc] initWithRootViewController:summaryViewController];
     //adviseNavigationViewController  = [[UINavigationController alloc] initWithRootViewController:adviseViewController];
-    settingNavigationViewController = [[UINavigationController alloc] initWithRootViewController:settingViewController];
-    icNavigationViewController      = [[UINavigationController alloc] initWithRootViewController:icViewController];
+    //settingNavigationViewController = [[UINavigationController alloc] initWithRootViewController:settingViewController];
+    //icNavigationViewController      = [[UINavigationController alloc] initWithRootViewController:icViewController];
+    envirNavigationViewController    = [[UINavigationController alloc]
+                                     initWithRootViewController:envirViewController];
+    actNavigationViewController      = [[UINavigationController alloc]
+                                     initWithRootViewController:actViewController];
+    phyNavigationViewController      = [[UINavigationController alloc]
+                                     initWithRootViewController:phyViewController];
+    calendarNavigationViewController = [[UINavigationController alloc]
+                                     initWithRootViewController:calendarViewController];
     
     
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
     [controllers addObject:homeNavigationViewController];
-    [controllers addObject:summaryNavigationViewController];
+    //[controllers addObject:summaryNavigationViewController];
     //[controllers addObject:adviseNavigationViewController];
-    [controllers addObject:icNavigationViewController];
-    [controllers addObject:settingNavigationViewController];
+    //[controllers addObject:icNavigationViewController];
+    //[controllers addObject:settingNavigationViewController];
+    [controllers addObject:envirNavigationViewController];
+    [controllers addObject:actNavigationViewController];
+    [controllers addObject:phyNavigationViewController];
+    [controllers addObject:calendarNavigationViewController];
     
-    
-    TabbarController = [[MMXTabBarController alloc] init];
-    [TabbarController setViewControllers:controllers];
-    self.window.rootViewController  = TabbarController;
-    NSString *guideVerson =[[NSUserDefaults standardUserDefaults] stringForKey:@"GuideVerson"];
+    myTabController = [[MyTabBarController alloc] init];
+    [myTabController setViewControllers:controllers];
+    self.window.rootViewController  = myTabController;
+    NSString *guideVerson = [[NSUserDefaults standardUserDefaults] stringForKey:@"GuideVerson"];
     if (![guideVerson  isEqual: GuideVerson])
     {
-        guideViewController = [[GuideViewController alloc] initWithRootViewController:TabbarController];        
+        guideViewController = [[GuideViewController alloc] initWithRootViewController:myTabController];
         if (guideVerson == nil) {
             guideViewController.isLaunchBefore = NO;
         }
@@ -169,7 +186,7 @@ void UncaughtExceptionHandler(NSException *exception) {
         self.window.rootViewController = guideViewController;
     }
     else{
-        self.window.rootViewController  = TabbarController;
+        self.window.rootViewController  = myTabController;
     }
 
     [self initializePlat];

@@ -361,7 +361,6 @@ messageView;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%i", [[_settingArray objectAtIndex:section] count]);
     return [[_settingArray objectAtIndex:section] count];
 }
 

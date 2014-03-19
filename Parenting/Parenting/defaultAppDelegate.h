@@ -14,11 +14,23 @@
 #import "GuideViewController.h"
 
 #import "MMXTabBarController.h"
+#import "MyTabBarController.h"
+#import "EnviromemtViewController.h"
+#import "ActivityViewController.h"
+#import "PhysiologyViewController.h"
+#import "CalendarViewController.h"
+
 
 @class defaultViewController;
 @interface defaultAppDelegate : UIResponder <UIApplicationDelegate>
 {
     MMXTabBarController             *TabbarController;
+    MyTabBarController              *myTabController;
+    EnviromemtViewController        *envirViewController;
+    ActivityViewController          *actViewController;
+    PhysiologyViewController        *phyViewController;
+    CalendarViewController          *calendarViewController;
+    
     SettingViewController           *settingViewController;
     InformationCenterViewController *icViewController;
     SummaryViewController           *summaryViewController;
@@ -31,6 +43,12 @@
     UINavigationController          *summaryNavigationViewController;
     UINavigationController          *homeNavigationViewController;
     UINavigationController          *icNavigationViewController;
+    
+    UINavigationController          *envirNavigationViewController;
+    UINavigationController          *actNavigationViewController;
+    UINavigationController          *phyNavigationViewController;
+    UINavigationController          *calendarNavigationViewController;
+
 }
 @property (strong, nonatomic) UIWindow *window;
 

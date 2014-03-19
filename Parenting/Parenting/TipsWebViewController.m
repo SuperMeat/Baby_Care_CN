@@ -9,8 +9,6 @@
 #import "TipsWebViewController.h"
 #import "CustomURLCache.h"
 #import "MBProgressHUD.h"
-#import "MMProgressHUD.h"
-#import "MMProgressHUDOverlayView.h"
 
 @interface TipsWebViewController ()
 

@@ -29,4 +29,7 @@
                              RepeatDay:(NSString *)repeatday
                               FireDate:(NSString *) fireDate
                    AlarmKey:(NSString *) alarmKey;
+
++ (UIColor *) colorWithHexString:(NSString *) color;
+
 @end

@@ -81,7 +81,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSLog(@"pickerView : %d, %d",row,component);
+    NSLog(@"pickerView : %ld, %ld",row,component);
 }
 
 
@@ -112,6 +112,5 @@
 			return 1;
 	}
 }
-
 
 @end
