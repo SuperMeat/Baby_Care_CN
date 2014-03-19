@@ -28,6 +28,8 @@
 		4800B14518D9880B0093A6AF /* ACFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B13A18D9880B0093A6AF /* ACFunction.m */; };
 		4800B14618D9880B0093A6AF /* ACTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14018D9880B0093A6AF /* ACTabBarController.m */; };
 		4800B14718D9880B0093A6AF /* ACViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14318D9880B0093A6AF /* ACViewController.m */; };
+		4800B14B18D9A4020093A6AF /* UserRecordDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14A18D9A4020093A6AF /* UserRecordDB.m */; };
+		4800B14E18D9A4270093A6AF /* UserManageDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14D18D9A4270093A6AF /* UserManageDB.m */; };
 		48013D37185ADFC300F483A6 /* BLEController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48013D36185ADFC300F483A6 /* BLEController.m */; };
 		48013D3B185AE3A000F483A6 /* libUartLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48013D39185AE3A000F483A6 /* libUartLib.a */; };
 		48013D3D185AE47900F483A6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48013D3C185AE47900F483A6 /* CoreBluetooth.framework */; };
@@ -704,6 +706,10 @@
 		4800B14018D9880B0093A6AF /* ACTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTabBarController.m; sourceTree = "<group>"; };
 		4800B14218D9880B0093A6AF /* ACViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACViewController.h; sourceTree = "<group>"; };
 		4800B14318D9880B0093A6AF /* ACViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACViewController.m; sourceTree = "<group>"; };
+		4800B14918D9A4020093A6AF /* UserRecordDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRecordDB.h; sourceTree = "<group>"; };
+		4800B14A18D9A4020093A6AF /* UserRecordDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRecordDB.m; sourceTree = "<group>"; };
+		4800B14C18D9A4270093A6AF /* UserManageDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManageDB.h; sourceTree = "<group>"; };
+		4800B14D18D9A4270093A6AF /* UserManageDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManageDB.m; sourceTree = "<group>"; };
 		48013D35185ADFC300F483A6 /* BLEController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEController.h; path = BLEController/BLEController.h; sourceTree = "<group>"; };
 		48013D36185ADFC300F483A6 /* BLEController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLEController.m; path = BLEController/BLEController.m; sourceTree = "<group>"; };
 		48013D39185AE3A000F483A6 /* libUartLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUartLib.a; sourceTree = "<group>"; };
@@ -1730,6 +1736,10 @@
 				BE7C698318681A2000C4B675 /* SuggestionDataBase.m */,
 				48F47F0418BF1F9C009A504B /* BabyInfoManagerDB.h */,
 				48F47F0518BF1F9C009A504B /* BabyInfoManagerDB.m */,
+				4800B14918D9A4020093A6AF /* UserRecordDB.h */,
+				4800B14A18D9A4020093A6AF /* UserRecordDB.m */,
+				4800B14C18D9A4270093A6AF /* UserManageDB.h */,
+				4800B14D18D9A4270093A6AF /* UserManageDB.m */,
 			);
 			name = DataController;
 			sourceTree = "<group>";
@@ -3943,6 +3953,7 @@
 				48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */,
 				485749961831C3D1000D921B /* NotifyViewController.m in Sources */,
 				BE7C697B1867F1B300C4B675 /* ASIFormDataRequest.m in Sources */,
+				4800B14B18D9A4020093A6AF /* UserRecordDB.m in Sources */,
 				4800B14418D9880B0093A6AF /* ACDate.m in Sources */,
 				7215972D17453680006FD415 /* main.m in Sources */,
 				48EF612718C6FAC7006C3D5C /* CommonUtility.m in Sources */,
@@ -3997,6 +4008,7 @@
 				48357E231846ED2A00BCF799 /* EnvironmentAdviceDB.m in Sources */,
 				CE638AB7174F4899009A60AB /* FMResultSet.m in Sources */,
 				48F6ABA4186D191C0032045E /* AlarmKey.m in Sources */,
+				4800B14E18D9A4270093A6AF /* UserManageDB.m in Sources */,
 				48EF611C18C6FAC7006C3D5C /* AnimatedAnnotation.m in Sources */,
 				CE638B51174F5FCE009A60AB /* QuadCurveMenu.m in Sources */,
 				CE638B52174F5FCE009A60AB /* QuadCurveMenuItem.m in Sources */,
