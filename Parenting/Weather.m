@@ -85,13 +85,8 @@
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"%@",error);
-
-    
-//  UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"定位失败" message:[NSString stringWithFormat:@"%@",error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//    [alter show];
-//    return;
-
 }
+
 -(NSString*)yql
 {
     CLLocationCoordinate2D coordinate=userCoordinate;

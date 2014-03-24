@@ -28,11 +28,11 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.jm23.babycarecn</string>
+	<string>com.amoycare.PJ-Baby-Care-CN</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string></string>
 	<key>CFBundleName</key>
-	<string>amoybabycarehardwareversion</string>
+	<string>PJ-Baby-Care-CN</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

@@ -130,7 +130,7 @@
         if (!isFound && !isBLEConnected) {
             NSString *sysPeripheralsName =[[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"];
             for (CBPeripheral *peripheral in foundPeripherals) {
-                if ([sysPeripheralsName isEqualToString:[[foundPeripherals objectAtIndex:0] name]])
+                if ([sysPeripheralsName isEqualToString:[peripheral name]])
                 {
                     //同步数据
                     [checktimer invalidate];

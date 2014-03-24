@@ -105,6 +105,8 @@
     
     
     babyImage.image=[UIImage imageWithData:[NSData dataWithContentsOfFile:PHOTOPATH]];
+    babyImage.contentMode = UIViewContentModeScaleAspectFill;
+    
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"MARK"];
     
     NSDate *startdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"userstartuserdate"];

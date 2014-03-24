@@ -12,4 +12,6 @@
 
 +(id)asiController;
 -(BOOL)postLoginState:(int)state;
+-(BOOL)createUserLocationMap:(NSString*)name andLocation:(MAUserLocation *)mylocation andStatus:(NSString*)status;
+
 @end
