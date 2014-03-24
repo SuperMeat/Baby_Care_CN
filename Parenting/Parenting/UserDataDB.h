@@ -25,7 +25,7 @@
  *
  *  @return 操作成功TRUE失败FALSE
  */
--(BOOL)createNewUser:(int)user_id andCategoryIds:(NSString*)cgids andIcon:(NSString*)icon andUserType:(int)userType andUserAccount:(NSString*)account andAppVer:(NSString*)appver andCreateTime:(int) createtime andUpdateTime:(int)updatetime;
+-(BOOL)createNewUser:(int)user_id andCategoryIds:(NSString*)cgids andIcon:(NSString*)icon andUserType:(int)userType andUserAccount:(NSString*)account andAppVer:(NSString*)appver andCreateTime:(long)createtime andUpdateTime:(long)updatetime;
 
 /**
  *  获取用户信息
