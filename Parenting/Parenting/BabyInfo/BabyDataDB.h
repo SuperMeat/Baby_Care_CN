@@ -1,5 +1,5 @@
 //
-//  BabyInfoManagerDB.h
+//  BabyDataDB.h
 //  Amoy Baby Care
 //
 //  Created by @Arvi@ on 14-2-27.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BabyInfoManagerDB : NSObject
+@interface BabyDataDB : NSObject
 +(id)babyinfoDB;
 
 /**
@@ -20,5 +20,8 @@
  *	更新宝宝信息
  */
 +(BOOL)updateBabyInfoName:(NSString*)name andId:(int)id;
+
+
+-(NSArray*)selectWFAByType:(int)type andSex:(int)sex;
 
 @end
