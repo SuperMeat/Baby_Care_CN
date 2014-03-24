@@ -20,7 +20,7 @@
     return _sharedObject;
 }
 
--(BOOL)createNewUser:(int)user_id andCategoryIds:(NSString*)cgids andIcon:(NSString*)icon andUserType:(int)userType andUserAccount:(NSString*)account andAppVer:(NSString*)appver andCreateTime:(int)createtime andUpdateTime:(int)updatetime
+-(BOOL)createNewUser:(int)user_id andCategoryIds:(NSString*)cgids andIcon:(NSString*)icon andUserType:(int)userType andUserAccount:(NSString*)account andAppVer:(NSString*)appver andCreateTime:(long)createtime andUpdateTime:(long)updatetime
 {
     BOOL res;
     FMDatabase *db=[FMDatabase databaseWithPath:DBPATH];
@@ -69,7 +69,7 @@
     
     NSString *sql =[NSString stringWithFormat:@"select * from bc_user where user_id = %d",user_id];
     FMResultSet *resultset=[db executeQuery:sql];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:0];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:8];
     if ([resultset next]) {
         [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"user_id"]] forKey:@"user_id"];
         [dic setValue:[resultset stringForColumn:@"category_ids"] forKey:@"category_ids"];

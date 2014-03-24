@@ -53,7 +53,7 @@
     return array;
 }
 
--(NSArray*)selectTipsByCategoryId:(int)categoryid
+-(NSArray*)selectTipListByCategoryId:(int)categoryid
 {
     BOOL res;
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
@@ -68,24 +68,21 @@
     
     NSString *sql =[NSString stringWithFormat:@"select * from bc_tips where categoryid = %d",categoryid];
     FMResultSet *resultset=[db executeQuery:sql];
-    while ([resultset next]) {
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:0];
-        [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"tip_id"]] forKey:@"tip_id"];
-        [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@" category_id"]] forKey:@"category_id"];
-        [dic setValue:[resultset stringForColumn:@"tip_title"] forKey:@"tip_title"];
-        [dic setValue:[resultset stringForColumn:@"tip_summary"] forKey:@"tip_summary"];
-        [dic setValue:[resultset stringForColumn:@"tip_pic_url"] forKey:@"tip_pic_url"];
-        [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"read_time"]] forKey:@"read_time"];
-        [array addObject:dic];
+    while ([resultset next])
+    {
+        NSDictionary *dic = [self selectTipByTipId:[resultset intForColumn:@"tip_id"]];
+        if (dic != nil)
+        {
+            [array addObject:dic];
+        }
     }
     
     return array;
 }
 
--(NSArray*)selectTipsByTipId:(int)tipid
+-(NSDictionary*)selectTipByTipId:(int)tipid
 {
     BOOL res;
-    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
     NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Tips" ofType:@"sqlite"];
     
     FMDatabase *db=[FMDatabase databaseWithPath:path];
@@ -97,18 +94,19 @@
     
     NSString *sql =[NSString stringWithFormat:@"select * from bc_tips where tip_id = %d",tipid];
     FMResultSet *resultset=[db executeQuery:sql];
-    while ([resultset next]) {
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:0];
+   
+    if ([resultset next]) {
+         NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:6];
         [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"tip_id"]] forKey:@"tip_id"];
         [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@" category_id"]] forKey:@"category_id"];
         [dic setValue:[resultset stringForColumn:@"tip_title"] forKey:@"tip_title"];
         [dic setValue:[resultset stringForColumn:@"tip_summary"] forKey:@"tip_summary"];
         [dic setValue:[resultset stringForColumn:@"tip_pic_url"] forKey:@"tip_pic_url"];
         [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"read_time"]] forKey:@"read_time"];
-        [array addObject:dic];
+        return dic;
     }
     
-    return array;
+    return nil;
 }
 
 @end

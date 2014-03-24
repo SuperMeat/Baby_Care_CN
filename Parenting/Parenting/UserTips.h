@@ -11,6 +11,6 @@
 @interface UserTips : NSObject
 +(id)dataBase;
 -(NSArray*)selectTipsCategoryByFlagId:(int)flagid;
--(NSArray*)selectTipsByCategoryId:(int)categoryid;
--(NSArray*)selectTipsByTipId:(int)tipid;
+-(NSArray*)selectTipListByCategoryId:(int)categoryid;
+-(NSDictionary*)selectTipByTipId:(int)tipid;
 @end
