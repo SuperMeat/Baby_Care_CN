@@ -85,7 +85,7 @@
 		48152E47184C65AE009A4900 /* 1136.3.png in Resources */ = {isa = PBXBuildFile; fileRef = 48152E41184C65AE009A4900 /* 1136.3.png */; };
 		48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */; };
 		48152E4F1851B842009A4900 /* MyLocalNofityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */; };
-		481D919618D7DA590046A6B9 /* BC_Tips.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 481D919518D7DA590046A6B9 /* BC_Tips.sqlite */; };
+		481D919618D7DA590046A6B9 /* BC_Info.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 481D919518D7DA590046A6B9 /* BC_Info.sqlite */; };
 		482791C71884DE1D003E9724 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B51884DE1D003E9724 /* 114.png */; };
 		482791C81884DE1D003E9724 /* 120 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B61884DE1D003E9724 /* 120 2.png */; };
 		482791C91884DE1D003E9724 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B71884DE1D003E9724 /* 120.png */; };
@@ -780,7 +780,7 @@
 		48152E4B1851B842009A4900 /* MyLocalNofityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLocalNofityViewController.h; path = LocalNofication/MyLocalNofityViewController.h; sourceTree = "<group>"; };
 		48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLocalNofityViewController.m; path = LocalNofication/MyLocalNofityViewController.m; sourceTree = "<group>"; };
 		48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyLocalNofityViewController.xib; path = LocalNofication/MyLocalNofityViewController.xib; sourceTree = "<group>"; };
-		481D919518D7DA590046A6B9 /* BC_Tips.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BC_Tips.sqlite; sourceTree = "<group>"; };
+		481D919518D7DA590046A6B9 /* BC_Info.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BC_Info.sqlite; sourceTree = "<group>"; };
 		482791B51884DE1D003E9724 /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		482791B61884DE1D003E9724 /* 120 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120 2.png"; sourceTree = "<group>"; };
 		482791B71884DE1D003E9724 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
@@ -2590,7 +2590,7 @@
 		7215972717453680006FD415 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				481D919518D7DA590046A6B9 /* BC_Tips.sqlite */,
+				481D919518D7DA590046A6B9 /* BC_Info.sqlite */,
 				CE23978C176EE37B0096E033 /* Babyinfo.rdb */,
 				7215972817453680006FD415 /* Amoy Baby Care-Info.plist */,
 				7215972917453680006FD415 /* InfoPlist.strings */,
@@ -3446,7 +3446,7 @@
 				48152E1818486C66009A4900 /* messages_right_bubble@2x.png in Resources */,
 				CE0167B7174B059000462363 /* btn_setting.png in Resources */,
 				CE0167B8174B059000462363 /* btn_setting@2x.png in Resources */,
-				481D919618D7DA590046A6B9 /* BC_Tips.sqlite in Resources */,
+				481D919618D7DA590046A6B9 /* BC_Info.sqlite in Resources */,
 				CE0167B9174B059000462363 /* btn_setting_focus.png in Resources */,
 				48152DEE18486B13009A4900 /* UMContactViewController.xib in Resources */,
 				CE0167BA174B059000462363 /* btn_setting_focus@2x.png in Resources */,

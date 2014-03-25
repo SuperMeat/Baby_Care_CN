@@ -24,7 +24,7 @@
 {
     BOOL res;
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Tips" ofType:@"sqlite"];
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     
     FMDatabase *db=[FMDatabase databaseWithPath:path];
     res=[db open];
@@ -57,7 +57,7 @@
 {
     BOOL res;
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Tips" ofType:@"sqlite"];
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     
     FMDatabase *db=[FMDatabase databaseWithPath:path];
     res=[db open];
@@ -83,7 +83,7 @@
 -(NSDictionary*)selectTipByTipId:(int)tipid
 {
     BOOL res;
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Tips" ofType:@"sqlite"];
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     
     FMDatabase *db=[FMDatabase databaseWithPath:path];
     res=[db open];

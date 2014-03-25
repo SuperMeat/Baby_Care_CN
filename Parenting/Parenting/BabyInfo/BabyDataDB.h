@@ -78,6 +78,30 @@
 
 -(BOOL)updateBabyInfoUpdateTime:(long)update_time BabyId:(int)baby_id;
 
+/**
+ *  新增生理曲线
+ *
+ *  @param create_time 服务器返回创建实际爱你
+ *  @param update_time 服务器更新时间
+ *  @param type        曲线类型
+ *  @param value       值
+ *
+ *  @return 插入成功True失败false
+ */
+-(BOOL)insertBabyPhysiology:(long)create_time UpdateTime:(long)update_time
+                       MeasureTime:(long)measure_time Type:(int)type Value:(double)value;
+-(BOOL)updateBabyPhysiology:(double)value ByCreateTime:(long)create_time andType:(int)type;
+-(NSArray*)selectBabyPhysiologyList:(int)type;
+-(BOOL)deleteBabyPhysiologyByType:(int)type andCreateTime:(long)create_time;
+
+/**
+ *  获取曲线模板数据
+ *
+ *  @param type 曲线类型(身高,体重,头围...)
+ *  @param sex  性别
+ *
+ *  @return 标准值组成的数组
+ */
 -(NSArray*)selectWFAByType:(int)type andSex:(int)sex;
 
 @end

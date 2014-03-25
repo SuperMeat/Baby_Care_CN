@@ -39,4 +39,25 @@
 -(BOOL)updateUserCategoryIds:(NSString*)ids andUserId:(int)user_id;
 -(BOOL)updateUserPhoto:(NSString*)photo andUserId:(int)user_id;
 
+/**
+ *  用户收到推送消息
+ *
+ *  @param msg 小心
+ *
+ *  @return 插入成功true失败false
+ */
+-(BOOL)insertNotifyMessage:(NSString*)msg andTitle:(NSString*)title;
+-(BOOL)updateNotifyMessageById:(int)userid andCreateTime:(long)create_time;
+-(BOOL)updateNotifyMessageAll;
+
+/**
+ *	请求所有推送消息如果flagid为0则全部，否则为指定msgid=flagid
+ *
+ *	@return	封装好的数组对象
+ */
+-(NSArray*)selectNotifyMessage:(int)flagid;
+
+-(BOOL)deleteNotifyMessage:(NSDate*) date;
+-(BOOL)deleteNotifyMessageById:(int)msgid;
+
 @end

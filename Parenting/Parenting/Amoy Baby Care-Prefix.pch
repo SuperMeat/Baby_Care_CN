@@ -54,6 +54,8 @@
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
+#define USERDBPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d/userdata.db",NSHomeDirectory(),USERID,BABYID])
+
 #define DBPATH ([NSString stringWithFormat:@"%@/Documents/userdata.db",NSHomeDirectory()])
 
 #define SDBPATH ([NSString stringWithFormat:@"%@/Documents/BabySuggestion.rdb",NSHomeDirectory()])
