@@ -232,8 +232,8 @@
 }
 
 -(BOOL)insertBabyPhysiology:(long)create_time
-                MeasureTime:(long)measure_time
                  UpdateTime:(long)update_time
+                MeasureTime:(long)measure_time
                        Type:(int)type
                       Value:(double)value
 {

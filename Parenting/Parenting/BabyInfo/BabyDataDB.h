@@ -88,8 +88,12 @@
  *
  *  @return 插入成功True失败false
  */
--(BOOL)insertBabyPhysiology:(long)create_time UpdateTime:(long)update_time
-                       MeasureTime:(long)measure_time Type:(int)type Value:(double)value;
+-(BOOL)insertBabyPhysiology:(long)create_time
+                 UpdateTime:(long)update_time
+                MeasureTime:(long)measure_time
+                       Type:(int)type
+                      Value:(double)value;
+
 -(BOOL)updateBabyPhysiology:(double)value ByCreateTime:(long)create_time andType:(int)type;
 -(NSArray*)selectBabyPhysiologyList:(int)type;
 -(BOOL)deleteBabyPhysiologyByType:(int)type andCreateTime:(long)create_time;
