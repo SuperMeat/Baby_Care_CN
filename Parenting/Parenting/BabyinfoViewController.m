@@ -430,7 +430,7 @@ static int age = 0;
         imagePicker.sourceType=UIImagePickerControllerSourceTypeCamera;
         imagePicker.allowsEditing=YES;
         imagePicker.delegate=self;
-        if ([OpenFunction getSystemVersion] >= 7.0) {
+        if ([ACFunction getSystemVersion] >= 7.0) {
             [imagePicker.view setFrame:CGRectMake(0, 0, 320, 480)];
             if ([UIScreen mainScreen].bounds.size.height == 568) {
                 [imagePicker.view setFrame:CGRectMake(0, 0, 320, 568)];
@@ -465,7 +465,7 @@ static int age = 0;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.allowsEditing = YES;
         imagePicker.delegate = self;
-        if ([OpenFunction getSystemVersion] >= 7.0) {
+        if ([ACFunction getSystemVersion] >= 7.0) {
             [imagePicker.view setFrame:CGRectMake(0, 0, 320, 480)];
             if ([UIScreen mainScreen].bounds.size.height == 568) {
                 [imagePicker.view setFrame:CGRectMake(0, 0, 320, 568)];
@@ -539,7 +539,7 @@ static int age = 0;
     [imagedata writeToFile:PHOTOPATH atomically:NO];
     [self.babyimageview setImage:image];
     
-    if ([OpenFunction getSystemVersion] < 7.0) {
+    if ([ACFunction getSystemVersion] < 7.0) {
         [self.navigationController setNavigationBarHidden:NO animated:NO];
         
         [imagePicker.view removeFromSuperview];

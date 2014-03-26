@@ -9,7 +9,7 @@
 #import "HomeViewController.h"
 #import "playViewController.h"
 #import "SummaryViewController.h"
-#import "OpenFunction.h"
+#import "ACFunction.h"
 @interface HomeViewController ()
 
 @end
@@ -417,7 +417,7 @@
 {
     //NSLog(@"alertView %d", buttonIndex);
     if (buttonIndex == 1) {
-        [OpenFunction openUserReviews];
+        [ACFunction openUserReviews];
         [[NSUserDefaults standardUserDefaults] setObject:@"yesido" forKey:@"userreviews"];
     }
     else

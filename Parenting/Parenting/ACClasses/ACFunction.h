@@ -10,7 +10,7 @@
 
 @interface ACFunction : NSObject
 + (float) getSystemVersion;
-
++ (void)  openUserReviews;
 /**
  *  本地通知处理
  *

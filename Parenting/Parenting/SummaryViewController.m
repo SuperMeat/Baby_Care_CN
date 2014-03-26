@@ -483,7 +483,7 @@
 -(void)makeTimeSegment
 {
     float Y = 0.0;
-    if ([OpenFunction getSystemVersion] >= 7.0) {
+    if ([ACFunction getSystemVersion] >= 7.0) {
         Y += 64.0;
     }
     CGRect rx = [ UIScreen mainScreen ].bounds;
@@ -588,7 +588,7 @@
     CGRect rx = [ UIScreen mainScreen ].bounds;
     
     float Y = 0.0;
-    if ([OpenFunction getSystemVersion] >= 7.0) {
+    if ([ACFunction getSystemVersion] >= 7.0) {
         Y += 64.0;
     }
     

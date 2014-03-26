@@ -668,7 +668,7 @@
     if (set != Nil) {
         
         [dic setValue:[NSNumber numberWithLong:[set longLongIntForColumn:@"diaper_id"]] forKey:@"id"];
-        [dic setValue:[NSNumber numberWithInt:[OpenFunction getTimeStampFromDate:[set dateForColumn:@"starttime"]]] forKey:@"starttime"];
+        [dic setValue:[NSNumber numberWithInt:[ACDate getTimeStampFromDate:[set dateForColumn:@"starttime"]]] forKey:@"starttime"];
         
         [dic setValue:[NSNumber numberWithInt:[set intForColumn:@"month"]] forKey:@"month"];
         [dic setValue:[NSNumber numberWithInt:[set intForColumn:@"week"]] forKey:@"week"];
@@ -681,7 +681,7 @@
         [dic setValue:[set stringForColumn:@"moreinfo"] forKey:@"moreinfo"];
         [dic setValue:[set stringForColumn:@"type"] forKey:@"type"];
         
-        [dic setValue:[NSNumber numberWithInt:[OpenFunction getTimeStampFromDate:[set dateForColumn:@"upload"]]] forKey:@"upload"];
+        [dic setValue:[NSNumber numberWithInt:[ACDate getTimeStampFromDate:[set dateForColumn:@"upload"]]] forKey:@"upload"];
     }
     
     return dic;
@@ -921,9 +921,9 @@
     }
     
     if (0 == fileTag) {
-        long timestamp = [OpenFunction getTimeStampFromDate:[currentdate date]];
-        NSDate   *newDate    = [OpenFunction getDateFromTimeStamp:(timestamp-scrollpage*604800)];
-        NSString *rangeTitle = [OpenFunction getWeekBeginAndEndWith:newDate];
+        long timestamp = [ACDate getTimeStampFromDate:[currentdate date]];
+        NSDate   *newDate    = [ACDate getDateFromTimeStamp:(timestamp-scrollpage*604800)];
+        NSString *rangeTitle = [ACDate getWeekBeginAndEndWith:newDate];
         //[self setWeekName:fileTag andTAble:table andpage:scrollpage];
         [self setWeekName:table andrange:rangeTitle];
     }
@@ -2177,7 +2177,7 @@
     for (NSDictionary *dic in returnArray) {
         int  uploadid   = [[dic objectForKey:@"id"] intValue];
         long uploadtime = [[dic objectForKey:@"upload"] longValue];
-        NSDate *upload  = [OpenFunction getDateFromTimeStamp:uploadtime];
+        NSDate *upload  = [ACDate getDateFromTimeStamp:uploadtime];
         [self updateUploadtime:tablename andUploadTime:upload andID:uploadid];
     }
 }

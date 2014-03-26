@@ -36,7 +36,24 @@
  */
 -(NSDictionary*)selectUser:(int)user_id;
 
+/**
+ *  用户更改订阅目录
+ *
+ *  @param ids     组合好的订阅目录eg:@"1;2;3;..."
+ *  @param user_id 用户id
+ *
+ *  @return 更新成功true失败false
+ */
 -(BOOL)updateUserCategoryIds:(NSString*)ids andUserId:(int)user_id;
+
+/**
+ *  更新用户头像
+ *
+ *  @param photo   照片
+ *  @param user_id 用户id
+ *
+ *  @return 返回成功true失败false
+ */
 -(BOOL)updateUserPhoto:(NSString*)photo andUserId:(int)user_id;
 
 /**
@@ -47,7 +64,22 @@
  *  @return 插入成功true失败false
  */
 -(BOOL)insertNotifyMessage:(NSString*)msg andTitle:(NSString*)title;
+
+/**
+ *  更新消息阅读状态
+ *
+ *  @param userid      用户id
+ *  @param create_time 通知的时间
+ *
+ *  @return 更新成功true失败false
+ */
 -(BOOL)updateNotifyMessageById:(int)userid andCreateTime:(long)create_time;
+
+/**
+ *  更新所有
+ *
+ *  @return 更新成功true失败false
+ */
 -(BOOL)updateNotifyMessageAll;
 
 /**
@@ -57,7 +89,22 @@
  */
 -(NSArray*)selectNotifyMessage:(int)flagid;
 
+/**
+ *  删除通知,系统控制
+ *
+ *  @param date 在规定时间内删除
+ *
+ *  @return
+ */
 -(BOOL)deleteNotifyMessage:(NSDate*) date;
+
+/**
+ *  用户手动删除
+ *
+ *  @param msgid 消息id
+ *
+ *  @return 删除成功true失败false
+ */
 -(BOOL)deleteNotifyMessageById:(int)msgid;
 
 @end

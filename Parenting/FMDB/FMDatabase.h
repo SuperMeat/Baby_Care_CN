@@ -61,7 +61,7 @@
     
     NSMutableDictionary *_cachedStatements;
     NSMutableSet        *_openResultSets;
-    NSMutableSet        *_openFunctions;
+    NSMutableSet        *_ACFunctions;
 
 }
 

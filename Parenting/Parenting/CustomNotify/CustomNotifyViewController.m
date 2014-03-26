@@ -178,7 +178,7 @@
         NSArray* delarray = [[NSArray alloc]initWithObjects:@"日",@"一",@"二",@"三",@"四",@"五",@"六", nil];
         for (NSString *str in delarray) {
             NSString *key = [NSString stringWithFormat:@"%@%@", self.ln.createtime, str];
-            [OpenFunction deleteLocalNotification:key];
+            [ACFunction deleteLocalNotification:key];
         }
 
         [DataBase deleteNotifyTime:self.ln.createtime];
@@ -581,7 +581,7 @@
             //再重新更新
             for (NSString *str in array) {
                 NSString *key = [NSString stringWithFormat:@"%@%@", self.ln.createtime, str];
-                [OpenFunction addLocalNotification:self.ln.title RepeatDay:str FireDate:self.ln.time AlarmKey:key];
+                [ACFunction addLocalNotification:self.ln.title RepeatDay:str FireDate:self.ln.time AlarmKey:key];
             }
         }
 

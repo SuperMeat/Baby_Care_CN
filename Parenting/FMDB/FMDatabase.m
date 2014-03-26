@@ -57,7 +57,7 @@
     FMDBRelease(_openResultSets);
     FMDBRelease(_cachedStatements);
     FMDBRelease(_databasePath);
-    FMDBRelease(_openFunctions);
+    FMDBRelease(_ACFunctions);
     
 #if ! __has_feature(objc_arc)
     [super dealloc];
@@ -1087,15 +1087,15 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
 
 - (void)makeFunctionNamed:(NSString*)name maximumArguments:(int)count withBlock:(void (^)(sqlite3_context *context, int argc, sqlite3_value **argv))block {
     
-    if (!_openFunctions) {
-        _openFunctions = [NSMutableSet new];
+    if (!_ACFunctions) {
+        _ACFunctions = [NSMutableSet new];
     }
     
     id b = FMDBReturnAutoreleased([block copy]);
     
-    [_openFunctions addObject:b];
+    [_ACFunctions addObject:b];
     
-    /* I tried adding custom functions to release the block when the connection is destroyed- but they seemed to never be called, so we use _openFunctions to store the values instead. */
+    /* I tried adding custom functions to release the block when the connection is destroyed- but they seemed to never be called, so we use _ACFunctions to store the values instead. */
 #if ! __has_feature(objc_arc)
     sqlite3_create_function([self sqliteHandle], [name UTF8String], count, SQLITE_UTF8, (void*)b, &FMDBBlockSQLiteCallBackFunction, 0x00, 0x00);
 #else

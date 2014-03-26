@@ -36,6 +36,7 @@
     
     if (!res) {
         NSLog(@"表格创建失败");
+        [db close];
         return res;
     }
     
@@ -52,6 +53,7 @@
     if (!res) {
         NSLog(@"%@",NSHomeDirectory());
         NSLog(@"插入失败");
+        [db close];
         return res;
     }
     
@@ -71,6 +73,7 @@
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return nil;
     }
     
@@ -88,6 +91,7 @@
         [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"update_time"]] forKey:@"update_time"];
     }
     
+    [db close];
     return dic;
 
 }
@@ -100,12 +104,14 @@
     FMDatabase *db=[FMDatabase databaseWithPath:path];    res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return res;
     }
     
     res=[db executeUpdate:@"update bc_user set  category_ids= ? where user_id=?",ids, [NSNumber numberWithInt:user_id]];
     if (!res) {
         NSLog(@"更新失败");
+        [db close];
         return res;
     }
     [db close];
@@ -121,12 +127,14 @@
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return res;
     }
     
     res=[db executeUpdate:@"update bc_user set icon= ? where user_id=?",photo, [NSNumber numberWithInt:user_id]];
     if (!res) {
         NSLog(@"更新失败");
+        [db close];
         return res;
     }
     [db close];
@@ -144,12 +152,14 @@
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return res;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_msg (msgid INTEGER PRIMARY KEY AUTOINCREMENT,user_id integer not null, create_time INTEGER default 0,update integer default 0, message Varchar DEFAULT NULL, tilte message Varchar DEFAULT NULL, status INTEGER NOT NULL)"];
     
     if (!res) {
         NSLog(@"表格创建失败");
+        [db close];
         return res;
     }
     
@@ -164,9 +174,9 @@
          title
     ];
     
-    if (!res)
-    {
-        NSLog(@"插入失败");
+    if (!res) {
+        NSLog(@"数据库插入失败");
+        [db close];
         return res;
     }
     [db close];
@@ -183,16 +193,14 @@
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return res;
     }
     
-    if (!res) {
-        NSLog(@"表格创建失败");
-        return res;
-    }
     res=[db executeUpdate:@"update bc_msg set status = 1 where user_id=? and create_time = ?",[NSNumber numberWithInt:userid], [NSNumber numberWithLong:create_time]];
     if (!res) {
-        NSLog(@"更新失败");
+        NSLog(@"数据库更新失败");
+        [db close];
         return res;
     }
     [db close];
@@ -211,16 +219,15 @@
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return res;
     }
     
-    if (!res) {
-        NSLog(@"表格创建失败");
-        return res;
-    }
+    
     res=[db executeUpdate:@"update notify_message set status = 1 where status=0 where user_id=?",user_id];
     if (!res) {
-        NSLog(@"更新失败");
+        NSLog(@"数据库更新失败");
+        [db close];
         return res;
     }
     [db close];
@@ -239,6 +246,7 @@
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return nil;
     }
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_msg (msgid INTEGER PRIMARY KEY AUTOINCREMENT,user_id integer  not null, create_time INTEGER default 0,update integer default 0, message Varchar DEFAULT NULL, tilte message Varchar DEFAULT NULL, status INTEGER NOT NULL)"];
@@ -246,6 +254,7 @@
     
     if (!res) {
         NSLog(@"表格创建失败");
+        [db close];
         return nil;
         
     }
@@ -295,10 +304,16 @@
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return res;
     }
     
     res=[db executeUpdate:@"delete from notify_message where notify_time < ?",date];
+    if (!res) {
+        NSLog(@"数据库删除失败");
+        [db close];
+        return res;
+    }
     [db close];
     return res;
     
@@ -314,11 +329,18 @@
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return res;
     }
     
     res=[db executeUpdate:@"delete from notify_message where msgid = ? and user_id = ?", [NSNumber numberWithInt:msgid], [NSNumber numberWithInt:user_id]];
 
+    if (!res) {
+        NSLog(@"数据库删除失败");
+        [db close];
+        return res;
+    }
+    
     [db close];
     return res;
 }
