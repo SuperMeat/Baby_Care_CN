@@ -399,8 +399,12 @@ messageView;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView==clearalert) {
-        if (buttonIndex==1) {
-            [[NSFileManager defaultManager] removeItemAtPath:DBPATH error:nil];
+        int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+        int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+
+        if (buttonIndex==1)
+        {
+            [[NSFileManager defaultManager] removeItemAtPath:USERDBPATH(user_id, baby_id) error:nil];
         }
     }
     else

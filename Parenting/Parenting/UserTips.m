@@ -24,12 +24,13 @@
 {
     BOOL res;
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Tips" ofType:@"sqlite"];
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     
     FMDatabase *db=[FMDatabase databaseWithPath:path];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return nil;
     }
 
@@ -49,7 +50,7 @@
         [dic setValue:[resultset stringForColumn:@"category_title"] forKey:@"category_id"];
         [array addObject:dic];
     }
-    
+    [db close];
     return array;
 }
 
@@ -57,12 +58,13 @@
 {
     BOOL res;
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Tips" ofType:@"sqlite"];
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     
     FMDatabase *db=[FMDatabase databaseWithPath:path];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return nil;
     }
     
@@ -77,18 +79,20 @@
         }
     }
     
+    [db close];
     return array;
 }
 
 -(NSDictionary*)selectTipByTipId:(int)tipid
 {
     BOOL res;
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Tips" ofType:@"sqlite"];
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     
     FMDatabase *db=[FMDatabase databaseWithPath:path];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
+        [db close];
         return nil;
     }
     
@@ -103,9 +107,10 @@
         [dic setValue:[resultset stringForColumn:@"tip_summary"] forKey:@"tip_summary"];
         [dic setValue:[resultset stringForColumn:@"tip_pic_url"] forKey:@"tip_pic_url"];
         [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"read_time"]] forKey:@"read_time"];
+        [db close];
         return dic;
     }
-    
+    [db close];
     return nil;
 }
 

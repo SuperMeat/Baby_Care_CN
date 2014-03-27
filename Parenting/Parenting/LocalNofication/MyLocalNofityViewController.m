@@ -100,7 +100,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-    [OpenFunction addLocalNotificationWithMessage:@"干嘛干嘛" FireDate:notifyDate AlarmKey:@"ddd"];
+    [ACFunction addLocalNotificationWithMessage:@"干嘛干嘛" FireDate:notifyDate AlarmKey:@"ddd"];
 }
 
 /**

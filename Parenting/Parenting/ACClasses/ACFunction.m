@@ -14,6 +14,12 @@
     return [[[UIDevice currentDevice] systemVersion] floatValue];
 }
 
++ (void) openUserReviews
+{
+    NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/bao-bei-ji-hua-jian-ban-rang/id706557892?mt=8"];
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
 
 +(void)addLocalNotification:(NSString *)message
                   RepeatDay:(NSString *)repeatday

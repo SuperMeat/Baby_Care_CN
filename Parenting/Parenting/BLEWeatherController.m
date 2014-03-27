@@ -449,7 +449,7 @@
     phonethrans = phonevalue*1.0*8192.0/3.32;
     if (maxphonethrans > 90)
     {
-        [OpenFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,林阿妈刀A音浪太强,不晃会被撞到地上 %lf",maxphonethrans] FireDate:[currentdate date] AlarmKey:@"phonewarning"];
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,林阿妈刀A音浪太强,不晃会被撞到地上 %lf",maxphonethrans] FireDate:[currentdate date] AlarmKey:@"phonewarning"];
     }
     
     [BLEWeather setsoundfrombluetooth:phonethrans andmaxsound:maxphonethrans];

@@ -70,14 +70,414 @@
  */
 -(BOOL)updateBabyInfoName:(NSString*)newNickname BabyId:(int)baby_id;
 
+/**
+ *  修改宝宝出生日期
+ *
+ *  @param birth   出生时间戳
+ *  @param baby_id 宝宝唯一ID
+ *
+ *  @return true or false
+ */
 -(BOOL)updateBabyBirth:(long)birth BabyId:(int)baby_id;
 
+/**
+ *  更改性别
+ *
+ *  @param sex     性别
+ *  @param baby_id 宝宝id
+ *
+ *  @return
+ */
 -(BOOL)updateBabySex:(int)sex BabyId:(int)baby_id;
 
+/**
+ *  更改宝宝照片
+ *
+ *  @param icon    照片名字
+ *  @param baby_id 宝宝id
+ *
+ *  @return
+ */
 -(BOOL)updateBabyIcon:(NSString*)icon BabyId:(int)baby_id;
 
+/**
+ *  更新同步时间
+ *
+ *  @param update_time 同步时间时间戳,服务器返回
+ *  @param baby_id
+ *
+ *  @return
+ */
 -(BOOL)updateBabyInfoUpdateTime:(long)update_time BabyId:(int)baby_id;
 
+/**
+ *  新增生理曲线
+ *
+ *  @param create_time 服务器返回创建实际爱你
+ *  @param update_time 服务器更新时间
+ *  @param type        曲线类型
+ *  @param value       值
+ *
+ *  @return 插入成功True失败false
+ */
+-(BOOL)insertBabyPhysiology:(long)create_time
+                 UpdateTime:(long)update_time
+                MeasureTime:(long)measure_time
+                       Type:(int)type
+                      Value:(double)value;
+/**
+ *  更新生理曲线值
+ *
+ *  @param value       值
+ *  @param create_time 创建时间
+ *  @param type        曲线类型
+ *
+ *  @return
+ */
+-(BOOL)updateBabyPhysiology:(double)value ByCreateTime:(long)create_time andType:(int)type;
+
+/**
+ *  获取曲线列表
+ *
+ *  @param type 曲线类型
+ *
+ *  @return
+ */
+-(NSArray*)selectBabyPhysiologyList:(int)type;
+
+/**
+ *  删除某一条曲线记录
+ *
+ *  @param type        曲线类型
+ *  @param create_time 创建时间
+ *
+ *  @return 
+ */
+-(BOOL)deleteBabyPhysiologyByType:(int)type andCreateTime:(long)create_time;
+
+/**
+ *  获取曲线模板数据
+ *
+ *  @param type 曲线类型(身高,体重,头围...)
+ *  @param sex  性别
+ *
+ *  @return 标准值组成的数组
+ */
 -(NSArray*)selectWFAByType:(int)type andSex:(int)sex;
+
+/**
+ *  插入一条新的洗澡记录
+ *
+ *  @param create_time 创建时间
+ *  @param update_time 更新时间
+ *  @param start_time  洗澡时间
+ *  @param month       月
+ *  @param week        周
+ *  @param weekday     周几
+ *  @param duration    时长
+ *  @param deal_way    洗澡方式
+ *  @param remark      备注
+ *  @param more_info   备用字段
+ */
+-(BOOL)insertBabyBathRecord:(long)create_time
+                 UpdateTime:(long)update_time
+                  StartTime:(NSDate*)start_time
+                      Month:(int)month
+                       Week:(int)week
+                    Weekday:(int)weekday
+                   Duration:(int)duration
+                   BathType:(NSString*)bath_type
+                     Remark:(NSString*)remark
+                   MoreInfo:(NSString*)more_info;
+
+/**
+ *  更新洗澡记录
+ *
+ *  @param starttime  洗澡时间
+ *  @param month      月
+ *  @param week       周
+ *  @param weekday    周几
+ *  @param duration   时长
+ *  @param bath_type  洗澡方式
+ *  @param remark     备注
+ *  @param more_info  扩展字段
+ *  @param createtime 创建时间
+ *
+ *  @return 更新成功trur失败false
+ */
+-(BOOL)updateBathRecord:(NSDate*)starttime
+                  Month:(int)month
+                   Week:(int)week
+                WeekDay:(int)weekday
+               Duration:(int)duration
+               BathType:(NSString*)bath_type
+                 Remark:(NSString*)remark
+               MoreInfo:(NSString*)more_info
+             CreateTime:(long)createtime;
+
+/**
+ *  新增尿布信息
+ *
+ *  @param create_time 创建时间
+ *  @param update_time 同步时间
+ *  @param start_time  开始时间
+ *  @param month       月
+ *  @param week        周
+ *  @param weekday     周几
+ *  @param status      尿布状态(干,湿,脏)
+ *  @param color       尿布颜色
+ *  @param hard        硬度
+ *  @param remark      备注
+ *  @param more_info   备用字段
+ *
+ *  @return
+ */
+-(BOOL)insertBabyDiaperRecord:(long)create_time
+                   UpdateTime:(long)update_time
+                    StartTime:(NSDate *)start_time
+                        Month:(int)month
+                         Week:(int)week
+                      Weekday:(int)weekday
+                       Status:(NSString *)status
+                        Color:(NSString *)color
+                         Hard:(NSString *)hard
+                       Remark:(NSString *)remark
+                     MoreInfo:(NSString *)more_info;
+
+/**
+ *  更新尿布记录
+ *
+ *  @param starttime  开始时间
+ *  @param month      月
+ *  @param week       周
+ *  @param weekday    周几
+ *  @param status     尿布状态
+ *  @param color      颜色
+ *  @param hard       硬度
+ *  @param remark     备注
+ *  @param more_info  备用字段
+ *  @param createtime 创建时间
+ *
+ *  @return
+ */
+-(BOOL)updateDiaperRecord:(NSDate*)starttime
+                    Month:(int)month
+                     Week:(int)week
+                  WeekDay:(int)weekday
+                   Status:(NSString *)status
+                    Color:(NSString *)color
+                     Hard:(NSString *)hard
+                   Remark:(NSString *)remark
+                 MoreInfo:(NSString*)more_info
+               CreateTime:(long)createtime;
+
+/**
+ *  新增喂食记录
+ *
+ *  @param create_time 创建时间
+ *  @param update_time 更新时间
+ *  @param start_time  开始时间
+ *  @param month       月
+ *  @param week        周
+ *  @param weekday     周几
+ *  @param duration    持续时间
+ *  @param oz          量
+ *  @param feed_type   喂食方式
+ *  @param food_type   食物类型
+ *  @param remark      备注
+ *  @param more_info
+ *
+ *  @return
+ */
+-(BOOL)insertBabyFeedRecord:(long)create_time
+                 UpdateTime:(long)update_time
+                  StartTime:(NSDate *)start_time
+                      Month:(int)month
+                       Week:(int)week
+                    Weekday:(int)weekday
+                   Duration:(int)duration
+                         Oz:(double)oz
+                   FeedType:(NSString *)feed_type
+                   FoodType:(NSString *)food_type
+                     Remark:(NSString *)remark
+                   MoreInfo:(NSString *)more_info;
+
+/**
+ *  更新喂食记录
+ *
+ *  @param starttime  开始时间
+ *  @param month      月
+ *  @param week       周
+ *  @param weekday    周几
+ *  @param duration   持续时间
+ *  @param oz         量
+ *  @param feed_type  喂食方式
+ *  @param food_type  食物类型
+ *  @param remark     备注
+ *  @param more_info
+ *  @param createtime 创建时间
+ *
+ *  @return
+ */
+-(BOOL)updateFeedRecord:(NSDate*)starttime
+                  Month:(int)month
+                   Week:(int)week
+                WeekDay:(int)weekday
+               Duration:(int)duration
+                     Oz:(double)oz
+               FeedType:(NSString *)feed_type
+               FoodType:(NSString *)food_type
+                 Remark:(NSString *)remark
+               MoreInfo:(NSString*)more_info
+             CreateTime:(long)createtime;
+
+/**
+ *  插入玩耍记录
+ *
+ *  @param create_time 创建时间
+ *  @param update_time 更新时间
+ *  @param start_time  开始时间
+ *  @param month       月
+ *  @param week        周
+ *  @param weekday     周几
+ *  @param duration    持续时间
+ *  @param place       地点
+ *  @param play_type   如何玩
+ *  @param remark      备注
+ *  @param more_info
+ *
+ *  @return
+ */
+-(BOOL)insertBabyPlayRecord:(long)create_time
+                 UpdateTime:(long)update_time
+                  StartTime:(NSDate *)start_time
+                      Month:(int)month
+                       Week:(int)week
+                    Weekday:(int)weekday
+                   Duration:(int)duration
+                      Place:(NSString *)place
+                  PlaceType:(NSString *)play_type
+                     Remark:(NSString *)remark
+                   MoreInfo:(NSString *)more_info;
+
+/**
+ *  更新玩耍
+ *
+ *  @param starttime  开始时间
+ *  @param month      月
+ *  @param week       周
+ *  @param weekday    周几
+ *  @param duration   持续时间
+ *  @param place      地点
+ *  @param play_type  玩耍方式
+ *  @param remark     备注
+ *  @param more_info
+ *  @param createtime 创建时间
+ *
+ *  @return
+ */
+-(BOOL)updatePlayRecord:(NSDate*)starttime
+                  Month:(int)month
+                   Week:(int)week
+                WeekDay:(int)weekday
+               Duration:(int)duration
+                  Place:(NSString *)place
+              PlaceType:(NSString *)play_type
+                 Remark:(NSString *)remark
+               MoreInfo:(NSString*)more_info
+             CreateTime:(long)createtime;
+
+/**
+ *  新增睡觉记录
+ *
+ *  @param create_time 创建时间
+ *  @param update_time 更新时间
+ *  @param start_time  开始时间
+ *  @param month       月
+ *  @param week        周
+ *  @param weekday     周几
+ *  @param duration    持续时间
+ *  @param posture     姿势
+ *  @param place       地点
+ *  @param remark
+ *  @param more_info
+ *
+ *  @return
+ */
+-(BOOL)insertBabySleepRecord:(long)create_time
+                 UpdateTime:(long)update_time
+                  StartTime:(NSDate *)start_time
+                      Month:(int)month
+                       Week:(int)week
+                    Weekday:(int)weekday
+                   Duration:(int)duration
+                    Posture:(NSString *)posture
+                      Place:(NSString *)place
+                     Remark:(NSString *)remark
+                   MoreInfo:(NSString *)more_info;
+
+/**
+ *  更新睡觉
+ *
+ *  @param starttime  开始时间
+ *  @param month      月
+ *  @param week       周
+ *  @param weekday    周几
+ *  @param duration   持续时间
+ *  @param posture    姿势
+ *  @param place      地点
+ *  @param remark     备注
+ *  @param more_info
+ *  @param createtime
+ *
+ *  @return
+ */
+-(BOOL)updateSleepRecord:(NSDate*)starttime
+                  Month:(int)month
+                   Week:(int)week
+                WeekDay:(int)weekday
+               Duration:(int)duration
+                Posture:(NSString *)posture
+                  Place:(NSString *)place
+                 Remark:(NSString *)remark
+               MoreInfo:(NSString*)more_info
+             CreateTime:(long)createtime;
+
+/**
+ *  删除记录
+ *
+ *  @param create_time 创建时间
+ *  @param tablename   针对项目表名
+ *
+ *  @return
+ */
+-(BOOL)deleteBabyRecord:(long)create_time
+              Tablename:(NSString*)tablename;
+
+
+/**
+ *  更新操作时长
+ *
+ *  @param create_time 创建时间
+ *  @param duration    时长
+ *  @param tablename   表名
+ *
+ *  @return
+ */
+-(BOOL)updateDuration:(long)create_time
+             Duration:(int)duration
+            Tablename:(NSString*)tablename;
+
+/**
+ *  更新同步时间
+ *
+ *  @param tablename   表名
+ *  @param uploadtime  同步时间
+ *  @param create_time 创建时间
+ *
+ *  @return
+ */
+-(BOOL)updateUploadtime:(NSString*)tablename andUploadTime:(long)uploadtime andCreateTime:(long)create_time;
+
 
 @end

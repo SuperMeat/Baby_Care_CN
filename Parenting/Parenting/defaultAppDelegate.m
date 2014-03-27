@@ -50,7 +50,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"userreviews"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"none" forKey:@"userreviews"];
-        [[NSUserDefaults standardUserDefaults] setObject:[currentdate date] forKey:@"userstartuserdate"];
+        [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"userstartuserdate"];
     }
     
     [self tap];
@@ -64,11 +64,12 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
     
-    [[UINavigationBar appearance] setBarTintColor:[OpenFunction colorWithHexString:@"0x68bfcc"]];
+    [[UINavigationBar appearance] setBarTintColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     
-    //[[UINavigationBar appearance] setBackgroundColor:[OpenFunction colorWithHexString:@"0x68bfcc"]];
+    [[UINavigationBar appearance] setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     
-    [[UINavigationBar appearance] setAlpha:0.8];
+    [[UINavigationBar appearance] setTintColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    
     
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor whiteColor],

@@ -35,6 +35,7 @@
 #import "BLEWeather.h"
 #import "FMDatabase.h"
 #import "SummaryItem.h"
+#import "ACFunction.h"
 #import "OpenFunction.h"
 #import "ChineseToPinyin.h"
 #import "defaultAppDelegate.h"
@@ -54,6 +55,8 @@
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
+#define USERDBPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d/userdata.db",NSHomeDirectory(),USERID,BABYID])
+
 #define DBPATH ([NSString stringWithFormat:@"%@/Documents/userdata.db",NSHomeDirectory()])
 
 #define SDBPATH ([NSString stringWithFormat:@"%@/Documents/BabySuggestion.rdb",NSHomeDirectory()])
@@ -105,11 +108,11 @@
 #else
 #define NSLog(...){};
 #endif
-#define G_YADDONVERSION ([OpenFunction getSystemVersion] >= 7.0 ?0:0)
+#define G_YADDONVERSION ([ACFunction getSystemVersion] >= 7.0 ?0:0)
 
-#define SAVEVIEW_YADDONVERSION ([OpenFunction getSystemVersion] >= 7.0 ?64:0)
+#define SAVEVIEW_YADDONVERSION ([ACFunction getSystemVersion] >= 7.0 ?64:0)
 
-#define G_XREDUCEONVERSION ([OpenFunction getSystemVersion] >= 7.0 ?20.0:0)
+#define G_XREDUCEONVERSION ([ACFunction getSystemVersion] >= 7.0 ?20.0:0)
 
 #define CUSTOMER_COUNTRY 1 // US,1 CN
 
