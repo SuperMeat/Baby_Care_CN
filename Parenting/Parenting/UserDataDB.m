@@ -265,9 +265,9 @@
         while ([set next])
         {
             NotifyItem *item = [[NotifyItem alloc]init];
-            item.notifyid = [set longForColumn:@"create_time"];
-            item.content  = [set stringForColumn:@"message"];
-            item.status   = [set intForColumn:@"status"];
+            item.notifyid    = [set longForColumn:@"create_time"];
+            item.content     = [set stringForColumn:@"message"];
+            item.status      = [set intForColumn:@"status"];
             item.notify_time = [ACDate getDateFromTimeStamp:[set longForColumn:@"create_time"]];
             [array addObject:item];
         }
@@ -280,9 +280,9 @@
         while ([set next])
         {
             NotifyItem *item = [[NotifyItem alloc]init];
-            item.notifyid = [set intForColumn:@"msgid"];
-            item.content  = [set stringForColumn:@"message"];
-            item.status   = [set intForColumn:@"status"];
+            item.notifyid    = [set intForColumn:@"msgid"];
+            item.content     = [set stringForColumn:@"message"];
+            item.status      = [set intForColumn:@"status"];
             item.notify_time = [ACDate getDateFromTimeStamp:[set longForColumn:@"create_time"]];
             [array addObject:item];
         }
