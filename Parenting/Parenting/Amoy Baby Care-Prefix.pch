@@ -181,3 +181,38 @@
 //*** end
 
 #define ACCOUNTNAME ([[NSUserDefaults standardUserDefaults]stringForKey:@"ACCOUNT_NAME"])
+
+
+
+//************协议内容************
+//      版本 : 1.0.1
+//      日期 : 2014-3-28
+//      创建 : 陈伟斌
+#pragma MARK HTTPREQUEST
+
+#ifdef DEBUG
+#define BASE_URL @"http://192.168.1.138:8010/api/"
+#else
+#define BASE_URL @"http://cbaisan.w82.dns87.com/api/" //接口IP
+#endif
+
+//网络错误提示
+#define http_error @"网络连接异常"
+//协议版本号
+#define PROVERSION @"1.0.1"
+
+
+//请求类型
+#define BASEREQUEST_TYPE 1
+
+//用户注册请求地址
+#define USER_CREATE_URL ([BASE_URL stringByAppendingString:@"User.svc/UserCreate"])
+
+//用户注册类型
+#define RTYPE_APP 1
+#define RTYPE_TENCENT 2
+#define RTYPE_SINA 3
+
+//***********  END  ************
+
+
