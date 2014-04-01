@@ -102,8 +102,6 @@
     //    self.navigationItem.rightBarButtonItem=backbar;
     [self.navigationController.view addSubview:buttonSyncBLE];
     
-    
-    
     babyImage.image=[UIImage imageWithData:[NSData dataWithContentsOfFile:PHOTOPATH]];
     babyImage.contentMode = UIViewContentModeScaleAspectFill;
     
