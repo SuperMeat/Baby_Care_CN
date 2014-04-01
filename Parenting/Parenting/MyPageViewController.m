@@ -8,6 +8,8 @@
 
 #import "MyPageViewController.h"
 
+#import "LoginViewController.h"
+
 @interface MyPageViewController ()
 
 @end
@@ -29,7 +31,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
 }
+
 
 - (void)didReceiveMemoryWarning
 {

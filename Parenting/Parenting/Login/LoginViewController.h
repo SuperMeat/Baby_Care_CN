@@ -11,6 +11,7 @@
 @interface LoginViewController : UIViewController<UIAlertViewDelegate>
 {
     BOOL isPushSocialView;
+    UIViewController *_nextViewController;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *viewButtons;

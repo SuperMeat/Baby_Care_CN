@@ -81,19 +81,17 @@
 
 }
 
--(void)skipToMain:(id)sender{
-    
-    _nextViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:_nextViewController animated:YES completion:^{}];
-    //FIXME:恢复注释
-//    if (_isLaunchBefore) {
-//        _nextViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//        [self presentViewController:_nextViewController animated:YES completion:^{}];
-//    }
-//    else{
-//        LoginViewController *loginViewController = [[LoginViewController alloc]initWithRootViewController:_nextViewController];
-//        self.view.window.rootViewController= loginViewController;
-//    }
+-(void)skipToMain:(id)sender{ 
+    //根据登录状态跳转
+     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil)  {
+        _nextViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:_nextViewController animated:YES completion:^{}];
+    }
+    else{
+        LoginViewController *loginViewController = [[LoginViewController alloc]initWithRootViewController:_nextViewController];
+        UINavigationController *naviLogi = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+        self.view.window.rootViewController= naviLogi;
+    }
 }
 
 // scrollview 委托函数

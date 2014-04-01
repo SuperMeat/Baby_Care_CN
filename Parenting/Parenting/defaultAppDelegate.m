@@ -9,7 +9,7 @@
 #import "defaultAppDelegate.h"
 #import "APService.h"
 #import "UMSocial.h" 
-
+#import "LoginViewController.h"
 
 @implementation defaultAppDelegate
 
@@ -101,17 +101,6 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
     
-    //复制babyinfo.rdb到document才
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"ISEXISIT_SUGGESTION"])
-    {
-        NSString *document  = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-        NSString *newFile = [document stringByAppendingPathComponent:@"BabySuggestion.rdb"];
-        NSString *oldFile = [[NSBundle mainBundle] pathForResource:@"Babyinfo-cwb" ofType:@"rdb"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager copyItemAtPath:oldFile toPath:newFile error:nil];
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"ISEXISIT_SUGGESTION"];
-    }
-    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"] != nil)
     {
         bleweatherCtrler = [BLEWeatherController bleweathercontroller];
@@ -119,9 +108,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
     
     [MAMapServices sharedServices].apiKey = AMAP_KEY;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil) {
-        [[ASIController asiController] postLoginState:1];
-    }
+    
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
 //    NSString *deviceID = nil;
@@ -179,22 +166,25 @@ void UncaughtExceptionHandler(NSException *exception) {
     myTabController = [[MyTabBarController alloc] init];
     [myTabController setViewControllers:controllers];
     self.window.rootViewController  = myTabController;
-    NSString *guideVerson = [[NSUserDefaults standardUserDefaults] stringForKey:@"GuideVerson"];
+    
+    //判断版本信息,如果使用向导版本有更新的话则跳入向导
+    NSString *guideVerson = [[NSUserDefaults standardUserDefaults] stringForKey:@"GuideVerson"]; 
+    
     if (![guideVerson  isEqual: GuideVerson])
     {
         guideViewController = [[GuideViewController alloc] initWithRootViewController:myTabController];
-        if (guideVerson == nil) {
-            guideViewController.isLaunchBefore = NO;
-        }
-        else{
-            guideViewController.isLaunchBefore = YES;
-        }
         [[NSUserDefaults standardUserDefaults] setObject:GuideVerson forKey:@"GuideVerson"];
         self.window.rootViewController = guideViewController;
+    }
+    else if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil){
+        LoginViewController *loginViewController = [[LoginViewController alloc]initWithRootViewController:myTabController];
+        UINavigationController *naviLogi = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+        self.window.rootViewController= naviLogi;
     }
     else{
         self.window.rootViewController  = myTabController;
     }
+    
 
     [self initializePlat];
     

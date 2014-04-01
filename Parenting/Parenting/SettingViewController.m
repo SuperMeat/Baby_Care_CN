@@ -130,7 +130,7 @@ messageView;
     _item12.name = @"查看小区附近的麻麻们";
     _item13.name = @"允许发布自己位置及状态";
     
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"]==nil) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil) {
         _item10.name=@"账号登录";
         UIButton *buttonLogin=[UIButton buttonWithType:UIButtonTypeCustom];
         [buttonLogin setTitle:@"登录" forState:UIControlStateNormal];
@@ -416,9 +416,9 @@ messageView;
     
     if (alertView==logoutAlert) {
         //记录历史账号
-        if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_TYPE"] isEqualToString:@"APP"])
+        if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_TYPE"]intValue] == RTYPE_APP)
         {
-            [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_NAME"] forKey:@"HISTORY_ACCOUNT_NAME"];
+            [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] forKey:@"HISTORY_ACCOUNT_NAME"];
         }
 
         //TODO:是否清除本地数据

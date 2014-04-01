@@ -23,6 +23,7 @@
 {
     if ((self = [super init])) {
         if (rootViewController != nil) {
+            _nextViewController = rootViewController;
             [[NSUserDefaults standardUserDefaults]setObject:[rootViewController nibName] forKey:@"ViewControllerBeforLogin"];
         }
         self.hidesBottomBarWhenPushed=YES;
@@ -66,11 +67,12 @@
     for (UIViewController *myDT in self.navigationController.viewControllers) {
         if ([myDT.nibName isEqualToString:targetNibName]) {
             [self.navigationController popToViewController:myDT animated:YES];
-            break;
+            return;
         }
     }
+    _nextViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:_nextViewController animated:YES completion:^{}];
 }
-
 -(void)goLogin
 {
     LoginMainViewController *testViewController = [[LoginMainViewController alloc]initWithNibName:@"LoginMainViewController" bundle:nil];
@@ -122,7 +124,7 @@
                         NSString *response = [request responseString];
                         if ([response isEqualToString:@"1"]) {
                             [[NSUserDefaults standardUserDefaults]setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"] forKey:@"ACCOUNT_NAME"];
-                            [[NSUserDefaults standardUserDefaults] setObject:@"TENCENT" forKey:@"ACCOUNT_TYPE"];
+                            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_TENCENT] forKey:@"ACCOUNT_TYPE"];
                             alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登录成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                             [alert show];
                         }
@@ -191,7 +193,7 @@
                     NSString *response = [request responseString];
                     if ([response isEqualToString:@"1"]) {
                         [[NSUserDefaults standardUserDefaults]setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"] forKey:@"ACCOUNT_NAME"];
-                        [[NSUserDefaults standardUserDefaults] setObject:@"SINA" forKey:@"ACCOUNT_TYPE"];
+                        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_SINA] forKey:@"ACCOUNT_TYPE"];
                         alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登录成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                         [alert show];
                     }
