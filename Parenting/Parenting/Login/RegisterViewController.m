@@ -8,10 +8,12 @@
 
 #import "RegisterViewController.h"
 #import "LoginMainViewController.h"
-#import "ASIHTTPRequest.h"
 #import "MBProgressHUD.h"
 #import "MD5.h"
 #import "APService.h"
+#import "NetWorkConnect.h"
+#import "DataContract.h"
+
 @interface RegisterViewController ()
 
 @end
@@ -73,6 +75,8 @@
 -(void)doGoBack{
     [self.navigationController popViewControllerAnimated:YES];
 }
+-(void)doGoMain{
+    [self.navigationController popToRootViewControllerAnimated:YES];}
 
 -(void)doRegister{
     //输入判断
@@ -124,17 +128,7 @@
     }
     
     //注册接口
-    NSString* strUrl = [ASIHTTPADDRESS stringByAppendingString:@"/BaseService.svc/register/"];
-    strUrl = [strUrl stringByAppendingString:[MD5 md5:ASIHTTPTOKEN]];
-    NSString* openudid = [@"/" stringByAppendingString:[APService openUDID]];
-    strUrl = [strUrl stringByAppendingString:openudid];
-    
-    NSString* parameter = [NSString stringWithFormat:@"/%@/%@/APP",inputEmail.text,[MD5 md5:inputPd.text]];
-    strUrl = [strUrl stringByAppendingString:parameter];
-    strUrl = [strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *url = [NSURL URLWithString:strUrl];
-	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     //隐藏键盘
     [inputEmail resignFirstResponder];
     [inputPd resignFirstResponder];
@@ -143,42 +137,43 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.alpha = 0.5;
     hud.color = [UIColor grayColor];
-    hud.labelText = @"注册中...";
+    hud.labelText = http_requesting;
     
-	[request startSynchronous];
-	NSError *error = [request error];
-    UIAlertView *alert;
-	if (!error) {
-		NSString *response = [request responseString];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        if ([response isEqualToString:@"1"]) {
-            [[NSUserDefaults standardUserDefaults]setObject:inputEmail.text forKey:@"ACCOUNT_NAME"];
-            [[NSUserDefaults standardUserDefaults] setObject:@"APP" forKey:@"ACCOUNT_TYPE"];
-            alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"注册成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alert show];
-        }
-        else if ([response isEqualToString:@"-1"]){
-            alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"账户名已存在,请重新选择您的账户名!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alert show];
-        }
-        else if ([response isEqualToString:@"-9"]){
-            alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"服务器连接异常!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alert show];
-        }
-    }
-    else{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"服务器连接异常!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alert show];
-    }
+    //封装数据
+    NSMutableDictionary *dictBody = [[DataContract dataContract]UserCreateDict:RTYPE_APP account:inputEmail.text password:[MD5 md5:inputPd.text]];
+    //Http请求
+    [[NetWorkConnect sharedRequest]
+     httpRequestWithURL:USER_CREATE_URL
+     data:dictBody
+     mode:@"POST"
+     HUD:hud
+     didFinishBlock:^(NSDictionary *result){
+         hud.labelText = [result objectForKey:@"msg"];
+         //处理反馈信息: code=1为成功  code=99为失败
+         if ([[result objectForKey:@"code"]intValue] == 1) {
+             //保存用户名
+             [[NSUserDefaults standardUserDefaults] setObject:inputEmail.text forKey:@"ACCOUNT_NAME"];
+             //数据库保存
+             
+             [hud hide:YES afterDelay:0.8];
+             [self performSelector:@selector(doGoMain) withObject:nil afterDelay:0.8];
+         }
+         else{
+             [hud hide:YES afterDelay:1.2];
+         }
+     }
+     didFailBlock:^(NSString *error){
+         //请求失败处理
+         hud.labelText = http_error;
+         [hud hide:YES afterDelay:1];
+     }
+     isShowProgress:YES
+     isAsynchronic:YES
+     netWorkStatus:YES
+     viewController:self];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if ([alertView.message isEqual: @"注册成功!"])
-    {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
 }
 
 #pragma textfield protocol

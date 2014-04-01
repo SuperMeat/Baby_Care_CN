@@ -153,7 +153,7 @@
         }
         else if ([response isEqualToString:@"1"]){
             [[NSUserDefaults standardUserDefaults]setObject:inputEmail.text forKey:@"ACCOUNT_NAME"];
-            [[NSUserDefaults standardUserDefaults] setObject:@"APP" forKey:@"ACCOUNT_TYPE"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_APP] forKey:@"ACCOUNT_TYPE"];
             alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登录成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
             [[ASIController asiController] postLoginState:1];

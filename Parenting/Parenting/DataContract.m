@@ -21,13 +21,13 @@
     return _sharedObject;
 }
 
--(NSDictionary*)UserCreateDict:(int) registerType
+-(NSMutableDictionary*)UserCreateDict:(int) registerType
                        account:(NSString*) account
                       password:(NSString*) password
 {
-    NSArray *key = @[@"account",@"password",@"rType"];
-    NSArray *data = [[NSArray alloc]initWithObjects:account,password,registerType,nil];
-    NSDictionary *dict = [[NSDictionary alloc]initWithObjects:data forKeys:key];
+    NSArray *key = @[@"account",@"password",@"rtype"];
+    NSArray *data = [[NSArray alloc]initWithObjects:account,password,[NSNumber numberWithInt:registerType] ,nil];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithObjects:data forKeys:key];
     return dict;
 }
 

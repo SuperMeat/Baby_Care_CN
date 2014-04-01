@@ -10,6 +10,7 @@
 
 @interface RegisterViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 {
+    MBProgressHUD *hud;
     NSArray *arrData;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

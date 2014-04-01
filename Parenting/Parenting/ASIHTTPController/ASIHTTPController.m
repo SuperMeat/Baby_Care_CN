@@ -150,7 +150,7 @@
 #pragma mark 更新登录状态
 //state:1-在线 0-待机 -1-离线
 -(BOOL)postLoginState:(int)state{
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:state],"state",ACCOUNTNAME,"account",nil];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:state],"state",[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"],"account",nil];
     NSMutableArray *result;
     if ([NSJSONSerialization isValidJSONObject:dict])
     {

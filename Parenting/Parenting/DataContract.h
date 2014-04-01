@@ -12,7 +12,7 @@
 
 +(id)dataContract;
 
--(NSDictionary*)UserCreateDict:(int) registerType
+-(NSMutableDictionary*)UserCreateDict:(int) registerType
                        account:(NSString*) account
                       password:(NSString*) password;
 
