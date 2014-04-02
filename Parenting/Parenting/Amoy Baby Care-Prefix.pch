@@ -216,8 +216,6 @@
 
 //***********  END  ************
 
-
-
 #define ACCOUNTNAME ([[NSUserDefaults standardUserDefaults]stringForKey:@"ACCOUNT_NAME"])
 
 #define PNGSCALE (([UIScreen mainScreen].bounds.size.height) == 568?1.0:(1.0))
