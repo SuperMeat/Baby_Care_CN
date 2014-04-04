@@ -47,7 +47,6 @@
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
 #endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    [self.view setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
 }
 
 - (void)setTitle:(NSString *)title

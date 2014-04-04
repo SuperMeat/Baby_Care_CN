@@ -292,7 +292,6 @@
     labletip.backgroundColor=[UIColor clearColor];
     [self.view addSubview:labletip];
     
-    
     if ([UIScreen mainScreen].bounds.size.height==568) {
         CGRect fr;
         

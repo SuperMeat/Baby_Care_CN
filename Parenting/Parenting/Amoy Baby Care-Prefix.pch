@@ -218,5 +218,7 @@
 
 #define ACCOUNTNAME ([[NSUserDefaults standardUserDefaults]stringForKey:@"ACCOUNT_NAME"])
 
-#define PNGSCALE (([UIScreen mainScreen].bounds.size.height) == 568?1.0:(1.0))
+#define PNGSCALE (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 1.0:(480.0/568.0))
+
+#define NORECORDTIP @"您还没有任何活动记录哦,\r现在开始记录吧!"
 

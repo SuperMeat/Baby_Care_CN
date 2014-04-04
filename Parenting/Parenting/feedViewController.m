@@ -36,8 +36,7 @@
             self.extendedLayoutIncludesOpaqueBars = NO;
             self.modalPresentationCapturesStatusBarAppearance = NO;
         }
-#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        //self.automaticallyAdjustsScrollViewInsets = NO;
+#endif       
     }
     return self;
 }
@@ -61,6 +60,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBar.hidden = NO;
     [MobClick beginLogPageView:@"喂食"];
     
     if (self.weather) {
@@ -191,7 +191,7 @@
     self.navigationItem.titleView = titleView;
     
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
+    //[backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 34, 28)];
     title.backgroundColor = [UIColor clearColor];
     [title setTextAlignment:NSTextAlignmentCenter];
@@ -200,13 +200,12 @@
     title.font = [UIFont systemFontOfSize:14];
     [backbutton addSubview:title];
     
-    
     [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
     backbutton.frame=CGRectMake(0, 0, 44, 28);
     
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
-    self.navigationItem.leftBarButtonItem=backbar;
+    self.navigationController.navigationItem.leftBarButtonItem=backbar;
     
     UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setBackgroundImage:[UIImage imageNamed:@"btn1.png"] forState:UIControlStateNormal];

@@ -311,55 +311,6 @@
             
         }
         
-        //        if (indexPath.row==0) {
-        //            [Cell setNeedsDisplay];
-        //            UIButton *button=(UIButton*)[Cell.contentView viewWithTag:100001];
-        //            UIButton *buttonarrow=(UIButton*)[Cell.contentView viewWithTag:100002];
-        //            buttonarrow.hidden=YES;
-        //            Cell.imageView.hidden=NO;
-        //            button.contentMode=UIViewContentModeScaleAspectFit;
-        //
-        //            ActivityItem *item=[dataArray objectAtIndex:indexPath.section];
-        //            if ([item.type isEqualToString:@"Feed"]) {
-        //                [button setImage:[UIImage imageNamed:@"process_feed.png"] forState:UIControlStateDisabled];
-        //            }
-        //            else if([item.type isEqualToString:@"Diaper"])
-        //            {
-        //                [button setImage:[UIImage imageNamed:@"process_diaper.png"] forState:UIControlStateDisabled];
-        //
-        //            }
-        //            else if([item.type isEqualToString:@"Pleep"])
-        //            {
-        //                [button setImage:[UIImage imageNamed:@"process_sleep.png"] forState:UIControlStateDisabled];
-        //            }
-        //            else if([item.type isEqualToString:@"Play"])
-        //            {
-        //                [button setImage:[UIImage imageNamed:@"process_play.png"] forState:UIControlStateDisabled];
-        //            }
-        //            else
-        //            {
-        //                [button setImage:[UIImage imageNamed:@"process_bath.png"] forState:UIControlStateDisabled];
-        //            }
-        //            NSDateFormatter *formater=[[NSDateFormatter alloc]init];
-        //            [formater setDateFormat:@"HH:mm"];
-        //            [currentdate getStarttimefromdate:item.starttime];
-        //            [button setHidden:NO];
-        //            [Cell.contentView bringSubviewToFront:button];
-        //            Cell.textLabel.text=[formater stringFromDate:item.starttime];
-        //        }
-        //        else
-        //        {
-        //            [Cell setNeedsDisplay];
-        //            Cell.imageView.hidden=YES;
-        //            Cell.textLabel.text=@"";
-        //            [[Cell.contentView viewWithTag:100001] setHidden:YES];
-        //            UIButton *buttonarrow=(UIButton*)[Cell.contentView viewWithTag:100002];
-        //            buttonarrow.hidden=NO;
-        //
-        //        }
-        //
-        //
-        //        return Cell;
         if(indexPath.row==0)
         {
             UITableViewCell *Cell=[tableView dequeueReusableCellWithIdentifier:@"History"];
