@@ -10,7 +10,7 @@
 #import "LoginViewController.h"
 #import "MBProgressHUD.h"
 
-#import "SyncController.h"
+#import "HomeTopView.h"
 
 @interface MyPageViewController ()
 
@@ -33,11 +33,11 @@
     
     [self LoadData];
     
-    //是否有创建过宝宝
-    if (!BABYID) {
-        BabyinfoViewController *bi=[[BabyinfoViewController alloc]initWithNibName:@"BabyinfoViewController" bundle:nil];
-        [self.navigationController pushViewController:bi animated:YES];
-    }
+    //FIXME:是否有创建过宝宝
+//    if (!BABYID) {
+//        BabyinfoViewController *bi=[[BabyinfoViewController alloc]initWithNibName:@"BabyinfoViewController" bundle:nil];
+//        [self.navigationController pushViewController:bi animated:YES];
+//    }
 }
 
 -(void)LoadData{
@@ -46,17 +46,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 150, 60)];
-    [btn setTitle:@"同步" forState:UIControlStateNormal];
-    btn.backgroundColor = [UIColor grayColor];
-    [btn addTarget:self action:@selector(sync) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+    [self initView];
+    
 }
 
--(void)sync
-{
-    MBProgressHUD *hud;
-    [[SyncController syncController] syncBabyDataCollectionsByUserID:ACCOUNTUID HUD:hud SyncFinished:^(){} ViewController:self];
+#pragma 加载视图
+-(void)initView{
+    //加载头像区视图
+    HomeTopView *homeTopView = [[HomeTopView alloc]initWithFrame:CGRectMake(0, 0, 320, 235)];
+    [self.view addSubview:homeTopView];
 }
 
 - (void)didReceiveMemoryWarning
