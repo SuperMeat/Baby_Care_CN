@@ -12,6 +12,7 @@
 #import "diaperViewController.h"
 #import "bathViewController.h"
 #import "playViewController.h"
+#import "FeedActivityViewController.h"
 
 @interface ActivityViewController : ACViewController<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 {

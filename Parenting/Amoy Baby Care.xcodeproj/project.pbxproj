@@ -188,6 +188,9 @@
 		485F3F4A17F07CDA00BD876F /* OpenFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F3F4917F07CDA00BD876F /* OpenFunction.m */; };
 		485F3F4E17F16E3800BD876F /* DataCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485F3F4C17F16E3800BD876F /* DataCustomCell.xib */; };
 		485F3F4F17F16E3800BD876F /* DataCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F3F4D17F16E3800BD876F /* DataCustomCell.m */; };
+		4890DCE018F1A3D500C498FB /* TESTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4890DCDF18F1A3D500C498FB /* TESTViewController.m */; };
+		4890DCE418F23DA000C498FB /* FeedActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4890DCE218F23DA000C498FB /* FeedActivityViewController.m */; };
+		4890DCE518F23DA000C498FB /* FeedActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4890DCE318F23DA000C498FB /* FeedActivityViewController.xib */; };
 		489AABEC180D141B00EB607E /* icon_uv.png in Resources */ = {isa = PBXBuildFile; fileRef = 489AABEA180D141B00EB607E /* icon_uv.png */; };
 		489AABED180D141B00EB607E /* icon_uv@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 489AABEB180D141B00EB607E /* icon_uv@2x.png */; };
 		489AABF1180D2D1100EB607E /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AABF0180D2D1100EB607E /* ChineseToPinyin.m */; };
@@ -920,6 +923,11 @@
 		485F3F4B17F16E3800BD876F /* DataCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCustomCell.h; sourceTree = "<group>"; };
 		485F3F4C17F16E3800BD876F /* DataCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataCustomCell.xib; sourceTree = "<group>"; };
 		485F3F4D17F16E3800BD876F /* DataCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCustomCell.m; sourceTree = "<group>"; };
+		4890DCDE18F1A3D500C498FB /* TESTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESTViewController.h; sourceTree = "<group>"; };
+		4890DCDF18F1A3D500C498FB /* TESTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESTViewController.m; sourceTree = "<group>"; };
+		4890DCE118F23DA000C498FB /* FeedActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedActivityViewController.h; sourceTree = "<group>"; };
+		4890DCE218F23DA000C498FB /* FeedActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedActivityViewController.m; sourceTree = "<group>"; };
+		4890DCE318F23DA000C498FB /* FeedActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedActivityViewController.xib; sourceTree = "<group>"; };
 		489AABEA180D141B00EB607E /* icon_uv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_uv.png; sourceTree = "<group>"; };
 		489AABEB180D141B00EB607E /* icon_uv@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_uv@2x.png"; sourceTree = "<group>"; };
 		489AABEF180D2D1100EB607E /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
@@ -2437,6 +2445,8 @@
 				48FEAF8C18E943B8002425E2 /* ActivityViewController.xib */,
 				7215975017453988006FD415 /* Summary */,
 				CE0168AC174B682E00462363 /* ActivityClass */,
+				4890DCDE18F1A3D500C498FB /* TESTViewController.h */,
+				4890DCDF18F1A3D500C498FB /* TESTViewController.m */,
 			);
 			name = "活动";
 			sourceTree = "<group>";
@@ -2575,6 +2585,9 @@
 				CE3826FA174DEB21009AD8DA /* bathViewController.h */,
 				CE3826FB174DEB21009AD8DA /* bathViewController.m */,
 				CE3826FC174DEB22009AD8DA /* bathViewController.xib */,
+				4890DCE118F23DA000C498FB /* FeedActivityViewController.h */,
+				4890DCE218F23DA000C498FB /* FeedActivityViewController.m */,
+				4890DCE318F23DA000C498FB /* FeedActivityViewController.xib */,
 			);
 			name = ActivityController;
 			sourceTree = "<group>";
@@ -3731,6 +3744,7 @@
 				CE016834174B49D300462363 /* bath_time@2x.png in Resources */,
 				48FEAF8018E917CB002425E2 /* line_cutoff@2x.png in Resources */,
 				CE016835174B49D300462363 /* bg_blue.png in Resources */,
+				4890DCE518F23DA000C498FB /* FeedActivityViewController.xib in Resources */,
 				CE016836174B49D300462363 /* bg_blue@2x.png in Resources */,
 				4800B0C318D7F3D20093A6AF /* 环境@2x.png in Resources */,
 				CE016837174B49D300462363 /* bg_gray.png in Resources */,
@@ -4208,6 +4222,7 @@
 				7215973117453680006FD415 /* defaultAppDelegate.m in Sources */,
 				BE75CD081872C3FC001EF1C1 /* LoginMainViewController.m in Sources */,
 				48EC1DC818603B3700965254 /* LocalNotifyCell.m in Sources */,
+				4890DCE418F23DA000C498FB /* FeedActivityViewController.m in Sources */,
 				F3F09B5D1745CBCE006CB06D /* SettingViewController.m in Sources */,
 				F3F09B6C1745CC15006CB06D /* HomeViewController.m in Sources */,
 				BEB475A018E574A80004B649 /* NSObject+SBJson.m in Sources */,
@@ -4250,6 +4265,7 @@
 				CE638AB4174F4899009A60AB /* FMDatabaseAdditions.m in Sources */,
 				482B34B118C032D500EFA963 /* UpLoadController.m in Sources */,
 				BE7C69341867D87000C4B675 /* ASIHTTPController.m in Sources */,
+				4890DCE018F1A3D500C498FB /* TESTViewController.m in Sources */,
 				BEB475A818E574A80004B649 /* SBJsonStreamWriterState.m in Sources */,
 				485749A4183205A3000D921B /* NotifyItem.m in Sources */,
 				489AABF1180D2D1100EB607E /* ChineseToPinyin.m in Sources */,

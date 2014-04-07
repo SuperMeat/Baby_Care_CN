@@ -25,6 +25,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+
+}
+
+- (void)setTitle:(NSString *)title
+{
+    ac_title = title;
     [self.view setFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 200, 20)];
     titleView.backgroundColor=[UIColor clearColor];
@@ -47,11 +53,6 @@
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
 #endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-}
-
-- (void)setTitle:(NSString *)title
-{
-    ac_title = title;
 }
 
 - (void)viewDidLoad

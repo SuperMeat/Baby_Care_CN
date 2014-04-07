@@ -311,7 +311,7 @@
             
         }
         
-        if(indexPath.row==0)
+if(indexPath.row==0)
         {
             UITableViewCell *Cell=[tableView dequeueReusableCellWithIdentifier:@"History"];
             if (Cell==nil) {
