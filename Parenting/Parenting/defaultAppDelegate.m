@@ -134,6 +134,11 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 -(void)tap
 {
+    //homeViewController    = [[HomeViewController alloc] init];
+    summaryViewController   = [SummaryViewController summary];
+    //adviseViewController  = [[AdviseMasterViewController alloc] init];
+    //settingViewController = [[SettingViewController alloc] init];
+    //icViewController      = [[InformationCenterViewController alloc] init];
     myPageViewController   = [[MyPageViewController alloc] init];
     envirViewController    = [[EnviromemtViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];

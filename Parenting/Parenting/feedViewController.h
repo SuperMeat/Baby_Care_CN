@@ -23,7 +23,7 @@
     NSTimer *timer;
     UILabel *timeLable;
     UILabel *pmintro;
-   save_feedview *saveView;
+    save_feedview *saveView;
     UILabel *labletip;
     
     

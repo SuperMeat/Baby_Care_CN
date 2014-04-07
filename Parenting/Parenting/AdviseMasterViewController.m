@@ -41,6 +41,7 @@
         [titleView addSubview:titleText];
         
         self.navigationItem.titleView = titleView;
+        self.navigationController.navigationBarHidden = NO;
         self.hidesBottomBarWhenPushed=YES;
 #define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
         

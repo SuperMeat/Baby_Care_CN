@@ -7,12 +7,18 @@
 //
 
 #import "ACViewController.h"
+#import "feedViewController.h"
+#import "sleepViewController.h"
+#import "diaperViewController.h"
+#import "bathViewController.h"
+#import "playViewController.h"
 
-@interface ActivityViewController : ACViewController<UITableViewDataSource,UITableViewDelegate>
+@interface ActivityViewController : ACViewController<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 {
     NSTimer *timer;
     UITableView *datatable;
     NSArray *dataArray;
+    UILabel *labelText;
 }
 
 @property (strong, nonatomic) UIImageView *activityImageView;

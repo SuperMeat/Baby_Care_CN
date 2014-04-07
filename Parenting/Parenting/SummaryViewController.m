@@ -34,35 +34,21 @@
 @synthesize dataArray;
 @synthesize plotScrollView, plot,Mark;
 
++(id)summary
+{
+    
+    __strong static id _sharedObject = nil;
+    
+    _sharedObject = [[self alloc] init]; // or some other init method
+    
+    return _sharedObject;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        plotTag = 0;
-        isScroll = YES;
-        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 100, 20)];
-        titleView.backgroundColor=[UIColor clearColor];
-        UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
-        titleText.backgroundColor = [UIColor clearColor];
-        [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
-        titleText.textColor = [UIColor whiteColor];
-        [titleText setTextAlignment:NSTextAlignmentCenter];
-        [titleText setText:NSLocalizedString(@"navsummary", nil)];
-        [titleView addSubview:titleText];
-        
-        self.navigationItem.titleView = titleView;
-#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
-        
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        if ( IOS7_OR_LATER )
-        {
-            self.edgesForExtendedLayout = UIRectEdgeNone;
-            self.extendedLayoutIncludesOpaqueBars = NO;
-            self.modalPresentationCapturesStatusBarAppearance = NO;
-        }
-#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        //self.title  = NSLocalizedString(@"navsummary", nil);
     }
     return self;
 }
@@ -75,6 +61,32 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    plotTag = 0;
+    isScroll = YES;
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 100, 20)];
+    titleView.backgroundColor=[UIColor clearColor];
+    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+    titleText.backgroundColor = [UIColor clearColor];
+    [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
+    titleText.textColor = [UIColor whiteColor];
+    [titleText setTextAlignment:NSTextAlignmentCenter];
+    [titleText setText:NSLocalizedString(@"navsummary", nil)];
+    [titleView addSubview:titleText];
+    
+    self.navigationItem.titleView = titleView;
+#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    if ( IOS7_OR_LATER )
+    {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+    }
+#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    //self.title  = NSLocalizedString(@"navsummary", nil);
+    self.hidesBottomBarWhenPushed = YES;
+
     [MobClick beginLogPageView:@"总结页面"];
 #define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
     
@@ -379,6 +391,7 @@
 //
    
 }
+
 -(void)showshareview
 {
     [self.view bringSubviewToFront:Shareview];

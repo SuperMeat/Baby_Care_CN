@@ -44,7 +44,7 @@
 }
 
 
-
++(id)summary;
 @property (retain, nonatomic)NSMutableArray *dataArray;
 @property (retain, nonatomic)UIScrollView *plotScrollView;
 @property (strong, nonatomic) IBOutlet UIView *ExplainView;
