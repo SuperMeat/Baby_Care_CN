@@ -21,6 +21,17 @@
     if (self) {
         // Custom initialization
         [self setTitle:@"活动"];
+#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+        
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        if ( IOS7_OR_LATER )
+        {
+            self.edgesForExtendedLayout = UIRectEdgeNone;
+            self.extendedLayoutIncludesOpaqueBars = NO;
+            self.modalPresentationCapturesStatusBarAppearance = NO;
+        }
+#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+
     }
     return self;
 }
@@ -50,6 +61,7 @@
         {
             playViewController *play=[playViewController shareViewController];
             play.summary = [SummaryViewController summary];
+            self.navigationController.navigationBar.hidden = NO;
             [self.navigationController pushViewController:play animated:YES];
         }
             break;
@@ -57,20 +69,24 @@
         {
             bathViewController *bath=[bathViewController shareViewController];
             bath.summary = [SummaryViewController summary];
+            self.navigationController.navigationBar.hidden = NO;
             [self.navigationController pushViewController:bath animated:YES];
         }
             break;
         case QCM_TYPE_FEED:
         {
-            feedViewController *feed =[feedViewController shareViewController];
-            feed.summary = [SummaryViewController summary];
+            FeedActivityViewController *feed = [FeedActivityViewController shareViewController];
+            NSLog(@"%@", self.navigationController);
+            self.navigationController.navigationBar.hidden = NO;
             [self.navigationController pushViewController:feed animated:YES];
+
         }
             break;
         case QCM_TYPE_DIAPER:
         {
             diaperViewController *diaper=[diaperViewController shareViewController];
             diaper.summary = [SummaryViewController summary];
+            self.navigationController.navigationBar.hidden = NO;
             [self.navigationController pushViewController:diaper animated:YES];
         }
             break;
@@ -84,10 +100,14 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.hidden = YES;
+}
 
 - (void)initView
 {
-    self.navigationController.navigationBar.hidden = YES;
+
     
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 320, 44)];
     titleView.backgroundColor=[UIColor clearColor];

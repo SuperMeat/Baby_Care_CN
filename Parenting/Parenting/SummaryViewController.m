@@ -61,6 +61,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBar.hidden = NO;
     plotTag = 0;
     isScroll = YES;
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 100, 20)];
@@ -254,7 +255,7 @@
 
     if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"MARK"] isEqualToString:@"1"] ||![[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]) {
         
-        [self MenuSelectIndex:0];
+        [self MenuSelectIndex:2];
         [backbutton setHidden:YES];
     }
     else

@@ -104,7 +104,7 @@
 
     //self.navigationItem.title=NSLocalizedString(@"Diaper", nil);
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
+    //[backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 34, 28)];
     title.backgroundColor = [UIColor clearColor];
     [title setTextAlignment:NSTextAlignmentCenter];
@@ -123,7 +123,7 @@
     self.navigationItem.leftBarButtonItem=backbar;
     
     UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setBackgroundImage:[UIImage imageNamed:@"btn1.png"] forState:UIControlStateNormal];
+    //[rightButton setBackgroundImage:[UIImage imageNamed:@"btn1.png"] forState:UIControlStateNormal];
     UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 83, 28)];
     title1.backgroundColor = [UIColor clearColor];
     [title1 setTextAlignment:NSTextAlignmentCenter];
@@ -168,22 +168,6 @@
 
 -(void)makeView
 {
-       
-
-//    UIButton *environment=[UIButton buttonWithType:UIButtonTypeCustom];
-//    [environment setTitle:NSLocalizedString(@"btnenvironment", nil) forState:UIControlStateNormal];
-//    [environment setTitleEdgeInsets:UIEdgeInsetsMake(20, 0, 10, 0)];
-//    [environment setBackgroundImage:[UIImage imageNamed:@"label_left.png"] forState:UIControlStateNormal];
-//    [environment setBackgroundImage:[UIImage imageNamed:@"label_left_focus.png"] forState:UIControlStateDisabled];
-//    environment.frame=CGRectMake(0, 190+G_YADDONVERSION, 160, 47);
-//    [self.view addSubview:environment];
-//    environment.tag=501;
-//    [environment addTarget:self action:@selector(environmentOradvise:) forControlEvents:UIControlEventTouchUpInside];
-//    [environment setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-//    [environment setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    
-    
-    
 //    UIButton *advise=[UIButton buttonWithType:UIButtonTypeCustom];
 //    [advise setTitle:NSLocalizedString(@"btnadvise", nil)  forState:UIControlStateNormal];
 //    [advise setBackgroundImage:[UIImage imageNamed:@"label_right.png"] forState:UIControlStateNormal];
@@ -359,10 +343,6 @@
 }
 -(void)stop
 {
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"timerOn"];
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ctl"];
-//    [timer invalidate];
-//    timeLable.text=@"00:00:00";
     startButton.selected=NO;
     startButton.enabled = YES;
 
