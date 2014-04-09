@@ -390,6 +390,7 @@
 		BE15C33B18F51B1700098220 /* input_word@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE15C33118F51B1700098220 /* input_word@2x.png */; };
 		BE15C33C18F51B1700098220 /* timeline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE15C33218F51B1700098220 /* timeline@2x.png */; };
 		BE15C33D18F51B1700098220 /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = BE15C33318F51B1700098220 /* top.png */; };
+		BE15C34018F51B4200098220 /* TimeLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE15C33F18F51B4200098220 /* TimeLineView.m */; };
 		BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */; };
 		BE3D75CC1889199F00E1C391 /* MyDevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */; };
 		BE422ADB18C6B5580089219C /* ASIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE422ADA18C6B5580089219C /* ASIController.m */; };
@@ -1200,6 +1201,8 @@
 		BE15C33118F51B1700098220 /* input_word@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_word@2x.png"; sourceTree = "<group>"; };
 		BE15C33218F51B1700098220 /* timeline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline@2x.png"; sourceTree = "<group>"; };
 		BE15C33318F51B1700098220 /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top.png; sourceTree = "<group>"; };
+		BE15C33E18F51B4200098220 /* TimeLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineView.h; sourceTree = "<group>"; };
+		BE15C33F18F51B4200098220 /* TimeLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLineView.m; sourceTree = "<group>"; };
 		BE3D75C81889199F00E1C391 /* MyDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesViewController.h; sourceTree = "<group>"; };
 		BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesViewController.m; sourceTree = "<group>"; };
 		BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesViewController.xib; sourceTree = "<group>"; };
@@ -3045,6 +3048,8 @@
 				4800B0DC18D931EF0093A6AF /* MyPageViewController.h */,
 				4800B0DD18D931EF0093A6AF /* MyPageViewController.m */,
 				4800B0DE18D931EF0093A6AF /* MyPageViewController.xib */,
+				BE15C33E18F51B4200098220 /* TimeLineView.h */,
+				BE15C33F18F51B4200098220 /* TimeLineView.m */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -4281,6 +4286,7 @@
 				BEB475A018E574A80004B649 /* NSObject+SBJson.m in Sources */,
 				BE7C697C1867F1B300C4B675 /* ASIHTTPRequest.m in Sources */,
 				48EC1DD61862CE2000965254 /* CustonTimeViewController.m in Sources */,
+				BE15C34018F51B4200098220 /* TimeLineView.m in Sources */,
 				48152DD318486AEA009A4900 /* UMEGORefreshTableHeaderView.m in Sources */,
 				48152DED18486B13009A4900 /* UMContactViewController.m in Sources */,
 				BEB475A618E574A80004B649 /* SBJsonStreamWriter.m in Sources */,

@@ -12,8 +12,9 @@
     
     UIImageView *image_bg_top;
     UIImageView *image_headPic;
-    UIImageView *image_date;
+    UIImageView *image_days;
     UILabel *label_babyName;
+    UILabel *label_days;
     UIButton *button_msg;
     UIButton *button_family;
 }
