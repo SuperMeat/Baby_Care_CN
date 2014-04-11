@@ -1,27 +1,30 @@
 //
-//  bathViewController.h
-//  Parenting
+//  SleepActivityViewController.h
+//  Amoy Baby Care
 //
-//  Created by user on 13-5-23.
-//  Copyright (c) 2013年 家明. All rights reserved.
+//  Created by @Arvi@ on 14-4-9.
+//  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
+
+#import "ACViewController.h"
 
 #import <UIKit/UIKit.h>
 #import "SummaryViewController.h"
-@class save_bathview;
-@interface bathViewController : ACViewController
+@class save_sleepview;
+@interface SleepActivityViewController : ACViewController
 {
-
+    
     UIButton * startButton;
     UIButton * addRecordBtn;
     NSTimer *timer;
     UILabel *timeLable;
+    save_sleepview *saveView;
     UIImageView *timerImage;
     UIImageView *timerImageView;
     UIImageView *adviseImageView;
-    save_bathview *saveView;
     UILabel *labletip;
 }
 @property (strong, nonatomic)SummaryViewController *summary;
 +(id)shareViewController;
 @end
+

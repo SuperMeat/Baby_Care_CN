@@ -18,28 +18,30 @@
     }
     return self;
 }
+
 - (id)initWithArray:(NSArray*)array
 {
-    self=[self initWithFrame:CGRectMake(0, 0, 320, 190+G_YADDONVERSION)];
-    self.myscroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 190+G_YADDONVERSION)];
+    self=[self initWithFrame:CGRectMake(0,0, 320, 130)];
+    [self setBackgroundColor:[UIColor clearColor]];
+    self.myscroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 130)];
     [self addSubview:myscroll];
     myscroll.delegate=self;
     myscroll.pagingEnabled=YES;
     myscroll.showsHorizontalScrollIndicator=NO;
-    myscroll.contentSize=CGSizeMake(320*array.count, 190);
+    myscroll.contentSize=CGSizeMake(320*array.count, 130);
     for (int i=0; i<array.count; i++) {
         
         NSDictionary *dict=[array objectAtIndex:i];
-        SuggestView *suggest=[[SuggestView alloc]initWithTitle:[dict objectForKey:@"title"] Suggestion:[dict objectForKey:@"content"] Center:CGPointMake(160+320*i, 100) ];
+        SuggestView *suggest=[[SuggestView alloc]initWithTitle:[dict objectForKey:@"title"] Suggestion:[dict objectForKey:@"content"] Center:CGPointMake(160+320*i, 60) ];
         [myscroll addSubview:suggest];
     }
     
-    UIImageView *image=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"indexInfo@2x.png"]];
-
-    image.center=CGPointMake(160, 189+G_YADDONVERSION);
+    UIImageView *image=[[UIImageView alloc]init];
+    [image setBackgroundColor:[UIColor clearColor]];
+    image.center=CGPointMake(160, 120);
     image.bounds=CGRectMake(0, 0, 320, 10);
     self.mypagecontrol=[[UIPageControl alloc]init];
-    mypagecontrol.center=CGPointMake(160, 5);
+    mypagecontrol.center=CGPointMake(160, 6);
     mypagecontrol.bounds=CGRectMake(0, 0, 320, 10);
     [self addSubview:image];
     [image addSubview:mypagecontrol];
@@ -56,19 +58,10 @@
 }
 -(void)chagepage:(UIPageControl*)sender
 {
-    
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.25];
     [myscroll  setContentOffset:CGPointMake(320*sender.currentPage, 0)];
     [UIView commitAnimations];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

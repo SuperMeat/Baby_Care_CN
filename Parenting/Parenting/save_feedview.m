@@ -46,7 +46,7 @@
     self.durationsec  = [[array objectAtIndex:2] intValue];
     
     self.curduration = self.durationhour*60*60 + self.durationmin*60 + self.durationsec;
-    NSLog(@"init sleep duration:%d",self.curduration);
+    NSLog(@"init feed duration:%d",self.curduration);
 
     self=[self initWithFrame:frame];
     return self;
@@ -178,15 +178,10 @@
     remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 160, 30)];
     remarktext.backgroundColor=[UIColor clearColor];
     remarktext.textColor=[UIColor grayColor];;
-//    [remarktext setBackground:[UIImage imageNamed:@"save_text.png"]];
     [remarkbg addSubview:remarktext];
     [imageview addSubview:remarkbg];
     remarktext.delegate=self;
     [remarktext setFont:[UIFont systemFontOfSize:16]];
-//    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
-//    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
-//    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
-//    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
 
     Oztext=[[UITextField alloc]initWithFrame:CGRectMake(115, 200, 150, 30)];
     [Oztext setBackground:[UIImage imageNamed:@"save_text.png"]];
@@ -231,14 +226,16 @@
     
     UIButton *savebutton=[UIButton buttonWithType:UIButtonTypeCustom];
     savebutton.frame=CGRectMake(200, 240, 70, 30);
-    [savebutton setBackgroundImage:[UIImage imageNamed:@"btn2.png"] forState:UIControlStateNormal];
+    [savebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    savebutton.layer.cornerRadius = 5.0f;
     [savebutton setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
     [savebutton addTarget:self action:@selector(Save) forControlEvents:UIControlEventTouchUpInside];
     [imageview addSubview:savebutton];
     
     UIButton *canclebutton=[UIButton buttonWithType:UIButtonTypeCustom];
     canclebutton.frame=CGRectMake(20, 240, 70, 30);
-    [canclebutton setBackgroundImage:[UIImage imageNamed:@"btn2.png"] forState:UIControlStateNormal];
+    [canclebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    canclebutton.layer.cornerRadius = 5.0f;
     [canclebutton setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
     [canclebutton addTarget:self action:@selector(cancle:) forControlEvents:UIControlEventTouchUpInside];
     [imageview addSubview:canclebutton];

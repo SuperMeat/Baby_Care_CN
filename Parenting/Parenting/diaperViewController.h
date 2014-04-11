@@ -8,19 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "SummaryViewController.h"
-@class WeatherView;
 @class save_diaperview;
-@interface diaperViewController : UIViewController
+@interface diaperViewController : ACViewController
 {
 
     UIButton * startButton;
     NSTimer *timer;
     UILabel *timeLable;
+    UIImageView *timerImage;
+    UIImageView *timerImageView;
+    UIImageView *adviseImageView;
      save_diaperview *saveView;
 
 }
 @property (strong, nonatomic)SummaryViewController *summary;
-@property(weak,nonatomic)WeatherView *weather;
 @property(strong,nonatomic)NSString *status;
 
 +(id)shareViewController;

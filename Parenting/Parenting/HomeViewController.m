@@ -126,7 +126,7 @@
 -(void)LoadData
 {
     DataBase *db=[DataBase dataBase];
-    dataArray=[db selectAll];
+    dataArray = [db selectAll];
     [datatable reloadData];
     [actionArray removeAllObjects];
     [actionArray addObject:[db selectFromdiaper]];
@@ -501,9 +501,9 @@ if(indexPath.row==0)
     switch (sender) {
         case 1:
         {
-            feedViewController *feed=[feedViewController shareViewController];
-            feed.summary = [nav.viewControllers lastObject];
-            [self.navigationController pushViewController:feed animated:YES];
+//            feedViewController *feed=[feedViewController shareViewController];
+//            feed.summary = [nav.viewControllers lastObject];
+//            [self.navigationController pushViewController:feed animated:YES];
         }
             break;
         case 0:
@@ -514,9 +514,9 @@ if(indexPath.row==0)
         }break;
         case 2:
         {
-            sleepViewController *sleep=[sleepViewController shareViewController];
-            sleep.summary = [nav.viewControllers lastObject];
-            [self.navigationController pushViewController:sleep animated:YES];
+//            sleepViewController *sleep=[sleepViewController shareViewController];
+//            sleep.summary = [nav.viewControllers lastObject];
+//            [self.navigationController pushViewController:sleep animated:YES];
         }break;
         case 4:
         {

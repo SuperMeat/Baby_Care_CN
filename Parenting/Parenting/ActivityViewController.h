@@ -8,7 +8,7 @@
 
 #import "ACViewController.h"
 #import "feedViewController.h"
-#import "sleepViewController.h"
+#import "SleepActivityViewController.h"
 #import "diaperViewController.h"
 #import "bathViewController.h"
 #import "playViewController.h"
@@ -17,9 +17,13 @@
 @interface ActivityViewController : ACViewController<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 {
     NSTimer *timer;
+    NSTimer *tipTimer;
     UITableView *datatable;
     NSArray *dataArray;
     UILabel *labelText;
+    UILabel *timeTip;
+    UIImageView *statusImageView;
+    NSInteger timerOnType;
 }
 
 @property (strong, nonatomic) UIImageView *activityImageView;

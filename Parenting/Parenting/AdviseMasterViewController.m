@@ -79,6 +79,23 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     //[self.tableView reloadData];
+    UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
+    title.backgroundColor = [UIColor clearColor];
+    [title setTextAlignment:NSTextAlignmentCenter];
+    title.textAlignment = NSTextAlignmentCenter;
+    title.textColor = [UIColor whiteColor];
+    title.text =NSLocalizedString(@"navback", nil);
+    title.font = [UIFont systemFontOfSize:14];
+    [backbutton addSubview:title];
+    
+    
+    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    backbutton.frame=CGRectMake(0, 0, 44, 28);
+    
+    
+    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
+    self.navigationItem.leftBarButtonItem=backbar;
 }
 
 -(void)viewWillDisappear:(BOOL)animated

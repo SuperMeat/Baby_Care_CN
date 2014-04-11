@@ -176,14 +176,16 @@
     
     UIButton *savebutton=[UIButton buttonWithType:UIButtonTypeCustom];
     savebutton.frame=CGRectMake(200, 220, 70, 30);
-    [savebutton setBackgroundImage:[UIImage imageNamed:@"btn2.png"] forState:UIControlStateNormal];
+    [savebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    savebutton.layer.cornerRadius = 5.0f;
     [savebutton setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
     [savebutton addTarget:self action:@selector(Save) forControlEvents:UIControlEventTouchUpInside];
     [imageview addSubview:savebutton];
     
     UIButton *canclebutton=[UIButton buttonWithType:UIButtonTypeCustom];
     canclebutton.frame=CGRectMake(20, 220, 70, 30);
-    [canclebutton setBackgroundImage:[UIImage imageNamed:@"btn2.png"] forState:UIControlStateNormal];
+    [canclebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    canclebutton.layer.cornerRadius = 5.0f;
     [canclebutton setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
     [canclebutton addTarget:self action:@selector(cancle:) forControlEvents:UIControlEventTouchUpInside];
     [imageview addSubview:canclebutton];

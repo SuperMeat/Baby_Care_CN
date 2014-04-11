@@ -53,15 +53,32 @@
     return self;
 }
 
+-(id)init
+{
+    self=[super init];
+    if (self) {
+        self.hidesBottomBarWhenPushed=YES;
+//#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+//        
+//#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+//        if ( IOS7_OR_LATER )
+//        {
+//            self.edgesForExtendedLayout = UIRectEdgeNone;
+//            self.extendedLayoutIncludesOpaqueBars = NO;
+//            self.modalPresentationCapturesStatusBarAppearance = NO;
+//        }
+//#endif
+    }
+    return self;
+}
+
 -(void)setting
 {
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_title.png"] forBarMetrics:UIBarMetricsDefault];
     [self.view setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBar.hidden = NO;
     plotTag = 0;
     isScroll = YES;
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 100, 20)];
@@ -75,30 +92,26 @@
     [titleView addSubview:titleText];
     
     self.navigationItem.titleView = titleView;
-#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+
+    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
+    title.backgroundColor = [UIColor clearColor];
+    [title setTextAlignment:NSTextAlignmentCenter];
+    title.textAlignment = NSTextAlignmentCenter;
+    title.textColor = [UIColor whiteColor];
+    title.text =NSLocalizedString(@"navback", nil);
+    title.font = [UIFont systemFontOfSize:14];
+    [backbutton addSubview:title];
     
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    if ( IOS7_OR_LATER )
-    {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
-#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    //self.title  = NSLocalizedString(@"navsummary", nil);
-    self.hidesBottomBarWhenPushed = YES;
+    [backbutton addTarget:self action:@selector(popback:) forControlEvents:UIControlEventTouchUpInside];
+    backbutton.frame=CGRectMake(0, 0, 44, 28);
+    
+    NSLog(@"%@", self.navigationController);
+    
+    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
+    self.navigationItem.leftBarButtonItem=backbar;
 
     [MobClick beginLogPageView:@"总结页面"];
-#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
-    
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    if ( IOS7_OR_LATER )
-    {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
-#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"gototips"]boolValue] == YES) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"gototips"];
@@ -135,17 +148,6 @@
     [self segmentSelected:(UIButton *)[self.view viewWithTag:101]];
     
     [self TimeSelected:(UIButton*)[self.view viewWithTag:201]];
-    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"MARK"] isEqualToString:@"1"] ||![[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]) {
-        
-        [self MenuSelectIndex:0];
-        [backbutton setHidden:YES];
-        
-    }
-    else
-    {
-        [backbutton setHidden:NO];
-    }
-    
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
     if ([flag boolValue]==YES) {
         [self scrollUpadateData];
@@ -157,18 +159,18 @@
 {
     [super viewDidLoad];
     
-    [self.Mark setFrame:CGRectMake(244, 31+G_YADDONVERSION, 76, 137)];
+    [self.Mark setFrame:CGRectMake(166 , 81+64 , 154, 37)];
     
     NSLog(@"%@", DBPATH);
     plotArray = [[NSMutableArray alloc] initWithCapacity:0];
     CGRect rx = [ UIScreen mainScreen ].bounds;
-    plotScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 35, 320, rx.size.height  - 35 - 49-20- G_YADDONVERSION + 5 + 23)];
+    plotScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50+15, 320, rx.size.height-64)];
     [self.view addSubview:plotScrollView];
-    //plotScrollView.contentSize = CGSizeMake(320 * [DataBase scrollWidth:0], rx.size.height  - 35 - 49-20);
     plotScrollView.contentSize = CGSizeMake(320 * [DataBase scrollWidthWithTag:0 andTableName:[self tableName:selectIndex]], 0);
     plotScrollView.delegate = self;
     plotScrollView.pagingEnabled = YES;
     plotScrollView.showsHorizontalScrollIndicator = NO;
+    [plotScrollView setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
     //界面布局
     [self setting];
 
@@ -176,13 +178,13 @@
     [self makeTimeSegment];
     [self makeMenu];
     NSLog(@"%f",menu.frame.size.height);
-    List =[[UITableView alloc]initWithFrame:CGRectMake(0, 35 + G_YADDONVERSION, 320, menu.frame.size.height-60-30) style:UITableViewStylePlain];
-    List.backgroundColor=[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+    List =[[UITableView alloc]initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64) style:UITableViewStylePlain];
+    List.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     [self.view addSubview:List];
     List.delegate   = self;
     List.dataSource = self;
     List.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view bringSubviewToFront:self.ExplainView];
+    //[self.view bringSubviewToFront:self.ExplainView];
 
     List.allowsSelectionDuringEditing=YES;
     
@@ -190,8 +192,8 @@
     mHeight = originalHeight;
     sectionIndex = 0;
     dicClicked = [NSMutableDictionary dictionaryWithCapacity:3];
-    Advise =[[UITableView alloc]initWithFrame:CGRectMake(0, 35+G_YADDONVERSION, 320, menu.frame.size.height-60-30) style:UITableViewStylePlain];
-    Advise.backgroundColor=[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+    Advise =[[UITableView alloc]initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64) style:UITableViewStylePlain];
+    Advise.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     [self.view addSubview:Advise];
     Advise.delegate=self;
     Advise.dataSource=self;
@@ -235,34 +237,6 @@
 //    [Shareview addSubview:share];
 //    [Shareview addSubview:cancle];
     
-    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 34, 28)];
-    title.backgroundColor = [UIColor clearColor];
-    [title setTextAlignment:NSTextAlignmentCenter];
-    title.textColor = [UIColor whiteColor];
-    title.text =NSLocalizedString(@"navback", nil);
-    title.font = [UIFont systemFontOfSize:14];
-    [backbutton addSubview:title];
-    
-    
-    [backbutton addTarget:self action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    backbutton.frame=CGRectMake(0, 0, 44, 28);
-    
-    
-    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
-    self.navigationItem.leftBarButtonItem=backbar;
-
-    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"MARK"] isEqualToString:@"1"] ||![[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]) {
-        
-        [self MenuSelectIndex:2];
-        [backbutton setHidden:YES];
-    }
-    else
-    {
-        [backbutton setHidden:NO];
-    }
-
     [self.view bringSubviewToFront:menu];
     
     UILabel *sign1=(UILabel*)[self.Mark viewWithTag:601];
@@ -276,23 +250,23 @@
     sign3.text=NSLocalizedString(@"Feed", nil);
     sign4.text=NSLocalizedString(@"Sleep", nil);
     sign5.text=NSLocalizedString(@"Diaper", nil);
-    [self.view addSubview:Shareview];
+    //[self.view addSubview:Shareview];
     [self makePlotSegment];
     NSUserDefaults *db = [NSUserDefaults standardUserDefaults];
     [db setInteger:0 forKey:@"SHUIBIAN"];
     [db synchronize];
-    
-    
 
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)popViewControllerAnimated:(id)sender{
+- (void)popback:(id)sender{
     NSString *str = @"1";
     NSUserDefaults *db = [NSUserDefaults standardUserDefaults];
     [db setObject:str forKey:@"MARK"];
     [db synchronize];
-    self.tabBarController.selectedIndex = 0;
+    self.tabBarController.selectedIndex = 2;
+    self.navigationController.navigationBar.hidden = NO;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -303,7 +277,7 @@
 - (void)ShareBtn{
     
     [self hidenshareview];
-    //UIView *view = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] subviews] lastObject];//获得某个window的某个subView
+  
     UIGraphicsBeginImageContext(CGSizeMake(plotScrollView.frame.size.width, plotScrollView.frame.size.height - 65));
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
@@ -426,7 +400,7 @@
     plot.hidden=YES;
     Histogram.hidden=YES;
     Plotting.hidden=YES;
-    sender.titleLabel.textColor=[UIColor whiteColor];
+    //sender.titleLabel.textColor=[UIColor whiteColor];
     [[self.view viewWithTag:201] setHidden:YES];
     [[self.view viewWithTag:202] setHidden:YES];
     self.Mark.hidden=YES;
@@ -466,29 +440,26 @@
 -(void)makeHeadSegement
 {
     UIButton *lable1_sum=[UIButton buttonWithType:UIButtonTypeCustom];
-    [lable1_sum setBackgroundImage:[UIImage imageNamed:@"label1_sum.png"] forState:UIControlStateNormal];
-    [lable1_sum setBackgroundImage:[UIImage imageNamed:@"label1_sum_focus.png"] forState:UIControlStateHighlighted];
-    [lable1_sum setBackgroundImage:[UIImage  imageNamed:@"label1_sum_focus.png"] forState:UIControlStateDisabled];
+    [lable1_sum setBackgroundImage:[UIImage imageNamed:@"label1_sum"] forState:UIControlStateNormal];
+    [lable1_sum setBackgroundImage:[UIImage  imageNamed:@"label1_sum_choose"] forState:UIControlStateDisabled];
     [lable1_sum addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
-    lable1_sum.frame=CGRectMake(0, 0+G_YADDONVERSION, 106, 35);
+    lable1_sum.frame=CGRectMake(2, 23/2.0+64, 211/2.0, 65/2.0+1);
     lable1_sum.tag=101;
     [self.view addSubview:lable1_sum];
     
     UIButton *lable2_sum=[UIButton buttonWithType:UIButtonTypeCustom];
-    [lable2_sum setBackgroundImage:[[UIImage imageNamed:@"label2_sum.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]forState:UIControlStateNormal];
-    [lable2_sum setBackgroundImage:[[UIImage imageNamed:@"label2_sum_focus.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] forState:UIControlStateHighlighted];
-    [lable2_sum setBackgroundImage:[[UIImage imageNamed:@"label2_sum_focus.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] forState:UIControlStateDisabled];
+    [lable2_sum setBackgroundImage:[UIImage imageNamed:@"label2_sum"] forState:UIControlStateNormal];
+    [lable2_sum setBackgroundImage:[UIImage imageNamed:@"label2_sum_choose"]  forState:UIControlStateDisabled];
     [lable2_sum addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
     lable2_sum.tag=102;
-    lable2_sum.frame=CGRectMake(106, 0+G_YADDONVERSION, 108, 35);
+    lable2_sum.frame=CGRectMake(211/2.0+2, 23/2.0+64, 211/2.0, 65/2.0+1);
     [self.view addSubview:lable2_sum];
     
     UIButton *lable3_sum=[UIButton buttonWithType:UIButtonTypeCustom];
-    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum.png"] forState:UIControlStateNormal];
-    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum_focus.png"] forState:UIControlStateHighlighted];
-    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum_focus.png"] forState:UIControlStateDisabled];
+    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum"] forState:UIControlStateNormal];
+    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum_choose"] forState:UIControlStateDisabled];
     [lable3_sum addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
-    lable3_sum.frame=CGRectMake(214, 0+G_YADDONVERSION, 106, 35);
+    lable3_sum.frame=CGRectMake(211+2, 23/2.0+64, 211/2.0, 65/2.0+1);
     lable3_sum.tag=103;
     
     [self.view addSubview:lable3_sum];
@@ -503,28 +474,21 @@
     CGRect rx = [ UIScreen mainScreen ].bounds;
     
     UIButton *week_sum=[UIButton buttonWithType:UIButtonTypeCustom];
-    [week_sum setBackgroundImage:[UIImage imageNamed:@"btn_day.png"] forState:UIControlStateNormal];
-    [week_sum setBackgroundImage:[UIImage imageNamed:@"btn_day_focus.png"] forState:UIControlStateHighlighted];
-    [week_sum setBackgroundImage:[UIImage  imageNamed:@"btn_day_focus.png"] forState:UIControlStateDisabled];
+    [week_sum setBackgroundImage:[UIImage imageNamed:@"btn_month"] forState:UIControlStateNormal];
+    [week_sum setBackgroundImage:[UIImage  imageNamed:@"btn_week"] forState:UIControlStateDisabled];
     [week_sum addTarget:self action:@selector(TimeSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [week_sum setTitle:NSLocalizedString(@"Week", nil) forState:UIControlStateNormal];
-    week_sum.frame=CGRectMake((320-86*2)/2, rx.size.height - 130-20+G_YADDONVERSION, 86, 30);
+    week_sum.frame=CGRectMake(320-7-142/2.0-5,  rx.size.height - 160+64+44-15, 142/2.0, 53/2.0);
     week_sum.tag=201;
-    
-    week_sum.titleLabel.textColor=[UIColor grayColor];
     [self.view addSubview:week_sum];
     
-    UIButton *year_sum=[UIButton buttonWithType:UIButtonTypeCustom];
-    [year_sum setBackgroundImage:[UIImage imageNamed:@"btn_year.png"] forState:UIControlStateNormal];
-    [year_sum setBackgroundImage:[UIImage imageNamed:@"btn_year_focus.png"] forState:UIControlStateHighlighted];
-    [year_sum setBackgroundImage:[UIImage imageNamed:@"btn_year_focus.png"] forState:UIControlStateDisabled];
-    [year_sum addTarget:self action:@selector(TimeSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [year_sum setTitle:NSLocalizedString(@"Month", nil) forState:UIControlStateNormal];
-    year_sum.frame=CGRectMake((320-86*2)/2+86,  rx.size.height - 130-20 + G_YADDONVERSION, 86, 30);
-    year_sum.tag=202;
-    year_sum.titleLabel.textColor=[UIColor grayColor];
+    UIButton *month_sum=[UIButton buttonWithType:UIButtonTypeCustom];
+    [month_sum setBackgroundImage:[UIImage imageNamed:@"btn_week"] forState:UIControlStateNormal];
+    [month_sum setBackgroundImage:[UIImage imageNamed:@"btn_month"] forState:UIControlStateDisabled];
+    [month_sum addTarget:self action:@selector(TimeSelected:) forControlEvents:UIControlEventTouchUpInside];
+    month_sum.frame=CGRectMake(320-7-142/2.0-5,  rx.size.height-160+64+44-15, 142/2.0, 53/2.0);
+    month_sum.tag=202;
     
-    [self.view addSubview:year_sum];
+    [self.view addSubview:month_sum];
     [self TimeSelected:week_sum];
 }
 -(void)TimeSelected:(UIButton*)sender
@@ -542,9 +506,9 @@
     }
     another1.enabled=YES;
     
-    another1.titleLabel.textColor=[UIColor grayColor];
-    
-    sender.titleLabel.textColor=[UIColor whiteColor];
+//    another1.titleLabel.textColor=[UIColor grayColor];
+//    
+//    sender.titleLabel.textColor=[UIColor whiteColor];
     isScroll = NO;
     [plot removeFromSuperview];
     //CGRect rx = [UIScreen mainScreen ].bounds;
@@ -573,46 +537,41 @@
 //                                                         ContentImage:[UIImage imageNamed:@"btn_all.png"]
 //                                              highlightedContentImage:[UIImage imageNamed:@"btn_all_focus.png"]];
     // People MenuItem.
-    QuadCurveMenuItem *menuitemplay = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_play.png"]
-                                                      highlightedImage:[UIImage imageNamed:@"btn_play_focus.png"]
-                                                          ContentImage:[UIImage imageNamed:@"btn_play.png"]
-                                               highlightedContentImage:[UIImage imageNamed:@"btn_play_focus.png"]];
+    QuadCurveMenuItem *menuitemplay = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_playing"]
+                                                      highlightedImage:[UIImage imageNamed:@"btn_playing_focus.png"]
+                                                          ContentImage:[UIImage imageNamed:@"btn_playing"]
+                                               highlightedContentImage:[UIImage imageNamed:@"btn_playing_focus.png"]];
     // Place MenuItem.
-    QuadCurveMenuItem *menuitembath = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_bath.png"]
-                                                      highlightedImage:[UIImage imageNamed:@"btn_bath_focus.png"]
-                                                          ContentImage:[UIImage imageNamed:@"btn_bath.png"]
-                                               highlightedContentImage:[UIImage imageNamed:@"btn_bath_focus.png"]];
+    QuadCurveMenuItem *menuitembath = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_bath"]
+                                                      highlightedImage:[UIImage imageNamed:@"btn_bath_focus"]
+                                                          ContentImage:[UIImage imageNamed:@"btn_bath"]
+                                               highlightedContentImage:[UIImage imageNamed:@"btn_bath_focus"]];
     // Music MenuItem.
-    QuadCurveMenuItem *menuitemfeed = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_feed.png"]
-                                                      highlightedImage:[UIImage imageNamed:@"btn_feed_focus.png"]
-                                                          ContentImage:[UIImage imageNamed:@"btn_feed.png"]
-                                               highlightedContentImage:[UIImage imageNamed:@"btn_feed_focus.png"]];
+    QuadCurveMenuItem *menuitemfeed = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_feeding"]
+                                                      highlightedImage:[UIImage imageNamed:@"btn_feeding_focus"]
+                                                          ContentImage:[UIImage imageNamed:@"btn_feeding"]
+                                               highlightedContentImage:[UIImage imageNamed:@"btn_feeding_focus"]];
     // Thought MenuItem.
-    QuadCurveMenuItem *menuitemsleep = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_sleep.png"]
-                                                       highlightedImage:[UIImage imageNamed:@"btn_sleep_focus.png"]
-                                                           ContentImage:[UIImage imageNamed:@"btn_sleep.png"]
-                                                highlightedContentImage:[UIImage imageNamed:@"btn_sleep_focus.png"]];
+    QuadCurveMenuItem *menuitemsleep = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_sleeping"]
+                                                       highlightedImage:[UIImage imageNamed:@"btn_sleeping_focus"]
+                                                           ContentImage:[UIImage imageNamed:@"btn_sleeping"]
+                                                highlightedContentImage:[UIImage imageNamed:@"btn_sleeping_focus"]];
     // Sleep MenuItem.
-    QuadCurveMenuItem *menuitemdiaper = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_diaper.png"]
-                                                        highlightedImage:[UIImage imageNamed:@"btn_diaper_focus.png"]
-                                                            ContentImage:[UIImage imageNamed:@"btn_diaper.png"]
-                                                 highlightedContentImage:[UIImage imageNamed:@"btn_diaper_focus.png"]];
+    QuadCurveMenuItem *menuitemdiaper = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_diapers"]
+                                                        highlightedImage:[UIImage imageNamed:@"btn_diapers_focus"]
+                                                            ContentImage:[UIImage imageNamed:@"btn_diapers"]
+                                                 highlightedContentImage:[UIImage imageNamed:@"btn_diapers_focus"]];
     
     NSArray *menus = [NSArray arrayWithObjects:menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, nil];
     CGRect rx = [ UIScreen mainScreen ].bounds;
     
-    float Y = 0.0;
-    if ([ACFunction getSystemVersion] >= 7.0) {
-        Y += 64.0;
-    }
-    
     if(rx.size.height > 480){
-        menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(0, 0+G_YADDONVERSION, 320, [UIScreen mainScreen].bounds.size.height-20-44- 49) menus:menus];
+        menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(10, 42+64, 320, [UIScreen mainScreen].bounds.size.height-20-44- 49-10-50) menus:menus];
     }else{
-        menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(0, 0+G_YADDONVERSION, 320, [UIScreen mainScreen].bounds.size.height-20-44 - 49) menus:menus];
+        menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(10, 42+64, 320, [UIScreen mainScreen].bounds.size.height-20-44 - 44-10-50) menus:menus];
 
     }
-    
+    [menu setBackgroundColor:[UIColor clearColor]];
     menu.delegate = self;
     [self.view addSubview:menu];
     
@@ -943,11 +902,9 @@
         }
         cell.minutesLable.textColor=cell.timeLable.textColor;
         SummaryItem *item=[ListArray objectAtIndex:indexPath.row];
-        cell.timeLable.text = [currentdate dateForSummaryList:item.starttime];
+        cell.timeLable.text = [ACDate dateForSummaryList:item.starttime];
         cell.MarkLable.text = NSLocalizedString(item.type, nil);
         cell.minutesLable.text = item.duration;
-        
-        
         
         if ([item.duration isEqualToString:NSLocalizedString(@"Wet", nil)]) {
             cell.minutesLable.textColor=[UIColor colorWithRed:0x82/255.0 green:0xC6/255.0 blue:0xE1/255.0 alpha:0xFF/255.0];
@@ -983,7 +940,6 @@
         tipsTitle     = (UILabel*)[cell.contentView viewWithTag:2];
         
         NSString *imageName,*title;
-       // NSLog(@"%d",indexPath.section);
         switch (chooseAdvise) {
             case ADVISE_TYPE_ALL:
                 if (indexPath.section < 5) {
@@ -1142,7 +1098,6 @@
         
         url = NSLocalizedString(key, nil);
         
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
         TipsWebViewController *tips = [[TipsWebViewController alloc] init];
         [tips setTipsUrl:url];
         [self.navigationController pushViewController:tips animated:YES];
@@ -1223,35 +1178,35 @@
     //NSLog(@"%@",item.type);
     if ([item.type isEqualToString:@"Feed"]) {
         
-        feed=[[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
+        feed=[[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
         feed.feedSaveDelegate = self;
         [feed loaddata];
         [self.view addSubview:feed];
     }
     else if ([item.type isEqualToString:@"Sleep"])
     {
-        sleep=[[save_sleepview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
+        sleep=[[save_sleepview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
         sleep.sleepSaveDelegate = self;
        [sleep loaddata];
         [self.view addSubview:sleep];
     }
     else if ([item.type isEqualToString:@"Play"])
     {
-        play=[[save_playview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
+        play=[[save_playview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
         play.playSaveDelegate = self;
         [play loaddata];
         [self.view addSubview:play];
     }
     else if ([item.type isEqualToString:@"Bath"])
     {
-        bath=[[save_bathview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
+        bath=[[save_bathview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
         bath.bathSaveDelegate = self;
         [bath loaddata];
         [self.view addSubview:bath];
     }
     else
     {
-        diaper=[[save_diaperview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime];
+        diaper=[[save_diaperview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime];
         diaper.diaperSaveDelegate = self;
         [diaper loaddata];
         [self.view addSubview:diaper];
@@ -1287,6 +1242,7 @@
         }
        
         plot = [[MyCorePlot alloc] initWithFrame:CGRectMake(([DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] - j - 1) * 320, 0, 320, rx.size.height - 40 - 35 - 49-20) andTitle:[self tableName:selectIndex] andXplotRangeWithLocation:0.0f andXlength:xLength andYplotRangeWithLocation:0.0f andYlength:maxyAxis * 1.5 andDataSource:data andXAxisTag:plotTag andMaxDay:maxmonthday];
+        [plot setBackgroundColor:[UIColor whiteColor]];
         [plotScrollView addSubview:plot];
         [self setName];
         [plotArray addObject:plot];
@@ -1294,42 +1250,32 @@
     }
     
     [plotScrollView scrollRectToVisible:CGRectMake([DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] * 320 - 320, 0, 320, rx.size.height - 40 - 35 - 49-20) animated:NO];
-    
+    [self.Mark setFrame:CGRectMake(166, 64+46, 154, 37)];
     [self.view bringSubviewToFront:self.Mark];
 }
 
 //折线图切换
 -(void)makePlotSegment
 {
-    CGRect rx = [ UIScreen mainScreen ].bounds;
     Histogram=[UIButton buttonWithType:UIButtonTypeCustom];
-    [Histogram setBackgroundImage:[UIImage imageNamed:@"btn_day.png"]  forState:UIControlStateNormal];
-    [Histogram setBackgroundImage:[UIImage imageNamed:@"btn_day_focus.png"] forState:UIControlStateHighlighted];
-    [Histogram setBackgroundImage:[UIImage  imageNamed:@"btn_day_focus.png"]  forState:UIControlStateDisabled];
+    [Histogram setBackgroundImage:[UIImage imageNamed:@"btn_times]"]  forState:UIControlStateNormal];
+    [Histogram setBackgroundImage:[UIImage imageNamed:@"btn_times"] forState:UIControlStateHighlighted];
+    [Histogram setBackgroundImage:[UIImage  imageNamed:@"btn_time"]  forState:UIControlStateDisabled];
     Histogram.contentMode=UIViewContentModeScaleAspectFill;
-    [Histogram setTitle:NSLocalizedString(@"H", nil) forState:UIControlStateNormal];
-    Histogram.frame=CGRectMake((320-30*2)/2+120, rx.size.height - 130-20+G_YADDONVERSION, 30, 30);
+    Histogram.frame=CGRectMake(12, 50+64, 142/2.0, 52/2.0);
     [self.view addSubview:Histogram];
     
     Plotting=[UIButton buttonWithType:UIButtonTypeCustom];
     Plotting=[UIButton buttonWithType:UIButtonTypeCustom];
-    [Plotting setBackgroundImage:[UIImage imageNamed:@"btn_year.png"]forState:UIControlStateNormal];
-    [Plotting setBackgroundImage:[UIImage imageNamed:@"btn_year_focus.png"]  forState:UIControlStateHighlighted];
-    [Plotting setBackgroundImage:[UIImage  imageNamed:@"btn_year_focus.png"] forState:UIControlStateDisabled];
-    [Plotting setTitle:NSLocalizedString(@"P", nil) forState:UIControlStateNormal];
-    Plotting.frame=CGRectMake((320-30*2)/2+30+120, rx.size.height - 130-20+G_YADDONVERSION, 30, 30);
+    [Plotting setBackgroundImage:[UIImage imageNamed:@"btn_times"]forState:UIControlStateNormal];
+    [Plotting setBackgroundImage:[UIImage imageNamed:@"btn_times"]  forState:UIControlStateHighlighted];
+    [Plotting setBackgroundImage:[UIImage  imageNamed:@"btn_time"] forState:UIControlStateDisabled];
+    Plotting.frame=CGRectMake(12, 50+64, 142/2.0, 52/2.0);
     Plotting.contentMode=UIViewContentModeScaleToFill;
     [self.view addSubview:Plotting];
     
-    [Plotting setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [Plotting setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-    
-    [Histogram setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [Histogram setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-    
     [Histogram addTarget:self action:@selector(PLotSelected:) forControlEvents:UIControlEventTouchUpInside];
     [Plotting addTarget:self action:@selector(PLotSelected:) forControlEvents:UIControlEventTouchUpInside];
-    
     
     Histogram.titleLabel.numberOfLines = 0;
     Plotting.titleLabel.numberOfLines  = 0;

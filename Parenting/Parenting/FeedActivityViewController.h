@@ -15,8 +15,13 @@
     UIButton * startButtonleft;
     UIButton * startButtonright;
     UIButton * addRecordBtn;
-    UIImageView *breastleft;
-    UIImageView *breastright;
+    UIButton * chooseBreast;
+    UIButton * chooseBottle;
+    
+    UIImageView *timerImage;
+    UIImageView *timerImageView;
+    UIImageView *adviseImageView;
+
     NSTimer *timer;
     UILabel *timeLable;
     UILabel *pmintro;
@@ -29,8 +34,6 @@
 @property(nonatomic,strong)NSString *feedWay;
 @property(nonatomic,strong)NSString *breast;
 @property (strong, nonatomic)SummaryViewController *summary;
-@property(weak,nonatomic)WeatherView *weather;
-@property(weak,nonatomic)BLEWeatherView *bleweather;
 @property(nonatomic,strong)NSString *obj;
 +(id)shareViewController;
 @end

@@ -53,10 +53,10 @@
         }
         
         // add the "Add" Button.
-        _addButton = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_more.png"]
-                                       highlightedImage:[UIImage imageNamed:@"btn_more_focus.png"] 
-                                                 ContentImage:[UIImage imageNamed:@"btn_more.png"]
-                                highlightedContentImage:[UIImage imageNamed:@"btn_more_focus.png"]];
+        _addButton = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_unfold"]
+                                       highlightedImage:[UIImage imageNamed:@"btn_unfold_focus"]
+                                                 ContentImage:[UIImage imageNamed:@"btn_unfold"]
+                                highlightedContentImage:[UIImage imageNamed:@"btn_unfold_focus"]];
         _addButton.delegate = self;
         _addButton.center = STARTPOINT;
         [self addSubview:_addButton];

@@ -145,6 +145,31 @@
     return [NSString stringWithFormat:@"%@ %02d/%02d",week,[comps day],[comps month]];;
 }
 
++(NSString*)getDayBeforeDespFromDate:(NSDate *)date
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
+    comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+    if ([comps day] >0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"DayTips", nil),[comps day]];
+    }
+    else if ([comps hour]>0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"HourTips", nil),[comps hour]];
+    }
+    else if ([comps minute]>0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"MinuteTips", nil),[comps minute]];
+    }
+    else if ([comps second]>0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"SecondTips", nil),[comps second]];
+    }
+    else
+    {
+        return @"NULL";
+    }
+
+}
+
 +(NSDate*)getStarttime
 {
     NSDate *date=[[NSUserDefaults standardUserDefaults] objectForKey:@"timerOn"];

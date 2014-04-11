@@ -170,7 +170,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     [myTabController setViewControllers:controllers];
     
     //FIXME:TEST
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"ACCOUNT_NAME"];
+//    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"ACCOUNT_NAME"];
     
     //  向导版本有更新则跳转
     if (![[[NSUserDefaults standardUserDefaults] stringForKey:@"GUIDE_V"]  isEqual: GUIDE_V]){

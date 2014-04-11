@@ -8,19 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "SummaryViewController.h"
-@class WeatherView;
 @class save_playview;
-@interface playViewController : UIViewController
+@interface playViewController : ACViewController
 {
 
     UIButton * startButton;
     UIButton * addRecordBtn;
     NSTimer *timer;
     UILabel *timeLable;
+    UIImageView *timerImage;
+    UIImageView *timerImageView;
+    UIImageView *adviseImageView;
      save_playview *saveView;
     UILabel *labletip;
 }
 @property (strong, nonatomic)SummaryViewController *summary;
-@property(weak,nonatomic)WeatherView *weather;
 +(id)shareViewController;
 @end

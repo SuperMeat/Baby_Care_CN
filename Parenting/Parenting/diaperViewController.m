@@ -13,7 +13,7 @@
 @end
 
 @implementation diaperViewController
-@synthesize summary,weather,status;
+@synthesize summary,status;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,17 +28,6 @@
     self=[super init];
     if (self) {
         self.hidesBottomBarWhenPushed=YES;
-#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
-        
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        if ( IOS7_OR_LATER )
-        {
-            self.edgesForExtendedLayout = UIRectEdgeNone;
-            self.extendedLayoutIncludesOpaqueBars = NO;
-            self.modalPresentationCapturesStatusBarAppearance = NO;
-        }
-#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        //self.automaticallyAdjustsScrollViewInsets = NO;
     }
     return self;
 }
@@ -53,12 +42,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [MobClick beginLogPageView:@"换尿布"];
-  //  [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"weather"];
-    if (self.weather) {
-        self.weather.chooseType = QCM_TYPE_DIAPER;
-        [self.weather refreshweather];
-    }
-    
+    self.hidesBottomBarWhenPushed = YES;
+    [self makeNav];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stop) name:@"stop" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancel) name:@"cancel" object:nil];
     
@@ -86,7 +71,8 @@
     dispatch_once(&pred, ^{
         _sharedObject = [[self alloc] init]; // or some other init method
     });
-    return _sharedObject;}
+    return _sharedObject;
+}
 
 -(void)makeNav
 {
@@ -102,13 +88,11 @@
     
     self.navigationItem.titleView = titleView;
 
-    //self.navigationItem.title=NSLocalizedString(@"Diaper", nil);
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    //[backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 34, 28)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
     title.backgroundColor = [UIColor clearColor];
     [title setTextAlignment:NSTextAlignmentCenter];
-    //title.textAlignment = NSTextAlignmentCenter;
+    title.textAlignment = NSTextAlignmentCenter;
     title.textColor = [UIColor whiteColor];
     title.text =NSLocalizedString(@"navback", nil);
     title.font = [UIFont systemFontOfSize:14];
@@ -123,8 +107,7 @@
     self.navigationItem.leftBarButtonItem=backbar;
     
     UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    //[rightButton setBackgroundImage:[UIImage imageNamed:@"btn1.png"] forState:UIControlStateNormal];
-    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 83, 28)];
+    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
     title1.backgroundColor = [UIColor clearColor];
     [title1 setTextAlignment:NSTextAlignmentCenter];
     title1.textColor = [UIColor whiteColor];
@@ -134,14 +117,15 @@
     
     
     [rightButton addTarget:self action:@selector(pushSummaryView:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame=CGRectMake(0, 0, 83, 28);
+    rightButton.frame=CGRectMake(0, 0, 44, 28);
     UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBar;
 }
 
 - (void)pushSummaryView:(id)sender{
+    summary = [SummaryViewController summary];
     [summary MenuSelectIndex:4];
-    self.tabBarController.selectedIndex = 1;
+    [self.navigationController pushViewController:summary animated:YES];
 }
 
 
@@ -154,123 +138,50 @@
     
     AdviseScrollview *ad=[[AdviseScrollview alloc]initWithArray:[NSArray arrayWithObjects:dict1,dict2,dict3, nil]];
     
-    
-    [self.view addSubview:ad];
-
-    
-    self.weather=[WeatherView weatherview];
-    [self.weather makeview];
-    self.weather.chooseType = QCM_TYPE_DIAPER;
-    weather.frame=CGRectMake(0, 0+G_YADDONVERSION, 320, 200);
-    [self.view addSubview:weather];
-    NSLog(@"weather %@",weather);
+    adviseImageView = [[UIImageView alloc] init];
+    [adviseImageView setFrame:CGRectMake(0, 480-130, 320, 130)];
+    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
+    adviseImageView.userInteractionEnabled = YES;
+    [adviseImageView addSubview:ad];
+    [self.view addSubview:adviseImageView];
 }
 
 -(void)makeView
 {
-//    UIButton *advise=[UIButton buttonWithType:UIButtonTypeCustom];
-//    [advise setTitle:NSLocalizedString(@"btnadvise", nil)  forState:UIControlStateNormal];
-//    [advise setBackgroundImage:[UIImage imageNamed:@"label_right.png"] forState:UIControlStateNormal];
-//    [advise setBackgroundImage:[UIImage imageNamed:@"label_right_focus.png"] forState:UIControlStateDisabled];
-//    advise.frame=CGRectMake(160, 190+G_YADDONVERSION, 160, 47);
-//    [advise setTitleEdgeInsets:UIEdgeInsetsMake(20, 0, 10, 0)];
-//    [self.view addSubview:advise];
-//    advise.tag=502;
-//    [advise addTarget:self action:@selector(environmentOradvise:) forControlEvents:UIControlEventTouchUpInside];
-//    [self environmentOradvise:advise];
-//    [advise setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-//    [advise setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    
-    if (CUSTOMER_COUNTRY==1) {
-        UILabel *pmintro = [[UILabel alloc]initWithFrame:CGRectMake(208, 187, 100, 20)];
-        [pmintro setBackgroundColor:[UIColor clearColor]];
-        [pmintro setText:@"数据来源PM25.in"];
-        [pmintro setFont:[UIFont fontWithName:@"Arial" size:12]];
-        [pmintro setTextColor:[UIColor whiteColor]];
-        [self.view addSubview:pmintro];
-    }
 
     startButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    startButton.bounds=CGRectMake(0, 0, 83, 28);
-    startButton.center=CGPointMake(160, 370+G_YADDONVERSION);
+    startButton.bounds=CGRectMake(0, 0, 100, 28);
+    startButton.center=CGPointMake(160, 370*PNGSCALE);
     [startButton setTitle:NSLocalizedString(@"Submit",nil) forState:UIControlStateNormal];
-    [startButton setBackgroundImage:[UIImage imageNamed:@"btn1.png"] forState:UIControlStateNormal];
-    [startButton setBackgroundImage:[UIImage imageNamed:@"btn1_focus.png"] forState:UIControlStateSelected];
+    [startButton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    startButton.layer.cornerRadius = 5.0f;
     [self.view addSubview:startButton];
     [startButton addTarget:self action:@selector(startOrPause:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *dry=[UIButton buttonWithType:UIButtonTypeCustom];
-    dry.frame=CGRectMake(160-100-20, 250+G_YADDONVERSION, 63, 63);
-    [dry setBackgroundImage:[UIImage imageNamed:@"btn_dry.png"] forState:UIControlStateNormal];
-    [dry setBackgroundImage:[UIImage imageNamed:@"btn_dry_focus.png"] forState:UIControlStateDisabled];
+    dry.frame=CGRectMake(17, 150+G_YADDONVERSION, 189/2.0, 189/2.0);
+    [dry setBackgroundImage:[UIImage imageNamed:@"icon_dry"] forState:UIControlStateNormal];
+    [dry setBackgroundImage:[UIImage imageNamed:@"icon_dry_choose"] forState:UIControlStateDisabled];
     [self.view addSubview:dry];
     dry.tag=201;
     [dry addTarget:self action:@selector(Activityselected:) forControlEvents:UIControlEventTouchUpInside];
     [self Activityselected:dry];
     
     UIButton *wet=[UIButton buttonWithType:UIButtonTypeCustom];
-    wet.frame=CGRectMake(160-31.5, 250+G_YADDONVERSION, 63, 63);
-    [wet setBackgroundImage:[UIImage imageNamed:@"btn_wed.png"] forState:UIControlStateNormal];
-    [wet setBackgroundImage:[UIImage imageNamed:@"btn_wed_focus.png"] forState:UIControlStateDisabled];
+    wet.frame=CGRectMake(160-45, 150+G_YADDONVERSION, 189/2.0, 189/2.0);
+    [wet setBackgroundImage:[UIImage imageNamed:@"icon_wet"] forState:UIControlStateNormal];
+    [wet setBackgroundImage:[UIImage imageNamed:@"icon_wet_choose"] forState:UIControlStateDisabled];
     [self.view addSubview:wet];
     wet.tag=202;
     [wet addTarget:self action:@selector(Activityselected:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *dirty=[UIButton buttonWithType:UIButtonTypeCustom];
-    dirty.frame=CGRectMake(160+100-63+20, 250+G_YADDONVERSION, 63, 63);
-    [dirty setBackgroundImage:[UIImage imageNamed:@"btn_dirty.png"] forState:UIControlStateNormal];
-    [dirty setBackgroundImage:[UIImage imageNamed:@"btn_dirty_focus.png"] forState:UIControlStateDisabled];
+    dirty.frame=CGRectMake(320-17-90, 150+G_YADDONVERSION, 189/2.0, 189/2.0);
+    [dirty setBackgroundImage:[UIImage imageNamed:@"icon_dirty"] forState:UIControlStateNormal];
+    [dirty setBackgroundImage:[UIImage imageNamed:@"icon_dirty_choose"] forState:UIControlStateDisabled];
     [self.view addSubview:dirty];
     dirty.tag=203;
     [dirty addTarget:self action:@selector(Activityselected:) forControlEvents:UIControlEventTouchUpInside];
-
-    
-    UILabel *labdry=[[UILabel alloc]init];
-    labdry.center=CGPointMake(dry.center.x, 330+G_YADDONVERSION);
-    labdry.bounds=CGRectMake(0, 0, 63, 30);
-    labdry.text=NSLocalizedString(@"Dry",nil);
-    labdry.textAlignment=NSTextAlignmentCenter;
-    labdry.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:labdry];
-    
-    UILabel *labwet=[[UILabel alloc]init];
-    labwet.center=CGPointMake(wet.center.x, 330+G_YADDONVERSION);
-    labwet.bounds=CGRectMake(0, 0, 63, 30);
-    labwet.text=NSLocalizedString(@"Wet",nil);
-    labwet.textAlignment=NSTextAlignmentCenter;
-    labwet.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:labwet];
-    
-    UILabel *labdirty=[[UILabel alloc]init];
-    labdirty.center=CGPointMake(dirty.center.x, 330+G_YADDONVERSION);
-    labdirty.bounds=CGRectMake(0, 0, 63, 30);
-    labdirty.text=NSLocalizedString(@"Dirty",nil);
-    labdirty.textAlignment=NSTextAlignmentCenter;
-    labdirty.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:labdirty];
-
-    
-    if ([UIScreen mainScreen].bounds.size.height==568) {
-        CGRect fr;
-        
-        startButton.center=CGPointMake(160, 400+G_YADDONVERSION);
-        
-        fr=labdirty.frame;
-        labdirty.frame=CGRectMake(fr.origin.x, fr.origin.y+30, fr.size.width, fr.size.height);
-        fr=labdry.frame;
-        labdry.frame=CGRectMake(fr.origin.x, fr.origin.y+30, fr.size.width, fr.size.height);
-        fr=labwet.frame;
-        labwet.frame=CGRectMake(fr.origin.x, fr.origin.y+30, fr.size.width, fr.size.height);
-        
-        fr=wet.frame;
-        wet.frame=CGRectMake(fr.origin.x, fr.origin.y+30, fr.size.width, fr.size.height);
-        fr=dirty.frame;
-        dirty.frame=CGRectMake(fr.origin.x, fr.origin.y+30, fr.size.width, fr.size.height);
-        fr=dry.frame;
-        dry.frame=CGRectMake(fr.origin.x, fr.origin.y+30, fr.size.width, fr.size.height);
-        
-    }
-    
     
 }
 
@@ -307,10 +218,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self makeNav];
-    [self makeAdvise];
     [self makeView];
-    [self.view setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
+    [self makeAdvise];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -330,7 +240,7 @@
 
     if (saveView==nil) {
         saveView=[[save_diaperview alloc]init];
-        [saveView setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height)];
+        [saveView setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height)];
         saveView.status = self.status;
 
     }
@@ -355,25 +265,5 @@
     //[saveView removeFromSuperview];
     startButton.enabled = YES;
 }
--(void)environmentOradvise:(UIButton *)sender
-{
-    sender.enabled=NO;
-    sender.titleLabel.textColor=[UIColor whiteColor];
-    UIButton *another;
-    
-    if (sender.tag==501) {
-        another=(UIButton*)[self.view viewWithTag:502];
-        weather.hidden=NO;
-    }
-    else
-    {
-        another=(UIButton*)[self.view viewWithTag:501];
-        weather.hidden=YES;
-        
-    }
-    another.enabled=YES;
-    another.titleLabel.textColor=[UIColor grayColor];
-}
-
 
 @end
