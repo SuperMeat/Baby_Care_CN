@@ -67,9 +67,9 @@
     [self makeDatePicker];
     // saveView.backgroundColor=[UIColor colorWithWhite:0.4 alpha:0.3];
     
-    imageview.backgroundColor=[UIColor clearColor];
+    imageview.backgroundColor=[ACFunction colorWithHexString:@"#f4f4f4"];
+    imageview.layer.cornerRadius = 8.0f;
     imageview.userInteractionEnabled=YES;
-    imageview.image=[UIImage imageNamed:@"save_bg.png"];
     [imageview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
     
     UILabel *date=[[UILabel alloc]initWithFrame:CGRectMake(10, 40, 100, 30)];
@@ -138,7 +138,7 @@
     [imageview addSubview:remark];
     
     datetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
-    [datetext setBackground:[UIImage imageNamed:@"save_text.png"]];
+    [datetext setBackground:[UIImage imageNamed:@"save_text"]];
     datetext.adjustsFontSizeToFitWidth=YES;
     [imageview addSubview:datetext];
     //datetext.enabled=NO;
@@ -153,7 +153,7 @@
     [datetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     
     starttimetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 80, 150, 30)];
-    [starttimetext setBackground:[UIImage imageNamed:@"save_text.png"]];
+    [starttimetext setBackground:[UIImage imageNamed:@"save_text"]];
     [imageview addSubview:starttimetext];
     starttimetext.textColor=[UIColor grayColor];
     
@@ -166,13 +166,13 @@
     starttimetext.inputView = starttimepicker;
     
     UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 120, 150, 30)];
-    remarkbg.image=[UIImage imageNamed:@"save_text.png"];
+    remarkbg.image=[UIImage imageNamed:@"save_text"];
     remarkbg.userInteractionEnabled=YES;
     
     remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30)];
     remarktext.backgroundColor=[UIColor clearColor];
     remarktext.textColor=[UIColor grayColor];
-    //    [remarktext setBackground:[UIImage imageNamed:@"save_text.png"]];
+    //    [remarktext setBackground:[UIImage imageNamed:@"save_text"]];
     remarktext.font=[UIFont systemFontOfSize:16];
     [remarkbg addSubview:remarktext];
     [imageview addSubview:remarkbg];

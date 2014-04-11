@@ -151,9 +151,12 @@
     
     NSArray *conArray;
     int labelLocation=1;
-    if (0 == tag) {
+    if (0 == tag)
+    {
         conArray = [NSArray arrayWithObjects:NSLocalizedString(@"Sun",nil),NSLocalizedString( @"Mon",nil), NSLocalizedString(@"Tue",nil), NSLocalizedString(@"Wed",nil), NSLocalizedString(@"Thu",nil), NSLocalizedString(@"Fri",nil), NSLocalizedString(@"Sat",nil), nil];
-    }else{
+    }
+    else
+    {
         //NSCalendar *calendar = [NSCalendar currentCalendar];
         //NSRange range = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:[NSDate date]];
         //NSUInteger numberOfDaysInMonth = range.length;

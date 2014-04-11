@@ -211,7 +211,7 @@
 //    Shareview=[[UIImageView alloc]initWithFrame:CGRectMake(20, -300+G_YADDONVERSION, 280, 300)];
 //
 //    
-//    [Shareview setImage:[UIImage imageNamed:@"save_bg.png"]];
+//    [Shareview setImage:[UIImage imageNamed:@"save_bg"]];
 //    [Shareview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
 //    Shareview.userInteractionEnabled=YES;
 //    UIImageView *Shareimage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 260, 180)];
@@ -1218,15 +1218,13 @@
 
     CGRect rx = [UIScreen mainScreen ].bounds;
     NSLog(@"scrollUpdateData:%@,%d, %d",[self tableName:selectIndex],plotTag,[DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]]);
-    //int range = [DataBase scrollWidth:plotTag];
     int range = [DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]];
     int j = 0;
     for (int i = range - 1; i >= 0;i--)
     {
-        NSArray *data  = [DataBase scrollData:i andTable:[self tableName:selectIndex] andFieldTag:plotTag];
+        NSArray *data   = [DataBase scrollData:i andTable:[self tableName:selectIndex] andFieldTag:plotTag];
         int maxmonthday = [DataBase getMonthMax:i];
-       //NSLog(@"%@",data);
-        float maxyAxis = 0.0f;
+        float maxyAxis  = 0.0f;
         for (NSArray *ar in data) {
             for (NSString *str in ar) {
                 if ([str floatValue] > maxyAxis) {
@@ -1258,7 +1256,7 @@
 -(void)makePlotSegment
 {
     Histogram=[UIButton buttonWithType:UIButtonTypeCustom];
-    [Histogram setBackgroundImage:[UIImage imageNamed:@"btn_times]"]  forState:UIControlStateNormal];
+    [Histogram setBackgroundImage:[UIImage imageNamed:@"btn_times"]  forState:UIControlStateNormal];
     [Histogram setBackgroundImage:[UIImage imageNamed:@"btn_times"] forState:UIControlStateHighlighted];
     [Histogram setBackgroundImage:[UIImage  imageNamed:@"btn_time"]  forState:UIControlStateDisabled];
     Histogram.contentMode=UIViewContentModeScaleAspectFill;

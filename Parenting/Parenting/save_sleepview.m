@@ -62,9 +62,9 @@
     [self addSubview:imageview];
     [imageview addSubview:title];
     
-    imageview.backgroundColor=[UIColor clearColor];
+    imageview.backgroundColor=[ACFunction colorWithHexString:@"#f4f4f4"];
+    imageview.layer.cornerRadius = 8.0f;
     imageview.userInteractionEnabled=YES;
-    imageview.image=[UIImage imageNamed:@"save_bg.png"];
     [imageview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
     
     UILabel *date=[[UILabel alloc]initWithFrame:CGRectMake(10, 40, 100, 30)];
@@ -105,7 +105,7 @@
     [imageview addSubview:remark];
     
     datetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
-    [datetext setBackground:[UIImage imageNamed:@"save_text.png"]];
+    [datetext setBackground:[UIImage imageNamed:@"save_text"]];
     datetext.adjustsFontSizeToFitWidth=YES;
     [imageview addSubview:datetext];
     datetext.textColor=[UIColor grayColor];
@@ -122,7 +122,7 @@
     
     
     starttimetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 80, 150, 30)];
-    [starttimetext setBackground:[UIImage imageNamed:@"save_text.png"]];
+    [starttimetext setBackground:[UIImage imageNamed:@"save_text"]];
     [imageview addSubview:starttimetext];
     starttimetext.delegate  = self;
     starttimetext.inputView = starttimepicker;
@@ -135,7 +135,7 @@
     [starttimetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     
     durationtext=[[UITextField alloc]initWithFrame:CGRectMake(115, 120, 150, 30)];
-    [durationtext setBackground:[UIImage imageNamed:@"save_text.png"]];
+    [durationtext setBackground:[UIImage imageNamed:@"save_text"]];
     [imageview addSubview:durationtext];
     durationtext.textColor=[UIColor grayColor];
     
@@ -156,13 +156,13 @@
 
     
     UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
-    remarkbg.image=[UIImage imageNamed:@"save_text.png"];
+    remarkbg.image=[UIImage imageNamed:@"save_text"];
     remarkbg.userInteractionEnabled=YES;
     
     remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30)];
     remarktext.backgroundColor=[UIColor clearColor];
     remarktext.textColor=[UIColor grayColor];
-    //    [remarktext setBackground:[UIImage imageNamed:@"save_text.png"]];
+    //    [remarktext setBackground:[UIImage imageNamed:@"save_text"]];
     [remarkbg addSubview:remarktext];
     remarktext.font=[UIFont systemFontOfSize:16];
     [imageview addSubview:remarkbg];

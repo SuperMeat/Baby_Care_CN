@@ -400,7 +400,7 @@
     return [self dateFromString:str];
 }
 
-+ (NSString*)getMonthBeginAndEndWith:(NSDate *)newDate
++ (NSString*)getWeekBeginAndEndWith:(NSDate *)newDate
 {
     if (newDate == nil) {
         newDate = [NSDate date];
@@ -426,7 +426,7 @@
     return [NSString stringWithFormat:@"%@~%@",beginString,endString];
 }
 
-+ (NSString*)getWeekBeginAndEndWith:(NSDate *)newDate
++ (NSString*)getMonthBeginAndEndWith:(NSDate *)newDate
 {
     if (newDate == nil) {
         newDate = [NSDate date];

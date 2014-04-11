@@ -283,6 +283,8 @@
 		48F91A1218F557390038DC67 /* SleepActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F91A1018F557390038DC67 /* SleepActivityViewController.m */; };
 		48F91A1318F557390038DC67 /* SleepActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48F91A1118F557390038DC67 /* SleepActivityViewController.xib */; };
 		48F91A1418F7C4530038DC67 /* label1_sum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48FEAF3918E917CB002425E2 /* label1_sum@2x.png */; };
+		48F91A1618F7DD010038DC67 /* save_text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F91A1518F7DD010038DC67 /* save_text@2x.png */; };
+		48F91A1818F7DE0F0038DC67 /* save_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F91A1718F7DE0F0038DC67 /* save_bg@2x.png */; };
 		48FEAEF418E91423002425E2 /* icon_bath_timing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48FEAEDC18E91423002425E2 /* icon_bath_timing@2x.png */; };
 		48FEAEF518E91423002425E2 /* icon_bath@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48FEAEDD18E91423002425E2 /* icon_bath@2x.png */; };
 		48FEAEF618E91423002425E2 /* icon_cry_timing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48FEAEDE18E91423002425E2 /* icon_cry_timing@2x.png */; };
@@ -889,6 +891,8 @@
 		48F91A0F18F557390038DC67 /* SleepActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepActivityViewController.h; sourceTree = "<group>"; };
 		48F91A1018F557390038DC67 /* SleepActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepActivityViewController.m; sourceTree = "<group>"; };
 		48F91A1118F557390038DC67 /* SleepActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SleepActivityViewController.xib; sourceTree = "<group>"; };
+		48F91A1518F7DD010038DC67 /* save_text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_text@2x.png"; sourceTree = "<group>"; };
+		48F91A1718F7DE0F0038DC67 /* save_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_bg@2x.png"; sourceTree = "<group>"; };
 		48FEAEDC18E91423002425E2 /* icon_bath_timing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bath_timing@2x.png"; sourceTree = "<group>"; };
 		48FEAEDD18E91423002425E2 /* icon_bath@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bath@2x.png"; sourceTree = "<group>"; };
 		48FEAEDE18E91423002425E2 /* icon_cry_timing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_cry_timing@2x.png"; sourceTree = "<group>"; };
@@ -1530,6 +1534,8 @@
 		480EF91518E5155C00D40903 /* 活动信息首页 */ = {
 			isa = PBXGroup;
 			children = (
+				48F91A1718F7DE0F0038DC67 /* save_bg@2x.png */,
+				48F91A1518F7DD010038DC67 /* save_text@2x.png */,
 				48FEAEDC18E91423002425E2 /* icon_bath_timing@2x.png */,
 				48FEAEDD18E91423002425E2 /* icon_bath@2x.png */,
 				48FEAEDE18E91423002425E2 /* icon_cry_timing@2x.png */,
@@ -3427,6 +3433,7 @@
 				48FEAF5318E917CB002425E2 /* btn_diapers_focus@2x.png in Resources */,
 				480EFA4018E5155C00D40903 /* btn_playing_play@2x.png in Resources */,
 				480EFA2A18E5155C00D40903 /* panels_color8@2x.png in Resources */,
+				48F91A1818F7DE0F0038DC67 /* save_bg@2x.png in Resources */,
 				482791D61884DE1D003E9724 /* Icon@2x.png in Resources */,
 				482791CC1884DE1D003E9724 /* 58.png in Resources */,
 				480EFA0F18E5155C00D40903 /* icon_dirty_choose@2x.png in Resources */,
@@ -3479,6 +3486,7 @@
 				48FEB01218EBBA46002425E2 /* UMShareEditViewController.xib in Resources */,
 				4800B0C218D7F3D20093A6AF /* 活动_按@2x.png in Resources */,
 				480EFA2518E5155C00D40903 /* panels_color5_choose@2x.png in Resources */,
+				48F91A1618F7DD010038DC67 /* save_text@2x.png in Resources */,
 				BE75CD1C1872CBA5001EF1C1 /* login_tencent.png in Resources */,
 				480EFA4E18E5155C00D40903 /* input_timer@2x.png in Resources */,
 				480EFA0D18E5155C00D40903 /* icon_dirty@2x.png in Resources */,
