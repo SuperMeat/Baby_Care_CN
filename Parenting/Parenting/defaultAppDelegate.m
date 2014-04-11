@@ -187,7 +187,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     else{
         self.window.rootViewController  = myTabController;
     }
-    
+//    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
     [self initializePlat];
 }
 

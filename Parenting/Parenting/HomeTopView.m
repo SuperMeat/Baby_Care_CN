@@ -60,8 +60,8 @@
 
 #pragma 加载数据
 -(void)initData{
-    label_days.text = @"123天";
-    label_babyName.text = @"Angel BB";
+//    label_days.text = @"";
+//    label_babyName.text = @"";
 //    image_headPic.image = [UIImage imageNamed:@"114.png"];
 }
 

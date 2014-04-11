@@ -60,7 +60,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"insert into bc_baby(baby_id,user_id,nickname, birth,sex,head,relationship,relationship_nickname,permission,create_time,update_time) values(?,?,?,?,?,?,?,?,?,?,?)",[NSNumber numberWithInt:user_id],
+    res=[db executeUpdate:@"insert into bc_baby(user_id,baby_id,nickname, birth,sex,head,relationship,relationship_nickname,permission,create_time,update_time) values(?,?,?,?,?,?,?,?,?,?,?)",[NSNumber numberWithInt:user_id],
         [NSNumber numberWithInt:baby_id],
         nickname,
         [NSNumber numberWithLong:birthday],
@@ -114,7 +114,7 @@
 -(NSDictionary*)selectBabyInfoByBabyId:(int)baby_id
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id,baby_id)];
     res=[db open];
     if (!res) {
@@ -130,11 +130,11 @@
     {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];
         [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"user_id"]] forKey:@"user_id"];
-        [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@" baby_id"]] forKey:@"baby_id"];
+        [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"baby_id"]] forKey:@"baby_id"];
         [dic setValue:[resultset stringForColumn:@"nickname"] forKey:@"nickname"];
         [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"birth"]] forKey:@"birth"];
         [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"sex"]] forKey:@"sex"];
-        [dic setValue:[resultset stringForColumn:@"icon"] forKey:@"icon"];
+        [dic setValue:[resultset stringForColumn:@"head"] forKey:@"icon"];
         [dic setValue:[resultset stringForColumn:@"relationship"] forKey:@"relationship"];
         [dic setValue:[resultset stringForColumn:@"relationship_nickname"] forKey:@"relationship_nickname"];
         [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"permission"]] forKey:@"permission"];
