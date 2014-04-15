@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BabyinfoViewController.h"
+#import "MBProgressHUD.h"
 
-@interface MyPageViewController : ACViewController
+@interface MyPageViewController : ACViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,UITextFieldDelegate>
+{
+    UIImagePickerController *imagePicker;
+    UIActionSheet *action;
+    UIView *guideView;
+    MBProgressHUD *hud;
+}
 
 @end

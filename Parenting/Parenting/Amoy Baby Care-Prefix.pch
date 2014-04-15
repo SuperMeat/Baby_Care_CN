@@ -54,6 +54,8 @@
 #import "ASIController.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
+#define BABYICONPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d.png",NSHomeDirectory(),USERID,BABYID])
+
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
 #define USERDBPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d/userdata.db",NSHomeDirectory(),USERID,BABYID])
 
@@ -212,6 +214,7 @@
 #define USER_CREATE_URL ([BASE_URL stringByAppendingString:@"User.svc/UserCreate"])
 #define USER_LOGIN_URL ([BASE_URL stringByAppendingString:@"User.svc/UserLogin"])
 #define BABY_SYNC_URL ([BASE_URL stringByAppendingString:@"Baby.svc/GetBabysInfo"])
+#define BABY_CREATEBYUSERID_URL ([BASE_URL stringByAppendingString:@"Baby.svc/BabyCreateByUserID"])
 
 //用户注册类型
 #define RTYPE_APP 1

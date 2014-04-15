@@ -20,4 +20,5 @@
                              account:(NSString*) account
                             password:(NSString*) password;
 
+-(NSMutableDictionary*)BabyCreateByUserIdDict:(int) userid;
 @end
