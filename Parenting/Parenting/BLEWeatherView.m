@@ -60,12 +60,12 @@
     pm.tag    = 5;
     uv.tag    = 6;
     
-    temp.title=NSLocalizedString(@"Temperature",nil);
-    humi.title=NSLocalizedString(@"Humidity",nil);
-    light.title=NSLocalizedString(@"Light",nil);
-    sound.title=NSLocalizedString(@"Sound",nil);
-    pm.title=NSLocalizedString(@"PM2.5",nil);
-    uv.title=NSLocalizedString(@"UV",nil);
+    temp.title = NSLocalizedString(@"Temperature",nil);
+    humi.title = NSLocalizedString(@"Humidity",nil);
+    light.title= NSLocalizedString(@"Light",nil);
+    sound.title= NSLocalizedString(@"Sound",nil);
+    pm.title   = NSLocalizedString(@"PM2.5",nil);
+    uv.title   = NSLocalizedString(@"UV",nil);
     
     temp.headimage  = [UIImage imageNamed:@"icon_temperature.png"];
     humi.headimage  = [UIImage imageNamed:@"icon_humidity.png"];
@@ -104,10 +104,13 @@
     //[[BLEWeather bleweather] getbleweather:^(NSDictionary *weatherDict) {
         NSDictionary *dict=[[BLEWeather bleweather] getbleweather];
         NSLog(@"weDic %@", dict);
-        
+    
         if([[dict objectForKey:@"temp"] length]>0)
         {
             temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
+            if ([[dict objectForKey:@"temp"]intValue] == 0) {
+                temp.level = 2;
+            }
         }
         
         if ([[dict objectForKey:@"humidity"] length]>0) {
@@ -219,9 +222,9 @@
             uv.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]];
         }
     
-        if ([[dict objectForKey:@"pm25"] length]>0)
+        if ([[dict objectForKey:@"pm"] length]>0)
         {
-            pm.detail=[NSString stringWithFormat:@"%@",[dict    objectForKey:@"pm25"]];
+            pm.detail=[NSString stringWithFormat:@"%@",[dict    objectForKey:@"pm"]];
         }
 
     
@@ -327,7 +330,7 @@
     
     UIImageView *image=(UIImageView*)[Cell.contentView viewWithTag:104];
     title.text = item.title;
-    UIImageView *levelImage = [[UIImageView alloc] initWithFrame:CGRectMake(image.frame.size.width-20-46/2.0*PNGSCALE, image.frame.size.height/2.0-41/2.0*PNGSCALE, 46/2.0*PNGSCALE, 41/2.0*PNGSCALE)];
+    UIImageView *levelImage = [[UIImageView alloc] initWithFrame:CGRectMake(image.frame.size.width-15-46/2.0*PNGSCALE, 9, 46/2.0*PNGSCALE, 41/2.0*PNGSCALE)];
     
     UILabel *weatherDetail = [[UILabel alloc]initWithFrame:CGRectMake(image.frame.size.width/2.0, 0, 50, image.frame.size.height)];
     weatherDetail.font = [UIFont fontWithName:@"Arvial" size:13];

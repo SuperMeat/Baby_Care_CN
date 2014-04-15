@@ -151,6 +151,27 @@
     }
 }
 
++(void)setpm25frombluetooth:(long)pm25
+{
+    NSDictionary *envir = [[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"];
+    
+    NSLog(@"setuvfrombluetooth : %ld", pm25);
+       if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"])
+    {
+        NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
+        [envir setValue:[NSString stringWithFormat:@"%ld",pm25] forKey:@"pm"];
+        [[NSUserDefaults standardUserDefaults] setObject:envir forKey:@"weatherbluetooth"];
+    }
+    else
+    {
+        NSMutableDictionary *envir2 = [[NSMutableDictionary alloc] initWithDictionary:envir];
+        
+        [envir2 setValue:[NSString stringWithFormat:@"%ld",pm25] forKey:@"pm"];
+        [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"weatherbluetooth"];
+        [[NSUserDefaults standardUserDefaults] setObject:envir2 forKey:@"weatherbluetooth"];
+    }
+}
+
 +(long)gettemperature{
     NSMutableDictionary *dict=[[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"];
     if([[dict objectForKey:@"temp"] length]>0)
@@ -197,6 +218,17 @@
     if([[dict objectForKey:@"uv"] length]>0)
     {
         return [[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]]intValue];
+    }
+    
+    return 0;
+}
+
++(long)getpm25
+{
+    NSMutableDictionary *dict=[[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"];
+    if([[dict objectForKey:@"pm"] length]>0)
+    {
+        return [[NSString stringWithFormat:@"%@",[dict objectForKey:@"pm"]]intValue];
     }
     
     return 0;

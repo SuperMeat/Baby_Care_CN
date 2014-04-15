@@ -23,10 +23,12 @@ typedef void(^GetBLEweather)(NSDictionary *weatherDict);
 +(void)setlightfrombluetooth:(double)light;
 +(void)setsoundfrombluetooth:(double)sound andmaxsound:(double)maxsound;
 +(void)setuvfrombluetooth:(long)uv;
++(void)setpm25frombluetooth:(long)pm25;
 +(long)gettemperature;
 +(long)gethumidity;
 +(double)getlight;
 +(double)getsound;
 +(long)getuv;
++(long)getpm25;
 
 @end
