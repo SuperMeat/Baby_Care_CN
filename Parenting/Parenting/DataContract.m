@@ -41,4 +41,12 @@
     return dict;
 }
 
+-(NSMutableDictionary*)BabyCreateByUserIdDict:(int) userid
+{
+    NSArray *key = @[@"userId"];
+    NSArray *data = [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:userid],nil];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithObjects:data forKeys:key];
+    return dict;
+}
+
 @end

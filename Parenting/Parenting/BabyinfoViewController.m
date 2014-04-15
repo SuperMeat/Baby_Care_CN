@@ -334,6 +334,14 @@ static int age = 0;
 
 - (IBAction)Save:(id)sender {
     if (!self.nametextfield.text.length>0||!self.birthdaytextfield.text.length>0||!self.heighttextfield.text.length>0||!self.weighttextfield.text.length>0||!self.Headtextfield.text.length>0) {
+        
+        //TODO:创建BABY路径 保存BABY信息
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"BABYID"];
+        
+        
+        
+        
+        
         UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:NSLocalizedString(@"BabyInfoTips", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alter show];
         return;
@@ -517,6 +525,8 @@ static int age = 0;
             
             self.birthdaytextfield.text=[dateFormater stringFromDate:datepicker.date];
             [[NSUserDefaults standardUserDefaults] setObject:[dateFormater stringFromDate:datepicker.date] forKey:@"birthday"];
+            
+            
             
         }
         else

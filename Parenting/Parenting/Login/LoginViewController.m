@@ -52,13 +52,16 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
     if (isPushSocialView) {
         isPushSocialView = NO;
     }
     else{
-        self.navigationController.navigationBarHidden = NO;
+         self.navigationController.navigationBarHidden = NO;
     }
-} 
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
