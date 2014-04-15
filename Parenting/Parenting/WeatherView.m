@@ -91,7 +91,7 @@
     table.backgroundView=nil;
     table.bounces=NO;
     
-     [self setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
+     [self setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:table];
 
 
@@ -112,7 +112,7 @@
                 int pmvalue = [[dict objectForKey:@"PM25"] intValue];
                 if (pmvalue > 0) {
                     pm.detail=[NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"PM25"],[OpenFunction getpm25description:pmvalue]];
-                    [dataarray replaceObjectAtIndex:4 withObject:pm];
+                    [dataarray replaceObjectAtIndex:2 withObject:pm];
                 }
             }
             
@@ -120,7 +120,6 @@
         
         [dataarray replaceObjectAtIndex:0 withObject:temp];
         [dataarray replaceObjectAtIndex:1 withObject:humi];
-        
         
         dispatch_async(dispatch_get_main_queue(), ^{
             

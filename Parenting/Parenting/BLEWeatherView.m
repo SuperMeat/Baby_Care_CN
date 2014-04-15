@@ -67,37 +67,32 @@
     pm.title=NSLocalizedString(@"PM2.5",nil);
     uv.title=NSLocalizedString(@"UV",nil);
     
-    temp.headimage=[UIImage imageNamed:@"icon_temperature.png"];
-    humi.headimage=[UIImage imageNamed:@"icon_humidity.png"];
-    light.headimage=[UIImage imageNamed:@"icon_light.png"];
-    sound.headimage=[UIImage imageNamed:@"icon_sound.png"];
-    pm.headimage=[UIImage imageNamed:@"icon_pm2.5.png"];
-    uv.headimage=[UIImage imageNamed:@"icon_uv.png"];
+    temp.headimage  = [UIImage imageNamed:@"icon_temperature.png"];
+    humi.headimage  = [UIImage imageNamed:@"icon_humidity.png"];
+    light.headimage = [UIImage imageNamed:@"icon_light.png"];
+    sound.headimage = [UIImage imageNamed:@"icon_sound.png"];
+    pm.headimage    = [UIImage imageNamed:@"icon_pm2.5.png"];
+    uv.headimage    = [UIImage imageNamed:@"icon_uv.png"];
     
-    dataarray=[[NSMutableArray alloc]initWithCapacity:0];
+    dataarray = [[NSMutableArray alloc]initWithCapacity:0];
     [dataarray addObject:temp];
     [dataarray addObject:humi];
+    [dataarray addObject:light];
+    [dataarray addObject:sound];
+    [dataarray addObject:uv];
+    [dataarray addObject:pm];
     
-    if (CUSTOMER_COUNTRY == 0)
-    {
-        [dataarray addObject:uv];
-    }
-    else
-    {
-        [dataarray addObject:light];
-        [dataarray addObject:sound];
-        [dataarray addObject:uv];
-    }
-    
-    table = [[UITableView alloc]initWithFrame:CGRectMake(self.bounds.origin.x+10, self.bounds.origin.y+8, self.bounds.size.width-20, self.bounds.size.height) style:UITableViewStyleGrouped];
-    table.separatorStyle = UITableViewCellSeparatorStyleNone;
-    table.backgroundColor=[UIColor clearColor];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(self.bounds.origin.x+(320-277*PNGSCALE)/2.0, self.bounds.origin.y+5, self.bounds.size.width*PNGSCALE-43*PNGSCALE, self.bounds.size.height*PNGSCALE+19) style:UITableViewStyleGrouped];
+    table.separatorStyle  = UITableViewCellSeparatorStyleNone;
+    table.showsHorizontalScrollIndicator = NO;
+    table.showsVerticalScrollIndicator   = NO;
+    table.backgroundColor = [UIColor clearColor];
     table.delegate = self;
     table.dataSource = self;
     table.backgroundView=nil;
     table.bounces=NO;
     
-    [self setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
+    [self setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:table];
     
     gettimer = [NSTimer scheduledTimerWithTimeInterval: getDataTimeInterval
@@ -130,14 +125,19 @@
         if ([[dict objectForKey:@"uv"] length]>0) {
             uv.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]];
         }
-        
-        
+    
+        if ([[dict objectForKey:@"pm"] length]>0) {
+            pm.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"pm"]];
+        }
+
+    
         [dataarray replaceObjectAtIndex:0 withObject:temp];
         [dataarray replaceObjectAtIndex:1 withObject:humi];
         [dataarray replaceObjectAtIndex:2 withObject:light];
         [dataarray replaceObjectAtIndex:3 withObject:sound];
         [dataarray replaceObjectAtIndex:4 withObject:uv];
-        
+        [dataarray replaceObjectAtIndex:5 withObject:pm];
+    
         dispatch_async(dispatch_get_main_queue(), ^{
             
             UITableView *tab=table;
@@ -166,10 +166,10 @@
     Environmentitem *humi=[[Environmentitem alloc]init];
     Environmentitem *light=[[Environmentitem alloc]init];
     Environmentitem *sound=[[Environmentitem alloc]init];
-    //Environmentitem *pm=[[Environmentitem alloc]init];
     Environmentitem *uv=[[Environmentitem alloc]init];
-    
-  //  [[BLEWeather bleweather] getbleweather:^(NSDictionary *weatherDict) {
+    Environmentitem *pm=[[Environmentitem alloc]init];
+  
+    //  [[BLEWeather bleweather] getbleweather:^(NSDictionary *weatherDict) {
         NSDictionary *dict=[[BLEWeather bleweather]getbleweather];
         NSLog(@"weDic %@", dict);
         
@@ -218,7 +218,13 @@
         if ([[dict objectForKey:@"uv"] length]>0) {
             uv.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]];
         }
-        
+    
+        if ([[dict objectForKey:@"pm25"] length]>0)
+        {
+            pm.detail=[NSString stringWithFormat:@"%@",[dict    objectForKey:@"pm25"]];
+        }
+
+    
         Environmentitem *itemTemp = [dataarray objectAtIndex:0];
         itemTemp.detail = temp.detail;
         [dataarray replaceObjectAtIndex:0 withObject:itemTemp];
@@ -238,6 +244,11 @@
         Environmentitem *itemUV = [dataarray objectAtIndex:4];
         itemUV.detail = uv.detail;
         [dataarray replaceObjectAtIndex:4 withObject:itemUV];
+    
+        Environmentitem *itemPM = [dataarray objectAtIndex:5];
+        itemPM.detail = pm.detail;
+        [dataarray replaceObjectAtIndex:5 withObject:itemPM];
+    
         dispatch_async(dispatch_get_main_queue(), ^{
             
             UITableView *tab=table;
@@ -263,42 +274,88 @@
     UITableViewCell *Cell=[tableView dequeueReusableCellWithIdentifier:@"ID"];
     if (Cell==nil) {
         Cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ID"];
-        Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"list_env.png"]];
-        UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(150, 2, 30, 30)];
+        //Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"UV"]];
+        UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 554/2.0*PNGSCALE, 83/2.0*PNGSCALE)];
+        if (indexPath.section == 0) {
+            Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"temp"]];
+            //[image setImage:[UIImage imageNamed:@"temp"]];
+        }
+        
+        if (indexPath.section == 1) {
+            Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"humidity"]];
+            //[image setImage:[UIImage imageNamed:@"humidity"]];
+        }
+        
+        if (indexPath.section == 2) {
+            Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"light"]];
+            //[image setImage:[UIImage imageNamed:@"UV"]];
+        }
+        
+        if (indexPath.section == 3) {
+            Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"noice"]];
+            //[image setImage:[UIImage imageNamed:@"light"]];
+        }
+        
+        if (indexPath.section == 4) {
+            Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"UV"]];
+            //[image setImage:[UIImage imageNamed:@"noice"]];
+        }
+        
+        if (indexPath.section == 5) {
+            Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pm25"]];
+            //[image setImage:[UIImage imageNamed:@"pm25"]];
+        }
+        
+       
         [Cell.contentView addSubview:image];
         Cell.backgroundColor = [UIColor clearColor];
         image.tag=104;
         Cell.textLabel.backgroundColor=[UIColor clearColor];
         Cell.detailTextLabel.backgroundColor=[UIColor clearColor];
         Cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        Cell.textLabel.textColor=[UIColor colorWithRed:0x76/255.0 green:0x72/255.0 blue:0x71/255.0 alpha:0xFF/255.0];
-        Cell.textLabel.font=[UIFont systemFontOfSize:15];
+        Cell.textLabel.textColor=[ACFunction colorWithHexString:@"#96999b"];
+        Cell.textLabel.font = [UIFont systemFontOfSize:12];
         Cell.detailTextLabel.textColor=[UIColor whiteColor];
     }
     Environmentitem *item=[dataarray objectAtIndex:indexPath.section];
     Cell.imageView.image=item.headimage;
     
-    Cell.textLabel.text=item.title;
-    UIImageView *image=(UIImageView*)[Cell.contentView viewWithTag:104];
+    //Cell.textLabel.text=item.title;
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 80, 83/2.0*PNGSCALE)];
+    title.textColor = [ACFunction colorWithHexString:@"#96999b"];
+    title.font      = [UIFont fontWithName:@"Arvial" size:13];
     
+    UIImageView *image=(UIImageView*)[Cell.contentView viewWithTag:104];
+    title.text = item.title;
+    UIImageView *levelImage = [[UIImageView alloc] initWithFrame:CGRectMake(image.frame.size.width-20-46/2.0*PNGSCALE, image.frame.size.height/2.0-41/2.0*PNGSCALE, 46/2.0*PNGSCALE, 41/2.0*PNGSCALE)];
+    
+    UILabel *weatherDetail = [[UILabel alloc]initWithFrame:CGRectMake(image.frame.size.width/2.0, 0, 50, image.frame.size.height)];
+    weatherDetail.font = [UIFont fontWithName:@"Arvial" size:13];
+    weatherDetail.textAlignment = NSTextAlignmentCenter;
+    weatherDetail.textColor = [ACFunction colorWithHexString:@"#96999b"];
+    [image addSubview:title];
+    [image addSubview:levelImage];
+    [image addSubview:weatherDetail];
+    [image setBackgroundColor:[UIColor clearColor]];
     if (item.detail.length>0) {
         Cell.detailTextLabel.text=item.detail;
         [Cell.detailTextLabel setFont:[UIFont fontWithName:@"Arial" size:15]];
-        image.image=[UIImage imageNamed:@"icon_connected.png"];
+        //image.image=[UIImage imageNamed:@"icon_connected.png"];
     }
     else
     {
         //Cell.detailTextLabel.text=@"_______";
-        Cell.detailTextLabel.text=NSLocalizedString(@"WeatherDetail", nil);
-        [Cell.detailTextLabel setFont:[UIFont fontWithName:@"Arial" size:12]];
-        image.image=[UIImage imageNamed:@"icon_notconnected.png"];
+        //Cell.detailTextLabel.text=NSLocalizedString(@"WeatherDetail", nil);
+        //[Cell.detailTextLabel setFont:[UIFont fontWithName:@"Arial" size:15]];
+        weatherDetail.text = @"0";
+        [levelImage setImage:[UIImage imageNamed:@"icon_grey"]];
     }
     return Cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 33;
+    return 83/2.0*PNGSCALE;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

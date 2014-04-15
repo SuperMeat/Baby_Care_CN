@@ -150,7 +150,7 @@
                                                                    kWidth - kPortraitWidth - kHoriMargin,
                                                                    kHeight - 2 * kVertMargin)];
         self.nameLabel.backgroundColor  = [UIColor clearColor];
-        self.nameLabel.textAlignment    = UITextAlignmentCenter;
+        self.nameLabel.textAlignment    = NSTextAlignmentCenter;
         self.nameLabel.textColor        = [UIColor whiteColor];
         self.nameLabel.font             = [UIFont systemFontOfSize:15.f];
         [self addSubview:self.nameLabel];

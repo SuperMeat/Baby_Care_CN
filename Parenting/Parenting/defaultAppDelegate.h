@@ -16,7 +16,7 @@
 
 #import "ACTabBarController.h"
 #import "MyTabBarController.h"
-#import "EnviromemtViewController.h"
+#import "EnvironmentViewController.h"
 #import "ActivityViewController.h"
 #import "PhysiologyViewController.h"
 #import "CalendarViewController.h"
@@ -29,7 +29,7 @@
     MyTabBarController              *myTabController;
     
     MyPageViewController            *myPageViewController;
-    EnviromemtViewController        *envirViewController;
+    EnvironmentViewController       *envirViewController;
     ActivityViewController          *actViewController;
     PhysiologyViewController        *phyViewController;
     CalendarViewController          *calendarViewController;

@@ -140,7 +140,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     //settingViewController = [[SettingViewController alloc] init];
     //icViewController      = [[InformationCenterViewController alloc] init];
     myPageViewController   = [[MyPageViewController alloc] init];
-    envirViewController    = [[EnviromemtViewController alloc] init];
+    envirViewController    = [[EnvironmentViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
     calendarViewController = [[CalendarViewController alloc] init];

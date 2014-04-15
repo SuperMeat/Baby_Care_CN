@@ -44,6 +44,7 @@
 
         [envir setValue:[NSString stringWithFormat:@"0"] forKey:@"uv"];
         
+        [envir setValue:[NSString stringWithFormat:@"0"] forKey:@"pm"];
         [[NSUserDefaults standardUserDefaults] setObject:envir forKey:@"weatherbluetooth"];
     }
     else
