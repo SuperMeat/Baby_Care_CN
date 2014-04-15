@@ -42,6 +42,7 @@
     NSLog(@"show Summary!");
     SummaryViewController *summary = [SummaryViewController summary];
     [summary MenuSelectIndex:1];
+    self.navigationController.navigationBar.hidden = NO;
     [self.navigationController pushViewController:summary animated:YES];
 }
 
@@ -49,12 +50,17 @@
 {
     NSLog(@"show Advise!");
     AdviseMasterViewController *tipsMasterViewController = [[AdviseMasterViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    self.navigationController.navigationBar.hidden = NO;
     [self.navigationController pushViewController:tipsMasterViewController animated:YES];
 }
 
 - (void)goToDailyActivity:(UIButton*)button
 {
     NSLog(@"go to activity:%d!", button.tag);
+    NSString *str = @"1";
+    NSUserDefaults *db = [NSUserDefaults standardUserDefaults];
+    [db setObject:str forKey:@"MARK"];
+    [db synchronize];
     
     switch (button.tag) {
         case QCM_TYPE_PLAY:
@@ -76,7 +82,6 @@
         case QCM_TYPE_FEED:
         {
             FeedActivityViewController *feed = [FeedActivityViewController shareViewController];
-            NSLog(@"%@", self.navigationController);
             self.navigationController.navigationBar.hidden = NO;
             [self.navigationController pushViewController:feed animated:YES];
 
@@ -92,8 +97,10 @@
             break;
         case QCM_TYPE_SLEEP:
         {
-            sleepViewController *sleep=[sleepViewController shareViewController];
-            sleep.summary = [SummaryViewController summary];          [self.navigationController pushViewController:sleep animated:YES];
+            SleepActivityViewController *sleep=[SleepActivityViewController shareViewController];
+            sleep.summary = [SummaryViewController summary];
+            self.navigationController.navigationBar.hidden = NO;
+            [self.navigationController pushViewController:sleep animated:YES];
         }break;
         default:
             break;
@@ -102,13 +109,35 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [MobClick beginLogPageView:@"活动页面"];
     self.navigationController.navigationBar.hidden = YES;
+    [self LoadData];
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"MARK"];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"timerOn"]) {
+        timer=[NSTimer scheduledTimerWithTimeInterval:1
+                                               target:self selector:@selector(timerGo) userInfo:nil repeats:YES];
+    }
+    else if ([dataArray count] > 0)
+    {
+        tipTimer=[NSTimer scheduledTimerWithTimeInterval:30
+                                               target:self selector:@selector(tipTimerGo) userInfo:nil repeats:YES];
+    }
+    [self refreshTimeTip];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [timer invalidate];
+    [tipTimer invalidate];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"活动页面"];
 }
 
 - (void)initView
 {
-
-    
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 320, 44)];
     titleView.backgroundColor=[UIColor clearColor];
     UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -116,8 +145,10 @@
     [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
     titleText.textColor = [UIColor whiteColor];
     [titleText setTextAlignment:NSTextAlignmentCenter];
-    [titleText setText:ac_title];
+    [titleText setText:@"活动"];
     [titleView addSubview:titleText];
+    
+    [self LoadData];
     
     self.activityImageView = [[UIImageView alloc] init];
     [self.activityImageView setFrame:CGRectMake(0, 0, 320, 334*PNGSCALE)];
@@ -188,7 +219,7 @@
     datatable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:datatable];
 
-    UIImageView *statusImageView = [[UIImageView alloc]initWithFrame:CGRectMake(160-135*PNGSCALE, 334*PNGSCALE+15+62*PNGSCALE, 269*PNGSCALE, 80*PNGSCALE)];
+    statusImageView = [[UIImageView alloc]initWithFrame:CGRectMake(160-135*PNGSCALE, 334*PNGSCALE+15+62*PNGSCALE, 269*PNGSCALE, 80*PNGSCALE)];
     [statusImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
     statusImageView.layer.masksToBounds = YES;
     statusImageView.layer.cornerRadius = 8.0;
@@ -198,26 +229,24 @@
     labelText.numberOfLines = 0;
     labelText.font = [UIFont fontWithName:@"Arial" size:17];
     [statusImageView addSubview:labelText];
-    // 没有记录
-    int i = 3;
-    if (i == 1) {
+    timeTip = [[UILabel alloc]initWithFrame:CGRectMake(10, 20+8+3, statusImageView.frame.size.width-20,  statusImageView.frame.size.height-20-20)];
+    timeTip.textAlignment = NSTextAlignmentCenter;
+    timeTip.textColor = [ACFunction colorWithHexString:@"#323232"];
+    timeTip.backgroundColor = [UIColor clearColor];
+    timeTip.font = [UIFont fontWithName:@"Arial" size:30];
+    [statusImageView addSubview:timeTip];
+
+    if (timerOnType == 1) {
         labelText.text = NORECORDTIP;
+        timeTip.hidden = YES;
     }
-    else if (i == 2)
+    else if (timerOnType == 2)
     {
-        labelText.text = @"十分钟前陪宝宝玩耍了!";
+        [self refreshTimeTip];
     }
     else
     {
-        labelText.text  = @"正在玩耍...";
-        labelText.frame = CGRectMake(10, 8, statusImageView.frame.size.width-20, 20);
-        UILabel *timeTip = [[UILabel alloc]initWithFrame:CGRectMake(10, 20+8+3, statusImageView.frame.size.width-20,  statusImageView.frame.size.height-20-20)];
-        timeTip.text = @"00:10:23";
-        timeTip.textAlignment = NSTextAlignmentCenter;
-        timeTip.textColor = [ACFunction colorWithHexString:@"#323232"];
-        timeTip.backgroundColor = [UIColor clearColor];
-        timeTip.font = [UIFont fontWithName:@"Arial" size:30];
-        [statusImageView addSubview:timeTip];
+        [self refreshShowTimer];
     }
     
     labelText.textAlignment = NSTextAlignmentCenter;
@@ -228,26 +257,108 @@
     [self.view addSubview:statusImageView];
 }
 
-- (void)viewDidLoad
+-(void)refreshTimeTip
 {
-    [super viewDidLoad];
-    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
-    for (int i=0; i<12; i++) {
-        ActivityItem *item=[[ActivityItem alloc]init];
-        item.starttime=[ACDate date];
-        if (i % 2 == 0) {
-            item.type = @"Bath";
+    if (timerOnType == 2) {
+        ActivityItem *item=[dataArray firstObject];
+        NSString *type = @"";
+        if ([item.type isEqualToString:@"Diaper"]) {
+            type = @"给宝贝换尿布了";
         }
-        else if (i % 3 == 0) {
-            item.type = @"Play";
+        else if ([item.type isEqualToString:@"Play"])
+        {
+            type = @"跟宝贝玩耍了";
+        }
+        else if ([item.type isEqualToString:@"Bath"])
+        {
+            type = @"帮宝贝洗澡了";
+        }
+        else if ([item.type isEqualToString:@"Sleep"])
+        {
+            type = @"宝贝睡觉了";
         }
         else
         {
-            item.type=@"Diaper";
+            type = @"给宝贝喂食了";
         }
-        [array addObject:item];
+        
+        labelText.text = [NSString stringWithFormat:@"最近一次:\r%@%@",[ACDate getDayBeforeDespFromDate:item.starttime], type];
+        labelText.lineBreakMode = NSLineBreakByWordWrapping;
+        labelText.numberOfLines = 0;
+        labelText.frame = CGRectMake(10, 8, statusImageView.frame.size.width-20, 50);
+        timeTip.hidden = YES;
     }
-    dataArray = array;
+}
+
+-(void)refreshShowTimer
+{
+    if (timerOnType == 3)
+    {
+        NSString *type= [[NSUserDefaults standardUserDefaults] objectForKey:@"ctl"];
+        NSString *ctltype = @"";
+        if ([type isEqualToString:@"feed"]) {
+            ctltype=@"喂食";
+        }
+        else if([type isEqualToString:@"diaper"])
+        {
+            ctltype=@"换尿布";
+        }
+        else if([type isEqualToString:@"sleep"])
+        {
+            ctltype=@"睡觉";
+        }
+        else if([type isEqualToString:@"play"])
+        {
+            ctltype=@"玩耍";
+        }
+        else
+        {
+            ctltype=@"洗澡";
+        }
+        
+        labelText.frame = CGRectMake(10,  8, statusImageView.frame.size.width-20, 20);
+        timeTip.hidden  = NO;
+        
+        labelText.text = [NSString stringWithFormat:@"正在%@...", ctltype];
+        timeTip.text   = [ACDate durationFormat];
+    }
+}
+
+-(void)LoadData
+{
+    DataBase *db=[DataBase dataBase];
+    dataArray=[db selectAll];
+    if ([dataArray count] == 0) {
+        timerOnType = 1;
+    }
+    else
+    {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"timerOn"])
+        {
+            timerOnType = 3;
+        }
+        else
+        {
+            timerOnType = 2;
+        }
+    }
+    
+    [datatable reloadData];
+}
+
+- (void)tipTimerGo
+{
+    [self refreshTimeTip];
+}
+
+-(void)timerGo
+{
+    [self refreshShowTimer];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
     [self initView];
     [self.view  setBackgroundColor:[UIColor whiteColor]];
     // Do any additional setup after loading the view from its nib.
@@ -345,10 +456,12 @@
 {
     return 0;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0) {
@@ -360,6 +473,7 @@
     }
 
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 

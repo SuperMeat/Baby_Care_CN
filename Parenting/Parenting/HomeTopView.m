@@ -65,7 +65,7 @@
     //姓名
     label_babyName = [[UILabel alloc]init];
     label_babyName.frame = CGRectMake(60, 174, 200, 24);
-    label_babyName.font = [UIFont fontWithName:@"Arial-BoldMT" size:20];
+    label_babyName.font = [UIFont fontWithName:@"Arial-BoldMT" size:16];
     label_babyName.textColor = [UIColor whiteColor];
     label_babyName.textAlignment = CPTTextAlignmentCenter;
     [self addSubview:label_babyName];

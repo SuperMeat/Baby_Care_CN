@@ -15,9 +15,9 @@
 #import "ACViewController.h"
 #import "SuggestView.h"
 #import "AdviseScrollview.h"
-#import "feedViewController.h"
+#import "FeedActivityViewController.h"
 #import "diaperViewController.h"
-#import "sleepViewController.h"
+#import "SleepActivityViewController.h"
 #import "playViewController.h"
 #import "bathViewController.h"
 #import "currentdate.h"
@@ -228,8 +228,6 @@
 #define ACCOUNTUID ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_UID"]intValue])
 
 #define BABYID ([[[NSUserDefaults standardUserDefaults]objectForKey:@"BABYID"]intValue])
-
-#define PNGSCALE (([UIScreen mainScreen].bounds.size.height) == 568?1.0:(1.0))
 
 #define PNGSCALE (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 1.0:(480.0/568.0))
 

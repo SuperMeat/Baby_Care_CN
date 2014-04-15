@@ -155,7 +155,7 @@
 	}
     
 
-	[self selectedTab:[self.buttons objectAtIndex:2]];
+	[self selectedTab:[self.buttons objectAtIndex:1]];
     
     [self addObserver:self forKeyPath:@"selectedIndex" options:0 context:nil];
 }

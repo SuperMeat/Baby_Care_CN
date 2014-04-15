@@ -60,7 +60,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBar.hidden = NO;
     [MobClick beginLogPageView:@"喂食"];
     
     if (self.weather) {
@@ -191,7 +190,7 @@
     self.navigationItem.titleView = titleView;
     
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    //[backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
+    //[backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal]
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 34, 28)];
     title.backgroundColor = [UIColor clearColor];
     [title setTextAlignment:NSTextAlignmentCenter];
@@ -376,7 +375,6 @@
     timeLable.textColor=[UIColor grayColor];
     timeLable.backgroundColor=[UIColor clearColor];
     [self.view addSubview:timeLable];
-    
     
     
     UIImageView *timeicon=[[UIImageView alloc]initWithFrame:CGRectMake(160-G_XREDUCEONVERSION, 260+G_YADDONVERSION+20, 25, 25)];
@@ -580,7 +578,7 @@
 {
     if (saveView==nil) {
         //saveView=[[save_feedview alloc]initWithFrame:self.view.frame FeedWay:self.feedWay Breasttype:self.breast];
-        saveView = [[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) FeedWay:self.feedWay Breasttype:self.breast];
+        saveView = [[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) FeedWay:self.feedWay Breasttype:self.breast];
     }
     saveView.feedway=self.feedWay;
     saveView.breast=self.breast;

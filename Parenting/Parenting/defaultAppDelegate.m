@@ -140,7 +140,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     //settingViewController = [[SettingViewController alloc] init];
     //icViewController      = [[InformationCenterViewController alloc] init];
     myPageViewController   = [[MyPageViewController alloc] init];
-    envirViewController    = [[EnviromemtViewController alloc] init];
+    envirViewController    = [[EnvironmentViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
     calendarViewController = [[CalendarViewController alloc] init];
@@ -168,9 +168,6 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     myTabController = [[MyTabBarController alloc] init];
     [myTabController setViewControllers:controllers];
-    
-    //DEBUG
-    //[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"ACCOUNT_NAME"];
     
     //  向导版本有更新则跳转
     if (![[[NSUserDefaults standardUserDefaults] stringForKey:@"GUIDE_V"]  isEqual: GUIDE_V]){

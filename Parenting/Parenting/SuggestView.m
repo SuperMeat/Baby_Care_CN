@@ -25,43 +25,36 @@
     if (self) {
         
         self.center=center;
-        self.bounds=CGRectMake(0, 0, 275, 190);
-    UIImageView *titleimage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 275, 23)];
-    titleimage.image=[UIImage imageNamed:@"title_orange.png"];
-    
-    UIImageView *suggestionimage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 23, 275, 168)];
-    suggestionimage.image=[UIImage imageNamed:@"bg_advice.png"];
-    
-    self.backgroundColor=[UIColor clearColor];
-    UILabel *titlelable=[[UILabel alloc]initWithFrame:CGRectMake(5, 0, 265, 23)];
-    titlelable.textAlignment=NSTextAlignmentCenter;
-    titlelable.text=title;
-    titlelable.backgroundColor=[UIColor clearColor];
-        titlelable.textColor=[UIColor colorWithRed:0xFF/255.0 green:0xFF/255.0 blue:0xFF/255.0 alpha:0xFF/255.0];
+        self.bounds=CGRectMake(0, 0, 275, 100);
         
-    UITextView *suggestionlable=[[UITextView alloc]initWithFrame:CGRectMake(15, 0, 245, 163)];
-    suggestionlable.text=suggestion;
-    //suggestionlable.numberOfLines=0;
-    suggestionlable.textColor=[UIColor colorWithRed:0x97/255.0 green:0x97/255.0 blue:0x97/255.0 alpha:0xFF/255.0];
-
-    suggestionlable.backgroundColor=[UIColor clearColor];
+        UIImageView *suggestionimage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 275, 100)];
+        suggestionimage.layer.cornerRadius = 8.0f;
+        suggestionimage.userInteractionEnabled = YES;
+        self.backgroundColor=[UIColor clearColor];
+        UITextView *suggestionlable=[[UITextView alloc]initWithFrame:CGRectMake(10, 0, 245, 100)];
+        suggestionlable.text=suggestion;
+        suggestionlable.textAlignment = NSTextAlignmentCenter;
+        CGSize size = [suggestionlable.text sizeWithFont: [UIFont boldSystemFontOfSize:15]
+                                 constrainedToSize: CGSizeMake(245, 9999999.0f)
+                                     lineBreakMode: NSLineBreakByClipping];
+        suggestionlable.scrollEnabled = YES;
+        suggestionlable.autoresizingMask
+        = UIViewAutoresizingFlexibleHeight;
+        [suggestionlable setContentSize:size];
+        if (suggestionlable.contentSize.height <= suggestionlable.frame.size.height)
+        {
+            [suggestionlable setUserInteractionEnabled:NO];
+        }
+        
+        suggestionlable.textColor=[ACFunction colorWithHexString:@"#6599a2"];
+        suggestionlable.backgroundColor=[UIColor clearColor];
         suggestionlable.editable = NO;
-    //    suggestionlable.lineBreakMode=NSLineBreakByTruncatingMiddle;
-    [titleimage addSubview:titlelable];
-    [suggestionimage addSubview:suggestionlable];
-    
-    [self addSubview:titleimage];
-    [self addSubview:suggestionimage];
+        suggestionlable.font = [UIFont systemFontOfSize:15];
+        suggestionlable.userInteractionEnabled = YES;
+        [suggestionimage addSubview:suggestionlable];
+        [self addSubview:suggestionimage];
     }
     return self;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

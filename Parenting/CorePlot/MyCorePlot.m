@@ -101,11 +101,11 @@
     yAxis.majorTickLength = 0.1;
     
     if ([title isEqualToString:@"Diaper"]) {
-        yAxis.title=NSLocalizedString(@"Count",nil);
+        //yAxis.title=NSLocalizedString(@"Count",nil);
     }
     else
     {
-        yAxis.title=NSLocalizedString(@"Hours/h",nil);
+        //yAxis.title=NSLocalizedString(@"Hours/h",nil);
     }
 
     yAxis.titleRotation=0;
@@ -151,9 +151,12 @@
     
     NSArray *conArray;
     int labelLocation=1;
-    if (0 == tag) {
+    if (0 == tag)
+    {
         conArray = [NSArray arrayWithObjects:NSLocalizedString(@"Sun",nil),NSLocalizedString( @"Mon",nil), NSLocalizedString(@"Tue",nil), NSLocalizedString(@"Wed",nil), NSLocalizedString(@"Thu",nil), NSLocalizedString(@"Fri",nil), NSLocalizedString(@"Sat",nil), nil];
-    }else{
+    }
+    else
+    {
         //NSCalendar *calendar = [NSCalendar currentCalendar];
         //NSRange range = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:[NSDate date]];
         //NSUInteger numberOfDaysInMonth = range.length;
@@ -190,7 +193,7 @@
 
     lineStyle.lineWidth = 1.0f;
 
-    yAxis.title=NSLocalizedString(@"Count",nil);
+    //yAxis.title=NSLocalizedString(@"Count",nil);
     
     CPTGradient *fillGradient;
     if ([self.tablename isEqualToString:NSLocalizedString(@"PlayTable",nil)]) {
@@ -242,7 +245,7 @@
     if (range.length > 0) {
         table = [table substringToIndex:range.location];
     }
-    yAxis.title=NSLocalizedString(@"Hours/h",nil);
+    //yAxis.title=NSLocalizedString(@"Hours/h",nil);
     boundLinePlot  = [[CPTScatterPlot alloc] init];
     CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
     lineStyle.miterLimit        = 1.0f;
@@ -264,7 +267,7 @@
     }else{
         lineStyle.lineColor         = [CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0];
         plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0]];
-            yAxis.title=NSLocalizedString(@"Count",nil);
+            //yAxis.title=NSLocalizedString(@"Count",nil);
     }
     boundLinePlot.dataLineStyle = lineStyle;
     boundLinePlot.dataSource    = self;

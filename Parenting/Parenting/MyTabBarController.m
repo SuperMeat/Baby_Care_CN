@@ -33,8 +33,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:NO];
-    
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidLoad

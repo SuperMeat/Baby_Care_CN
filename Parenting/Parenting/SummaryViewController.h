@@ -17,7 +17,7 @@
 #import "save_playview.h"
 #import "save_sleepview.h"
 
-@interface SummaryViewController : UIViewController<QuadCurveMenuDelegate, UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,save_diaperviewDelegate,save_sleepviewDelegate,save_playviewDelegate,save_bathviewDelegate,save_feedviewDelegate>{
+@interface SummaryViewController : ACViewController<QuadCurveMenuDelegate, UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,save_diaperviewDelegate,save_sleepviewDelegate,save_playviewDelegate,save_bathviewDelegate,save_feedviewDelegate,UINavigationControllerDelegate>{
     MyCorePlot *plot;
     UIButton *backbutton;
     int plotTag;
@@ -43,7 +43,6 @@
     save_bathview   *bath;
 }
 
-
 +(id)summary;
 @property (retain, nonatomic)NSMutableArray *dataArray;
 @property (retain, nonatomic)UIScrollView *plotScrollView;
@@ -51,9 +50,6 @@
 @property (strong, nonatomic) MyCorePlot *plot;
 @property (weak, nonatomic) IBOutlet UIView *Mark;
 
-
-
 -(void)MenuSelectIndex:(int)index;
-
 
 @end
