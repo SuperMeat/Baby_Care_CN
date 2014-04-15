@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BabyBaseInfoView.h"
 
 @interface TimeLineView : UIView<UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *timeLineArray;
+    NSTimer *timer;
+    UIPickerView *picker_sex_birth;
+    BabyBaseInfoView *babyInfo;
 }
 
 @property (nonatomic,strong)UITableView *timeLineTableView;

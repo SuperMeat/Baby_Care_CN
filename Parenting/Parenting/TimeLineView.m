@@ -7,6 +7,8 @@
 //
 
 #import "TimeLineView.h"
+#import "BabyMessageDataDB.h"
+#import "BabyDataDb.h"
 
 #define MsgMaxLength 20
 #define SingleLine 47.5
@@ -28,19 +30,45 @@
         _timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _timeLineTableView.dataSource = self;
         _timeLineTableView.delegate = self;
+        
         [self addSubview:_timeLineTableView];
         //init Data
         [self initData];
+        
+        //时间器刷新控件
+        timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateTimeLine) userInfo:nil repeats:YES];
     }
     return self;
 }
 
+#pragma 刷新控件
+-(void)updateTimeLine{
+    timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
+    [_timeLineTableView reloadData];
+}
+
 #pragma 加载数据
 -(void)initData{
-    //DEBUG:test data
-    NSArray *arr1 = @[@"1",@"测试数据1",@"",@"",@"4-4"];
-    NSArray *arr2 = @[@"2",@"测试数据2",@"",@"",@"4-4"];
-    timeLineArray = [[NSMutableArray alloc]initWithObjects:arr1,arr2, nil];
+    timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
+    
+    //初始化加载消息
+    if ([timeLineArray count] == 0) {
+        //欢迎消息
+        [[BabyMessageDataDB babyMessageDB]insertBabyMessageNormal:00000000 UpdateTime:00000000 key:@"" type:2 content:@"欢迎使用BabyCare"];
+        //提示录入照片or宝贝姓名or生日
+        NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
+        if (dict) {
+            //姓名
+            if ([[dict objectForKey:@"nickname"] isEqual: @""] || [[dict objectForKey:@"birth"] intValue] == 0) {
+                [[BabyMessageDataDB babyMessageDB]insertBabyMessageNormal:00000001 UpdateTime:00000001 key:@"input_babyInfo" type:1 content:@"请完善宝宝基本信息"];
+            }
+            else{
+                //删除提醒
+                [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:00000001];
+            }
+        }
+        timeLineArray = [[NSMutableArray alloc]initWithObjects:[[BabyMessageDataDB babyMessageDB]selectAll], nil];
+    }
 }
 
 #pragma mark table view data source
@@ -83,6 +111,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSArray *selectRow = [timeLineArray objectAtIndex:indexPath.row];
+    NSString *key = [selectRow objectAtIndex:5];
+    if ([key  isEqual: @""]) {
+        
+    }
+    else if([key isEqual:@"input_babyInfo"]){
+        //弹出宝贝信息录入窗口
+        if (babyInfo==nil) {
+            babyInfo = [[BabyBaseInfoView alloc]initWithFrame:CGRectMake(self.superview.frame.origin.x, 40, self.superview.frame.size.width, self.superview.frame.size.height)];
+            [self.superview addSubview:babyInfo];
+        }
+        else {
+            [self.superview addSubview:babyInfo];
+        }
+    }
+    
     //根据点击类型跳转到相关页面
     //[self.navigationController pushViewController:viewController animated:YES];
 }
@@ -121,7 +165,8 @@
     timeLabel.textColor = [UIColor blackColor];
     CGSize timeLabelSize = [timeLabel.text sizeWithAttributes:@{NSFontAttributeName:fontTime}];
     timeLabel.frame = CGRectMake(5.0f,37.0f,timeLabelSize.width, timeLabelSize.height);
-    timeLabel.text = [arrayContent objectAtIndex:4];
+//    timeLabel.text = [arrayContent objectAtIndex:4];
+    timeLabel.text = @"";
     
     //内容文本
     NSString *content = [arrayContent objectAtIndex:1];

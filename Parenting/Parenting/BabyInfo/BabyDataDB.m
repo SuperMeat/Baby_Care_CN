@@ -151,7 +151,7 @@
 -(BOOL)updateBabyInfoName:(NSString*)newNickname BabyId:(int)baby_id
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
     if (!res) {
@@ -173,7 +173,7 @@
 -(BOOL)updateBabyBirth:(long)birth BabyId:(int)baby_id
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
     if (!res) {
@@ -195,7 +195,7 @@
 -(BOOL)updateBabySex:(int)sex BabyId:(int)baby_id
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
     if (!res) {
@@ -217,7 +217,7 @@
 -(BOOL)updateBabyIcon:(NSString*)icon BabyId:(int)baby_id
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
     if (!res) {
@@ -226,7 +226,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"update bc_baby set icon= ? where baby_id=?",icon, [NSNumber numberWithInt:baby_id]];
+    res=[db executeUpdate:@"update bc_baby set head= ? where baby_id=?",icon, [NSNumber numberWithInt:baby_id]];
     if (!res) {
         NSLog(@"更新失败");
         [db close];
@@ -239,7 +239,7 @@
 -(BOOL)updateBabyInfoUpdateTime:(long)update_time BabyId:(int)baby_id
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
     if (!res) {
@@ -265,7 +265,7 @@
                       Value:(double)value
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -305,7 +305,7 @@
 -(BOOL)updateBabyPhysiology:(double)value ByCreateTime:(long)create_time andType:(int)type
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
 
@@ -331,7 +331,7 @@
     BOOL res;
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
     
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
 
@@ -360,7 +360,7 @@
 -(BOOL)deleteBabyPhysiologyByType:(int)type andCreateTime:(long)create_time
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
 
@@ -427,7 +427,7 @@
                    MoreInfo:(NSString*)more_info
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -483,7 +483,7 @@
                      MoreInfo:(NSString *)more_info
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -542,7 +542,7 @@
                    MoreInfo:(NSString *)more_info
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -600,7 +600,7 @@
                    MoreInfo:(NSString *)more_info
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -657,7 +657,7 @@
                     MoreInfo:(NSString *)more_info
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -712,7 +712,7 @@
              CreateTime:(long)createtime
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -744,7 +744,7 @@
                CreateTime:(long)createtime
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -777,7 +777,7 @@
              CreateTime:(long)createtime
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -809,7 +809,7 @@
              CreateTime:(long)createtime
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -841,7 +841,7 @@
               CreateTime:(long)createtime
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
@@ -866,7 +866,7 @@
             Tablename:(NSString*)tablename
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     
@@ -893,7 +893,7 @@
               Tablename:(NSString*)tablename
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     
@@ -919,7 +919,7 @@
 -(BOOL)updateUploadtime:(NSString*)tablename andUploadTime:(long)uploadtime andCreateTime:(long)create_time
 {
     BOOL res;
-    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int user_id = ACCOUNTUID;
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
 

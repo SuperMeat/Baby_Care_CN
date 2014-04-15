@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeTopView : UIView{
+@interface HomeTopView : UIView<UIImagePickerControllerDelegate,UIActionSheetDelegate>
+{
     
     UIImageView *image_bg_top;
     UIImageView *image_headPic;
@@ -17,6 +18,11 @@
     UILabel *label_days;
     UIButton *button_msg;
     UIButton *button_family;
+    
+    UIImagePickerController *imagePicker;
+    UIActionSheet *action;
 }
+
+-(void)initData;
 
 @end

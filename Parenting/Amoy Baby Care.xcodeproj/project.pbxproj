@@ -21,8 +21,6 @@
 		4800B0CF18D8215B0093A6AF /* EnviromemtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B0CE18D8215B0093A6AF /* EnviromemtViewController.m */; };
 		4800B0D218D822AD0093A6AF /* PhysiologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B0D118D822AD0093A6AF /* PhysiologyViewController.m */; };
 		4800B0D518D822C20093A6AF /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B0D418D822C20093A6AF /* CalendarViewController.m */; };
-		4800B0DF18D931EF0093A6AF /* MyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B0DD18D931EF0093A6AF /* MyPageViewController.m */; };
-		4800B0E018D931EF0093A6AF /* MyPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4800B0DE18D931EF0093A6AF /* MyPageViewController.xib */; };
 		4800B14418D9880B0093A6AF /* ACDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B13818D9880B0093A6AF /* ACDate.m */; };
 		4800B14518D9880B0093A6AF /* ACFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B13A18D9880B0093A6AF /* ACFunction.m */; };
 		4800B14618D9880B0093A6AF /* ACTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14018D9880B0093A6AF /* ACTabBarController.m */; };
@@ -186,8 +184,6 @@
 		485749A4183205A3000D921B /* NotifyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 485749A3183205A3000D921B /* NotifyItem.m */; };
 		48574A6A183B33E8000D921B /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48574A68183B33E8000D921B /* libPushSDK.a */; };
 		485F3F4A17F07CDA00BD876F /* OpenFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F3F4917F07CDA00BD876F /* OpenFunction.m */; };
-		485F3F4E17F16E3800BD876F /* DataCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485F3F4C17F16E3800BD876F /* DataCustomCell.xib */; };
-		485F3F4F17F16E3800BD876F /* DataCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F3F4D17F16E3800BD876F /* DataCustomCell.m */; };
 		4890DCE018F1A3D500C498FB /* TESTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4890DCDF18F1A3D500C498FB /* TESTViewController.m */; };
 		4890DCE418F23DA000C498FB /* FeedActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4890DCE218F23DA000C498FB /* FeedActivityViewController.m */; };
 		4890DCE518F23DA000C498FB /* FeedActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4890DCE318F23DA000C498FB /* FeedActivityViewController.xib */; };
@@ -394,6 +390,9 @@
 		BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */; };
 		BE3D75CC1889199F00E1C391 /* MyDevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */; };
 		BE422ADB18C6B5580089219C /* ASIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE422ADA18C6B5580089219C /* ASIController.m */; };
+		BE489F6B18FBB5220018F06F /* BabyBaseInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE489F6A18FBB5220018F06F /* BabyBaseInfoView.m */; };
+		BE489F6F18FBBA060018F06F /* MyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE489F6D18FBBA060018F06F /* MyPageViewController.m */; };
+		BE489F7018FBBA060018F06F /* MyPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE489F6E18FBBA060018F06F /* MyPageViewController.xib */; };
 		BE5997C71861930A008D3F6C /* BindingDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C01861930A008D3F6C /* BindingDeviceViewController.m */; };
 		BE5997C81861930A008D3F6C /* BindingDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */; };
 		BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */; };
@@ -417,6 +416,7 @@
 		BE75CD1D1872CBA5001EF1C1 /* login_tencent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE75CD151872CBA5001EF1C1 /* login_tencent@2x.png */; };
 		BE75CD1E1872CBA5001EF1C1 /* login_title.png in Resources */ = {isa = PBXBuildFile; fileRef = BE75CD161872CBA5001EF1C1 /* login_title.png */; };
 		BE75CD1F1872CBA5001EF1C1 /* login_title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE75CD171872CBA5001EF1C1 /* login_title@2x.png */; };
+		BE78352518F7FB2C0052DCB1 /* BabyMessageDataDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BE78352418F7FB2C0052DCB1 /* BabyMessageDataDB.m */; };
 		BE7C69341867D87000C4B675 /* ASIHTTPController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C69331867D87000C4B675 /* ASIHTTPController.m */; };
 		BE7C69361867DCCE00C4B675 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7C69351867DCCE00C4B675 /* MobileCoreServices.framework */; };
 		BE7C69771867F1B300C4B675 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C69641867F1B300C4B675 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -709,8 +709,6 @@
 		F3C3222C175DD3AC00F2BD7F /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C3222B175DD3AC00F2BD7F /* libCorePlot-CocoaTouch.a */; };
 		F3F09B5D1745CBCE006CB06D /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F09B5B1745CBCE006CB06D /* SettingViewController.m */; };
 		F3F09B5E1745CBCE006CB06D /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F09B5C1745CBCE006CB06D /* SettingViewController.xib */; };
-		F3F09B6C1745CC15006CB06D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F09B6A1745CC15006CB06D /* HomeViewController.m */; };
-		F3F09B6D1745CC15006CB06D /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F09B6B1745CC15006CB06D /* HomeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -732,9 +730,6 @@
 		4800B0D118D822AD0093A6AF /* PhysiologyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysiologyViewController.m; sourceTree = "<group>"; };
 		4800B0D318D822C20093A6AF /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		4800B0D418D822C20093A6AF /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
-		4800B0DC18D931EF0093A6AF /* MyPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageViewController.h; sourceTree = "<group>"; };
-		4800B0DD18D931EF0093A6AF /* MyPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageViewController.m; sourceTree = "<group>"; };
-		4800B0DE18D931EF0093A6AF /* MyPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPageViewController.xib; sourceTree = "<group>"; };
 		4800B13718D9880B0093A6AF /* ACDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDate.h; sourceTree = "<group>"; };
 		4800B13818D9880B0093A6AF /* ACDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDate.m; sourceTree = "<group>"; };
 		4800B13918D9880B0093A6AF /* ACFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFunction.h; sourceTree = "<group>"; };
@@ -933,9 +928,6 @@
 		48574A68183B33E8000D921B /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
 		485F3F4817F07CDA00BD876F /* OpenFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenFunction.h; sourceTree = "<group>"; };
 		485F3F4917F07CDA00BD876F /* OpenFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenFunction.m; sourceTree = "<group>"; };
-		485F3F4B17F16E3800BD876F /* DataCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCustomCell.h; sourceTree = "<group>"; };
-		485F3F4C17F16E3800BD876F /* DataCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataCustomCell.xib; sourceTree = "<group>"; };
-		485F3F4D17F16E3800BD876F /* DataCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCustomCell.m; sourceTree = "<group>"; };
 		4890DCDE18F1A3D500C498FB /* TESTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESTViewController.h; sourceTree = "<group>"; };
 		4890DCDF18F1A3D500C498FB /* TESTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESTViewController.m; sourceTree = "<group>"; };
 		4890DCE118F23DA000C498FB /* FeedActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedActivityViewController.h; sourceTree = "<group>"; };
@@ -1209,6 +1201,11 @@
 		BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesViewController.xib; sourceTree = "<group>"; };
 		BE422AD918C6B5580089219C /* ASIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIController.h; sourceTree = "<group>"; };
 		BE422ADA18C6B5580089219C /* ASIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIController.m; sourceTree = "<group>"; };
+		BE489F6918FBB5220018F06F /* BabyBaseInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyBaseInfoView.h; sourceTree = "<group>"; };
+		BE489F6A18FBB5220018F06F /* BabyBaseInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyBaseInfoView.m; sourceTree = "<group>"; };
+		BE489F6C18FBBA060018F06F /* MyPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageViewController.h; sourceTree = "<group>"; };
+		BE489F6D18FBBA060018F06F /* MyPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageViewController.m; sourceTree = "<group>"; };
+		BE489F6E18FBBA060018F06F /* MyPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPageViewController.xib; sourceTree = "<group>"; };
 		BE5997BF1861930A008D3F6C /* BindingDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingDeviceViewController.h; sourceTree = "<group>"; };
 		BE5997C01861930A008D3F6C /* BindingDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingDeviceViewController.m; sourceTree = "<group>"; };
 		BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingDeviceViewController.xib; sourceTree = "<group>"; };
@@ -1239,6 +1236,8 @@
 		BE75CD151872CBA5001EF1C1 /* login_tencent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_tencent@2x.png"; sourceTree = "<group>"; };
 		BE75CD161872CBA5001EF1C1 /* login_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_title.png; sourceTree = "<group>"; };
 		BE75CD171872CBA5001EF1C1 /* login_title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_title@2x.png"; sourceTree = "<group>"; };
+		BE78352318F7FB2C0052DCB1 /* BabyMessageDataDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyMessageDataDB.h; sourceTree = "<group>"; };
+		BE78352418F7FB2C0052DCB1 /* BabyMessageDataDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyMessageDataDB.m; sourceTree = "<group>"; };
 		BE7C69321867D87000C4B675 /* ASIHTTPController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIHTTPController.h; path = ASIHTTPController/ASIHTTPController.h; sourceTree = "<group>"; };
 		BE7C69331867D87000C4B675 /* ASIHTTPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIHTTPController.m; path = ASIHTTPController/ASIHTTPController.m; sourceTree = "<group>"; };
 		BE7C69351867DCCE00C4B675 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1681,9 +1680,6 @@
 		F3F09B5A1745CBCE006CB06D /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		F3F09B5B1745CBCE006CB06D /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		F3F09B5C1745CBCE006CB06D /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
-		F3F09B691745CC15006CB06D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		F3F09B6A1745CC15006CB06D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		F3F09B6B1745CC15006CB06D /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1856,6 +1852,8 @@
 				4800B15018DA84F80093A6AF /* UserTips.m */,
 				48C9AD1218E2AB4800D04FF7 /* SummaryDB.h */,
 				48C9AD1318E2AB4800D04FF7 /* SummaryDB.m */,
+				BE78352318F7FB2C0052DCB1 /* BabyMessageDataDB.h */,
+				BE78352418F7FB2C0052DCB1 /* BabyMessageDataDB.m */,
 			);
 			name = DataController;
 			sourceTree = "<group>";
@@ -3039,19 +3037,15 @@
 		7215974F17453980006FD415 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				BE489F6C18FBBA060018F06F /* MyPageViewController.h */,
+				BE489F6D18FBBA060018F06F /* MyPageViewController.m */,
+				BE489F6E18FBBA060018F06F /* MyPageViewController.xib */,
 				BEAA855218F4E425002B137F /* HomeTopView.h */,
 				BEAA855318F4E425002B137F /* HomeTopView.m */,
-				485F3F4B17F16E3800BD876F /* DataCustomCell.h */,
-				485F3F4C17F16E3800BD876F /* DataCustomCell.xib */,
-				485F3F4D17F16E3800BD876F /* DataCustomCell.m */,
-				F3F09B691745CC15006CB06D /* HomeViewController.h */,
-				F3F09B6A1745CC15006CB06D /* HomeViewController.m */,
-				F3F09B6B1745CC15006CB06D /* HomeViewController.xib */,
-				4800B0DC18D931EF0093A6AF /* MyPageViewController.h */,
-				4800B0DD18D931EF0093A6AF /* MyPageViewController.m */,
-				4800B0DE18D931EF0093A6AF /* MyPageViewController.xib */,
 				BE15C33E18F51B4200098220 /* TimeLineView.h */,
 				BE15C33F18F51B4200098220 /* TimeLineView.m */,
+				BE489F6918FBB5220018F06F /* BabyBaseInfoView.h */,
+				BE489F6A18FBB5220018F06F /* BabyBaseInfoView.m */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -3745,7 +3739,6 @@
 				F3F09B5E1745CBCE006CB06D /* SettingViewController.xib in Resources */,
 				48FEAF0118E91423002425E2 /* btn_sum1@2x.png in Resources */,
 				48DEA7C417F46C3E00A11316 /* Diaper_5.jpg in Resources */,
-				F3F09B6D1745CC15006CB06D /* HomeViewController.xib in Resources */,
 				48FEAF8E18E943B8002425E2 /* ActivityViewController.xib in Resources */,
 				CE0167B3174B059000462363 /* btn_delete.png in Resources */,
 				CE0167B4174B059000462363 /* btn_delete@2x.png in Resources */,
@@ -3961,6 +3954,7 @@
 				480EFA5518E5155C00D40903 /* label_breast_choose@2x.png in Resources */,
 				485749971831C3D1000D921B /* NotifyViewController.xib in Resources */,
 				48152E1518486C66009A4900 /* item_ok@2x.png in Resources */,
+				BE489F7018FBBA060018F06F /* MyPageViewController.xib in Resources */,
 				48FEAF5918E917CB002425E2 /* btn_month@2x.png in Resources */,
 				CE0168A1174B4CCB00462363 /* title_green.png in Resources */,
 				CE0168A2174B4CCB00462363 /* title_green@2x.png in Resources */,
@@ -3989,7 +3983,6 @@
 				48DEA79D17F45E0C00A11316 /* Feed_2.jpg in Resources */,
 				4800B0C618D7F3D20093A6AF /* 生理_按@2x.png in Resources */,
 				480EFA3518E5155C00D40903 /* panels_input@2x.png in Resources */,
-				4800B0E018D931EF0093A6AF /* MyPageViewController.xib in Resources */,
 				485749A11831C423000D921B /* MissionViewController.xib in Resources */,
 				48152E2118486C66009A4900 /* nav_btn_bg_lighted@2x.png in Resources */,
 				48FEAEF518E91423002425E2 /* icon_bath@2x.png in Resources */,
@@ -4099,7 +4092,6 @@
 				48DEA7AB17F467A000A11316 /* Sleep_2.jpg in Resources */,
 				BE75CD1F1872CBA5001EF1C1 /* login_title@2x.png in Resources */,
 				BE5997D018619320008D3F6C /* TipsMasterViewController.xib in Resources */,
-				485F3F4E17F16E3800BD876F /* DataCustomCell.xib in Resources */,
 				48DEA7AA17F467A000A11316 /* Sleep_1.jpg in Resources */,
 				48DEA7AE17F467A000A11316 /* Sleep_5.jpg in Resources */,
 				480EFA2018E5155C00D40903 /* panels_color3@2x.png in Resources */,
@@ -4286,7 +4278,6 @@
 				48EC1DC818603B3700965254 /* LocalNotifyCell.m in Sources */,
 				4890DCE418F23DA000C498FB /* FeedActivityViewController.m in Sources */,
 				F3F09B5D1745CBCE006CB06D /* SettingViewController.m in Sources */,
-				F3F09B6C1745CC15006CB06D /* HomeViewController.m in Sources */,
 				BEB475A018E574A80004B649 /* NSObject+SBJson.m in Sources */,
 				BE7C697C1867F1B300C4B675 /* ASIHTTPRequest.m in Sources */,
 				48EC1DD61862CE2000965254 /* CustonTimeViewController.m in Sources */,
@@ -4304,10 +4295,10 @@
 				4855BD071830D80300F02A3E /* InfomationItem.m in Sources */,
 				BE7C697D1867F1B300C4B675 /* ASIInputStream.m in Sources */,
 				48C9AD1418E2AB4800D04FF7 /* SummaryDB.m in Sources */,
-				485F3F4F17F16E3800BD876F /* DataCustomCell.m in Sources */,
 				48EF612218C6FAC7006C3D5C /* FaceOverlayView.m in Sources */,
 				CECE7F8E174A214F0036D0BC /* SettingItem.m in Sources */,
 				48F6ABC01883B9BE0032045E /* BLEWeatherController.m in Sources */,
+				BE489F6F18FBBA060018F06F /* MyPageViewController.m in Sources */,
 				BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */,
 				CE0167D4174B217C00462363 /* CopyrightViewController.m in Sources */,
 				CE0167DB174B45AB00462363 /* feedViewController.m in Sources */,
@@ -4360,6 +4351,7 @@
 				BE7C698418681A2000C4B675 /* SuggestionDataBase.m in Sources */,
 				CEDBEAB41755DD660006828A /* Weather.m in Sources */,
 				48B7813A182A1D500073EEBD /* MBProgressHUD.m in Sources */,
+				BE489F6B18FBB5220018F06F /* BabyBaseInfoView.m in Sources */,
 				48152DF418486B13009A4900 /* UMFeedbackViewController.m in Sources */,
 				48B78135182A0FD30073EEBD /* TipsWebViewController.m in Sources */,
 				48152E2E1848721F009A4900 /* GuideViewController.m in Sources */,
@@ -4397,10 +4389,10 @@
 				F365CADC176C537900EA1406 /* CustumCell.m in Sources */,
 				BEB475AA18E574A80004B649 /* SBJsonUTF8Stream.m in Sources */,
 				CE239796176EE4A50096E033 /* BabyinfoViewController.m in Sources */,
+				BE78352518F7FB2C0052DCB1 /* BabyMessageDataDB.m in Sources */,
 				4800B0CB18D81A300093A6AF /* MyTabBarController.m in Sources */,
 				48EF611D18C6FAC7006C3D5C /* AnimatedAnnotationView.m in Sources */,
 				48FEAF8D18E943B8002425E2 /* ActivityViewController.m in Sources */,
-				4800B0DF18D931EF0093A6AF /* MyPageViewController.m in Sources */,
 				BEB475A518E574A80004B649 /* SBJsonStreamParserState.m in Sources */,
 				4800B14618D9880B0093A6AF /* ACTabBarController.m in Sources */,
 				BE5997C71861930A008D3F6C /* BindingDeviceViewController.m in Sources */,

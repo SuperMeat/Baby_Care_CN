@@ -54,6 +54,8 @@
 #import "ASIController.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
+#define BABYICONPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d.png",NSHomeDirectory(),USERID,BABYID])
+
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
 #define USERDBPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d/userdata.db",NSHomeDirectory(),USERID,BABYID])
 

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SettingViewController.h"
 #import "SummaryViewController.h"
-#import "HomeViewController.h"
 #import "InformationCenterViewController.h"
 #import "GuideViewController.h"
 #import "LoginViewController.h"
@@ -37,7 +36,6 @@
     SettingViewController           *settingViewController;
     InformationCenterViewController *icViewController;
     SummaryViewController           *summaryViewController;
-    HomeViewController              *homeViewController;
     GuideViewController             *guideViewController;
     LoginViewController             *loginViewController;
     
