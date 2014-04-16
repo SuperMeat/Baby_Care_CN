@@ -53,7 +53,7 @@
     if (ACCOUNTUID) {
         if (!BABYID) {
             //注册接口
-            hud = [MBProgressHUD showHUDAddedTo:guideView animated:YES];
+            hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             //隐藏键盘
             hud.mode = MBProgressHUDModeIndeterminate;
             hud.alpha = 0.5;
@@ -90,7 +90,7 @@
                  [hud hide:YES afterDelay:1];
              }
              isShowProgress:YES
-             isAsynchronic:YES
+             isAsynchronic:NO
              netWorkStatus:YES
              viewController:self];
         }
