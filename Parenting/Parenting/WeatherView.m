@@ -97,6 +97,7 @@
     tempDetail = [[UILabel alloc] initWithFrame:CGRectMake(376/2.0, 372/2.0-64-155/2.0-44, 246/2.0, 155/2.0)];
     [tempDetail setBackgroundColor:[UIColor redColor]];
     tempDetail.textAlignment = NSTextAlignmentCenter;
+    tempDetail.text =@"22°";
     tempDetail.font = [UIFont fontWithName:@"Arvial" size:80];
     [self addSubview:tempDetail];
     [[Weather weather] getweather:^(NSDictionary *weatherDict) {
