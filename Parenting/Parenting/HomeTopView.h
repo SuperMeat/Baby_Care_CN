@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeTopView : UIView<UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface HomeTopView : UIView<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 {
     
     UIImageView *image_bg_top;
