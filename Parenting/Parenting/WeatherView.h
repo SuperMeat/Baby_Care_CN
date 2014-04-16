@@ -24,6 +24,8 @@
     AdviseData  *mAdHumi;
     AdviseLevel *mAlHumi;
     
+    UILabel *tempDetail;
+    
 }
 
 +(id)weatherview;

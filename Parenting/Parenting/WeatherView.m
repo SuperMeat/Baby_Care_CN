@@ -83,18 +83,22 @@
         [dataarray addObject:pm];
     }
 
-    table = [[UITableView alloc]initWithFrame:CGRectMake(self.bounds.origin.x+10, self.bounds.origin.y+8, self.bounds.size.width-20, self.bounds.size.height) style:UITableViewStyleGrouped];
-    table.separatorStyle = UITableViewCellSeparatorStyleNone;
-    table.backgroundColor=[UIColor clearColor];
-    table.delegate = self;
-    table.dataSource = self;
-    table.backgroundView=nil;
-    table.bounces=NO;
-    
-     [self setBackgroundColor:[UIColor whiteColor]];
-    [self addSubview:table];
+//    table = [[UITableView alloc]initWithFrame:CGRectMake(self.bounds.origin.x+10, self.bounds.origin.y+8, self.bounds.size.width-20, self.bounds.size.height) style:UITableViewStyleGrouped];
+//    table.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    table.backgroundColor=[UIColor clearColor];
+//    table.delegate = self;
+//    table.dataSource = self;
+//    table.backgroundView=nil;
+//    table.bounces=NO;
+//    
+//    [self setBackgroundColor:[UIColor whiteColor]];
+    //[self addSubview:table];
 
-
+    tempDetail = [[UILabel alloc] initWithFrame:CGRectMake(376/2.0, 372/2.0-64-155/2.0-44, 246/2.0, 155/2.0)];
+    [tempDetail setBackgroundColor:[UIColor redColor]];
+    tempDetail.textAlignment = NSTextAlignmentCenter;
+    tempDetail.font = [UIFont fontWithName:@"Arvial" size:80];
+    [self addSubview:tempDetail];
     [[Weather weather] getweather:^(NSDictionary *weatherDict) {
         NSDictionary *dict=weatherDict;
         NSLog(@"weDic %@", dict);

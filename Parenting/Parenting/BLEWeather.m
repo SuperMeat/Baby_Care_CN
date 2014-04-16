@@ -130,11 +130,9 @@
 
 +(void)setuvfrombluetooth:(long)uv
 {
-    //[[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"weatherbluetooth"];
     NSDictionary *envir = [[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"];
     
     NSLog(@"setuvfrombluetooth : %ld", uv);
-    //NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"])
     {
         NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];

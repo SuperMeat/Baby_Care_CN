@@ -79,6 +79,10 @@
 #define ADVISE_TYPE_UV      15
 #define ADVISE_TYPE_PM25    16
 
+#define ENV_ADVISE_LEVEL_EXCELLENT   1
+#define ENV_ADVISE_LEVEL_GOOD        2
+#define ENV_ADVISE_LEVEL_BAD         3
+
 /**
  *	QuadCurveMenu
  *
@@ -183,7 +187,6 @@
 #define BLUETOOTH_BUTTON_SLEEP  @"01"
 #define BLUETOOTH_BUTTON_PLAY   @"02"
 //*** end
-
 
 //************协议内容************
 //      版本 : 1.0.1
