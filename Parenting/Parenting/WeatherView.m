@@ -98,7 +98,7 @@
     [tempDetail setBackgroundColor:[UIColor redColor]];
     tempDetail.textAlignment = NSTextAlignmentCenter;
     tempDetail.text =@"22°";
-    tempDetail.font = [UIFont fontWithName:@"Arvial" size:80];
+    tempDetail.font = [UIFont fontWithName:@"Arvial" size:160];
     [self addSubview:tempDetail];
     [[Weather weather] getweather:^(NSDictionary *weatherDict) {
         NSDictionary *dict=weatherDict;
