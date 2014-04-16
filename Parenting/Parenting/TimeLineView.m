@@ -20,6 +20,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        //init Data
+        [self initData];
         //init TableView
         _timeLineTableView  =
         [[UITableView alloc]initWithFrame:
@@ -32,9 +34,6 @@
         _timeLineTableView.delegate = self;
         
         [self addSubview:_timeLineTableView];
-        //init Data
-        [self initData];
-        
         //时间器刷新控件
         timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateTimeLine) userInfo:nil repeats:YES];
     }
@@ -49,8 +48,6 @@
 
 #pragma 加载数据
 -(void)initData{
-    timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
-    
     //初始化加载消息
     if ([timeLineArray count] == 0) {
         //欢迎消息
@@ -67,7 +64,18 @@
                 [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:00000001];
             }
         }
-        timeLineArray = [[NSMutableArray alloc]initWithObjects:[[BabyMessageDataDB babyMessageDB]selectAll], nil];
+        timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
+    }
+    else{
+        NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
+        if (dict) {
+            //姓名
+            if (![[dict objectForKey:@"nickname"] isEqual: @""] && [[dict objectForKey:@"birth"] intValue] != 0) {
+                [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:00000001];
+                //TODO:填写完宝贝信息后引导做测评 之类的
+            }
+        }
+         timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
     }
 }
 

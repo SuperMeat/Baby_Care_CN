@@ -60,8 +60,10 @@ void UncaughtExceptionHandler(NSException *exception) {
         NSString *newFile = [document stringByAppendingPathComponent:@"BC_Info.sqlite"];
         NSString *oldFile = [[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager copyItemAtPath:oldFile toPath:newFile error:nil];
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"ISEXISIT_BC_INFO"];
+        NSError *error;
+        if ([fileManager copyItemAtPath:oldFile toPath:newFile error:&error]) {
+             [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"ISEXISIT_BC_INFO"];
+        }
     }
 
     
