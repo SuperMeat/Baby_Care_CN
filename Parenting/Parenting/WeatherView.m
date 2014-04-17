@@ -94,12 +94,52 @@
 //    [self setBackgroundColor:[UIColor whiteColor]];
     //[self addSubview:table];
 
-    tempDetail = [[UILabel alloc] initWithFrame:CGRectMake(376/2.0, 372/2.0-64-155/2.0-44, 246/2.0, 155/2.0)];
-    [tempDetail setBackgroundColor:[UIColor redColor]];
+    tempDetail = [[UILabel alloc] initWithFrame:CGRectMake(376/2.0, 372/2.0*PNGSCALE-110*PNGSCALE-155/2.0*PNGSCALE, 246/2.0*PNGSCALE, 155/2.0*PNGSCALE)];
+    [tempDetail setBackgroundColor:[UIColor clearColor]];
+    [tempDetail setTextColor:[ACFunction colorWithHexString:@"#69becc"]];
     tempDetail.textAlignment = NSTextAlignmentCenter;
-    tempDetail.text =@"22°";
-    tempDetail.font = [UIFont fontWithName:@"Arvial" size:160];
+    tempDetail.text =@"0";
+    tempDetail.font = [UIFont fontWithName:@"Arial" size:80*PNGSCALE];
     [self addSubview:tempDetail];
+    
+    weatherStatus = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE,100,15)];
+    weatherStatus.text = @"超级龙卷风";
+    [weatherStatus setBackgroundColor:[UIColor clearColor]];
+    weatherStatus.font = [UIFont fontWithName:@"Arial" size:12];
+    weatherStatus.textAlignment = NSTextAlignmentLeft;
+    [weatherStatus setTextColor:[ACFunction colorWithHexString:@"#7a7a7a"]];
+    [self addSubview:weatherStatus];
+    
+    airDetail = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE+2+15, 100, 15)];
+    airDetail.text = @"空气质量指数:暂无";
+    airDetail.font = [UIFont fontWithName:@"Arial" size:12];
+    airDetail.textAlignment = NSTextAlignmentLeft;
+    [airDetail setTextColor:[ACFunction colorWithHexString:@"#7a7a7a"]];
+    [self addSubview:airDetail];
+    
+    humiDetail = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE+2+15+15, 100, 15)];
+    humiDetail.text = @"湿度:0%";
+    humiDetail.font = [UIFont fontWithName:@"Arial" size:12];
+    humiDetail.textAlignment = NSTextAlignmentLeft;
+    [humiDetail setTextColor:[ACFunction colorWithHexString:@"#7a7a7a"]];
+    [self addSubview:humiDetail];
+    
+    statusBigImageView = [[UIImageView alloc] initWithFrame:CGRectMake(376/2.0+5, 372/2.0*PNGSCALE-110*PNGSCALE-155/2.0*PNGSCALE+155/2.0*PNGSCALE-10, 118/2.0, 132/2.0)];
+    [statusBigImageView setImage:[UIImage imageNamed:@"icon_cloudy"]];
+    [self addSubview:statusBigImageView];
+    
+    todayView = [[UIView alloc]initWithFrame:CGRectMake(0, 200-80, 320/3.0, 80)];
+    [todayView setBackgroundColor:[UIColor redColor]];
+    [self addSubview:todayView];
+    
+    tomorrowView = [[UIView alloc]initWithFrame:CGRectMake(320/3.0, 200-80, 320/3.0, 80)];
+    [tomorrowView setBackgroundColor:[UIColor blueColor]];
+    [self addSubview:tomorrowView];
+    
+    afertomorrowView = [[UIView alloc]initWithFrame:CGRectMake(320-320/3.0, 200-80, 320/3.0, 80)];
+    [afertomorrowView setBackgroundColor:[UIColor yellowColor]];
+    [self addSubview:afertomorrowView];
+    
     [[Weather weather] getweather:^(NSDictionary *weatherDict) {
         NSDictionary *dict=weatherDict;
         NSLog(@"weDic %@", dict);
@@ -107,9 +147,11 @@
         if([[dict objectForKey:@"temp"] length]>0)
         {
             temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
+            tempDetail.text =[NSString stringWithFormat:@"%@°",[dict objectForKey:@"temp"]];
         }
         if ([[dict objectForKey:@"humidity"] length]>0) {
             humi.detail=[NSString stringWithFormat:@"%@%%",[dict objectForKey:@"humidity"]];
+            humiDetail.text = [NSString stringWithFormat:@"湿度:%@%%",[dict objectForKey:@"humidity"]];
         }
         
         if (CUSTOMER_COUNTRY == 1) {
@@ -117,6 +159,7 @@
                 int pmvalue = [[dict objectForKey:@"PM25"] intValue];
                 if (pmvalue > 0) {
                     pm.detail=[NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"PM25"],[OpenFunction getpm25description:pmvalue]];
+                    airDetail.text = [NSString stringWithFormat:@"空气指数:%@",[dict objectForKey:@"PM25"]];
                     [dataarray replaceObjectAtIndex:2 withObject:pm];
                 }
             }
@@ -158,6 +201,8 @@
         if([[dict objectForKey:@"temp"] length]>0)
         {
             temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
+            tempDetail.text = [NSString stringWithFormat:@"%@°",[dict objectForKey:@"temp"]];
+            
             NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_TEMP andValue:[NSNumber numberWithInt:[[dict objectForKey:@"temp"] intValue]]];
 
             if ([arr count]>0) {
@@ -175,6 +220,8 @@
         }
         if ([[dict objectForKey:@"humidity"] length]>0) {
             humi.detail=[NSString stringWithFormat:@"%@ %%",[dict objectForKey:@"humidity"]];
+            humiDetail.text = [NSString stringWithFormat:@"湿度:%@%%",[dict objectForKey:@"humidity"]];
+
             NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_HUMI andValue:[NSNumber numberWithInt:[[dict objectForKey:@"humidity"] intValue]]];
             
             if ([arr count]>0) {
@@ -195,6 +242,7 @@
                 int pmvalue = [[dict objectForKey:@"PM25"] intValue];
                 if (pmvalue > 0) {
                     pm.detail=[NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"PM25"],[OpenFunction getpm25description:pmvalue]];
+                    airDetail.text = [NSString stringWithFormat:@"空气指数: %@",[dict objectForKey:@"PM25"]];
                     Environmentitem *itemPM25 = [dataarray objectAtIndex:2];
                     itemPM25.detail = pm.detail;
                     [dataarray replaceObjectAtIndex:2 withObject:itemPM25];

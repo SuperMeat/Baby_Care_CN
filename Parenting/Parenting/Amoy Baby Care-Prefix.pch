@@ -236,3 +236,6 @@
 
 #define NORECORDTIP @"您还没有任何活动记录哦,\r现在开始记录吧!"
 
+#define BAIDUWEATHERAPI @"http://api.map.baidu.com/telematics/v3/weather?location=%@&output=json&ak=0jqwWuOll53rYRpidLF3XrB9"
+
+#define WEATHERICONSCALE 0.55

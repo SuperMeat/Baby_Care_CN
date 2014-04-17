@@ -39,7 +39,7 @@
     {
         //起始条目beginCount  取的数量:syncCount-count条
         [self syncDataByBeginIndex:beginCount andCount:syncCount-beginCount];
-        NSString *newSyncTime = [self getNewSyncTime];
+        [self getNewSyncTime];
         //save newSyncTime;
         //sync over
     }

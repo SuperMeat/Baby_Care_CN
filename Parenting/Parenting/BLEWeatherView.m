@@ -95,12 +95,14 @@
     [self setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:table];
     
-    gettimer = [NSTimer scheduledTimerWithTimeInterval: getDataTimeInterval
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"] != nil)
+    {
+        gettimer = [NSTimer scheduledTimerWithTimeInterval: getDataTimeInterval
                                                 target: self
                                               selector: @selector(handleTimer:)
                                               userInfo: nil
                                                repeats: YES];
-
+    }
     //[[BLEWeather bleweather] getbleweather:^(NSDictionary *weatherDict) {
         NSDictionary *dict=[[BLEWeather bleweather] getbleweather];
         NSLog(@"weDic %@", dict);
@@ -385,14 +387,14 @@
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 80, 83/2.0*PNGSCALE)];
     title.textColor = [ACFunction colorWithHexString:@"#96999b"];
-    title.font      = [UIFont fontWithName:@"Arvial" size:13];
+    title.font      = [UIFont fontWithName:@"Arial" size:13];
     
     UIImageView *image=(UIImageView*)[Cell.contentView viewWithTag:104];
     title.text = item.title;
     UIImageView *levelImage = [[UIImageView alloc] initWithFrame:CGRectMake(image.frame.size.width-15-46/2.0*PNGSCALE, 9, 46/2.0*PNGSCALE, 41/2.0*PNGSCALE)];
     
     UILabel *weatherDetail = [[UILabel alloc]initWithFrame:CGRectMake(image.frame.size.width/2.0, 0, 50, image.frame.size.height)];
-    weatherDetail.font = [UIFont fontWithName:@"Arvial" size:13];
+    weatherDetail.font = [UIFont fontWithName:@"Arial" size:13];
     weatherDetail.textAlignment = NSTextAlignmentCenter;
     weatherDetail.textColor = [ACFunction colorWithHexString:@"#96999b"];
     [image addSubview:title];

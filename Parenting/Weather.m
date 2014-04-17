@@ -147,7 +147,7 @@
     NSArray *weatherDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     if (weatherDic == nil ||weatherDic.count == 1)
     {
-        return nil;
+        return [NSString stringWithFormat:@"%d", 0];
     }
     else
     {
@@ -158,12 +158,60 @@
         }
     }
     
-    return nil;
+    return [NSString stringWithFormat:@"%d", 0];
+}
+
+-(NSDictionary *)getWeatherFromSina:(NSString*)city andByDay:(int)day
+{
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weather"])
+    {
+        NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
+        
+        NSStringEncoding chineseEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        
+        city = [city stringByAddingPercentEscapesUsingEncoding:chineseEncoding];
+        
+        NSString* str = [NSString stringWithFormat:@"http://php.weather.sina.com.cn/xml.php?city=%@&password=DJOYnieT8234jlsK&day=%d",city, day];
+    
+        NSURL *url = [NSURL URLWithString:str];
+        NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5];
+        NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSString *citystring = [[NSString alloc]initWithData:received encoding:NSUTF8StringEncoding];
+
+        GDataXMLDocument *xml=[[GDataXMLDocument alloc]initWithXMLString:citystring options:1 error:nil];
+   
+        GDataXMLElement *root = [xml rootElement];
+        NSArray *rootarray = [root children];
+        GDataXMLElement  *channeName = [rootarray objectAtIndex:0];
+        NSArray *array = [channeName children];
+        NSLog(@"%@,%d", array, [array count]);
+
+        for (GDataXMLElement *item  in array)
+        {
+            NSArray *itemArray = [item children];
+            NSLog(@"%@",[[itemArray objectAtIndex:0] stringValue]);
+//            [envir setObject:[[item attributeForName:@"status1"]stringValue] forKey:@"weatherstatus"];
+//            [envir setObject:[[item attributeForName:@"direction1"]stringValue] forKey:@"direction"];
+//            [envir setObject:[[item attributeForName:@"power1"]stringValue] forKey:@"power"];
+//            [envir setObject:[[item attributeForName:@"temperature1"]stringValue] forKey:@"temperature1"];
+//            [envir setObject:[[item attributeForName:@"temperature2"]stringValue] forKey:@"temperature2"];
+            break;
+            
+        }
+        
+        if ([envir count] > 0) {
+            [[NSUserDefaults standardUserDefaults] setObject:envir forKey:@"weathertoday"];
+        }
+    }
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"weathertoday"];
 }
 
 -(NSDictionary *)getweather
 {
-    
+    //[self getWeatherFromSina:@"厦门" andByDay:0];
+    //[self getWeatherFromSina:@"厦门" andByDay:1];
+    //[self getWeatherFromSina:@"厦门" andByDay:2];
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weather"])
     {
         NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
@@ -175,6 +223,7 @@
         GDataXMLDocument *xml=[[GDataXMLDocument alloc]initWithXMLString:str options:1 error:nil];
         NSDictionary *namespace=[NSDictionary dictionaryWithObjectsAndKeys:@"http://xml.weather.yahoo.com/ns/rss/1.0",@"yweather", nil];
         NSArray *array=[xml nodesForXPath:@"//yweather:atmosphere" namespaces:namespace error:nil];
+        
         for (GDataXMLElement *item  in array) {
             ;
             [envir setObject:[[item attributeForName:@"humidity"]stringValue] forKey:@"humidity"];
@@ -222,6 +271,110 @@
     }
    
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"weather"];
+}
+
+- (NSString*)weatherCodeToString:(int)Code
+{
+    switch(Code){
+        case 0:
+            return @"龙卷风";
+        case 1:
+            return @"热带风暴";
+        case 2:
+            return @"暴风";
+        case 3:
+            return @"大雷雨";
+        case 4:
+            return @"雷阵雨";
+        case 5:
+            return @"雨夹雪";
+        case 6:
+            return @"雨夹雹";
+        case 7:
+            return @"雪夹雹";
+        case 8:
+            return @"冻雾雨";
+        case 9:
+            return @"细雨";
+        case 10:
+            return @"冻雨";
+        case 11:
+            return @"阵雨";
+        case 12:
+            return @"阵雨";
+        case 13:
+            return @"阵雪";
+        case 14:
+            return @"小阵雪";
+        case 15:
+            return @"高吹雪";
+        case 16:
+            return @"雪";
+        case 17:
+            return @"冰雹";
+        case 18:
+            return @"雨淞";
+        case 19:
+            return @"粉尘";
+        case 20:
+            return @"雾";
+        case 21:
+            return @"薄雾";
+        case 22:
+            return @"烟雾";
+        case 23:
+            return @"大风";
+        case 24:
+            return @"风";
+        case 25:
+            return @"冷";
+        case 26:
+            return @"阴";
+        case 27:
+            return @"多云";
+        case 28:
+            return @"多云";
+        case 29:
+            return @"局部多云";
+        case 30:
+            return @"局部多云";
+        case 31:
+            return @"晴";
+        case 32:
+            return @"晴";
+        case 33:
+            return @"转晴";
+        case 34:
+            return @"转晴";
+        case 35:
+            return @"雨夹冰雹";
+        case 36:
+            return @"热";
+        case 37:
+            return @"局部雷雨";
+        case 38:
+            return @"偶有雷雨";
+        case 39:
+            return @"偶有雷雨";
+        case 40:
+            return @"偶有阵雨";
+        case 41:
+            return @"大雪";
+        case 42:
+            return @"零星阵雪";
+        case 43:
+            return @"大雪";
+        case 44:
+            return @"局部多云";
+        case 45:
+            return @"雷阵雨";
+        case 46:
+            return @"阵雪";
+        case 47:
+            return @"局部雷阵雨";
+        default:
+            return @"水深火热";
+    }
 }
 
 -(void)getweather:(Getweather) getweather
