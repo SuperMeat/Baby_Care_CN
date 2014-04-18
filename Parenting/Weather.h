@@ -25,6 +25,7 @@ typedef void(^Getweather)(NSDictionary *weatherDict);
 
 +(id)weather;
 -(NSDictionary*)getweather;
+-(NSDictionary*)getWeatherDetail:(int)type;
 -(void)getweather:(Getweather) getweather;
 
 @end

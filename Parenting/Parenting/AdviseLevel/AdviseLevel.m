@@ -9,5 +9,14 @@
 #import "AdviseLevel.h"
 
 @implementation AdviseLevel
-
+-(id)init
+{
+    self=[super init];
+    if (self) {
+        self.mAdviseId = 0;
+        self.mLevel    = 0;
+    }
+    
+    return self;
+}
 @end

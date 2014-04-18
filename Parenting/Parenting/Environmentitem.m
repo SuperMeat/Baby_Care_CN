@@ -10,4 +10,5 @@
 
 @implementation Environmentitem
 @synthesize headimage,title,detail;
+
 @end

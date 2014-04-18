@@ -34,6 +34,7 @@
 +(int)getCurrentMonth;
 +(int)getCurrentWeek;
 +(int)getCurrentWeekDay;
++(int)getCurrentHour;
 +(int)getday:(NSDate*) date;
 +(int)getEarlyWeek:(NSDate*) time;
 +(int)getCurrentYear;

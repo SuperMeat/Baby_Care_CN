@@ -80,6 +80,10 @@
 #define ADVISE_TYPE_UV      15
 #define ADVISE_TYPE_PM25    16
 
+#define ENV_ADVISE_LEVEL_EXCELLENT   1
+#define ENV_ADVISE_LEVEL_GOOD        2
+#define ENV_ADVISE_LEVEL_BAD         3
+
 /**
  *	QuadCurveMenu
  *
@@ -185,7 +189,6 @@
 #define BLUETOOTH_BUTTON_PLAY   @"02"
 //*** end
 
-
 //************协议内容************
 //      版本 : 1.0.1
 //      日期 : 2014-3-28
@@ -234,3 +237,6 @@
 
 #define NORECORDTIP @"您还没有任何活动记录哦,\r现在开始记录吧!"
 
+#define BAIDUWEATHERAPI @"http://api.map.baidu.com/telematics/v3/weather?location=%@&output=json&ak=0jqwWuOll53rYRpidLF3XrB9"
+
+#define WEATHERICONSCALE 0.55

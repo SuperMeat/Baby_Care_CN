@@ -33,7 +33,7 @@
         self.backgroundColor=[UIColor clearColor];
         UITextView *suggestionlable=[[UITextView alloc]initWithFrame:CGRectMake(10, 0, 245, 100)];
         suggestionlable.text=suggestion;
-        suggestionlable.textAlignment = NSTextAlignmentCenter;
+        suggestionlable.textAlignment = NSTextAlignmentJustified;
         CGSize size = [suggestionlable.text sizeWithFont: [UIFont boldSystemFontOfSize:15]
                                  constrainedToSize: CGSizeMake(245, 9999999.0f)
                                      lineBreakMode: NSLineBreakByClipping];

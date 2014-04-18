@@ -14,8 +14,6 @@
 {
     BOOL         isgetted;
     UITableView *table;
-    NSString    *tempcontent;
-    int          templevel;
     //温度建议
     AdviseData  *mAdTemp;
     AdviseLevel *mAlTemp;
@@ -24,6 +22,21 @@
     AdviseData  *mAdHumi;
     AdviseLevel *mAlHumi;
     
+    //光照建议
+    AdviseData  *mAdLight;
+    AdviseLevel *mAlLight;
+    
+    //噪音建议
+    AdviseData  *mAdNoice;
+    AdviseLevel *mAlNoice;
+    
+    //UV建议
+    AdviseData  *mAdUV;
+    AdviseLevel *mAlUV;
+    
+    //PM建议
+    AdviseData  *mAdPM25;
+    AdviseLevel *mAlPM25;
     BOOL isFistTime;
     NSTimer *gettimer;
     NSTimeInterval getDataTimeInterval;

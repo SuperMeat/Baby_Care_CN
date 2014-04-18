@@ -312,6 +312,17 @@
     return [comps week];
 }
 
++(int)getCurrentHour
+{
+    NSDate *time=[self date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSHourCalendarUnit;
+    comps=[calendar components:unitFlags fromDate:time];
+    return [comps hour];
+}
+
 +(int)getCurrentWeekDay
 {
     NSDate *time=[self date];
