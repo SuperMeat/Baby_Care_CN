@@ -65,6 +65,19 @@ void UncaughtExceptionHandler(NSException *exception) {
              [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"ISEXISIT_BC_INFO"];
         }
     }
+    //FIXME:复制who数据库
+    {
+        NSString *document  = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        NSString *newFile = [document stringByAppendingPathComponent:@"who.rdb"];
+        NSString *oldFile = [[NSBundle mainBundle] pathForResource:@"who" ofType:@"rdb"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSError *error;
+        if ([fileManager copyItemAtPath:oldFile toPath:newFile error:&error]) { 
+        }
+
+    }
+    
+    
 
     
     [self tap];

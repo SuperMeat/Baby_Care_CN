@@ -25,6 +25,7 @@
 
 +(NSDate*)getNewDateFromOldDate:(NSDate*) newdate andOldDate:(NSDate*)olddate;
 +(NSDate*)getNewDateFromOldTime:(NSDate*)newdate andOldDate:(NSDate*)olddate;
++(NSString*)getDaySinceDate:(NSDate *)date;
 
 +(int)getMonthFromDate:(NSDate*)   date;
 +(int)getWeekFromDate:(NSDate*)    date;
