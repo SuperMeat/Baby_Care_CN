@@ -343,9 +343,12 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *Cell=[tableView dequeueReusableCellWithIdentifier:@"ID"];
+    static NSString *CellTableIdentifier = @"ID";
+    
+    UITableViewCell *Cell = [tableView dequeueReusableCellWithIdentifier:
+                             CellTableIdentifier];
     if (Cell==nil) {
-        Cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ID"];
+        Cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTableIdentifier];
         UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 554/2.0*PNGSCALE, 83/2.0*PNGSCALE)];
         if (indexPath.section == 0) {
             Cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"temp"]];
@@ -382,17 +385,22 @@
         Cell.textLabel.font = [UIFont systemFontOfSize:12];
         Cell.detailTextLabel.textColor=[UIColor whiteColor];
     }
+    
     Environmentitem *item=[dataarray objectAtIndex:indexPath.section];
     Cell.imageView.image=item.headimage;
+    
+    UIImageView *image=(UIImageView*)[Cell.contentView viewWithTag:104];
+    for(UIView * view in image.subviews){
+        [view removeFromSuperview];
+    }
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 80, 83/2.0*PNGSCALE)];
     title.textColor = [ACFunction colorWithHexString:@"#96999b"];
     title.font      = [UIFont fontWithName:@"Arial" size:13];
-    
-    UIImageView *image=(UIImageView*)[Cell.contentView viewWithTag:104];
     title.text = item.title;
-    UIImageView *levelImage = [[UIImageView alloc] initWithFrame:CGRectMake(image.frame.size.width-15-46/2.0*PNGSCALE, 9, 46/2.0*PNGSCALE, 41/2.0*PNGSCALE)];
     
+    UIImageView *levelImage = [[UIImageView alloc] initWithFrame:CGRectMake(image.frame.size.width-15-46/2.0*PNGSCALE, 9, 46/2.0*PNGSCALE, 41/2.0*PNGSCALE)];
+
     UILabel *weatherDetail = [[UILabel alloc]initWithFrame:CGRectMake(image.frame.size.width/2.0, 0, 50, image.frame.size.height)];
     weatherDetail.font = [UIFont fontWithName:@"Arial" size:13];
     weatherDetail.textAlignment = NSTextAlignmentCenter;
