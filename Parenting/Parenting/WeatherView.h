@@ -54,6 +54,14 @@
     UIView *todayView;
     UIView *tomorrowView;
     UIView *aftertomorrowView;
+    
+    NSString *wearDetail;
+    NSString *confortable;
+    NSString *ktDetail;
+    NSString *xcDetail;
+    NSString *gmDetail;
+    NSString *gmsDetail;
+    NSString *ydDetail;
 }
 
 +(id)weatherview;
@@ -62,4 +70,8 @@
 @property int chooseType;
 -(void)makeview;
 -(void)refreshweather;
+
+-(NSString*)getChuanYiAdvise;
+-(NSString*)getOutSideAdvise;
+-(NSString*)getHealthAdvise;
 @end

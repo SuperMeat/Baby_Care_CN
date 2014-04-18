@@ -222,11 +222,53 @@
             [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"zwx_s"];
         }
         
+        // 污染情况
         if ([[item name] isEqualToString:@"pollution_l"] && [itemArray count]>0)
         {
             [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"pollution_l"];
         }
+        
+        // 穿衣
+        if ([[item name] isEqualToString:@"chy_shuoming"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"chy_shuoming"];
+        }
 
+        //舒适指数
+        if ([[item name] isEqualToString:@"ssd_s"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"ssd_s"];
+        }
+
+        //空调
+        if ([[item name] isEqualToString:@"ktk_l"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"ktk_l"];
+        }
+
+        //洗车指数
+        if ([[item name] isEqualToString:@"xcz_s"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"xcz_s"];
+        }
+        
+        //感冒指数
+        if ([[item name] isEqualToString:@"gm_l"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"gm_l"];
+        }
+        
+        //感冒指数
+        if ([[item name] isEqualToString:@"gm_s"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"gm_s"];
+        }
+        
+        //运动指数
+        if ([[item name] isEqualToString:@"yd_s"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"yd_s"];
+        }
 
     }
     

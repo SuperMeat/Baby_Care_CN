@@ -269,6 +269,14 @@
         temp1.text = [NSString stringWithFormat:@"%d℃",[[dictoday objectForKey:@"temperature1"] intValue]];
         temp2.text = [NSString stringWithFormat:@"%d℃",[[dictoday objectForKey:@"temperature2"] intValue]];
         
+        wearDetail  = [dictoday objectForKey:@"chy_shuoming"];
+        confortable = [dictoday objectForKey:@"ssd_s"];
+        ktDetail    = [dictoday objectForKey:@"ktk_l"];
+        xcDetail    = [dictoday objectForKey:@"xcz_s"];
+        gmDetail    = [dictoday objectForKey:@"gm_l"];
+        gmsDetail   = [dictoday objectForKey:@"gm_s"];
+        ydDetail    = [dictoday objectForKey:@"yd_s"];
+
     }
     
     NSDictionary* dic2moro = [[Weather weather]getWeatherDetail:1];
@@ -322,6 +330,21 @@
     [self updatedataarray];
 }
 
+-(NSString*)getChuanYiAdvise
+{
+    return [NSString stringWithFormat:@"【穿衣指数】%@,%@\n\r", wearDetail,confortable];;
+}
+
+-(NSString*)getOutSideAdvise
+{
+    return [NSString stringWithFormat:@"【空调指数】%@\r【洗车指数】%@", ktDetail,xcDetail];
+}
+
+-(NSString*)getHealthAdvise
+{
+    return [NSString stringWithFormat:@"【运动指数】%@\r【感冒指数】%@,%@", ydDetail,gmDetail,gmsDetail];
+}
+
 -(UIImage*)getweathericon:(NSString*)status
 {
    NSArray *array = [[NSArray alloc] initWithObjects:@"云",@"雨",@"雷",@"阴",@"晴",@"雪",nil];
@@ -372,6 +395,13 @@
 
         temp1.text = [NSString stringWithFormat:@"%d℃",[[dictoday objectForKey:@"temperature1"] intValue]];
         temp2.text = [NSString stringWithFormat:@"%d℃",[[dictoday objectForKey:@"temperature2"] intValue]];
+        wearDetail  = [dictoday objectForKey:@"chy_shuoming"];
+        confortable = [dictoday objectForKey:@"ssd_s"];
+        ktDetail    = [dictoday objectForKey:@"ktk_l"];
+        xcDetail    = [dictoday objectForKey:@"xcz_s"];
+        gmDetail    = [dictoday objectForKey:@"gm_l"];
+        gmsDetail   = [dictoday objectForKey:@"gm_s"];
+        ydDetail    = [dictoday objectForKey:@"yd_s"];
 
     }
     
