@@ -53,7 +53,7 @@
     UIImageView *cutlineAfterTomorrow;
     UIView *todayView;
     UIView *tomorrowView;
-    UIView *afertomorrowView;
+    UIView *aftertomorrowView;
 }
 
 +(id)weatherview;

@@ -144,74 +144,117 @@
                                      error:&error];
     
     NSData *data = [stringFromFileAtURL dataUsingEncoding:NSUTF8StringEncoding];
-    NSArray *weatherDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-    if (weatherDic == nil ||weatherDic.count == 1)
+    if (data != nil)
     {
-        return [NSString stringWithFormat:@"%d", 0];
-    }
-    else
-    {
-        NSDictionary *dic = [weatherDic lastObject];
-        if (dic != nil && [dic count]>0) {
-            NSNumber *aqi = [dic objectForKey:@"aqi"];
-            return [NSString stringWithFormat:@"%@", aqi];
+        NSArray *weatherDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        if (weatherDic == nil ||weatherDic.count == 1)
+        {
+            return [NSString stringWithFormat:@"%d", 0];
+        }
+        else
+        {
+            NSDictionary *dic = [weatherDic lastObject];
+            if (dic != nil && [dic count]>0) {
+                NSNumber *aqi = [dic objectForKey:@"aqi"];
+                return [NSString stringWithFormat:@"%@", aqi];
+            }
         }
     }
-    
     return [NSString stringWithFormat:@"%d", 0];
 }
 
 -(NSDictionary *)getWeatherFromSina:(NSString*)city andByDay:(int)day
 {
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weather"])
+    NSString *key = @"";
+    if (day == 0) {
+        key = @"weathertoday";
+    }
+    else if (day == 1)
     {
-        NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
-        
-        NSStringEncoding chineseEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-        
-        city = [city stringByAddingPercentEscapesUsingEncoding:chineseEncoding];
-        
-        NSString* str = [NSString stringWithFormat:@"http://php.weather.sina.com.cn/xml.php?city=%@&password=DJOYnieT8234jlsK&day=%d",city, day];
-    
-        NSURL *url = [NSURL URLWithString:str];
-        NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5];
-        NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        NSString *citystring = [[NSString alloc]initWithData:received encoding:NSUTF8StringEncoding];
-
-        GDataXMLDocument *xml=[[GDataXMLDocument alloc]initWithXMLString:citystring options:1 error:nil];
-   
-        GDataXMLElement *root = [xml rootElement];
-        NSArray *rootarray = [root children];
-        GDataXMLElement  *channeName = [rootarray objectAtIndex:0];
-        NSArray *array = [channeName children];
-        NSLog(@"%@,%d", array, [array count]);
-
-        for (GDataXMLElement *item  in array)
-        {
-            NSArray *itemArray = [item children];
-            NSLog(@"%@",[[itemArray objectAtIndex:0] stringValue]);
-//            [envir setObject:[[item attributeForName:@"status1"]stringValue] forKey:@"weatherstatus"];
-//            [envir setObject:[[item attributeForName:@"direction1"]stringValue] forKey:@"direction"];
-//            [envir setObject:[[item attributeForName:@"power1"]stringValue] forKey:@"power"];
-//            [envir setObject:[[item attributeForName:@"temperature1"]stringValue] forKey:@"temperature1"];
-//            [envir setObject:[[item attributeForName:@"temperature2"]stringValue] forKey:@"temperature2"];
-            break;
-            
-        }
-        
-        if ([envir count] > 0) {
-            [[NSUserDefaults standardUserDefaults] setObject:envir forKey:@"weathertoday"];
-        }
+        key = @"weathertomorrow";
+    }
+    else
+    {
+        key = @"weatheraftertomorrow";
     }
     
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"weathertoday"];
+    
+    NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
+    
+    NSStringEncoding chineseEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    
+    city = [city stringByAddingPercentEscapesUsingEncoding:chineseEncoding];
+    
+    NSString* str = [NSString stringWithFormat:@"http://php.weather.sina.com.cn/xml.php?city=%@&password=DJOYnieT8234jlsK&day=%d",city, day];
+    
+    NSLog(@"%@",str);
+    NSURL *url = [NSURL URLWithString:str];
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5];
+    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *citystring = [[NSString alloc]initWithData:received encoding:NSUTF8StringEncoding];
+    
+    GDataXMLDocument *xml=[[GDataXMLDocument alloc]initWithXMLString:citystring options:1 error:nil];
+    
+    GDataXMLElement *root = [xml rootElement];
+    NSArray *rootarray = [root children];
+    GDataXMLElement  *channeName = [rootarray objectAtIndex:0];
+    NSArray *array = [channeName children];
+    for (GDataXMLElement *item  in array)
+    {
+        NSArray *itemArray = [item children];
+        if ([[item name] isEqualToString:@"status1"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"weatherstatus"];
+        }
+        
+        if ([[item name] isEqualToString:@"temperature1"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"temperature1"];
+        }
+        
+        if ([[item name] isEqualToString:@"temperature2"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"temperature2"];
+        }
+        
+        if ([[item name] isEqualToString:@"zwx_s"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"zwx_s"];
+        }
+        
+        if ([[item name] isEqualToString:@"pollution_l"] && [itemArray count]>0)
+        {
+            [envir setObject: [[itemArray objectAtIndex:0] stringValue] forKey:@"pollution_l"];
+        }
+
+
+    }
+    
+    if ([envir count] > 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:envir forKey:key];
+    }
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+}
+
+-(NSDictionary *)getWeatherDetail:(int)type
+{
+    switch (type) {
+        case 0:
+            return [[NSUserDefaults standardUserDefaults] objectForKey:@"weathertoday"];
+        case 1:
+            return [[NSUserDefaults standardUserDefaults] objectForKey:@"weathertomorrow"];
+        case 2:
+            return [[NSUserDefaults standardUserDefaults] objectForKey:@"weatheraftertomorrow"];
+        default:
+            break;
+    }
+    
+    return nil;
 }
 
 -(NSDictionary *)getweather
 {
-    //[self getWeatherFromSina:@"厦门" andByDay:0];
-    //[self getWeatherFromSina:@"厦门" andByDay:1];
-    //[self getWeatherFromSina:@"厦门" andByDay:2];
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weather"])
     {
         NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
@@ -239,6 +282,10 @@
         
         mycity = [[NSUserDefaults standardUserDefaults] objectForKey:@"mylocation"];
         if (CUSTOMER_COUNTRY == 1 && mycity) {
+            [self getWeatherFromSina:mycity andByDay:0];
+            [self getWeatherFromSina:mycity andByDay:1];
+            [self getWeatherFromSina:mycity andByDay:2];
+
             NSString *pm25value = [self getweatherfromPM25in:mycity];
             if (pm25value != nil) {
                 [envir setObject:pm25value forKey:@"PM25"];
@@ -254,6 +301,10 @@
          mycity = [[NSUserDefaults standardUserDefaults] objectForKey:@"mylocation"];
         if (CUSTOMER_COUNTRY == 1 && mycity)
         {
+            [self getWeatherFromSina:mycity andByDay:0];
+            [self getWeatherFromSina:mycity andByDay:1];
+            [self getWeatherFromSina:mycity andByDay:2];
+            
             if ([envir objectForKey:@"PM25"] == nil)
             {
                 NSMutableDictionary *newenvir=[[NSMutableDictionary alloc]init];
