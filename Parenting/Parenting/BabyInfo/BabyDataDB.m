@@ -266,7 +266,7 @@
 {
     BOOL res;
     int user_id = ACCOUNTUID;
-    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    int baby_id = BABYID;
     FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
     res=[db open];
     if (!res) {
@@ -274,7 +274,7 @@
         [db close];
         return res;
     }
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_physiology (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, type integer defalut 0, measure_time integer default 0, value double default 0)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_physiology (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, type integer DEFAULT 0, measure_time integer DEFAULT 0, value double default 0)"];
     
     if (!res) {
         NSLog(@"表格创建失败");
@@ -285,8 +285,8 @@
     res=[db executeUpdate:@"insert into bc_baby_physiology values(?,?,?,?,?)",
         [NSNumber numberWithLong:create_time],
         [NSNumber numberWithLong:update_time],
-        [NSNumber numberWithLong:measure_time],
         [NSNumber numberWithInt:type],
+        [NSNumber numberWithLong:measure_time],
         [NSNumber numberWithDouble:value]
          ];
     
@@ -342,7 +342,7 @@
         return nil;
     }
     
-    NSString *sql =[NSString stringWithFormat:@"select * from bc_baby_physiology where type = %d",type];
+    NSString *sql =[NSString stringWithFormat:@"select * from bc_baby_physiology where type = %d order by measure_time desc",type];
     FMResultSet *resultset=[db executeQuery:sql];
     while ([resultset next]) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];

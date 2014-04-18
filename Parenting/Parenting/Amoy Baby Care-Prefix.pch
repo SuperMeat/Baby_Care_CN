@@ -62,6 +62,7 @@
 #define UDBPATH ([NSString stringWithFormat:@"%@/Documents/BC_Info.sqlite",NSHomeDirectory()])
 
 #define DBPATH ([NSString stringWithFormat:@"%@/Documents/userdata.db",NSHomeDirectory()])
+#define WHODBPATH ([NSString stringWithFormat:@"%@/Documents/who.rdb",NSHomeDirectory()])
 
 #define SDBPATH ([NSString stringWithFormat:@"%@/Documents/BabySuggestion.rdb",NSHomeDirectory()])
 
