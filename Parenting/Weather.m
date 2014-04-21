@@ -179,6 +179,7 @@
     }
     
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
     NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
     
     NSStringEncoding chineseEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
