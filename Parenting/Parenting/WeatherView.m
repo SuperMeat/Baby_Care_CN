@@ -63,12 +63,12 @@
     pm.title=NSLocalizedString(@"PM2.5",nil);
     uv.title=NSLocalizedString(@"UV",nil);
     
-    temp.headimage=[UIImage imageNamed:@"icon_temperature.png"];
-    humi.headimage=[UIImage imageNamed:@"icon_humidity.png"];
-    light.headimage=[UIImage imageNamed:@"icon_light.png"];
-    sound.headimage=[UIImage imageNamed:@"icon_sound.png"];
-    pm.headimage=[UIImage imageNamed:@"icon_pm2.5.png"];
-    uv.headimage=[UIImage imageNamed:@"icon_uv.png"];
+//    temp.headimage=[UIImage imageNamed:@"icon_temperature.png"];
+//    humi.headimage=[UIImage imageNamed:@"icon_humidity.png"];
+//    light.headimage=[UIImage imageNamed:@"icon_light.png"];
+//    sound.headimage=[UIImage imageNamed:@"icon_sound.png"];
+//    pm.headimage=[UIImage imageNamed:@"icon_pm2.5.png"];
+//    uv.headimage=[UIImage imageNamed:@"icon_uv.png"];
     
     dataarray=[[NSMutableArray alloc]initWithCapacity:0];
     [dataarray addObject:temp];
