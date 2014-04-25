@@ -28,6 +28,7 @@
     self=[super init];
     if (self) {
         self.hidesBottomBarWhenPushed=YES;
+        
     }
     return self;
 }
