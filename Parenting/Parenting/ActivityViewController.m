@@ -168,7 +168,7 @@
     
     self.btnAdvise = [[UIButton alloc] init];
     self.btnAdvise.frame = CGRectMake(320-10-40,22, 40, 40);
-    [self.btnAdvise setImage:[UIImage imageNamed:@"btn_sum2"] forState:UIControlStateNormal];
+    [self.btnAdvise setImage:[UIImage imageNamed:@"btn_sum3"] forState:UIControlStateNormal];
     [self.activityImageView addSubview:self.btnAdvise];
     [self.btnAdvise addTarget:self action:@selector(showAdvise) forControlEvents:UIControlEventTouchUpInside];
 

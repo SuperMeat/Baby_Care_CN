@@ -461,7 +461,7 @@
     action3=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (durationpicker==nil) {
-        durationpicker=[[DurationPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
+        durationpicker=[[DurationPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 162)];
     }
     
     durationpicker.delegate   = self;
@@ -471,7 +471,7 @@
     [durationpicker selectRow:self.durationmin inComponent:1 animated:NO];
     [durationpicker selectRow:self.durationhour inComponent:0 animated:NO];
     
-    durationpicker.frame=CGRectMake(0, 0, 320, 100);
+    durationpicker.frame=CGRectMake(0, 0, 320, 162);
     
     action3.bounds=CGRectMake(0, 0, 320, 200);
     
