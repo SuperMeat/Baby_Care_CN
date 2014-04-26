@@ -1,30 +1,28 @@
 //
-//  PhyDetailViewController.m
+//  PHYDetailViewController.m
 //  Amoy Baby Care
 //
-//  Created by CHEN WEIBIN on 14-4-18.
+//  Created by CHEN WEIBIN on 14-4-24.
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
-#import "PhyDetailViewController.h"
-#import "WhoDataBase.h"
+#import "PHYDetailViewController.h"
 #import "BabyDataDB.h"
+#import "WhoDataBase.h"
 
 #define YAXISCOUNT 5
 #define SIZEINTERVA 10
 
-@interface PhyDetailViewController ()
+@interface PHYDetailViewController ()
 
 @end
 
-@implementation PhyDetailViewController
+@implementation PHYDetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        [self setTitle:@"生理详细"];
         self.hidesBottomBarWhenPushed=YES;
 #define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
         
@@ -40,44 +38,24 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [MobClick beginLogPageView:@"生理详细页"];
-    self.hidesBottomBarWhenPushed=YES;
-}
-
--(void)setItemIndex:(NSInteger)index{
-    itemIndex = index;
-    switch (itemIndex) {
-        case 1:
-            itemName=@"身高";
-            break;
-        case 2:
-            itemName=@"体重";
-            break;
-        case 3:
-            itemName=@"BMI";
-            break;
-        case 4:
-            itemName=@"头围";
-            break;
-        case 5:
-            itemName=@"体温";
-            break;
-        default:
-            break;
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initView];
-    [self drawLine];
-    [self makeAdvise];
-} 
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [MobClick beginLogPageView:@"生理详细页"];
+    self.hidesBottomBarWhenPushed=YES;
+    [self initData];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [MobClick endLogPageView:@"生理详细页"];
+}
 
 -(void)initView{
+    //navigationBar
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 320, 44)];
     titleView.backgroundColor=[UIColor clearColor];
     UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -95,19 +73,116 @@
     [self.view addSubview:self.phyDetailImageView];
     [self.phyDetailImageView setUserInteractionEnabled:YES];
     
-    buttonBack = [[UIButton alloc] init];
-    buttonBack.frame = CGRectMake(10, 22, 40, 40);
-    buttonBack.titleLabel.font = [UIFont systemFontOfSize:14];
-    [buttonBack setTitle:@"返回" forState:UIControlStateNormal];
-    [buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [_phyDetailImageView addSubview:buttonBack];
+    _buttonBack = [[UIButton alloc] init];
+    _buttonBack.frame = CGRectMake(10, 22, 40, 40);
+    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:16];
+    [_buttonBack setTitle:@"返回" forState:UIControlStateNormal];
+    [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [_phyDetailImageView addSubview:_buttonBack];
+    
+    _buttonAdd = [[UIButton alloc] init];
+    _buttonAdd.frame = CGRectMake(320-10-40,22, 40, 40);
+    _buttonAdd.titleLabel.font = [UIFont systemFontOfSize:20];
+    [_buttonAdd setTitle:@"+" forState:UIControlStateNormal];
+    [_buttonAdd addTarget:self action:@selector(AddRecord) forControlEvents:UIControlEventTouchUpInside];
+    [_phyDetailImageView addSubview:_buttonAdd];
+    
+    _buttonTip = [[UIButton alloc] init];
+    _buttonTip.frame = CGRectMake(50, 22, 40, 40);
+    _buttonTip.titleLabel.font = [UIFont systemFontOfSize:20];
+    [_buttonTip setTitle:@"i" forState:UIControlStateNormal];
+
+    [_phyDetailImageView addSubview:_buttonTip];
+    
+    //_viewTop1
+    _viewTop1 = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 65)];
+    _viewTop1.backgroundColor = [ACFunction colorWithHexString:@"#EFEEEE"];
+    [self.view addSubview:_viewTop1];
+    
+    //_viewTop1_LAST
+    _labelLastValue = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 80, 20)];
+    _labelLastValue.font = [UIFont fontWithName:@"Arial" size:20];
+    _labelLastValue.textColor = [ACFunction colorWithHexString:[arrayCurrent objectAtIndex:7]];
+    _labelLastValue.textAlignment = NSTextAlignmentLeft;
+    
+    UILabel *labelLastTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 80, 20)];
+    labelLastTitle.font = [UIFont fontWithName:@"Arial" size:10];
+    labelLastTitle.textAlignment = NSTextAlignmentLeft;
+    labelLastTitle.text = [NSString stringWithFormat:@"上次%@",itemName];
+    
+    _labelLastDate = [[UILabel alloc]initWithFrame:CGRectMake(10, 42, 80, 20)];
+    _labelLastDate.font = [UIFont fontWithName:@"Arial" size:12];
+    _labelLastDate.textAlignment = NSTextAlignmentLeft;
+    
+    [_viewTop1 addSubview:_labelLastValue];
+    [_viewTop1 addSubview:labelLastTitle];
+    [_viewTop1 addSubview:_labelLastDate];
+    
+    //_viewTop1_CURRENT
+    _labelCURValue = [[UILabel alloc]initWithFrame:CGRectMake(135, 10, 80, 20)];
+    _labelCURValue.font = [UIFont fontWithName:@"Arial" size:20];
+    _labelCURValue.textColor = [ACFunction colorWithHexString:[arrayCurrent objectAtIndex:7]];
+    _labelCURValue.textAlignment = NSTextAlignmentLeft;
+    
+    UILabel *labelCURTitle = [[UILabel alloc]initWithFrame:CGRectMake(135, 30, 80, 20)];
+    labelCURTitle.font = [UIFont fontWithName:@"Arial" size:10];
+    labelCURTitle.textAlignment = NSTextAlignmentLeft;
+    labelCURTitle.text = [NSString stringWithFormat:@"当前%@",itemName];
+    
+    _labelCURDate = [[UILabel alloc]initWithFrame:CGRectMake(135, 42, 80, 20)];
+    _labelCURDate.font = [UIFont fontWithName:@"Arial" size:12];
+    _labelCURDate.textAlignment = NSTextAlignmentLeft;
+    
+    //_viewTop1_CHANGE
+    _labelChangeValue = [[UILabel alloc]initWithFrame:CGRectMake(260, 10, 60, 20)];
+    _labelChangeValue.font = [UIFont fontWithName:@"Arial" size:20];
+    _labelChangeValue.textColor = [ACFunction colorWithHexString:[arrayCurrent objectAtIndex:7]];
+    _labelCURValue.textAlignment = NSTextAlignmentLeft;
+    
+    UILabel *labelChangeTitle = [[UILabel alloc]initWithFrame:CGRectMake(260, 30, 60, 20)];
+    labelChangeTitle.font = [UIFont fontWithName:@"Arial" size:10];
+    labelChangeTitle.textAlignment = NSTextAlignmentLeft;
+    labelChangeTitle.text = @"变化";
+    
+    [_viewTop1 addSubview:_labelCURValue];
+    [_viewTop1 addSubview:labelCURTitle];
+    [_viewTop1 addSubview:_labelCURDate];
+    [_viewTop1 addSubview:_labelChangeValue];
+    [_viewTop1 addSubview:labelChangeTitle];
+
+    //_viewTopHistroy
+    _viewHistroy = [[UIView alloc]initWithFrame:CGRectMake(0, 130, self.view.bounds.size.width, 44)];
+    _viewHistroy.backgroundColor = [ACFunction colorWithHexString:@"#EFEEEE"];
+    [self.view addSubview:_viewHistroy];
+    
+    UILabel *labelHistory = [[UILabel alloc]initWithFrame:CGRectMake(10, 12, 200, 20)];
+    labelHistory.font = [UIFont fontWithName:@"Arial" size:16];
+    labelHistory.textAlignment = NSTextAlignmentLeft;
+    labelHistory.text = @"查看所有记录";
+    
+    [_viewHistroy addSubview:labelHistory];
+    
+    //corePlot
+    [self drawLine:CGRectMake(0, 175, self.view.bounds.size.width, 174)];
+    [self.view addSubview:plot];
+    
+    //adviseView
+    [self makeAdvise:CGRectMake(0, 480-130, 320, 130)];
 }
 
--(void)goBack{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)initData{
+    //_viewTop1
+    //LAST
+    _labelLastValue.text = @"5.2 KG";
+    _labelLastDate.text = @"2014-4-15";
+    //CURRENT
+    _labelCURValue.text = @"5.6 KG";
+    _labelCURDate.text = @"2014-4-23";
+    //CHANGE
+    _labelChangeValue.text = @"+0.3";
 }
 
--(void)makeAdvise
+-(void)makeAdvise:(CGRect)rect
 {
     NSDictionary *dict1=[[NSDictionary alloc]initWithObjectsAndKeys:@"一、把宝宝叫醒\n\r到了喂奶时间，就要把宝宝叫醒。你应该让宝宝晚上能够一觉到天亮，而不是白天睡觉、晚上哭闹。我的做法是，喂奶时间快到时，就把宝宝的房门打开，进去把窗帘拉开，让宝宝慢慢醒过来。如果喂奶时间到了，宝宝还在睡觉，我会把宝宝抱起来，交给喜欢宝宝的人抱一抱，比如孩子的爸爸、爷爷、奶奶或其他亲友，请他们轻轻地叫醒宝宝。他们会轻声跟宝宝说话，亲亲他，或者帮他脱掉几件衣服，让宝宝慢慢地醒过来。",@"content", nil];
     NSDictionary *dict2=[[NSDictionary alloc]initWithObjectsAndKeys:@"二、喂奶要喂饱\n\r每次喂奶一定要喂饱。喂母乳时，每边各喂10～15分钟。我们常跟宝宝开玩笑说：“这不是吃点心哦。”尽量让宝宝在吃奶时保持清醒。如果宝宝还没吃饱就开始打瞌睡，可以搔搔他的脚底，蹭蹭他的脸颊，或把奶头拔开一段距离。尽量让宝宝吃饱，让他可以撑到下次喂奶的时间。",@"content", nil];
@@ -116,16 +191,14 @@
     AdviseScrollview *ad=[[AdviseScrollview alloc]initWithArray:[NSArray arrayWithObjects:dict1,dict2,dict3, nil]];
     
     adviseImageView = [[UIImageView alloc] init];
-    [adviseImageView setFrame:CGRectMake(0, 480-130, 320, 130)];
+    [adviseImageView setFrame:rect];
     [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
     adviseImageView.userInteractionEnabled = YES;
     [adviseImageView addSubview:ad];
     [self.view addSubview:adviseImageView];
 }
 
-
--(void)drawLine
-{
+-(void)drawLine:(CGRect)rect{
     //********Start********
     //Step-1:                           根据宝宝的出生天数得出X轴范围
     //Argument:postnatalDays            宝宝的出生天数
@@ -149,8 +222,58 @@
     NSArray *xyTitle = @[@"",@"(分值)"];
     NSArray *axis = @[xAsix,yAsix];
     
-    plot = [[PhyCorePlot alloc]initWithFrame:CGRectMake(0, 70, 320, 272) Title:@"" XYPlotRange:xyPlot XYTitle:xyTitle Axis:axis YBaseV:yBaseValue YSizeInterval:ySizeInterval];
-    [self.view addSubview:plot];
+    plot = [[PhyCorePlot alloc]initWithFrame:rect Title:@"" XYPlotRange:xyPlot XYTitle:xyTitle Axis:axis YBaseV:yBaseValue YSizeInterval:ySizeInterval];
+}
+
+-(void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)AddRecord{
+//    addPHYRecordViewController = [[AddPHYRecordViewController alloc] init];
+//    [pHYDetailViewController setVar:[arrayPhyItems objectAtIndex:indexPath.row]];
+//    [self.navigationController pushViewController:pHYDetailViewController animated:YES];
+
+}
+
+-(void)setVar:(NSArray*) array{
+    arrayCurrent = array;
+    
+    switch ([[array objectAtIndex:0]intValue]) {
+        case 0:
+            itemName = @"身高";
+            break;
+        case 1:
+            itemName = @"体重";
+            break;
+        case 2:
+            itemName = @"BMI";
+            break;
+        case 3:
+            itemName = @"头围";
+            break;
+        case 4:
+            itemName = @"体温";
+            break;
+        default:
+            break;
+    }
+}
+
+- (NSInteger)numberOfDaysFromTodayByTime:(int)birth
+{
+    NSDate *today = [NSDate date];
+    NSTimeZone *localTimeZone = [NSTimeZone systemTimeZone];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:localTimeZone];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    double dBirth = (double)birth;
+    double dToday = [ACDate getTimeStampFromDate:today];
+    NSInteger nSecs = (NSInteger)(dToday - dBirth);
+    NSInteger oneDaySecs = 24*3600;
+    return nSecs / oneDaySecs;
+    
 }
 
 #pragma mark - 获取x轴坐标系
@@ -173,7 +296,7 @@
         PostnatalDays=60;
         sizeInterval = 60 / SIZEINTERVA;
         for (int i = 0; i <= PostnatalDays; i++) {
-            if (sizeInterval % 4 == 0) {
+            if (i % sizeInterval == 0) {
                 [arrXAsix addObject:[NSNumber numberWithInt:i]];
             }
         }
@@ -236,22 +359,6 @@
         [arrYAsix addObject:[NSNumber numberWithFloat:i]];
     }
     return arrYAsix;
-}
-
-- (NSInteger)numberOfDaysFromTodayByTime:(int)birth
-{
-    NSDate *today = [NSDate date];
-    NSTimeZone *localTimeZone = [NSTimeZone systemTimeZone];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:localTimeZone];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    
-    double dBirth = (double)birth;
-    double dToday = [ACDate getTimeStampFromDate:today];
-    NSInteger nSecs = (NSInteger)(dToday - dBirth);
-    NSInteger oneDaySecs = 24*3600;
-    return nSecs / oneDaySecs;
-    
 }
 
 - (void)didReceiveMemoryWarning

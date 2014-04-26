@@ -47,7 +47,7 @@
 //    CPTGradient *gradient = [ CPTGradient gradientWithBeginningColor :[CPTColor colorWithComponentRed:0xEF/255.0 green:0xEF/255.0 blue:0xEF/255.0 alpha:0xFF/255.0] endingColor :[CPTColor colorWithComponentRed:0xEF/255.0 green:0xEF/255.0 blue:0xEF/255.0 alpha:0xFF/255.0]];
     
     //ADD-CWB
-    CPTColor *endColor = [CPTColor whiteColor];
+    CPTColor *endColor = [CPTColor colorWithComponentRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1.0];
     CPTGradient *gradient = [ CPTGradient gradientWithBeginningColor :endColor endingColor :endColor];
     gradient. angle = 45.0f ;
     // 渐变填充
