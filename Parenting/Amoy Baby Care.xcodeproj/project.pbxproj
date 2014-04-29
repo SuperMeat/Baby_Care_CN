@@ -160,6 +160,8 @@
 		48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2518472BB500BCF799 /* AdviseLevel.m */; };
 		48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2818473EC400BCF799 /* WeatherAdviseViewController.m */; };
 		48357E2B18473EC400BCF799 /* WeatherAdviseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48357E2918473EC400BCF799 /* WeatherAdviseViewController.xib */; };
+		4836F8A2190F5A490042006E /* DataCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4836F8A0190F5A490042006E /* DataCustomCell.m */; };
+		4836F8A3190F5A490042006E /* DataCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4836F8A1190F5A490042006E /* DataCustomCell.xib */; };
 		483D08D318164C9B00E720E6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483D08D218164C9B00E720E6 /* CoreTelephony.framework */; };
 		483D08D518164CB600E720E6 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 483D08D418164CB600E720E6 /* libstdc++.dylib */; };
 		483D08D718164CCA00E720E6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483D08D618164CCA00E720E6 /* Security.framework */; };
@@ -824,6 +826,9 @@
 		48357E2718473EC400BCF799 /* WeatherAdviseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherAdviseViewController.h; path = Weather/WeatherAdviseViewController.h; sourceTree = "<group>"; };
 		48357E2818473EC400BCF799 /* WeatherAdviseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherAdviseViewController.m; path = Weather/WeatherAdviseViewController.m; sourceTree = "<group>"; };
 		48357E2918473EC400BCF799 /* WeatherAdviseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WeatherAdviseViewController.xib; path = Weather/WeatherAdviseViewController.xib; sourceTree = "<group>"; };
+		4836F89F190F5A490042006E /* DataCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCustomCell.h; sourceTree = "<group>"; };
+		4836F8A0190F5A490042006E /* DataCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCustomCell.m; sourceTree = "<group>"; };
+		4836F8A1190F5A490042006E /* DataCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataCustomCell.xib; sourceTree = "<group>"; };
 		483D08D218164C9B00E720E6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		483D08D418164CB600E720E6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		483D08D618164CCA00E720E6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -2332,6 +2337,9 @@
 		488C894F18B497ED0091C2BF /* 活动 */ = {
 			isa = PBXGroup;
 			children = (
+				4836F89F190F5A490042006E /* DataCustomCell.h */,
+				4836F8A0190F5A490042006E /* DataCustomCell.m */,
+				4836F8A1190F5A490042006E /* DataCustomCell.xib */,
 				48FEAF8A18E943B8002425E2 /* ActivityViewController.h */,
 				48FEAF8B18E943B8002425E2 /* ActivityViewController.m */,
 				48FEAF8C18E943B8002425E2 /* ActivityViewController.xib */,
@@ -3865,6 +3873,7 @@
 				482791D31884DE1D003E9724 /* Icon-Small.png in Resources */,
 				BE004CE018FE2B7500E56833 /* icon_remind@2x.png in Resources */,
 				4800B0C818D7F3D20093A6AF /* 首页_按@2x.png in Resources */,
+				4836F8A3190F5A490042006E /* DataCustomCell.xib in Resources */,
 				480EFA1D18E5155C00D40903 /* panels_color1_choose@2x.png in Resources */,
 				48FEAF6318E917CB002425E2 /* btn_sleeping_focus@2x.png in Resources */,
 				BE75CD041872C3CD001EF1C1 /* LoginViewController.xib in Resources */,
@@ -4072,6 +4081,7 @@
 				CE638AB5174F4899009A60AB /* FMDatabasePool.m in Sources */,
 				CE638AB6174F4899009A60AB /* FMDatabaseQueue.m in Sources */,
 				48357E231846ED2A00BCF799 /* EnvironmentAdviceDB.m in Sources */,
+				4836F8A2190F5A490042006E /* DataCustomCell.m in Sources */,
 				CE638AB7174F4899009A60AB /* FMResultSet.m in Sources */,
 				BE5914C718FCDEE000F0488B /* BabyBaseInfoView.m in Sources */,
 				48F6ABA4186D191C0032045E /* AlarmKey.m in Sources */,
@@ -4306,8 +4316,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "16B56DB3-67BA-46B0-8F2D-4FED9B70E1B1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "16B56DB3-67BA-46B0-8F2D-4FED9B70E1B1";
+				PROVISIONING_PROFILE = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64";

@@ -235,6 +235,11 @@
 
 #define PNGSCALE (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 1.0:(480.0/568.0))
 
+#define YWEATHADD (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 20:0)
+#define YADD (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 48:0)
+
+#define WINDOWSCREEN (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 568:480)
+
 #define NORECORDTIP @"您还没有任何活动记录哦,\r现在开始记录吧!"
 
 #define BAIDUWEATHERAPI @"http://api.map.baidu.com/telematics/v3/weather?location=%@&output=json&ak=0jqwWuOll53rYRpidLF3XrB9"

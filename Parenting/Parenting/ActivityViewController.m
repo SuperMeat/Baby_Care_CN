@@ -469,7 +469,7 @@
     }
     else
     {
-        return 36*PNGSCALE;
+        return 20*PNGSCALE;
     }
 
 }

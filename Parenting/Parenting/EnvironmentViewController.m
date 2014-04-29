@@ -77,8 +77,8 @@
     chooseIndoor=[UIButton buttonWithType:UIButtonTypeCustom];
     chooseOutdoor=[UIButton buttonWithType:UIButtonTypeCustom];
 
-    chooseOutdoor.frame=CGRectMake(40, 90*PNGSCALE-64, 140*PNGSCALE, 25*PNGSCALE);
-    chooseIndoor.frame=CGRectMake(140*PNGSCALE+40, 90*PNGSCALE-64, 140*PNGSCALE, 25*PNGSCALE);
+    chooseOutdoor.frame=CGRectMake((320-140*PNGSCALE*2)/2.0, 90*PNGSCALE-64, 140*PNGSCALE, 25*PNGSCALE);
+    chooseIndoor.frame=CGRectMake((320-140*PNGSCALE*2)/2.0+140*PNGSCALE, 90*PNGSCALE-64, 140*PNGSCALE, 25*PNGSCALE);
     [chooseIndoor setBackgroundImage:[UIImage imageNamed:@"label_indoor"] forState:UIControlStateNormal];
     [chooseIndoor setBackgroundImage:[UIImage imageNamed:@"label_indoor_focus"] forState:UIControlStateDisabled];
     chooseIndoor.tag=101;
@@ -104,7 +104,7 @@
     [self.weather makeview];
     [self.weather setBackgroundColor:[UIColor whiteColor]];
     self.weather.chooseType = QCM_TYPE_FEED;
-    self.weather.frame=CGRectMake(0, 0+90*PNGSCALE-64+5+25*PNGSCALE, 320, frame.size.height-130-64-49);
+    self.weather.frame=CGRectMake(0, 0+90*PNGSCALE-64+2+25*PNGSCALE, 320, frame.size.height-130-64-49);
     [self.view addSubview:self.weather];
     NSLog(@"weather %@",self.weather);
     
@@ -112,7 +112,7 @@
     self.bleweather.chooseType = QCM_TYPE_FEED;
     [self.bleweather setBackgroundColor:[UIColor whiteColor]];
     [self.bleweather makeview];
-    self.bleweather.frame=CGRectMake(0, 0+90*PNGSCALE-64+5+25*PNGSCALE, 320, frame.size.height-130-64-49);
+    self.bleweather.frame=CGRectMake(0, 0+90*PNGSCALE-64+2+25*PNGSCALE, 320, frame.size.height-130-64-49);
     [self.view addSubview:self.bleweather];
     [self.bleweather setHidden:YES];
     NSLog(@"bleweather %@",self.bleweather);
