@@ -69,8 +69,8 @@
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor grayColor];
     imageview=[[UIImageView alloc]init];
-    imageview.bounds=CGRectMake(0, 0, 290, 280);
-    imageview.center=CGPointMake(160, (460-44-49)/2);
+    imageview.bounds=CGRectMake(0, 0, 290, 280+30);
+    imageview.center=CGPointMake(160, (460-44-49)/2+30);
     [self addSubview:imageview];
     [imageview addSubview:title];
     
@@ -85,9 +85,9 @@
     
     UILabel *duration = [[UILabel alloc]initWithFrame:CGRectMake(10, 120, 100, 30)];
     
-    UILabel *remark = [[UILabel alloc]initWithFrame:CGRectMake(10, 160, 100, 30)];
+    UILabel *remark = [[UILabel alloc]initWithFrame:CGRectMake(10, 200, 100, 30)];
     
-    Oz = [[UILabel alloc]initWithFrame:CGRectMake(10, 200, 100, 30)];
+    Oz = [[UILabel alloc]initWithFrame:CGRectMake(10, 160, 100, 30)];
     
     date.backgroundColor      = [UIColor clearColor];
     starttime.backgroundColor = [UIColor clearColor];
@@ -123,7 +123,7 @@
     [imageview addSubview:remark];
     
     datetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
-    [datetext setBackground:[UIImage imageNamed:@"save_text"]];
+    [datetext setBackground:[UIImage imageNamed:@"panels_input"]];
     datetext.adjustsFontSizeToFitWidth=YES;
     [imageview addSubview:datetext];
     datetext.textColor=[UIColor grayColor];
@@ -139,7 +139,7 @@
     starttimetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 80, 150, 30)];
     
     starttimetext.textColor=[UIColor grayColor];
-    [starttimetext setBackground:[UIImage imageNamed:@"save_text"]];
+    [starttimetext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:starttimetext];
     
     [starttimetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
@@ -151,7 +151,7 @@
     starttimetext.inputView = starttimepicker;
     
     durationtext=[[UITextField alloc]initWithFrame:CGRectMake(115, 120, 150, 30)];
-    [durationtext setBackground:[UIImage imageNamed:@"save_text"]];
+    [durationtext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:durationtext];
     durationtext.textColor=[UIColor grayColor];;
 
@@ -171,20 +171,20 @@
         [minutes addObject:[NSNumber numberWithInt:j]];
     }
 
-    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
-    remarkbg.image=[UIImage imageNamed:@"save_text"];
+    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 200, 150, 60)];
+    remarkbg.image=[UIImage imageNamed:@"panels_input"];
     remarkbg.userInteractionEnabled=YES;
     
-    remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 160, 30)];
+    remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 160, 60)];
     remarktext.backgroundColor=[UIColor clearColor];
     remarktext.textColor=[UIColor grayColor];;
     [remarkbg addSubview:remarktext];
     [imageview addSubview:remarkbg];
     remarktext.delegate=self;
-    [remarktext setFont:[UIFont systemFontOfSize:16]];
+    [remarktext setFont:[UIFont systemFontOfSize:13]];
 
-    Oztext=[[UITextField alloc]initWithFrame:CGRectMake(115, 200, 150, 30)];
-    [Oztext setBackground:[UIImage imageNamed:@"save_text"]];
+    Oztext=[[UITextField alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
+    [Oztext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:Oztext];
     Oztext.textColor=[UIColor grayColor];
     Oztext.delegate=self;
@@ -225,7 +225,7 @@
     [rightbutton addTarget:self action:@selector(leftOrright:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *savebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    savebutton.frame=CGRectMake(200, 240, 70, 30);
+    savebutton.frame=CGRectMake(200, 270, 70, 30);
     [savebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     savebutton.layer.cornerRadius = 5.0f;
     [savebutton setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
@@ -233,7 +233,7 @@
     [imageview addSubview:savebutton];
     
     UIButton *canclebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    canclebutton.frame=CGRectMake(20, 240, 70, 30);
+    canclebutton.frame=CGRectMake(20, 270, 70, 30);
     [canclebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     canclebutton.layer.cornerRadius = 5.0f;
     [canclebutton setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
@@ -396,13 +396,6 @@
 
     }
 
-//    if (!oz.length>0) {
-//        
-//
-//    UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@ can not be null",[[NSUserDefaults standardUserDefaults] objectForKey:@"metric"]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//    [alter show];
-//    return;
-//    }
     if (select) {
         if (Oztext.hidden) {
             if (leftbtn.enabled) {

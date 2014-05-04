@@ -568,8 +568,6 @@
 		CE0167C8174B059000462363 /* radio_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167B2174B059000462363 /* radio_focus@2x.png */; };
 		CE0167D4174B217C00462363 /* CopyrightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0167D2174B217C00462363 /* CopyrightViewController.m */; };
 		CE0167D5174B217C00462363 /* CopyrightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0167D3174B217C00462363 /* CopyrightViewController.xib */; };
-		CE0167DB174B45AB00462363 /* feedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0167D9174B45AB00462363 /* feedViewController.m */; };
-		CE0167DC174B45AB00462363 /* feedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0167DA174B45AB00462363 /* feedViewController.xib */; };
 		CE016899174B4CCB00462363 /* bg_advice.png in Resources */ = {isa = PBXBuildFile; fileRef = CE016889174B4CCB00462363 /* bg_advice.png */; };
 		CE01689A174B4CCB00462363 /* bg_advice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01688A174B4CCB00462363 /* bg_advice@2x.png */; };
 		CE01689B174B4CCB00462363 /* btn_left.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01688B174B4CCB00462363 /* btn_left.png */; };
@@ -1363,9 +1361,6 @@
 		CE0167D1174B217C00462363 /* CopyrightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyrightViewController.h; sourceTree = "<group>"; };
 		CE0167D2174B217C00462363 /* CopyrightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopyrightViewController.m; sourceTree = "<group>"; };
 		CE0167D3174B217C00462363 /* CopyrightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CopyrightViewController.xib; sourceTree = "<group>"; };
-		CE0167D8174B45AB00462363 /* feedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = feedViewController.h; sourceTree = "<group>"; };
-		CE0167D9174B45AB00462363 /* feedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = feedViewController.m; sourceTree = "<group>"; };
-		CE0167DA174B45AB00462363 /* feedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = feedViewController.xib; sourceTree = "<group>"; };
 		CE016889174B4CCB00462363 /* bg_advice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_advice.png; sourceTree = "<group>"; };
 		CE01688A174B4CCB00462363 /* bg_advice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_advice@2x.png"; sourceTree = "<group>"; };
 		CE01688B174B4CCB00462363 /* btn_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_left.png; sourceTree = "<group>"; };
@@ -2476,9 +2471,6 @@
 		48EC1DBF185EF2D700965254 /* ActivityController */ = {
 			isa = PBXGroup;
 			children = (
-				CE0167D8174B45AB00462363 /* feedViewController.h */,
-				CE0167D9174B45AB00462363 /* feedViewController.m */,
-				CE0167DA174B45AB00462363 /* feedViewController.xib */,
 				CE3826EB174DEAE2009AD8DA /* diaperViewController.h */,
 				CE3826EC174DEAE2009AD8DA /* diaperViewController.m */,
 				CE3826ED174DEAE2009AD8DA /* diaperViewController.xib */,
@@ -3626,7 +3618,6 @@
 				48F91ABA18FB8DF10038DC67 /* advise_arrow_right_focus@2x.png in Resources */,
 				BE25763E18FE51CA0053683A /* plunger_blue@2x.png in Resources */,
 				CE0167D5174B217C00462363 /* CopyrightViewController.xib in Resources */,
-				CE0167DC174B45AB00462363 /* feedViewController.xib in Resources */,
 				48FEAF8618E917CB002425E2 /* line_@2x.png in Resources */,
 				48FEAF8018E917CB002425E2 /* line_cutoff@2x.png in Resources */,
 				4890DCE518F23DA000C498FB /* FeedActivityViewController.xib in Resources */,
@@ -4056,7 +4047,6 @@
 				48F6ABC01883B9BE0032045E /* BLEWeatherController.m in Sources */,
 				BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */,
 				CE0167D4174B217C00462363 /* CopyrightViewController.m in Sources */,
-				CE0167DB174B45AB00462363 /* feedViewController.m in Sources */,
 				CE0168AB174B506A00462363 /* SuggestView.m in Sources */,
 				CE3826EE174DEAE2009AD8DA /* diaperViewController.m in Sources */,
 				BE7C69781867F1B300C4B675 /* ASIDataCompressor.m in Sources */,
