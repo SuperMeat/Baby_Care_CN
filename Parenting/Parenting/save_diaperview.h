@@ -27,7 +27,8 @@
     
     UIDatePicker *starttimepicker;
     UIActionSheet *action2;
-    
+    long _createtime;
+    long _updatetime;
     NSDate* curstarttime;
     
 }
@@ -36,7 +37,7 @@
 @property(nonatomic,strong)NSDate *start;
 @property(nonatomic,assign)BOOL isshow;
 @property (assign) id<save_diaperviewDelegate> diaperSaveDelegate;
--(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start;
+-(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start UpdateTime:(long)updatetime CreateTime:(long)createtime;
 -(id)initWithFrame:(CGRect)frame Status:(NSString*)status;
 -(void)loaddata;
 @end

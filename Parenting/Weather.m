@@ -92,7 +92,7 @@
     CLLocationCoordinate2D coordinate=userCoordinate;
     NSString *str=[NSString stringWithFormat:@"http://query.yahooapis.com/v1/public/yql?q=select woeid from geo.placefinder where text=\"%f,%f\" and gflags=\"R\"",coordinate.latitude,coordinate.longitude];
     str=[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@", str);
+    //NSLog(@"%@", str);
     
     str=[NSString stringWithContentsOfURL:[NSURL URLWithString:str] encoding:NSUTF8StringEncoding error:nil];
     return str;
@@ -188,7 +188,7 @@
     
     NSString* str = [NSString stringWithFormat:@"http://php.weather.sina.com.cn/xml.php?city=%@&password=DJOYnieT8234jlsK&day=%d",city, day];
     
-    NSLog(@"%@",str);
+    //NSLog(@"%@",str);
     NSURL *url = [NSURL URLWithString:str];
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5];
     NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];

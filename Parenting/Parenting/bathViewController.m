@@ -264,7 +264,7 @@
         }
         labletip.text = NSLocalizedString(@"Counting", nil);
         sender.selected=YES;
-        [[NSUserDefaults standardUserDefaults] setObject:[currentdate date] forKey:@"timerOn"];
+        [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"timerOn"];
         [[NSUserDefaults standardUserDefaults] setObject:@"bath" forKey:@"ctl"];
         timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerGo) userInfo:nil repeats:YES];
     }
@@ -279,7 +279,7 @@
 
 -(void)timerGo
 {
-    timeLable.text=[currentdate durationFormat];
+    timeLable.text=[ACDate durationFormat];
     if ([timeLable.text isEqualToString:@"00:00:00"]) {
         [self stop];
     }
@@ -338,7 +338,7 @@
 {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"addbathnow"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[currentdate date] forKey:@"timerOn"];
+    [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"timerOn"];
     [[NSUserDefaults standardUserDefaults] setObject:@"bath" forKey:@"ctl"];
     
     [self makeSave];

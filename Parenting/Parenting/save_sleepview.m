@@ -24,10 +24,12 @@
     }
     return self;
 }
--(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start Duration:(NSString*)_curduration
+-(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start Duration:(NSString*)_curduration UpdateTime:(long)updatetime CreateTime:(long)createtime
 {
     self.start=_start;
     self.select=_select;
+    _updatetime = updatetime;
+    _createtime = createtime;
     NSArray *array    = [_curduration componentsSeparatedByString:@":"];
     self.durationhour = [[array objectAtIndex:0] intValue];
     self.durationmin  = [[array objectAtIndex:1] intValue];
@@ -204,14 +206,14 @@
     
     if (self.select) {
         
-        DataBase *db=[DataBase dataBase];
+        SummaryDB *db=[SummaryDB dataBase];
         NSArray *array= [db searchFromsleep:self.start];
         NSDate *date=(NSDate*)[array objectAtIndex:0];
         
-        datetext.text=[currentdate dateFomatdate:date];
+        datetext.text=[ACDate dateFomatdate:date];
         
         
-        durationtext.text=[currentdate getDurationfromdate:date second:[[array objectAtIndex:1] intValue] ] ;
+        durationtext.text=[ACDate getDurationfromdate:date second:[[array objectAtIndex:1] intValue] ] ;
         
         NSArray *array2 = [durationtext.text componentsSeparatedByString:@":"];
         
@@ -219,7 +221,7 @@
         self.durationmin  = [[array2 objectAtIndex:1] intValue];
         self.durationsec  = [[array2 objectAtIndex:2] intValue];
         
-        starttimetext.text=[currentdate getStarttimefromdate:date];
+        starttimetext.text=[ACDate getStarttimefromdate:date];
         
         
         remarktext.text=[array objectAtIndex:2];
@@ -229,9 +231,9 @@
     else
     {
         
-        datetext.text=[currentdate getdateFormat];
+        datetext.text=[ACDate getdateFormat];
 
-        durationtext.text=[currentdate durationFormat];
+        durationtext.text=[ACDate durationFormat];
         
         NSArray *array = [durationtext.text componentsSeparatedByString:@":"];
         self.durationhour = [[array objectAtIndex:0] intValue];
@@ -239,7 +241,7 @@
         self.durationsec  = [[array objectAtIndex:2] intValue];
 
         
-        starttimetext.text=[currentdate getStarttimeFormat];
+        starttimetext.text=[ACDate getStarttimeFormat];
     }
 }
 
@@ -255,18 +257,18 @@
 
 -(void)Save
 {
-    DataBase *db=[DataBase dataBase];
+    BabyDataDB *db=[BabyDataDB babyinfoDB];
     int duration=0;
     if (select) {
-        //[db updatesleepRemark:remarktext.text Starttime:start];
         NSArray *array = [durationtext.text componentsSeparatedByString:@":"];
         duration = [[array objectAtIndex:0] intValue]*60*60 + [[array objectAtIndex:1]intValue]*60+[[array objectAtIndex:2]intValue];
         if (curstarttime == nil) {
-            [db updatesleepRemark:self.start Month:[currentdate getMonthFromDate:self.start] Week:[currentdate getWeekFromDate:self.start] WeekDay:[currentdate getWeekDayFromDate:self.start] Duration:duration Remark:remarktext.text OldStartTime:self.start];
+            
+            [db updateSleepRecord:self.start Month:[ACDate getMonthFromDate:self.start] Week:[ACDate getWeekFromDate:self.start] WeekDay:[ACDate getWeekDayFromDate:self.start] Duration:duration Posture:@"" Place:@"" Remark:remarktext.text  MoreInfo:@"" CreateTime:_createtime];
         }
         else
         {
-            [db updatesleepRemark:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Duration:duration  Remark:remarktext.text OldStartTime:self.start];
+             [db updateSleepRecord:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] WeekDay:[ACDate getWeekDayFromDate:curstarttime] Duration:duration Posture:@"" Place:@"" Remark:remarktext.text  MoreInfo:@"" CreateTime:_createtime];
             curstarttime = nil;
         }
 
@@ -278,14 +280,24 @@
     NSArray *arr=[durationtext.text componentsSeparatedByString:@":"];
         duration=[[arr objectAtIndex:0] intValue]*60*60+[[arr objectAtIndex:1]intValue]*60+[[arr objectAtIndex:2] intValue];
     
-    //[db insertsleepStarttime:[currentdate getStarttime] Month:[currentdate getMonth] Week:[currentdate getWeek] WeekDay:[currentdate getWeekDay] Duration:(duration) Remark:remarktext.text];
-
         if (curstarttime == nil) {
-            [db insertsleepStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Duration:(duration) Place:@"" Remark:remarktext.text];
+            long creattime = [ACDate getTimeStampFromDate:[ACDate date]];
+            [db insertBabySleepRecord:creattime UpdateTime:creattime StartTime:[ACDate date] Month:[ACDate getCurrentMonth] Week:[ACDate getCurrentWeek] Weekday:[ACDate getCurrentWeekDay] Duration:duration Posture:@"" Place:@"" Remark:remarktext.text MoreInfo:@""];
         }
         else
         {
-            [db insertsleepStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Duration:(duration) Place:@""  Remark:remarktext.text];
+            long creattime = [ACDate getTimeStampFromDate:[ACDate date]];
+            [db insertBabySleepRecord:creattime
+                           UpdateTime:creattime
+                            StartTime:curstarttime
+                                Month:[ACDate getMonthFromDate:curstarttime]
+                                 Week:[ACDate getWeekFromDate:curstarttime]
+                              Weekday:[ACDate getWeekDayFromDate:curstarttime]
+                             Duration:duration
+                              Posture:@""
+                                Place:@""
+                               Remark:remarktext.text
+                             MoreInfo:@""];
             curstarttime = nil;
         }
 
@@ -377,21 +389,21 @@
         }
         else
         {
-            curstarttime = [currentdate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
+            curstarttime = [ACDate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
         }
     }
     else
     {
         if (curstarttime == nil) {
-            curstarttime  = [currentdate getNewDateFromOldDate:picker.date andOldDate:self.start];
+            curstarttime  = [ACDate getNewDateFromOldDate:picker.date andOldDate:self.start];
         }
         else
         {
-            curstarttime  = [currentdate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
+            curstarttime  = [ACDate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
         }
     }
     
-    datetext.text = [currentdate dateFomatdate:curstarttime];
+    datetext.text = [ACDate dateFomatdate:curstarttime];
 }
 
 -(void)actionsheetShow
@@ -428,21 +440,21 @@
         }
         else
         {
-            curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
+            curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
         }
     }
     else
     {
         if (curstarttime == nil) {
-            curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:self.start];
+            curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:self.start];
         }
         else
         {
-            curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
+            curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
         }
     }
     
-    starttimetext.text = [currentdate getStarttimefromdate:curstarttime];
+    starttimetext.text = [ACDate getStarttimefromdate:curstarttime];
 }
 
 -(void)actionsheetStartTimeShow

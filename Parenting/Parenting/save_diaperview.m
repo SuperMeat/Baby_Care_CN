@@ -28,11 +28,12 @@
 }
 
 
--(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start
+-(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start UpdateTime:(long)updatetime CreateTime:(long)createtime
 {
     self.start=_start;
     self.select=_select;
-
+    _createtime = createtime;
+    _updatetime = updatetime;
     self=[self initWithFrame:frame];
     return self;
 }
@@ -170,7 +171,7 @@
     remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30+30)];
     remarktext.backgroundColor=[UIColor clearColor];
     remarktext.textColor=[UIColor grayColor];
-    remarktext.font=[UIFont systemFontOfSize:16];
+    remarktext.font=[UIFont systemFontOfSize:13];
     [remarkbg addSubview:remarktext];
     [imageview addSubview:remarkbg];
     remarktext.delegate=self;
@@ -231,16 +232,17 @@
 {
     if (self.select) {
         
-        DataBase *db=[DataBase dataBase];
+        SummaryDB *db=[SummaryDB dataBase];
+
         NSArray *array= [db searchFromdiaper:self.start];
         NSDate *date=(NSDate*)[array objectAtIndex:0];
         
         self.start = date;
         
-        datetext.text=[currentdate dateFomatdate:date];
+        datetext.text=[ACDate dateFomatdate:date];
         
         
-        starttimetext.text=[currentdate getStarttimefromdate:date];
+        starttimetext.text=[ACDate getStarttimefromdate:date];
         
         
         remarktext.text=[array objectAtIndex:1];
@@ -262,8 +264,8 @@
     
     else
     {
-        datetext.text=[currentdate dateFomatdate:[currentdate date]];
-        starttimetext.text=[currentdate getStarttimefromdate:[currentdate date]];
+        datetext.text=[ACDate dateFomatdate:[ACDate date]];
+        starttimetext.text=[ACDate getStarttimefromdate:[ACDate date]];
         if ([self.status isEqualToString:@"Wet"]) {
             wet.enabled=NO;
             dry.enabled=YES;
@@ -283,6 +285,7 @@
         }
     }
 }
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 
 {
@@ -296,16 +299,15 @@
 
 -(void)Save:(UIButton*)sender
 {
-    DataBase *db=[DataBase dataBase];
+    BabyDataDB *db=[BabyDataDB babyinfoDB];
     if (select)
     {
-        //[db updatediaperStatus:self.status Remark:remarktext.text Starttime:start];
         if (curstarttime == nil) {
-            [db updatediaperStatus:self.start Month:[currentdate getMonthFromDate:self.start] Week:[currentdate getWeekFromDate:self.start] WeekDay:[currentdate getWeekDayFromDate:self.start] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text OldStartTime:self.start];
+            [db updateDiaperRecord:self.start Month:[ACDate getMonthFromDate:self.start] Week:[ACDate getWeekFromDate:self.start] WeekDay:[ACDate getWeekDayFromDate:self.start] Status:self.status Color:@"red" Hard:@"hard" Remark:remarktext.text MoreInfo:@"" CreateTime:_createtime];
         }
         else
         {
-            [db updatediaperStatus:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text OldStartTime:self.start];
+            [db updateDiaperRecord:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] WeekDay:[ACDate getWeekDayFromDate:curstarttime] Status:self.status Color:@"red" Hard:@"hard" Remark:remarktext.text MoreInfo:@"" CreateTime:_createtime];
         }
         
         [self removeFromSuperview];
@@ -316,13 +318,16 @@
         }
         
         
-    //[db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Remark:remarktext.text];
+    //[db insertdiaperStarttime:[ACDate date] Month:[ACDate getCurrentMonth] Week:[ACDate getCurrentWeek] WeekDay:[ACDate getCurrentWeekDay] Status:self.status Remark:remarktext.text];
         if (curstarttime == nil) {
-            [db insertdiaperStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text UploadTime:0];
+            long createtime = [ACDate getTimeStampFromDate:[NSDate date]];
+            [db insertBabyDiaperRecord:createtime UpdateTime:createtime StartTime:[ACDate date] Month:[ACDate getCurrentMonth] Week:[ACDate getCurrentWeek] Weekday:[ACDate getCurrentWeekDay] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text MoreInfo:@""];
         }
         else
         {
-            [db insertdiaperStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text UploadTime:0];
+            long createtime = [ACDate getTimeStampFromDate:[NSDate date]];
+            [db insertBabyDiaperRecord:createtime UpdateTime:createtime StartTime:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] Weekday:[ACDate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text MoreInfo:@""];
+
             curstarttime = nil;
         }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
@@ -351,21 +356,21 @@
         }
         else
         {
-            curstarttime = [currentdate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
+            curstarttime = [ACDate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
         }
     }
     else
     {
         if (curstarttime == nil) {
-            curstarttime  = [currentdate getNewDateFromOldDate:picker.date andOldDate:self.start];
+            curstarttime  = [ACDate getNewDateFromOldDate:picker.date andOldDate:self.start];
         }
         else
         {
-            curstarttime  = [currentdate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
+            curstarttime  = [ACDate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
         }
     }
     
-    datetext.text = [currentdate dateFomatdate:curstarttime];
+    datetext.text = [ACDate dateFomatdate:curstarttime];
 }
 
 -(void)actionsheetShow
@@ -402,21 +407,21 @@
         }
         else
         {
-             curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
+             curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
         }
     }
     else
     {
         if (curstarttime == nil) {
-            curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:self.start];
+            curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:self.start];
         }
         else
         {
-            curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
+            curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
         }
     }
    
-    starttimetext.text = [currentdate getStarttimefromdate:curstarttime];
+    starttimetext.text = [ACDate getStarttimefromdate:curstarttime];
 }
 
 -(void)actionsheetStartTimeShow

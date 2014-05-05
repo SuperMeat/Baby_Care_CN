@@ -201,7 +201,7 @@
             
             if (self.ln.createtime == nil)
             {
-                NSDate* createtime = [currentdate date];
+                NSDate* createtime = [ACDate date];
                 self.ln.createtime = createtime;
                 [self changelocalnotify];
                 [DataBase insertNotifyTime:self.ln.createtime andNotifyTime:self.ln.time andRedundant:self.ln.redundant andTitle:self.ln.title];
@@ -216,7 +216,7 @@
         if (self.ln.redundant == nil || [self.ln.redundant isEqualToString:@"永不"] == YES) {
             if (self.ln.createtime == nil)
             {
-                NSDate* createtime = [currentdate date];
+                NSDate* createtime = [ACDate date];
                 self.ln.createtime = createtime;
                 [self changelocalnotify];
                 [DataBase insertNotifyTime:self.ln.createtime andNotifyTime:self.ln.time andRedundant:self.ln.redundant andTitle:self.ln.title];

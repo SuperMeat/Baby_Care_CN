@@ -29,7 +29,8 @@
     UIActionSheet *action2;
     
     NSDate* curstarttime;
-    
+    long _createtime;
+    long _updatetime;
     DurationPickerView *durationpicker;
     UIActionSheet *action3;
     NSMutableArray *hours;
@@ -44,7 +45,7 @@
 @property int durationsec;
 @property(nonatomic,assign)BOOL isshow;
 @property (assign) id<save_bathviewDelegate> bathSaveDelegate;
--(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start Duration:(NSString*)_curduration;
+-(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start Duration:(NSString*)_curduration UpdateTime:(long)updatetime CreateTime:(long)createtime;
 -(void)Save;
 -(void)loaddata;
 @end

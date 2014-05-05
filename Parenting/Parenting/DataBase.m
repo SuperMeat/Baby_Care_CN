@@ -337,7 +337,7 @@
         FMResultSet *resultset=[db executeQuery:@"select * from(select starttime,duration,type from feed union all select starttime,duration,type from sleep union all select starttime,duration,type from bath union all select starttime,duration,type from play)where starttime=? and type=? order by starttime desc",start,type ];
         
         if ([resultset next]) {NSLog(@"duration%@",str);
-            str= [currentdate getDurationfromdate:start second:[resultset intForColumn:@"duration"]];
+            str= [ACDate getDurationfromdate:start second:[resultset intForColumn:@"duration"]];
         }
         
     }
@@ -376,7 +376,7 @@
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
-        comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+        comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
         if ([comps day] >0) {
             return [NSString stringWithFormat:NSLocalizedString(@"DayTips", nil),[comps day]];
         }
@@ -418,7 +418,7 @@
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
-        comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+        comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
         if ([comps day] >0) {
             return [NSString stringWithFormat:NSLocalizedString(@"DayTips", nil),[comps day]];
         }
@@ -460,7 +460,7 @@
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
-        comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+        comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
         if ([comps day] >0) {
             return [NSString stringWithFormat:NSLocalizedString(@"DayTips", nil),[comps day]];
         }
@@ -504,7 +504,7 @@
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
-        comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+        comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
         if ([comps day] >0) {
             return [NSString stringWithFormat:NSLocalizedString(@"DayTips", nil),[comps day]];
         }
@@ -547,7 +547,7 @@
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
-        comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+        comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
         if ([comps day] >0) {
             return [NSString stringWithFormat:NSLocalizedString(@"DayTips", nil),[comps day]];
         }
@@ -803,9 +803,9 @@
 + (NSArray *)dataFromTable:(int)fileTag andpage:(int)scrollpage andTable:(NSString *)table
 {
     //NSLog(@"dataFromTable:%d, page:%d, table:%@", fileTag, scrollpage, table);
-    int week    = [currentdate getCurrentWeek];
-    int weekday = [currentdate getCurrentWeekDay];
-    int month   = [currentdate getCurrentMonth];
+    int week    = [ACDate getCurrentWeek];
+    int weekday = [ACDate getCurrentWeekDay];
+    int month   = [ACDate getCurrentMonth];
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
     NSMutableArray *count = [[NSMutableArray alloc] initWithCapacity:0];
     NSMutableArray *duration = [[NSMutableArray alloc] initWithCapacity:0];
@@ -819,7 +819,7 @@
     if (0 == fileTag) {
         //week
         int max = 0;
-        if (week-scrollpage != [currentdate getCurrentWeek]) {
+        if (week-scrollpage != [ACDate getCurrentWeek]) {
             max = 7;
         }else{
             max = weekday;
@@ -874,8 +874,8 @@
             curmonth = month;
         }
         
-        int nowDay = [currentdate getday:[currentdate date]];
-        if ((month-scrollpage) == [currentdate getCurrentMonth]) {
+        int nowDay = [ACDate getday:[ACDate date]];
+        if ((month-scrollpage) == [ACDate getCurrentMonth]) {
             for (int i = 0; i <= (nowDay - 1) / 7; i++) {
                 NSString *str = @"0";
                 [count addObject:str];
@@ -900,7 +900,7 @@
         while ([set next]) {
             NSTimeInterval interval = [set doubleForColumn:@"starttime"];
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
-            int day = [currentdate getday:date];
+            int day = [ACDate getday:date];
             NSLog(@"set next day: %d count: %@ duration:%@", day, count, duration);
             int oldeCount = [[count objectAtIndex:(day - 1) / 7] intValue];
             oldeCount++;
@@ -921,7 +921,7 @@
     }
     
     if (0 == fileTag) {
-        long timestamp = [ACDate getTimeStampFromDate:[currentdate date]];
+        long timestamp = [ACDate getTimeStampFromDate:[ACDate date]];
         NSDate   *newDate    = [ACDate getDateFromTimeStamp:(timestamp-scrollpage*604800)];
         NSString *rangeTitle = [ACDate getWeekBeginAndEndWith:newDate];
         //[self setWeekName:fileTag andTAble:table andpage:scrollpage];
@@ -932,12 +932,12 @@
         int curmonth = 0,curyear = 0;
         if (month <= scrollpage) {
             curmonth = 12- scrollpage + month;
-            curyear  = [currentdate getCurrentYear]-scrollpage/12-1;
+            curyear  = [ACDate getCurrentYear]-scrollpage/12-1;
         }
         else
         {
             curmonth = month;
-            curyear  = [currentdate getCurrentYear];
+            curyear  = [ACDate getCurrentYear];
         }
         NSLog(@"scrollpage:%d, month:%d, curmonth:%d", scrollpage, month,curmonth);
         [self setTitleName:[NSString stringWithFormat:@"%@(%i.%d)",NSLocalizedString(table,nil), curyear, curmonth]];
@@ -951,7 +951,7 @@
 + (int)getMonthMax:(int)scrollpage
 {
     int max   = 31;
-    int month = [currentdate getCurrentMonth];
+    int month = [ACDate getCurrentMonth];
     BOOL res  = YES;
     NSString *sql;
     NSString *table = @"diaper";
@@ -981,9 +981,9 @@
 
 + (NSArray *)dataSourceFromDatabase:(int)fileTag andpage:(int)scrollpage andTable:(NSString *)table
 {
-    int week = [currentdate getCurrentWeek];
-    int weekday = [currentdate getCurrentWeekDay];
-    int month = [currentdate getCurrentMonth];
+    int week = [ACDate getCurrentWeek];
+    int weekday = [ACDate getCurrentWeekDay];
+    int month = [ACDate getCurrentMonth];
     NSMutableArray *arrayCount = [[NSMutableArray alloc] initWithCapacity:0];
     NSArray *arr = [NSArray arrayWithObjects:@"play", @"bath", @"feed", @"sleep", @"diaper", nil];
     BOOL res = YES;
@@ -1002,7 +1002,7 @@
         // 显示周
         if (0 == fileTag) {
             int max = 0;
-            if (week - scrollpage != [currentdate getCurrentWeek]) {
+            if (week - scrollpage != [ACDate getCurrentWeek]) {
                 max = 7;
             }else{
                 max = weekday;
@@ -1033,9 +1033,9 @@
          */
         else
         {
-            int nowDay = [currentdate getday:[currentdate date]];
+            int nowDay = [ACDate getday:[ACDate date]];
             NSLog(@"datasourcefromdatebase：nowday:%d", nowDay);
-            if (month-scrollpage == [currentdate getCurrentMonth]) {
+            if (month-scrollpage == [ACDate getCurrentMonth]) {
                 for (int i = 0; i <= (nowDay - 1) / 7; i++) {
                     NSString *str = @"0";
                     [muarr addObject:str];
@@ -1054,7 +1054,7 @@
             while ([set next]) {
                 NSTimeInterval interval = [set doubleForColumn:@"starttime"];
                 NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
-                int day = [currentdate getday:date];
+                int day = [ACDate getday:date];
                 NSLog(@"datasourcefromdatabase: date:%@ day: %d",date,day);
                 NSString *str = @"";
                 int count = [[muarr objectAtIndex:(day - 1) / 7] intValue];
@@ -1088,7 +1088,7 @@
         if (month <= scrollpage ) {
             curmonth = 12 - month + scrollpage;
         }
-        [self setTitleName:[NSString stringWithFormat:@"%@(%i.%i)",NSLocalizedString(@"All",nil), [currentdate getCurrentYear], curmonth]];
+        [self setTitleName:[NSString stringWithFormat:@"%@(%i.%i)",NSLocalizedString(@"All",nil), [ACDate getCurrentYear], curmonth]];
     }
     [db close];
     NSLog(@"%@", arrayCount);
@@ -1883,7 +1883,7 @@
     }
     
     
-    res=[db executeUpdate:@"insert into notify_message (message, notify_time, status) values(?,?,0)",msg,[currentdate date]];
+    res=[db executeUpdate:@"insert into notify_message (message, notify_time, status) values(?,?,0)",msg,[ACDate date]];
     if (!res)
     {
         NSLog(@"插入失败");

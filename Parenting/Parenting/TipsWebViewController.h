@@ -12,6 +12,8 @@
 {
     NSString* _url;
     int count;
+    UIImageView* Shareview;
+    UITextField *Sharetext;
 }
 @property (strong, nonatomic)  UIWebView *webView;
 -(void) setTipsUrl:(NSString*)requestUrl;

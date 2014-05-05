@@ -271,7 +271,7 @@
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
-    comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
     if ([comps year] == 0 && [comps month] == 0 && [comps day]==0) {
         return @"1天";
     }

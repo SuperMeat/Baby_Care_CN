@@ -36,7 +36,7 @@
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start Duration:(NSString *)_curduration
+-(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start Duration:(NSString *)_curduration UpdateTime:(long)updatetime CreateTime:(long)createtime
 {
     self.start=_start;
     self.select=_select;
@@ -46,6 +46,8 @@
     self.durationsec  = [[array objectAtIndex:2] intValue];
     
     self.curduration = self.durationhour*60*60 + self.durationmin*60 + self.durationsec;
+    _createtime = createtime;
+    _updatetime = updatetime;
     NSLog(@"init feed duration:%d",self.curduration);
 
     self=[self initWithFrame:frame];
@@ -253,21 +255,21 @@
 {
     if (self.select) {
         
-        DataBase *db=[DataBase dataBase];
+        SummaryDB *db=[SummaryDB dataBase];
         NSArray *array= [db searchFromfeed:start];
         NSDate *date=(NSDate*)[array objectAtIndex:0];
         
-        datetext.text=[currentdate dateFomatdate:date];
+        datetext.text=[ACDate dateFomatdate:date];
         NSLog(@"%d",  [[array objectAtIndex:1] intValue] );
         
-        durationtext.text=[currentdate getDurationfromdate:date second:[[array objectAtIndex:1] intValue] ] ;
+        durationtext.text=[ACDate getDurationfromdate:date second:[[array objectAtIndex:1] intValue] ] ;
         NSArray *array2 = [durationtext.text componentsSeparatedByString:@":"];
         
         self.durationhour = [[array2 objectAtIndex:0] intValue];
         self.durationmin  = [[array2 objectAtIndex:1] intValue];
         self.durationsec  = [[array2 objectAtIndex:2] intValue];
         
-        starttimetext.text=[currentdate getStarttimefromdate:date];
+        starttimetext.text=[ACDate getStarttimefromdate:date];
         
         
         remarktext.text=[array objectAtIndex:4];
@@ -329,15 +331,15 @@
             rightbutton.enabled=NO;
             leftbutton.enabled=YES;
         }
-        datetext.text=[currentdate getdateFormat];
-        durationtext.text=[currentdate durationFormat];
+        datetext.text=[ACDate getdateFormat];
+        durationtext.text=[ACDate durationFormat];
         NSArray *array2 = [durationtext.text componentsSeparatedByString:@":"];
         
         self.durationhour = [[array2 objectAtIndex:0] intValue];
         self.durationmin  = [[array2 objectAtIndex:1] intValue];
         self.durationsec  = [[array2 objectAtIndex:2] intValue];
         
-        starttimetext.text=[currentdate getStarttimeFormat];
+        starttimetext.text=[ACDate getStarttimeFormat];
     }
 }
 
@@ -355,7 +357,7 @@
 
 -(void)Save
 {
-    DataBase *db=[DataBase dataBase];
+    BabyDataDB *db=[BabyDataDB babyinfoDB];
     int duration;
     NSArray *arr=[durationtext.text componentsSeparatedByString:@":"];
     duration=[[arr objectAtIndex:0] intValue]*60*60+[[arr objectAtIndex:1]intValue]*60+[[arr objectAtIndex:2] intValue];
@@ -411,15 +413,33 @@
             oz=Oztext.text;
         }
         
-        //[db updatefeedOzorlr:Oztext.text Remark:remarktext.text Starttime:start];
         NSArray *array = [durationtext.text componentsSeparatedByString:@":"];
         duration = [[array objectAtIndex:0] intValue]*60*60 + [[array objectAtIndex:1]intValue]*60+[[array objectAtIndex:2]intValue];
         if (curstarttime == nil) {
-            [db updatefeedOzorlr:self.start Month:[currentdate getMonthFromDate:self.start] Week:[currentdate getWeekFromDate:self.start] WeekDay:[currentdate getWeekDayFromDate:self.start] Duration:duration OzorLR:Oztext.text Remark:remarktext.text OldStartTime:self.start];
+            [db updateFeedRecord:self.start
+                           Month:[ACDate getMonthFromDate:self.start]
+                            Week:[ACDate getWeekFromDate:self.start]
+                         WeekDay:[ACDate getWeekDayFromDate:self.start]
+                        Duration:duration
+                              Oz:Oztext.text
+                        FoodType:@"奶"
+                          Remark:remarktext.text
+                        MoreInfo:@""
+                      CreateTime:_createtime];
         }
         else
         {
-            [db updatefeedOzorlr:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Duration:duration OzorLR:Oztext.text Remark:remarktext.text OldStartTime:self.start];
+            [db updateFeedRecord:curstarttime
+                           Month:[ACDate getMonthFromDate:curstarttime]
+                            Week:[ACDate getWeekFromDate:curstarttime]
+                         WeekDay:[ACDate getWeekDayFromDate:curstarttime]
+                        Duration:duration
+                              Oz:Oztext.text
+                        FoodType:@"奶"
+                          Remark:remarktext.text
+                        MoreInfo:@""
+                      CreateTime:_createtime];
+
             curstarttime = nil;
         }
 
@@ -428,14 +448,38 @@
     
     else
     {
-    
-        //[db insertfeedStarttime:[currentdate getStarttime] Month:[currentdate getMonth] Week:[currentdate getWeek] WeekDay:[currentdate getWeekDay] Duration:(duration)  Feedway:way OzorLR:oz Remark:remarktext.text];
-        if (curstarttime == nil) {
-            [db insertfeedStarttime:[currentdate date] Month:[currentdate getCurrentMonth] Week:[currentdate getCurrentWeek] WeekDay:[currentdate getCurrentWeekDay] Duration:(duration) Feedway:way OzorLR:oz Remark:remarktext.text];
+        if (curstarttime == nil)
+        {
+            long createtime = [ACDate getTimeStampFromDate:[ACDate date]];
+            [db insertBabyFeedRecord:createtime
+                          UpdateTime:createtime
+                           StartTime:[ACDate date]
+                               Month:[ACDate getCurrentMonth]
+                                Week:[ACDate getCurrentWeek]
+                             Weekday:[ACDate getCurrentWeekDay]
+                            Duration:duration
+                                  Oz:oz
+                            FeedType:[NSString stringWithFormat:@"%d",way]
+                            FoodType:@"奶"
+                              Remark:remarktext.text
+                            MoreInfo:@""];
         }
         else
         {
-            [db insertfeedStarttime:curstarttime Month:[currentdate getMonthFromDate:curstarttime] Week:[currentdate getWeekFromDate:curstarttime] WeekDay:[currentdate getWeekDayFromDate:curstarttime] Duration:(duration) Feedway:way OzorLR:oz Remark:remarktext.text];
+            long createtime = [ACDate getTimeStampFromDate:[ACDate date]];
+            [db insertBabyFeedRecord:createtime
+                          UpdateTime:createtime
+                           StartTime:curstarttime
+                               Month:[ACDate getMonthFromDate:curstarttime]
+                                Week:[ACDate getWeekFromDate:curstarttime]
+                             Weekday:[ACDate getWeekDayFromDate:curstarttime]
+                            Duration:duration
+                                  Oz:oz
+                            FeedType:[NSString stringWithFormat:@"%d",way]
+                            FoodType:@"奶"
+                              Remark:remarktext.text
+                            MoreInfo:@""];
+
             curstarttime = nil;
         }
 
@@ -551,21 +595,21 @@
         }
         else
         {
-            curstarttime = [currentdate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
+            curstarttime = [ACDate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
         }
     }
     else
     {
         if (curstarttime == nil) {
-            curstarttime  = [currentdate getNewDateFromOldDate:picker.date andOldDate:self.start];
+            curstarttime  = [ACDate getNewDateFromOldDate:picker.date andOldDate:self.start];
         }
         else
         {
-            curstarttime  = [currentdate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
+            curstarttime  = [ACDate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
         }
     }
     
-    datetext.text = [currentdate dateFomatdate:curstarttime];
+    datetext.text = [ACDate dateFomatdate:curstarttime];
 }
 
 -(void)actionsheetShow
@@ -602,21 +646,21 @@
         }
         else
         {
-            curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
+            curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
         }
     }
     else
     {
         if (curstarttime == nil) {
-            curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:self.start];
+            curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:self.start];
         }
         else
         {
-            curstarttime = [currentdate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
+            curstarttime = [ACDate getNewDateFromOldTime:picker.date andOldDate:curstarttime];
         }
     }
     
-    starttimetext.text = [currentdate getStarttimefromdate:curstarttime];
+    starttimetext.text = [ACDate getStarttimefromdate:curstarttime];
 }
 
 -(void)actionsheetStartTimeShow

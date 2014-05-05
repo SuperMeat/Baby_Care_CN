@@ -183,22 +183,22 @@
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_FEED]) {
             //db insertFeed
-            isSaved = [db insertfeedStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime] WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:hDuration Feedway:0 OzorLR:@"" Remark:@""];
+            isSaved = [db insertfeedStarttime:startTime Month:[ACDate getMonthFromDate:startTime] Week:[ACDate getWeekFromDate:startTime] WeekDay:[ACDate getWeekDayFromDate:startTime] Duration:hDuration Feedway:0 OzorLR:@"" Remark:@""];
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_DIAPER]) {
             //db insertDiaper
-            isSaved = [db insertdiaperStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime]  WeekDay:[currentdate getWeekDayFromDate:startTime] Status:@"" Color:@"" Hard:@"" Remark:@"" UploadTime:0];
+            isSaved = [db insertdiaperStarttime:startTime Month:[ACDate getMonthFromDate:startTime] Week:[ACDate getWeekFromDate:startTime]  WeekDay:[ACDate getWeekDayFromDate:startTime] Status:@"" Color:@"" Hard:@"" Remark:@"" UploadTime:0];
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_BATH]) {
             //db insertBath
-            isSaved = [db insertbathStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime]   WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:hDuration Remark:@""];
+            isSaved = [db insertbathStarttime:startTime Month:[ACDate getMonthFromDate:startTime] Week:[ACDate getWeekFromDate:startTime]   WeekDay:[ACDate getWeekDayFromDate:startTime] Duration:hDuration Remark:@""];
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_SLEEP]) {
-            isSaved = [db insertsleepStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime] WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:hDuration Place:@""  Remark:@""];
+            isSaved = [db insertsleepStarttime:startTime Month:[ACDate getMonthFromDate:startTime] Week:[ACDate getWeekFromDate:startTime] WeekDay:[ACDate getWeekDayFromDate:startTime] Duration:hDuration Place:@""  Remark:@""];
         }
         else if ([buttonID  isEqual: BLUETOOTH_BUTTON_PLAY]) {
             //db insertPlay
-            isSaved = [db insertplayStarttime:startTime Month:[currentdate getMonthFromDate:startTime] Week:[currentdate getWeekFromDate:startTime] WeekDay:[currentdate getWeekDayFromDate:startTime] Duration:(hDuration) Place:@"" WithWho:@"" DoWhat:@""  Remark:@""];
+            isSaved = [db insertplayStarttime:startTime Month:[ACDate getMonthFromDate:startTime] Week:[ACDate getWeekFromDate:startTime] WeekDay:[ACDate getWeekDayFromDate:startTime] Duration:(hDuration) Place:@"" WithWho:@"" DoWhat:@""  Remark:@""];
         }
         
         [self getPressKeyHistory:1];

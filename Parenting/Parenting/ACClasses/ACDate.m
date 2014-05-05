@@ -150,7 +150,7 @@
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
-    comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
     if ([comps day] >0) {
         return [NSString stringWithFormat:NSLocalizedString(@"DayTips", nil),[comps day]];
     }
@@ -175,7 +175,7 @@
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
-    comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
     if ([comps day] >999)
     {
         return @"N年前";

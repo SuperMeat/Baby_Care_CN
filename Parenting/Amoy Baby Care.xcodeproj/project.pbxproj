@@ -26,7 +26,7 @@
 		4800B14618D9880B0093A6AF /* ACTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14018D9880B0093A6AF /* ACTabBarController.m */; };
 		4800B14718D9880B0093A6AF /* ACViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14318D9880B0093A6AF /* ACViewController.m */; };
 		4800B14B18D9A4020093A6AF /* UserDataDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B14A18D9A4020093A6AF /* UserDataDB.m */; };
-		4800B15118DA84F80093A6AF /* UserTips.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B15018DA84F80093A6AF /* UserTips.m */; };
+		4800B15118DA84F80093A6AF /* UserTipsDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800B15018DA84F80093A6AF /* UserTipsDB.m */; };
 		48013D37185ADFC300F483A6 /* BLEController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48013D36185ADFC300F483A6 /* BLEController.m */; };
 		48013D3D185AE47900F483A6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48013D3C185AE47900F483A6 /* CoreBluetooth.framework */; };
 		480EFA0018E5155C00D40903 /* btn_cry_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF93B18E5155C00D40903 /* btn_cry_pause@2x.png */; };
@@ -636,7 +636,6 @@
 		CEDBEABE1755FD840006828A /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDBEABD1755FD840006828A /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CEF1F4971754AEAC005B3ECD /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1F4961754AEAC005B3ECD /* ActivityItem.m */; };
 		F365CADC176C537900EA1406 /* CustumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F365CADB176C537900EA1406 /* CustumCell.m */; };
-		F3C321D7175DD2E500F2BD7F /* currentdate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C321D6175DD2E500F2BD7F /* currentdate.m */; };
 		F3C3222C175DD3AC00F2BD7F /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C3222B175DD3AC00F2BD7F /* libCorePlot-CocoaTouch.a */; };
 		F3F09B5D1745CBCE006CB06D /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F09B5B1745CBCE006CB06D /* SettingViewController.m */; };
 		F3F09B5E1745CBCE006CB06D /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F09B5C1745CBCE006CB06D /* SettingViewController.xib */; };
@@ -671,8 +670,8 @@
 		4800B14318D9880B0093A6AF /* ACViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACViewController.m; sourceTree = "<group>"; };
 		4800B14918D9A4020093A6AF /* UserDataDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataDB.h; sourceTree = "<group>"; };
 		4800B14A18D9A4020093A6AF /* UserDataDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataDB.m; sourceTree = "<group>"; };
-		4800B14F18DA84F80093A6AF /* UserTips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTips.h; sourceTree = "<group>"; };
-		4800B15018DA84F80093A6AF /* UserTips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTips.m; sourceTree = "<group>"; };
+		4800B14F18DA84F80093A6AF /* UserTipsDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTipsDB.h; sourceTree = "<group>"; };
+		4800B15018DA84F80093A6AF /* UserTipsDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTipsDB.m; sourceTree = "<group>"; };
 		48013D35185ADFC300F483A6 /* BLEController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEController.h; path = BLEController/BLEController.h; sourceTree = "<group>"; };
 		48013D36185ADFC300F483A6 /* BLEController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLEController.m; path = BLEController/BLEController.m; sourceTree = "<group>"; };
 		48013D3C185AE47900F483A6 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -1461,8 +1460,6 @@
 		CEF1F4961754AEAC005B3ECD /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
 		F365CADA176C537900EA1406 /* CustumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustumCell.h; sourceTree = "<group>"; };
 		F365CADB176C537900EA1406 /* CustumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustumCell.m; sourceTree = "<group>"; };
-		F3C321D5175DD2E500F2BD7F /* currentdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = currentdate.h; sourceTree = "<group>"; };
-		F3C321D6175DD2E500F2BD7F /* currentdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = currentdate.m; sourceTree = "<group>"; };
 		F3C321DC175DD3AC00F2BD7F /* _CPTConstraintsFixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CPTConstraintsFixed.h; sourceTree = "<group>"; };
 		F3C321DD175DD3AC00F2BD7F /* _CPTConstraintsRelative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CPTConstraintsRelative.h; sourceTree = "<group>"; };
 		F3C321DE175DD3AC00F2BD7F /* _CPTDarkGradientTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CPTDarkGradientTheme.h; sourceTree = "<group>"; };
@@ -1712,8 +1709,8 @@
 				48F47F0518BF1F9C009A504B /* BabyDataDB.m */,
 				4800B14918D9A4020093A6AF /* UserDataDB.h */,
 				4800B14A18D9A4020093A6AF /* UserDataDB.m */,
-				4800B14F18DA84F80093A6AF /* UserTips.h */,
-				4800B15018DA84F80093A6AF /* UserTips.m */,
+				4800B14F18DA84F80093A6AF /* UserTipsDB.h */,
+				4800B15018DA84F80093A6AF /* UserTipsDB.m */,
 				48C9AD1218E2AB4800D04FF7 /* SummaryDB.h */,
 				48C9AD1318E2AB4800D04FF7 /* SummaryDB.m */,
 				BE955F4E190104A000225029 /* WhoDataBase.h */,
@@ -2200,22 +2197,6 @@
 				48F6ABBF1883B9BE0032045E /* BLEWeatherController.m */,
 			);
 			name = Weather;
-			sourceTree = "<group>";
-		};
-		4855BCF41830B01F00F02A3E /* DateControl */ = {
-			isa = PBXGroup;
-			children = (
-				F3C321D5175DD2E500F2BD7F /* currentdate.h */,
-				F3C321D6175DD2E500F2BD7F /* currentdate.m */,
-			);
-			name = DateControl;
-			sourceTree = "<group>";
-		};
-		4855BCF51830B03D00F02A3E /* LocalData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = LocalData;
 			sourceTree = "<group>";
 		};
 		4855BCF61830B08100F02A3E /* RunTimeSuggestion */ = {
@@ -2976,8 +2957,6 @@
 				BE7C69311867D7D100C4B675 /* ASIHTTPController */,
 				48013D33185ADF7F00F483A6 /* BLEController */,
 				4855BCF71830B0AD00F02A3E /* PublicFunction */,
-				4855BCF51830B03D00F02A3E /* LocalData */,
-				4855BCF41830B01F00F02A3E /* DateControl */,
 				4855BCF31830AFEB00F02A3E /* Weather */,
 				CE0C33C8176189CE00B1B683 /* CorePlot */,
 				72FAFD9A1746945700901B8B /* cacheUtil */,
@@ -4012,7 +3991,7 @@
 				4800B14B18D9A4020093A6AF /* UserDataDB.m in Sources */,
 				4800B14418D9880B0093A6AF /* ACDate.m in Sources */,
 				7215972D17453680006FD415 /* main.m in Sources */,
-				4800B15118DA84F80093A6AF /* UserTips.m in Sources */,
+				4800B15118DA84F80093A6AF /* UserTipsDB.m in Sources */,
 				48EF612718C6FAC7006C3D5C /* CommonUtility.m in Sources */,
 				48EC1DD01861772300965254 /* CustomNotifyViewController.m in Sources */,
 				BE900F2218ECFCEA00B06133 /* SyncController.m in Sources */,
@@ -4114,7 +4093,6 @@
 				BEB475A118E574A80004B649 /* SBJsonParser.m in Sources */,
 				BE7AB1B4190A3F8D00D9B502 /* AddPHYRecordViewController.m in Sources */,
 				4800B0D518D822C20093A6AF /* CalendarViewController.m in Sources */,
-				F3C321D7175DD2E500F2BD7F /* currentdate.m in Sources */,
 				BEB4758418E572A20004B649 /* DataContract.m in Sources */,
 				48EF611F18C6FAC7006C3D5C /* CusAnnotationView.m in Sources */,
 				CE0C33CB176189CE00B1B683 /* MyCorePlot.m in Sources */,
@@ -4220,10 +4198,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "16B56DB3-67BA-46B0-8F2D-4FED9B70E1B1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "16B56DB3-67BA-46B0-8F2D-4FED9B70E1B1";
+				PROVISIONING_PROFILE = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -4246,7 +4224,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
@@ -4278,7 +4256,7 @@
 					"$(SRCROOT)",
 				);
 				INFOPLIST_FILE = "Parenting/Amoy Baby Care-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -4336,7 +4314,7 @@
 					"$(SRCROOT)",
 				);
 				INFOPLIST_FILE = "Parenting/Amoy Baby Care-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",

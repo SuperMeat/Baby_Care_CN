@@ -535,7 +535,7 @@
                        Week:(int)week
                     Weekday:(int)weekday
                    Duration:(int)duration
-                         Oz:(double)oz
+                         Oz:(NSString *)oz
                    FeedType:(NSString *)feed_type
                    FoodType:(NSString *)food_type
                      Remark:(NSString *)remark
@@ -552,7 +552,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz DOUBLE DEFAULT 0,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     
     if (!res) {
         NSLog(@"表格创建失败");
@@ -568,7 +568,7 @@
          [NSNumber numberWithInt:week],
          [NSNumber numberWithInt:weekday],
          [NSNumber numberWithInt:duration],
-         [NSNumber numberWithDouble:oz],
+         oz,
          remark,
          feed_type,
          food_type,
@@ -722,7 +722,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"update bc_baby_bath set starttime = ?, month=?,week = ?,weekday=?,duration=?,deal_way=?,remark=?,more_info = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],bath_type,remark,more_info,[NSNumber numberWithLong:createtime]];
+    res=[db executeUpdate:@"update bc_baby_bath set starttime = ?, month=?,week = ?,weekday=?,duration=?,deal_way=?,remark=?,moreinfo = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],bath_type,remark,more_info,[NSNumber numberWithLong:createtime]];
     if (!res) {
         NSLog(@"数据库更新失败");
         [db close];
@@ -754,7 +754,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"update bc_baby_diaper set starttime = ?, month=?,week = ?,weekday=?,status=?,color=?,hard = ?,remark=?,more_info = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],status,color,hard,remark,more_info,[NSNumber numberWithLong:createtime]];
+    res=[db executeUpdate:@"update bc_baby_diaper set starttime = ?, month=?,week = ?,weekday=?,status=?,color=?,hard = ?,remark=?,moreinfo = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],status,color,hard,remark,more_info,[NSNumber numberWithLong:createtime]];
     if (!res) {
         NSLog(@"数据库更新失败");
         [db close];
@@ -769,8 +769,7 @@
                    Week:(int)week
                 WeekDay:(int)weekday
                Duration:(int)duration
-                     Oz:(double)oz
-               FeedType:(NSString *)feed_type
+                     Oz:(NSString *)oz
                FoodType:(NSString *)food_type
                  Remark:(NSString *)remark
                MoreInfo:(NSString*)more_info
@@ -787,7 +786,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"update bc_baby_feed set starttime = ?, month=?,week = ?,weekday=?,duration=?,oz=?,feed_type = ?,food_type = ?,remark=?,more_info = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],[NSNumber numberWithDouble:oz],feed_type,food_type,remark,more_info,[NSNumber numberWithLong:createtime]];
+    res=[db executeUpdate:@"update bc_baby_feed set starttime = ?,month=?,week = ?,weekday=?,duration=?,oz=?,food_type = ?,remark=?, moreinfo = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],oz,food_type,remark,more_info,[NSNumber numberWithLong:createtime]];
     if (!res) {
         NSLog(@"数据库更新失败");
         [db close];
@@ -819,7 +818,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"update bc_baby_play set starttime = ?, month=?,week = ?,weekday=?,duration=?,place = ?,play_type = ?,remark=?,more_info = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],place,play_type,remark,more_info,[NSNumber numberWithLong:createtime]];
+    res=[db executeUpdate:@"update bc_baby_play set starttime = ?, month=?,week = ?,weekday=?,duration=?,place = ?,play_type = ?,remark=?,moreinfo = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],place,play_type,remark,more_info,[NSNumber numberWithLong:createtime]];
     if (!res) {
         NSLog(@"数据库更新失败");
         [db close];
@@ -851,7 +850,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"update bc_baby_sleep set starttime = ?, month=?,week = ?,weekday=?,duration=?,place = ?,posture = ?,remark=?,more_info = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],place,posture,remark,more_info,[NSNumber numberWithLong:createtime]];
+    res=[db executeUpdate:@"update bc_baby_sleep set starttime = ?, month=?,week = ?,weekday=?,duration=?,place = ?,posture = ?,remark=?,moreinfo = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],place,posture,remark,more_info,[NSNumber numberWithLong:createtime]];
     if (!res) {
         NSLog(@"数据库更新失败");
         [db close];
@@ -941,5 +940,4 @@
     [db close];
     return res;
 }
-
 @end
