@@ -59,8 +59,8 @@
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor grayColor];
     imageview=[[UIImageView alloc]init];
-    imageview.bounds=CGRectMake(0, 0, 290, 260);
-    imageview.center=CGPointMake(160, (460-44-49)/2);
+    imageview.bounds=CGRectMake(0, 0, 290, 260+30);
+    imageview.center=CGPointMake(160, (460-44-49)/2+30);
     [self addSubview:imageview];
     [imageview addSubview:title];
     
@@ -79,7 +79,7 @@
     
     UILabel *remark=[[UILabel alloc]initWithFrame:CGRectMake(10, 120, 100, 30)];
     
-    UILabel *Activity=[[UILabel alloc]initWithFrame:CGRectMake(10, 160, 100, 30)];
+    UILabel *Activity=[[UILabel alloc]initWithFrame:CGRectMake(10, 160+30, 100, 30)];
     
     date.backgroundColor=[UIColor clearColor];
     starttime.backgroundColor=[UIColor clearColor];
@@ -100,7 +100,7 @@
     
     
     dirty=[UIButton buttonWithType:UIButtonTypeCustom];
-    dirty.frame=CGRectMake(225, 160, 87/2.0, 87/2.0);
+    dirty.frame=CGRectMake(225, 160+30, 87/2.0, 87/2.0);
     [dirty setBackgroundImage:[UIImage imageNamed:@"panels_icon_dirty"] forState:UIControlStateNormal];
     [dirty setBackgroundImage:[UIImage imageNamed:@"panels_icon_dirty_choose"] forState:UIControlStateDisabled];
     [imageview addSubview:dirty];
@@ -109,7 +109,7 @@
      UIControlEventTouchUpInside];
     
     dry=[UIButton buttonWithType:UIButtonTypeCustom];
-    dry.frame=CGRectMake(115, 160, 87/2.0, 87/2.0);
+    dry.frame=CGRectMake(115, 160+30, 87/2.0, 87/2.0);
     [dry setBackgroundImage:[UIImage imageNamed:@"panels_icon_dry"] forState:UIControlStateNormal];
     [dry setBackgroundImage:[UIImage imageNamed:@"panels_icon_dry_choose"] forState:UIControlStateDisabled];
     [imageview addSubview:dry];
@@ -118,7 +118,7 @@
      UIControlEventTouchUpInside];
     
     wet=[UIButton buttonWithType:UIButtonTypeCustom];
-    wet.frame=CGRectMake(170, 160, 87/2.0, 87/2.0);
+    wet.frame=CGRectMake(170, 160+30, 87/2.0, 87/2.0);
     [wet setBackgroundImage:[UIImage imageNamed:@"panels_icon_wet"] forState:UIControlStateNormal];
     [wet setBackgroundImage:[UIImage imageNamed:@"panels_icon_wet_choose"] forState:UIControlStateDisabled];
     [imageview addSubview:wet];
@@ -138,10 +138,9 @@
     [imageview addSubview:remark];
     
     datetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
-    [datetext setBackground:[UIImage imageNamed:@"save_text"]];
+    [datetext setBackground:[UIImage imageNamed:@"panels_input"]];
     datetext.adjustsFontSizeToFitWidth=YES;
     [imageview addSubview:datetext];
-    //datetext.enabled=NO;
     datetext.delegate = self;
     datetext.inputView = datepicker;
     
@@ -153,7 +152,7 @@
     [datetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     
     starttimetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 80, 150, 30)];
-    [starttimetext setBackground:[UIImage imageNamed:@"save_text"]];
+    [starttimetext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:starttimetext];
     starttimetext.textColor=[UIColor grayColor];
     
@@ -161,29 +160,23 @@
     [starttimetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
     [starttimetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
     [starttimetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
-    //starttimetext.enabled=NO;
     starttimetext.delegate = self;
     starttimetext.inputView = starttimepicker;
     
-    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 120, 150, 30)];
-    remarkbg.image=[UIImage imageNamed:@"save_text"];
+    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 120, 150, 30+30)];
+    remarkbg.image=[UIImage imageNamed:@"panels_input"];
     remarkbg.userInteractionEnabled=YES;
     
-    remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30)];
+    remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30+30)];
     remarktext.backgroundColor=[UIColor clearColor];
     remarktext.textColor=[UIColor grayColor];
-    //    [remarktext setBackground:[UIImage imageNamed:@"save_text"]];
     remarktext.font=[UIFont systemFontOfSize:16];
     [remarkbg addSubview:remarktext];
     [imageview addSubview:remarkbg];
     remarktext.delegate=self;
-    //    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
-    //    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
-    //    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
-    //    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     
     UIButton *savebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    savebutton.frame=CGRectMake(200, 220, 70, 30);
+    savebutton.frame=CGRectMake(200, 220+30, 70, 30);
     [savebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     savebutton.layer.cornerRadius = 5.0f;
     [savebutton setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
@@ -191,7 +184,7 @@
     [imageview addSubview:savebutton];
     
     UIButton *canclebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    canclebutton.frame=CGRectMake(20, 220, 70, 30);
+    canclebutton.frame=CGRectMake(20, 220+30, 70, 30);
     [canclebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     canclebutton.layer.cornerRadius = 5.0f;
     [canclebutton setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];

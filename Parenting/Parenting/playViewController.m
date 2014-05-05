@@ -172,7 +172,7 @@
     
     
     adviseImageView = [[UIImageView alloc] init];
-    [adviseImageView setFrame:CGRectMake(0, 480-130, 320, 130)];
+    [adviseImageView setFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 130)];
     [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
     adviseImageView.userInteractionEnabled = YES;
     [adviseImageView addSubview:ad];

@@ -58,8 +58,8 @@
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor grayColor];
     imageview=[[UIImageView alloc]init];
-    imageview.bounds=CGRectMake(0, 0, 290, 260);
-    imageview.center=CGPointMake(160, (460-44-49)/2);
+    imageview.bounds=CGRectMake(0, 0, 290, 260+30);
+    imageview.center=CGPointMake(160, (460-44-49)/2+30);
     [self addSubview:imageview];
     [imageview addSubview:title];
     // saveView.backgroundColor=[UIColor colorWithWhite:0.4 alpha:0.3];
@@ -105,7 +105,7 @@
     [imageview addSubview:remark];
     
     datetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
-    [datetext setBackground:[UIImage imageNamed:@"save_text"]];
+    [datetext setBackground:[UIImage imageNamed:@"panels_input"]];
     datetext.adjustsFontSizeToFitWidth=YES;
     [imageview addSubview:datetext];
     //datetext.enabled=NO;
@@ -118,7 +118,7 @@
     [datetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     datetext.textColor=[UIColor grayColor];
     starttimetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 80, 150, 30)];
-    [starttimetext setBackground:[UIImage imageNamed:@"save_text"]];
+    [starttimetext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:starttimetext];
 
     [starttimetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
@@ -130,7 +130,7 @@
     starttimetext.inputView = starttimepicker;
     starttimetext.textColor=[UIColor grayColor];
     durationtext=[[UITextField alloc]initWithFrame:CGRectMake(115, 120, 150, 30)];
-    [durationtext setBackground:[UIImage imageNamed:@"save_text"]];
+    [durationtext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:durationtext];
 
     [durationtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
@@ -150,11 +150,11 @@
     }
 
     durationtext.textColor=[UIColor grayColor];
-    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
-    remarkbg.image=[UIImage imageNamed:@"save_text"];
+    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 160, 150, 30+30)];
+    remarkbg.image=[UIImage imageNamed:@"panels_input"];
     remarkbg.userInteractionEnabled=YES;
     
-    remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30)];
+    remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30+30)];
     remarktext.backgroundColor=[UIColor clearColor];
     //    [remarktext setBackground:[UIImage imageNamed:@"save_text"]];
     [remarkbg addSubview:remarktext];
@@ -170,7 +170,7 @@
     
     
     UIButton *savebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    savebutton.frame=CGRectMake(200, 220, 70, 30);
+    savebutton.frame=CGRectMake(200, 220+30, 70, 30);
     [savebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     savebutton.layer.cornerRadius = 5.0f;
     [savebutton setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
@@ -178,7 +178,7 @@
     [imageview addSubview:savebutton];
     
     UIButton *canclebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    canclebutton.frame=CGRectMake(20, 220, 70, 30);
+    canclebutton.frame=CGRectMake(20, 220+30, 70, 30);
     [canclebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     canclebutton.layer.cornerRadius = 5.0f;
     [canclebutton setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];

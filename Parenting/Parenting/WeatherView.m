@@ -83,18 +83,7 @@
         [dataarray addObject:pm];
     }
 
-//    table = [[UITableView alloc]initWithFrame:CGRectMake(self.bounds.origin.x+10, self.bounds.origin.y+8, self.bounds.size.width-20, self.bounds.size.height) style:UITableViewStyleGrouped];
-//    table.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    table.backgroundColor=[UIColor clearColor];
-//    table.delegate = self;
-//    table.dataSource = self;
-//    table.backgroundView=nil;
-//    table.bounces=NO;
-//    
-//    [self setBackgroundColor:[UIColor whiteColor]];
-    //[self addSubview:table];
-
-    tempDetail = [[UILabel alloc] initWithFrame:CGRectMake(376/2.0-10, 372/2.0*PNGSCALE-110*PNGSCALE-155/2.0*PNGSCALE, 246/2.0*PNGSCALE+50, 155/2.0*PNGSCALE)];
+    tempDetail = [[UILabel alloc] initWithFrame:CGRectMake(376/2.0-30, 372/2.0*PNGSCALE-110*PNGSCALE-155/2.0*PNGSCALE, 246/2.0+50, 155/2.0*PNGSCALE)];
     [tempDetail setBackgroundColor:[UIColor clearColor]];
     [tempDetail setTextColor:[ACFunction colorWithHexString:@"#69becc"]];
     tempDetail.textAlignment = NSTextAlignmentCenter;
@@ -102,7 +91,7 @@
     tempDetail.font = [UIFont fontWithName:@"Arial" size:70*PNGSCALE];
     [self addSubview:tempDetail];
     
-    weatherStatus = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE,100,15)];
+    weatherStatus = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE+YWEATHADD,100,15)];
     weatherStatus.text = @"获取中";
     [weatherStatus setBackgroundColor:[UIColor clearColor]];
     weatherStatus.font = [UIFont fontWithName:@"Arial" size:12];
@@ -110,25 +99,25 @@
     [weatherStatus setTextColor:[ACFunction colorWithHexString:@"#7a7a7a"]];
     [self addSubview:weatherStatus];
     
-    airDetail = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE+2+15, 100, 15)];
+    airDetail = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE+2+15+YWEATHADD, 100, 15)];
     airDetail.text = @"污染指数:暂无";
     airDetail.font = [UIFont fontWithName:@"Arial" size:12];
     airDetail.textAlignment = NSTextAlignmentLeft;
     [airDetail setTextColor:[ACFunction colorWithHexString:@"#7a7a7a"]];
     [self addSubview:airDetail];
     
-    humiDetail = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE+2+15+15, 100, 15)];
+    humiDetail = [[UILabel alloc] initWithFrame:CGRectMake(20,155/2.0*PNGSCALE+2+15+15+YWEATHADD, 100, 15)];
     humiDetail.text = @"湿度:0%";
     humiDetail.font = [UIFont fontWithName:@"Arial" size:12];
     humiDetail.textAlignment = NSTextAlignmentLeft;
     [humiDetail setTextColor:[ACFunction colorWithHexString:@"#7a7a7a"]];
     [self addSubview:humiDetail];
     
-    statusBigImageView = [[UIImageView alloc] initWithFrame:CGRectMake(376/2.0+5, 372/2.0*PNGSCALE-110*PNGSCALE-155/2.0*PNGSCALE+155/2.0*PNGSCALE-10, 118/2.0, 132/2.0)];
+    statusBigImageView = [[UIImageView alloc] initWithFrame:CGRectMake(376/2.0+5, 372/2.0*PNGSCALE-110*PNGSCALE-155/2.0*PNGSCALE+155/2.0*PNGSCALE-10+YWEATHADD, 118/2.0, 132/2.0)];
     [statusBigImageView setImage:[UIImage imageNamed:@"icon_cloudy"]];
     [self addSubview:statusBigImageView];
     
-    todayView = [[UIView alloc]initWithFrame:CGRectMake(0, 200-80, 320/3.0, 80)];
+    todayView = [[UIView alloc]initWithFrame:CGRectMake(0, 200-80+YADD, 320/3.0, 80)];
     [todayView setBackgroundColor:[UIColor clearColor]];
     
     UILabel *todayLabel = [[UILabel alloc] initWithFrame:CGRectMake(320/3.0/2.0-50, 0, 100, 20)];
@@ -169,7 +158,7 @@
     
     [self addSubview:todayView];
     
-    tomorrowView = [[UIView alloc]initWithFrame:CGRectMake(320/3.0, 200-80, 320/3.0, 80)];
+    tomorrowView = [[UIView alloc]initWithFrame:CGRectMake(320/3.0, 200-80+YADD, 320/3.0, 80)];
     [tomorrowView setBackgroundColor:[UIColor clearColor]];
     UILabel *Label2 = [[UILabel alloc] initWithFrame:CGRectMake(320/3.0/2.0-50, 0, 100, 20)];
     Label2.text  =@"明天";
@@ -209,7 +198,7 @@
     
     [self addSubview:tomorrowView];
     
-    aftertomorrowView = [[UIView alloc]initWithFrame:CGRectMake(320-320/3.0, 200-80, 320/3.0, 80)];
+    aftertomorrowView = [[UIView alloc]initWithFrame:CGRectMake(320-320/3.0, 200-80+YADD, 320/3.0, 80)];
     [aftertomorrowView setBackgroundColor:[UIColor clearColor]];
     UILabel *Label3= [[UILabel alloc] initWithFrame:CGRectMake(320/3.0/2.0-50, 0, 100, 20)];
     Label3.text  =@"后天";
@@ -249,11 +238,11 @@
     
     [self addSubview:aftertomorrowView];
     
-    UIImageView *cutline1 = [[UIImageView alloc] initWithFrame:CGRectMake(320/3.0+1, 120, 1, 80)];
+    UIImageView *cutline1 = [[UIImageView alloc] initWithFrame:CGRectMake(320/3.0+1, 120+YADD, 1, 80)];
     [cutline1 setImage:[UIImage imageNamed:@"cutline_y"]];
     [self addSubview:cutline1];
     
-    UIImageView *cutline2 = [[UIImageView alloc] initWithFrame:CGRectMake(320/3.0+1+320/3.0+1, 120, 1, 80)];
+    UIImageView *cutline2 = [[UIImageView alloc] initWithFrame:CGRectMake(320/3.0+1+320/3.0+1, 120+YADD, 1, 80)];
     [cutline2 setImage:[UIImage imageNamed:@"cutline_y"]];
     [self addSubview:cutline2];
     

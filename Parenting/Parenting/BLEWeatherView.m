@@ -15,7 +15,7 @@
 +(id)weatherview
 {
     
-    __strong static WeatherView *_sharedObject = nil;
+    __strong static BLEWeatherView *_sharedObject = nil;
     
     _sharedObject =  [[self alloc] init]; // or some other init metho
     
@@ -31,7 +31,7 @@
 {
     self=[super init];
     if (self){
-        self.frame = CGRectMake(0, 0, 320, 200);
+        self.frame = CGRectMake(0, 0, 320, 200+YADD);
         getDataTimeInterval = 1.0;
         //        self.backgroundColor=[UIColor redColor];
     }
