@@ -239,6 +239,7 @@
                          Week:(int)week
                       Weekday:(int)weekday
                        Status:(NSString *)status
+                       Amount:(NSString *)amount
                         Color:(NSString *)color
                          Hard:(NSString *)hard
                        Remark:(NSString *)remark
@@ -265,6 +266,7 @@
                      Week:(int)week
                   WeekDay:(int)weekday
                    Status:(NSString *)status
+                   Amount:(NSString *)amount
                     Color:(NSString *)color
                      Hard:(NSString *)hard
                    Remark:(NSString *)remark
@@ -296,7 +298,7 @@
                        Week:(int)week
                     Weekday:(int)weekday
                    Duration:(int)duration
-                         Oz:(double)oz
+                         Oz:(NSString *)oz
                    FeedType:(NSString *)feed_type
                    FoodType:(NSString *)food_type
                      Remark:(NSString *)remark
@@ -324,8 +326,7 @@
                    Week:(int)week
                 WeekDay:(int)weekday
                Duration:(int)duration
-                     Oz:(double)oz
-               FeedType:(NSString *)feed_type
+                     Oz:(NSString *)oz
                FoodType:(NSString *)food_type
                  Remark:(NSString *)remark
                MoreInfo:(NSString*)more_info
@@ -478,6 +479,5 @@
  *  @return
  */
 -(BOOL)updateUploadtime:(NSString*)tablename andUploadTime:(long)uploadtime andCreateTime:(long)create_time;
-
 
 @end

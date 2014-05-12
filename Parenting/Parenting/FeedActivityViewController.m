@@ -320,7 +320,7 @@
         }
         labletip.text = NSLocalizedString(@"Counting", nil);
         sender.selected=YES;
-        [[NSUserDefaults standardUserDefaults] setObject:[currentdate date] forKey:@"timerOn"];
+        [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"timerOn"];
         [[NSUserDefaults standardUserDefaults] setObject:@"feed" forKey:@"ctl"];
         timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerGo) userInfo:nil repeats:YES];    }
     else{
@@ -332,7 +332,7 @@
 
 -(void)timerGo
 {
-    timeLable.text=[currentdate durationFormat];
+    timeLable.text=[ACDate durationFormat];
     if ([timeLable.text isEqualToString:@"00:00:00"]) {
         [self stop];
     }
@@ -446,7 +446,7 @@
 {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"addfeednow"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[currentdate date] forKey:@"timerOn"];
+    [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"timerOn"];
     [[NSUserDefaults standardUserDefaults] setObject:@"feed" forKey:@"ctl"];
     
     [self makeSave];

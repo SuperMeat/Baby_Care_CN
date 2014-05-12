@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Parenting/SummaryDB.m"
-            timestampString = "418900360.229711"
+            filePath = "FMDB/FMDatabase.m"
+            timestampString = "420957685.067623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "962"
-            endingLineNumber = "962"
-            landmarkName = "+dataFromTable:andpage:andTable:"
+            startingLineNumber = "688"
+            endingLineNumber = "688"
+            landmarkName = "-executeUpdate:error:withArgumentsInArray:orDictionary:orVAList:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

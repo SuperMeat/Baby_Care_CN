@@ -60,7 +60,7 @@ static int age = 0;
         NSDateFormatter *dateFormater=[[NSDateFormatter alloc]init];
         [dateFormater setDateFormat:@"yyyy-MM-dd"];
         
-        [[NSUserDefaults standardUserDefaults] setObject:[dateFormater stringFromDate:[currentdate date]] forKey:@"birthday"];
+        [[NSUserDefaults standardUserDefaults] setObject:[dateFormater stringFromDate:[ACDate date]] forKey:@"birthday"];
         
     }
 
@@ -98,7 +98,7 @@ static int age = 0;
     
     self.birthdaytextfield.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"birthday"];
     //NSLog(@"birth : %@",self.birthdaytextfield.text);
-        age=[currentdate getDurationfromdate:self.birthdaytextfield.text];
+        age=[ACDate getDurationfromdate:self.birthdaytextfield.text];
         [self loaddataForstandard:age];
     
     
@@ -366,7 +366,7 @@ static int age = 0;
         [alter show];
     }
     
-    age=[currentdate getDurationfromdate:self.birthdaytextfield.text];
+    age=[ACDate getDurationfromdate:self.birthdaytextfield.text];
 
     [self loaddataForstandard:age];
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"IsFirstSaveInfo"] == nil) {
@@ -647,7 +647,7 @@ static int age = 0;
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
-    comps=  [calendar components:unitFlags fromDate:date toDate:[currentdate date] options:nil];
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
     if ([comps year] == 0 && [comps month] == 0 && [comps day]==0) {
         return [NSString stringWithFormat:@"1%@",NSLocalizedString(@"Days", nil)];
     }

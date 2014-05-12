@@ -130,7 +130,7 @@
                    FireDate:(NSString *)fireDate
                    AlarmKey:(NSString *)alarmKey
 {
-    NSDate *now = [currentdate date];
+    NSDate *now = [ACDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSInteger unitFlags = NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit;
@@ -185,7 +185,7 @@
     
     UILocalNotification *notification=[[UILocalNotification alloc] init];
     if (notification!=nil) {
-        notification.fireDate  = [currentdate dateFromString:settime];
+        notification.fireDate  = [ACDate dateFromString:settime];
         notification.repeatInterval = kCFCalendarUnitWeek;
         notification.timeZone  = [NSTimeZone defaultTimeZone];
         notification.soundName = @"钟琴.m4a";

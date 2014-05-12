@@ -1,14 +1,14 @@
 //
-//  UserTips.m
+//  UserTipsDB.m
 //  Amoy Baby Care
 //
 //  Created by @Arvi@ on 14-3-20.
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
-#import "UserTips.h"
+#import "UserTipsDB.h"
 
-@implementation UserTips
+@implementation UserTipsDB
 +(id)dataBase
 {
     static dispatch_once_t pred = 0;

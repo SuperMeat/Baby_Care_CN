@@ -161,8 +161,8 @@
     
     UIButton *dry=[UIButton buttonWithType:UIButtonTypeCustom];
     dry.frame=CGRectMake(17, 150+G_YADDONVERSION, 189/2.0, 189/2.0);
-    [dry setBackgroundImage:[UIImage imageNamed:@"icon_dry"] forState:UIControlStateNormal];
-    [dry setBackgroundImage:[UIImage imageNamed:@"icon_dry_choose"] forState:UIControlStateDisabled];
+    [dry setBackgroundImage:[UIImage imageNamed:@"icon_both"] forState:UIControlStateNormal];
+    [dry setBackgroundImage:[UIImage imageNamed:@"icon_both_choose"] forState:UIControlStateDisabled];
     [self.view addSubview:dry];
     dry.tag=201;
     [dry addTarget:self action:@selector(Activityselected:) forControlEvents:UIControlEventTouchUpInside];
@@ -241,7 +241,7 @@
 
     if (saveView==nil) {
         saveView=[[save_diaperview alloc]init];
-        [saveView setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height)];
+        [saveView setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-20, self.view.frame.size.width, self.view.frame.size.height)];
         saveView.status = self.status;
 
     }

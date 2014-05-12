@@ -326,7 +326,7 @@
 
 -(void)LoadData
 {
-    DataBase *db=[DataBase dataBase];
+    SummaryDB *db=[SummaryDB dataBase];
     dataArray=[db selectAll];
     if ([dataArray count] == 0) {
         timerOnType = 1;

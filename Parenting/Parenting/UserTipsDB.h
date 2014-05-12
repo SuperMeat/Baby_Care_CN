@@ -1,5 +1,5 @@
 //
-//  UserTips.h
+//  UserTipsDB.h
 //  Amoy Baby Care
 //
 //  Created by @Arvi@ on 14-3-20.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UserTips : NSObject
+@interface UserTipsDB : NSObject
 +(id)dataBase;
 /**
  *  查询订阅目录信息

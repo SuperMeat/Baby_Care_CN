@@ -95,7 +95,7 @@
     NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit;
     comps=[calendar components:unitFlags fromDate:sender.date];
     NSString* str = [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02d",[comps year],[comps month],[comps day],[comps hour],[comps minute],0];
-    notifyDate = [currentdate dateFromString:str];
+    notifyDate = [ACDate dateFromString:str];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;

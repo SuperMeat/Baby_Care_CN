@@ -12,4 +12,6 @@
 @property(nonatomic,strong)NSDate *starttime;
 @property(nonatomic,strong)NSString *type;
 @property(nonatomic,strong)NSString *duration;
+@property long createtime;
+@property long updatetime;
 @end

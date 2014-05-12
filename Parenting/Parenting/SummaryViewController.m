@@ -58,16 +58,7 @@
     self=[super init];
     if (self) {
         self.hidesBottomBarWhenPushed=YES;
-//#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
-//        
-//#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-//        if ( IOS7_OR_LATER )
-//        {
-//            self.edgesForExtendedLayout = UIRectEdgeNone;
-//            self.extendedLayoutIncludesOpaqueBars = NO;
-//            self.modalPresentationCapturesStatusBarAppearance = NO;
-//        }
-//#endif
+        [self setting];
     }
     return self;
 }
@@ -166,13 +157,12 @@
     CGRect rx = [ UIScreen mainScreen ].bounds;
     plotScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50+15, 320, rx.size.height-64)];
     [self.view addSubview:plotScrollView];
-    plotScrollView.contentSize = CGSizeMake(320 * [DataBase scrollWidthWithTag:0 andTableName:[self tableName:selectIndex]], 0);
+    
+    plotScrollView.contentSize = CGSizeMake(320 * [SummaryDB scrollWidthWithTag:0 andTableName:[self tableName:selectIndex]], 0);
     plotScrollView.delegate = self;
     plotScrollView.pagingEnabled = YES;
     plotScrollView.showsHorizontalScrollIndicator = NO;
     [plotScrollView setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
-    //界面布局
-    [self setting];
 
     [self makeHeadSegement];
     [self makeTimeSegment];
@@ -514,8 +504,8 @@
     //CGRect rx = [UIScreen mainScreen ].bounds;
     
     //plotScrollView.contentSize = CGSizeMake([DataBase scrollWidth:plotTag] * 320, rx.size.height  - 35 - 49-20);
-    plotScrollView.contentSize = CGSizeMake([DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] * 320, 0);
-    
+    plotScrollView.contentSize = CGSizeMake([SummaryDB scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] * 320, 0);
+      NSLog(@"%f，%f",plotScrollView.contentSize.height,plotScrollView.contentSize.width);
     for (MyCorePlot *plot_1 in plotArray) {
         [plot_1 removeFromSuperview];
     }
@@ -587,6 +577,7 @@
     
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
     NSLog(@"idx  %d",idx);
+   
     if ((idx==4)||btn.enabled) {
         Plotting.hidden=YES;
         Histogram.hidden=YES;
@@ -595,6 +586,7 @@
     {
         Plotting.hidden=NO;
         Histogram.hidden=NO;
+        
     }
     switch (idx) {
 //        case 0:
@@ -611,7 +603,7 @@
 //            break;
         case 0:
         {
-            ListArray=[[DataBase dataBase] selectplayforsummary];
+            ListArray=[[SummaryDB dataBase] selectplayforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_PLAY];
@@ -622,7 +614,7 @@
             break;
         case 1:
         {
-            ListArray=[[DataBase dataBase] selectbathforsummary];
+            ListArray=[[SummaryDB dataBase] selectbathforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
@@ -633,7 +625,7 @@
             break;
         case 2:
         {
-            ListArray=[[DataBase dataBase] selectfeedforsummary];
+            ListArray=[[SummaryDB dataBase] selectfeedforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_FEED];
@@ -644,7 +636,7 @@
             break;
         case 3:
         {
-            ListArray=[[DataBase dataBase] selectsleepforsummary];
+            ListArray=[[SummaryDB dataBase] selectsleepforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_SLEEP];
@@ -655,7 +647,7 @@
             break;
         case 4:
         {
-            ListArray=[[DataBase dataBase] selectdiaperforsummary];
+            ListArray=[[SummaryDB dataBase] selectdiaperforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_DIAPER];
@@ -669,17 +661,18 @@
             break;
     }
     
+    selectIndex = idx;
+    plotScrollView.contentSize = CGSizeMake([SummaryDB scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] * 320, 0);
     for (MyCorePlot *plot_1 in plotArray) {
         [plot_1 removeFromSuperview];
     }
     [plotArray removeAllObjects];
-    selectIndex = idx;
+    
     [self scrollUpadateData];
 }
 
 -(void)updaterecord:(NSInteger)idx
 {
-    
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
     NSLog(@"idx  %d",idx);
     if ((idx==4)||btn.enabled) {
@@ -706,7 +699,7 @@
             break;
         case 0:
         {
-            ListArray=[[DataBase dataBase] selectplayforsummary];
+            ListArray=[[SummaryDB dataBase] selectplayforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_PLAY];
@@ -717,7 +710,7 @@
             break;
         case 1:
         {
-            ListArray=[[DataBase dataBase] selectbathforsummary];
+            ListArray=[[SummaryDB dataBase] selectbathforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
@@ -728,7 +721,7 @@
             break;
         case 2:
         {
-            ListArray=[[DataBase dataBase] selectfeedforsummary];
+            ListArray=[[SummaryDB dataBase] selectfeedforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_FEED];
@@ -739,7 +732,7 @@
             break;
         case 3:
         {
-            ListArray=[[DataBase dataBase] selectsleepforsummary];
+            ListArray=[[SummaryDB dataBase] selectsleepforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_SLEEP];
@@ -750,7 +743,7 @@
             break;
         case 4:
         {
-            ListArray=[[DataBase dataBase] selectdiaperforsummary];
+            ListArray=[[SummaryDB dataBase] selectdiaperforsummary];
             [List reloadData];
             
             int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_DIAPER];
@@ -1137,15 +1130,6 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == Advise) {
-//        if (indexPath.row != 0) {
-//            if ([[dicClicked objectForKey:indexPath] isEqualToString: isOpen])
-//                return [[dicClicked objectForKey:indexPath] floatValue];
-//            else
-//                return originalHeight;
-//        }
-//        else {
-//            return 25.0f;
-//        }
         return 120;
     }
     else
@@ -1163,7 +1147,7 @@
         
         SummaryItem *item=[ListArray objectAtIndex:indexPath.row];
 
-        DataBase *db=[DataBase dataBase];
+        SummaryDB *db=[SummaryDB dataBase];
         
         [db deleteWithStarttime:item.starttime];
         
@@ -1178,35 +1162,35 @@
     //NSLog(@"%@",item.type);
     if ([item.type isEqualToString:@"Feed"]) {
         
-        feed=[[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
+        feed=[[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration UpdateTime:item.updatetime CreateTime:item.createtime];
         feed.feedSaveDelegate = self;
         [feed loaddata];
         [self.view addSubview:feed];
     }
     else if ([item.type isEqualToString:@"Sleep"])
     {
-        sleep=[[save_sleepview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
+        sleep=[[save_sleepview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration UpdateTime:item.updatetime CreateTime:item.createtime];
         sleep.sleepSaveDelegate = self;
        [sleep loaddata];
         [self.view addSubview:sleep];
     }
     else if ([item.type isEqualToString:@"Play"])
     {
-        play=[[save_playview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
+        play=[[save_playview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration UpdateTime:item.updatetime CreateTime:item.createtime];
         play.playSaveDelegate = self;
         [play loaddata];
         [self.view addSubview:play];
     }
     else if ([item.type isEqualToString:@"Bath"])
     {
-        bath=[[save_bathview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration];
+        bath=[[save_bathview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration UpdateTime:item.updatetime CreateTime:item.createtime];
         bath.bathSaveDelegate = self;
         [bath loaddata];
         [self.view addSubview:bath];
     }
     else
     {
-        diaper=[[save_diaperview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime];
+        diaper=[[save_diaperview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-20, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime UpdateTime:item.updatetime CreateTime:item.createtime];
         diaper.diaperSaveDelegate = self;
         [diaper loaddata];
         [self.view addSubview:diaper];
@@ -1217,13 +1201,12 @@
 - (void)scrollUpadateData{
 
     CGRect rx = [UIScreen mainScreen ].bounds;
-    NSLog(@"scrollUpdateData:%@,%d, %d",[self tableName:selectIndex],plotTag,[DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]]);
-    int range = [DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]];
+    int range = [SummaryDB scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]];
     int j = 0;
     for (int i = range - 1; i >= 0;i--)
     {
-        NSArray *data   = [DataBase scrollData:i andTable:[self tableName:selectIndex] andFieldTag:plotTag];
-        int maxmonthday = [DataBase getMonthMax:i];
+        NSArray *data   = [SummaryDB scrollData:i andTable:[self tableName:selectIndex] andFieldTag:plotTag];
+        int maxmonthday = [SummaryDB getMonthMax:i];
         float maxyAxis  = 0.0f;
         for (NSArray *ar in data) {
             for (NSString *str in ar) {
@@ -1239,7 +1222,7 @@
             xLength = 6.0f;
         }
        
-        plot = [[MyCorePlot alloc] initWithFrame:CGRectMake(([DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] - j - 1) * 320, 0, 320, rx.size.height - 40 - 35 - 49-20) andTitle:[self tableName:selectIndex] andXplotRangeWithLocation:0.0f andXlength:xLength andYplotRangeWithLocation:0.0f andYlength:maxyAxis * 1.5 andDataSource:data andXAxisTag:plotTag andMaxDay:maxmonthday];
+        plot = [[MyCorePlot alloc] initWithFrame:CGRectMake(([SummaryDB scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] - j - 1) * 320, 0, 320, rx.size.height - 40 - 35 - 49-20) andTitle:[self tableName:selectIndex] andXplotRangeWithLocation:0.0f andXlength:xLength andYplotRangeWithLocation:0.0f andYlength:maxyAxis * 1.5 andDataSource:data andXAxisTag:plotTag andMaxDay:maxmonthday];
         [plot setBackgroundColor:[UIColor whiteColor]];
         [plotScrollView addSubview:plot];
         [self setName];
@@ -1247,7 +1230,7 @@
         j++;
     }
     
-    [plotScrollView scrollRectToVisible:CGRectMake([DataBase scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] * 320 - 320, 0, 320, rx.size.height - 40 - 35 - 49-20) animated:NO];
+    [plotScrollView scrollRectToVisible:CGRectMake([SummaryDB scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] * 320 - 320, 0, 320, rx.size.height - 40 - 35 - 49-20) animated:NO];
     [self.Mark setFrame:CGRectMake(166, 64+46, 154, 37)];
     [self.view bringSubviewToFront:self.Mark];
 }

@@ -260,7 +260,7 @@
             return;
         }
         labletip.text = NSLocalizedString(@"Counting", nil);        sender.selected=YES;
-        [[NSUserDefaults standardUserDefaults] setObject:[currentdate date] forKey:@"timerOn"];
+        [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"timerOn"];
         [[NSUserDefaults standardUserDefaults] setObject:@"play" forKey:@"ctl"];
         timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerGo) userInfo:nil repeats:YES];
     }
@@ -274,7 +274,7 @@
 
 -(void)timerGo
 {
-    timeLable.text=[currentdate durationFormat];
+    timeLable.text=[ACDate durationFormat];
     NSLog(@"timerGo:%@", timeLable.text);
     if ([timeLable.text isEqualToString:@"00:00:00"]) {
         [self stop];
@@ -342,7 +342,7 @@
 {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"addplaynow"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[currentdate date] forKey:@"timerOn"];
+    [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"timerOn"];
     [[NSUserDefaults standardUserDefaults] setObject:@"play" forKey:@"ctl"];
     
     [self makeSave];
