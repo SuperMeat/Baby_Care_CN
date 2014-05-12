@@ -1190,7 +1190,7 @@
     }
     else
     {
-        diaper=[[save_diaperview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime UpdateTime:item.updatetime CreateTime:item.createtime];
+        diaper=[[save_diaperview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-20, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime UpdateTime:item.updatetime CreateTime:item.createtime];
         diaper.diaperSaveDelegate = self;
         [diaper loaddata];
         [self.view addSubview:diaper];

@@ -7,6 +7,8 @@
 //
 
 #import "save_diaperview.h"
+#import "DiaperPickerView.h"
+
 @implementation save_diaperview
 @synthesize status=_status,select,start,isshow;
 
@@ -43,14 +45,6 @@
     self.status=status;
     return [self initWithFrame:frame];
 }
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
 
 -(void)makeSave
 {
@@ -60,13 +54,12 @@
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor grayColor];
     imageview=[[UIImageView alloc]init];
-    imageview.bounds=CGRectMake(0, 0, 290, 260+30);
-    imageview.center=CGPointMake(160, (460-44-49)/2+30);
+    imageview.bounds=CGRectMake(0, 0, 290, 260+30+60+20);
+    imageview.center=CGPointMake(160, (460-44-49)/2+30+60+20);
     [self addSubview:imageview];
     [imageview addSubview:title];
     
     [self makeDatePicker];
-    // saveView.backgroundColor=[UIColor colorWithWhite:0.4 alpha:0.3];
     
     imageview.backgroundColor=[ACFunction colorWithHexString:@"#f4f4f4"];
     imageview.layer.cornerRadius = 8.0f;
@@ -80,7 +73,15 @@
     
     UILabel *remark=[[UILabel alloc]initWithFrame:CGRectMake(10, 120, 100, 30)];
     
-    UILabel *Activity=[[UILabel alloc]initWithFrame:CGRectMake(10, 160+30, 100, 30)];
+    UILabel *Activity=[[UILabel alloc]initWithFrame:CGRectMake(10, 160, 100, 30)];
+    
+    UILabel *Amount=[[UILabel alloc]initWithFrame:CGRectMake(10, 160+50, 100, 30)];
+    
+    UILabel *Color=[[UILabel alloc]initWithFrame:CGRectMake(10, 160+50+40, 100, 30)];
+    
+    if (Hard == nil) {
+        Hard = [[UILabel alloc]initWithFrame:CGRectMake(10, 160+50+40+40, 100, 30)];
+    }
     
     date.backgroundColor=[UIColor clearColor];
     starttime.backgroundColor=[UIColor clearColor];
@@ -88,20 +89,28 @@
     Activity.backgroundColor=[UIColor clearColor];
     remark.backgroundColor=[UIColor clearColor];
     
+    Amount.backgroundColor = [UIColor clearColor];
+    Color.backgroundColor  = [UIColor clearColor];
+    Hard.backgroundColor   = [UIColor clearColor];
+    
     date.textColor=[UIColor grayColor];
     starttime.textColor=[UIColor grayColor];
-        Activity.textColor=[UIColor grayColor];
-    remark.textColor=[UIColor grayColor];
-    
+    Activity.textColor=[UIColor grayColor];
+    remark.textColor  =[UIColor grayColor];
+    Amount.textColor = [UIColor grayColor];
+    Color.textColor  = [UIColor grayColor];
+    Hard.textColor   = [UIColor grayColor];
     
     date.text=NSLocalizedString(@"Date:",nil);
     starttime.text=NSLocalizedString(@"Start Time:",nil);
     Activity.text=NSLocalizedString(@"Activity:",nil);
     remark.text=NSLocalizedString(@"Comments:",nil);
-    
+    Amount.text = @"量:";
+    Color.text  = @"颜色:";
+    Hard.text   = @"粘稠度:";
     
     dirty=[UIButton buttonWithType:UIButtonTypeCustom];
-    dirty.frame=CGRectMake(225, 160+30, 87/2.0, 87/2.0);
+    dirty.frame=CGRectMake(225, 160, 87/2.0, 87/2.0);
     [dirty setBackgroundImage:[UIImage imageNamed:@"panels_icon_dirty"] forState:UIControlStateNormal];
     [dirty setBackgroundImage:[UIImage imageNamed:@"panels_icon_dirty_choose"] forState:UIControlStateDisabled];
     [imageview addSubview:dirty];
@@ -110,16 +119,16 @@
      UIControlEventTouchUpInside];
     
     dry=[UIButton buttonWithType:UIButtonTypeCustom];
-    dry.frame=CGRectMake(115, 160+30, 87/2.0, 87/2.0);
-    [dry setBackgroundImage:[UIImage imageNamed:@"panels_icon_dry"] forState:UIControlStateNormal];
-    [dry setBackgroundImage:[UIImage imageNamed:@"panels_icon_dry_choose"] forState:UIControlStateDisabled];
+    dry.frame=CGRectMake(115, 160, 87/2.0, 87/2.0);
+    [dry setBackgroundImage:[UIImage imageNamed:@"panels_icon_both"] forState:UIControlStateNormal];
+    [dry setBackgroundImage:[UIImage imageNamed:@"panels_icon_both_choose"] forState:UIControlStateDisabled];
     [imageview addSubview:dry];
     dry.tag=202;
     [dry addTarget:self action:@selector(changeStatus:) forControlEvents:
      UIControlEventTouchUpInside];
     
     wet=[UIButton buttonWithType:UIButtonTypeCustom];
-    wet.frame=CGRectMake(170, 160+30, 87/2.0, 87/2.0);
+    wet.frame=CGRectMake(170, 160, 87/2.0, 87/2.0);
     [wet setBackgroundImage:[UIImage imageNamed:@"panels_icon_wet"] forState:UIControlStateNormal];
     [wet setBackgroundImage:[UIImage imageNamed:@"panels_icon_wet_choose"] forState:UIControlStateDisabled];
     [imageview addSubview:wet];
@@ -133,10 +142,17 @@
     Activity.textAlignment=NSTextAlignmentRight;
     remark.textAlignment=NSTextAlignmentRight;
     
+    Amount.textAlignment = NSTextAlignmentRight;
+    Color.textAlignment  = NSTextAlignmentRight;
+    Hard.textAlignment   = NSTextAlignmentRight;
+    
     [imageview addSubview:date];
     [imageview addSubview:starttime];
     [imageview addSubview:Activity];
     [imageview addSubview:remark];
+    [imageview addSubview:Amount];
+    [imageview addSubview:Color];
+    [imageview addSubview:Hard];
     
     datetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
     [datetext setBackground:[UIImage imageNamed:@"panels_input"]];
@@ -164,11 +180,11 @@
     starttimetext.delegate = self;
     starttimetext.inputView = starttimepicker;
     
-    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 120, 150, 30+30)];
+    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 120, 150, 30)];
     remarkbg.image=[UIImage imageNamed:@"panels_input"];
     remarkbg.userInteractionEnabled=YES;
     
-    remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30+30)];
+    remarktext=[[UITextView alloc]initWithFrame:CGRectMake(-2, 0, 140, 30)];
     remarktext.backgroundColor=[UIColor clearColor];
     remarktext.textColor=[UIColor grayColor];
     remarktext.font=[UIFont systemFontOfSize:13];
@@ -176,8 +192,50 @@
     [imageview addSubview:remarkbg];
     remarktext.delegate=self;
     
+    amounttext=[[UITextField alloc]initWithFrame:CGRectMake(115, 160+10+87/2.0, 150, 30)];
+    [amounttext setBackground:[UIImage imageNamed:@"panels_input"]];
+    amounttext.adjustsFontSizeToFitWidth=YES;
+    [imageview addSubview:amounttext];
+    amounttext.delegate = self;
+    amounttext.inputView = datepicker;
+    
+    amounttext.textColor=[UIColor grayColor];
+    
+    [amounttext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
+    [amounttext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
+    [amounttext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
+    [amounttext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
+    
+    colortext=[[UITextField alloc]initWithFrame:CGRectMake(115, 160+50+87/2.0, 150, 30)];
+    [colortext setBackground:[UIImage imageNamed:@"panels_input"]];
+    colortext.adjustsFontSizeToFitWidth=YES;
+    [imageview addSubview:colortext];
+    colortext.delegate = self;
+    colortext.inputView = datepicker;
+    
+    colortext.textColor=[UIColor grayColor];
+    
+    [colortext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
+    [colortext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
+    [colortext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
+    [colortext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
+    
+    hardtext=[[UITextField alloc]initWithFrame:CGRectMake(115, 160+50+40+87/2.0, 150, 30)];
+    [hardtext setBackground:[UIImage imageNamed:@"panels_input"]];
+    hardtext.adjustsFontSizeToFitWidth=YES;
+    [imageview addSubview:hardtext];
+    hardtext.delegate = self;
+    hardtext.inputView = datepicker;
+    
+    hardtext.textColor=[UIColor grayColor];
+    
+    [hardtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
+    [hardtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
+    [hardtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
+    [hardtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
+    
     UIButton *savebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    savebutton.frame=CGRectMake(200, 220+30, 70, 30);
+    savebutton.frame=CGRectMake(200, 220+30+60+20, 70, 30);
     [savebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     savebutton.layer.cornerRadius = 5.0f;
     [savebutton setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
@@ -185,12 +243,14 @@
     [imageview addSubview:savebutton];
     
     UIButton *canclebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    canclebutton.frame=CGRectMake(20, 220+30, 70, 30);
+    canclebutton.frame=CGRectMake(20, 220+30+60+20, 70, 30);
     [canclebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     canclebutton.layer.cornerRadius = 5.0f;
     [canclebutton setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
     [canclebutton addTarget:self action:@selector(cancle:) forControlEvents:UIControlEventTouchUpInside];
     [imageview addSubview:canclebutton];
+    
+    
     
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -210,18 +270,24 @@
             dirty.enabled = NO;
             dry.enabled = YES;
             wet.enabled = YES;
+            Hard.hidden = NO;
+            hardtext.hidden = NO;
             break;
         case 202:
             self.status = @"Dry";
             dirty.enabled = YES;
             dry.enabled   = NO;
             wet.enabled   = YES;
+            Hard.hidden = NO;
+            hardtext.hidden = NO;
             break;
         case 203:
             self.status = @"Wet";
             dirty.enabled = YES;
             dry.enabled   = YES;
             wet.enabled   = NO;
+            Hard.hidden = YES;
+            hardtext.hidden = YES;
             break;
         default:
             break;
@@ -251,17 +317,29 @@
         NSLog(@"%@",self.status);
         if ([self.status isEqualToString:@"Wet"]) {
             wet.enabled=NO;
+            Hard.hidden = YES;
+            hardtext.hidden = YES;
         }
         else if ([self.status isEqualToString:@"Dirty"])
         {
             dirty.enabled=NO;
+            Hard.hidden = NO;
+            hardtext.hidden = NO;
         }
         else if([self.status isEqualToString:@"Dry"])
         {
             dry.enabled=NO;
+            Hard.hidden = NO;
+            hardtext.hidden = NO;
         }
+        
+        self.amount = [array objectAtIndex:3];
+        amounttext.text = self.amount;
+        self.color  = [array objectAtIndex:4];
+        colortext.text = self.color;
+        self.hard   = [array objectAtIndex:5];
+        hardtext.text = self.hard;
     }
-    
     else
     {
         datetext.text=[ACDate dateFomatdate:[ACDate date]];
@@ -270,18 +348,25 @@
             wet.enabled=NO;
             dry.enabled=YES;
             dirty.enabled=YES;
+            
+            Hard.hidden = YES;
+            hardtext.hidden = YES;
         }
         else if ([self.status isEqualToString:@"Dirty"])
         {
             dirty.enabled=NO;
             dry.enabled=YES;
             wet.enabled=YES;
+            Hard.hidden = NO;
+            hardtext.hidden = NO;
         }
         else if([self.status isEqualToString:@"Dry"])
         {
             dry.enabled=NO;
             wet.enabled=YES;
             dirty.enabled=YES;
+            Hard.hidden = NO;
+            hardtext.hidden = NO;
         }
     }
 }
@@ -303,11 +388,11 @@
     if (select)
     {
         if (curstarttime == nil) {
-            [db updateDiaperRecord:self.start Month:[ACDate getMonthFromDate:self.start] Week:[ACDate getWeekFromDate:self.start] WeekDay:[ACDate getWeekDayFromDate:self.start] Status:self.status Color:@"red" Hard:@"hard" Remark:remarktext.text MoreInfo:@"" CreateTime:_createtime];
+            [db updateDiaperRecord:self.start Month:[ACDate getMonthFromDate:self.start] Week:[ACDate getWeekFromDate:self.start] WeekDay:[ACDate getWeekDayFromDate:self.start] Status:self.status Amount:self.amount Color:self.color Hard:self.hard Remark:remarktext.text MoreInfo:@"" CreateTime:_createtime];
         }
         else
         {
-            [db updateDiaperRecord:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] WeekDay:[ACDate getWeekDayFromDate:curstarttime] Status:self.status Color:@"red" Hard:@"hard" Remark:remarktext.text MoreInfo:@"" CreateTime:_createtime];
+            [db updateDiaperRecord:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] WeekDay:[ACDate getWeekDayFromDate:curstarttime] Status:self.status Amount:self.amount Color:self.color Hard:self.hard Remark:remarktext.text MoreInfo:@"" CreateTime:_createtime];
         }
         
         [self removeFromSuperview];
@@ -317,16 +402,14 @@
             self.status=@"";
         }
         
-        
-    //[db insertdiaperStarttime:[ACDate date] Month:[ACDate getCurrentMonth] Week:[ACDate getCurrentWeek] WeekDay:[ACDate getCurrentWeekDay] Status:self.status Remark:remarktext.text];
         if (curstarttime == nil) {
             long createtime = [ACDate getTimeStampFromDate:[NSDate date]];
-            [db insertBabyDiaperRecord:createtime UpdateTime:createtime StartTime:[ACDate date] Month:[ACDate getCurrentMonth] Week:[ACDate getCurrentWeek] Weekday:[ACDate getCurrentWeekDay] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text MoreInfo:@""];
+            [db insertBabyDiaperRecord:createtime UpdateTime:createtime StartTime:[ACDate date] Month:[ACDate getCurrentMonth] Week:[ACDate getCurrentWeek] Weekday:[ACDate getCurrentWeekDay] Status:self.status Amount:self.amount Color:self.color Hard:self.hard Remark:remarktext.text MoreInfo:@""];
         }
         else
         {
             long createtime = [ACDate getTimeStampFromDate:[NSDate date]];
-            [db insertBabyDiaperRecord:createtime UpdateTime:createtime StartTime:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] Weekday:[ACDate getWeekDayFromDate:curstarttime] Status:self.status Color:@"" Hard:@"" Remark:remarktext.text MoreInfo:@""];
+            [db insertBabyDiaperRecord:createtime UpdateTime:createtime StartTime:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] Weekday:[ACDate getWeekDayFromDate:curstarttime] Status:self.status Amount:self.amount Color:self.color Hard:self.hard Remark:remarktext.text MoreInfo:@""];
 
             curstarttime = nil;
         }
@@ -442,6 +525,148 @@
 }
 
 
+-(void)actionsheetDiaperPickerAmout
+{
+    action3=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    
+    if (diaperPickerView1==nil) {
+        diaperPickerView1 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_AMOUNT Option:DIAPER_OPTION_XUXU];
+        diaperPickerView1.diaperPickerViewDelegate = self;
+    }
+   
+    if ([self.amount isEqualToString:@"无"]) {
+        [diaperPickerView1 selectRow:0 inComponent:0 animated:YES];
+    }
+    else if ([self.amount isEqualToString:@"少量"])
+    {
+        [diaperPickerView1 selectRow:1 inComponent:0 animated:YES];
+    }
+    else if ([self.amount isEqualToString:@"正常"])
+    {
+        [diaperPickerView1 selectRow:2 inComponent:0 animated:YES];
+    }
+    else if ([self.amount isEqualToString:@"很多"])
+    {
+        [diaperPickerView1 selectRow:3 inComponent:0 animated:YES];
+    }
+    else if ([self.amount isEqualToString:@"溢出"])
+    {
+        [diaperPickerView1 selectRow:4 inComponent:0 animated:YES];
+    }
+    else
+    {
+        [diaperPickerView1 selectRow:0 inComponent:0 animated:YES];
+        self.amount = @"无";
+    }
+    
+    diaperPickerView1.showsSelectionIndicator = YES;
+    diaperPickerView1.frame=CGRectMake(0, 0, 320, 100);
+    
+    action3.bounds=CGRectMake(0, 0, 320, 200);
+    [action3 addSubview:diaperPickerView1];
+    [action3 showInView:self.window];
+}
+
+-(void)actionsheetDiaperPickerColor
+{
+    action4=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    
+    if (diaperPickerView2==nil) {
+        diaperPickerView2 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_COLOR Option:DIAPER_OPTION_XUXU];
+        diaperPickerView2.diaperPickerViewDelegate = self;
+    }
+    
+    if ([self.color isEqualToString:@"透明"]) {
+        [diaperPickerView2 selectRow:0 inComponent:0 animated:YES];
+    }
+    else if ([self.color isEqualToString:@"较淡"])
+    {
+        [diaperPickerView2 selectRow:1 inComponent:0 animated:YES];
+    }
+    else if ([self.color isEqualToString:@"偏黄"])
+    {
+        [diaperPickerView2 selectRow:2 inComponent:0 animated:YES];
+    }
+    else if ([self.color isEqualToString:@"较黄"])
+    {
+        [diaperPickerView2 selectRow:3 inComponent:0 animated:YES];
+    }
+    else if ([self.color isEqualToString:@"深黄"])
+    {
+        [diaperPickerView2 selectRow:4 inComponent:0 animated:YES];
+    }
+    else
+    {
+        [diaperPickerView2 selectRow:0 inComponent:0 animated:YES];
+        self.color = @"透明";
+    }
+    
+    diaperPickerView2.showsSelectionIndicator = YES;
+
+    diaperPickerView2.frame=CGRectMake(0, 0, 320, 100);
+    
+    action4.bounds=CGRectMake(0, 0, 320, 200);
+    [action4 addSubview:diaperPickerView2];
+    [action4 showInView:self.window];
+}
+
+-(void)actionsheetDiaperPickerHard
+{
+    action5=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    
+    if (diaperPickerView3==nil) {
+        diaperPickerView3 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_HARD Option:DIAPER_OPTION_XUXU];
+        diaperPickerView3.diaperPickerViewDelegate = self;
+    }
+    
+    if ([self.hard isEqualToString:@"水样"]) {
+        [diaperPickerView3 selectRow:0 inComponent:0 animated:YES];
+    }
+    else if ([self.hard isEqualToString:@"较稀"])
+    {
+        [diaperPickerView3 selectRow:1 inComponent:0 animated:YES];
+    }
+    else if ([self.hard isEqualToString:@"正常"])
+    {
+        [diaperPickerView3 selectRow:2 inComponent:0 animated:YES];
+    }
+    else if ([self.hard isEqualToString:@"软干硬"])
+    {
+        [diaperPickerView3 selectRow:3 inComponent:0 animated:YES];
+    }
+    else if ([self.hard isEqualToString:@"很干硬"])
+    {
+        [diaperPickerView3 selectRow:4 inComponent:0 animated:YES];
+    }
+    else
+    {
+        [diaperPickerView3 selectRow:0 inComponent:0 animated:YES];
+        self.hard = @"水样";
+    }
+    
+    diaperPickerView3.showsSelectionIndicator = YES;
+    diaperPickerView3.frame=CGRectMake(0, 0, 320, 100);
+    
+    action5.bounds=CGRectMake(0, 0, 320, 200);
+    [action5 addSubview:diaperPickerView3];
+    [action5 showInView:self.window];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+    if (actionSheet == action3) {
+        amounttext.text = [NSString stringWithFormat:@"%@", self.amount];
+    }
+    
+    if (actionSheet == action4) {
+        colortext.text = [NSString stringWithFormat:@"%@", self.color];
+    }
+    
+    if (actionSheet == action5) {
+        hardtext.text = [NSString stringWithFormat:@"%@", self.hard];
+    }
+}
+
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     
@@ -459,6 +684,15 @@
     
     [self addSubview:starttimepicker];
     starttimepicker.hidden = YES;
+    
+    [self addSubview:diaperPickerView1];
+    diaperPickerView1.hidden = YES;
+    
+    [self addSubview:diaperPickerView2];
+    diaperPickerView2.hidden = YES;
+    
+    [self addSubview:diaperPickerView3];
+    diaperPickerView3.hidden = YES;
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
@@ -472,6 +706,21 @@
     if (textField == starttimetext) {
         [self actionsheetStartTimeShow];
         [starttimetext resignFirstResponder];
+    }
+    
+    if (textField == amounttext) {
+        [self actionsheetDiaperPickerAmout];
+        [amounttext resignFirstResponder];
+    }
+    
+    if (textField == colortext) {
+        [self actionsheetDiaperPickerColor];
+        [colortext resignFirstResponder];
+    }
+    
+    if (textField == hardtext) {
+        [self actionsheetDiaperPickerHard];
+        [hardtext resignFirstResponder];
     }
 }
 
@@ -519,5 +768,22 @@
 {
     return YES;
 }
+
+-(void)sendDiaperSaveChanged:(int)type NewStatus:(NSString*)newstatus
+{
+    if (type == DIAPER_TYPE_AMOUNT)
+    {
+        self.amount = newstatus;
+    }
+    else if (type == DIAPER_TYPE_COLOR)
+    {
+        self.color = newstatus;
+    }
+    else
+    {
+        self.hard  = newstatus;
+    }
+}
+
 
 @end

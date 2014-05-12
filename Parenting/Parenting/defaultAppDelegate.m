@@ -143,7 +143,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 //        deviceID = [cls performSelector:deviceIDSelector];
 //    }
 //    NSLog(@"{\"oid\": \"%@\"}", deviceID);
-    
+    [MTA startWithAppkey:MTA_KEY];
     return YES;
 }
 

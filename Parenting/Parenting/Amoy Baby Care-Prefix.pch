@@ -57,6 +57,7 @@
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import "MyMapViewController.h"
 #import "ASIController.h"
+#import "MTA.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define BABYICONPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d.png",NSHomeDirectory(),USERID,BABYID])
@@ -88,6 +89,13 @@
 #define ENV_ADVISE_LEVEL_EXCELLENT   1
 #define ENV_ADVISE_LEVEL_GOOD        2
 #define ENV_ADVISE_LEVEL_BAD         3
+
+#define DIAPER_OPTION_XUXU 1
+#define DIAPER_OPTION_BABA 2
+
+#define DIAPER_TYPE_AMOUNT 1
+#define DIAPER_TYPE_COLOR  2
+#define DIAPER_TYPE_HARD   3
 
 /**
  *	QuadCurveMenu
@@ -137,6 +145,8 @@
 #define JPUSHAPPKEY    @"415aa5c57db9b6d73d91c2af"
 
 #define GUIDE_V    @"T1.0.04021520"
+
+#define MTA_KEY @"I6A97SFF8ERU"
 
 #ifdef DEBUG
 #define ASIHTTPADDRESS @"http://192.168.1.138:8033/babycare/WCF"

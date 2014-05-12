@@ -239,6 +239,7 @@
                          Week:(int)week
                       Weekday:(int)weekday
                        Status:(NSString *)status
+                       Amount:(NSString *)amount
                         Color:(NSString *)color
                          Hard:(NSString *)hard
                        Remark:(NSString *)remark
@@ -265,6 +266,7 @@
                      Week:(int)week
                   WeekDay:(int)weekday
                    Status:(NSString *)status
+                   Amount:(NSString *)amount
                     Color:(NSString *)color
                      Hard:(NSString *)hard
                    Remark:(NSString *)remark
