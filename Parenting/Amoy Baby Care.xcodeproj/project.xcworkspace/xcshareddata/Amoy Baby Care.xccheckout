@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>0BAD1D63-62B5-44C5-84D7-D190E0464412</string>
+	<string>6977C231-EB3F-4C48-B145-6C16AF87BB94</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Amoy Baby Care</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>39FB49D9-4BA4-4854-8E0F-5BF97AF2D030</key>
-		<string>https://github.com/JammingLin/Baby_Care_CN.git</string>
+		<key>F768EE91-5715-421A-928C-B96F96D679D7</key>
+		<string>https://github.com/SuperMeat/Baby_Care_CN.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Parenting/Amoy Baby Care.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>39FB49D9-4BA4-4854-8E0F-5BF97AF2D030</key>
+		<key>F768EE91-5715-421A-928C-B96F96D679D7</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/JammingLin/Baby_Care_CN.git</string>
+	<string>https://github.com/SuperMeat/Baby_Care_CN.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>39FB49D9-4BA4-4854-8E0F-5BF97AF2D030</string>
+	<string>F768EE91-5715-421A-928C-B96F96D679D7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>39FB49D9-4BA4-4854-8E0F-5BF97AF2D030</string>
+			<string>F768EE91-5715-421A-928C-B96F96D679D7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Baby_Care_CN</string>
 		</dict>
