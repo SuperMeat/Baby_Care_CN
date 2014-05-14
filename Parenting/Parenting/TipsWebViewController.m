@@ -182,7 +182,7 @@
 //        [Shareview addSubview:cancle];
 
     count = 0;
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-150)];
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-G_WEBVIEWY)];
     [self.webView setScalesPageToFit:YES];
     self.webView.delegate = self;
     NSURLRequest* urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:_url]];

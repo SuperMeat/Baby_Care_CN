@@ -260,3 +260,5 @@
 #define BAIDUWEATHERAPI @"http://api.map.baidu.com/telematics/v3/weather?location=%@&output=json&ak=0jqwWuOll53rYRpidLF3XrB9"
 
 #define WEATHERICONSCALE 0.55
+
+#define G_WEBVIEWY (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 49:150)

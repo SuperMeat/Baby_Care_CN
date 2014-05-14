@@ -485,8 +485,6 @@
 		BE5997C71861930A008D3F6C /* BindingDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C01861930A008D3F6C /* BindingDeviceViewController.m */; };
 		BE5997C81861930A008D3F6C /* BindingDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */; };
 		BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */; };
-		BE5997CF18619320008D3F6C /* TipsMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997CD18619320008D3F6C /* TipsMasterViewController.m */; };
-		BE5997D018619320008D3F6C /* TipsMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5997CE18619320008D3F6C /* TipsMasterViewController.xib */; };
 		BE5997D418619339008D3F6C /* lookingDevice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D218619339008D3F6C /* lookingDevice.jpg */; };
 		BE5997D518619339008D3F6C /* scanfail_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D318619339008D3F6C /* scanfail_1.jpg */; };
 		BE6938D61908E80200FC2BB4 /* PhysiologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6938D41908E80200FC2BB4 /* PhysiologyViewController.m */; };
@@ -1244,9 +1242,6 @@
 		BE5997C11861930A008D3F6C /* BindingDeviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingDeviceViewController.xib; sourceTree = "<group>"; };
 		BE5997C21861930A008D3F6C /* LookingForDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookingForDeviceViewController.h; sourceTree = "<group>"; };
 		BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookingForDeviceViewController.m; sourceTree = "<group>"; };
-		BE5997CC18619320008D3F6C /* TipsMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsMasterViewController.h; sourceTree = "<group>"; };
-		BE5997CD18619320008D3F6C /* TipsMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsMasterViewController.m; sourceTree = "<group>"; };
-		BE5997CE18619320008D3F6C /* TipsMasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipsMasterViewController.xib; sourceTree = "<group>"; };
 		BE5997D218619339008D3F6C /* lookingDevice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lookingDevice.jpg; sourceTree = "<group>"; };
 		BE5997D318619339008D3F6C /* scanfail_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scanfail_1.jpg; sourceTree = "<group>"; };
 		BE6938D31908E80200FC2BB4 /* PhysiologyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysiologyViewController.h; sourceTree = "<group>"; };
@@ -2137,9 +2132,6 @@
 		4855BCA8183075B100F02A3E /* Tips */ = {
 			isa = PBXGroup;
 			children = (
-				BE5997CC18619320008D3F6C /* TipsMasterViewController.h */,
-				BE5997CD18619320008D3F6C /* TipsMasterViewController.m */,
-				BE5997CE18619320008D3F6C /* TipsMasterViewController.xib */,
 				48B4C0B617DEEF7C0099D986 /* AdviseMasterViewController.h */,
 				48B4C0B717DEEF7D0099D986 /* AdviseMasterViewController.m */,
 				48B4C0B817DEEF7E0099D986 /* AdviseMasterViewController.xib */,
@@ -3866,7 +3858,6 @@
 				48DEA7AB17F467A000A11316 /* Sleep_2.jpg in Resources */,
 				BE75CD1F1872CBA5001EF1C1 /* login_title@2x.png in Resources */,
 				48F91AB818FB8DF10038DC67 /* advise_arrow_right@2x.png in Resources */,
-				BE5997D018619320008D3F6C /* TipsMasterViewController.xib in Resources */,
 				48DEA7AA17F467A000A11316 /* Sleep_1.jpg in Resources */,
 				48DEA7AE17F467A000A11316 /* Sleep_5.jpg in Resources */,
 				48F91AFB18FBB54E0038DC67 /* icon_little_rainy@2x.png in Resources */,
@@ -4032,7 +4023,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				48EF612618C6FAC7006C3D5C /* ReGeocodeAnnotation.m in Sources */,
-				BE5997CF18619320008D3F6C /* TipsMasterViewController.m in Sources */,
 				48B78141182A20610073EEBD /* CustomURLCache.m in Sources */,
 				48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */,
 				485749961831C3D1000D921B /* NotifyViewController.m in Sources */,
