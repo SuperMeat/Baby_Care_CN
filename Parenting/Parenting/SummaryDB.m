@@ -670,10 +670,38 @@
     {
         [array addObject:[NSString stringWithFormat:@""]];
     }
-    [array addObject:[set stringForColumn:@"status"]];
-    [array addObject:[set stringForColumn:@"amount"]];
-    [array addObject:[set stringForColumn:@"color"]];
-    [array addObject:[set stringForColumn:@"hard"]];
+    
+    if ([set stringForColumn:@"status"]) {
+        [array addObject:[set stringForColumn:@"status"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
+    if ([set stringForColumn:@"amount"]) {
+        [array addObject:[set stringForColumn:@"amount"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
+    if ([set stringForColumn:@"color"]) {
+        [array addObject:[set stringForColumn:@"color"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
+    if ([set stringForColumn:@"hard"]) {
+        [array addObject:[set stringForColumn:@"hard"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
     [array addObject:[NSNumber numberWithLong:[set longForColumn:@"update_time"]]];
     [array addObject:[NSNumber numberWithLong:[set longForColumn:@"create_time"]]];
     
@@ -855,6 +883,306 @@
     res=[db executeUpdate:@"delete from bc_baby_play where starttime=?",starttime];
     [db close];
     return res;
+}
+
+-(NSDictionary*)searchTodayDiaperStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= \"XuXu\"",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    [set next];
+    int xuxu_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        xuxu_count = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]], @"BaBa"];
+    [set next];
+    int baba_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        baba_count = [set intForColumnIndex:0];
+    }
+
+    set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]], @"XuXuBaBa"];
+    [set next];
+    int xuxubaba_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        xuxubaba_count = [set intForColumnIndex:0];
+    }
+
+    [dic setObject:[NSNumber numberWithInt:xuxu_count] forKey:@"xuxu"];
+    [dic setObject:[NSNumber numberWithInt:baba_count] forKey:@"baba"];
+    [dic setObject:[NSNumber numberWithInt:xuxubaba_count] forKey:@"xuxubaba"];
+    [dic setObject:[NSNumber numberWithInt:(xuxubaba_count+baba_count+xuxu_count)] forKey:@"all"];
+    
+    
+    [db close];
+    return  dic;
+
+}
+
+-(NSDictionary*)searchYesterdayDiaperStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    long today  = [ACDate getTimeStampFromDate:[ACDate date]];
+    long yester = today - 86400;
+    NSDate *yes = [ACDate getDateFromTimeStamp:yester];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]], @"XuXu"];
+    [set next];
+    int xuxu_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        xuxu_count = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]], @"BaBa"];
+    [set next];
+    int baba_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        baba_count = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]], @"XuXuBaBa"];
+    [set next];
+    int xuxubaba_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        xuxubaba_count = [set intForColumnIndex:0];
+    }
+    
+    [dic setObject:[NSNumber numberWithInt:xuxu_count] forKey:@"xuxu"];
+    [dic setObject:[NSNumber numberWithInt:baba_count] forKey:@"baba"];
+    [dic setObject:[NSNumber numberWithInt:xuxubaba_count] forKey:@"xuxubaba"];
+    [dic setObject:[NSNumber numberWithInt:(xuxubaba_count+baba_count+xuxu_count)] forKey:@"all"];
+    
+    [db close];
+    return  dic;
+
+}
+
+-(NSDictionary*)searchTodayFeedStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select sum(amount) from bc_baby_feed where month = ? and week=? and weekday=? and feed_type = ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],@"0"];
+    [set next];
+    int sum_amount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_amount = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select sum(duration) from bc_baby_feed where month = ? and week=? and weekday=? and feed_type=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],@"1"];
+    [set next];
+    int sum_duration = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_duration = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_feed where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    [set next];
+    int max_duration = 0;
+    if ([set intForColumnIndex:0])
+    {
+        max_duration = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select max(amount) from bc_baby_feed where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    [set next];
+    int max_amount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        max_amount = [set intForColumnIndex:0];
+    }
+    
+    //一天吃了多少量
+    [dic setObject:[NSNumber numberWithInt:sum_amount] forKey:@"sum_amount"];
+    //一天喂了多久
+    [dic setObject:[NSNumber numberWithInt:sum_duration] forKey:@"sum_duration"];
+    //最大一次喂了多久
+    [dic setObject:[NSNumber numberWithInt:max_duration] forKey:@"max_duration"];
+    //最大一次量多少
+    [dic setObject:[NSNumber numberWithInt:max_amount] forKey:@"max_amount"];
+    
+    [db close];
+    return  dic;
+}
+
+-(NSDictionary*)searchYesterdayFeedStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    long today  = [ACDate getTimeStampFromDate:[ACDate date]];
+    long yester = today - 86400;
+    NSDate *yes = [ACDate getDateFromTimeStamp:yester];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select sum(amount) from bc_baby_feed where month = ? and week=? and weekday=? and feed_type = ?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]],@"0"];
+    [set next];
+    int sum_amount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_amount = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select sum(duration) from bc_baby_feed where month = ? and week=? and weekday=? and feed_type=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]],@"1"];
+    [set next];
+    int sum_duration = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_duration = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_feed where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]]];
+    [set next];
+    int max_duration = 0;
+    if ([set intForColumnIndex:0])
+    {
+        max_duration = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select max(amount) from bc_baby_feed where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]]];
+    [set next];
+    int max_amount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        max_amount = [set intForColumnIndex:0];
+    }
+    
+    //一天吃了多少量
+    [dic setObject:[NSNumber numberWithInt:sum_amount] forKey:@"sum_amount"];
+    //一天喂了多久
+    [dic setObject:[NSNumber numberWithInt:sum_duration] forKey:@"sum_duration"];
+    //最大一次喂了多久
+    [dic setObject:[NSNumber numberWithInt:max_duration] forKey:@"max_duration"];
+    //最大一次量多少
+    [dic setObject:[NSNumber numberWithInt:max_amount] forKey:@"max_amount"];
+    [db close];
+    return  dic;
+}
+
+-(NSDictionary*)searchTodaySleepStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select sum(duration) from bc_baby_sleep where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    [set next];
+    int sum_duration = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_duration = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    [set next];
+    int max_duration = 0;
+    if ([set intForColumnIndex:0])
+    {
+        max_duration = [set intForColumnIndex:0];
+    }
+    
+    [dic setObject:[NSNumber numberWithInt:sum_duration] forKey:@"sum_duration"];
+    [dic setObject:[NSNumber numberWithInt:max_duration] forKey:@"max_duration"];
+    
+    [db close];
+    return  dic;
+}
+
+-(NSDictionary*)searchYesterdaySleepStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    long today  = [ACDate getTimeStampFromDate:[ACDate date]];
+    long yester = today - 86400;
+    NSDate *yes = [ACDate getDateFromTimeStamp:yester];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select sum(duration) from bc_baby_sleep where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]]];
+    [set next];
+    int sum_duration = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_duration = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]]];
+    [set next];
+    int max_duration = 0;
+    if ([set intForColumnIndex:0])
+    {
+        max_duration = [set intForColumnIndex:0];
+    }
+    
+    [dic setObject:[NSNumber numberWithInt:sum_duration] forKey:@"sum_duration"];
+    [dic setObject:[NSNumber numberWithInt:max_duration] forKey:@"max_duration"];
+    
+    [db close];
+    return  dic;
 }
 
 + (NSArray *)dataFromTable:(int)fileTag andpage:(int)scrollpage andTable:(NSString *)table

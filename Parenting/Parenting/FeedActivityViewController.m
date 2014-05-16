@@ -89,6 +89,7 @@
     {
         [self feedWay:bo];
     }
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"timerOn"]&&[[[NSUserDefaults standardUserDefaults] objectForKey:@"ctl"] isEqualToString:@"feed"]) {
         addRecordBtn.enabled = NO;
         labletip.text = NSLocalizedString(@"Counting", nil);
@@ -233,8 +234,11 @@
     [self.view addSubview:chooseBreast];
     [self.view addSubview:chooseBottle];
     
+    UIImageView *historyView = [[UIImageView alloc] initWithFrame:CGRectMake(140, 90*PNGSCALE+20*PNGSCALE+10, 200*PNGSCALE, 120*PNGSCALE)];
+    [historyView setImage:[UIImage imageNamed:@"bg"]];
+    [self.view addSubview:historyView];
     
-    timerImage = [[UIImageView alloc]initWithFrame:CGRectMake((320-165*PNGSCALE)/2.0, 90*PNGSCALE+20*PNGSCALE, 165*PNGSCALE, 111*PNGSCALE)];
+    timerImage = [[UIImageView alloc]initWithFrame:CGRectMake((320-165*PNGSCALE)/2.0, 90*PNGSCALE+20*PNGSCALE+60*PNGSCALE, 165*PNGSCALE, 111*PNGSCALE)];
     [timerImage setBackgroundColor:[UIColor clearColor]];
     if (startButton.selected==YES)
     {
@@ -346,6 +350,7 @@
         }
     }
 }
+
 -(void)makeSave
 {
     if (saveView==nil) {
@@ -434,7 +439,7 @@
         startButton.hidden=NO;
         startButtonleft.hidden=YES;
         startButtonright.hidden=YES;
-        timerImage.frame = CGRectMake(140, 150, 165*PNGSCALE, 111*PNGSCALE);
+        timerImage.frame = CGRectMake(140, 150+60*PNGSCALE, 165*PNGSCALE, 111*PNGSCALE);
         
     }
     another.enabled=YES;

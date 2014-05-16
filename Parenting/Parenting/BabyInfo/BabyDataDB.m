@@ -564,13 +564,17 @@
     
     int amount = 0;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"metric"] isEqualToString:@"Mls:"]) {
-        NSRange range = [oz rangeOfString:@"ml"];
-        amount = [[oz substringFromIndex:(range.location-1)] intValue];
+        if ([oz isEqualToString:@""] != NO) {
+            NSRange range = [oz rangeOfString:@"ml"];
+            amount = [[oz substringFromIndex:(range.location-1)] intValue];
+        }
     }
     else
     {
-        NSRange range = [oz rangeOfString:@"oz"];
-        amount = [[oz substringFromIndex:(range.location-1)] intValue];
+        if ([oz isEqualToString:@""] != NO) {
+            NSRange range = [oz rangeOfString:@"oz"];
+            amount = [[oz substringFromIndex:(range.location-1)] intValue];
+        }
     }
 
     res=[db executeUpdate:@"insert into bc_baby_feed values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",

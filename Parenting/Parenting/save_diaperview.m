@@ -266,7 +266,7 @@
 {
     switch (sender.tag) {
         case 201:
-            self.status = @"Dirty";
+            self.status = @"BaBa";
             dirty.enabled = NO;
             dry.enabled = YES;
             wet.enabled = YES;
@@ -274,7 +274,7 @@
             hardtext.hidden = NO;
             break;
         case 202:
-            self.status = @"Dry";
+            self.status = @"XuXuBaBa";
             dirty.enabled = YES;
             dry.enabled   = NO;
             wet.enabled   = YES;
@@ -282,7 +282,7 @@
             hardtext.hidden = NO;
             break;
         case 203:
-            self.status = @"Wet";
+            self.status = @"XuXu";
             dirty.enabled = YES;
             dry.enabled   = YES;
             wet.enabled   = NO;
@@ -315,18 +315,18 @@
         
         self.status=[array objectAtIndex:2];
         NSLog(@"%@",self.status);
-        if ([self.status isEqualToString:@"Wet"]) {
+        if ([self.status isEqualToString:@"XuXu"]) {
             wet.enabled=NO;
             Hard.hidden = YES;
             hardtext.hidden = YES;
         }
-        else if ([self.status isEqualToString:@"Dirty"])
+        else if ([self.status isEqualToString:@"BaBa"])
         {
             dirty.enabled=NO;
             Hard.hidden = NO;
             hardtext.hidden = NO;
         }
-        else if([self.status isEqualToString:@"Dry"])
+        else if([self.status isEqualToString:@"XuXuBaBa"])
         {
             dry.enabled=NO;
             Hard.hidden = NO;
@@ -344,7 +344,7 @@
     {
         datetext.text=[ACDate dateFomatdate:[ACDate date]];
         starttimetext.text=[ACDate getStarttimefromdate:[ACDate date]];
-        if ([self.status isEqualToString:@"Wet"]) {
+        if ([self.status isEqualToString:@"XuXu"]) {
             wet.enabled=NO;
             dry.enabled=YES;
             dirty.enabled=YES;
@@ -352,7 +352,7 @@
             Hard.hidden = YES;
             hardtext.hidden = YES;
         }
-        else if ([self.status isEqualToString:@"Dirty"])
+        else if ([self.status isEqualToString:@"BaBa"])
         {
             dirty.enabled=NO;
             dry.enabled=YES;
@@ -360,7 +360,7 @@
             Hard.hidden = NO;
             hardtext.hidden = NO;
         }
-        else if([self.status isEqualToString:@"Dry"])
+        else if([self.status isEqualToString:@"XuXuBaBa"])
         {
             dry.enabled=NO;
             wet.enabled=YES;
@@ -413,7 +413,9 @@
 
             curstarttime = nil;
         }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
+        
+        [self.diaperSaveDelegate sendReloadData];
     }
     
     //自动上传数据

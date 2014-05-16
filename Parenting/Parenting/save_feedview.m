@@ -196,31 +196,31 @@
     [Oztext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     Oztext.keyboardType=UIKeyboardTypeNumberPad;
     
-    left=[[UILabel alloc]initWithFrame:CGRectMake(115, 200, 50, 20)];
+    left=[[UILabel alloc]initWithFrame:CGRectMake(115, 200-30, 50, 20)];
     left.text=NSLocalizedString(@"Left",nil);
     left.backgroundColor=[UIColor clearColor];
     left.textColor=[UIColor grayColor];
     [imageview addSubview:left];
     
-    right=[[UILabel alloc]initWithFrame:CGRectMake(215, 200, 50, 20)];
+    right=[[UILabel alloc]initWithFrame:CGRectMake(215, 200-30, 50, 20)];
     right.textColor=[UIColor grayColor];
     right.text=NSLocalizedString(@"Right",nil);
     right.backgroundColor=[UIColor clearColor];
     [imageview addSubview:right];
     
     leftbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    leftbutton.frame=CGRectMake(80, 200, 20, 20);
-    [leftbutton setBackgroundImage:[UIImage imageNamed:@"save_radio.png"] forState:UIControlStateNormal];
-    [leftbutton setBackgroundImage:[UIImage imageNamed:@"save_radio_focus.png"] forState:UIControlStateDisabled];
+    leftbutton.frame=CGRectMake(80, 200-30, 20, 20);
+    [leftbutton setBackgroundImage:[UIImage imageNamed:@"radio.png"] forState:UIControlStateNormal];
+    [leftbutton setBackgroundImage:[UIImage imageNamed:@"radio_focus.png"] forState:UIControlStateDisabled];
     [imageview addSubview:leftbutton];
     leftbutton.highlighted=NO;
     leftbutton.tag=1001;
     [leftbutton addTarget:self action:@selector(leftOrright:) forControlEvents:UIControlEventTouchUpInside];
     
     rightbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame=CGRectMake(180, 200, 20, 20);
-    [rightbutton setBackgroundImage:[UIImage imageNamed:@"save_radio.png"] forState:UIControlStateNormal];
-    [rightbutton setBackgroundImage:[UIImage imageNamed:@"save_radio_focus.png"] forState:UIControlStateDisabled];
+    rightbutton.frame=CGRectMake(180, 200-30, 20, 20);
+    [rightbutton setBackgroundImage:[UIImage imageNamed:@"radio.png"] forState:UIControlStateNormal];
+    [rightbutton setBackgroundImage:[UIImage imageNamed:@"radio_focus.png"] forState:UIControlStateDisabled];
     [imageview addSubview:rightbutton];
     rightbutton.highlighted=NO;
     rightbutton.tag=1002;

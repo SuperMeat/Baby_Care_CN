@@ -899,14 +899,14 @@
         cell.MarkLable.text = NSLocalizedString(item.type, nil);
         cell.minutesLable.text = item.duration;
         
-        if ([item.duration isEqualToString:NSLocalizedString(@"Wet", nil)]) {
+        if ([item.duration isEqualToString:NSLocalizedString(@"XuXu", nil)]) {
             cell.minutesLable.textColor=[UIColor colorWithRed:0x82/255.0 green:0xC6/255.0 blue:0xE1/255.0 alpha:0xFF/255.0];
         }
-        else if([item.duration isEqualToString:NSLocalizedString(@"Dry", nil)])
+        else if([item.duration isEqualToString:NSLocalizedString(@"XuXuBaBa", nil)])
         {
             cell.minutesLable.textColor=[UIColor colorWithRed:0xB6/255.0 green:0xB6/255.0 blue:0xB6/255.0 alpha:0xFF/255.0];
         }
-        else if ([item.duration isEqualToString:NSLocalizedString(@"Dirty", nil)]) {
+        else if ([item.duration isEqualToString:NSLocalizedString(@"BaBa", nil)]) {
             cell.minutesLable.textColor=[UIColor colorWithRed:0xBC/255.0 green:0x97/255.0 blue:0x6A/255.0 alpha:0xFF/255.0];
         }
         else

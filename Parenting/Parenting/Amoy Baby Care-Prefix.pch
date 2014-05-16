@@ -262,3 +262,12 @@
 #define WEATHERICONSCALE 0.55
 
 #define G_WEBVIEWY (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 49:150)
+
+#define MIDTEXT   16.5
+#define BIGTEXT   36
+#define TEXTCOLOR @"#7e7a79"
+#define IMAGEVIEWBGCOLOR @"#d6d6d6"
+#define BIGTEXTCOLOR @"#7e7a79"
+
+#define REDARROWCOLOR @"#e46565"
+#define GREENARROWCOLOR @"#62d382"

@@ -32,6 +32,15 @@
 -(NSArray*)searchFromplay:(NSDate*)start;
 -(NSArray*)searchFromsleep:(NSDate*)start;
 
+-(NSDictionary*)searchTodayDiaperStatusList;
+-(NSDictionary*)searchYesterdayDiaperStatusList;
+
+-(NSDictionary*)searchTodayFeedStatusList;
+-(NSDictionary*)searchYesterdayFeedStatusList;
+
+-(NSDictionary*)searchTodaySleepStatusList;
+-(NSDictionary*)searchYesterdaySleepStatusList;
+
 -(BOOL)deleteWithStarttime:(NSDate*)starttime;
 
 + (int)scrollWidth:(int)tag;
