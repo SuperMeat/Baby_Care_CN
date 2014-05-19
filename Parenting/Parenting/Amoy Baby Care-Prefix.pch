@@ -65,12 +65,15 @@
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
 #define USERDBPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d/userdata.db",NSHomeDirectory(),USERID,BABYID])
 
+
 #define UDBPATH ([NSString stringWithFormat:@"%@/Documents/BC_Info.sqlite",NSHomeDirectory()])
 
 #define DBPATH ([NSString stringWithFormat:@"%@/Documents/userdata.db",NSHomeDirectory()])
 #define WHODBPATH ([NSString stringWithFormat:@"%@/Documents/who.rdb",NSHomeDirectory()])
 
 #define SDBPATH ([NSString stringWithFormat:@"%@/Documents/BabySuggestion.rdb",NSHomeDirectory()])
+
+#define CATEGORYPATH ([NSString stringWithFormat:@"%@/Documents/bc_category.sqlite",NSHomeDirectory()])
 
 #define ADVISE_TYPE_DIAPER 1
 #define ADVISE_TYPE_SLEEP  2
@@ -149,13 +152,15 @@
 #define MTA_KEY @"I6A97SFF8ERU"
 
 #ifdef DEBUG
-#define ASIHTTPADDRESS @"http://192.168.1.138:8033/babycare/WCF"
+#define WEBPHOTO(FLODERNAME) ([NSString stringWithFormat:@"http://192.168.1.138:8010/image/%@",FLODERNAME])
 #define ASISYSTEMIP    @"http://192.168.1.138:8033/BC_System/WCF"
+#define ASIHTTPADDRESS @"http://cbaisan.w82.dns87.com/babycare/WCF" //接口IP
 #define ASIADDRESS     @"http://192.168.1.138:8010/WCFService"
 #else
+#define WEBPHOTO(FLODERNAME) ([NSString stringWithFormat:@"http://正式服务器地址/image/%@",FLODERNAME])
+#define ASISYSTEMIP    @"http://192.168.1.138:8033/BC_System/WCF"
 #define ASIHTTPADDRESS @"http://cbaisan.w82.dns87.com/babycare/WCF" //接口IP
-#define ASISYSTEMIP    @"http://cbaisan.w82.dns87.com/BC_System/WCF"
-#define ASIADDRESS     @"http://cbaisan.w82.dns87.com/WCFService"
+#define ASIADDRESS     @"http://正式服务器地址/WCFService"
 #endif
 
 #define ASIHTTPTOKEN @"5788024"  //令牌
@@ -239,6 +244,9 @@
 #define RTYPE_APP 1
 #define RTYPE_TENCENT 2
 #define RTYPE_SINA 3
+
+//类目同步
+#define CATEGORY_SYNC_URL ([BASE_URL stringByAppendingString:@"User.svc/SyncCategory"])
 
 //***********  END  ************
 
