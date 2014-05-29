@@ -48,6 +48,11 @@
     long highmaxphone;
     double maxphonethrans;
     
+    //pm25
+    long lowpm25;
+    long highpm25;
+    long pm25value;
+
     BOOL isFistTip;
     BOOL isTimeOut;
     BOOL isFound;

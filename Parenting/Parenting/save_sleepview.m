@@ -302,6 +302,7 @@
         }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:[NSNumber numberWithInt:(duration)]];
+        [self.sleepSaveDelegate sendSleepReloadData];
     }
     
     [self.sleepSaveDelegate sendSleepSaveChanged:duration andstarttime:curstarttime];
@@ -462,12 +463,12 @@
     action2=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (starttimepicker==nil) {
-        starttimepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
+        starttimepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 162)];
         starttimepicker.datePickerMode=UIDatePickerModeTime;
         [starttimepicker addTarget:self action:@selector(updatestarttime:) forControlEvents:UIControlEventValueChanged];
     }
     
-    starttimepicker.frame=CGRectMake(0, 0, 320, 100);
+    starttimepicker.frame=CGRectMake(0, 0, 320, 162);
     
     action2.bounds=CGRectMake(0, 0, 320, 200);
     [action2 addSubview:starttimepicker];

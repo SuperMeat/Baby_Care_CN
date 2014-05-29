@@ -103,6 +103,7 @@
                                               userInfo: nil
                                                repeats: YES];
     }
+    
     //[[BLEWeather bleweather] getbleweather:^(NSDictionary *weatherDict) {
         NSDictionary *dict=[[BLEWeather bleweather] getbleweather];
         NSLog(@"weDic %@", dict);
@@ -196,9 +197,10 @@
         if([[dict objectForKey:@"temp"] length]>0)
         {
             temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_TEMP andValue:[NSNumber numberWithInt:[[dict objectForKey:@"temp"] intValue]]];                        if ([arr count]>0) {
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_TEMP andValue:[NSNumber numberWithInt:[[dict objectForKey:@"temp"] intValue]]];
+            if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_TEMP];
+                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:SUGGESTION_DB_TYPE_TEMP];
                 if ([a2 count]>0) {
                     AdviseData* ad = [a2 objectAtIndex:0];
                     mAdTemp = ad;
@@ -215,7 +217,7 @@
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_HUMI];
+                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:SUGGESTION_DB_TYPE_HUMI];
                 if ([a2 count]>0) {
                     AdviseData* ad = [a2 objectAtIndex:0];
                     mAdHumi = ad;
@@ -231,7 +233,7 @@
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_LIGHT];
+                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:SUGGESTION_DB_TYPE_LIGHT];
                 if ([a2 count]>0) {
                     AdviseData* ad = [a2 objectAtIndex:0];
                     mAdLight = ad;
@@ -247,7 +249,7 @@
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_NOICE];
+                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:SUGGESTION_DB_TYPE_NOICE];
                 if ([a2 count]>0) {
                     AdviseData* ad = [a2 objectAtIndex:0];
                     mAdNoice = ad;
@@ -263,11 +265,11 @@
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_UV];
+                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:SUGGESTION_DB_TYPE_UV];
                 if ([a2 count]>0) {
                     AdviseData* ad = [a2 objectAtIndex:0];
-                    mAdUV = ad;
-                    mAlUV = al;
+                    mAdUV    = ad;
+                    mAlUV    = al;
                     uv.level = al.mLevel;
                 }
             }
@@ -276,11 +278,11 @@
         if ([[dict objectForKey:@"pm"] length]>0)
         {
             pm.detail=[NSString stringWithFormat:@"%@",[dict    objectForKey:@"pm"]];
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_PM25 andValue:[NSNumber numberWithInt:[[dict objectForKey:@"humidity"] intValue]]];
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_PM25 andValue:[NSNumber numberWithInt:[[dict objectForKey:@"pm"] intValue]]];
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_PM25];
+                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:SUGGESTION_DB_TYPE_PM25];
                 if ([a2 count]>0) {
                     AdviseData* ad = [a2 objectAtIndex:0];
                     mAdPM25 = ad;
@@ -409,8 +411,42 @@
     [image addSubview:levelImage];
     [image addSubview:weatherDetail];
     [image setBackgroundColor:[UIColor clearColor]];
-    if (item.detail.length>0) {
-        if (item.level == 0) {
+    if (item.detail.length>0)
+    {
+        int Condition = 0;
+        if (indexPath.section == 0) {
+            Condition = ENVIR_SUGGESTION_TYPE_TEMP;
+        }
+        else if (indexPath.section == 1)
+        {
+            Condition =ENVIR_SUGGESTION_TYPE_HUMI;
+        }
+        else if (indexPath.section == 2)
+        {
+            Condition =ENVIR_SUGGESTION_TYPE_LIGHT;
+        }
+        else if (indexPath.section == 3)
+        {
+            Condition =ENVIR_SUGGESTION_TYPE_NOICE;
+        }
+        else if (indexPath.section == 4)
+        {
+            Condition =ENVIR_SUGGESTION_TYPE_UV;
+        }
+        else if (indexPath.section == 5)
+        {
+            Condition =ENVIR_SUGGESTION_TYPE_PM25;
+        }
+        
+            
+        NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:Condition andValue:[NSNumber numberWithInt:[item.detail intValue]]];
+        int level = 0;
+        if ([arr count]>0) {
+            AdviseLevel *al = [arr objectAtIndex:0];
+            level = al.mLevel;
+        }
+
+        if (level == 0) {
             weatherDetail.text = @"暂无";
             [levelImage setImage:[UIImage imageNamed:@"icon_grey"]];
         }
@@ -419,7 +455,7 @@
             weatherDetail.text=item.detail;
             NSString *condition = @"";
             NSString *strLevel  = @"";
-            switch (item.level)
+            switch (level)
             {
                 case ENV_ADVISE_LEVEL_EXCELLENT:
                     strLevel = @"excellent";
@@ -520,4 +556,30 @@
         [alert show];
     }
 }
+
+-(AdviseData*)getTempAdviseData
+{
+    return mAdTemp;
+}
+-(AdviseData*)getHumiAdviseData
+{
+    return mAdHumi;
+}
+-(AdviseData*)getLightAdviseData
+{
+    return mAdLight;
+}
+-(AdviseData*)getNoiceAdviseData
+{
+    return mAdNoice;
+}
+-(AdviseData*)getUVAdviseData
+{
+    return  mAdUV;
+}
+-(AdviseData*)getPM25AdviseData
+{
+    return  mAdPM25;
+}
+
 @end

@@ -168,7 +168,7 @@
     [self makeTimeSegment];
     [self makeMenu];
     NSLog(@"%f",menu.frame.size.height);
-    List =[[UITableView alloc]initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64) style:UITableViewStylePlain];
+    List =[[UITableView alloc]initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64-49) style:UITableViewStylePlain];
     List.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     [self.view addSubview:List];
     List.delegate   = self;
@@ -182,7 +182,7 @@
     mHeight = originalHeight;
     sectionIndex = 0;
     dicClicked = [NSMutableDictionary dictionaryWithCapacity:3];
-    Advise =[[UITableView alloc]initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64) style:UITableViewStylePlain];
+    Advise =[[UITableView alloc]initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64-49) style:UITableViewStylePlain];
     Advise.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     [self.view addSubview:Advise];
     Advise.delegate=self;
@@ -1162,7 +1162,7 @@
     //NSLog(@"%@",item.type);
     if ([item.type isEqualToString:@"Feed"]) {
         
-        feed=[[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration UpdateTime:item.updatetime CreateTime:item.createtime];
+        feed=[[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration UpdateTime:item.updatetime CreateTime:item.createtime];
         feed.feedSaveDelegate = self;
         [feed loaddata];
         [self.view addSubview:feed];
@@ -1308,5 +1308,6 @@
 {
     [self updaterecord:QCM_TYPE_FEED];
 }
+
 
 @end

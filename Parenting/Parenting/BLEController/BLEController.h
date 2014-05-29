@@ -22,6 +22,7 @@
 -(void)RecvLightData:(NSData*)data;
 -(void)RecvUVData:(NSData*)data;
 -(void)RecvMicroPhone:(NSData*)data;
+-(void)RecvPM25Data:(NSData*)data;
 @end
 
 @interface BLEController : NSObject{
@@ -48,4 +49,5 @@
 -(void)getLight;
 -(void)getUV;
 -(void)getMicrophone:(int)type;//0开启,1关闭
+-(void)getAir;
 @end

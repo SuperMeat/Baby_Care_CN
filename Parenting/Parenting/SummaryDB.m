@@ -641,6 +641,14 @@
         [array addObject:[NSString stringWithFormat:@""]];
     }
     
+    if ([set stringForColumn:@"food_type"]) {
+        [array addObject:[set objectForColumnName:@"food_type"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
     [db close];
     return  array;
 }
@@ -986,7 +994,7 @@
 
 }
 
--(NSDictionary*)searchTodayFeedStatusList
+-(NSDictionary*)searchCurFeedStatusList
 {
     BOOL res;
     int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
@@ -1000,52 +1008,97 @@
     }
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
-    FMResultSet *set=[db executeQuery:@"select sum(amount) from bc_baby_feed where month = ? and week=? and weekday=? and feed_type = ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],@"0"];
+    FMResultSet *set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where week=? and food_type = ?",[NSNumber numberWithInt:[ACDate getCurrentWeek]],@"母乳"];
     [set next];
-    int sum_amount = 0;
+    int sum_weekbreastamount = 0;
+    int weekbreastdays = 0;
     if ([set intForColumnIndex:0])
     {
-        sum_amount = [set intForColumnIndex:0];
+        sum_weekbreastamount = [set intForColumnIndex:0];
+    }
+ 
+    if ([set intForColumnIndex:1]) {
+        weekbreastdays = [set intForColumnIndex:1];
     }
     
-    set=[db executeQuery:@"select sum(duration) from bc_baby_feed where month = ? and week=? and weekday=? and feed_type=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],@"1"];
+    int week_breast_average = 0;
+    if (sum_weekbreastamount > 0) {
+        week_breast_average = sum_weekbreastamount / weekbreastdays;
+    }
+    
+    //周母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:week_breast_average] forKey:@"week_breast_average"];
+    
+    
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where  week=? and food_type=?",[NSNumber numberWithInt:[ACDate getCurrentWeek]],@"奶粉"];
     [set next];
-    int sum_duration = 0;
+    int sum_weekmilkamount = 0;
+    int milkdays = 0;
     if ([set intForColumnIndex:0])
     {
-        sum_duration = [set intForColumnIndex:0];
+        sum_weekmilkamount = [set intForColumnIndex:0];
     }
     
-    set=[db executeQuery:@"select max(duration) from bc_baby_feed where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    if ([set intForColumnIndex:1]) {
+        milkdays = [set intForColumnIndex:1];
+    }
+    
+    int week_milk_average = 0;
+    if (sum_weekmilkamount>0) {
+        week_milk_average = sum_weekmilkamount/milkdays;
+    }
+    
+    //周奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:week_milk_average] forKey:@"week_milk_average"];
+
+
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where month = ? and food_type=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],@"母乳"];
     [set next];
-    int max_duration = 0;
+    int sum_monthbreastamount = 0;
+    int monthbreastdays = 0;
     if ([set intForColumnIndex:0])
     {
-        max_duration = [set intForColumnIndex:0];
+        sum_monthbreastamount = [set intForColumnIndex:0];
+    }
+
+    if ([set intForColumnIndex:1]) {
+        monthbreastdays = [set intForColumnIndex:1];
     }
     
-    set=[db executeQuery:@"select max(amount) from bc_baby_feed where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+
+    int month_breast_average = 0;
+    if (sum_monthbreastamount>0) {
+        month_breast_average = sum_monthbreastamount/monthbreastdays;
+    }
+
+    //月母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:month_breast_average] forKey:@"month_breast_average"];
+    
+    set=[db executeQuery:@"select sum(amount), count(distinct(weekday)) from bc_baby_feed where month = ? and food_type=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],@"奶粉"];
     [set next];
-    int max_amount = 0;
+    int sum_monthmilkamount = 0;
+    int monthmilkdays = 0;
     if ([set intForColumnIndex:0])
     {
-        max_amount = [set intForColumnIndex:0];
+        sum_monthmilkamount = [set intForColumnIndex:0];
     }
     
-    //一天吃了多少量
-    [dic setObject:[NSNumber numberWithInt:sum_amount] forKey:@"sum_amount"];
-    //一天喂了多久
-    [dic setObject:[NSNumber numberWithInt:sum_duration] forKey:@"sum_duration"];
-    //最大一次喂了多久
-    [dic setObject:[NSNumber numberWithInt:max_duration] forKey:@"max_duration"];
-    //最大一次量多少
-    [dic setObject:[NSNumber numberWithInt:max_amount] forKey:@"max_amount"];
+    if ([set intForColumnIndex:1]) {
+        monthmilkdays = [set intForColumnIndex:1];
+    }
+    
+    int month_milk_average = 0;
+    if (sum_monthmilkamount>0) {
+        month_milk_average = sum_monthmilkamount/monthmilkdays;
+    }
+    //月奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:month_milk_average] forKey:@"month_milk_average"];
     
     [db close];
     return  dic;
 }
 
--(NSDictionary*)searchYesterdayFeedStatusList
+-(NSDictionary*)searchLastFeedStatusList
 {
     BOOL res;
     int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
@@ -1058,56 +1111,108 @@
         return nil;
     }
     
-    long today  = [ACDate getTimeStampFromDate:[ACDate date]];
-    long yester = today - 86400;
-    NSDate *yes = [ACDate getDateFromTimeStamp:yester];
+    long curmonth  = [ACDate getCurrentMonth];
+    long curweek   = [ACDate getCurrentWeek];
+    long lastmonth = curmonth - 1;
+    long lastweek  = curweek - 1;
+    if ((curweek-1)==0) {
+        lastweek = 52;
+    }
+    
+    if ((curmonth -1) == 0) {
+        lastmonth = 12;
+    }
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
-    FMResultSet *set=[db executeQuery:@"select sum(amount) from bc_baby_feed where month = ? and week=? and weekday=? and feed_type = ?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]],@"0"];
+    FMResultSet *set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where week=? and food_type = ?",[NSNumber numberWithInt:lastweek],@"母乳"];
     [set next];
-    int sum_amount = 0;
+    int sum_weekbreastamount = 0;
+    int weekbreastdays = 0;
     if ([set intForColumnIndex:0])
     {
-        sum_amount = [set intForColumnIndex:0];
+        sum_weekbreastamount = [set intForColumnIndex:0];
     }
     
-    set=[db executeQuery:@"select sum(duration) from bc_baby_feed where month = ? and week=? and weekday=? and feed_type=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]],@"1"];
+    if ([set intForColumnIndex:1]) {
+        weekbreastdays = [set intForColumnIndex:1];
+    }
+   
+    int week_breast_average = 0;
+    if (sum_weekbreastamount > 0) {
+        week_breast_average = sum_weekbreastamount / weekbreastdays;
+    }
+    
+    //周母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:week_breast_average] forKey:@"week_breast_average"];
+    
+    
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where week=? and food_type=?",[NSNumber numberWithInt:lastweek],@"奶粉"];
     [set next];
-    int sum_duration = 0;
+    int sum_weekmilkamount = 0;
+    int milkdays = 0;
     if ([set intForColumnIndex:0])
     {
-        sum_duration = [set intForColumnIndex:0];
+        sum_weekmilkamount = [set intForColumnIndex:0];
     }
     
-    set=[db executeQuery:@"select max(duration) from bc_baby_feed where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]]];
+    if ([set intForColumnIndex:1]) {
+        milkdays = [set intForColumnIndex:1];
+    }
+    int week_milk_average = 0;
+    if (sum_weekmilkamount>0) {
+        week_milk_average = sum_weekmilkamount/milkdays;
+    }
+    
+    //周奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:week_milk_average] forKey:@"week_milk_average"];
+    
+    
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where month = ? and food_type=?",[NSNumber numberWithInt:lastmonth],@"母乳"];
     [set next];
-    int max_duration = 0;
+    int sum_monthbreastamount = 0;
+    int monthbreastdays = 0;
+    
     if ([set intForColumnIndex:0])
     {
-        max_duration = [set intForColumnIndex:0];
+        sum_monthbreastamount = [set intForColumnIndex:0];
     }
     
-    set=[db executeQuery:@"select max(amount) from bc_baby_feed where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]]];
+    if ([set intForColumnIndex:1]) {
+        monthbreastdays = [set intForColumnIndex:1];
+    }
+    
+    int month_breast_average = 0;
+    if (sum_monthbreastamount>0) {
+        month_breast_average = sum_monthbreastamount/monthbreastdays;
+    }
+    
+    //月母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:month_breast_average] forKey:@"month_breast_average"];
+    
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where month = ? and food_type=?",[NSNumber numberWithInt:lastmonth],@"奶粉"];
     [set next];
-    int max_amount = 0;
+    int sum_monthmilkamount = 0;
+    int monthmilkdays = 0;
     if ([set intForColumnIndex:0])
     {
-        max_amount = [set intForColumnIndex:0];
+        sum_monthmilkamount = [set intForColumnIndex:0];
+    }
+    if ([set intForColumnIndex:1]) {
+        monthmilkdays = [set intForColumnIndex:1];
     }
     
-    //一天吃了多少量
-    [dic setObject:[NSNumber numberWithInt:sum_amount] forKey:@"sum_amount"];
-    //一天喂了多久
-    [dic setObject:[NSNumber numberWithInt:sum_duration] forKey:@"sum_duration"];
-    //最大一次喂了多久
-    [dic setObject:[NSNumber numberWithInt:max_duration] forKey:@"max_duration"];
-    //最大一次量多少
-    [dic setObject:[NSNumber numberWithInt:max_amount] forKey:@"max_amount"];
+    int month_milk_average = 0;
+    if (sum_monthmilkamount>0) {
+        month_milk_average = sum_monthmilkamount/monthmilkdays;
+    }
+    //月奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:month_milk_average] forKey:@"month_milk_average"];
+    
     [db close];
     return  dic;
 }
 
--(NSDictionary*)searchTodaySleepStatusList
+-(NSDictionary*)searchCurSleepStatusList
 {
     BOOL res;
     int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
@@ -1121,30 +1226,75 @@
     }
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
-    FMResultSet *set=[db executeQuery:@"select sum(duration) from bc_baby_sleep where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    FMResultSet *set=[db executeQuery:@"select sum(duration),count(distinct(weekday)) from bc_baby_sleep where week=?",[NSNumber numberWithInt:[ACDate getCurrentWeek]]];
     [set next];
-    int sum_duration = 0;
+    int sum_weekbreastamount = 0;
+    int weekbreastdays = 0;
     if ([set intForColumnIndex:0])
     {
-        sum_duration = [set intForColumnIndex:0];
+        sum_weekbreastamount = [set intForColumnIndex:0];
+    }
+    if ([set intForColumnIndex:1]) {
+        weekbreastdays = [set intForColumnIndex:1];
     }
     
-    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    int week_breast_average = 0;
+    if (sum_weekbreastamount > 0) {
+        week_breast_average = sum_weekbreastamount / weekbreastdays;
+    }
+    
+    //周母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:week_breast_average] forKey:@"week_sleep_average"];
+    
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where  week=?",[NSNumber numberWithInt:[ACDate getCurrentWeek]]];
     [set next];
-    int max_duration = 0;
+    int sum_weekmilkamount = 0;
     if ([set intForColumnIndex:0])
     {
-        max_duration = [set intForColumnIndex:0];
+        sum_weekmilkamount = [set intForColumnIndex:0];
     }
     
-    [dic setObject:[NSNumber numberWithInt:sum_duration] forKey:@"sum_duration"];
-    [dic setObject:[NSNumber numberWithInt:max_duration] forKey:@"max_duration"];
+    //周奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:sum_weekmilkamount] forKey:@"week_max_sleep_average"];
+    
+    
+    set=[db executeQuery:@"select sum(duration),count(distinct(weekday)) from bc_baby_sleep where month = ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]]];
+    [set next];
+    int sum_monthbreastamount = 0;
+    int monthbreastdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthbreastamount = [set intForColumnIndex:0];
+    }
+    if ([set intForColumnIndex:1]) {
+        monthbreastdays = [set intForColumnIndex:1];
+    }
+    
+    int month_breast_average = 0;
+    if (sum_monthbreastamount>0) {
+        month_breast_average = sum_monthbreastamount/monthbreastdays;
+    }
+    
+    //月母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:month_breast_average] forKey:@"month_sleep_average"];
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where month = ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]]];
+    [set next];
+    int sum_monthmilkamount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthmilkamount = [set intForColumnIndex:0];
+    }
+    
+    //月奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:sum_monthmilkamount] forKey:@"month_max_sleep_average"];
     
     [db close];
     return  dic;
 }
 
--(NSDictionary*)searchYesterdaySleepStatusList
+-(NSDictionary*)searchLastSleepStatusList
 {
     BOOL res;
     int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
@@ -1157,29 +1307,85 @@
         return nil;
     }
     
-    long today  = [ACDate getTimeStampFromDate:[ACDate date]];
-    long yester = today - 86400;
-    NSDate *yes = [ACDate getDateFromTimeStamp:yester];
+    long curmonth  = [ACDate getCurrentMonth];
+    long curweek   = [ACDate getCurrentWeek];
+    long lastmonth = curmonth - 1;
+    long lastweek  = curweek - 1;
+    if ((curweek-1)==0) {
+        lastweek = 52;
+    }
+    
+    if ((curmonth -1) == 0) {
+        lastmonth = 12;
+    }
+
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
-    FMResultSet *set=[db executeQuery:@"select sum(duration) from bc_baby_sleep where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]]];
+    FMResultSet *set=[db executeQuery:@"select sum(duration),count(distinct(weekday)) from bc_baby_sleep where week=?",[NSNumber numberWithInt:lastweek]];
     [set next];
-    int sum_duration = 0;
+    int sum_weekbreastamount = 0;
+    int weekbreastdays = 0;
     if ([set intForColumnIndex:0])
     {
-        sum_duration = [set intForColumnIndex:0];
+        sum_weekbreastamount = [set intForColumnIndex:0];
+        
+    }
+    if ([set intForColumnIndex:1]) {
+        weekbreastdays = [set intForColumnIndex:1];
     }
     
-    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where month = ? and week=? and weekday=?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]]];
+    int week_breast_average = 0;
+    if (sum_weekbreastamount > 0) {
+        week_breast_average = sum_weekbreastamount / weekbreastdays;
+    }
+    
+    //周母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:week_breast_average] forKey:@"week_sleep_average"];
+    
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where  week=?",[NSNumber numberWithInt:lastweek]];
     [set next];
-    int max_duration = 0;
+    int sum_weekmilkamount = 0;
     if ([set intForColumnIndex:0])
     {
-        max_duration = [set intForColumnIndex:0];
+        sum_weekmilkamount = [set intForColumnIndex:0];
     }
     
-    [dic setObject:[NSNumber numberWithInt:sum_duration] forKey:@"sum_duration"];
-    [dic setObject:[NSNumber numberWithInt:max_duration] forKey:@"max_duration"];
+    //周奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:sum_weekmilkamount] forKey:@"week_max_sleep_average"];
+    
+    
+    set=[db executeQuery:@"select sum(duration), count(distinct(weekday)) from bc_baby_sleep where month = ?",[NSNumber numberWithInt:lastmonth]];
+    [set next];
+    int sum_monthbreastamount = 0;
+    int monthbreastdays = 0;
+    
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthbreastamount = [set intForColumnIndex:0];
+    }
+    
+    if ([set intForColumnIndex:1]) {
+        monthbreastdays = [set intForColumnIndex:1];
+    }
+    int month_breast_average = 0;
+    if (sum_monthbreastamount>0) {
+        month_breast_average = sum_monthbreastamount/monthbreastdays;
+    }
+    
+    //月母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:month_breast_average] forKey:@"month_sleep_average"];
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where month = ?",[NSNumber numberWithInt:lastmonth]];
+    [set next];
+    int sum_monthmilkamount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthmilkamount = [set intForColumnIndex:0];
+    }
+    
+    //月奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:sum_monthmilkamount] forKey:@"month_max_sleep_average"];
     
     [db close];
     return  dic;

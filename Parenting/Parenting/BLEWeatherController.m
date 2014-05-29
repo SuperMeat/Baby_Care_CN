@@ -61,7 +61,7 @@
 {
     self.blecontroller = [[BLEController alloc] init];
     self.blecontroller.bleControllerDelegate = self;
-    getDataTimeInterval = 1.0;
+    getDataTimeInterval = 30.0;
     isFistTip = YES;
     [self checkbluetooth];
 }
@@ -438,7 +438,7 @@
                 highmaxphone = [BLEController hexStringHighToInt:newHexStr];
             }
             
-            if (3 == i)
+            if (5 == i)
             {
                 phonevalue     = lowphone + highphone;
                 maxphonethrans = 94+20.0*log10(((lowmaxphone + highmaxphone)/8192.0*3.32)*1.0);
@@ -455,6 +455,46 @@
     [BLEWeather setsoundfrombluetooth:phonethrans andmaxsound:maxphonethrans];
 }
 
+- (void)RecvPM25Data:(NSData*)data
+{
+    Byte *hexData = (Byte *)[data bytes];
+    for (int i=0;i<=[data length];i++)
+    {
+        NSString *newHexStr = [NSString stringWithFormat:@"%02x",hexData[i]&0xff];
+        int recv = [BLEController hexStringToInt:newHexStr];
+        if (i == 0) {
+            if (recv == 0) {
+                errorCode = recv;
+            }
+            else{
+                NSLog(@"error code : %d", recv);
+            }
+        }
+        
+        if (errorCode == 0)
+        {
+            
+            //16进制数
+            if (i == 2) {
+                highpm25  = [BLEController hexStringHighToInt:newHexStr];
+            }
+            
+            if (1 == i)
+            {
+                lowpm25 = [BLEController hexStringToInt:newHexStr];
+            }
+            
+        
+            if (3 == i)
+            {
+                pm25value = (lowpm25+highpm25)/8192.0*3.3*168;
+            }
+        }
+    }
+    
+    [BLEWeather setpm25frombluetooth:pm25value];
+}
+
 - (void)sendData{
     if (isBLEConnected) {
         if (isFistTime) {
@@ -462,6 +502,7 @@
             [self.blecontroller getLight];
             [self.blecontroller getMicrophone:0];
             [self.blecontroller getUV];
+            [self.blecontroller getAir];
             isFistTime = NO;
         }
         
@@ -479,20 +520,24 @@
     //在这里进行处理
     getindex++;
     [_blecontroller getMicrophone:1];
-    if (getindex % 4 == 0) {
+    if (getindex % 5 == 0) {
         [self.blecontroller getTemperatureAndHumi];
     }
-    else if (getindex % 4 == 1)
+    else if (getindex % 5 == 1)
     {
         [self.blecontroller getLight];
     }
-    else if (getindex % 4 == 2)
+    else if (getindex % 5 == 2)
     {
         [self.blecontroller getMicrophone:0];
     }
-    else if (getindex % 4 == 3)
+    else if (getindex % 5 == 3)
     {
         [self.blecontroller getUV];
+    }
+    else if (getindex % 5 == 4)
+    {
+        [self.blecontroller getAir];
     }
 }
 

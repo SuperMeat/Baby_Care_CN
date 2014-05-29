@@ -8,8 +8,9 @@
 #import <UIKit/UIKit.h>
 #import "ACViewController.h"
 #import "SummaryViewController.h"
+#import "save_feedview.h"
 
-@interface FeedActivityViewController : ACViewController
+@interface FeedActivityViewController : ACViewController<save_feedviewDelegate>
 {
     UIButton * startButton;
     UIButton * startButtonleft;
@@ -28,6 +29,27 @@
     save_feedview *saveView;
     UILabel *labletip;
     
+    UIImageView *historyView;
+    
+    UILabel *breastweeklabel;
+    UILabel *breastmonthlabel;
+    UILabel *milkweeklabel;
+    UILabel *milkmonthlabel;
+    
+    UILabel *breastweekamount;
+    UILabel *breastmonthamount;
+    UILabel *milkweekamount;
+    UILabel *milkmonthamount;
+    
+    UIImageView *breastweekstatusImageView;
+    UIImageView *breastmonthstatusImageView;
+    UIImageView *milkweekstatusImageView;
+    UIImageView *milkmonthstatusImageView;
+    
+    UILabel *cutbreastweek;
+    UILabel *cutbreastmonth;
+    UILabel *cutmilkweek;
+    UILabel *cutmilkmonth;
     
 }
 @property(nonatomic,strong)NSString *activity;

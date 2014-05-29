@@ -415,11 +415,11 @@
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
         
-        [self.diaperSaveDelegate sendReloadData];
+        [self.diaperSaveDelegate sendDiaperReloadData];
     }
     
     //自动上传数据
-    [UpLoadController checkDiaperUpload:1];
+    //[UpLoadController checkDiaperUpload:1];
     
     [self.diaperSaveDelegate sendDiaperSaveChanged:self.status andstarttime:self.start];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"justdoit"];
@@ -532,7 +532,7 @@
     action3=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (diaperPickerView1==nil) {
-        diaperPickerView1 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_AMOUNT Option:DIAPER_OPTION_XUXU];
+        diaperPickerView1 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, amounttext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_AMOUNT Option:DIAPER_OPTION_XUXU];
         diaperPickerView1.diaperPickerViewDelegate = self;
     }
    
@@ -562,7 +562,7 @@
     }
     
     diaperPickerView1.showsSelectionIndicator = YES;
-    diaperPickerView1.frame=CGRectMake(0, 0, 320, 100);
+    diaperPickerView1.frame=CGRectMake(0, 0, 320, 162);
     
     action3.bounds=CGRectMake(0, 0, 320, 200);
     [action3 addSubview:diaperPickerView1];
@@ -574,7 +574,7 @@
     action4=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (diaperPickerView2==nil) {
-        diaperPickerView2 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_COLOR Option:DIAPER_OPTION_XUXU];
+        diaperPickerView2 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, colortext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_COLOR Option:DIAPER_OPTION_XUXU];
         diaperPickerView2.diaperPickerViewDelegate = self;
     }
     
@@ -605,7 +605,7 @@
     
     diaperPickerView2.showsSelectionIndicator = YES;
 
-    diaperPickerView2.frame=CGRectMake(0, 0, 320, 100);
+    diaperPickerView2.frame=CGRectMake(0, 0, 320, 162);
     
     action4.bounds=CGRectMake(0, 0, 320, 200);
     [action4 addSubview:diaperPickerView2];
@@ -617,7 +617,7 @@
     action5=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (diaperPickerView3==nil) {
-        diaperPickerView3 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_HARD Option:DIAPER_OPTION_XUXU];
+        diaperPickerView3 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, hardtext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_HARD Option:DIAPER_OPTION_XUXU];
         diaperPickerView3.diaperPickerViewDelegate = self;
     }
     
@@ -647,7 +647,7 @@
     }
     
     diaperPickerView3.showsSelectionIndicator = YES;
-    diaperPickerView3.frame=CGRectMake(0, 0, 320, 100);
+    diaperPickerView3.frame=CGRectMake(0, 0, 320, 162);
     
     action5.bounds=CGRectMake(0, 0, 320, 200);
     [action5 addSubview:diaperPickerView3];

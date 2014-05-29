@@ -12,6 +12,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+#import "ACLabel.h"
 #import "ACViewController.h"
 #import "SuggestView.h"
 #import "AdviseScrollview.h"
@@ -20,6 +21,7 @@
 #import "SleepActivityViewController.h"
 #import "playViewController.h"
 #import "bathViewController.h"
+#import "FoodTypePickerView.h"
 #import "save_feedview.h"
 #import "save_bathview.h"
 #import "save_playview.h"
@@ -168,6 +170,13 @@
 #define SUGGESTION_TYPE_UV      5
 #define SUGGESTION_TYPE_PM25    6
 
+#define SUGGESTION_DB_TYPE_TEMP  1
+#define SUGGESTION_DB_TYPE_HUMI  2
+#define SUGGESTION_DB_TYPE_LIGHT 3
+#define SUGGESTION_DB_TYPE_NOICE 4
+#define SUGGESTION_DB_TYPE_UV    5
+#define SUGGESTION_DB_TYPE_PM25  6
+
 //*** 蓝牙设备连接参数
 #define PRESS_KEY_DIAPER 1
 #define PRESS_KEY_SLEEP  2
@@ -193,7 +202,8 @@
 #define PID_RESP_GET_UV 10
 #define PID_REQ_GET_MICROPHONE 11
 #define PID_RESP_GET_MICROPHONE 12
-
+#define PID_REQ_GET_AIR 13
+#define PID_RESP_GET_AIR 14
 #define PID_HEART_BEAT  254
 
 //五个按钮:喂食,换尿布,洗澡,睡觉,玩耍
@@ -262,8 +272,8 @@
 #define WEATHERICONSCALE 0.55
 
 #define G_WEBVIEWY (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 49:150)
-
-#define MIDTEXT   16.5
+#define SMALLTEXT 10
+#define MIDTEXT   15
 #define BIGTEXT   36
 #define TEXTCOLOR @"#7e7a79"
 #define IMAGEVIEWBGCOLOR @"#d6d6d6"
@@ -271,3 +281,7 @@
 
 #define REDARROWCOLOR @"#e46565"
 #define GREENARROWCOLOR @"#62d382"
+
+#define FOOD_TYPE_MILK   1
+#define FOOD_TYPE_BREAST 2
+#define FOOD_TYPE_SOLIDFOOD 3

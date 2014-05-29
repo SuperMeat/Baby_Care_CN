@@ -564,16 +564,16 @@
     
     int amount = 0;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"metric"] isEqualToString:@"Mls:"]) {
-        if ([oz isEqualToString:@""] != NO) {
+        if ([oz isEqualToString:@""] != YES) {
             NSRange range = [oz rangeOfString:@"ml"];
-            amount = [[oz substringFromIndex:(range.location-1)] intValue];
+            amount = [[oz substringToIndex:range.location] intValue];
         }
     }
     else
     {
-        if ([oz isEqualToString:@""] != NO) {
+        if ([oz isEqualToString:@""] != YES) {
             NSRange range = [oz rangeOfString:@"oz"];
-            amount = [[oz substringFromIndex:(range.location-1)] intValue];
+            amount = [[oz substringToIndex:range.location] intValue];
         }
     }
 
@@ -807,13 +807,21 @@
     
     int amount = 0;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"metric"] isEqualToString:@"Mls:"]) {
-        NSRange range = [oz rangeOfString:@"ml"];
-        amount = [[oz substringToIndex:range.location] intValue];
+        if (![oz isEqualToString:@""]) {
+            NSRange range = [oz rangeOfString:@"ml"];
+            if (range.length != 0) {
+                amount = [[oz substringToIndex:range.location] intValue];
+            }
+        }
     }
     else
     {
-        NSRange range = [oz rangeOfString:@"oz"];
-        amount = [[oz substringToIndex:range.location] intValue];
+        if (![oz isEqualToString:@""]) {
+            NSRange range = [oz rangeOfString:@"oz"];
+            if (range.length != 0) {
+                amount = [[oz substringToIndex:range.location] intValue];
+            }
+        }
     }
     
     res=[db executeUpdate:@"update bc_baby_feed set starttime = ?,month=?,week = ?,weekday=?,duration=?,oz=?,food_type = ?,remark=?, moreinfo = ?,amount = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],[NSNumber numberWithInt:duration],oz,food_type,remark,more_info,[NSNumber numberWithInt:amount],[NSNumber numberWithLong:createtime]];

@@ -131,8 +131,6 @@
     [self.navigationController pushViewController:summary animated:YES];
 }
 
-
-
 -(void)makeAdvise
 {
     NSDictionary *dict1=[[NSDictionary alloc]initWithObjectsAndKeys:@"Everything is ok",@"title",@"Give your baby a bath and take him for a walk every day at about the same time. It'll get him used to the idea of daily routine. In fact, he'll probably take comfort in it. With a little luck, other schedules will fall into place more easily, too.",@"content", nil];
@@ -265,7 +263,7 @@
     today.text = @"今天换尿布次数:";
     today.textAlignment = NSTextAlignmentLeft;
     today.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    today.font      = [UIFont systemFontOfSize:33/2.0];
+    today.font      = [UIFont systemFontOfSize:MIDTEXT];
     [historyView addSubview:today];
     
     todayCountView = [[UIImageView alloc]initWithFrame:CGRectMake((320-599/2.0)/2.0, 10+20+10, 120, 50)];
@@ -289,7 +287,7 @@
     todayXuXu.backgroundColor = [UIColor clearColor];
     todayXuXu.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     todayXuXu.textAlignment = NSTextAlignmentCenter;
-    todayXuXu.font = [UIFont systemFontOfSize:33/2.0];
+    todayXuXu.font = [UIFont systemFontOfSize:MIDTEXT];
     [lefthistory addSubview:todayXuXu];
     
     XuXuStatusView = [[UIImageView alloc] init];
@@ -307,14 +305,14 @@
     xuxu.backgroundColor = [UIColor clearColor];
     xuxu.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     xuxu.textAlignment = NSTextAlignmentLeft;
-    xuxu.font = [UIFont systemFontOfSize:33/2.0];
+    xuxu.font = [UIFont systemFontOfSize:MIDTEXT];
     [lefthistory addSubview:xuxu];
     
     todayBaBa = [[UILabel alloc] initWithFrame:CGRectMake(35, 5+26, 20, 20)];
     todayBaBa.backgroundColor = [UIColor clearColor];
     todayBaBa.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     todayBaBa.textAlignment = NSTextAlignmentCenter;
-    todayBaBa.font = [UIFont systemFontOfSize:33/2.0];
+    todayBaBa.font = [UIFont systemFontOfSize:MIDTEXT];
     [lefthistory addSubview:todayBaBa];
     BaBaStatusView = [[UIImageView alloc] init];
     BaBaStatusView.frame = CGRectMake(35+18, 5+26+3, 18/2.0, 21/2.0);
@@ -329,7 +327,7 @@
     baba.backgroundColor = [UIColor clearColor];
     baba.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     baba.textAlignment = NSTextAlignmentLeft;
-    baba.font = [UIFont systemFontOfSize:33/2.0];
+    baba.font = [UIFont systemFontOfSize:MIDTEXT];
     [lefthistory addSubview:baba];
 
     
@@ -337,7 +335,7 @@
     todayXuXuBaBa.backgroundColor = [UIColor clearColor];
     todayXuXuBaBa.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     todayXuXuBaBa.textAlignment = NSTextAlignmentCenter;
-    todayXuXuBaBa.font = [UIFont systemFontOfSize:33/2.0];
+    todayXuXuBaBa.font = [UIFont systemFontOfSize:MIDTEXT];
     
     [lefthistory addSubview:todayXuXuBaBa];
     XuXuBaBaStatusView = [[UIImageView alloc] init];
@@ -355,7 +353,7 @@
     xuxubaba.backgroundColor = [UIColor clearColor];
     xuxubaba.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     xuxubaba.textAlignment = NSTextAlignmentLeft;
-    xuxubaba.font = [UIFont systemFontOfSize:33/2.0];
+    xuxubaba.font = [UIFont systemFontOfSize:MIDTEXT];
     [lefthistory addSubview:xuxubaba];
     
     startButton=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -479,7 +477,7 @@
 }
 
 #pragma -mark save_diaperDelegate
--(void)sendReloadData
+-(void)sendDiaperReloadData
 {
     [self loadData];
 }

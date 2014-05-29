@@ -128,6 +128,8 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
     
+    [[NSUserDefaults standardUserDefaults] setObject:@"BLE_ENV"  forKey:@"BLE_ENV"];
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"] != nil)
     {
         bleweatherCtrler = [BLEWeatherController bleweathercontroller];

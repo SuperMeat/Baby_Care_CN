@@ -62,12 +62,16 @@
         another=(UIButton*)[self.view viewWithTag:102];
         self.weather.hidden= YES;
         _bleweather.hidden = NO;
+        adindoor.hidden = NO;
+        adoutdoor.hidden = YES;
     }
     else
     {
         another=(UIButton*)[self.view viewWithTag:101];
         self.weather.hidden= NO;
         _bleweather.hidden = YES;
+        adoutdoor.hidden = NO;
+        adindoor.hidden  = YES;
     }
     another.enabled=YES;
 }
@@ -118,20 +122,81 @@
     NSLog(@"bleweather %@",self.bleweather);
 
 }
+
 -(void)makeAdvise
 {
+    
     NSDictionary *dict1=[[NSDictionary alloc]initWithObjectsAndKeys:[self.weather getChuanYiAdvise],@"content", nil];
     NSDictionary *dict2=[[NSDictionary alloc]initWithObjectsAndKeys:[self.weather getOutSideAdvise],@"content", nil];
     NSDictionary *dict3=[[NSDictionary alloc]initWithObjectsAndKeys:[self.weather getHealthAdvise],@"content", nil];
     
-    AdviseScrollview *ad=[[AdviseScrollview alloc]initWithArray:[NSArray arrayWithObjects:dict1,dict2,dict3, nil]];
+    adoutdoor =[[AdviseScrollview alloc]initWithArray:[NSArray arrayWithObjects:dict1,dict2,dict3, nil]];
+    
+    NSMutableArray *indoorArray = [[NSMutableArray alloc]initWithCapacity:0];
+    AdviseData *temp = [[BLEWeatherView weatherview]getTempAdviseData];
+    if (![temp.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:temp.mContent,@"content", nil];
+
+        [indoorArray addObject:tempdic];
+    }
+    
+    AdviseData *humi = [[BLEWeatherView weatherview]getHumiAdviseData];
+    if (![humi.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:humi.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+
+    
+    AdviseData *light = [[BLEWeatherView weatherview]getLightAdviseData];
+    if (![light.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:light.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+
+    
+    AdviseData *noice = [[BLEWeatherView weatherview]getNoiceAdviseData];
+    if (![noice.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:noice.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+
+    
+    AdviseData *uv = [[BLEWeatherView weatherview]getUVAdviseData];
+    if (![uv.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:uv.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+
+    AdviseData *pm25 = [[BLEWeatherView weatherview]getPM25AdviseData];
+    if (![pm25.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:pm25.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+    
+    adindoor=[[AdviseScrollview alloc]initWithArray:indoorArray];
+    
+    if (chooseIndoor.enabled) {
+        adindoor.hidden  = YES;
+        adoutdoor.hidden = NO;
+    }
+    else
+    {
+        adindoor.hidden  = NO;
+        adoutdoor.hidden = YES;
+    }
     
     adviseImageView = [[UIImageView alloc] init];
     CGRect frame = [[UIScreen mainScreen] bounds];
     [adviseImageView setFrame:CGRectMake(0, frame.size.height-130-64-49, 320, 130)];
     [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
     adviseImageView.userInteractionEnabled = YES;
-    [adviseImageView addSubview:ad];
+    [adviseImageView addSubview:adindoor];
+    [adviseImageView addSubview:adoutdoor];
     [self.view addSubview:adviseImageView];
 }
 

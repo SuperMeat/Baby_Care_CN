@@ -35,11 +35,11 @@
 -(NSDictionary*)searchTodayDiaperStatusList;
 -(NSDictionary*)searchYesterdayDiaperStatusList;
 
--(NSDictionary*)searchTodayFeedStatusList;
--(NSDictionary*)searchYesterdayFeedStatusList;
+-(NSDictionary*)searchCurFeedStatusList;
+-(NSDictionary*)searchLastFeedStatusList;
 
--(NSDictionary*)searchTodaySleepStatusList;
--(NSDictionary*)searchYesterdaySleepStatusList;
+-(NSDictionary*)searchCurSleepStatusList;
+-(NSDictionary*)searchLastSleepStatusList;
 
 -(BOOL)deleteWithStarttime:(NSDate*)starttime;
 

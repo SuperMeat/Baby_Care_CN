@@ -48,4 +48,10 @@
 @property int chooseType;
 -(void)makeview;
 -(void)refreshweather;
+-(AdviseData*)getTempAdviseData;
+-(AdviseData*)getHumiAdviseData;
+-(AdviseData*)getLightAdviseData;
+-(AdviseData*)getNoiceAdviseData;
+-(AdviseData*)getUVAdviseData;
+-(AdviseData*)getPM25AdviseData;
 @end

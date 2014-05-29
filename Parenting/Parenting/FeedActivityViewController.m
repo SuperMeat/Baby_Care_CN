@@ -62,6 +62,7 @@
     [db synchronize];
 
     [self makeNav];
+    adviseImageView.userInteractionEnabled = YES;
     
     if (startButton != nil) {
         startButton.enabled = YES;
@@ -121,6 +122,8 @@
         labletip.text = NSLocalizedString(@"Wait", nil);
     }
 
+    [self loadData];
+
 }
 
 -(void)stop
@@ -135,6 +138,7 @@
     startButton.enabled = YES;
     startButtonright.enabled = YES;
     startButtonleft.enabled = YES;
+    adviseImageView.userInteractionEnabled = YES;
     
 }
 -(void)viewWillDisappear:(BOOL)animated
@@ -234,9 +238,128 @@
     [self.view addSubview:chooseBreast];
     [self.view addSubview:chooseBottle];
     
-    UIImageView *historyView = [[UIImageView alloc] initWithFrame:CGRectMake(140, 90*PNGSCALE+20*PNGSCALE+10, 200*PNGSCALE, 120*PNGSCALE)];
+    historyView = [[UIImageView alloc] initWithFrame:CGRectMake((320-310*PNGSCALE)/2.0, 90*PNGSCALE+20*PNGSCALE+10, 310*PNGSCALE, 100*PNGSCALE)];
+    [historyView.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+    historyView.layer.cornerRadius = 8.0f;
     [historyView setImage:[UIImage imageNamed:@"bg"]];
     [self.view addSubview:historyView];
+    
+    UILabel *weeklabel = [[UILabel alloc]init];
+    weeklabel.frame = CGRectMake(5, 5, 80, 16.5);
+    weeklabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    weeklabel.text  = @"周日均(ml)";
+    weeklabel.textAlignment = NSTextAlignmentLeft;
+    weeklabel.font = [UIFont systemFontOfSize:16.5];
+    [historyView addSubview:weeklabel];
+    
+    UILabel *monthlabel = [[UILabel alloc]init];
+    monthlabel.frame = CGRectMake(historyView.frame.size.width/2.0+5, 5, 80, 16.5);
+    monthlabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    monthlabel.text  = @"月日均(ml)";
+    monthlabel.font = [UIFont systemFontOfSize:16.5];
+    monthlabel.textAlignment = NSTextAlignmentLeft;
+    [historyView addSubview:monthlabel];
+    
+    breastweeklabel = [[UILabel alloc]init];
+    [historyView addSubview:breastweeklabel];
+    breastweeklabel.frame = CGRectMake(5, 5+16.5+10, 50, 15);
+    breastweeklabel.text = @"母乳:";
+    breastweeklabel.font = [UIFont systemFontOfSize:15];
+    breastweeklabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    breastweeklabel.textAlignment = NSTextAlignmentLeft;
+    
+    breastweekamount = [[UILabel alloc] init];
+    breastweekamount.frame = CGRectMake(5+50, 5+16.5+10, 40, MIDTEXT);
+    breastweekamount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    breastweekamount.font = [UIFont systemFontOfSize:MIDTEXT];
+    breastweekamount.textAlignment = NSTextAlignmentLeft;
+    [historyView addSubview:breastweekamount];
+    
+    breastweekstatusImageView = [[UIImageView alloc] init];
+    breastweekstatusImageView.frame = CGRectMake(5+50+40, 5+16.5+10, 18/2.0, 21/2.0);
+    [historyView addSubview:breastweekstatusImageView];
+    cutbreastweek = [[UILabel alloc]init];
+    cutbreastweek.frame = CGRectMake(5+50+40+18/2.0, 5+16.5+10, 40, 10);
+    cutbreastweek.textAlignment = NSTextAlignmentLeft;
+    cutbreastweek.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    cutbreastweek.font = [UIFont systemFontOfSize:SMALLTEXT];
+    [historyView addSubview:cutbreastweek];
+    
+    breastmonthlabel  = [[UILabel alloc]init];
+    [historyView addSubview:breastmonthlabel];
+    breastmonthlabel.frame = CGRectMake(historyView.frame.size.width/2.0  + 5, 5+16.5+10, 50, 15);
+    breastmonthlabel.text = @"母乳:";
+    breastmonthlabel.font = [UIFont systemFontOfSize:MIDTEXT];
+    breastmonthlabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    breastmonthlabel.textAlignment = NSTextAlignmentLeft;
+
+    breastmonthamount = [[UILabel alloc]init];
+    [historyView addSubview:breastmonthamount];
+    breastmonthamount.frame = CGRectMake(historyView.frame.size.width/2.0  + 5+50, 5+16.5+10, 40, MIDTEXT);
+    breastmonthamount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    breastmonthamount.font = [UIFont systemFontOfSize:MIDTEXT];
+    breastmonthamount.textAlignment = NSTextAlignmentLeft;
+    
+    breastmonthstatusImageView = [[UIImageView alloc] init];
+    [historyView addSubview:breastmonthstatusImageView];
+    breastmonthstatusImageView.frame = CGRectMake(historyView.frame.size.width/2.0  + 5+50+40, 5+16.5+10, 18/2.0, 21/2.0);
+    cutbreastmonth = [[UILabel alloc]init];
+    cutbreastmonth.frame = CGRectMake(historyView.frame.size.width/2.0+5+50+40+18/2.0, 5+16.5+10, 40, 10);
+    cutbreastmonth.textAlignment = NSTextAlignmentLeft;
+    cutbreastmonth.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    cutbreastmonth.font = [UIFont systemFontOfSize:SMALLTEXT];
+    [historyView addSubview:cutbreastmonth];
+    
+    milkweeklabel  = [[UILabel alloc]init];
+    [historyView addSubview:milkweeklabel];
+    milkweeklabel.frame = CGRectMake(5, 5+16.5+10+15+10, 50, 15);
+    milkweeklabel.text = @"奶粉:";
+    milkweeklabel.font = [UIFont systemFontOfSize:MIDTEXT];
+    milkweeklabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    milkweeklabel.textAlignment = NSTextAlignmentLeft;
+
+    milkweekamount = [[UILabel alloc] init];
+    [historyView addSubview:milkweekamount];
+    milkweekamount.frame = CGRectMake(5+50, 5+16.5+10+15+10, 40, MIDTEXT);
+    milkweekamount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    milkweekamount.font = [UIFont systemFontOfSize:MIDTEXT];
+    milkweekamount.textAlignment = NSTextAlignmentLeft;
+    
+    milkweekstatusImageView = [[UIImageView alloc] init];
+    [historyView addSubview:milkweekstatusImageView];
+     milkweekstatusImageView.frame = CGRectMake(5+50+40, 5+16.5+10+15+10, 18/2.0, 21/2.0);
+    cutmilkweek = [[UILabel alloc]init];
+    [historyView addSubview:cutmilkweek];
+    cutmilkweek.frame = CGRectMake(5+50+40+18/2.0, 5+16.5+10+15+10, 40, 10);
+    cutmilkweek.textAlignment = NSTextAlignmentLeft;
+    cutmilkweek.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    cutmilkweek.font = [UIFont systemFontOfSize:SMALLTEXT];
+    
+    milkmonthlabel = [[UILabel alloc]init];
+    [historyView addSubview:milkmonthlabel];
+    milkmonthlabel.frame = CGRectMake(historyView.frame.size.width/2.0 + 5, 5+16.5+10+15+10, 90, 15);
+    milkmonthlabel.text = @"奶粉:";
+    milkmonthlabel.font = [UIFont systemFontOfSize:MIDTEXT];
+    milkmonthlabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    milkmonthlabel.textAlignment = NSTextAlignmentLeft;
+
+    milkmonthamount = [[UILabel alloc] init];
+    [historyView addSubview:milkmonthamount];
+    milkmonthamount.frame = CGRectMake(historyView.frame.size.width/2.0+5+50, 5+16.5+10+15+10, 40, MIDTEXT);
+    milkmonthamount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    milkmonthamount.font = [UIFont systemFontOfSize:MIDTEXT];
+    milkmonthamount.textAlignment = NSTextAlignmentLeft;
+    
+    milkmonthstatusImageView = [[UIImageView alloc] init];
+    [historyView addSubview:milkmonthstatusImageView];
+    milkmonthstatusImageView.frame = CGRectMake(historyView.frame.size.width/2.0+5+50+40, 5+16.5+10+15+10, 18/2.0, 21/2.0);
+
+    cutmilkmonth = [[UILabel alloc]init];
+    [historyView addSubview:cutmilkmonth];
+    cutmilkmonth.frame = CGRectMake(historyView.frame.size.width/2.0+5+50+40+18/2.0, 5+16.5+10+15+10, 40, 10);
+    cutmilkmonth.textAlignment = NSTextAlignmentLeft;
+    cutmilkmonth.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    cutmilkmonth.font = [UIFont systemFontOfSize:SMALLTEXT];
     
     timerImage = [[UIImageView alloc]initWithFrame:CGRectMake((320-165*PNGSCALE)/2.0, 90*PNGSCALE+20*PNGSCALE+60*PNGSCALE, 165*PNGSCALE, 111*PNGSCALE)];
     [timerImage setBackgroundColor:[UIColor clearColor]];
@@ -274,7 +397,7 @@
     [timerImageView addSubview:timeLable];
     
     startButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    startButton.frame=CGRectMake(40,150*PNGSCALE, 182*PNGSCALE/2.0, 366*PNGSCALE/2.0);
+    startButton.frame=CGRectMake(40,150*PNGSCALE+80*PNGSCALE, 182*PNGSCALE/2.0*0.75, 366*PNGSCALE/2.0*0.75);
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_feeding_play"] forState:UIControlStateNormal];
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_feeding_pause"] forState:UIControlStateSelected];
     [self.view addSubview:startButton];
@@ -303,6 +426,131 @@
     addRecordBtn.layer.cornerRadius = 5.0f;
     [self.view addSubview:addRecordBtn];
 
+    [self loadData];
+}
+
+- (void)loadData
+{
+    NSDictionary *curStatusList = [[SummaryDB dataBase]searchCurFeedStatusList];
+    NSDictionary *lastStatusList = [[SummaryDB dataBase] searchLastFeedStatusList];
+    if (curStatusList != nil && lastStatusList != nil && [curStatusList count]>0)
+    {
+        int week_breast_average  = 0;
+        int week_milk_average    = 0;
+        int month_breast_average = 0;
+        int month_milk_average   = 0;
+        
+        if ([curStatusList objectForKey:@"week_breast_average"]) {
+            week_breast_average = [[curStatusList objectForKey:@"week_breast_average"]intValue];
+        }
+        
+        if ([curStatusList objectForKey:@"week_milk_average"]) {
+            week_milk_average = [[curStatusList objectForKey:@"week_milk_average"]intValue];
+        }
+        
+        if ([curStatusList objectForKey:@"month_breast_average"]) {
+            month_breast_average = [[curStatusList objectForKey:@"month_breast_average"]intValue];
+        }
+        
+        if ([curStatusList objectForKey:@"month_milk_average"]) {
+            month_milk_average = [[curStatusList objectForKey:@"month_milk_average"]intValue];
+        }
+        
+        int last_week_breast_average  = 0;
+        int last_week_milk_average    = 0;
+        int last_month_breast_average = 0;
+        int last_month_milk_average   = 0;
+
+        if ([lastStatusList count]>0)
+        {
+            if ([lastStatusList objectForKey:@"week_breast_average"])
+            {
+                last_week_breast_average = [[lastStatusList objectForKey:@"week_breast_average"]intValue];
+            }
+            
+            if ([lastStatusList objectForKey:@"week_milk_average"])
+            {
+                last_week_milk_average = [[lastStatusList objectForKey:@"week_milk_average"]intValue];
+            }
+            
+            if ([lastStatusList objectForKey:@"month_breast_average"])
+            {
+                last_month_breast_average = [[lastStatusList objectForKey:@"month_breast_average"]intValue];
+            }
+            
+            if ([lastStatusList objectForKey:@"month_milk_average"])
+            {
+                last_month_milk_average = [[lastStatusList objectForKey:@"month_milk_average"]intValue];
+            }
+            
+            breastweekamount.text = [NSString stringWithFormat:@"%d", week_breast_average];
+            breastmonthamount.text = [NSString stringWithFormat:@"%d",month_breast_average];
+            milkweekamount.text = [NSString stringWithFormat:@"%d", week_milk_average];
+            milkmonthamount.text = [NSString stringWithFormat:@"%d",month_milk_average];
+            
+            if (week_breast_average > last_week_breast_average)
+            {
+                [breastweekstatusImageView setImage:[UIImage imageNamed:@"arrow_up"]];
+                cutbreastweek.text = [NSString stringWithFormat:@"%d",week_breast_average-last_week_breast_average];
+                
+            }
+            else if (week_breast_average == last_week_breast_average)
+            {
+                [breastweekstatusImageView setImage:[UIImage imageNamed:@"arrow_flat"]];
+            }
+            else
+            {
+                [breastweekstatusImageView setImage:[UIImage imageNamed:@"arrow_down"]];
+                cutbreastweek.text = [NSString stringWithFormat:@"%d",last_week_breast_average-week_breast_average];
+            }
+            
+            if (week_milk_average > last_week_milk_average)
+            {
+                [milkweekstatusImageView setImage:[UIImage imageNamed:@"arrow_up"]];
+                cutmilkweek.text = [NSString stringWithFormat:@"%d",week_milk_average-last_week_milk_average];
+            }
+            else if (week_milk_average == last_week_milk_average)
+            {
+                 [milkweekstatusImageView setImage:[UIImage imageNamed:@"arrow_flat"]];
+            }
+            else
+            {
+                [milkweekstatusImageView setImage:[UIImage imageNamed:@"arrow_down"]];
+                cutmilkweek.text = [NSString stringWithFormat:@"%d",last_week_milk_average-week_milk_average];
+            }
+            
+            if (month_breast_average > last_month_breast_average)
+            {
+                [breastmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_up"]];
+                cutbreastmonth.text = [NSString stringWithFormat:@"%d",month_breast_average-last_month_breast_average];
+            }
+            else if (month_breast_average == last_month_breast_average)
+            {
+                 [breastmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_flat"]];
+            }
+            else
+            {
+                [breastmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_down"]];
+                cutbreastmonth.text = [NSString stringWithFormat:@"%d",last_month_breast_average-month_breast_average];
+            }
+            
+            if (month_milk_average > last_month_milk_average)
+            {
+                [milkmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_up"]];
+                cutmilkmonth.text = [NSString stringWithFormat:@"%d",month_milk_average-last_month_milk_average];
+            }
+            else if (month_milk_average == last_month_milk_average)
+            {
+                [milkmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_flat"]];
+            }
+            else
+            {
+                [milkmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_down"]];
+                cutmilkmonth.text = [NSString stringWithFormat:@"%d",last_month_milk_average-month_milk_average];
+            }
+            
+        }
+    }
 }
 
 - (void)pushSummaryView:(id)sender{
@@ -354,8 +602,10 @@
 -(void)makeSave
 {
     if (saveView==nil) {
-        saveView = [[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height) FeedWay:self.feedWay Breasttype:self.breast];
+        saveView = [[save_feedview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height) FeedWay:self.feedWay Breasttype:self.breast];
     }
+    adviseImageView.userInteractionEnabled = YES;
+    saveView.feedSaveDelegate = self;
     saveView.feedway=self.feedWay;
     saveView.breast=self.breast;
     [saveView loaddata];
@@ -363,7 +613,7 @@
     startButton.enabled = NO;
     startButtonright.enabled = NO;
     startButtonleft.enabled = NO;
-    
+    [self.view bringSubviewToFront:adviseImageView];
     [self.view addSubview:saveView];
     
 }
@@ -391,6 +641,7 @@
     labletip.text=@"The end time,a total of...";
     NSNumber *dur=noti.object;
     labletip.text=[NSString stringWithFormat:NSLocalizedString(@"Over", nil),[dur floatValue]/3600];
+    adviseImageView.userInteractionEnabled = YES;
 }
 
 -(void)cancel:(NSNotification*)noti
@@ -405,7 +656,7 @@
     startButton.enabled = YES;
     startButtonright.enabled = YES;
     startButtonleft.enabled = YES;
-    
+    adviseImageView.userInteractionEnabled = YES;
 }
 
 -(void)feedWay:(UIButton *)sender
@@ -428,6 +679,7 @@
         startButton.hidden=YES;
         startButtonleft.hidden=NO;
         startButtonright.hidden=NO;
+        historyView.hidden = YES;
         timerImage.frame = CGRectMake((320-165*PNGSCALE)/2.0, 90*PNGSCALE+20*PNGSCALE, 165*PNGSCALE, 111*PNGSCALE);
         
     }
@@ -435,6 +687,7 @@
     {
         another=(UIButton*)[self.view viewWithTag:101];
         self.feedWay=@"bottle";
+        historyView.hidden = NO;
         feedway.hidden=NO;
         startButton.hidden=NO;
         startButtonleft.hidden=YES;
@@ -471,4 +724,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma -mark feeddelegate
+-(void)sendFeedSaveChanged:(int)duration andstarttime:(NSDate*)newstarttime
+{
+    
+}
+-(void)sendFeedReloadData
+{
+    [self loadData];
+}
 @end

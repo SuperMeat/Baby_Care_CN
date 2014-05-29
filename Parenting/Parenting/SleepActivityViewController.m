@@ -34,9 +34,7 @@
 
 -(void)dealloc
 {
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -76,7 +74,7 @@
     str = @"0";
     [db setObject:str forKey:@"MARK"];
     [db synchronize];
-    
+    [self loadData];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -176,14 +174,137 @@
 
 -(void)makeView
 {
+    historyView = [[UIImageView alloc] initWithFrame:CGRectMake((320-310*PNGSCALE)/2.0, 105*PNGSCALE, 310*PNGSCALE, 100*PNGSCALE)];
+    [historyView.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+    historyView.layer.cornerRadius = 8.0f;
+    [historyView setImage:[UIImage imageNamed:@"bg"]];
+    [self.view addSubview:historyView];
+    
+    UILabel *weeklabel = [[UILabel alloc]init];
+    weeklabel.frame = CGRectMake(5, 5, 100, 16.5);
+    weeklabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    weeklabel.text  = @"周日均(分钟)";
+    weeklabel.textAlignment = NSTextAlignmentLeft;
+    weeklabel.font = [UIFont systemFontOfSize:16.5];
+    [historyView addSubview:weeklabel];
+    
+    UILabel *monthlabel = [[UILabel alloc]init];
+    monthlabel.frame = CGRectMake(historyView.frame.size.width/2.0+5, 5, 100, 16.5);
+    monthlabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    monthlabel.text  = @"月日均(分钟)";
+    monthlabel.font = [UIFont systemFontOfSize:16.5];
+    monthlabel.textAlignment = NSTextAlignmentLeft;
+    [historyView addSubview:monthlabel];
+    
+    averagesleepweeklabel = [[UILabel alloc]init];
+    [historyView addSubview:averagesleepweeklabel];
+    averagesleepweeklabel.frame = CGRectMake(5, 5+16.5+10, 50, 15);
+    averagesleepweeklabel.text = @"总时:";
+    averagesleepweeklabel.font = [UIFont systemFontOfSize:15];
+    averagesleepweeklabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    averagesleepweeklabel.textAlignment = NSTextAlignmentLeft;
+    
+    averagesleepweekamount = [[UILabel alloc] init];
+    averagesleepweekamount.frame = CGRectMake(5+50, 5+16.5+10, 40, MIDTEXT);
+    averagesleepweekamount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    averagesleepweekamount.font = [UIFont systemFontOfSize:MIDTEXT];
+    averagesleepweekamount.textAlignment = NSTextAlignmentLeft;
+    [historyView addSubview:averagesleepweekamount];
+    
+    averagesleepweekstatusImageView = [[UIImageView alloc] init];
+    averagesleepweekstatusImageView.frame = CGRectMake(5+50+40, 5+16.5+10, 18/2.0, 21/2.0);
+    [historyView addSubview:averagesleepweekstatusImageView];
+    cutaveragesleepweek = [[UILabel alloc]init];
+    cutaveragesleepweek.frame = CGRectMake(5+50+40+18/2.0, 5+16.5+10, 40, 10);
+    cutaveragesleepweek.textAlignment = NSTextAlignmentLeft;
+    cutaveragesleepweek.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    cutaveragesleepweek.font = [UIFont systemFontOfSize:SMALLTEXT];
+    [historyView addSubview:cutaveragesleepweek];
+    
+    averagesleepmonthlabel  = [[UILabel alloc]init];
+    [historyView addSubview:averagesleepmonthlabel];
+    averagesleepmonthlabel.frame = CGRectMake(historyView.frame.size.width/2.0  + 5, 5+16.5+10, 50, 15);
+    averagesleepmonthlabel.text = @"总时:";
+    averagesleepmonthlabel.font = [UIFont systemFontOfSize:MIDTEXT];
+    averagesleepmonthlabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    averagesleepmonthlabel.textAlignment = NSTextAlignmentLeft;
+    
+    averagesleepmonthamount = [[UILabel alloc]init];
+    [historyView addSubview:averagesleepmonthamount];
+    averagesleepmonthamount.frame = CGRectMake(historyView.frame.size.width/2.0  + 5+50, 5+16.5+10, 40, MIDTEXT);
+    averagesleepmonthamount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    averagesleepmonthamount.font = [UIFont systemFontOfSize:MIDTEXT];
+    averagesleepmonthamount.textAlignment = NSTextAlignmentLeft;
+    
+    averagesleepmonthstatusImageView = [[UIImageView alloc] init];
+    [historyView addSubview:averagesleepmonthstatusImageView];
+    averagesleepmonthstatusImageView.frame = CGRectMake(historyView.frame.size.width/2.0  + 5+50+40, 5+16.5+10, 18/2.0, 21/2.0);
+    cutaveragesleepmonth = [[UILabel alloc]init];
+    cutaveragesleepmonth.frame = CGRectMake(historyView.frame.size.width/2.0+5+50+40+18/2.0, 5+16.5+10, 40, 10);
+    cutaveragesleepmonth.textAlignment = NSTextAlignmentLeft;
+    cutaveragesleepmonth.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    cutaveragesleepmonth.font = [UIFont systemFontOfSize:SMALLTEXT];
+    [historyView addSubview:cutaveragesleepmonth];
+    
+    maxsleepweeklabel  = [[UILabel alloc]init];
+    [historyView addSubview:maxsleepweeklabel];
+    maxsleepweeklabel.frame = CGRectMake(5, 5+16.5+10+15+10, 50, 15);
+    maxsleepweeklabel.text = @"最长:";
+    maxsleepweeklabel.font = [UIFont systemFontOfSize:MIDTEXT];
+    maxsleepweeklabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    maxsleepweeklabel.textAlignment = NSTextAlignmentLeft;
+    
+    maxsleepweekamount = [[UILabel alloc] init];
+    [historyView addSubview:maxsleepweekamount];
+    maxsleepweekamount.frame = CGRectMake(5+50, 5+16.5+10+15+10, 40, MIDTEXT);
+    maxsleepweekamount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    maxsleepweekamount.font = [UIFont systemFontOfSize:MIDTEXT];
+    maxsleepweekamount.textAlignment = NSTextAlignmentLeft;
+    
+    maxsleepweekstatusImageView = [[UIImageView alloc] init];
+    [historyView addSubview:maxsleepweekstatusImageView];
+    maxsleepweekstatusImageView.frame = CGRectMake(5+50+40, 5+16.5+10+15+10, 18/2.0, 21/2.0);
+    cutmaxsleepweek = [[UILabel alloc]init];
+    [historyView addSubview:cutmaxsleepweek];
+    cutmaxsleepweek.frame = CGRectMake(5+50+40+18/2.0, 5+16.5+10+15+10, 40, 10);
+    cutmaxsleepweek.textAlignment = NSTextAlignmentLeft;
+    cutmaxsleepweek.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    cutmaxsleepweek.font = [UIFont systemFontOfSize:SMALLTEXT];
+    
+    maxsleepmonthlabel = [[UILabel alloc]init];
+    [historyView addSubview:maxsleepmonthlabel];
+    maxsleepmonthlabel.frame = CGRectMake(historyView.frame.size.width/2.0 + 5, 5+16.5+10+15+10, 90, 15);
+    maxsleepmonthlabel.text = @"最长:";
+    maxsleepmonthlabel.font = [UIFont systemFontOfSize:MIDTEXT];
+    maxsleepmonthlabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    maxsleepmonthlabel.textAlignment = NSTextAlignmentLeft;
+    
+    maxsleepmonthamount = [[UILabel alloc] init];
+    [historyView addSubview:maxsleepmonthamount];
+    maxsleepmonthamount.frame = CGRectMake(historyView.frame.size.width/2.0+5+50, 5+16.5+10+15+10, 40, MIDTEXT);
+    maxsleepmonthamount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    maxsleepmonthamount.font = [UIFont systemFontOfSize:MIDTEXT];
+    maxsleepmonthamount.textAlignment = NSTextAlignmentLeft;
+    
+    maxsleepmonthstatusImageView = [[UIImageView alloc] init];
+    [historyView addSubview:maxsleepmonthstatusImageView];
+    maxsleepmonthstatusImageView.frame = CGRectMake(historyView.frame.size.width/2.0+5+50+40, 5+16.5+10+15+10, 18/2.0, 21/2.0);
+    
+    cutmaxsleepmonth = [[UILabel alloc]init];
+    [historyView addSubview:cutmaxsleepmonth];
+    cutmaxsleepmonth.frame = CGRectMake(historyView.frame.size.width/2.0+5+50+40+18/2.0, 5+16.5+10+15+10, 40, 10);
+    cutmaxsleepmonth.textAlignment = NSTextAlignmentLeft;
+    cutmaxsleepmonth.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    cutmaxsleepmonth.font = [UIFont systemFontOfSize:SMALLTEXT];
+
     startButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    startButton.frame=CGRectMake(25,200*PNGSCALE, 281*PNGSCALE/2.0, 231*PNGSCALE/2.0);
+    startButton.frame=CGRectMake(25,200*PNGSCALE+30, 281*PNGSCALE/2.0, 231*PNGSCALE/2.0);
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_sleeping_play.png"] forState:UIControlStateNormal];
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_sleeping_pause.png"] forState:UIControlStateSelected];
     [self.view addSubview:startButton];
     [startButton addTarget:self action:@selector(startOrPause:) forControlEvents:UIControlEventTouchUpInside];
     
-    timerImage = [[UIImageView alloc]initWithFrame:CGRectMake(320-20-165*PNGSCALE, 150, 165*PNGSCALE, 111*PNGSCALE)];
+    timerImage = [[UIImageView alloc]initWithFrame:CGRectMake(320-20-165*PNGSCALE, 150+30, 165*PNGSCALE, 111*PNGSCALE)];
     [timerImage setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:timerImage];
     
@@ -226,6 +347,130 @@
     
 }
 
+- (void)loadData
+{
+    NSDictionary *curStatusList = [[SummaryDB dataBase]searchCurSleepStatusList];
+    NSDictionary *lastStatusList = [[SummaryDB dataBase] searchLastSleepStatusList];
+    if (curStatusList != nil && lastStatusList != nil && [curStatusList count]>0)
+    {
+        int week_sleep_average  = 0;
+        int week_max_sleep_average    = 0;
+        int month_sleep_average = 0;
+        int month_max_sleep_average   = 0;
+        
+        if ([curStatusList objectForKey:@"week_sleep_average"]) {
+            week_sleep_average = [[curStatusList objectForKey:@"week_sleep_average"]intValue];
+        }
+        
+        if ([curStatusList objectForKey:@"week_max_sleep_average"]) {
+            week_max_sleep_average = [[curStatusList objectForKey:@"week_max_sleep_average"]intValue];
+        }
+        
+        if ([curStatusList objectForKey:@"month_sleep_average"]) {
+            month_sleep_average = [[curStatusList objectForKey:@"month_sleep_average"]intValue];
+        }
+        
+        if ([curStatusList objectForKey:@"month_sleep_average"]) {
+            month_max_sleep_average = [[curStatusList objectForKey:@"month_max_sleep_average"]intValue];
+        }
+        
+        int last_week_sleep_average   = 0;
+        int last_week_max_average    = 0;
+        int last_month_sleep_average = 0;
+        int last_month_max_average   = 0;
+        
+        if ([lastStatusList count]>0)
+        {
+            if ([lastStatusList objectForKey:@"week_sleep_average"])
+            {
+                last_week_sleep_average = [[lastStatusList objectForKey:@"week_sleep_average"]intValue];
+            }
+            
+            if ([lastStatusList objectForKey:@"week_max_sleep_average"])
+            {
+                last_week_max_average = [[lastStatusList objectForKey:@"week_max_sleep_average"]intValue];
+            }
+            
+            if ([lastStatusList objectForKey:@"month_sleep_average"])
+            {
+                last_month_sleep_average = [[lastStatusList objectForKey:@"month_sleep_average"]intValue];
+            }
+            
+            if ([lastStatusList objectForKey:@"month_max_sleep_average"])
+            {
+                last_month_max_average = [[lastStatusList objectForKey:@"month_max_sleep_average"]intValue];
+            }
+            
+            averagesleepweekamount.text = [NSString stringWithFormat:@"%d", week_sleep_average/60];
+            averagesleepmonthamount.text = [NSString stringWithFormat:@"%d",month_sleep_average/60];
+            maxsleepweekamount.text = [NSString stringWithFormat:@"%d", week_max_sleep_average/60];
+            maxsleepmonthamount.text = [NSString stringWithFormat:@"%d",month_max_sleep_average/60];
+            
+            if (week_sleep_average > last_week_sleep_average)
+            {
+                [averagesleepweekstatusImageView setImage:[UIImage imageNamed:@"arrow_up"]];
+                cutaveragesleepweek.text = [NSString stringWithFormat:@"%d",(week_sleep_average-last_week_sleep_average)/60];
+                
+            }
+            else if (week_sleep_average == last_week_sleep_average)
+            {
+                [averagesleepweekstatusImageView setImage:[UIImage imageNamed:@"arrow_flat"]];
+            }
+            else
+            {
+                [averagesleepweekstatusImageView setImage:[UIImage imageNamed:@"arrow_down"]];
+                cutaveragesleepweek.text = [NSString stringWithFormat:@"%d",(last_week_sleep_average-week_sleep_average)/60];
+            }
+            
+            if (week_max_sleep_average > last_week_max_average)
+            {
+                [maxsleepweekstatusImageView setImage:[UIImage imageNamed:@"arrow_up"]];
+                cutmaxsleepweek.text = [NSString stringWithFormat:@"%d",(week_max_sleep_average-last_week_max_average)/60];
+            }
+            else if (week_max_sleep_average == last_week_max_average)
+            {
+                [maxsleepweekstatusImageView setImage:[UIImage imageNamed:@"arrow_flat"]];
+            }
+            else
+            {
+                [maxsleepweekstatusImageView setImage:[UIImage imageNamed:@"arrow_down"]];
+                cutmaxsleepweek.text = [NSString stringWithFormat:@"%d",(last_week_max_average-week_max_sleep_average)/60];
+            }
+            
+            if (month_sleep_average > last_month_sleep_average)
+            {
+                [averagesleepmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_up"]];
+                cutaveragesleepmonth.text = [NSString stringWithFormat:@"%d",(month_sleep_average-last_month_sleep_average)/60];
+            }
+            else if (month_sleep_average == last_month_sleep_average)
+            {
+                [averagesleepmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_flat"]];
+            }
+            else
+            {
+                [averagesleepmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_down"]];
+                cutaveragesleepmonth.text = [NSString stringWithFormat:@"%d",(last_month_sleep_average-month_sleep_average)/60];
+            }
+            
+            if (month_max_sleep_average > last_month_max_average)
+            {
+                [maxsleepmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_up"]];
+                cutmaxsleepmonth.text = [NSString stringWithFormat:@"%d",(month_max_sleep_average-last_month_max_average)/60];
+            }
+            else if (month_max_sleep_average == last_month_max_average)
+            {
+                [maxsleepmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_flat"]];
+            }
+            else
+            {
+                [maxsleepmonthstatusImageView setImage:[UIImage imageNamed:@"arrow_down"]];
+                cutmaxsleepmonth.text = [NSString stringWithFormat:@"%d",(last_month_max_average-month_max_sleep_average)/60];
+            }
+            
+        }
+    }
+
+}
 
 - (void)viewDidLoad
 {
@@ -347,5 +592,16 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"sleep" forKey:@"ctl"];
     
     [self makeSave];
+}
+
+#pragma -mark sleep delegate
+-(void)sendSleepSaveChanged:(int)duration andstarttime:(NSDate*)newstarttime
+{
+    
+}
+
+-(void)sendSleepReloadData
+{
+    [self loadData];
 }
 @end

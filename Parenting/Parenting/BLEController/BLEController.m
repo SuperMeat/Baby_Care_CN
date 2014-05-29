@@ -230,6 +230,11 @@
     [self.bleControllerDelegate RecvMicroPhone:data];
 }
 
+-(void)resp_get_air:(NSData*)data
+{
+    [self.bleControllerDelegate RecvPM25Data:data];
+}
+
 #pragma mark tools function
 -(void)RecvBTData:(NSData*)recvData
 {
@@ -278,6 +283,9 @@
             break;
         case PID_RESP_GET_MICROPHONE:
             [self resp_get_microphone:respData];
+            break;
+        case PID_RESP_GET_AIR:
+            [self resp_get_air:respData];
             break;
         default:
             //提取结束
@@ -526,6 +534,24 @@
     NSLog(@"get Micro:%@", cmdData);
     
     [uartLib sendValue:connectPeripheral sendData:cmdData type:CBCharacteristicWriteWithoutResponse];
+}
+
+- (void)getAir
+{
+    Byte ucaCmdData[10];
+    
+    memset(ucaCmdData, 0, 10);
+    ucaCmdData[0] = 0xab;
+    ucaCmdData[1] = 0xcd;
+    ucaCmdData[2] = 0x0D;
+    ucaCmdData[3] = 0;
+    ucaCmdData[4] = calculateXor(ucaCmdData, 4);
+    
+    NSData *cmdData =[[NSData alloc] initWithBytes:ucaCmdData length:5];
+    NSLog(@"get air:%@", cmdData);
+    
+    [uartLib sendValue:connectPeripheral sendData:cmdData type:CBCharacteristicWriteWithoutResponse];
+    
 }
 
 #pragma -mark public function

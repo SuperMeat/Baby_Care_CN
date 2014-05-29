@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FoodTypePickerView.h"
 @protocol save_feedviewDelegate<NSObject>
 @optional
 -(void)sendFeedSaveChanged:(int)duration andstarttime:(NSDate*)newstarttime;
+-(void)sendFeedReloadData;
 @end
 
-@interface save_feedview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface save_feedview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate,FoodTypePickerViewDelegate>
 {
     UIImageView *imageview;
     UITextField *Oztext;
@@ -20,6 +22,7 @@
     UITextField *durationtext;
     UITextField *datetext;
     UITextField *starttimetext;
+    UITextField *foodtypetext;
     UILabel *Oz;
     UIButton *leftbutton;
     UIButton *rightbutton;
@@ -36,9 +39,14 @@
     long _createtime;
     long _updatetime;
     DurationPickerView *durationpicker;
+    FoodTypePickerView *foodtypepicker;
     UIActionSheet *action3;
+    UIActionSheet *action4;
     NSMutableArray *hours;
     NSMutableArray *minutes;
+    UIImageView *remarkbg;
+    UILabel *remark;
+    UILabel *foodtypeLabel;
 }
 
 @property(nonatomic,strong)NSString *feedway;
@@ -50,6 +58,7 @@
 @property int durationhour;
 @property int durationmin;
 @property int durationsec;
+@property(nonatomic, copy)NSString *foodtype;
 @property(nonatomic,assign)BOOL isshow;
 @property (assign) id<save_feedviewDelegate> feedSaveDelegate;
 -(id)initWithFrame:(CGRect)frame Select:(BOOL)_select Start:(NSDate*)_start Duration:(NSString*)_curduration UpdateTime:(long)updatetime CreateTime:(long)createtime;
