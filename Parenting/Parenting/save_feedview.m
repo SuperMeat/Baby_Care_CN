@@ -438,7 +438,7 @@
     {
         way=1;
         
-        if (leftbtn.enabled) {
+        if (!leftbtn.enabled) {
             oz=@"left";
         }
         else
@@ -450,7 +450,7 @@
 
     if (select) {
         if (Oztext.hidden) {
-            if (leftbtn.enabled) {
+            if (!leftbtn.enabled) {
                 oz=@"left";
             }
             else
@@ -471,7 +471,7 @@
                             Week:[ACDate getWeekFromDate:self.start]
                          WeekDay:[ACDate getWeekDayFromDate:self.start]
                         Duration:duration
-                              Oz:Oztext.text
+                              Oz:oz
                         FoodType:self.foodtype
                           Remark:remarktext.text
                         MoreInfo:@""
@@ -484,7 +484,7 @@
                             Week:[ACDate getWeekFromDate:curstarttime]
                          WeekDay:[ACDate getWeekDayFromDate:curstarttime]
                         Duration:duration
-                              Oz:Oztext.text
+                              Oz:oz
                         FoodType:self.foodtype
                           Remark:remarktext.text
                         MoreInfo:@""

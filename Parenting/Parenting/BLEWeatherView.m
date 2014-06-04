@@ -561,6 +561,7 @@
 {
     return mAdTemp;
 }
+
 -(AdviseData*)getHumiAdviseData
 {
     return mAdHumi;

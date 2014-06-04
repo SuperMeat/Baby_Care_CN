@@ -253,7 +253,6 @@
 
 -(void)startOrPause:(UIButton*)sender
 {
-    
     if (!sender.selected) {
         
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"timerOn"]) {

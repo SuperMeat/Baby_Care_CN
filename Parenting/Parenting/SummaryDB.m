@@ -627,6 +627,7 @@
     [array addObject:[set  objectForColumnName:@"duration"]];
     [array addObject:[set objectForColumnName:@"feed_type"]];
     if ([set stringForColumn:@"oz"]) {
+        NSLog(@"oz:%@", [set stringForColumn:@"oz"]);
         [array addObject:[set stringForColumn:@"oz"]];
     }
     else

@@ -564,14 +564,14 @@
     
     int amount = 0;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"metric"] isEqualToString:@"Mls:"]) {
-        if ([oz isEqualToString:@""] != YES) {
+        if ([oz isEqualToString:@""] != YES && [oz isEqualToString:@"left"] != YES && [oz isEqualToString:@"right"] != YES) {
             NSRange range = [oz rangeOfString:@"ml"];
             amount = [[oz substringToIndex:range.location] intValue];
         }
     }
     else
     {
-        if ([oz isEqualToString:@""] != YES) {
+        if ([oz isEqualToString:@""] != YES && [oz isEqualToString:@"left"] != YES && [oz isEqualToString:@"right"] != YES) {
             NSRange range = [oz rangeOfString:@"oz"];
             amount = [[oz substringToIndex:range.location] intValue];
         }
@@ -807,7 +807,7 @@
     
     int amount = 0;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"metric"] isEqualToString:@"Mls:"]) {
-        if (![oz isEqualToString:@""]) {
+        if (![oz isEqualToString:@""] && [oz isEqualToString:@"left"] != YES && [oz isEqualToString:@"right"] != YES) {
             NSRange range = [oz rangeOfString:@"ml"];
             if (range.length != 0) {
                 amount = [[oz substringToIndex:range.location] intValue];
@@ -816,7 +816,7 @@
     }
     else
     {
-        if (![oz isEqualToString:@""]) {
+        if (![oz isEqualToString:@""] && [oz isEqualToString:@"left"] != YES && [oz isEqualToString:@"right"] != YES) {
             NSRange range = [oz rangeOfString:@"oz"];
             if (range.length != 0) {
                 amount = [[oz substringToIndex:range.location] intValue];
