@@ -23,7 +23,7 @@
 +(NSArray*)selectAllCategoryList{
     NSArray *resArray = [[NSArray alloc]init];;
     BOOL res;
-    FMDatabase *db=[FMDatabase databaseWithPath:CATEGORYPATH];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
@@ -31,7 +31,7 @@
         return nil;
     }
     
-    NSString *sql =@"select * from bc_category order by category_id";
+    NSString *sql =@"select * from bc_tips_category order by category_id";
     FMResultSet *resultset=[db executeQuery:sql];
     while ([resultset next]) {
         int category_id = [resultset intForColumn:@"category_id"];
@@ -56,14 +56,14 @@
                describe:(NSString*)describe
                    icon:(NSString*)icon{
     BOOL res;
-    FMDatabase *db=[FMDatabase databaseWithPath:CATEGORYPATH];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
         [db close];
         return res;
     }
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_category (category_id INTEGER PRIMARY KEY,create_time integer not null, update_time INTEGER default 0,parent_id integer default 0, name Varchar DEFAULT NULL,describe TEXT DEFAULT NULL, icon Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_tips_category (category_id INTEGER PRIMARY KEY,create_time integer not null, update_time INTEGER default 0,parent_id integer default 0, name Varchar DEFAULT NULL,describe TEXT DEFAULT NULL, icon Varchar DEFAULT NULL)"];
     
     if (!res) {
         NSLog(@"表格创建失败");
@@ -72,7 +72,7 @@
     }
     
     if (![self checkExist:categoryId]) {
-        res=[db executeUpdate:@"insert into bc_category (category_id, create_time, update_time, parent_id, name,describe, icon) values(?,?,?,?,?,?,?)",
+        res=[db executeUpdate:@"insert into bc_tips_category (category_id, create_time, update_time, parent_id, name,describe, icon) values(?,?,?,?,?,?,?)",
              [NSNumber numberWithInt:categoryId],
              [NSNumber numberWithInt:createTime],
              [NSNumber numberWithInt:updateTime],
@@ -84,7 +84,7 @@
 
     }
     else{
-        res=[db executeUpdate:@"update bc_category set update_time=?,parent_id=?,name=?,describe=?,icon=? where category_id=?",
+        res=[db executeUpdate:@"update bc_tips_category set update_time=?,parent_id=?,name=?,describe=?,icon=? where category_id=?",
              [NSNumber numberWithInt:categoryId],
              [NSNumber numberWithInt:parentId],
              name,
@@ -105,14 +105,14 @@
 
 +(BOOL)checkExist:(int)categoryId{
     BOOL res;
-    FMDatabase *db=[FMDatabase databaseWithPath:CATEGORYPATH];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
         [db close];
         return res;
     }
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_category (category_id INTEGER PRIMARY KEY,create_time integer not null, update_time INTEGER default 0,parent_id integer default 0, name Varchar DEFAULT NULL,describe TEXT DEFAULT NULL,  icon Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_tips_category (category_id INTEGER PRIMARY KEY,create_time integer not null, update_time INTEGER default 0,parent_id integer default 0, name Varchar DEFAULT NULL,describe TEXT DEFAULT NULL,  icon Varchar DEFAULT NULL)"];
     
     if (!res) {
         NSLog(@"表格创建失败");
@@ -120,7 +120,7 @@
         return res;
     }
     
-    NSString *sql = [NSString stringWithFormat:@"select category_id from bc_category where category_id = %d", categoryId];
+    NSString *sql = [NSString stringWithFormat:@"select category_id from bc_tips_category where category_id = %d", categoryId];
     
     FMResultSet *resultset=[db executeQuery:sql];
     res = NO;
@@ -136,14 +136,14 @@
 +(BOOL)checkUpdateState:(int)categoryId
              UpdateTime:(int)updateTime{
     BOOL res;
-    FMDatabase *db=[FMDatabase databaseWithPath:CATEGORYPATH];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
         [db close];
         return res;
     }
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_category (category_id INTEGER PRIMARY KEY,create_time integer not null, update_time INTEGER default 0,parent_id integer default 0, name Varchar DEFAULT NULL,describe TEXT DEFAULT NULL,  icon Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_tips_category (category_id INTEGER PRIMARY KEY,create_time integer not null, update_time INTEGER default 0,parent_id integer default 0, name Varchar DEFAULT NULL,describe TEXT DEFAULT NULL,  icon Varchar DEFAULT NULL)"];
     
     if (!res) {
         NSLog(@"表格创建失败");
@@ -151,7 +151,7 @@
         return res;
     }
     
-    NSString *sql = [NSString stringWithFormat:@"select update_time from bc_category where category_id = %d", categoryId];
+    NSString *sql = [NSString stringWithFormat:@"select update_time from bc_tips_category where category_id = %d", categoryId];
     
     FMResultSet *resultset=[db executeQuery:sql];
     res = YES;

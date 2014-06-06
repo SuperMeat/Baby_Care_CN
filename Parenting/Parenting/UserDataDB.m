@@ -99,14 +99,15 @@
 -(BOOL)updateUserCategoryIds:(NSString*)ids andUserId:(int)user_id
 {
     BOOL res;
-    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];    res=[db open];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
+    res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
         [db close];
         return res;
     }
     
-    res=[db executeUpdate:@"update bc_user set  category_ids= ? where user_id=?",ids, [NSNumber numberWithInt:user_id]];
+    res=[db executeUpdate:@"update bc_user set category_ids = ?  where user_id=?",ids, [NSNumber numberWithInt:user_id]];
     if (!res) {
         NSLog(@"更新失败");
         [db close];

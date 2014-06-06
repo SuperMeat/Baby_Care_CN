@@ -15,11 +15,14 @@
     NSArray *tipArray;
     NSArray *subArray;
     MBProgressHUD *hud;
+    NSString *category_ids;
 }
 
 @property (nonatomic,strong) UIScrollView   *scrollView;
 @property (nonatomic,strong) UITableView    *tTableView;
 @property (nonatomic,strong) UITableView    *sTableView;
+
+@property (nonatomic,strong) UIButton *buttonSubscribe;
 
 @property (strong, nonatomic) UIImageView *tipsNavigationImageView;
 

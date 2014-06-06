@@ -73,7 +73,6 @@
 
 #define SDBPATH ([NSString stringWithFormat:@"%@/Documents/BabySuggestion.rdb",NSHomeDirectory()])
 
-#define CATEGORYPATH ([NSString stringWithFormat:@"%@/Documents/bc_category.sqlite",NSHomeDirectory()])
 
 #define ADVISE_TYPE_DIAPER 1
 #define ADVISE_TYPE_SLEEP  2

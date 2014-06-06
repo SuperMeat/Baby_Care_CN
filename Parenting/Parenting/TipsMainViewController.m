@@ -32,25 +32,23 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self syncCategoryInfo];
+    self.navigationController.navigationBar.hidden = YES;
+    
+    if(_scrollView.contentOffset.x == 0){
+        [_buttonSubscribe setTitle:@"+" forState:UIControlStateNormal];
+    }
 }
 
--(void)syncCategoryInfo{
-    //TODO:save category data to DB
-    [[SyncController syncController]
-     syncCategoryInfo:ACCOUNTUID
-     HUD:hud
-     SyncFinished:^{
-         //调用成功
-         [self initData];
-         //TODO:未订阅任何贴士则转到贴士订阅页
-         NSDictionary *userDict = [[UserDataDB alloc] selectUser:ACCOUNTUID];
-         if ([[userDict objectForKey:@"category_ids"] isEqual:@""]) {
-             [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
-         }
-     }
-     ViewController:self
-     ];
+-(void)viewDidAppear:(BOOL)animated{
+    [self initData];
+    [_sTableView reloadData];
+    [_tTableView reloadData];
+    
+    [[SyncController syncController] syncCategoryInfo:ACCOUNTUID HUD:hud SyncFinished:^{
+        [self initData];
+        [_sTableView reloadData];
+        [_tTableView reloadData];
+    } ViewController:self];
 }
 
 -(void)initView{
@@ -71,6 +69,14 @@
     [self.tipsNavigationImageView addSubview:titleView];
     [self.view addSubview:self.tipsNavigationImageView];
     [self.tipsNavigationImageView setUserInteractionEnabled:YES];
+    
+    //加载订阅贴士按钮
+    _buttonSubscribe = [[UIButton alloc] init];
+    _buttonSubscribe.frame = CGRectMake(320-10-40,22, 40, 40);
+    _buttonSubscribe.titleLabel.font = [UIFont systemFontOfSize:20];
+    [_buttonSubscribe setTitle:@"+" forState:UIControlStateNormal];
+    [_buttonSubscribe addTarget:self action:@selector(goSubscribe:) forControlEvents:UIControlEventTouchUpInside];
+    [self.tipsNavigationImageView addSubview:_buttonSubscribe];
     
     //加载ScrollView
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width * 2, self.view.frame.size.height-64)];
@@ -93,25 +99,78 @@
 }
 
 -(void)initData{
-    //根据用户category_ids获取用户已订阅列表
-    NSArray *arr = @[@[@1,@"宝宝健康",@"宝宝健康的相关描述",@"http://t12.baidu.com/it/u=4056938852,1850657326&fm=56"],
-                     @[@2,@"夫妻生活",@"夫妻生活的相关描述",@"http://www.baidu.com/test.jpg"],
-                     @[@3,@"孕期注意",@"孕期注意的相关描述",@"http://www.baidu.com/test.jpg"],
-                     @[@4,@"环境相关",@"环境相关的相关描述",@"http://www.baidu.com/test.jpg"],
-                     @[@5,@"活动注意",@"活动注意的相关描述",@"http://www.baidu.com/test.jpg"],
-                     @[@6,@"喂食讲究",@"喂食讲究的相关描述",@"http://www.baidu.com/test.jpg"],
-                     ];
-    tipArray = [[NSArray alloc]initWithArray:arr];
-    
     //获取所有贴士类目
     subArray = [TipCategoryDB selectAllCategoryList];
+    tipArray = [[NSArray alloc]initWithObjects: nil];
     
-    [_tTableView reloadData];
-    [_sTableView reloadData];
+    //根据用户category_ids获取用户已订阅列表
+    if (category_ids == nil || [category_ids  isEqual: @""]) {
+        NSDictionary *userDict = [[UserDataDB alloc] selectUser:ACCOUNTUID];
+        category_ids = [userDict objectForKey:@"category_ids"];
+    }
+    
+    if ([category_ids isEqual:@","]) {
+        tipArray = [[NSArray alloc]initWithObjects:nil];
+    }
+    else{
+        NSArray *split = [category_ids componentsSeparatedByString:@","];
+        for(NSString *cur_category in split) {
+            if (![cur_category isEqualToString:@""]) {
+                for (NSArray * tarArr in subArray) {
+                    if ([[tarArr objectAtIndex:0] intValue] == [cur_category intValue]) {
+                        if(tipArray == nil)
+                        {
+                            tipArray=[[NSArray alloc]initWithObjects:tarArr, nil];
+                        }else
+                        {
+                            tipArray = [tipArray arrayByAddingObject:tarArr];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    tipArray = [tipArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        NSNumber *number1 = [obj1 objectAtIndex:0];
+        NSNumber *number2 = [obj2 objectAtIndex:0];
+        
+        NSComparisonResult result = [number1 compare:number2];
+        
+        return result == NSOrderedDescending; // 升序
+        return result == NSOrderedAscending;  // 降序
+    }];
+}
+
+-(void)goSubscribe:(UIButton*)button{
+    if ([button.titleLabel.text  isEqual:@"+"]) {
+        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+        [button setTitle:@"完成" forState:UIControlStateNormal];
+    }else{
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        [button setTitle:@"+" forState:UIControlStateNormal];
+    }
+    
 }
 
 -(void)subscribe:(UIButton*)button{
     
+    category_ids = [NSString stringWithFormat:@"%@%d,",category_ids,button.tag];
+    [[UserDataDB dataBase] updateUserCategoryIds:category_ids andUserId:ACCOUNTUID];
+    [self initData];
+    [_tTableView reloadData];
+    [_sTableView reloadData];
+}
+
+-(void)desubscribe:(UIButton*)button{
+    NSRange rang = [category_ids rangeOfString:[NSString stringWithFormat:@"%d,",button.tag]];
+    category_ids = [category_ids stringByReplacingCharactersInRange:rang withString:@""];
+    
+    [[UserDataDB dataBase] updateUserCategoryIds:category_ids andUserId:ACCOUNTUID];
+    [self initData];
+    [_tTableView reloadData];
+    [_sTableView reloadData];
 }
 
 #pragma tableview datasource
@@ -131,12 +190,11 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     //已订阅tableView
-    if (cell == nil && tableView == _tTableView) {
+    if (tableView == _tTableView) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
         //加载类目图标
-        NSURL *picUrl = [NSURL URLWithString:[[tipArray objectAtIndex:indexPath.row] objectAtIndex:3]];
-        UIImage *imagea = [UIImage imageWithData: [NSData dataWithContentsOfURL:picUrl]];
+        NSString *imageUrl = [NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),[[tipArray objectAtIndex:indexPath.row] objectAtIndex:3]];
+        UIImage *imagea = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageUrl]];
         UIImageView *iconImageView = [[UIImageView alloc]initWithImage:imagea];
         [iconImageView setFrame:CGRectMake(10, 10, 60, 60)];
         [cell addSubview:iconImageView];
@@ -151,10 +209,11 @@
         UILabel *describeLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, 200, 24)];
         describeLabel.font = [UIFont fontWithName:@"Arial" size:12];
         describeLabel.text = [[tipArray objectAtIndex:indexPath.row] objectAtIndex:2];
+        
         [cell addSubview:describeLabel];
     }
     //欲订阅列表
-    else if (cell == nil && tableView == _sTableView) {
+    else if (tableView == _sTableView) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         //加载类目图标
@@ -179,16 +238,17 @@
         //TODO:订阅和取消订阅类目
         //checkSubscribe(categoryID) - [[tipArray objectAtIndex:indexPath.section] objectAtIndex:0];
         UIButton *subButton = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 50 - 20 , 15 , 50, 50)];
-        subButton.tag = indexPath.row;
+        subButton.tag = [[[subArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
         if (![TipCategoryDB checkSubscribe:ACCOUNTUID categoryId:[[[subArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue]]) {
             //加载订阅按钮
             [subButton setBackgroundImage:[UIImage imageNamed:@"icon_subscribe.png"] forState:UIControlStateNormal];
+            [subButton addTarget:self action:@selector(subscribe:) forControlEvents:UIControlEventTouchUpInside];
         }
         else {
             //加载取消订阅按钮
             [subButton setBackgroundImage:[UIImage imageNamed:@"icon_desubscribe.png"] forState:UIControlStateNormal];
+            [subButton addTarget:self action:@selector(desubscribe:) forControlEvents:UIControlEventTouchUpInside];
         }
-        [subButton addTarget:self action:@selector(subscribe:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:subButton];
     }
     return cell;
@@ -199,8 +259,36 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.01f;
+    return 5.0f;
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == _tTableView) {
+        return YES;
+    }
+    return NO;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == _tTableView) {
+        return UITableViewCellEditingStyleDelete;
+    }
+    else{
+        return UITableViewCellEditingStyleNone;
+    }
+}
+
+-(NSString*)tableView:(UITableView*)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath*)indexpath{
+    return @"取消订阅";
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning
