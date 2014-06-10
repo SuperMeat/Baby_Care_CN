@@ -31,7 +31,7 @@
     long highlightChannel1;
     long CH0;
     long CH1;
-    double curlux;
+    long curlux;
     
     //uv
     long lowuv;
@@ -43,10 +43,10 @@
     long lowphone;
     long highphone;
     long phonevalue;
-    double phonethrans;
+    long phonethrans;
     long lowmaxphone;
     long highmaxphone;
-    double maxphonethrans;
+    long maxphonethrans;
     
     //pm25
     long lowpm25;

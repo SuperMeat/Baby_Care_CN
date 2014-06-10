@@ -61,7 +61,7 @@
 {
     self.blecontroller = [[BLEController alloc] init];
     self.blecontroller.bleControllerDelegate = self;
-    getDataTimeInterval = 30.0;
+    getDataTimeInterval = 10.0;
     isFistTip = YES;
     [self checkbluetooth];
 }
@@ -189,6 +189,17 @@
                 humidity    = ((humidityHigh+humidityLow) * 1.0 )/ 16383 * 100;
                 temperature = ((temperatureHigh + temperatureLow) * 1.0 )/ 16383 / 4 * 165 - 40;
                 hexStr = [NSString stringWithCString:[[NSString stringWithFormat:@"%@ 采集到的湿度:%ld %%, 温度:%ld !", date,humidity,temperature] UTF8String] encoding:NSUTF8StringEncoding];
+                
+                if (temperature > TEMP_MAX_VALUE)
+                {
+                    [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,温度过高,需开启空调或转移到凉快的室内,以确保宝宝能在适当温度下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+                }
+                
+                if (humidity > HUMI_MAX_VALUE)
+                {
+                    [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,湿度过大,需开启除湿机,以确保宝宝能在适当湿度下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+                }
+                
                 [BLEWeather setweatherfrombluetooth:temperature Humidity:humidity];
             }
         }
@@ -263,6 +274,11 @@
     }
     
     curlux = [self getlightluxwithCH0:CH0*1.0 andCH1:CH1*1.0];
+    if (curlux > LIGHT_MAX_VALUE)
+    {
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,光线强度过大,需为宝宝遮光或关闭灯光,以确保宝宝能在适当光线下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+    }
+
     [BLEWeather setlightfrombluetooth:curlux];
 }
 
@@ -397,6 +413,11 @@
     float adc_v = adcoutput/8192.0*3.32;
     
     uvvalue = [self getuv:adc_v];
+    if (uvvalue > UV_MAX_VALUE)
+    {
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,紫外线强度过大,需为宝宝采取防晒措施,以确保宝宝能在适宜的紫外强度下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+    }
+
     [BLEWeather setuvfrombluetooth:uvvalue];
 }
 
@@ -441,15 +462,15 @@
             if (5 == i)
             {
                 phonevalue     = lowphone + highphone;
-                maxphonethrans = 94+20.0*log10(((lowmaxphone + highmaxphone)/8192.0*3.32)*1.0);
+                maxphonethrans = (lowmaxphone + highmaxphone)/8192.0*3.32*1000;
             }
         }
     }
     
-    phonethrans = phonevalue*1.0*8192.0/3.32;
-    if (maxphonethrans > 90)
+    phonethrans = phonevalue/8192.0*3.32*1000;
+    if (maxphonethrans > NOICE_MAX_VALUE)
     {
-        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,林阿妈刀A音浪太强,不晃会被撞到地上 %lf",maxphonethrans] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,噪音指数过高,确定噪音来源,并且关闭或者远离,以确保宝宝能在安静环境下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
     }
     
     [BLEWeather setsoundfrombluetooth:phonethrans andmaxsound:maxphonethrans];
@@ -492,6 +513,11 @@
         }
     }
     
+    if (pm25value > PM25_MAX_VALUE)
+    {
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,空气污染指数过高,需净化空气,以确保宝宝能在空气清新的环境下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+    }
+
     [BLEWeather setpm25frombluetooth:pm25value];
 }
 

@@ -127,6 +127,14 @@
 #define ENVIR_SUGGESTION_TYPE_NOICE 3
 #define ENVIR_SUGGESTION_TYPE_UV    4
 #define ENVIR_SUGGESTION_TYPE_PM25  5
+
+#define TEMP_MAX_VALUE 31
+#define HUMI_MAX_VALUE 70
+#define LIGHT_MAX_VALUE 800
+#define NOICE_MAX_VALUE 3000
+#define UV_MAX_VALUE 7
+#define PM25_MAX_VALUE 300
+
 //去log
 #ifdef DEBUG
 #else
@@ -220,10 +228,16 @@
 //      创建 : 陈伟斌
 #pragma MARK HTTPREQUEST
 
+//#ifdef DEBUG
+////#define BASE_URL @"http://192.168.1.138:8010/api/"
+//#define BASE_URL @"http://cbaisan.w82.dns87.com/api/" 
+//#else
+//#define BASE_URL @"http://cbaisan.w82.dns87.com/api/" //接口IP
+//#endif
 #ifdef DEBUG
-#define BASE_URL @"http://192.168.1.138:8010/api/"
+#define BASE_URL @"http://114.215.109.90/api/"
 #else
-#define BASE_URL @"http://cbaisan.w82.dns87.com/api/" //接口IP
+#define BASE_URL @"http://114.215.109.90/api/" //接口IP
 #endif
 
 //网络通信提示

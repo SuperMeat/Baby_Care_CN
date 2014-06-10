@@ -419,44 +419,44 @@
         {
             tempDetail.text = [NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
             
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_TEMP andValue:[NSNumber numberWithInt:[[dict objectForKey:@"temp"] intValue]]];
-
-            if ([arr count]>0) {
-                AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_TEMP];
-                if ([a2 count]>0) {
-                   AdviseData* ad = [a2 objectAtIndex:0];
-                    tempcontent = ad.mContent;
-                    templevel   = al.mLevel;
-                    mAdTemp = ad;
-                    mAlTemp = al;
-                }
-            }
+//            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_TEMP andValue:[NSNumber numberWithInt:[[dict objectForKey:@"temp"] intValue]]];
+//
+//            if ([arr count]>0) {
+//                AdviseLevel *al = [arr objectAtIndex:0];
+//                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_TEMP];
+//                if ([a2 count]>0) {
+//                   AdviseData* ad = [a2 objectAtIndex:0];
+//                    tempcontent = ad.mContent;
+//                    templevel   = al.mLevel;
+//                    mAdTemp = ad;
+//                    mAlTemp = al;
+//                }
+//            }
             
         }
         if ([[dict objectForKey:@"humidity"] length]>0) {
             humiDetail.text = [NSString stringWithFormat:@"湿度:%@%%",[dict objectForKey:@"humidity"]];
 
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_HUMI andValue:[NSNumber numberWithInt:[[dict objectForKey:@"humidity"] intValue]]];
-            
-            if ([arr count]>0) {
-                AdviseLevel *al = [arr objectAtIndex:0];
-                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_HUMI];
-                if ([a2 count]>0) {
-                    AdviseData* ad = [a2 objectAtIndex:0];
-                    tempcontent = ad.mContent;
-                    templevel   = al.mLevel;
-                    mAdHumi = ad;
-                    mAlHumi = al;
-                }
-            }
+//            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_HUMI andValue:[NSNumber numberWithInt:[[dict objectForKey:@"humidity"] intValue]]];
+//            
+//            if ([arr count]>0) {
+//                AdviseLevel *al = [arr objectAtIndex:0];
+//                NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:ENVIR_SUGGESTION_TYPE_HUMI];
+//                if ([a2 count]>0) {
+//                    AdviseData* ad = [a2 objectAtIndex:0];
+//                    tempcontent = ad.mContent;
+//                    templevel   = al.mLevel;
+//                    mAdHumi = ad;
+//                    mAlHumi = al;
+//                }
+//            }
         }
         
         if (CUSTOMER_COUNTRY == 1) {
             if ([[dict objectForKey:@"PM25"] length]>0) {
                 int pmvalue = [[dict objectForKey:@"PM25"] intValue];
                 if (pmvalue > 0) {
-                    airDetail.text = [NSString stringWithFormat:@"空气指数: %@",[dict objectForKey:@"PM25"]];
+                    airDetail.text = [NSString stringWithFormat:@"空气指数: %d",pmvalue];
                     Environmentitem *itemPM25 = [dataarray objectAtIndex:2];
                     [dataarray replaceObjectAtIndex:2 withObject:itemPM25];
                 }

@@ -8,7 +8,7 @@
 
 #import "ACViewController.h"
 
-@interface EnvironmentViewController : ACViewController
+@interface EnvironmentViewController : ACViewController<BLEWeatherViewDelegate>
 {
     UIButton * chooseIndoor;
     UIButton * chooseOutdoor;

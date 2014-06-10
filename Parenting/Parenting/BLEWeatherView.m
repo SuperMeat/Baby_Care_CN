@@ -32,7 +32,7 @@
     self=[super init];
     if (self){
         self.frame = CGRectMake(0, 0, 320, 200+YADD);
-        getDataTimeInterval = 1.0;
+        getDataTimeInterval = 60.0;
         //        self.backgroundColor=[UIColor redColor];
     }
     return self;
@@ -110,42 +110,61 @@
     
         if([[dict objectForKey:@"temp"] length]>0)
         {
-            temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
+            int tempvalue = [[dict objectForKey:@"temp"]intValue];
+            temp.detail = [self getTempDespction:tempvalue];
+            temp.value = tempvalue;
+            //temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
             if ([[dict objectForKey:@"temp"]intValue] == 0) {
                 temp.level = 0;
             }
         }
         
         if ([[dict objectForKey:@"humidity"] length]>0) {
-            humi.detail=[NSString stringWithFormat:@"%@%%",[dict objectForKey:@"humidity"]];
+            int humivalue = [[dict objectForKey:@"humidity"]intValue];
+            humi.detail = [self getHumiDespction:humivalue];
+            humi.value  = humivalue;
+            //humi.detail=[NSString stringWithFormat:@"%@%%",[dict objectForKey:@"humidity"]];
             if ([[dict objectForKey:@"humidity"]intValue] == 0) {
                 humi.level = 0;
             }
         }
         
-        if ([[dict objectForKey:@"light"] length]>0) {
-            light.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"light"]];
+        if ([[dict objectForKey:@"light"] length]>0)
+        {
+            int lightvalue = [[dict objectForKey:@"light"]intValue];
+            light.detail=[self getLightDespction:lightvalue];
+            light.value = lightvalue;
+            //light.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"light"]];
             if ([[dict objectForKey:@"light"]doubleValue] == 0) {
                 light.level = 0;
             }
         }
         
         if ([[dict objectForKey:@"maxsound"] length]>0) {
-            sound.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"maxsound"]];
+            int soundvalue = [[dict objectForKey:@"maxsound"]intValue];
+            sound.detail = [self getNoiceDespction:soundvalue];
+            sound.value  = soundvalue;
+            //sound.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"maxsound"]];
             if ([[dict objectForKey:@"maxsound"]doubleValue] == 0) {
                 sound.level = 0;
             }
         }
         
         if ([[dict objectForKey:@"uv"] length]>0) {
-            uv.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]];
+            int uvvalue = [[dict objectForKey:@"uv"] intValue];
+            uv.detail = [self getUVDespction:uvvalue];
+            uv.value  = uvvalue;
+            //uv.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]];
             if ([[dict objectForKey:@"uv"]intValue] == 0) {
                 uv.level = 0;
             }
         }
     
         if ([[dict objectForKey:@"pm"] length]>0) {
-            pm.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"pm"]];
+            int pmvalue = [[dict objectForKey:@"pm"] intValue];
+            pm.detail=[self getPM25Despction:pmvalue];
+            pm.value = pmvalue;
+            //pm.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"pm"]];
             if ([[dict objectForKey:@"pm"]intValue] == 0) {
                 pm.level = 0;
             }
@@ -196,8 +215,11 @@
         
         if([[dict objectForKey:@"temp"] length]>0)
         {
-            temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_TEMP andValue:[NSNumber numberWithInt:[[dict objectForKey:@"temp"] intValue]]];
+            int tempvalue = [[dict objectForKey:@"temp"]intValue];
+            temp.detail = [self getTempDespction:tempvalue];
+            temp.value  = tempvalue;
+            //temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_TEMP andValue:[NSNumber numberWithInt:tempvalue]];
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
                 NSArray *a2 = [EnvironmentAdviceDB selectSuggestionBySid:al.mAdviseId andCondition:SUGGESTION_DB_TYPE_TEMP];
@@ -212,8 +234,11 @@
         }
         
         if ([[dict objectForKey:@"humidity"] length]>0) {
-            humi.detail=[NSString stringWithFormat:@"%@ %%",[dict objectForKey:@"humidity"]];
-             NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_HUMI andValue:[NSNumber numberWithInt:[[dict objectForKey:@"humidity"] intValue]]];
+            int humivalue = [[dict objectForKey:@"humidity"]intValue];
+            humi.detail = [self getHumiDespction:humivalue];
+            humi.value = humivalue;
+            //humi.detail=[NSString stringWithFormat:@"%@ %%",[dict objectForKey:@"humidity"]];
+             NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_HUMI andValue:[NSNumber numberWithInt:humivalue]];
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
@@ -228,7 +253,10 @@
         }
         
         if ([[dict objectForKey:@"light"] length]>0) {
-            light.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"light"]];
+            int lightvalue = [[dict objectForKey:@"light"]intValue];
+            light.detail=[self getLightDespction:lightvalue];
+            //light.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"light"]];
+            light.value = lightvalue;
             NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_LIGHT andValue:[NSNumber numberWithInt:[[dict objectForKey:@"light"] intValue]]];
             
             if ([arr count]>0) {
@@ -244,7 +272,10 @@
         }
     
         if ([[dict objectForKey:@"maxsound"] length]>0) {
-            sound.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"maxsound"]];
+            int soundvalue = [[dict objectForKey:@"maxsound"]intValue];
+            sound.detail = [self getNoiceDespction:soundvalue];
+            //sound.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"maxsound"]];
+            sound.value = soundvalue;
             NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_NOICE andValue:[NSNumber numberWithInt:[[dict objectForKey:@"maxsound"] intValue]]];
             
             if ([arr count]>0) {
@@ -260,7 +291,10 @@
         }
     
         if ([[dict objectForKey:@"uv"] length]>0) {
-            uv.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]];
+            int uvvalue = [[dict objectForKey:@"uv"] intValue];
+            uv.detail = [self getUVDespction:uvvalue];
+            //uv.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]];
+            uv.value = uvvalue;
             NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_UV andValue:[NSNumber numberWithInt:[[dict objectForKey:@"uv"] intValue]]];
             
             if ([arr count]>0) {
@@ -277,7 +311,9 @@
     
         if ([[dict objectForKey:@"pm"] length]>0)
         {
-            pm.detail=[NSString stringWithFormat:@"%@",[dict    objectForKey:@"pm"]];
+            int pmvalue = [[dict objectForKey:@"pm"] intValue];
+            pm.detail=[self getPM25Despction:pmvalue];
+            pm.value = pmvalue;
             NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_PM25 andValue:[NSNumber numberWithInt:[[dict objectForKey:@"pm"] intValue]]];
             
             if ([arr count]>0) {
@@ -327,7 +363,9 @@
             
             UITableView *tab=table;
             [tab reloadData];
+            [self.bleweatherDelegate UpdateWeatherTemp:mAdTemp andHumiData:mAdHumi andUVData:mAdUV andPM25Data:mAdPM25 andLightData:mAdLight andNoiceData:mAdNoice];
         });
+    
    // }];
     
 }
@@ -403,9 +441,9 @@
     
     UIImageView *levelImage = [[UIImageView alloc] initWithFrame:CGRectMake(image.frame.size.width-15-46/2.0*PNGSCALE, 9, 46/2.0*PNGSCALE, 41/2.0*PNGSCALE)];
 
-    UILabel *weatherDetail = [[UILabel alloc]initWithFrame:CGRectMake(image.frame.size.width/2.0, 0, 50, image.frame.size.height)];
+    UILabel *weatherDetail = [[UILabel alloc]initWithFrame:CGRectMake(image.frame.size.width/2.0, 0, 100, image.frame.size.height)];
     weatherDetail.font = [UIFont fontWithName:@"Arial" size:13];
-    weatherDetail.textAlignment = NSTextAlignmentCenter;
+    weatherDetail.textAlignment = NSTextAlignmentLeft;
     weatherDetail.textColor = [ACFunction colorWithHexString:@"#96999b"];
     [image addSubview:title];
     [image addSubview:levelImage];
@@ -437,9 +475,8 @@
         {
             Condition =ENVIR_SUGGESTION_TYPE_PM25;
         }
-        
             
-        NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:Condition andValue:[NSNumber numberWithInt:[item.detail intValue]]];
+        NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:Condition andValue:[NSNumber numberWithInt:item.value]];
         int level = 0;
         if ([arr count]>0) {
             AdviseLevel *al = [arr objectAtIndex:0];
@@ -552,8 +589,255 @@
             default:
                 break;
         }
+        
         DXAlertView *alert = [[DXAlertView alloc] initWithTitle:title contentText:mAdHumi.mContent leftButtonTitle:nil rightButtonTitle:@"OK"];
         [alert show];
+    }
+    
+    if (indexPath.section == 2 && mAlLight.mAdviseId > 0) {
+        NSString *title;
+        switch (mAlLight.mLevel) {
+            case ENV_ADVISE_LEVEL_EXCELLENT:
+                title = @"Excellent";
+                break;
+            case ENV_ADVISE_LEVEL_GOOD:
+                title = @"Good";
+                break;
+            case ENV_ADVISE_LEVEL_BAD:
+                title = @"Bad";
+                break;
+            default:
+                break;
+        }
+        
+        DXAlertView *alert = [[DXAlertView alloc] initWithTitle:title contentText:mAdLight.mContent leftButtonTitle:nil rightButtonTitle:@"OK"];
+        [alert show];
+    }
+
+    if (indexPath.section == 3 && mAlNoice.mAdviseId > 0) {
+        NSString *title;
+        switch (mAlNoice.mLevel) {
+            case ENV_ADVISE_LEVEL_EXCELLENT:
+                title = @"Excellent";
+                break;
+            case ENV_ADVISE_LEVEL_GOOD:
+                title = @"Good";
+                break;
+            case ENV_ADVISE_LEVEL_BAD:
+                title = @"Bad";
+                break;
+            default:
+                break;
+        }
+        
+        DXAlertView *alert = [[DXAlertView alloc] initWithTitle:title contentText:mAdNoice.mContent leftButtonTitle:nil rightButtonTitle:@"OK"];
+        [alert show];
+    }
+
+    if (indexPath.section == 4 && mAlUV.mAdviseId > 0) {
+        NSString *title;
+        switch (mAlUV.mLevel) {
+            case ENV_ADVISE_LEVEL_EXCELLENT:
+                title = @"Excellent";
+                break;
+            case ENV_ADVISE_LEVEL_GOOD:
+                title = @"Good";
+                break;
+            case ENV_ADVISE_LEVEL_BAD:
+                title = @"Bad";
+                break;
+            default:
+                break;
+        }
+        
+        DXAlertView *alert = [[DXAlertView alloc] initWithTitle:title contentText:mAdUV.mContent leftButtonTitle:nil rightButtonTitle:@"OK"];
+        [alert show];
+    }
+
+    if (indexPath.section == 5 && mAlPM25.mAdviseId > 0) {
+        NSString *title;
+        switch (mAlPM25.mLevel) {
+            case ENV_ADVISE_LEVEL_EXCELLENT:
+                title = @"Excellent";
+                break;
+            case ENV_ADVISE_LEVEL_GOOD:
+                title = @"Good";
+                break;
+            case ENV_ADVISE_LEVEL_BAD:
+                title = @"Bad";
+                break;
+            default:
+                break;
+        }
+        
+        DXAlertView *alert = [[DXAlertView alloc] initWithTitle:title contentText:mAdPM25.mContent leftButtonTitle:nil rightButtonTitle:@"OK"];
+        [alert show];
+    }
+
+}
+
+- (NSString*)getPM25Despction:(int)value
+{
+    NSString *decp = @"";
+    if (value > 300) {
+        decp = @"严重污染";
+    }
+    else if (value > 200)
+    {
+        decp = @"重度污染";
+    }
+    else if (value > 150)
+    {
+        decp = @"中度污染";
+    }
+    else if (value > 100)
+    {
+        decp = @"轻度污染";
+    }
+    else if (value > 50)
+    {
+        decp = @"良";
+    }
+    else
+    {
+        decp = @"优";
+    }
+    
+    return decp;
+    
+}
+
+-(NSString*)getUVDespction:(int)value
+{
+    if (value >= 10) {
+        return [NSString stringWithFormat:@"极强 %d",value];
+    }
+    else if (value >= 7)
+    {
+        return [NSString stringWithFormat:@"很强 %d",value];
+    }
+    else if (value >= 5)
+    {
+        return [NSString stringWithFormat:@"强 %d",value];
+
+    }
+    else if (value >= 3)
+    {
+        return [NSString stringWithFormat:@"中等 %d",value];
+
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"弱 %d",value];
+    }
+    
+}
+
+-(NSString*)getNoiceDespction:(int)value
+{
+    if (value >= 5000) {
+        return [NSString stringWithFormat:@"E 极差"];
+    }
+    else if (value >= 3000)
+    {
+        return [NSString stringWithFormat:@"D 差"];
+    }
+    else if (value >= 2000)
+    {
+        return [NSString stringWithFormat:@"C 合格"];
+    }
+    else if (value >= 1000)
+    {
+        return [NSString stringWithFormat:@"B- 中"];
+    }
+    else if (value >= 500)
+    {
+        return [NSString stringWithFormat:@"B 良"];
+    }
+    else if (value >= 300)
+    {
+        return [NSString stringWithFormat:@"A- 次优"];
+    }
+    else  if (value >= 100)
+    {
+        return [NSString stringWithFormat:@"A 优"];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"A+ 特优"];
+    }
+}
+
+-(NSString*)getLightDespction:(int)value
+{
+    if (value>=1000) {
+        return [NSString stringWithFormat:@"过亮"];
+    }
+    else if (value >= 800)
+    {
+        return [NSString stringWithFormat:@"偏亮"];
+    }
+    else if (value >= 500)
+    {
+        return [NSString stringWithFormat:@"亮"];
+    }
+    else if (value >= 300)
+    {
+        return [NSString stringWithFormat:@"适中"];
+    }
+    else if (value >= 80)
+    {
+        return [NSString stringWithFormat:@"极佳"];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"宜睡不宜动"];
+    }
+}
+
+-(NSString*)getHumiDespction:(int)value
+{
+    if (value>=70) {
+        return [NSString stringWithFormat:@"差 %d%%",value];
+    }
+    else if (value >= 61)
+    {
+        return [NSString stringWithFormat:@"良 %d%%",value];
+    }
+    else if (value >= 50)
+    {
+        return [NSString stringWithFormat:@"优 %d%%",value];
+    }
+    else if (value >= 40)
+    {
+        return [NSString stringWithFormat:@"良 %d%%",value];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"差 %d%%",value];
+    }
+}
+
+-(NSString*)getTempDespction:(int)value
+{
+    if (value>=31) {
+        return [NSString stringWithFormat:@"差 %d℃",value];
+    }
+    else if (value >= 26)
+    {
+        return [NSString stringWithFormat:@"良 %d℃",value];
+    }
+    else if (value >= 24)
+    {
+        return [NSString stringWithFormat:@"优 %d℃",value];
+    }
+    else if (value >= 20)
+    {
+        return [NSString stringWithFormat:@"良 %d℃",value];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"差 %d℃",value];
     }
 }
 

@@ -578,7 +578,8 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"timerOn"];
             [[NSUserDefaults standardUserDefaults] setObject:@"feed" forKey:@"ctl"];
-            timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerGo) userInfo:nil repeats:YES];    }
+            timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerGo) userInfo:nil repeats:YES];
+        }
         else{
             
             [self makeSave];
@@ -673,7 +674,6 @@
     startButtonleft.enabled = NO;
     [self.view bringSubviewToFront:adviseImageView];
     [self.view addSubview:saveView];
-    
 }
 
 -(void)stop:(NSNotification*)noti

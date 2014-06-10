@@ -68,7 +68,7 @@
             break;
     }
     
-    NSString *sqlstr = [NSString stringWithFormat:@"select * from 			bc_suggestion_by_enviroment where %@_min <= ? and %@_max >= ?", conditionName, conditionName];
+    NSString *sqlstr = [NSString stringWithFormat:@"select * from bc_suggestion_by_enviroment where %@_min <= ? and %@_max >= ?", conditionName, conditionName];
     
     FMResultSet *resultset=[db executeQuery:sqlstr,value,value];
     if ([resultset next]) {

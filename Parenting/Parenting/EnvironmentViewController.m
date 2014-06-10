@@ -92,8 +92,8 @@
     [chooseOutdoor setBackgroundImage:[UIImage imageNamed:@"label_outdoor"] forState:UIControlStateNormal];
     [chooseOutdoor setBackgroundImage:[UIImage imageNamed:@"label_outdoor_focus"] forState:UIControlStateDisabled];
     
-    chooseOutdoor.tag=102;
-    chooseOutdoor.highlighted=NO;
+    chooseOutdoor.tag = 102;
+    chooseOutdoor.highlighted = NO;
     chooseOutdoor.enabled = NO;
     [chooseOutdoor addTarget:self action:@selector(choose:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -113,6 +113,7 @@
     NSLog(@"weather %@",self.weather);
     
     self.bleweather = [BLEWeatherView weatherview];
+    self.bleweather.bleweatherDelegate = self;
     self.bleweather.chooseType = QCM_TYPE_FEED;
     [self.bleweather setBackgroundColor:[UIColor whiteColor]];
     [self.bleweather makeview];
@@ -152,14 +153,13 @@
     if (![light.mContent isEqualToString:@""]) {
         NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:light.mContent,@"content", nil];
         
-        [indoorArray addObject:tempdic];
+       [indoorArray addObject:tempdic];
     }
 
     
     AdviseData *noice = [[BLEWeatherView weatherview]getNoiceAdviseData];
     if (![noice.mContent isEqualToString:@""]) {
         NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:noice.mContent,@"content", nil];
-        
         [indoorArray addObject:tempdic];
     }
 
@@ -215,4 +215,57 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma -mark bleweatherdelegate
+-(void)UpdateWeatherTemp:(AdviseData*)tempdata andHumiData:(AdviseData*)humidata andUVData:(AdviseData*)uvdata andPM25Data:(AdviseData*)pmdata andLightData:(AdviseData *)lightdata andNoiceData:(AdviseData *)noicedata
+{
+    [adindoor removeFromSuperview];
+    NSMutableArray *indoorArray = [[NSMutableArray alloc]initWithCapacity:0];
+    if (![tempdata.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:tempdata.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+    
+    if (![humidata.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:humidata.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+    
+    if (![lightdata.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:lightdata.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+    
+    if (![noicedata.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:noicedata.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+    
+    if (![uvdata.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:uvdata.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+    
+    if (![pmdata.mContent isEqualToString:@""]) {
+        NSDictionary *tempdic=[[NSDictionary alloc]initWithObjectsAndKeys:pmdata.mContent,@"content", nil];
+        
+        [indoorArray addObject:tempdic];
+    }
+    
+
+
+    adindoor=[[AdviseScrollview alloc]initWithArray:indoorArray];
+    [adviseImageView addSubview:adindoor];
+    if (adoutdoor.hidden) {
+        adindoor.hidden = NO;
+    }
+    else
+    {
+        adindoor.hidden = YES;
+    }
+}
 @end

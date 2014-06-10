@@ -79,14 +79,14 @@
     }
 }
 
-+(void)setlightfrombluetooth:(double)light
++(void)setlightfrombluetooth:(long)light
 {
     NSDictionary *envir = [[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"];
-    NSLog(@"setlightfrombluetooth :%lf", light);
+    NSLog(@"setlightfrombluetooth :%ld", light);
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"])
     {
         NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
-        [envir setValue:[NSString stringWithFormat:@"%lf",light] forKey:@"light"];
+        [envir setValue:[NSString stringWithFormat:@"%ld",light] forKey:@"light"];
         [[NSUserDefaults standardUserDefaults] setObject:envir forKey:@"weatherbluetooth"];
     }
     else
@@ -94,25 +94,25 @@
         NSLog(@"%@", envir);
         NSMutableDictionary *envir2 = [[NSMutableDictionary alloc] initWithDictionary:envir];
 
-        [envir2 setValue:[NSString stringWithFormat:@"%lf",light] forKey:@"light"];
+        [envir2 setValue:[NSString stringWithFormat:@"%ld",light] forKey:@"light"];
         [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"weatherbluetooth"];
         [[NSUserDefaults standardUserDefaults] setObject:envir2 forKey:@"weatherbluetooth"];
 
     }
 }
 
-+(void)setsoundfrombluetooth:(double)sound andmaxsound:(double)maxsound
++(void)setsoundfrombluetooth:(long)sound andmaxsound:(long)maxsound
 {
     NSDictionary *envir = [[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"];
 
-    NSLog(@"setsoundfrombluetooth sound:%lf, maxsound:%lf", sound, maxsound);
+    NSLog(@"setsoundfrombluetooth sound:%ld, maxsound:%ld", sound, maxsound);
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"weatherbluetooth"])
     {
         NSMutableDictionary *envir=[[NSMutableDictionary alloc]init];
-        [envir setValue:[NSString stringWithFormat:@"%lf",sound] forKey:@"sound"];
+        [envir setValue:[NSString stringWithFormat:@"%ld",sound] forKey:@"sound"];
         
-        [envir setValue:[NSString stringWithFormat:@"%lf",maxsound] forKey:@"maxsound"];
+        [envir setValue:[NSString stringWithFormat:@"%ld",maxsound] forKey:@"maxsound"];
         
         [[NSUserDefaults standardUserDefaults] setObject:envir forKey:@"weatherbluetooth"];
     }
@@ -120,8 +120,8 @@
     {
         NSMutableDictionary *envir2 = [[NSMutableDictionary alloc] initWithDictionary:envir];
         
-        [envir2 setValue:[NSString stringWithFormat:@"%lf",sound] forKey:@"sound"];
-        [envir2 setValue:[NSString stringWithFormat:@"%lf",maxsound] forKey:@"maxsound"];
+        [envir2 setValue:[NSString stringWithFormat:@"%ld",sound] forKey:@"sound"];
+        [envir2 setValue:[NSString stringWithFormat:@"%ld",maxsound] forKey:@"maxsound"];
         [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"weatherbluetooth"];
         [[NSUserDefaults standardUserDefaults] setObject:envir2 forKey:@"weatherbluetooth"];
        
