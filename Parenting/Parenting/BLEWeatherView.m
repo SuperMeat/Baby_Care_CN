@@ -32,7 +32,7 @@
     self=[super init];
     if (self){
         self.frame = CGRectMake(0, 0, 320, 200+YADD);
-        getDataTimeInterval = 60.0;
+        getDataTimeInterval = 10.0;
         //        self.backgroundColor=[UIColor redColor];
     }
     return self;
@@ -81,6 +81,7 @@
     [dataarray addObject:sound];
     [dataarray addObject:uv];
     [dataarray addObject:pm];
+    
     
     table = [[UITableView alloc]initWithFrame:CGRectMake(self.bounds.origin.x+(320-277*PNGSCALE)/2.0, self.bounds.origin.y+5, self.bounds.size.width*PNGSCALE-43*PNGSCALE, self.bounds.size.height*PNGSCALE+19) style:UITableViewStyleGrouped];
     table.separatorStyle  = UITableViewCellSeparatorStyleNone;
@@ -332,31 +333,37 @@
         Environmentitem *itemTemp = [dataarray objectAtIndex:0];
         itemTemp.detail = temp.detail;
         itemTemp.level  = temp.level;
+        itemTemp.value  = temp.value;
         [dataarray replaceObjectAtIndex:0 withObject:itemTemp];
         
         Environmentitem *itemHumi = [dataarray objectAtIndex:1];
         itemHumi.detail = humi.detail;
         itemHumi.level  = humi.level;
+        itemHumi.level = humi.value;
         [dataarray replaceObjectAtIndex:1 withObject:itemHumi];
         
         Environmentitem *itemLight = [dataarray objectAtIndex:2];
         itemLight.detail = light.detail;
         itemLight.level  = light.level;
+        itemLight.value  = light.value;
         [dataarray replaceObjectAtIndex:2 withObject:itemLight];
         
         Environmentitem *itemSound = [dataarray objectAtIndex:3];
         itemSound.detail = sound.detail;
         itemSound.level  = sound.level;
+        itemSound.value  = sound.value;
         [dataarray replaceObjectAtIndex:3 withObject:itemSound];
         
         Environmentitem *itemUV = [dataarray objectAtIndex:4];
         itemUV.detail = uv.detail;
-        itemUV.level = uv.level;
+        itemUV.level  = uv.level;
+        itemUV.value  = uv.value;
         [dataarray replaceObjectAtIndex:4 withObject:itemUV];
     
         Environmentitem *itemPM = [dataarray objectAtIndex:5];
         itemPM.detail = pm.detail;
-        itemPM.level = pm.level;
+        itemPM.level  = pm.level;
+        itemPM.value  = pm.value;
         [dataarray replaceObjectAtIndex:5 withObject:itemPM];
     
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -430,7 +437,8 @@
     Cell.imageView.image=item.headimage;
     
     UIImageView *image=(UIImageView*)[Cell.contentView viewWithTag:104];
-    for(UIView * view in image.subviews){
+    for(UIView * view in image.subviews)
+    {
         [view removeFromSuperview];
     }
     
@@ -784,6 +792,10 @@
     else if (value >= 300)
     {
         return [NSString stringWithFormat:@"适中"];
+    }
+    else if (value >= 200)
+    {
+        return [NSString stringWithFormat:@"佳"];
     }
     else if (value >= 80)
     {

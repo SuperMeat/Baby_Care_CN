@@ -2073,6 +2073,19 @@
 			name = LocalNofication;
 			sourceTree = "<group>";
 		};
+		481F4B5D19482EE000FF414A /* BLEWeather */ = {
+			isa = PBXGroup;
+			children = (
+				48F6ABBB187D2B6E0032045E /* BLEWeather.h */,
+				48F6ABBC187D2B6E0032045E /* BLEWeather.m */,
+				48F6ABB8187D20FF0032045E /* BLEWeatherView.h */,
+				48F6ABB9187D20FF0032045E /* BLEWeatherView.m */,
+				48F6ABBE1883B9BE0032045E /* BLEWeatherController.h */,
+				48F6ABBF1883B9BE0032045E /* BLEWeatherController.m */,
+			);
+			name = BLEWeather;
+			sourceTree = "<group>";
+		};
 		482791B41884DE1D003E9724 /* icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -2233,17 +2246,11 @@
 				CEDBEAB31755DD660006828A /* Weather.m */,
 				CE0D0EAB175735B2005A3200 /* WeatherView.h */,
 				CE0D0EAC175735B3005A3200 /* WeatherView.m */,
-				48F6ABBB187D2B6E0032045E /* BLEWeather.h */,
-				48F6ABBC187D2B6E0032045E /* BLEWeather.m */,
-				48F6ABB8187D20FF0032045E /* BLEWeatherView.h */,
-				48F6ABB9187D20FF0032045E /* BLEWeatherView.m */,
 				CE0D0EC917574AFE005A3200 /* Environmentitem.h */,
 				CE0D0ECA17574AFE005A3200 /* Environmentitem.m */,
 				48357E2718473EC400BCF799 /* WeatherAdviseViewController.h */,
 				48357E2818473EC400BCF799 /* WeatherAdviseViewController.m */,
 				48357E2918473EC400BCF799 /* WeatherAdviseViewController.xib */,
-				48F6ABBE1883B9BE0032045E /* BLEWeatherController.h */,
-				48F6ABBF1883B9BE0032045E /* BLEWeatherController.m */,
 			);
 			name = Weather;
 			sourceTree = "<group>";
@@ -3030,6 +3037,7 @@
 				BE75CCFB1872BEAC001EF1C1 /* MD5 */,
 				BE7C69311867D7D100C4B675 /* ASIHTTPController */,
 				48013D33185ADF7F00F483A6 /* BLEController */,
+				481F4B5D19482EE000FF414A /* BLEWeather */,
 				4855BCF71830B0AD00F02A3E /* PublicFunction */,
 				4855BCF31830AFEB00F02A3E /* Weather */,
 				CE0C33C8176189CE00B1B683 /* CorePlot */,

@@ -61,7 +61,7 @@
 {
     self.blecontroller = [[BLEController alloc] init];
     self.blecontroller.bleControllerDelegate = self;
-    getDataTimeInterval = 10.0;
+    getDataTimeInterval = 30.0;
     isFistTip = YES;
     [self checkbluetooth];
 }
@@ -146,8 +146,6 @@
 
 -(void)RecvHumiAndTempDada:(NSData*)data
 {
-    NSString *hexStr=@"";
-    
     Byte *hexData = (Byte *)[data bytes];
     errorCode = 0;
     for(int i = 0; i<=[data length];i++)
@@ -183,12 +181,8 @@
             
             if (i == 5)
             {
-                NSDateFormatter *dateFormator = [[NSDateFormatter alloc] init];
-                dateFormator.dateFormat = @"yyyy-MM-dd  HH:mm:ss";
-                NSString *date = [dateFormator stringFromDate:[NSDate date]];
                 humidity    = ((humidityHigh+humidityLow) * 1.0 )/ 16383 * 100;
                 temperature = ((temperatureHigh + temperatureLow) * 1.0 )/ 16383 / 4 * 165 - 40;
-                hexStr = [NSString stringWithCString:[[NSString stringWithFormat:@"%@ 采集到的湿度:%ld %%, 温度:%ld !", date,humidity,temperature] UTF8String] encoding:NSUTF8StringEncoding];
                 
                 if (temperature > TEMP_MAX_VALUE)
                 {
@@ -206,30 +200,21 @@
     }
 }
 
--(double)getlightluxwithCH0:(double)ch0 andCH1:(double)ch1
+#define ALSIT 175
+#define AGAIN 1
+#define GA    0.49f
+#define B     1.862f
+#define C     0.746f
+#define D     1.291f
+#define DF    52 //DF 52 for APDS-9930
+-(int)getlightluxwithCH0:(int)ch0 andCH1:(int)ch1
 {
-    double lux = 0.0f;
-    int  rate  = ch1/ch0*100;
-    if (rate < 52) {
-        lux = (0.0315*ch0)-(0.0593*ch0*pow(ch1/ch0, 1.4));
-    }
-    else if (rate < 65)
-    {
-        lux = (0.0229*ch0) - (0.0291*ch1);
-    }
-    else if (rate < 80)
-    {
-        lux = (0.0157*ch0) - (0.0180*ch1);
-    }
-    else if (rate < 130)
-    {
-        lux = (0.00338*ch0) - (0.00260*ch1);
-    }
-    else
-    {
-        lux = 0;
-    }
-    return lux;
+    double    IAC1 = ch0-B*ch1;
+    double    IAC2 = C * ch0 - D * ch1;
+    double    IAC =  MAX(MAX(IAC1, IAC2), 0);
+    double    LPC = GA * DF / ((ALSIT * AGAIN)*1.0);
+    int       Lux = IAC * LPC;
+    return    Lux;
 }
 
 -(void)RecvLightData:(NSData*)data
@@ -273,7 +258,7 @@
         }
     }
     
-    curlux = [self getlightluxwithCH0:CH0*1.0 andCH1:CH1*1.0];
+    curlux = [self getlightluxwithCH0:CH0 andCH1:CH1];
     if (curlux > LIGHT_MAX_VALUE)
     {
         [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,光线强度过大,需为宝宝遮光或关闭灯光,以确保宝宝能在适当光线下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];

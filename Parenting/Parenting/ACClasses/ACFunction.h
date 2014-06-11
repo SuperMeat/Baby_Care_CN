@@ -30,4 +30,7 @@
                    AlarmKey:(NSString *) alarmKey;
 
 + (UIColor *) colorWithHexString:(NSString *) color;
+
++(void)writeFile:(NSString *)file;
+
 @end
