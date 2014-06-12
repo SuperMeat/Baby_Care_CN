@@ -61,7 +61,7 @@
 {
     self.blecontroller = [[BLEController alloc] init];
     self.blecontroller.bleControllerDelegate = self;
-    getDataTimeInterval = 1.0;
+    getDataTimeInterval = 30.0;
     isFistTip = YES;
     [self checkbluetooth];
 }
@@ -146,8 +146,6 @@
 
 -(void)RecvHumiAndTempDada:(NSData*)data
 {
-    NSString *hexStr=@"";
-    
     Byte *hexData = (Byte *)[data bytes];
     errorCode = 0;
     for(int i = 0; i<=[data length];i++)
@@ -183,42 +181,40 @@
             
             if (i == 5)
             {
-                NSDateFormatter *dateFormator = [[NSDateFormatter alloc] init];
-                dateFormator.dateFormat = @"yyyy-MM-dd  HH:mm:ss";
-                NSString *date = [dateFormator stringFromDate:[NSDate date]];
                 humidity    = ((humidityHigh+humidityLow) * 1.0 )/ 16383 * 100;
                 temperature = ((temperatureHigh + temperatureLow) * 1.0 )/ 16383 / 4 * 165 - 40;
-                hexStr = [NSString stringWithCString:[[NSString stringWithFormat:@"%@ 采集到的湿度:%ld %%, 温度:%ld !", date,humidity,temperature] UTF8String] encoding:NSUTF8StringEncoding];
+                
+                if (temperature > TEMP_MAX_VALUE)
+                {
+                    [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,温度过高,需开启空调或转移到凉快的室内,以确保宝宝能在适当温度下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+                }
+                
+                if (humidity > HUMI_MAX_VALUE)
+                {
+                    [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,湿度过大,需开启除湿机,以确保宝宝能在适当湿度下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+                }
+                
                 [BLEWeather setweatherfrombluetooth:temperature Humidity:humidity];
             }
         }
     }
 }
 
--(double)getlightluxwithCH0:(double)ch0 andCH1:(double)ch1
+#define ALSIT 175
+#define AGAIN 1
+#define GA    0.49f
+#define B     1.862f
+#define C     0.746f
+#define D     1.291f
+#define DF    52 //DF 52 for APDS-9930
+-(int)getlightluxwithCH0:(int)ch0 andCH1:(int)ch1
 {
-    double lux = 0.0f;
-    int  rate  = ch1/ch0*100;
-    if (rate < 52) {
-        lux = (0.0315*ch0)-(0.0593*ch0*pow(ch1/ch0, 1.4));
-    }
-    else if (rate < 65)
-    {
-        lux = (0.0229*ch0) - (0.0291*ch1);
-    }
-    else if (rate < 80)
-    {
-        lux = (0.0157*ch0) - (0.0180*ch1);
-    }
-    else if (rate < 130)
-    {
-        lux = (0.00338*ch0) - (0.00260*ch1);
-    }
-    else
-    {
-        lux = 0;
-    }
-    return lux;
+    double    IAC1 = ch0-B*ch1;
+    double    IAC2 = C * ch0 - D * ch1;
+    double    IAC =  MAX(MAX(IAC1, IAC2), 0);
+    double    LPC = GA * DF / ((ALSIT * AGAIN)*1.0);
+    int       Lux = IAC * LPC;
+    return    Lux;
 }
 
 -(void)RecvLightData:(NSData*)data
@@ -262,7 +258,12 @@
         }
     }
     
-    curlux = [self getlightluxwithCH0:CH0*1.0 andCH1:CH1*1.0];
+    curlux = [self getlightluxwithCH0:CH0 andCH1:CH1];
+    if (curlux > LIGHT_MAX_VALUE)
+    {
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,光线强度过大,需为宝宝遮光或关闭灯光,以确保宝宝能在适当光线下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+    }
+
     [BLEWeather setlightfrombluetooth:curlux];
 }
 
@@ -397,6 +398,11 @@
     float adc_v = adcoutput/8192.0*3.32;
     
     uvvalue = [self getuv:adc_v];
+    if (uvvalue > UV_MAX_VALUE)
+    {
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,紫外线强度过大,需为宝宝采取防晒措施,以确保宝宝能在适宜的紫外强度下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+    }
+
     [BLEWeather setuvfrombluetooth:uvvalue];
 }
 
@@ -438,21 +444,66 @@
                 highmaxphone = [BLEController hexStringHighToInt:newHexStr];
             }
             
-            if (3 == i)
+            if (5 == i)
             {
                 phonevalue     = lowphone + highphone;
-                maxphonethrans = 94+20.0*log10(((lowmaxphone + highmaxphone)/8192.0*3.32)*1.0);
+                maxphonethrans = (lowmaxphone + highmaxphone)/8192.0*3.32*1000;
             }
         }
     }
     
-    phonethrans = phonevalue*1.0*8192.0/3.32;
-    if (maxphonethrans > 90)
+    phonethrans = phonevalue/8192.0*3.32*1000;
+    if (maxphonethrans > NOICE_MAX_VALUE)
     {
-        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,林阿妈刀A音浪太强,不晃会被撞到地上 %lf",maxphonethrans] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,噪音指数过高,确定噪音来源,并且关闭或者远离,以确保宝宝能在安静环境下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
     }
     
     [BLEWeather setsoundfrombluetooth:phonethrans andmaxsound:maxphonethrans];
+}
+
+- (void)RecvPM25Data:(NSData*)data
+{
+    Byte *hexData = (Byte *)[data bytes];
+    for (int i=0;i<=[data length];i++)
+    {
+        NSString *newHexStr = [NSString stringWithFormat:@"%02x",hexData[i]&0xff];
+        int recv = [BLEController hexStringToInt:newHexStr];
+        if (i == 0) {
+            if (recv == 0) {
+                errorCode = recv;
+            }
+            else{
+                NSLog(@"error code : %d", recv);
+            }
+        }
+        
+        if (errorCode == 0)
+        {
+            
+            //16进制数
+            if (i == 2) {
+                highpm25  = [BLEController hexStringHighToInt:newHexStr];
+            }
+            
+            if (1 == i)
+            {
+                lowpm25 = [BLEController hexStringToInt:newHexStr];
+            }
+            
+        
+            if (3 == i)
+            {
+                pm25value = (lowpm25+highpm25)/8192.0*3.3*168;
+            }
+        }
+    }
+    
+    if (pm25value > PM25_MAX_VALUE)
+    {
+        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,空气污染指数过高,需净化空气,以确保宝宝能在空气清新的环境下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
+    }
+
+    [BLEWeather setpm25frombluetooth:pm25value];
 }
 
 - (void)sendData{
@@ -462,6 +513,7 @@
             [self.blecontroller getLight];
             [self.blecontroller getMicrophone:0];
             [self.blecontroller getUV];
+            [self.blecontroller getAir];
             isFistTime = NO;
         }
         
@@ -479,20 +531,24 @@
     //在这里进行处理
     getindex++;
     [_blecontroller getMicrophone:1];
-    if (getindex % 4 == 0) {
+    if (getindex % 5 == 0) {
         [self.blecontroller getTemperatureAndHumi];
     }
-    else if (getindex % 4 == 1)
+    else if (getindex % 5 == 1)
     {
         [self.blecontroller getLight];
     }
-    else if (getindex % 4 == 2)
+    else if (getindex % 5 == 2)
     {
         [self.blecontroller getMicrophone:0];
     }
-    else if (getindex % 4 == 3)
+    else if (getindex % 5 == 3)
     {
         [self.blecontroller getUV];
+    }
+    else if (getindex % 5 == 4)
+    {
+        [self.blecontroller getAir];
     }
 }
 

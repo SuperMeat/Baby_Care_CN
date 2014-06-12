@@ -20,8 +20,8 @@ typedef void(^GetBLEweather)(NSDictionary *weatherDict);
 -(void)getbleweather:(GetBLEweather) getbleweather;
 
 +(void)setweatherfrombluetooth:(long)temp Humidity:(long)humi;
-+(void)setlightfrombluetooth:(double)light;
-+(void)setsoundfrombluetooth:(double)sound andmaxsound:(double)maxsound;
++(void)setlightfrombluetooth:(long)light;
++(void)setsoundfrombluetooth:(long)sound andmaxsound:(long)maxsound;
 +(void)setuvfrombluetooth:(long)uv;
 +(void)setpm25frombluetooth:(long)pm25;
 +(long)gettemperature;

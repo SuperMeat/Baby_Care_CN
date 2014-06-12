@@ -12,6 +12,7 @@
 @protocol save_diaperviewDelegate<NSObject>
 @optional
 -(void)sendDiaperSaveChanged:(NSString*)newstatus andstarttime:(NSDate*)newstarttime;
+-(void)sendDiaperReloadData;
 @end
 
 @interface save_diaperview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,DiaperPickerViewDelegate>

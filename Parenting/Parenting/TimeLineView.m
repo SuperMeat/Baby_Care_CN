@@ -50,18 +50,20 @@
 -(void)initData{
     //初始化加载消息
     if ([timeLineArray count] == 0) {
+        NSDate *curdate = [ACDate date];
         //欢迎消息
-        [[BabyMessageDataDB babyMessageDB]insertBabyMessageNormal:00000000 UpdateTime:00000000 key:@"" type:2 content:@"欢迎使用BabyCare"];
+        [[BabyMessageDataDB babyMessageDB]insertBabyMessageNormal:curdate UpdateTime:curdate key:@"" type:2 content:@"欢迎使用BabyCare"];
         //提示录入照片or宝贝姓名or生日
         NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
         if (dict) {
             //姓名
             if ([[dict objectForKey:@"nickname"] isEqual: @""] || [[dict objectForKey:@"birth"] intValue] == 0) {
-                [[BabyMessageDataDB babyMessageDB]insertBabyMessageNormal:00000001 UpdateTime:00000001 key:@"input_babyInfo" type:1 content:@"请完善宝宝基本信息"];
+                [[BabyMessageDataDB babyMessageDB]insertBabyMessageNormal:curdate UpdateTime:1 key:@"input_babyInfo" type:1 content:@"请完善宝宝基本信息"];
             }
-            else{
+            else
+            {
                 //删除提醒
-                [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:00000001];
+                [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:1];
             }
         }
         timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];

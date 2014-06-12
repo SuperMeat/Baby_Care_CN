@@ -8,12 +8,14 @@
 
 #import "ACViewController.h"
 
-@interface EnvironmentViewController : ACViewController
+@interface EnvironmentViewController : ACViewController<BLEWeatherViewDelegate>
 {
     UIButton * chooseIndoor;
     UIButton * chooseOutdoor;
     UILabel  * pmintro;
     UIImageView *adviseImageView;
+    AdviseScrollview *adindoor;
+    AdviseScrollview *adoutdoor;
 }
 @property(weak,nonatomic)WeatherView *weather;
 @property(weak,nonatomic)BLEWeatherView *bleweather;

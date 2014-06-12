@@ -9,6 +9,6 @@
 #import "Environmentitem.h"
 
 @implementation Environmentitem
-@synthesize headimage,title,detail;
+@synthesize headimage,title,detail,tag,level,value;
 
 @end

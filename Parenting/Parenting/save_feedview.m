@@ -22,7 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-       
+        self.foodtype = @"";
         [self  makeSave];
     }
     return self;
@@ -54,14 +54,18 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+-(void)makePickerView
 {
-    // Drawing code
+    [self addSubview:datepicker];
+    datepicker.hidden=YES;
+    
+    [self addSubview:starttimepicker];
+    starttimepicker.hidden = YES;
+    
+    [self addSubview:foodtypepicker];
+    foodtypepicker.hidden = YES;
+    
 }
-*/
 
 -(void)makeSave
 {
@@ -71,12 +75,14 @@
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor grayColor];
     imageview=[[UIImageView alloc]init];
-    imageview.bounds=CGRectMake(0, 0, 290, 280+30);
-    imageview.center=CGPointMake(160, (460-44-49)/2+30);
+    imageview.bounds=CGRectMake(0, 0, 290, 280+30+40);
+    imageview.center=CGPointMake(160, (480-64)/2+30+40);
     [self addSubview:imageview];
     [imageview addSubview:title];
     
+    [self makePickerView];
     imageview.backgroundColor=[ACFunction colorWithHexString:@"#f4f4f4"];
+    //imageview.backgroundColor = [UIColor redColor];
     imageview.layer.cornerRadius = 8.0f;
     imageview.userInteractionEnabled=YES;
     [imageview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
@@ -87,7 +93,10 @@
     
     UILabel *duration = [[UILabel alloc]initWithFrame:CGRectMake(10, 120, 100, 30)];
     
-    UILabel *remark = [[UILabel alloc]initWithFrame:CGRectMake(10, 200, 100, 30)];
+    foodtypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,200, 100,30)];
+    
+    
+    remark = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
     
     Oz = [[UILabel alloc]initWithFrame:CGRectMake(10, 160, 100, 30)];
     
@@ -96,11 +105,13 @@
     duration.backgroundColor  = [UIColor clearColor];
     Oz.backgroundColor        = [UIColor clearColor];
     remark.backgroundColor    = [UIColor clearColor];
+    foodtypeLabel.backgroundColor    = [UIColor clearColor];
     
     date.textColor=[UIColor grayColor];
     starttime.textColor=[UIColor grayColor];
     duration.textColor=[UIColor grayColor];
     Oz.textColor=[UIColor grayColor];
+    foodtypeLabel.textColor=[UIColor grayColor];
     remark.textColor=[UIColor grayColor];
     
     date.text=NSLocalizedString(@"Date:",nil);
@@ -109,6 +120,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"metric"]==nil) {
         [[NSUserDefaults standardUserDefaults]setObject:@"Oz:" forKey:@"metric" ];
     }
+    foodtypeLabel.text = @"食物类型:";
    
     Oz.text=NSLocalizedString([[NSUserDefaults standardUserDefaults] objectForKey:@"metric"],nil);
     remark.text=NSLocalizedString(@"Comments:",nil);
@@ -117,12 +129,14 @@
     duration.textAlignment=NSTextAlignmentRight;
     Oz.textAlignment=NSTextAlignmentRight;
     remark.textAlignment=NSTextAlignmentRight;
+    foodtypeLabel.textAlignment = NSTextAlignmentRight;
     
     [imageview addSubview:date];
     [imageview addSubview:starttime];
     [imageview addSubview:duration];
     [imageview addSubview:Oz];
     [imageview addSubview:remark];
+    [imageview addSubview:foodtypeLabel];
     
     datetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
     [datetext setBackground:[UIImage imageNamed:@"panels_input"]];
@@ -173,7 +187,7 @@
         [minutes addObject:[NSNumber numberWithInt:j]];
     }
 
-    UIImageView *remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 200, 150, 60)];
+    remarkbg=[[UIImageView alloc]initWithFrame:CGRectMake(115, 200, 150, 60)];
     remarkbg.image=[UIImage imageNamed:@"panels_input"];
     remarkbg.userInteractionEnabled=YES;
     
@@ -196,38 +210,50 @@
     [Oztext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     Oztext.keyboardType=UIKeyboardTypeNumberPad;
     
-    left=[[UILabel alloc]initWithFrame:CGRectMake(115, 200, 50, 20)];
+    foodtypetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 200, 150, 30)];
+    [foodtypetext setBackground:[UIImage imageNamed:@"panels_input"]];
+    [imageview addSubview:foodtypetext];
+    foodtypetext.textColor=[UIColor grayColor];
+    foodtypetext.delegate=self;
+    [foodtypetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
+    [foodtypetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
+    [foodtypetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
+    [foodtypetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
+    foodtypetext.keyboardType=UIKeyboardTypeNumberPad;
+
+    
+    left=[[UILabel alloc]initWithFrame:CGRectMake(115, 200-30, 50, 20)];
     left.text=NSLocalizedString(@"Left",nil);
     left.backgroundColor=[UIColor clearColor];
     left.textColor=[UIColor grayColor];
     [imageview addSubview:left];
     
-    right=[[UILabel alloc]initWithFrame:CGRectMake(215, 200, 50, 20)];
+    right=[[UILabel alloc]initWithFrame:CGRectMake(215, 200-30, 50, 20)];
     right.textColor=[UIColor grayColor];
     right.text=NSLocalizedString(@"Right",nil);
     right.backgroundColor=[UIColor clearColor];
     [imageview addSubview:right];
     
     leftbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    leftbutton.frame=CGRectMake(80, 200, 20, 20);
-    [leftbutton setBackgroundImage:[UIImage imageNamed:@"save_radio.png"] forState:UIControlStateNormal];
-    [leftbutton setBackgroundImage:[UIImage imageNamed:@"save_radio_focus.png"] forState:UIControlStateDisabled];
+    leftbutton.frame=CGRectMake(80, 200-30, 20, 20);
+    [leftbutton setBackgroundImage:[UIImage imageNamed:@"radio.png"] forState:UIControlStateNormal];
+    [leftbutton setBackgroundImage:[UIImage imageNamed:@"radio_focus.png"] forState:UIControlStateDisabled];
     [imageview addSubview:leftbutton];
     leftbutton.highlighted=NO;
     leftbutton.tag=1001;
     [leftbutton addTarget:self action:@selector(leftOrright:) forControlEvents:UIControlEventTouchUpInside];
     
     rightbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame=CGRectMake(180, 200, 20, 20);
-    [rightbutton setBackgroundImage:[UIImage imageNamed:@"save_radio.png"] forState:UIControlStateNormal];
-    [rightbutton setBackgroundImage:[UIImage imageNamed:@"save_radio_focus.png"] forState:UIControlStateDisabled];
+    rightbutton.frame=CGRectMake(180, 200-30, 20, 20);
+    [rightbutton setBackgroundImage:[UIImage imageNamed:@"radio.png"] forState:UIControlStateNormal];
+    [rightbutton setBackgroundImage:[UIImage imageNamed:@"radio_focus.png"] forState:UIControlStateDisabled];
     [imageview addSubview:rightbutton];
     rightbutton.highlighted=NO;
     rightbutton.tag=1002;
     [rightbutton addTarget:self action:@selector(leftOrright:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *savebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    savebutton.frame=CGRectMake(200, 270, 70, 30);
+    savebutton.frame=CGRectMake(200, 270+40, 70, 30);
     [savebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     savebutton.layer.cornerRadius = 5.0f;
     [savebutton setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
@@ -235,7 +261,7 @@
     [imageview addSubview:savebutton];
     
     UIButton *canclebutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    canclebutton.frame=CGRectMake(20, 270, 70, 30);
+    canclebutton.frame=CGRectMake(20, 270+40, 70, 30);
     [canclebutton setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     canclebutton.layer.cornerRadius = 5.0f;
     [canclebutton setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
@@ -273,6 +299,8 @@
         
         
         remarktext.text=[array objectAtIndex:4];
+        self.foodtype = [array objectAtIndex:5];
+        foodtypetext.text = self.foodtype;
         if ([[array objectAtIndex:2] intValue]==0) {
             Oz.hidden=NO;
             Oztext.text=[array objectAtIndex:3];
@@ -281,6 +309,10 @@
             rightbutton.hidden=YES;
             left.hidden=YES;
             right.hidden=YES;
+            remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0+40);
+            remark.center   = CGPointMake(10+100/2.0, 200+30/2.0+40);
+            foodtypetext.hidden = NO;
+            foodtypeLabel.hidden = NO;
         }
         else
         {
@@ -290,6 +322,10 @@
             rightbutton.hidden=NO;
             left.hidden=NO;
             right.hidden=NO;
+            foodtypeLabel.hidden = YES;
+            foodtypetext.hidden = YES;
+            remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0);
+            remark.center   = CGPointMake(10+100/2.0, 200+30/2.0);
             if ([[array objectAtIndex:3] isEqual:@"left"]) {
                 leftbutton.enabled=NO;
                 rightbutton.enabled=YES;
@@ -306,12 +342,17 @@
     else
     {
         if ([self.feedway isEqualToString:@"bottle"]) {
-            leftbutton.hidden=YES;
             rightbutton.hidden=YES;
+            leftbutton.hidden = YES;
             left.hidden=YES;
             right.hidden=YES;
             Oz.hidden=NO;
             Oztext.hidden=NO;
+            foodtypeLabel.hidden = NO;
+            foodtypetext.hidden = NO;
+
+            remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0+40);
+            remark.center   = CGPointMake(10+100/2.0, 200+30/2.0+40);
         }
         else{
             
@@ -321,6 +362,11 @@
             rightbutton.hidden=NO;
             left.hidden=NO;
             right.hidden=NO;
+            foodtypeLabel.hidden = YES;
+            foodtypetext.hidden = YES;
+
+            remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0);
+            remark.center   = CGPointMake(10+100/2.0, 200+30/2.0);
         }
         if ([self.breast isEqualToString:@"left"]) {
             leftbutton.enabled=NO;
@@ -351,8 +397,12 @@
             [key resignFirstResponder];
         }
 
+        if ([key isKindOfClass:[UIButton class]]) {
+            [key resignFirstResponder];
+        }
     }
     [remarktext resignFirstResponder];
+    [foodtypetext resignFirstResponder];
 }
 
 -(void)Save
@@ -368,10 +418,10 @@
         way=0;
         
         if (![Oztext.text length]>0) {
-            UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:NSLocalizedString(@"FeedSaveTips", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alter show];
-            return;
-
+//            UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:NSLocalizedString(@"FeedSaveTips", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//            [alter show];
+//            return;
+            Oztext.text = @"0";
         }
         
         oz=Oztext.text;
@@ -388,7 +438,7 @@
     {
         way=1;
         
-        if (leftbtn.enabled) {
+        if (!leftbtn.enabled) {
             oz=@"left";
         }
         else
@@ -400,7 +450,7 @@
 
     if (select) {
         if (Oztext.hidden) {
-            if (leftbtn.enabled) {
+            if (!leftbtn.enabled) {
                 oz=@"left";
             }
             else
@@ -421,8 +471,8 @@
                             Week:[ACDate getWeekFromDate:self.start]
                          WeekDay:[ACDate getWeekDayFromDate:self.start]
                         Duration:duration
-                              Oz:Oztext.text
-                        FoodType:@"奶"
+                              Oz:oz
+                        FoodType:self.foodtype
                           Remark:remarktext.text
                         MoreInfo:@""
                       CreateTime:_createtime];
@@ -434,8 +484,8 @@
                             Week:[ACDate getWeekFromDate:curstarttime]
                          WeekDay:[ACDate getWeekDayFromDate:curstarttime]
                         Duration:duration
-                              Oz:Oztext.text
-                        FoodType:@"奶"
+                              Oz:oz
+                        FoodType:self.foodtype
                           Remark:remarktext.text
                         MoreInfo:@""
                       CreateTime:_createtime];
@@ -460,7 +510,7 @@
                             Duration:duration
                                   Oz:oz
                             FeedType:[NSString stringWithFormat:@"%d",way]
-                            FoodType:@"奶"
+                            FoodType:self.foodtype
                               Remark:remarktext.text
                             MoreInfo:@""];
         }
@@ -476,18 +526,19 @@
                             Duration:duration
                                   Oz:oz
                             FeedType:[NSString stringWithFormat:@"%d",way]
-                            FoodType:@"奶"
+                            FoodType:self.foodtype
                               Remark:remarktext.text
                             MoreInfo:@""];
 
             curstarttime = nil;
         }
 
-        
+        [self.feedSaveDelegate sendFeedReloadData];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:[NSNumber numberWithInt:duration]];
     }
     
-     [self.feedSaveDelegate sendFeedSaveChanged:duration andstarttime:curstarttime];
+    
+    [self.feedSaveDelegate sendFeedSaveChanged:duration andstarttime:curstarttime];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"justdoit"];
 }
 -(void)cancle:(UIButton*)sender
@@ -541,6 +592,12 @@
         [self actionsheetDurationShow];
         [durationtext resignFirstResponder];
     }
+    
+    if (textField == foodtypetext)
+    {
+        [self actionsheetFoodTypePicker];
+        [foodtypetext resignFirstResponder];
+    }
 
 }
 
@@ -568,7 +625,7 @@
         NSTimeInterval animationDuration = 0.25f;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:animationDuration];
-        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y+150, 320, 460-44-49);
+        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y+150, 320, 460);
         [UIView commitAnimations];
         self.isshow=NO;
     }
@@ -685,7 +742,7 @@
     action3=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (durationpicker==nil) {
-        durationpicker=[[DurationPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 162)];
+        durationpicker=[[DurationPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y, 320, 162)];
     }
     
     durationpicker.delegate   = self;
@@ -701,10 +758,54 @@
     [action3 showInView:self.window];
 }
 
+-(void)actionsheetFoodTypePicker
+{
+    action4=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    
+    if (foodtypepicker==nil) {
+        foodtypepicker = [[FoodTypePickerView alloc]initWithFrame:CGRectMake(0, foodtypetext.frame.origin.y+45, 320, 162) Type:@""];
+        foodtypepicker.foodTypePickerViewDelegate = self;
+    }
+    
+    if ([self.foodtype isEqualToString:@"母乳"]) {
+        [foodtypepicker selectRow:0 inComponent:0 animated:YES];
+    }
+    else if ([self.foodtype isEqualToString:@"奶粉"])
+    {
+        [foodtypepicker selectRow:1 inComponent:0 animated:YES];
+    }
+    else if ([self.foodtype isEqualToString:@"水"])
+    {
+        [foodtypepicker selectRow:2 inComponent:0 animated:YES];
+    }
+    else if ([self.foodtype isEqualToString:@"辅食"])
+    {
+        [foodtypepicker selectRow:3 inComponent:0 animated:YES];
+    }
+    else
+    {
+        [foodtypepicker selectRow:0 inComponent:0 animated:YES];
+        self.foodtype = @"母乳";
+    }
+    
+    foodtypepicker.showsSelectionIndicator = YES;
+    foodtypepicker.frame=CGRectMake(0, 0, 320, 162);
+    
+    action4.bounds=CGRectMake(0, 0, 320, 200);
+    [action4 addSubview:foodtypepicker];
+    [action4 showInView:self.window];
+}
+
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
     if (actionSheet == action3) {
         durationtext.text = [NSString stringWithFormat:@"%02d:%02d:%02d", self.durationhour,self.durationmin,self.durationsec];
+    }
+    
+    if (actionSheet == action4)
+    {
+        foodtypetext.text = self.foodtype;
     }
 }
 
@@ -792,4 +893,9 @@
 	}
 }
 
+#pragma -mark foodtypepickerviewdele gate
+-(void)sendFeedTypeSaveChanged:(NSString*)type
+{
+    self.foodtype = type;
+}
 @end

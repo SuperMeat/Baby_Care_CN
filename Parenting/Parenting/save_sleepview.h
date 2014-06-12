@@ -12,6 +12,7 @@
 @protocol save_sleepviewDelegate<NSObject>
 @optional
 -(void)sendSleepSaveChanged:(int)duration andstarttime:(NSDate*)newstarttime;
+-(void)sendSleepReloadData;
 @end
 
 @interface save_sleepview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate>

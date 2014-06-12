@@ -174,4 +174,29 @@
     return [UIColor colorWithRed:((float) r / 255.0f) green:((float) g / 255.0f) blue:((float) b / 255.0f) alpha:1.0f];
 }
 
++(void)writeFile:(NSString *)file
+{
+    //创建文件管理器
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    //获取路径
+    //1、参数NSDocumentDirectory要获取的那种路径
+    NSArray*  paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    //2、得到相应的Documents的路径
+    NSString* DocumentDirectory = [paths objectAtIndex:0];
+    //3、更改到待操作的目录下
+    [fileManager changeCurrentDirectoryPath:[DocumentDirectory stringByExpandingTildeInPath]];
+    //4、创建文件fileName文件名称，contents文件的内容，如果开始没有内容可以设置为nil，attributes文件的属性，初始为nil
+    [fileManager removeItemAtPath:@"uvinfo" error:nil];
+    NSString *path = [DocumentDirectory stringByAppendingPathComponent:@"uvinfo"];
+    //5、创建数据缓冲区
+    NSMutableData  *writer = [[NSMutableData alloc] init];
+    //6、将字符串添加到缓冲中
+    [writer appendData:[file dataUsingEncoding:NSUTF8StringEncoding]];
+    //7、将其他数据添加到缓冲中
+    //将缓冲的数据写入到文件中
+    [writer writeToFile:path atomically:YES];
+}
+
+
 @end

@@ -409,12 +409,12 @@
     action=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (datepicker==nil) {
-        datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
+        datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 162)];
         datepicker.datePickerMode=UIDatePickerModeDate;
         [datepicker addTarget:self action:@selector(updatedate:) forControlEvents:UIControlEventValueChanged];
     }
     
-    datepicker.frame=CGRectMake(0, 0, 320, 100);
+    datepicker.frame=CGRectMake(0, 0, 320, 162);
     
     action.bounds=CGRectMake(0, 0, 320, 200);
     [action addSubview:datepicker];

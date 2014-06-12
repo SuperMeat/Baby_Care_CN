@@ -68,7 +68,7 @@
             break;
     }
     
-    NSString *sqlstr = [NSString stringWithFormat:@"select * from 			bc_suggestion_by_enviroment where %@_min <= ? and %@_max >= ? and type = %d", conditionName, conditionName, condition];
+    NSString *sqlstr = [NSString stringWithFormat:@"select * from bc_suggestion_by_enviroment where %@_min <= ? and %@_max >= ?", conditionName, conditionName];
     
     FMResultSet *resultset=[db executeQuery:sqlstr,value,value];
     if ([resultset next]) {
@@ -83,7 +83,7 @@
         }
     }
     
-    sqlstr = [NSString stringWithFormat:@"select * from 			bc_suggestion_by_enviroment where %@_min < ? and %@_max  = 0 and type = %d", conditionName, conditionName, condition];
+    sqlstr = [NSString stringWithFormat:@"select * from 			bc_suggestion_by_enviroment where %@_min < ? and %@_max  = 0 ", conditionName, conditionName];
     
     resultset = [db executeQuery:sqlstr,value];
     if ([resultset next]) {
@@ -98,7 +98,7 @@
         }
     }
     
-    sqlstr = [NSString stringWithFormat:@"select * from 			bc_suggestion_by_enviroment where %@_min = 0 and %@_max > ? and type = %d", conditionName, conditionName, condition];
+    sqlstr = [NSString stringWithFormat:@"select * from 			bc_suggestion_by_enviroment where %@_min = 0 and %@_max > ? ", conditionName, conditionName];
     
     resultset = [db executeQuery:sqlstr,value];
     if ([resultset next]) {
@@ -132,31 +132,31 @@
         return nil;
     }
     
-    FMResultSet *resultset=[db executeQuery:@"select * from 		bc_suggestion where id = ? and type = ?",[NSNumber numberWithInt:sid],[NSNumber numberWithInt:condition]];
+    FMResultSet *resultset=[db executeQuery:@"select * from 		bc_suggestion where suggestion_id = ? and type = ?",[NSNumber numberWithInt:sid],[NSNumber numberWithInt:condition]];
     while([resultset next])
     {
         AdviseData *ad = [[AdviseData alloc]init];
         ad.mAuthor  = [resultset stringForColumn:@"author"];
-        ad.mContent = [resultset stringForColumn:@"content_en"];
-        ad.mContent_cn = [resultset stringForColumn:@"content_cn"];
+        ad.mContent = [resultset stringForColumn:@"content"];
+        ad.mContent_cn = [resultset stringForColumn:@"content"];
         ad.mFromUrl = [resultset stringForColumn:@"url"];
         switch (condition) {
-            case ENVIR_SUGGESTION_TYPE_TEMP:
+            case SUGGESTION_DB_TYPE_TEMP:
                 ad.mType    = ADVISE_TYPE_TEMP;
                 break;
-            case ENVIR_SUGGESTION_TYPE_HUMI:
+            case SUGGESTION_DB_TYPE_HUMI:
                 ad.mType    = ADVISE_TYPE_HUMI;
                 break;
-            case ENVIR_SUGGESTION_TYPE_LIGHT:
+            case SUGGESTION_DB_TYPE_LIGHT:
                 ad.mType    = ADVISE_TYPE_LIGHT;
                 break;
-            case ENVIR_SUGGESTION_TYPE_NOICE:
+            case SUGGESTION_DB_TYPE_NOICE:
                 ad.mType    = ADVISE_TYPE_NOICE;
                 break;
-            case ENVIR_SUGGESTION_TYPE_UV:
+            case SUGGESTION_DB_TYPE_UV:
                 ad.mType    = ADVISE_TYPE_UV;
                 break;
-            case ENVIR_SUGGESTION_TYPE_PM25:
+            case SUGGESTION_DB_TYPE_PM25:
                 ad.mType    = ADVISE_TYPE_PM25;
                 break;
             default:

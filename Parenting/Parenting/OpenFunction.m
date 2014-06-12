@@ -61,7 +61,8 @@
 
 + (NSString*)getopenudid
 {
-    return [APService openUDID];
+    //return [APService openUDID];
+    return @"";
 }
 
 + (NSString*)getWeekBeginAndEndWith:(NSDate *)newDate{

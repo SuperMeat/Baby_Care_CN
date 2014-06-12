@@ -14,4 +14,5 @@
 @property(nonatomic,strong)NSString *detail;
 @property int tag;
 @property int level;
+@property int value;
 @end

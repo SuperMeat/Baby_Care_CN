@@ -627,6 +627,7 @@
     [array addObject:[set  objectForColumnName:@"duration"]];
     [array addObject:[set objectForColumnName:@"feed_type"]];
     if ([set stringForColumn:@"oz"]) {
+        NSLog(@"oz:%@", [set stringForColumn:@"oz"]);
         [array addObject:[set stringForColumn:@"oz"]];
     }
     else
@@ -635,6 +636,14 @@
     }
     if ([set stringForColumn:@"remark"]) {
         [array addObject:[set stringForColumn:@"remark"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
+    if ([set stringForColumn:@"food_type"]) {
+        [array addObject:[set objectForColumnName:@"food_type"]];
     }
     else
     {
@@ -670,10 +679,38 @@
     {
         [array addObject:[NSString stringWithFormat:@""]];
     }
-    [array addObject:[set stringForColumn:@"status"]];
-    [array addObject:[set stringForColumn:@"amount"]];
-    [array addObject:[set stringForColumn:@"color"]];
-    [array addObject:[set stringForColumn:@"hard"]];
+    
+    if ([set stringForColumn:@"status"]) {
+        [array addObject:[set stringForColumn:@"status"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
+    if ([set stringForColumn:@"amount"]) {
+        [array addObject:[set stringForColumn:@"amount"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
+    if ([set stringForColumn:@"color"]) {
+        [array addObject:[set stringForColumn:@"color"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
+    if ([set stringForColumn:@"hard"]) {
+        [array addObject:[set stringForColumn:@"hard"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
     [array addObject:[NSNumber numberWithLong:[set longForColumn:@"update_time"]]];
     [array addObject:[NSNumber numberWithLong:[set longForColumn:@"create_time"]]];
     
@@ -855,6 +892,504 @@
     res=[db executeUpdate:@"delete from bc_baby_play where starttime=?",starttime];
     [db close];
     return res;
+}
+
+-(NSDictionary*)searchTodayDiaperStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= \"XuXu\"",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
+    [set next];
+    int xuxu_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        xuxu_count = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]], @"BaBa"];
+    [set next];
+    int baba_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        baba_count = [set intForColumnIndex:0];
+    }
+
+    set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]], @"XuXuBaBa"];
+    [set next];
+    int xuxubaba_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        xuxubaba_count = [set intForColumnIndex:0];
+    }
+
+    [dic setObject:[NSNumber numberWithInt:xuxu_count] forKey:@"xuxu"];
+    [dic setObject:[NSNumber numberWithInt:baba_count] forKey:@"baba"];
+    [dic setObject:[NSNumber numberWithInt:xuxubaba_count] forKey:@"xuxubaba"];
+    [dic setObject:[NSNumber numberWithInt:(xuxubaba_count+baba_count+xuxu_count)] forKey:@"all"];
+    
+    
+    [db close];
+    return  dic;
+
+}
+
+-(NSDictionary*)searchYesterdayDiaperStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    long today  = [ACDate getTimeStampFromDate:[ACDate date]];
+    long yester = today - 86400;
+    NSDate *yes = [ACDate getDateFromTimeStamp:yester];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]], @"XuXu"];
+    [set next];
+    int xuxu_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        xuxu_count = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]], @"BaBa"];
+    [set next];
+    int baba_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        baba_count = [set intForColumnIndex:0];
+    }
+    
+    set=[db executeQuery:@"select count(*) from bc_baby_diaper where month = ? and week=? and weekday=? and status= ?",[NSNumber numberWithInt:[ACDate getMonthFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekFromDate:yes]],[NSNumber numberWithInt:[ACDate getWeekDayFromDate:yes]], @"XuXuBaBa"];
+    [set next];
+    int xuxubaba_count = 0;
+    if ([set intForColumnIndex:0])
+    {
+        xuxubaba_count = [set intForColumnIndex:0];
+    }
+    
+    [dic setObject:[NSNumber numberWithInt:xuxu_count] forKey:@"xuxu"];
+    [dic setObject:[NSNumber numberWithInt:baba_count] forKey:@"baba"];
+    [dic setObject:[NSNumber numberWithInt:xuxubaba_count] forKey:@"xuxubaba"];
+    [dic setObject:[NSNumber numberWithInt:(xuxubaba_count+baba_count+xuxu_count)] forKey:@"all"];
+    
+    [db close];
+    return  dic;
+
+}
+
+-(NSDictionary*)searchCurFeedStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where week=? and food_type = ?",[NSNumber numberWithInt:[ACDate getCurrentWeek]],@"母乳"];
+    [set next];
+    int sum_weekbreastamount = 0;
+    int weekbreastdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_weekbreastamount = [set intForColumnIndex:0];
+    }
+ 
+    if ([set intForColumnIndex:1]) {
+        weekbreastdays = [set intForColumnIndex:1];
+    }
+    
+    int week_breast_average = 0;
+    if (sum_weekbreastamount > 0) {
+        week_breast_average = sum_weekbreastamount / weekbreastdays;
+    }
+    
+    //周母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:week_breast_average] forKey:@"week_breast_average"];
+    
+    
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where  week=? and food_type=?",[NSNumber numberWithInt:[ACDate getCurrentWeek]],@"奶粉"];
+    [set next];
+    int sum_weekmilkamount = 0;
+    int milkdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_weekmilkamount = [set intForColumnIndex:0];
+    }
+    
+    if ([set intForColumnIndex:1]) {
+        milkdays = [set intForColumnIndex:1];
+    }
+    
+    int week_milk_average = 0;
+    if (sum_weekmilkamount>0) {
+        week_milk_average = sum_weekmilkamount/milkdays;
+    }
+    
+    //周奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:week_milk_average] forKey:@"week_milk_average"];
+
+
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where month = ? and food_type=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],@"母乳"];
+    [set next];
+    int sum_monthbreastamount = 0;
+    int monthbreastdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthbreastamount = [set intForColumnIndex:0];
+    }
+
+    if ([set intForColumnIndex:1]) {
+        monthbreastdays = [set intForColumnIndex:1];
+    }
+    
+
+    int month_breast_average = 0;
+    if (sum_monthbreastamount>0) {
+        month_breast_average = sum_monthbreastamount/monthbreastdays;
+    }
+
+    //月母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:month_breast_average] forKey:@"month_breast_average"];
+    
+    set=[db executeQuery:@"select sum(amount), count(distinct(weekday)) from bc_baby_feed where month = ? and food_type=?",[NSNumber numberWithInt:[ACDate getCurrentMonth]],@"奶粉"];
+    [set next];
+    int sum_monthmilkamount = 0;
+    int monthmilkdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthmilkamount = [set intForColumnIndex:0];
+    }
+    
+    if ([set intForColumnIndex:1]) {
+        monthmilkdays = [set intForColumnIndex:1];
+    }
+    
+    int month_milk_average = 0;
+    if (sum_monthmilkamount>0) {
+        month_milk_average = sum_monthmilkamount/monthmilkdays;
+    }
+    //月奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:month_milk_average] forKey:@"month_milk_average"];
+    
+    [db close];
+    return  dic;
+}
+
+-(NSDictionary*)searchLastFeedStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    long curmonth  = [ACDate getCurrentMonth];
+    long curweek   = [ACDate getCurrentWeek];
+    long lastmonth = curmonth - 1;
+    long lastweek  = curweek - 1;
+    if ((curweek-1)==0) {
+        lastweek = 52;
+    }
+    
+    if ((curmonth -1) == 0) {
+        lastmonth = 12;
+    }
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where week=? and food_type = ?",[NSNumber numberWithInt:lastweek],@"母乳"];
+    [set next];
+    int sum_weekbreastamount = 0;
+    int weekbreastdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_weekbreastamount = [set intForColumnIndex:0];
+    }
+    
+    if ([set intForColumnIndex:1]) {
+        weekbreastdays = [set intForColumnIndex:1];
+    }
+   
+    int week_breast_average = 0;
+    if (sum_weekbreastamount > 0) {
+        week_breast_average = sum_weekbreastamount / weekbreastdays;
+    }
+    
+    //周母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:week_breast_average] forKey:@"week_breast_average"];
+    
+    
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where week=? and food_type=?",[NSNumber numberWithInt:lastweek],@"奶粉"];
+    [set next];
+    int sum_weekmilkamount = 0;
+    int milkdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_weekmilkamount = [set intForColumnIndex:0];
+    }
+    
+    if ([set intForColumnIndex:1]) {
+        milkdays = [set intForColumnIndex:1];
+    }
+    int week_milk_average = 0;
+    if (sum_weekmilkamount>0) {
+        week_milk_average = sum_weekmilkamount/milkdays;
+    }
+    
+    //周奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:week_milk_average] forKey:@"week_milk_average"];
+    
+    
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where month = ? and food_type=?",[NSNumber numberWithInt:lastmonth],@"母乳"];
+    [set next];
+    int sum_monthbreastamount = 0;
+    int monthbreastdays = 0;
+    
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthbreastamount = [set intForColumnIndex:0];
+    }
+    
+    if ([set intForColumnIndex:1]) {
+        monthbreastdays = [set intForColumnIndex:1];
+    }
+    
+    int month_breast_average = 0;
+    if (sum_monthbreastamount>0) {
+        month_breast_average = sum_monthbreastamount/monthbreastdays;
+    }
+    
+    //月母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:month_breast_average] forKey:@"month_breast_average"];
+    
+    set=[db executeQuery:@"select sum(amount),count(distinct(weekday)) from bc_baby_feed where month = ? and food_type=?",[NSNumber numberWithInt:lastmonth],@"奶粉"];
+    [set next];
+    int sum_monthmilkamount = 0;
+    int monthmilkdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthmilkamount = [set intForColumnIndex:0];
+    }
+    if ([set intForColumnIndex:1]) {
+        monthmilkdays = [set intForColumnIndex:1];
+    }
+    
+    int month_milk_average = 0;
+    if (sum_monthmilkamount>0) {
+        month_milk_average = sum_monthmilkamount/monthmilkdays;
+    }
+    //月奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:month_milk_average] forKey:@"month_milk_average"];
+    
+    [db close];
+    return  dic;
+}
+
+-(NSDictionary*)searchCurSleepStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select sum(duration),count(distinct(weekday)) from bc_baby_sleep where week=?",[NSNumber numberWithInt:[ACDate getCurrentWeek]]];
+    [set next];
+    int sum_weekbreastamount = 0;
+    int weekbreastdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_weekbreastamount = [set intForColumnIndex:0];
+    }
+    if ([set intForColumnIndex:1]) {
+        weekbreastdays = [set intForColumnIndex:1];
+    }
+    
+    int week_breast_average = 0;
+    if (sum_weekbreastamount > 0) {
+        week_breast_average = sum_weekbreastamount / weekbreastdays;
+    }
+    
+    //周母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:week_breast_average] forKey:@"week_sleep_average"];
+    
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where  week=?",[NSNumber numberWithInt:[ACDate getCurrentWeek]]];
+    [set next];
+    int sum_weekmilkamount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_weekmilkamount = [set intForColumnIndex:0];
+    }
+    
+    //周奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:sum_weekmilkamount] forKey:@"week_max_sleep_average"];
+    
+    
+    set=[db executeQuery:@"select sum(duration),count(distinct(weekday)) from bc_baby_sleep where month = ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]]];
+    [set next];
+    int sum_monthbreastamount = 0;
+    int monthbreastdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthbreastamount = [set intForColumnIndex:0];
+    }
+    if ([set intForColumnIndex:1]) {
+        monthbreastdays = [set intForColumnIndex:1];
+    }
+    
+    int month_breast_average = 0;
+    if (sum_monthbreastamount>0) {
+        month_breast_average = sum_monthbreastamount/monthbreastdays;
+    }
+    
+    //月母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:month_breast_average] forKey:@"month_sleep_average"];
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where month = ?",[NSNumber numberWithInt:[ACDate getCurrentMonth]]];
+    [set next];
+    int sum_monthmilkamount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthmilkamount = [set intForColumnIndex:0];
+    }
+    
+    //月奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:sum_monthmilkamount] forKey:@"month_max_sleep_average"];
+    
+    [db close];
+    return  dic;
+}
+
+-(NSDictionary*)searchLastSleepStatusList
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    long curmonth  = [ACDate getCurrentMonth];
+    long curweek   = [ACDate getCurrentWeek];
+    long lastmonth = curmonth - 1;
+    long lastweek  = curweek - 1;
+    if ((curweek-1)==0) {
+        lastweek = 52;
+    }
+    
+    if ((curmonth -1) == 0) {
+        lastmonth = 12;
+    }
+
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
+    FMResultSet *set=[db executeQuery:@"select sum(duration),count(distinct(weekday)) from bc_baby_sleep where week=?",[NSNumber numberWithInt:lastweek]];
+    [set next];
+    int sum_weekbreastamount = 0;
+    int weekbreastdays = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_weekbreastamount = [set intForColumnIndex:0];
+        
+    }
+    if ([set intForColumnIndex:1]) {
+        weekbreastdays = [set intForColumnIndex:1];
+    }
+    
+    int week_breast_average = 0;
+    if (sum_weekbreastamount > 0) {
+        week_breast_average = sum_weekbreastamount / weekbreastdays;
+    }
+    
+    //周母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:week_breast_average] forKey:@"week_sleep_average"];
+    
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where  week=?",[NSNumber numberWithInt:lastweek]];
+    [set next];
+    int sum_weekmilkamount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_weekmilkamount = [set intForColumnIndex:0];
+    }
+    
+    //周奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:sum_weekmilkamount] forKey:@"week_max_sleep_average"];
+    
+    
+    set=[db executeQuery:@"select sum(duration), count(distinct(weekday)) from bc_baby_sleep where month = ?",[NSNumber numberWithInt:lastmonth]];
+    [set next];
+    int sum_monthbreastamount = 0;
+    int monthbreastdays = 0;
+    
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthbreastamount = [set intForColumnIndex:0];
+    }
+    
+    if ([set intForColumnIndex:1]) {
+        monthbreastdays = [set intForColumnIndex:1];
+    }
+    int month_breast_average = 0;
+    if (sum_monthbreastamount>0) {
+        month_breast_average = sum_monthbreastamount/monthbreastdays;
+    }
+    
+    //月母乳每日平均
+    [dic setObject:[NSNumber numberWithInt:month_breast_average] forKey:@"month_sleep_average"];
+    
+    set=[db executeQuery:@"select max(duration) from bc_baby_sleep where month = ?",[NSNumber numberWithInt:lastmonth]];
+    [set next];
+    int sum_monthmilkamount = 0;
+    if ([set intForColumnIndex:0])
+    {
+        sum_monthmilkamount = [set intForColumnIndex:0];
+    }
+    
+    //月奶粉每日平均
+    [dic setObject:[NSNumber numberWithInt:sum_monthmilkamount] forKey:@"month_max_sleep_average"];
+    
+    [db close];
+    return  dic;
 }
 
 + (NSArray *)dataFromTable:(int)fileTag andpage:(int)scrollpage andTable:(NSString *)table

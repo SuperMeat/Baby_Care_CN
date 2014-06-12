@@ -12,6 +12,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+#import "ACLabel.h"
 #import "ACViewController.h"
 #import "SuggestView.h"
 #import "AdviseScrollview.h"
@@ -20,6 +21,7 @@
 #import "SleepActivityViewController.h"
 #import "playViewController.h"
 #import "bathViewController.h"
+#import "FoodTypePickerView.h"
 #import "save_feedview.h"
 #import "save_bathview.h"
 #import "save_playview.h"
@@ -127,6 +129,14 @@
 #define ENVIR_SUGGESTION_TYPE_NOICE 3
 #define ENVIR_SUGGESTION_TYPE_UV    4
 #define ENVIR_SUGGESTION_TYPE_PM25  5
+
+#define TEMP_MAX_VALUE 31
+#define HUMI_MAX_VALUE 70
+#define LIGHT_MAX_VALUE 800
+#define NOICE_MAX_VALUE 3000
+#define UV_MAX_VALUE 7
+#define PM25_MAX_VALUE 300
+
 //去log
 #ifdef DEBUG
 #else
@@ -172,6 +182,13 @@
 #define SUGGESTION_TYPE_UV      5
 #define SUGGESTION_TYPE_PM25    6
 
+#define SUGGESTION_DB_TYPE_TEMP  1
+#define SUGGESTION_DB_TYPE_HUMI  2
+#define SUGGESTION_DB_TYPE_LIGHT 3
+#define SUGGESTION_DB_TYPE_NOICE 4
+#define SUGGESTION_DB_TYPE_UV    5
+#define SUGGESTION_DB_TYPE_PM25  6
+
 //*** 蓝牙设备连接参数
 #define PRESS_KEY_DIAPER 1
 #define PRESS_KEY_SLEEP  2
@@ -197,7 +214,8 @@
 #define PID_RESP_GET_UV 10
 #define PID_REQ_GET_MICROPHONE 11
 #define PID_RESP_GET_MICROPHONE 12
-
+#define PID_REQ_GET_AIR 13
+#define PID_RESP_GET_AIR 14
 #define PID_HEART_BEAT  254
 
 //五个按钮:喂食,换尿布,洗澡,睡觉,玩耍
@@ -214,6 +232,12 @@
 //      创建 : 陈伟斌
 #pragma MARK HTTPREQUEST
 
+//#ifdef DEBUG
+////#define BASE_URL @"http://192.168.1.138:8010/api/"
+//#define BASE_URL @"http://cbaisan.w82.dns87.com/api/" 
+//#else
+//#define BASE_URL @"http://cbaisan.w82.dns87.com/api/" //接口IP
+//#endif
 #ifdef DEBUG
 #define BASE_URL @"http://114.215.109.90/"
 #else
@@ -269,3 +293,16 @@
 #define WEATHERICONSCALE 0.55
 
 #define G_WEBVIEWY (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 49:150)
+#define SMALLTEXT 10
+#define MIDTEXT   15
+#define BIGTEXT   36
+#define TEXTCOLOR @"#7e7a79"
+#define IMAGEVIEWBGCOLOR @"#d6d6d6"
+#define BIGTEXTCOLOR @"#7e7a79"
+
+#define REDARROWCOLOR @"#e46565"
+#define GREENARROWCOLOR @"#62d382"
+
+#define FOOD_TYPE_MILK   1
+#define FOOD_TYPE_BREAST 2
+#define FOOD_TYPE_SOLIDFOOD 3

@@ -266,7 +266,7 @@
 {
     switch (sender.tag) {
         case 201:
-            self.status = @"Dirty";
+            self.status = @"BaBa";
             dirty.enabled = NO;
             dry.enabled = YES;
             wet.enabled = YES;
@@ -274,7 +274,7 @@
             hardtext.hidden = NO;
             break;
         case 202:
-            self.status = @"Dry";
+            self.status = @"XuXuBaBa";
             dirty.enabled = YES;
             dry.enabled   = NO;
             wet.enabled   = YES;
@@ -282,7 +282,7 @@
             hardtext.hidden = NO;
             break;
         case 203:
-            self.status = @"Wet";
+            self.status = @"XuXu";
             dirty.enabled = YES;
             dry.enabled   = YES;
             wet.enabled   = NO;
@@ -315,18 +315,18 @@
         
         self.status=[array objectAtIndex:2];
         NSLog(@"%@",self.status);
-        if ([self.status isEqualToString:@"Wet"]) {
+        if ([self.status isEqualToString:@"XuXu"]) {
             wet.enabled=NO;
             Hard.hidden = YES;
             hardtext.hidden = YES;
         }
-        else if ([self.status isEqualToString:@"Dirty"])
+        else if ([self.status isEqualToString:@"BaBa"])
         {
             dirty.enabled=NO;
             Hard.hidden = NO;
             hardtext.hidden = NO;
         }
-        else if([self.status isEqualToString:@"Dry"])
+        else if([self.status isEqualToString:@"XuXuBaBa"])
         {
             dry.enabled=NO;
             Hard.hidden = NO;
@@ -344,7 +344,7 @@
     {
         datetext.text=[ACDate dateFomatdate:[ACDate date]];
         starttimetext.text=[ACDate getStarttimefromdate:[ACDate date]];
-        if ([self.status isEqualToString:@"Wet"]) {
+        if ([self.status isEqualToString:@"XuXu"]) {
             wet.enabled=NO;
             dry.enabled=YES;
             dirty.enabled=YES;
@@ -352,7 +352,7 @@
             Hard.hidden = YES;
             hardtext.hidden = YES;
         }
-        else if ([self.status isEqualToString:@"Dirty"])
+        else if ([self.status isEqualToString:@"BaBa"])
         {
             dirty.enabled=NO;
             dry.enabled=YES;
@@ -360,7 +360,7 @@
             Hard.hidden = NO;
             hardtext.hidden = NO;
         }
-        else if([self.status isEqualToString:@"Dry"])
+        else if([self.status isEqualToString:@"XuXuBaBa"])
         {
             dry.enabled=NO;
             wet.enabled=YES;
@@ -413,11 +413,13 @@
 
             curstarttime = nil;
         }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
+        
+        [self.diaperSaveDelegate sendDiaperReloadData];
     }
     
     //自动上传数据
-    [UpLoadController checkDiaperUpload:1];
+    //[UpLoadController checkDiaperUpload:1];
     
     [self.diaperSaveDelegate sendDiaperSaveChanged:self.status andstarttime:self.start];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"justdoit"];
@@ -530,7 +532,7 @@
     action3=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (diaperPickerView1==nil) {
-        diaperPickerView1 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_AMOUNT Option:DIAPER_OPTION_XUXU];
+        diaperPickerView1 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, amounttext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_AMOUNT Option:DIAPER_OPTION_XUXU];
         diaperPickerView1.diaperPickerViewDelegate = self;
     }
    
@@ -560,7 +562,7 @@
     }
     
     diaperPickerView1.showsSelectionIndicator = YES;
-    diaperPickerView1.frame=CGRectMake(0, 0, 320, 100);
+    diaperPickerView1.frame=CGRectMake(0, 0, 320, 162);
     
     action3.bounds=CGRectMake(0, 0, 320, 200);
     [action3 addSubview:diaperPickerView1];
@@ -572,7 +574,7 @@
     action4=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (diaperPickerView2==nil) {
-        diaperPickerView2 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_COLOR Option:DIAPER_OPTION_XUXU];
+        diaperPickerView2 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, colortext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_COLOR Option:DIAPER_OPTION_XUXU];
         diaperPickerView2.diaperPickerViewDelegate = self;
     }
     
@@ -603,7 +605,7 @@
     
     diaperPickerView2.showsSelectionIndicator = YES;
 
-    diaperPickerView2.frame=CGRectMake(0, 0, 320, 100);
+    diaperPickerView2.frame=CGRectMake(0, 0, 320, 162);
     
     action4.bounds=CGRectMake(0, 0, 320, 200);
     [action4 addSubview:diaperPickerView2];
@@ -615,7 +617,7 @@
     action5=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (diaperPickerView3==nil) {
-        diaperPickerView3 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100) Type:DIAPER_TYPE_HARD Option:DIAPER_OPTION_XUXU];
+        diaperPickerView3 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, hardtext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_HARD Option:DIAPER_OPTION_XUXU];
         diaperPickerView3.diaperPickerViewDelegate = self;
     }
     
@@ -645,7 +647,7 @@
     }
     
     diaperPickerView3.showsSelectionIndicator = YES;
-    diaperPickerView3.frame=CGRectMake(0, 0, 320, 100);
+    diaperPickerView3.frame=CGRectMake(0, 0, 320, 162);
     
     action5.bounds=CGRectMake(0, 0, 320, 200);
     [action5 addSubview:diaperPickerView3];
