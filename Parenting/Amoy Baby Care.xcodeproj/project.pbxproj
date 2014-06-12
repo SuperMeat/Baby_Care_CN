@@ -551,6 +551,10 @@
 		BEB7E2D0192310D200E752B7 /* TipsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2CE192310D100E752B7 /* TipsWebViewController.m */; };
 		BEB7E2D1192310D200E752B7 /* TipsWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */; };
 		BEB7E2D41923167C00E752B7 /* TipCategoryDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */; };
+		BEE539731945B022000703E6 /* TipListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE539711945B022000703E6 /* TipListViewController.m */; };
+		BEE539741945B022000703E6 /* TipListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE539721945B022000703E6 /* TipListViewController.xib */; };
+		BEE539781945B079000703E6 /* TipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE539761945B079000703E6 /* TipTableViewCell.m */; };
+		BEE539791945B079000703E6 /* TipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE539771945B079000703E6 /* TipTableViewCell.xib */; };
 		CE0167B3174B059000462363 /* btn_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01679D174B059000462363 /* btn_delete.png */; };
 		CE0167B4174B059000462363 /* btn_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01679E174B059000462363 /* btn_delete@2x.png */; };
 		CE0167B5174B059000462363 /* btn_delete_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01679F174B059000462363 /* btn_delete_focus.png */; };
@@ -1351,6 +1355,12 @@
 		BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipsWebViewController.xib; sourceTree = "<group>"; };
 		BEB7E2D21923167C00E752B7 /* TipCategoryDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipCategoryDB.h; sourceTree = "<group>"; };
 		BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipCategoryDB.m; sourceTree = "<group>"; };
+		BEE539701945B022000703E6 /* TipListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipListViewController.h; sourceTree = "<group>"; };
+		BEE539711945B022000703E6 /* TipListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipListViewController.m; sourceTree = "<group>"; };
+		BEE539721945B022000703E6 /* TipListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipListViewController.xib; sourceTree = "<group>"; };
+		BEE539751945B079000703E6 /* TipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipTableViewCell.h; sourceTree = "<group>"; };
+		BEE539761945B079000703E6 /* TipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipTableViewCell.m; sourceTree = "<group>"; };
+		BEE539771945B079000703E6 /* TipTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipTableViewCell.xib; sourceTree = "<group>"; };
 		CE01679D174B059000462363 /* btn_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete.png; sourceTree = "<group>"; };
 		CE01679E174B059000462363 /* btn_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_delete@2x.png"; sourceTree = "<group>"; };
 		CE01679F174B059000462363 /* btn_delete_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete_focus.png; sourceTree = "<group>"; };
@@ -2136,13 +2146,18 @@
 		4855BCA8183075B100F02A3E /* Tips */ = {
 			isa = PBXGroup;
 			children = (
+				BEE5397A1945B08B000703E6 /* old */,
 				BEB7E2CD192310D100E752B7 /* TipsWebViewController.h */,
 				BEB7E2CE192310D100E752B7 /* TipsWebViewController.m */,
 				BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */,
-				BEB7E2CA1923100B00E752B7 /* AdviseData.h */,
-				BEB7E2CB1923100B00E752B7 /* AdviseData.m */,
+				BEE539751945B079000703E6 /* TipTableViewCell.h */,
+				BEE539761945B079000703E6 /* TipTableViewCell.m */,
+				BEE539771945B079000703E6 /* TipTableViewCell.xib */,
 				BEB7E2C719230E4A00E752B7 /* TipsMainViewController.h */,
 				BEB7E2C819230E4A00E752B7 /* TipsMainViewController.m */,
+				BEE539701945B022000703E6 /* TipListViewController.h */,
+				BEE539711945B022000703E6 /* TipListViewController.m */,
+				BEE539721945B022000703E6 /* TipListViewController.xib */,
 			);
 			name = Tips;
 			sourceTree = "<group>";
@@ -3300,6 +3315,15 @@
 			path = SBJSON;
 			sourceTree = "<group>";
 		};
+		BEE5397A1945B08B000703E6 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				BEB7E2CA1923100B00E752B7 /* AdviseData.h */,
+				BEB7E2CB1923100B00E752B7 /* AdviseData.m */,
+			);
+			name = old;
+			sourceTree = "<group>";
+		};
 		CE01679C174B059000462363 /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3704,6 +3728,7 @@
 				48DEA7C117F46C3E00A11316 /* Diaper_2.jpg in Resources */,
 				BE25764A18FE51CA0053683A /* title_height@2x.png in Resources */,
 				BE6938DB19090C4B00FC2BB4 /* icon_height@2x.png in Resources */,
+				BEE539791945B079000703E6 /* TipTableViewCell.xib in Resources */,
 				BE7C698A18692ED100C4B675 /* btn_syncBLE@2x.png in Resources */,
 				48FEAF0818E91423002425E2 /* recent_records_line@2x.png in Resources */,
 				BE25764518FE51CA0053683A /* horizontal@2x.png in Resources */,
@@ -3832,6 +3857,7 @@
 				48DEA7D817F4703400A11316 /* Play_7.jpg in Resources */,
 				BE25763818FE51CA0053683A /* btn_chart@2x.png in Resources */,
 				480EFA3418E5155C00D40903 /* panels_icon_wet_choose@2x.png in Resources */,
+				BEE539741945B022000703E6 /* TipListViewController.xib in Resources */,
 				48FEB01118EBBA46002425E2 /* UMSCommentInputControlleriPad.xib in Resources */,
 				480EFA5918E5155C00D40903 /* btn_bath_pause@2x.png in Resources */,
 				BE6938E219090EAD00FC2BB4 /* icon_temperture@2x.png in Resources */,
@@ -4057,6 +4083,7 @@
 				BE75CD0D1872C46E001EF1C1 /* RegisterViewController.m in Sources */,
 				BE75CCFE1872BEC7001EF1C1 /* MD5.m in Sources */,
 				4855BD071830D80300F02A3E /* InfomationItem.m in Sources */,
+				BEE539731945B022000703E6 /* TipListViewController.m in Sources */,
 				BE7C697D1867F1B300C4B675 /* ASIInputStream.m in Sources */,
 				48F91B0D18FBBBB20038DC67 /* EnvironmentViewController.m in Sources */,
 				48C9AD1418E2AB4800D04FF7 /* SummaryDB.m in Sources */,
@@ -4135,6 +4162,7 @@
 				BEB475A118E574A80004B649 /* SBJsonParser.m in Sources */,
 				BE7AB1B4190A3F8D00D9B502 /* AddPHYRecordViewController.m in Sources */,
 				4800B0D518D822C20093A6AF /* CalendarViewController.m in Sources */,
+				BEE539781945B079000703E6 /* TipTableViewCell.m in Sources */,
 				BEB4758418E572A20004B649 /* DataContract.m in Sources */,
 				48EF611F18C6FAC7006C3D5C /* CusAnnotationView.m in Sources */,
 				CE0C33CB176189CE00B1B683 /* MyCorePlot.m in Sources */,

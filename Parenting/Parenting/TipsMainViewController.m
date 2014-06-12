@@ -9,6 +9,7 @@
 #import "TipsMainViewController.h"
 #import "UserDataDB.h"
 #import "TipCategoryDB.h"
+#import "TipListViewController.h"
 
 @interface TipsMainViewController ()
 
@@ -20,7 +21,17 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.hidesBottomBarWhenPushed=YES;
+#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+        
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        if ( IOS7_OR_LATER )
+        {
+            self.edgesForExtendedLayout = UIRectEdgeNone;
+            self.extendedLayoutIncludesOpaqueBars = NO;
+            self.modalPresentationCapturesStatusBarAppearance = NO;
+        }
+#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     }
     return self;
 }
@@ -32,8 +43,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBar.hidden = YES;
-    
+    self.navigationController.navigationBarHidden = YES;
     if(_scrollView.contentOffset.x == 0){
         [_buttonSubscribe setTitle:@"+" forState:UIControlStateNormal];
     }
@@ -70,6 +80,12 @@
     [self.view addSubview:self.tipsNavigationImageView];
     [self.tipsNavigationImageView setUserInteractionEnabled:YES];
     
+    _buttonBack = [[UIButton alloc] init];
+    _buttonBack.frame = CGRectMake(10, 22, 40, 40);
+    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:16];
+    [_buttonBack setTitle:@"返回" forState:UIControlStateNormal];
+    [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [self.tipsNavigationImageView addSubview:_buttonBack];
     //加载订阅贴士按钮
     _buttonSubscribe = [[UIButton alloc] init];
     _buttonSubscribe.frame = CGRectMake(320-10-40,22, 40, 40);
@@ -152,6 +168,10 @@
         [button setTitle:@"+" forState:UIControlStateNormal];
     }
     
+}
+
+-(void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)subscribe:(UIButton*)button{
@@ -286,7 +306,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (tableView == _tTableView) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        TipListViewController *tipList = [[TipListViewController alloc]init];
+        tipList.categoryId = [NSNumber numberWithInt:1];
+        [self.navigationController pushViewController:tipList animated:YES];
+    }
 }
 
 

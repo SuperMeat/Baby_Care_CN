@@ -56,7 +56,7 @@
     
     [self hidenshareview];
     //UIView *view = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] subviews] lastObject];//获得某个window的某个subView
-
+    
     [self showshareview];
     
     
@@ -144,43 +144,43 @@
 {
     [super viewDidLoad];
     //分享按钮
-//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        button.frame = CGRectMake(0, 0, 43, 28);
-//        [button addTarget:self action:@selector(ShareBtn) forControlEvents:UIControlEventTouchUpInside];
-//        [button setBackgroundImage:[UIImage imageNamed:@"btn3.png"] forState:UIControlStateNormal];
-//        [button setImage:[UIImage imageNamed:@"icon_share.png"] forState:UIControlStateNormal];
-//        UIBarButtonItem *rtButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-//        self.navigationItem.rightBarButtonItem = rtButton;
-//    
-//        Shareview=[[UIImageView alloc]initWithFrame:CGRectMake(20, -300+G_YADDONVERSION, 280, 300)];
-//    
-//    
-//        [Shareview setImage:[UIImage imageNamed:@"save_bg.png"]];
-//        [Shareview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-//        Shareview.userInteractionEnabled=YES;
-//        UIImageView *Shareimage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 260, 180)];
-//        [Shareview addSubview:Shareimage];
-//        Shareimage.tag=10001;
-//        Shareimage.contentMode=UIViewContentModeScaleAspectFit;
-//        Sharetext=[[UITextField alloc]initWithFrame:CGRectMake(10, 210, 260, 30)];
-//        [Shareview addSubview:Sharetext];
-//        Sharetext.tag=10002;
-//        Sharetext.borderStyle=UITextBorderStyleRoundedRect;
-//    
-//        UIButton *share=[UIButton buttonWithType:UIButtonTypeCustom];
-//        [share setTitle:NSLocalizedString(@"Share",nil) forState:UIControlStateNormal];
-//    
-//        share.frame=CGRectMake(155, 250, 100, 40);
-//        [share setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-//        [share addTarget:self action:@selector(Share) forControlEvents:UIControlEventTouchUpInside];
-//        UIButton *cancle=[UIButton buttonWithType:UIButtonTypeCustom];
-//        cancle.frame=CGRectMake(15, 250, 100, 40);
-//        [cancle setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
-//        [cancle addTarget:self action:@selector(hidenshareview) forControlEvents:UIControlEventTouchUpInside];
-//        [cancle setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-//        [Shareview addSubview:share];
-//        [Shareview addSubview:cancle];
-
+    //        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    //        button.frame = CGRectMake(0, 0, 43, 28);
+    //        [button addTarget:self action:@selector(ShareBtn) forControlEvents:UIControlEventTouchUpInside];
+    //        [button setBackgroundImage:[UIImage imageNamed:@"btn3.png"] forState:UIControlStateNormal];
+    //        [button setImage:[UIImage imageNamed:@"icon_share.png"] forState:UIControlStateNormal];
+    //        UIBarButtonItem *rtButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    //        self.navigationItem.rightBarButtonItem = rtButton;
+    //
+    //        Shareview=[[UIImageView alloc]initWithFrame:CGRectMake(20, -300+G_YADDONVERSION, 280, 300)];
+    //
+    //
+    //        [Shareview setImage:[UIImage imageNamed:@"save_bg.png"]];
+    //        [Shareview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+    //        Shareview.userInteractionEnabled=YES;
+    //        UIImageView *Shareimage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 260, 180)];
+    //        [Shareview addSubview:Shareimage];
+    //        Shareimage.tag=10001;
+    //        Shareimage.contentMode=UIViewContentModeScaleAspectFit;
+    //        Sharetext=[[UITextField alloc]initWithFrame:CGRectMake(10, 210, 260, 30)];
+    //        [Shareview addSubview:Sharetext];
+    //        Sharetext.tag=10002;
+    //        Sharetext.borderStyle=UITextBorderStyleRoundedRect;
+    //
+    //        UIButton *share=[UIButton buttonWithType:UIButtonTypeCustom];
+    //        [share setTitle:NSLocalizedString(@"Share",nil) forState:UIControlStateNormal];
+    //
+    //        share.frame=CGRectMake(155, 250, 100, 40);
+    //        [share setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+    //        [share addTarget:self action:@selector(Share) forControlEvents:UIControlEventTouchUpInside];
+    //        UIButton *cancle=[UIButton buttonWithType:UIButtonTypeCustom];
+    //        cancle.frame=CGRectMake(15, 250, 100, 40);
+    //        [cancle setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
+    //        [cancle addTarget:self action:@selector(hidenshareview) forControlEvents:UIControlEventTouchUpInside];
+    //        [cancle setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+    //        [Shareview addSubview:share];
+    //        [Shareview addSubview:cancle];
+    
     count = 0;
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-G_WEBVIEWY)];
     [self.webView setScalesPageToFit:YES];
@@ -190,9 +190,9 @@
     {
         [self.webView loadRequest:urlRequest];
     }
-
+    
     [self.view addSubview:self.webView];
-
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -205,7 +205,7 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-   // CustomURLCache *urlCache = (CustomURLCache *)[NSURLCache sharedURLCache];
+    // CustomURLCache *urlCache = (CustomURLCache *)[NSURLCache sharedURLCache];
     //[urlCache removeAllCachedResponses];
 }
 
@@ -213,13 +213,13 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-//    CGRect frame = webView.frame;
-//    
-//    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
-//    
-//    frame.size = fittingSize;
-//    
-//    webView.frame = frame;
+    //    CGRect frame = webView.frame;
+    //
+    //    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+    //
+    //    frame.size = fittingSize;
+    //
+    //    webView.frame = frame;
     //[MMProgressHUD dismissWithSuccess:@"Success!"];
 }
 
@@ -236,17 +236,17 @@
         hud.color = [UIColor grayColor];
         hud.labelText = NSLocalizedString(@"PlotLoading", nil);
         //random color
-//        CGFloat red =  arc4random_uniform(256)/255.f;
-//        CGFloat blue = arc4random_uniform(256)/255.f;
-//        CGFloat green = arc4random_uniform(256)/255.f;
-//        
-//        CGColorRef color = CGColorRetain([UIColor colorWithRed:red green:green blue:blue alpha:1.0].CGColor);
-//        
-//        [[[MMProgressHUD sharedHUD] overlayView] setOverlayColor:color];
-//        
-//        CGColorRelease(color);
-//        
-//        [MMProgressHUD showWithTitle:nil status:@"Loading..."];
+        //        CGFloat red =  arc4random_uniform(256)/255.f;
+        //        CGFloat blue = arc4random_uniform(256)/255.f;
+        //        CGFloat green = arc4random_uniform(256)/255.f;
+        //
+        //        CGColorRef color = CGColorRetain([UIColor colorWithRed:red green:green blue:blue alpha:1.0].CGColor);
+        //
+        //        [[[MMProgressHUD sharedHUD] overlayView] setOverlayColor:color];
+        //        
+        //        CGColorRelease(color);
+        //        
+        //        [MMProgressHUD showWithTitle:nil status:@"Loading..."];
         
         count++;
     }

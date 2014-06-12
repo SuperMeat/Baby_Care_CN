@@ -215,9 +215,9 @@
 #pragma MARK HTTPREQUEST
 
 #ifdef DEBUG
-#define BASE_URL @"http://192.168.1.138:8010/api/"
+#define BASE_URL @"http://114.215.109.90/"
 #else
-#define BASE_URL @"http://cbaisan.w82.dns87.com/api/" //接口IP
+#define BASE_URL @"http://114.215.109.90/" //接口IP
 #endif
 
 //网络通信提示
@@ -234,10 +234,10 @@
 #define BASEREQUEST_TYPE 1
 
 //用户注册请求地址
-#define USER_CREATE_URL ([BASE_URL stringByAppendingString:@"User.svc/UserCreate"])
-#define USER_LOGIN_URL ([BASE_URL stringByAppendingString:@"User.svc/UserLogin"])
-#define BABY_SYNC_URL ([BASE_URL stringByAppendingString:@"Baby.svc/GetBabysInfo"])
-#define BABY_CREATEBYUSERID_URL ([BASE_URL stringByAppendingString:@"Baby.svc/BabyCreateByUserID"])
+#define USER_CREATE_URL ([BASE_URL stringByAppendingString:@"api/User.svc/UserCreate"])
+#define USER_LOGIN_URL ([BASE_URL stringByAppendingString:@"api/User.svc/UserLogin"])
+#define BABY_SYNC_URL ([BASE_URL stringByAppendingString:@"api/Baby.svc/GetBabysInfo"])
+#define BABY_CREATEBYUSERID_URL ([BASE_URL stringByAppendingString:@"api/Baby.svc/BabyCreateByUserID"])
 
 //用户注册类型
 #define RTYPE_APP 1
@@ -245,7 +245,7 @@
 #define RTYPE_SINA 3
 
 //类目同步
-#define CATEGORY_SYNC_URL ([BASE_URL stringByAppendingString:@"User.svc/SyncCategory"])
+#define CATEGORY_SYNC_URL ([BASE_URL stringByAppendingString:@"api/User.svc/SyncCategory"])
 
 //***********  END  ************
 

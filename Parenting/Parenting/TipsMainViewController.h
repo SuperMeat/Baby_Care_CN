@@ -21,7 +21,7 @@
 @property (nonatomic,strong) UIScrollView   *scrollView;
 @property (nonatomic,strong) UITableView    *tTableView;
 @property (nonatomic,strong) UITableView    *sTableView;
-
+@property (strong, nonatomic) UIButton *buttonBack;
 @property (nonatomic,strong) UIButton *buttonSubscribe;
 
 @property (strong, nonatomic) UIImageView *tipsNavigationImageView;
