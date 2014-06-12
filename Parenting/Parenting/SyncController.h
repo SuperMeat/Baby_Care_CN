@@ -23,4 +23,9 @@ typedef void(^SyncFinishBlock)();
                 ViewController:(UIViewController*) viewController;
 
 
+-(void)syncCategoryInfo:(int) UserID
+                    HUD:(MBProgressHUD*) hud
+           SyncFinished:(SyncFinishBlock) syncFinishBlock
+         ViewController:(UIViewController*) viewController;
+
 @end

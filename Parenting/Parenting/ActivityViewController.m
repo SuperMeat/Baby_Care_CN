@@ -7,7 +7,7 @@
 //
 
 #import "ActivityViewController.h"
-#import "AdviseMasterViewController.h"
+#import "TipsMainViewController.h"
 
 @interface ActivityViewController ()
 
@@ -49,7 +49,7 @@
 - (void)showAdvise
 {
     NSLog(@"show Advise!");
-    AdviseMasterViewController *tipsMasterViewController = [[AdviseMasterViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    TipsMainViewController *tipsMasterViewController = [[TipsMainViewController alloc] init];
     self.navigationController.navigationBar.hidden = NO;
     [self.navigationController pushViewController:tipsMasterViewController animated:YES];
 }

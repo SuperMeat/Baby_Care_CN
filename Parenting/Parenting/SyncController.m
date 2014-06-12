@@ -10,6 +10,7 @@
 #import "NetWorkConnect.h"
 #import "MBProgressHUD.h"
 #import "BabyDataDB.h"
+#import "TipCategoryDB.h"
 
 @implementation SyncController
 
@@ -24,7 +25,7 @@
     return _sharedObject;
 }
 
-
+#pragma 同步婴儿数据
 -(void)syncBabyDataCollectionsByUserID:(int) UserID
                            HUD:(MBProgressHUD*) hud
                   SyncFinished:(SyncFinishBlock) syncFinishBlock
@@ -126,6 +127,71 @@
 //婴儿活动数据存储
 -(void)SaveBabyActivity:(NSArray*)actArray{
     
+}
+
+#pragma 同步贴士类目
+-(void)syncCategoryInfo:(int) UserID
+                    HUD:(MBProgressHUD*) hud
+           SyncFinished:(SyncFinishBlock) syncFinishBlock
+         ViewController:(UIViewController*) viewController{
+    
+    NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:UserID],@"userId",nil];
+    hud = [MBProgressHUD showHUDAddedTo:viewController.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.alpha = 0.5;
+    //提示消息
+    hud.labelText = @"接收数据中";
+    
+    [[NetWorkConnect sharedRequest]httpRequestWithURL:CATEGORY_SYNC_URL
+                                                 data:dictBody
+                                                 mode:@"POST"
+                                                  HUD:hud
+                                       didFinishBlock:^(NSDictionary *result)
+     {
+         //请求成功处理
+         NSMutableArray *categoryArr = [[result objectForKey:@"body"] objectForKey:@"Bc_Category"];
+         for (NSDictionary* category in categoryArr) {
+             //处理贴士类目表&创建数据库
+             int categoryId = [[category objectForKey:@"categoryId"] intValue];
+             int createTime = [[category objectForKey:@"create_time"] intValue];
+             int updateTime = [[category objectForKey:@"update_time"] intValue];
+             int parentId = [[category objectForKey:@"parent_id"] intValue];
+             NSString* name = [category objectForKey:@"name"];
+             NSString* describe = [category objectForKey:@"describe"];
+             NSString* icon = [category objectForKey:@"icon"];
+             
+             //检测该数据是否已入库 返回:YES需要更新 NO不需要更新
+             BOOL isUpdate = [TipCategoryDB checkUpdateState:categoryId UpdateTime:updateTime];
+             if (isUpdate) {
+                 //更新数据&保存照片
+                 NSString *picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"icon"),icon];
+                 UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picUrl]]];
+                 NSString *docDir = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
+                 NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",docDir,icon];
+                 NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+                 [data1 writeToFile:pngFilePath atomically:YES];
+                 
+                 [TipCategoryDB insertCategoryDB:categoryId CreateTime:createTime UpdateTime:updateTime ParentId:parentId name:name describe:describe icon:icon];
+             }
+         }
+
+         
+         if (syncFinishBlock) {
+             syncFinishBlock();
+         }
+         [hud hide:YES afterDelay:0.8];
+     }
+                                         didFailBlock:^(NSString *error)
+     {
+         //请求失败处理
+         hud.labelText = http_error;
+        [hud hide:YES afterDelay:0.8];
+     }
+                                       isShowProgress:YES
+                                        isAsynchronic:YES
+                                        netWorkStatus:YES
+                                       viewController:viewController];
+
 }
 
 @end

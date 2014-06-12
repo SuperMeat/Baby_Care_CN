@@ -106,5 +106,4 @@
  *  @return 删除成功true失败false
  */
 -(BOOL)deleteNotifyMessageById:(int)msgid;
-
 @end
