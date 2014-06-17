@@ -142,7 +142,9 @@
 		48152E47184C65AE009A4900 /* 1136.3.png in Resources */ = {isa = PBXBuildFile; fileRef = 48152E41184C65AE009A4900 /* 1136.3.png */; };
 		48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */; };
 		48152E4F1851B842009A4900 /* MyLocalNofityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */; };
-		481D919618D7DA590046A6B9 /* BC_Info.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 481D919518D7DA590046A6B9 /* BC_Info.sqlite */; };
+		481FB9C9194EED0A009553ED /* CacheData.m in Sources */ = {isa = PBXBuildFile; fileRef = 481FB9C8194EED0A009553ED /* CacheData.m */; };
+		481FB9CB194FFA69009553ED /* BC_Info.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 481FB9CA194FFA69009553ED /* BC_Info.sqlite */; };
+		481FB9CE195035FB009553ED /* UserLittleTips.m in Sources */ = {isa = PBXBuildFile; fileRef = 481FB9CD195035FB009553ED /* UserLittleTips.m */; };
 		482791C71884DE1D003E9724 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B51884DE1D003E9724 /* 114.png */; };
 		482791C81884DE1D003E9724 /* 120 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B61884DE1D003E9724 /* 120 2.png */; };
 		482791C91884DE1D003E9724 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791B71884DE1D003E9724 /* 120.png */; };
@@ -820,7 +822,11 @@
 		48152E4B1851B842009A4900 /* MyLocalNofityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLocalNofityViewController.h; path = LocalNofication/MyLocalNofityViewController.h; sourceTree = "<group>"; };
 		48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLocalNofityViewController.m; path = LocalNofication/MyLocalNofityViewController.m; sourceTree = "<group>"; };
 		48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyLocalNofityViewController.xib; path = LocalNofication/MyLocalNofityViewController.xib; sourceTree = "<group>"; };
-		481D919518D7DA590046A6B9 /* BC_Info.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BC_Info.sqlite; sourceTree = "<group>"; };
+		481FB9C7194EED0A009553ED /* CacheData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheData.h; path = CacheData/CacheData.h; sourceTree = "<group>"; };
+		481FB9C8194EED0A009553ED /* CacheData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheData.m; path = CacheData/CacheData.m; sourceTree = "<group>"; };
+		481FB9CA194FFA69009553ED /* BC_Info.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BC_Info.sqlite; sourceTree = "<group>"; };
+		481FB9CC195035FB009553ED /* UserLittleTips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLittleTips.h; sourceTree = "<group>"; };
+		481FB9CD195035FB009553ED /* UserLittleTips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLittleTips.m; sourceTree = "<group>"; };
 		482791B51884DE1D003E9724 /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		482791B61884DE1D003E9724 /* 120 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120 2.png"; sourceTree = "<group>"; };
 		482791B71884DE1D003E9724 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
@@ -1766,6 +1772,8 @@
 				BE955F4F190104A000225029 /* WhoDataBase.m */,
 				BEB7E2D21923167C00E752B7 /* TipCategoryDB.h */,
 				BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */,
+				481FB9CC195035FB009553ED /* UserLittleTips.h */,
+				481FB9CD195035FB009553ED /* UserLittleTips.m */,
 			);
 			name = DataController;
 			sourceTree = "<group>";
@@ -2098,6 +2106,15 @@
 			name = BLEWeather;
 			sourceTree = "<group>";
 		};
+		481FB9C6194EECDE009553ED /* CacheData */ = {
+			isa = PBXGroup;
+			children = (
+				481FB9C7194EED0A009553ED /* CacheData.h */,
+				481FB9C8194EED0A009553ED /* CacheData.m */,
+			);
+			name = CacheData;
+			sourceTree = "<group>";
+		};
 		482791B41884DE1D003E9724 /* icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -2377,6 +2394,7 @@
 		488C894D18B497A80091C2BF /* LogicController */ = {
 			isa = PBXGroup;
 			children = (
+				481FB9C6194EECDE009553ED /* CacheData */,
 				4855BCA61830751B00F02A3E /* InformationCenter */,
 				72159749174536D6006FD415 /* PublicClass */,
 				BE5997BE1861927B008D3F6C /* Bluetooth */,
@@ -2997,8 +3015,8 @@
 		7215972717453680006FD415 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				481FB9CA194FFA69009553ED /* BC_Info.sqlite */,
 				BE955F511901076600225029 /* who.rdb */,
-				481D919518D7DA590046A6B9 /* BC_Info.sqlite */,
 				CE23978C176EE37B0096E033 /* Babyinfo.rdb */,
 				7215972817453680006FD415 /* Amoy Baby Care-Info.plist */,
 				7215972917453680006FD415 /* InfoPlist.strings */,
@@ -3658,7 +3676,6 @@
 				48152E1818486C66009A4900 /* messages_right_bubble@2x.png in Resources */,
 				CE0167B7174B059000462363 /* btn_setting.png in Resources */,
 				CE0167B8174B059000462363 /* btn_setting@2x.png in Resources */,
-				481D919618D7DA590046A6B9 /* BC_Info.sqlite in Resources */,
 				CE0167B9174B059000462363 /* btn_setting_focus.png in Resources */,
 				48FEAF6418E917CB002425E2 /* btn_time@2x.png in Resources */,
 				48152DEE18486B13009A4900 /* UMContactViewController.xib in Resources */,
@@ -3851,6 +3868,7 @@
 				4800B0C618D7F3D20093A6AF /* 生理_按@2x.png in Resources */,
 				BE6938EB1909165200FC2BB4 /* PHYDetailViewController.xib in Resources */,
 				480EFA3518E5155C00D40903 /* panels_input@2x.png in Resources */,
+				481FB9CB194FFA69009553ED /* BC_Info.sqlite in Resources */,
 				BE25764618FE51CA0053683A /* horizontal_blue@2x.png in Resources */,
 				4800B0E018D931EF0093A6AF /* MyPageViewController.xib in Resources */,
 				485749A11831C423000D921B /* MissionViewController.xib in Resources */,
@@ -4118,6 +4136,7 @@
 				7215973117453680006FD415 /* defaultAppDelegate.m in Sources */,
 				BE75CD081872C3FC001EF1C1 /* LoginMainViewController.m in Sources */,
 				48EC1DC818603B3700965254 /* LocalNotifyCell.m in Sources */,
+				481FB9CE195035FB009553ED /* UserLittleTips.m in Sources */,
 				4890DCE418F23DA000C498FB /* FeedActivityViewController.m in Sources */,
 				F3F09B5D1745CBCE006CB06D /* SettingViewController.m in Sources */,
 				BEB475A018E574A80004B649 /* NSObject+SBJson.m in Sources */,
@@ -4128,6 +4147,7 @@
 				BEB475A618E574A80004B649 /* SBJsonStreamWriter.m in Sources */,
 				48EF60FB18C5C328006C3D5C /* MyMapViewController.m in Sources */,
 				72FAFD9D174694F500901B8B /* LogDBUtil.m in Sources */,
+				481FB9C9194EED0A009553ED /* CacheData.m in Sources */,
 				BEB7E2D41923167C00E752B7 /* TipCategoryDB.m in Sources */,
 				48F91A1218F557390038DC67 /* SleepActivityViewController.m in Sources */,
 				72FAFDA01746A14400901B8B /* CacheFileUtil.m in Sources */,
@@ -4327,7 +4347,7 @@
 				PROVISIONING_PROFILE = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
@@ -4354,7 +4374,7 @@
 				PROVISIONING_PROFILE = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4410,10 +4430,10 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "16B56DB3-67BA-46B0-8F2D-4FED9B70E1B1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "16B56DB3-67BA-46B0-8F2D-4FED9B70E1B1";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4470,10 +4490,10 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "16B56DB3-67BA-46B0-8F2D-4FED9B70E1B1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "16B56DB3-67BA-46B0-8F2D-4FED9B70E1B1";
+				PROVISIONING_PROFILE = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};

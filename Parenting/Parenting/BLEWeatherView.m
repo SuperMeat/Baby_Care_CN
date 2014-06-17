@@ -32,7 +32,7 @@
     self=[super init];
     if (self){
         self.frame = CGRectMake(0, 0, 320, 200+YADD);
-        getDataTimeInterval = 10.0;
+        getDataTimeInterval = REFRESHBLEDATATIMERAL;
         //        self.backgroundColor=[UIColor redColor];
     }
     return self;
@@ -113,7 +113,7 @@
         {
             int tempvalue = [[dict objectForKey:@"temp"]intValue];
             temp.detail = [self getTempDespction:tempvalue];
-            temp.value = tempvalue;
+            temp.value  = tempvalue;
             //temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
             if ([[dict objectForKey:@"temp"]intValue] == 0) {
                 temp.level = 0;
@@ -258,7 +258,7 @@
             light.detail=[self getLightDespction:lightvalue];
             //light.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"light"]];
             light.value = lightvalue;
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_LIGHT andValue:[NSNumber numberWithInt:[[dict objectForKey:@"light"] intValue]]];
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_LIGHT andValue:[NSNumber numberWithInt:light.value]];
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
@@ -277,7 +277,7 @@
             sound.detail = [self getNoiceDespction:soundvalue];
             //sound.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"maxsound"]];
             sound.value = soundvalue;
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_NOICE andValue:[NSNumber numberWithInt:[[dict objectForKey:@"maxsound"] intValue]]];
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_NOICE andValue:[NSNumber numberWithInt:sound.value]];
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
@@ -296,7 +296,7 @@
             uv.detail = [self getUVDespction:uvvalue];
             //uv.detail=[NSString stringWithFormat:@"%@",[dict objectForKey:@"uv"]];
             uv.value = uvvalue;
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_UV andValue:[NSNumber numberWithInt:[[dict objectForKey:@"uv"] intValue]]];
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_UV andValue:[NSNumber numberWithInt:uv.value]];
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];
@@ -315,7 +315,7 @@
             int pmvalue = [[dict objectForKey:@"pm"] intValue];
             pm.detail=[self getPM25Despction:pmvalue];
             pm.value = pmvalue;
-            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_PM25 andValue:[NSNumber numberWithInt:[[dict objectForKey:@"pm"] intValue]]];
+            NSArray *arr = [EnvironmentAdviceDB selectSuggestionByCondition:ENVIR_SUGGESTION_TYPE_PM25 andValue:[NSNumber numberWithInt:pm.value]];
             
             if ([arr count]>0) {
                 AdviseLevel *al = [arr objectAtIndex:0];

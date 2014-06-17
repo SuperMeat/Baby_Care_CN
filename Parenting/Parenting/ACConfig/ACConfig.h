@@ -14,4 +14,6 @@
 #import "ACFunction.h"
 #import "ACDate.h"
 
+#define REVIEW_URL @"itms-apps://itunes.apple.com/cn/app/bao-bei-ji-hua-jian-ban-rang/id706557892?mt=8"
+
 #endif
