@@ -50,7 +50,7 @@
     UILabel *cutbreastmonth;
     UILabel *cutmilkweek;
     UILabel *cutmilkmonth;
-    
+        AdviseScrollview *ad;
 }
 @property(nonatomic,strong)NSString *activity;
 @property(nonatomic,strong)NSString *feedWay;

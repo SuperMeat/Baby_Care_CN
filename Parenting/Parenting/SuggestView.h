@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SuggestView : UIView
--(id)initWithTitle:(NSString*)title Suggestion:(NSString*)suggestion Center:(CGPoint)center;
+
+
+@property (nonatomic) int m_titleid;
+-(id)initWithTitle:(int)titleid Suggestion:(NSString*)suggestion Center:(CGPoint)center;
 @end

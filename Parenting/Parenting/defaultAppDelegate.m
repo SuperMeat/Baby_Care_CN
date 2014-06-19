@@ -92,8 +92,10 @@ void UncaughtExceptionHandler(NSException *exception) {
     [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,nil] forState:UIControlStateNormal];
     
     //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
-    
-    [[UINavigationBar appearance] setBarTintColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0f) {
+        [[UINavigationBar appearance] setBarTintColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+
+    }
     
     [[UINavigationBar appearance] setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     

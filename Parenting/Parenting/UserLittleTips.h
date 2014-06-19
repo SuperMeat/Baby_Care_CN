@@ -18,4 +18,5 @@
  *  @return 订阅信息数组
  */
 -(NSArray*)selectLittleTipsByAge:(int)age andCondition:(int)condition;
+-(BOOL)updateReadTime:(int)tips_id;
 @end

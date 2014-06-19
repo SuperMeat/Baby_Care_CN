@@ -57,6 +57,10 @@
         startButton.enabled = YES;
     }
     
+    if (ad) {
+        [ad removeFromSuperview];
+        [self makeAdvise];
+    }
     [self loadData];
 }
 
@@ -133,9 +137,8 @@
 
 -(void)makeAdvise
 {
-    
     NSArray *adviseArray = [[UserLittleTips dataBase]selectLittleTipsByAge:1 andCondition:QCM_TYPE_DIAPER];
-    AdviseScrollview *ad=[[AdviseScrollview alloc]initWithArray:adviseArray];
+    ad=[[AdviseScrollview alloc]initWithArray:adviseArray];
     
     adviseImageView = [[UIImageView alloc] init];
     [adviseImageView setFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 130)];

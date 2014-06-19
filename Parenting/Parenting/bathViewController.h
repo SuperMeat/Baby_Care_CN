@@ -21,6 +21,7 @@
     UIImageView *adviseImageView;
     save_bathview *saveView;
     UILabel *labletip;
+    AdviseScrollview *ad;
 }
 @property (strong, nonatomic)SummaryViewController *summary;
 +(id)shareViewController;

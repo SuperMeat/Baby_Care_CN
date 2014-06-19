@@ -32,7 +32,7 @@
     for (int i=0; i<array.count; i++) {
         
         NSDictionary *dict=[array objectAtIndex:i];
-        SuggestView *suggest=[[SuggestView alloc]initWithTitle:[dict objectForKey:@"title"] Suggestion:[dict objectForKey:@"content"] Center:CGPointMake(160+320*i, 60) ];
+        SuggestView *suggest=[[SuggestView alloc]initWithTitle:[[dict objectForKey:@"tips_id"] intValue] Suggestion:[dict objectForKey:@"content"] Center:CGPointMake(160+320*i, 60) ];
         [myscroll addSubview:suggest];
     }
     
@@ -55,12 +55,23 @@
 {
     int page = myscroll.contentOffset.x / 320;
     mypagecontrol.currentPage = page;
+    //更新阅读时间
+    int updatepage = page;
+    if (page != 0 && (page != [[myscroll subviews] count]-1)) {
+        updatepage = page-1;
+    }
+    
+    UIView *subView = [[myscroll subviews] objectAtIndex:updatepage];
+    int tips_id = subView.tag;
+    [[UserLittleTips dataBase]updateReadTime:tips_id];
 }
+
 -(void)chagepage:(UIPageControl*)sender
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.25];
     [myscroll  setContentOffset:CGPointMake(320*sender.currentPage, 0)];
+   
     [UIView commitAnimations];
 }
 

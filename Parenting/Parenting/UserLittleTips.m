@@ -24,9 +24,8 @@
 {
     BOOL res;
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     
-    FMDatabase *db=[FMDatabase databaseWithPath:path];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
@@ -56,7 +55,7 @@
     }
     
     NSString *sql = @"";
-    sql = [NSString stringWithFormat:@"select * from bc_littletips where start_month<= %d and end_month >= %d and %@ = 1 order by tips_lock asc limit 3", age,age, strCondition];
+    sql = [NSString stringWithFormat:@"select * from bc_littletips where start_month<= %d and end_month >= %d and %@ = 1 order by read_time asc limit 5", age,age, strCondition];
     
     FMResultSet *resultset=[db executeQuery:sql];
     while ([resultset next]) {
@@ -69,4 +68,26 @@
     return array;
 }
 
+-(BOOL)updateReadTime:(int)tips_id
+{
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+
+    NSString *sql = [NSString stringWithFormat:@"update bc_littletips set read_time = %ld where littletips_id = %d", [ACDate getTimeStampFromDate:[ACDate date]], tips_id];
+    
+    res=[db executeUpdate:sql];
+    if (!res) {
+        NSLog(@"数据库更新失败");
+        [db close];
+        return res;
+    }
+
+    return res;
+}
 @end

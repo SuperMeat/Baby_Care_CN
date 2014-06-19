@@ -19,13 +19,14 @@
     }
     return self;
 }
--(id)initWithTitle:(NSString*)title Suggestion:(NSString*)suggestion Center:(CGPoint)center;
+-(id)initWithTitle:(int)titleid Suggestion:(NSString*)suggestion Center:(CGPoint)center;
 {
     self=[super init];
     if (self) {
-        
-        self.center=center;
-        self.bounds=CGRectMake(0, 0, 275, 100);
+        self.m_titleid = titleid;
+        self.tag    = titleid;
+        self.center = center;
+        self.bounds = CGRectMake(0, 0, 275, 100);
         
         UIImageView *suggestionimage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 275, 100)];
         suggestionimage.layer.cornerRadius = 8.0f;

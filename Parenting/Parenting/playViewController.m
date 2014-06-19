@@ -77,6 +77,11 @@
     str = @"0";
     [db setObject:str forKey:@"MARK"];
     [db synchronize];
+    if (ad) {
+        [ad removeFromSuperview];
+        [self makeAdvise];
+    }
+
 
 }
 
@@ -164,11 +169,9 @@
 
 -(void)makeAdvise
 {
-    NSDictionary *dict1=[[NSDictionary alloc]initWithObjectsAndKeys:@"Everything is ok",@"title",@"Give your baby a bath and take him for a walk every day at about the same time. It'll get him used to the idea of daily routine. In fact, he'll probably take comfort in it. With a little luck, other schedules will fall into place more easily, too.",@"content", nil];
-    NSDictionary *dict2=[[NSDictionary alloc]initWithObjectsAndKeys:@"Everything is ok",@"title",@"When your baby is very young, feed him whenever you notice hunger signals — even when they seem completely random.",@"content", nil];
-    NSDictionary *dict3=[[NSDictionary alloc]initWithObjectsAndKeys:@"Everything is ok",@"title",@"It is very normal that Lots of babies seem to prefer the nighttime hours for activity, and the daytime hours for slumber.Be patient. Most babies adjust to the family timetable in a month or so. ",@"content", nil];
+    NSArray *adviseArray = [[UserLittleTips dataBase]selectLittleTipsByAge:1 andCondition:QCM_TYPE_PLAY];
     
-    AdviseScrollview *ad=[[AdviseScrollview alloc]initWithArray:[NSArray arrayWithObjects:dict1,dict2,dict3, nil]];
+    ad=[[AdviseScrollview alloc]initWithArray:adviseArray];
     
     
     adviseImageView = [[UIImageView alloc] init];
