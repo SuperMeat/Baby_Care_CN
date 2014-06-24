@@ -142,6 +142,8 @@
 		48152E47184C65AE009A4900 /* 1136.3.png in Resources */ = {isa = PBXBuildFile; fileRef = 48152E41184C65AE009A4900 /* 1136.3.png */; };
 		48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */; };
 		48152E4F1851B842009A4900 /* MyLocalNofityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */; };
+		481968A31959378F003A9D37 /* AdviseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 481968A11959378F003A9D37 /* AdviseTableViewCell.m */; };
+		481968A41959378F003A9D37 /* AdviseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 481968A21959378F003A9D37 /* AdviseTableViewCell.xib */; };
 		481FB9C9194EED0A009553ED /* CacheData.m in Sources */ = {isa = PBXBuildFile; fileRef = 481FB9C8194EED0A009553ED /* CacheData.m */; };
 		481FB9CB194FFA69009553ED /* BC_Info.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 481FB9CA194FFA69009553ED /* BC_Info.sqlite */; };
 		481FB9CE195035FB009553ED /* UserLittleTips.m in Sources */ = {isa = PBXBuildFile; fileRef = 481FB9CD195035FB009553ED /* UserLittleTips.m */; };
@@ -822,6 +824,9 @@
 		48152E4B1851B842009A4900 /* MyLocalNofityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLocalNofityViewController.h; path = LocalNofication/MyLocalNofityViewController.h; sourceTree = "<group>"; };
 		48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLocalNofityViewController.m; path = LocalNofication/MyLocalNofityViewController.m; sourceTree = "<group>"; };
 		48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyLocalNofityViewController.xib; path = LocalNofication/MyLocalNofityViewController.xib; sourceTree = "<group>"; };
+		481968A01959378F003A9D37 /* AdviseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviseTableViewCell.h; sourceTree = "<group>"; };
+		481968A11959378F003A9D37 /* AdviseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviseTableViewCell.m; sourceTree = "<group>"; };
+		481968A21959378F003A9D37 /* AdviseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdviseTableViewCell.xib; sourceTree = "<group>"; };
 		481FB9C7194EED0A009553ED /* CacheData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheData.h; path = CacheData/CacheData.h; sourceTree = "<group>"; };
 		481FB9C8194EED0A009553ED /* CacheData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheData.m; path = CacheData/CacheData.m; sourceTree = "<group>"; };
 		481FB9CA194FFA69009553ED /* BC_Info.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BC_Info.sqlite; sourceTree = "<group>"; };
@@ -3098,6 +3103,9 @@
 		7215975017453988006FD415 /* Summary */ = {
 			isa = PBXGroup;
 			children = (
+				481968A01959378F003A9D37 /* AdviseTableViewCell.h */,
+				481968A11959378F003A9D37 /* AdviseTableViewCell.m */,
+				481968A21959378F003A9D37 /* AdviseTableViewCell.xib */,
 				CE69F1B5176AAAF600E26333 /* SummaryItem.m */,
 				CE69F1B4176AAAF600E26333 /* SummaryItem.h */,
 				CE0C33D917618AF100B1B683 /* SummaryViewController.h */,
@@ -4091,6 +4099,7 @@
 				CE673BA817697A8800A15012 /* Default.png in Resources */,
 				480EFA4418E5155C00D40903 /* btn_feeding_pause@2x.png in Resources */,
 				48DEA7D217F4703400A11316 /* Play_1.jpg in Resources */,
+				481968A41959378F003A9D37 /* AdviseTableViewCell.xib in Resources */,
 				480EFA2918E5155C00D40903 /* panels_color7_choose@2x.png in Resources */,
 				CE673BA917697A8800A15012 /* Default@2x.png in Resources */,
 				48F91B0718FBB54E0038DC67 /* line_dotted_blue@2x.png in Resources */,
@@ -4123,6 +4132,7 @@
 				48EF612618C6FAC7006C3D5C /* ReGeocodeAnnotation.m in Sources */,
 				48B78141182A20610073EEBD /* CustomURLCache.m in Sources */,
 				48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */,
+				481968A31959378F003A9D37 /* AdviseTableViewCell.m in Sources */,
 				485749961831C3D1000D921B /* NotifyViewController.m in Sources */,
 				BE7C697B1867F1B300C4B675 /* ASIFormDataRequest.m in Sources */,
 				4800B14B18D9A4020093A6AF /* UserDataDB.m in Sources */,
@@ -4325,6 +4335,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_DEBUG_INFORMATION_LEVEL = default;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -4344,8 +4355,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
+				PROVISIONING_PROFILE = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -4358,6 +4369,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_DEBUG_INFORMATION_LEVEL = default;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -4430,8 +4442,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				PROVISIONING_PROFILE = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 arm64";
