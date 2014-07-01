@@ -167,15 +167,30 @@
     
     adviseImageView = [[UIImageView alloc] init];
     [adviseImageView setFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 130)];
-    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
+    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     adviseImageView.userInteractionEnabled = YES;
     [adviseImageView addSubview:ad];
     [self.view addSubview:adviseImageView];
-    
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130+17, 198/2.0, 190/2.0)];
+    [addIamge1 setImage:[UIImage imageNamed:@"婴儿车"]];
+    [self.view addSubview:addIamge1];
+
+    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-153/2.0, frame.size.height-114/2.0, 153/2.0, 114/2.0)];
+    [addIamge setImage:[UIImage imageNamed:@"奶嘴"]];
+    [self.view addSubview:addIamge];
+
+    UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 10)];
+    [cutline setImage:[UIImage imageNamed:@"分界线"]];
+    [self.view addSubview:cutline];
 }
 
 -(void)makeView
 {
+    UIImageView *backIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [backIV setImage:[UIImage imageNamed:@"pattern1"]];
+    [self.view addSubview:backIV];
+    
     historyView = [[UIImageView alloc] initWithFrame:CGRectMake((320-310*PNGSCALE)/2.0, 105*PNGSCALE, 310*PNGSCALE, 100*PNGSCALE)];
     [historyView.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
     historyView.layer.cornerRadius = 8.0f;

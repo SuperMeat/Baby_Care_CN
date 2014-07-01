@@ -142,10 +142,24 @@
     
     adviseImageView = [[UIImageView alloc] init];
     [adviseImageView setFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 130)];
-    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
+    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     adviseImageView.userInteractionEnabled = YES;
     [adviseImageView addSubview:ad];
     [self.view addSubview:adviseImageView];
+   
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    
+    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130+7, 143/2.0, 165/2.0)];
+    [addIamge1 setImage:[UIImage imageNamed:@"婴儿衣"]];
+    [self.view addSubview:addIamge1];
+    
+    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-140/2.0, frame.size.height-108/2.0, 140/2.0, 108/2.0)];
+    [addIamge setImage:[UIImage imageNamed:@"纸尿布"]];
+    [self.view addSubview:addIamge];
+    
+    UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 10)];
+    [cutline setImage:[UIImage imageNamed:@"分界线"]];
+    [self.view addSubview:cutline];
 }
 
 - (void)loadData
@@ -255,6 +269,10 @@
 
 -(void)makeView
 {
+    UIImageView *backIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [backIV setImage:[UIImage imageNamed:@"pattern1"]];
+    [self.view addSubview:backIV];
+    
     historyView = [[UIImageView alloc] initWithFrame:CGRectMake((320-599/2.0)/2.0, 10+64, 599/2.0, 205/2.0)];
     [historyView setImage:[UIImage imageNamed:@"bg.png"]];
     historyView.layer.cornerRadius = 15.0f;
@@ -430,7 +448,8 @@
     [super viewDidLoad];
     [self makeView];
     [self makeAdvise];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+
+
     // Do any additional setup after loading the view from its nib.
 }
 

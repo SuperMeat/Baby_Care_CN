@@ -176,15 +176,30 @@
     
     adviseImageView = [[UIImageView alloc] init];
     [adviseImageView setFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 130)];
-    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
+    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     adviseImageView.userInteractionEnabled = YES;
     [adviseImageView addSubview:ad];
     [self.view addSubview:adviseImageView];
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130+7, 156/2.0, 230/2.0)];
+    [addIamge1 setImage:[UIImage imageNamed:@"挂饰"]];
+    [self.view addSubview:addIamge1];
 
+    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-102/2.0, frame.size.height-175/2.0, 102/2.0, 175/2.0)];
+    [addIamge setImage:[UIImage imageNamed:@"玩具棒"]];
+    [self.view addSubview:addIamge];
+
+    UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 10)];
+    [cutline setImage:[UIImage imageNamed:@"分界线"]];
+    [self.view addSubview:cutline];
 }
 
 -(void)makeView
 {
+    UIImageView *backIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [backIV setImage:[UIImage imageNamed:@"pattern1"]];
+    [self.view addSubview:backIV];
+    
     startButton=[UIButton buttonWithType:UIButtonTypeCustom];
     startButton.frame=CGRectMake(40,180*PNGSCALE, 281*PNGSCALE/2.0, 253*PNGSCALE/2.0);
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_playing_play.png"] forState:UIControlStateNormal];

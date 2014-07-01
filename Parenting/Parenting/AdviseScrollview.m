@@ -22,7 +22,7 @@
 - (id)initWithArray:(NSArray*)array
 {
     self=[self initWithFrame:CGRectMake(0,0, 320, 130)];
-    [self setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     self.myscroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 130)];
     [self addSubview:myscroll];
     myscroll.delegate=self;
@@ -37,7 +37,7 @@
     }
     
     UIImageView *image=[[UIImageView alloc]init];
-    [image setBackgroundColor:[UIColor clearColor]];
+    [image setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     image.center=CGPointMake(160, 120);
     image.bounds=CGRectMake(0, 0, 320, 10);
     self.mypagecontrol=[[UIPageControl alloc]init];
