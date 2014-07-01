@@ -4627,7 +4627,7 @@
 				7215973F17453680006FD415 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		7215974017453680006FD415 /* Build configuration list for PBXNativeTarget "Amoy Baby Care" */ = {
 			isa = XCConfigurationList;
@@ -4636,7 +4636,7 @@
 				7215974217453680006FD415 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
