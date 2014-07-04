@@ -822,11 +822,8 @@
     if (tableView == Advise)
         //return AdviseArray.count;
         switch (chooseAdvise) {
-            case ADVISE_TYPE_ALL:
-                return 34;
-                break;
             case ADVISE_TYPE_FEED:
-                return 5;
+                return 35;
                 break;
             case ADVISE_TYPE_SLEEP:
                 return 5;
@@ -950,37 +947,9 @@
         
         NSString *imageName,*title;
         switch (chooseAdvise) {
-            case ADVISE_TYPE_ALL:
-                if (indexPath.section < 5) {
-                    imageName = [NSString stringWithFormat:@"Feed_%d.jpg", indexPath.section + 1];
-                    title =[NSString stringWithFormat:@"Feed_T%d", indexPath.section + 1];
-                }
-                else if (indexPath.section < 10)
-                {
-                    imageName = [NSString stringWithFormat:@"Sleep_%d.jpg", indexPath.section % 5 + 1];
-                    title =[NSString stringWithFormat:@"Sleep_T%d", indexPath.section % 5+ 1];
-                }
-                else if (indexPath.section < 16)
-                {
-                    imageName = [NSString stringWithFormat:@"Bath_%d.jpg", indexPath.section % 10 + 1];
-                    title =[NSString stringWithFormat:@"Bath_T%d", indexPath.section % 10 + 1];
-                }
-                else if (indexPath.section < 21)
-                {
-                    imageName = [NSString stringWithFormat:@"Diaper_%d.jpg", indexPath.section % 16 + 1];
-                    title = [NSString stringWithFormat:@"Diaper_T%d", indexPath.section % 16 + 1];
-                    
-                }
-                else
-                {
-                    imageName = [NSString stringWithFormat:@"Play_%d.jpg", indexPath.section % 21 + 1];
-                    title = [NSString stringWithFormat:@"Play_T%d", indexPath.section % 21 + 1];
-                }
-
-                break;
             case ADVISE_TYPE_FEED:
-                if (indexPath.section < 5) {
-                    imageName = [NSString stringWithFormat:@"Feed_%d.jpg", indexPath.section + 1];
+                if (indexPath.section < 35) {
+                    imageName = [NSString stringWithFormat:@"Feed_%d.jpg", indexPath.section%5 + 1];
                     title =[NSString stringWithFormat:@"Feed_T%d", indexPath.section + 1];
                 }
                 break;
@@ -1052,53 +1021,35 @@
             [Advise reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
         
-        NSString *url, *key;
+        NSString *url, *key, *title;
         switch (chooseAdvise) {
-            case ADVISE_TYPE_ALL:
-                if (indexPath.section < 5) {
-                    key = [NSString stringWithFormat:@"Feed_%d", indexPath.section + 1];
-                }
-                else if (indexPath.section < 10)
-                {
-                    key = [NSString stringWithFormat:@"Sleep_%d", indexPath.section %5+ 1];
-                }
-                else if (indexPath.section < 16)
-                {
-                    key = [NSString stringWithFormat:@"Bath_%d", indexPath.section %10+ 1];
-                }
-                else if (indexPath.section < 21)
-                {
-                    key = [NSString stringWithFormat:@"Diaper_%d", indexPath.section%16 + 1];
-                }
-                else
-                {
-                    key = [NSString stringWithFormat:@"Play_%d", indexPath.section %21+ 1];
-                }
-
-                break;
             case ADVISE_TYPE_FEED:
-                if (indexPath.section < 5) {
+                if (indexPath.section < 35) {
                     key = [NSString stringWithFormat:@"Feed_%d", indexPath.section + 1];
-                }
+                    title =[NSString stringWithFormat:@"Feed_T%d", indexPath.section + 1];                }
                 break;
             case ADVISE_TYPE_SLEEP:
                 if (indexPath.section < 5) {
                     key = [NSString stringWithFormat:@"Sleep_%d", indexPath.section + 1];
+                    title =[NSString stringWithFormat:@"Sleep_T%d", indexPath.section + 1];
                 }
                 break;
             case ADVISE_TYPE_BATH:
                 if (indexPath.section < 6) {
                     key = [NSString stringWithFormat:@"Bath_%d", indexPath.section + 1];
+                    title =[NSString stringWithFormat:@"Bath_T%d", indexPath.section + 1];
                 }
                 break;
             case ADVISE_TYPE_DIAPER:
                 if (indexPath.section < 5) {
                     key = [NSString stringWithFormat:@"Diaper_%d", indexPath.section + 1];
+                    title =[NSString stringWithFormat:@"Diaper_T%d", indexPath.section + 1];
                 }
                 break;
             case ADVISE_TYPE_PLAY:
                 if (indexPath.section < 13) {
                     key = [NSString stringWithFormat:@"Play_%d", indexPath.section + 1];
+                    title =[NSString stringWithFormat:@"Play_T%d", indexPath.section + 1];
                 }
                 break;
             default:
@@ -1109,6 +1060,7 @@
         
         TipsWebViewController *tips = [[TipsWebViewController alloc] init];
         [tips setTipsUrl:url];
+        [tips setTipsTitle:NSLocalizedString(title, nil)];
         [self.navigationController pushViewController:tips animated:YES];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"gototips"];
 
