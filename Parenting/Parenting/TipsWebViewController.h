@@ -11,10 +11,12 @@
 @interface TipsWebViewController : UIViewController<UIWebViewDelegate>
 {
     NSString* _url;
+    NSString* _contenttitle;
     int count;
     UIImageView* Shareview;
     UITextField *Sharetext;
 }
 @property (strong, nonatomic)  UIWebView *webView;
 -(void) setTipsUrl:(NSString*)requestUrl;
+-(void) setTipsTitle:(NSString*)title;
 @end
