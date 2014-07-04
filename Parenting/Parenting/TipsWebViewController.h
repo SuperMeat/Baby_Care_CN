@@ -16,5 +16,6 @@
     UITextField *Sharetext;
 }
 @property (strong, nonatomic)  UIWebView *webView;
+@property (strong, nonatomic) UIImageView *tipsNavigationImageView;
 -(void) setTipsUrl:(NSString*)requestUrl;
 @end

@@ -26,7 +26,19 @@
     maskLayer2.frame = _view2.bounds;
     maskLayer2.path = maskPath2.CGPath;
     _view2.layer.mask = maskLayer2;
-     
+}
+
+-(void)setCellContent:(NSString*)date title:(NSString*)title summary:(NSString*)summary picUrl:(NSString*)picUrl{
+    _labelDate.text = date;
+    _labelSummary.text = summary;
+    _labelTitle.text = title;
+//    picUrl = @"13996157820.jpg";
+    picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"Tip"),picUrl];
+    UIASYImageView *imageView = [[UIASYImageView alloc] initWithFrame:_imagePic.frame];
+    [imageView showImageWithUrl:picUrl];
+    [_view1 addSubview:imageView];
+    [_imagePic setHidden:YES];
+//    _imagePic.image = imageView.image;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

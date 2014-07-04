@@ -195,4 +195,20 @@ typedef enum{
  */
 -(BOOL)updateUploadtime:(NSString*)tablename andUploadTime:(NSDate*)uploadtime andID:(long)upload_id;
 
+
+/**
+ 根据表名,字段名&值判断记录是否存在
+ */
++(BOOL)checkRecordExistByID:(int)Id
+                  FiledName:(NSString*)filedName
+                  TableName:(NSString*)tableName
+                     DBPath:(NSString*)path;
+/**
+ 根据表名,字段名&值,更新时间判断记录是否存在
+ */
++(BOOL)checkRecordNeedUpdateByID:(int)Id
+                      UpdateTime:(int)updateTime
+                       FiledName:(NSString*)filedName
+                       TableName:(NSString*)tableName
+                          DBPath:(NSString*)path;
 @end

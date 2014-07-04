@@ -9,16 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "TipTableViewCell.h"
 #import "TipsWebViewController.h"
+#import "TipCategoryDB.h"
+#import "SyncController.h"
+#import "MBProgressHUD.h"
 
 @interface TipListViewController : UIViewController<UIScrollViewDelegate>
 {
     UIActivityIndicatorView *activityView;
+    MBProgressHUD *hud;
     NSArray *arrDS;
+    NSString *tipsIds;
+//    int categoryId;
 }
 
 @property (strong, nonatomic) UIButton *buttonBack;
 @property (nonatomic,strong) UIScrollView *scrollView;
-@property (nonatomic,strong) NSNumber* categoryId;
+@property (nonatomic,assign) int categoryId;
 @property (strong, nonatomic) UIImageView *tipsNavigationImageView;
 
 @end

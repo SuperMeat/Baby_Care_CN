@@ -25,7 +25,22 @@
                 describe:(NSString*)describe
                    icon:(NSString*)icon;
 
+
++(BOOL)checkDeleteCategory:(NSString*)ids;
 +(BOOL)checkExist:(int)categoryId;
 +(BOOL)checkSubscribe:(int)UserID
            categoryId:(int)categoryId;
+
+
++(NSArray*)selectTipsByIds:(NSString*)ids;
++(BOOL)insertTipDB:(int)tipId
+        CreateTime:(int)createTime
+        UpdateTime:(int)updateTime
+        CategoryId:(int)categoryId
+             Title:(NSString*)title
+           Summary:(NSString*)summary
+            PicUrl:(NSString*)picUrl;
+
+
+
 @end

@@ -2182,5 +2182,54 @@
     }
 }
 
+#pragma 根据表名,字段名&值判断记录是否存在
++(BOOL)checkRecordExistByID:(int)Id
+                  FiledName:(NSString*)filedName
+                  TableName:(NSString*)tableName
+                     DBPath:(NSString*)path{
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:path];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return NO;
+    }
+    NSString *sql = [NSString stringWithFormat:@"select %@ from %@ where %@ = %d",filedName,tableName,filedName,Id];
+    
+    FMResultSet *resultset=[db executeQuery:sql];
+    res = NO;
+    while ([resultset next]) {
+        res = YES;
+    }
+    return res;
+}
+
+#pragma 根据表名,字段名&值,更新时间判断记录是否存在
++(BOOL)checkRecordNeedUpdateByID:(int)Id
+                      UpdateTime:(int)updateTime
+                       FiledName:(NSString*)filedName
+                       TableName:(NSString*)tableName
+                          DBPath:(NSString*)path{
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:path];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return NO;
+    }
+    NSString *sql = [NSString stringWithFormat:@"select %@,update_time from %@ where %@ = %d",filedName,tableName,filedName,Id];
+    FMResultSet *resultset=[db executeQuery:sql];
+    res = YES;
+    while ([resultset next]) {
+        int update_Time = [resultset intForColumn:@"update_time"];
+        if (update_Time == updateTime) {
+            res = NO;
+        }
+    }
+    return res;
+}
+
 @end
 

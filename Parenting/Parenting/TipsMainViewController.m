@@ -40,6 +40,15 @@
 {
     [super viewDidLoad];
     [self initView];
+    
+    [self initData];
+    
+    [[SyncController syncController] syncCategoryInfo:ACCOUNTUID HUD:hud SyncFinished:^{
+        [self initData];
+        [_sTableView reloadData];
+        [_tTableView reloadData];
+    } ViewController:self];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -50,15 +59,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self initData];
-    [_sTableView reloadData];
-    [_tTableView reloadData];
     
-    [[SyncController syncController] syncCategoryInfo:ACCOUNTUID HUD:hud SyncFinished:^{
-        [self initData];
-        [_sTableView reloadData];
-        [_tTableView reloadData];
-    } ViewController:self];
 }
 
 -(void)initView{
@@ -123,10 +124,15 @@
     if (category_ids == nil || [category_ids  isEqual: @""]) {
         NSDictionary *userDict = [[UserDataDB alloc] selectUser:ACCOUNTUID];
         category_ids = [userDict objectForKey:@"category_ids"];
+        if ([category_ids isEqual:@""]) {
+            category_ids = @",";
+        }
     }
     
     if ([category_ids isEqual:@","]) {
         tipArray = [[NSArray alloc]initWithObjects:nil];
+        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+        [_buttonSubscribe setTitle:@"完成" forState:UIControlStateNormal];
     }
     else{
         NSArray *split = [category_ids componentsSeparatedByString:@","];
@@ -175,7 +181,6 @@
 }
 
 -(void)subscribe:(UIButton*)button{
-    
     category_ids = [NSString stringWithFormat:@"%@%d,",category_ids,button.tag];
     [[UserDataDB dataBase] updateUserCategoryIds:category_ids andUserId:ACCOUNTUID];
     [self initData];
@@ -184,8 +189,8 @@
 }
 
 -(void)desubscribe:(UIButton*)button{
-    NSRange rang = [category_ids rangeOfString:[NSString stringWithFormat:@"%d,",button.tag]];
-    category_ids = [category_ids stringByReplacingCharactersInRange:rang withString:@""];
+    NSRange rang = [category_ids rangeOfString:[NSString stringWithFormat:@",%d,",button.tag]];
+    category_ids = [category_ids stringByReplacingCharactersInRange:rang withString:@","];
     
     [[UserDataDB dataBase] updateUserCategoryIds:category_ids andUserId:ACCOUNTUID];
     [self initData];
@@ -303,13 +308,24 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    int c_id = [[[tipArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
+    NSRange rang = [category_ids rangeOfString:[NSString stringWithFormat:@"%d,",c_id]];
+    category_ids = [category_ids stringByReplacingCharactersInRange:rang withString:@","];
+    
+    [[UserDataDB dataBase] updateUserCategoryIds:category_ids andUserId:ACCOUNTUID];
+    [self initData];
+    [_tTableView reloadData];
+    [_sTableView reloadData];
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _tTableView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         TipListViewController *tipList = [[TipListViewController alloc]init];
-        tipList.categoryId = [NSNumber numberWithInt:1];
+//        tipList.categoryId = [NSNumber numberWithInt:1];
+        tipList.categoryId = 1;
         [self.navigationController pushViewController:tipList animated:YES];
     }
 }

@@ -7,6 +7,7 @@
 //
 
 #import "TipCategoryDB.h"
+#import "ACDate.h"
 
 @implementation TipCategoryDB
 
@@ -165,6 +166,36 @@
     return res;
 }
 
+#pragma 检查并删除服务器上已删除类目
++(BOOL)checkDeleteCategory:(NSString*)ids{
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    
+    NSString *sql = [NSString stringWithFormat:@"select category_id from bc_tips_category where category_id not in (%@)", ids];
+    
+    FMResultSet *resultset=[db executeQuery:sql];
+    res = YES;
+    while ([resultset next]) {
+        int categoryId = [resultset intForColumn:@"category_id"];
+        sql = [NSString stringWithFormat:@"delete from bc_tips_category where category_id = %d ", categoryId];
+        res=[db executeUpdate:sql];
+        if (!res) {
+            NSLog(@"数据库删除失败");
+            [db close];
+            return res;
+        }
+    }
+    
+    return res;
+}
+
+
 +(BOOL)checkSubscribe:(int)UserID
            categoryId:(int)categoryId
 {
@@ -189,6 +220,85 @@
     }
     [db close];
     return res;
+}
+
+#pragma 插入贴士:检测该条是否存在->检测是否该条有更新->插入数据
++(BOOL)insertTipDB:(int)tipId
+        CreateTime:(int)createTime
+        UpdateTime:(int)updateTime
+        CategoryId:(int)categoryId
+             Title:(NSString*)title
+           Summary:(NSString*)summary
+            PicUrl:(NSString*)picUrl{
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return NO;
+    }
+    
+    if (![DataBase checkRecordExistByID:tipId
+                              FiledName:@"tip_id"
+                              TableName:@"bc_tips"
+                                 DBPath:UDBPATH]) {
+        res=[db executeUpdate:@"insert into bc_tips (tip_id, create_time, update_time, category_id, tip_title,tip_summary, tip_pic_url,read_time) values(?,?,?,?,?,?,?,?)",
+                 [NSNumber numberWithInt:tipId],
+                 [NSNumber numberWithInt:createTime],
+                 [NSNumber numberWithInt:updateTime],
+                 [NSNumber numberWithInt:categoryId],
+                 title,
+                 [NSString stringWithFormat:@""],//summary 暂时不存帖子内容
+                 picUrl,
+                 [NSNumber numberWithInt:0]
+                 ];
+    }
+    else{
+        //存在判断需不需要更新
+        if ([DataBase checkRecordNeedUpdateByID:tipId UpdateTime:updateTime FiledName:@"tip_id" TableName:@"bc_tips" DBPath:UDBPATH]) {
+            //需要更新数据
+            res=[db executeUpdate:@"update bc_tips set update_time=?, category_id=?,tip_title=?,tip_pic_url=? where tip_id=?",
+                 [NSNumber numberWithInt:updateTime],
+                 [NSNumber numberWithInt:categoryId],
+                 title,
+                 picUrl,
+                 [NSNumber numberWithInt:tipId]];
+        }
+    }
+    return res;
+}
+
++(NSArray*)selectTipsByIds:(NSString*)ids{
+    NSArray *resArray = [[NSArray alloc]init];;
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSString *sql =[NSString stringWithFormat:@"select * from bc_tips where tip_id in (%@) order by create_time",ids];
+    FMResultSet *resultset=[db executeQuery:sql];
+    while ([resultset next]) {
+        int tipId = [resultset intForColumn:@"tip_id"];
+        int createTime = [resultset intForColumn:@"create_time"];
+        NSDate *createDate = [ACDate getDateFromTimeStamp:(long)createTime];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        NSString * time = [dateFormatter stringFromDate:createDate];
+        NSString * title = [resultset stringForColumn:@"tip_title"];
+        NSString * summary = [resultset stringForColumn:@"tip_summary"];
+        NSString * pic = [resultset stringForColumn:@"tip_pic_url"];
+        NSArray *arr = [[NSArray alloc] initWithObjects:
+                        [NSNumber numberWithInt:tipId],time,title,summary,pic,[NSNumber numberWithInt:createTime],
+                        nil];
+        resArray = [resArray arrayByAddingObject:arr];
+    }
+    [db close];
+    return resArray;
 }
 
 @end

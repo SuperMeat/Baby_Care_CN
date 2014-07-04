@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TipTableViewCell : UITableViewCell
+#import "UIASYImageView.h"
+@interface TipTableViewCell : UITableViewCell{
+    
+    
+}
 
 @property (weak, nonatomic) IBOutlet UIView *view1;
 @property (weak, nonatomic) IBOutlet UIView *view2;
 
+@property (weak, nonatomic) IBOutlet UILabel *labelDate;
+@property (weak, nonatomic) IBOutlet UILabel *labelTitle;
+@property (weak, nonatomic) IBOutlet UILabel *labelSummary;
+@property (weak, nonatomic) IBOutlet UIImageView *imagePic;
 
+-(void)setCellContent:(NSString*)date title:(NSString*)title summary:(NSString*)summary picUrl:(NSString*)picUrl;
 @end
