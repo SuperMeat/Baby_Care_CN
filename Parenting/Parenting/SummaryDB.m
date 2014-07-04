@@ -126,6 +126,9 @@
         SummaryItem *item = [[SummaryItem alloc]init];
         item.starttime    = [set dateForColumn:@"starttime"];
         item.type         = [set stringForColumn:@"type"];
+        item.op_type     = [set stringForColumn:@"food_type"];
+        item.amount      = [set stringForColumn:@"oz"];
+        item.feedtype    = [set stringForColumn:@"feed_type"];
         item.createtime   = [set longForColumn:@"create_time"];
         item.updatetime   = [set longForColumn:@"update_time"];
         item.duration     = [self selectDurationfromStarttime:item.starttime Type:item.type];
@@ -164,6 +167,7 @@
         SummaryItem *item=[[SummaryItem alloc]init];
         item.starttime=[set dateForColumn:@"starttime"];
         item.type=[set stringForColumn:@"type"];
+        item.op_type = [set stringForColumn:@"status"];
         item.createtime   = [set longForColumn:@"create_time"];
         item.updatetime   = [set longForColumn:@"update_time"];
         item.duration=[self selectDurationfromStarttime:item.starttime Type:item.type];

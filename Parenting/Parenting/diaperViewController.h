@@ -31,6 +31,7 @@
     UILabel *cutXuXu;
     UILabel *cutBaBa;
     UILabel *cutXuXuBaBa;
+    AdviseScrollview *ad;
     
 }
 @property (strong, nonatomic)SummaryViewController *summary;

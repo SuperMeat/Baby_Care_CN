@@ -60,6 +60,8 @@
 #import "MyMapViewController.h"
 #import "ASIController.h"
 #import "MTA.h"
+#import "UserLittleTips.h"
+#import "FeedMoreController.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define BABYICONPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d.png",NSHomeDirectory(),USERID,BABYID])
@@ -303,7 +305,7 @@
 #define MIDTEXT   15
 #define BIGTEXT   36
 #define TEXTCOLOR @"#7e7a79"
-#define IMAGEVIEWBGCOLOR @"#d6d6d6"
+#define IMAGEVIEWBGCOLOR @"#f6f6f6"
 #define BIGTEXTCOLOR @"#7e7a79"
 
 #define REDARROWCOLOR @"#e46565"
@@ -312,3 +314,15 @@
 #define FOOD_TYPE_MILK   1
 #define FOOD_TYPE_BREAST 2
 #define FOOD_TYPE_SOLIDFOOD 3
+
+#ifdef DEBUG
+#define GETBLEDATATIMERAL 30.0   //秒
+#else
+#define GETBLEADATATIMERAL 30.0
+#endif
+
+#ifdef DEBUG
+#define REFRESHBLEDATATIMERAL 5.0   //秒
+#else
+#define REFRESHBLEADATATIMERAL 5.0
+#endif

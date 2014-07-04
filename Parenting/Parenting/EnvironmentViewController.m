@@ -126,13 +126,12 @@
 
 -(void)makeAdvise
 {
-    
+    CGRect frame = [[UIScreen mainScreen] bounds];
     NSDictionary *dict1=[[NSDictionary alloc]initWithObjectsAndKeys:[self.weather getChuanYiAdvise],@"content", nil];
     NSDictionary *dict2=[[NSDictionary alloc]initWithObjectsAndKeys:[self.weather getOutSideAdvise],@"content", nil];
     NSDictionary *dict3=[[NSDictionary alloc]initWithObjectsAndKeys:[self.weather getHealthAdvise],@"content", nil];
     
     adoutdoor =[[AdviseScrollview alloc]initWithArray:[NSArray arrayWithObjects:dict1,dict2,dict3, nil]];
-    
     NSMutableArray *indoorArray = [[NSMutableArray alloc]initWithCapacity:0];
     AdviseData *temp = [[BLEWeatherView weatherview]getTempAdviseData];
     if (![temp.mContent isEqualToString:@""]) {
@@ -179,7 +178,7 @@
     }
     
     adindoor=[[AdviseScrollview alloc]initWithArray:indoorArray];
-    
+
     if (chooseIndoor.enabled) {
         adindoor.hidden  = YES;
         adoutdoor.hidden = NO;
@@ -191,13 +190,26 @@
     }
     
     adviseImageView = [[UIImageView alloc] init];
-    CGRect frame = [[UIScreen mainScreen] bounds];
+
     [adviseImageView setFrame:CGRectMake(0, frame.size.height-130-64-49, 320, 130)];
-    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
+    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     adviseImageView.userInteractionEnabled = YES;
     [adviseImageView addSubview:adindoor];
     [adviseImageView addSubview:adoutdoor];
     [self.view addSubview:adviseImageView];
+    
+    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130-64-49+5, 156/2.0, 230/2.0)];
+    [addIamge setImage:[UIImage imageNamed:@"挂饰"]];
+    [self.view addSubview:addIamge];
+
+    UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130-64-49, 320, 10)];
+    [cutline setImage:[UIImage imageNamed:@"分界线"]];
+    [self.view addSubview:cutline];
+    
+    UIImageView *addIamge2 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-216/2.0, frame.size.height-76/2.0-49-64, 216/2.0, 76/2.0)];
+    [addIamge2 setImage:[UIImage imageNamed:@"小火车"]];
+    [self.view addSubview:addIamge2];
+
 }
 
 - (void)viewDidLoad
@@ -259,6 +271,7 @@
 
 
     adindoor=[[AdviseScrollview alloc]initWithArray:indoorArray];
+
     [adviseImageView addSubview:adindoor];
     if (adoutdoor.hidden) {
         adindoor.hidden = NO;

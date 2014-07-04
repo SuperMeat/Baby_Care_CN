@@ -34,5 +34,5 @@
 - (IBAction)Radiobuttonselect:(id)sender;
 
 + (NSString*)getbabyage;
-
++ (int)getbabyagefrommonth;
 @end

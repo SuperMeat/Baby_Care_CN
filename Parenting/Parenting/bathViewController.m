@@ -76,6 +76,10 @@
     str = @"0";
     [db setObject:str forKey:@"MARK"];
     [db synchronize];
+    if (ad) {
+        [ad removeFromSuperview];
+        [self makeAdvise];
+    }
     
 }
 -(void)stop
@@ -169,24 +173,37 @@
 
 -(void)makeAdvise
 {
-    NSDictionary *dict1=[[NSDictionary alloc]initWithObjectsAndKeys:@"Everything is ok",@"title",@"Give your baby a bath and take him for a walk every day at about the same time. It'll get him used to the idea of daily routine. In fact, he'll probably take comfort in it. With a little luck, other schedules will fall into place more easily, too.",@"content", nil];
-    NSDictionary *dict2=[[NSDictionary alloc]initWithObjectsAndKeys:@"Everything is ok",@"title",@"When your baby is very young, feed him whenever you notice hunger signals — even when they seem completely random.",@"content", nil];
-    NSDictionary *dict3=[[NSDictionary alloc]initWithObjectsAndKeys:@"Everything is ok",@"title",@"It is very normal that Lots of babies seem to prefer the nighttime hours for activity, and the daytime hours for slumber.Be patient. Most babies adjust to the family timetable in a month or so. ",@"content", nil];
+    NSArray *adviseArray = [[UserLittleTips dataBase]selectLittleTipsByAge:1 andCondition:QCM_TYPE_BATH];
     
-    AdviseScrollview *ad=[[AdviseScrollview alloc]initWithArray:[NSArray arrayWithObjects:dict1,dict2,dict3, nil]];
+    ad=[[AdviseScrollview alloc]initWithArray:adviseArray];
     
     
     adviseImageView = [[UIImageView alloc] init];
     [adviseImageView setFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 130)];
-    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
+    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     adviseImageView.userInteractionEnabled = YES;
     [adviseImageView addSubview:ad];
     [self.view addSubview:adviseImageView];
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130+7, 156/2.0, 230/2.0)];
+    [addIamge1 setImage:[UIImage imageNamed:@"挂饰"]];
+    [self.view addSubview:addIamge1];
 
+    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-218/2.0, frame.size.height-139/2.0, 218/2.0, 139/2.0)];
+    [addIamge setImage:[UIImage imageNamed:@"澡盆"]];
+    [self.view addSubview:addIamge];
+
+    UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 10)];
+    [cutline setImage:[UIImage imageNamed:@"分界线"]];
+    [self.view addSubview:cutline];
 }
 
 -(void)makeView
 {
+    UIImageView *backIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [backIV setImage:[UIImage imageNamed:@"pattern1"]];
+    [self.view addSubview:backIV];
+    
     startButton=[UIButton buttonWithType:UIButtonTypeCustom];
     startButton.frame=CGRectMake(40,180*PNGSCALE, 281*PNGSCALE/2.0, 270*PNGSCALE/2.0);
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_bath_play.png"] forState:UIControlStateNormal];

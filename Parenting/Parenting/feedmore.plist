@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>其他</string>
+	</array>
+	<array>
+		<string>蔬菜汁</string>
+		<string>水果汁</string>
+		<string>鸡蛋黄</string>
+		<string>牛奶</string>
+		<string>鱼肝油</string>
+		<string>温开水</string>
+	</array>
+	<array>
+		<string>婴儿米粉</string>
+		<string>泥糊状食品</string>
+		<string>婴儿面</string>
+	</array>
+	<array>
+		<string>鸡肉</string>
+		<string>猪肉</string>
+		<string>淡水鱼肉</string>
+		<string>水果泥 </string>
+	</array>
+	<array>
+		<string>米粥</string>
+		<string>软米饭</string>
+		<string>红薯</string>
+		<string>面汤</string>
+		<string>水果</string>
+	</array>
+	<array>
+		<string>炒菜</string>
+	</array>
+</array>
+</plist>

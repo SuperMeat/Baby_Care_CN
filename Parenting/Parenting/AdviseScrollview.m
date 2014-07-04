@@ -22,7 +22,7 @@
 - (id)initWithArray:(NSArray*)array
 {
     self=[self initWithFrame:CGRectMake(0,0, 320, 130)];
-    [self setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     self.myscroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 130)];
     [self addSubview:myscroll];
     myscroll.delegate=self;
@@ -32,12 +32,12 @@
     for (int i=0; i<array.count; i++) {
         
         NSDictionary *dict=[array objectAtIndex:i];
-        SuggestView *suggest=[[SuggestView alloc]initWithTitle:[dict objectForKey:@"title"] Suggestion:[dict objectForKey:@"content"] Center:CGPointMake(160+320*i, 60) ];
+        SuggestView *suggest=[[SuggestView alloc]initWithTitle:[[dict objectForKey:@"tips_id"] intValue] Suggestion:[dict objectForKey:@"content"] Center:CGPointMake(160+320*i, 60) ];
         [myscroll addSubview:suggest];
     }
     
     UIImageView *image=[[UIImageView alloc]init];
-    [image setBackgroundColor:[UIColor clearColor]];
+    [image setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     image.center=CGPointMake(160, 120);
     image.bounds=CGRectMake(0, 0, 320, 10);
     self.mypagecontrol=[[UIPageControl alloc]init];
@@ -55,12 +55,23 @@
 {
     int page = myscroll.contentOffset.x / 320;
     mypagecontrol.currentPage = page;
+    //更新阅读时间
+    int updatepage = page;
+    if (page != 0 && (page != [[myscroll subviews] count]-1)) {
+        updatepage = page-1;
+    }
+    
+    UIView *subView = [[myscroll subviews] objectAtIndex:updatepage];
+    int tips_id = subView.tag;
+    [[UserLittleTips dataBase]updateReadTime:tips_id];
 }
+
 -(void)chagepage:(UIPageControl*)sender
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.25];
     [myscroll  setContentOffset:CGPointMake(320*sender.currentPage, 0)];
+   
     [UIView commitAnimations];
 }
 

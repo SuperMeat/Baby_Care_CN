@@ -670,4 +670,21 @@ static int age = 0;
     
 }
 
++(int)getbabyagefrommonth
+{
+    NSString *age = [[NSUserDefaults standardUserDefaults] objectForKey:@"birthday"];
+    NSDateFormatter *fomatter=[[NSDateFormatter alloc]init];
+    [fomatter setLocale:[NSLocale currentLocale]];
+    [fomatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date=[fomatter dateFromString:age];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
+
+    int allmonth = [comps year] * 12 + [comps month];
+    return allmonth;
+}
+
 @end

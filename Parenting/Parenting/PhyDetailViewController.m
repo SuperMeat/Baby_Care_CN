@@ -96,7 +96,7 @@
     
     //_viewTop1
     _viewTop1 = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 65)];
-    _viewTop1.backgroundColor = [ACFunction colorWithHexString:@"#EFEEEE"];
+    _viewTop1.backgroundColor = [ACFunction colorWithHexString:@"#f6f6f6"];
     [self.view addSubview:_viewTop1];
     
     //_viewTop1_LAST
@@ -152,7 +152,7 @@
 
     //_viewTopHistroy
     _viewHistroy = [[UIView alloc]initWithFrame:CGRectMake(0, 130, self.view.bounds.size.width, 44)];
-    _viewHistroy.backgroundColor = [ACFunction colorWithHexString:@"#EFEEEE"];
+    _viewHistroy.backgroundColor = [ACFunction colorWithHexString:@"#f6f6f6"];
     [self.view addSubview:_viewHistroy];
     
     UILabel *labelHistory = [[UILabel alloc]initWithFrame:CGRectMake(10, 12, 200, 20)];
@@ -192,10 +192,22 @@
     
     adviseImageView = [[UIImageView alloc] init];
     [adviseImageView setFrame:rect];
-    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#e7e7e7"]];
+    [adviseImageView setBackgroundColor:[ACFunction colorWithHexString:@"#f6f6f6"]];
     adviseImageView.userInteractionEnabled = YES;
     [adviseImageView addSubview:ad];
     [self.view addSubview:adviseImageView];
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130+7, 130/2.0, 256/2.0)];
+    [addIamge1 setImage:[UIImage imageNamed:@"长颈鹿"]];
+    [self.view addSubview:addIamge1];
+    
+    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-171/2.0, frame.size.height-102/2.0, 171/2.0, 102/2.0)];
+    [addIamge setImage:[UIImage imageNamed:@"大象"]];
+    [self.view addSubview:addIamge];
+
+    UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 10)];
+    [cutline setImage:[UIImage imageNamed:@"分界线"]];
+    [self.view addSubview:cutline];
 }
 
 -(void)drawLine:(CGRect)rect{

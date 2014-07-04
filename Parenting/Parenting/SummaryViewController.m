@@ -896,8 +896,24 @@
         cell.minutesLable.textColor=cell.timeLable.textColor;
         SummaryItem *item=[ListArray objectAtIndex:indexPath.row];
         cell.timeLable.text = [ACDate dateForSummaryList:item.starttime];
-        cell.MarkLable.text = NSLocalizedString(item.type, nil);
         cell.minutesLable.text = item.duration;
+        if ([item.type isEqualToString:@"Feed"])
+        {
+            if ([item.feedtype isEqualToString:@"0"])
+            {
+                cell.MarkLable.text = item.op_type;
+                cell.minutesLable.text = item.amount;
+            }
+            else
+            {
+                cell.MarkLable.text = @"哺乳";
+            }
+        }
+        else
+        {
+           cell.MarkLable.text = NSLocalizedString(item.type, nil);
+        }
+        
         
         if ([item.duration isEqualToString:NSLocalizedString(@"XuXu", nil)]) {
             cell.minutesLable.textColor=[UIColor colorWithRed:0x82/255.0 green:0xC6/255.0 blue:0xE1/255.0 alpha:0xFF/255.0];
