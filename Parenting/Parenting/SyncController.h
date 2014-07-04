@@ -10,12 +10,15 @@
 #import "MBProgressHUD.h"
 
 typedef void(^SyncFinishBlock)();
+typedef void(^SyncFinishBlockP)(NSArray *retArr);
 
 @interface SyncController : NSObject {
     
 }
 
 +(id)syncController;
+
+
 
 -(void)syncBabyDataCollectionsByUserID:(int) UserID
                            HUD:(MBProgressHUD*) hud
@@ -27,5 +30,15 @@ typedef void(^SyncFinishBlock)();
                     HUD:(MBProgressHUD*) hud
            SyncFinished:(SyncFinishBlock) syncFinishBlock
          ViewController:(UIViewController*) viewController;
+
+-(void)getTips:(int) UserID
+    CategoryID:(int) categoryID
+LastCreateTime:(long) lastCreateTime
+     GetNumber:(int) getNumber
+           HUD:(MBProgressHUD*) hud
+  SyncFinished:(SyncFinishBlockP) SyncFinishBlockP
+ViewController:(UIViewController*) viewController;
+
+-(void)SyncBasicContent;
 
 @end

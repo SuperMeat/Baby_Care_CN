@@ -12,13 +12,8 @@
 #import "LoginViewController.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
-#import <Frontia/FrontiaPush.h>
-#import <Frontia/Frontia.h>
+#import "SyncController.h"
 
-#define APP_KEY @"0jqwWuOll53rYRpidLF3XrB9"
-#define REPORT_ID @"d5dd317228"
-
-#define IosAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 
 @implementation defaultAppDelegate
 
@@ -214,7 +209,13 @@ void UncaughtExceptionHandler(NSException *exception) {
         self.window.rootViewController  = myTabController;
     }
 //    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
+    
     [self initializePlat];
+    
+    /*
+     同步数据
+     */
+    [[SyncController syncController] SyncBasicContent];
 }
 
 - (void)initializePlat

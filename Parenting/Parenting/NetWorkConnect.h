@@ -49,5 +49,6 @@ typedef void(^RequestDidFail)(NSString *strErrorMesg);
 
 + (NetWorkConnect *)sharedRequest;
 
+-(BOOL)remoteFileExist:(NSString*)str_url;
 
 @end

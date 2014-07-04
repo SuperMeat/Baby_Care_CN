@@ -16,7 +16,7 @@
 
 static NetWorkConnect * _instance;
 
-#define request_timeout 5
+#define request_timeout 2
 
 @implementation NetWorkConnect
 @synthesize delegate;
@@ -109,5 +109,17 @@ static NetWorkConnect * _instance;
     }
 }
 
+#pragma 检测远程文件是否存在
+-(BOOL)remoteFileExist:(NSString*)str_url
+{
+    NSURL *url = [NSURL URLWithString:str_url];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    int statusCode = [request responseStatusCode];
+    if(statusCode==200){
+        return YES;
+    }
+    return NO;
+}
 
 @end
