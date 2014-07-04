@@ -10,6 +10,7 @@
 #import "APService.h"
 #import "UMSocial.h" 
 #import "LoginViewController.h"
+#import "SyncController.h"
 
 @implementation defaultAppDelegate
 
@@ -202,7 +203,13 @@ void UncaughtExceptionHandler(NSException *exception) {
         self.window.rootViewController  = myTabController;
     }
 //    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
+    
     [self initializePlat];
+    
+    /*
+     同步数据
+     */
+    [[SyncController syncController] SyncBasicContent];
 }
 
 - (void)initializePlat

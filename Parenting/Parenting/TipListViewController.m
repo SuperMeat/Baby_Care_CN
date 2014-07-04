@@ -32,10 +32,28 @@
 {
     [super viewDidLoad];
     [self initView];
+    
+    [[SyncController syncController]    getTips:ACCOUNTUID
+                                     CategoryID:_categoryId
+                                 LastCreateTime:[ACDate getTimeStampFromDate:[NSDate date]]//Now
+                                      GetNumber:3
+                                            HUD:hud
+                                   SyncFinished:^(NSArray *retArr){
+                                       //取出获取到数据的ids
+                                       tipsIds=@"";
+                                       for (NSDictionary* tip in retArr) {
+                                           //处理贴士类目表&创建数据库
+                                           int tipsId = [[tip objectForKey:@"tipId"] intValue];
+                                           tipsIds = [tipsIds stringByAppendingString:[NSString stringWithFormat:@"%d,",tipsId]];
+                                       }
+                                       tipsIds = [tipsIds substringToIndex:[tipsIds length]-1];
+                                       [self initData];
+                                   }
+                                 ViewController:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self initData];
+
 }
 
 -(void)initView{
@@ -82,13 +100,14 @@
 
 -(void)initData{
     //TODO:获取数据库数据源 倒序排列
-    arrDS = @[
-              @[@1,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-              @[@2,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-              @[@3,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"]];
-    
+    arrDS = [TipCategoryDB selectTipsByIds:tipsIds];
     CGSize newSize;
-    if ([arrDS count] == 1) {
+    if ([arrDS count] == 0) {
+        //处理空数据
+        newSize = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
+        // _scrollView addsubview Label & Image
+    }
+    else if ([arrDS count] == 1) {
         //条数 * CELLHEIGHT + 上扩边(SCROLLPADDINGTOP)
         newSize = CGSizeMake(_scrollView.frame.size.width, [arrDS count]* CELLHEIGHT + SCROLLPADDINGTOP + SCROLLPADDINGBOTTOM);
     }
@@ -105,12 +124,14 @@
     for(NSArray *arr in arrDS)
     {
         TipTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"TipTableViewCell" owner:self options:nil] objectAtIndex:0];
+        [cell setCellContent:[arr objectAtIndex:1] title:[arr objectAtIndex:2] summary:[arr objectAtIndex:3] picUrl:[arr objectAtIndex:4]];
         cell.frame = CGRectMake(0, SCROLLPADDINGTOP + [arrDS indexOfObject:arr]*CELLHEIGHT, CELLWIDTH, CELLHEIGHT);
         cell.tag = [[arr objectAtIndex:0] intValue];
         //设置CELL内容
         [_scrollView addSubview:cell];
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goDetail:)];
+        tapGesture.view.tag =[[arr objectAtIndex:0] intValue];
         [cell addGestureRecognizer:tapGesture];
     }
     
@@ -120,23 +141,40 @@
     if (_scrollView.contentOffset.y < 0 && !activityView.isAnimating) {
         [activityView startAnimating];
         _scrollView.scrollEnabled = NO;
-        [self uploadData];
+        
+        
+        long lastCreateTime = [[[arrDS objectAtIndex:0] objectAtIndex:5]longValue];
+        [[SyncController syncController]    getTips:ACCOUNTUID
+                                         CategoryID:_categoryId
+                                     LastCreateTime:lastCreateTime//Now
+                                          GetNumber:3
+                                                HUD:hud
+                                       SyncFinished:^(NSArray *retArr){
+                                           //已无更新记录
+                                           if (retArr == nil) {
+                                               [activityView stopAnimating];
+                                               _scrollView.scrollEnabled = YES;
+                                               [_scrollView setContentOffset:CGPointMake(0, SCROLLPADDINGTOP) animated:YES];
+                                               return;
+                                           }
+                                           //取出获取到数据的ids
+                                           tipsIds = @"";
+                                           for (NSDictionary* tip in retArr) {
+                                               //处理贴士类目表&创建数据库
+                                               int tipsId = [[tip objectForKey:@"tipId"] intValue];
+                                               tipsIds = [tipsIds stringByAppendingString:[NSString stringWithFormat:@"%d,",tipsId]];
+                                           }
+                                           tipsIds = [tipsIds substringToIndex:[tipsIds length]-1];
+                                           [self uploadData];
+                                       }
+                                     ViewController:self];
     }
 }
 
 -(void)uploadData{
-    NSArray *arrRevice = @[
-                           @[@1,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-                           @[@2,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-                           @[@3,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"]];
-    //插入到原有DataSource
-    arrDS = @[
-              @[@1,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-              @[@2,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-              @[@3,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-              @[@1,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-              @[@2,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"],
-              @[@3,@"2014-05-18 10:00",@"避免月经失调的十大秘方",@"如果你已经月经失调,那么最好的一条建议咋样就咋样",@"exp.png"]];
+    NSArray *arrRevice = [TipCategoryDB selectTipsByIds:tipsIds];
+    
+    arrDS = [arrRevice arrayByAddingObjectsFromArray:arrDS];
     
     //先调整contentSize
     CGSize newSize = CGSizeMake(_scrollView.frame.size.width,
@@ -152,12 +190,14 @@
     for(NSArray *arr in arrRevice)
     {
         TipTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"TipTableViewCell" owner:self options:nil] objectAtIndex:0];
+        [cell setCellContent:[arr objectAtIndex:1] title:[arr objectAtIndex:2] summary:[arr objectAtIndex:3] picUrl:[arr objectAtIndex:4]];
         cell.frame = CGRectMake(0, SCROLLPADDINGTOP + [arrDS indexOfObject:arr]*CELLHEIGHT, CELLWIDTH, CELLHEIGHT);
         cell.tag = [[arr objectAtIndex:0] intValue];
         //设置CELL内容
         [_scrollView addSubview:cell];
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goDetail:)];
+        tapGesture.view.tag =[[arr objectAtIndex:0] intValue];
         [cell addGestureRecognizer:tapGesture];
     }
     
@@ -169,8 +209,10 @@
 }
 
 -(void)goDetail:(id)sender{
+    UITapGestureRecognizer* tap = sender;
     TipsWebViewController *tipsWeb = [[TipsWebViewController alloc]init];
-    [tipsWeb setTipsUrl:@"http://114.215.109.90/tips/showTip.aspx?id=7"];
+    NSString *Url = [NSString stringWithFormat:@"%@/tips/showTip.aspx?id=%d",BASE_URL,tap.view.tag];
+    [tipsWeb setTipsUrl:Url];
     [self.navigationController pushViewController:tipsWeb animated:YES];
 }
 

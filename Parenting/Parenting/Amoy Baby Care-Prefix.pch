@@ -161,12 +161,11 @@
 #define MTA_KEY @"I6A97SFF8ERU"
 
 #ifdef DEBUG
-#define WEBPHOTO(FLODERNAME) ([NSString stringWithFormat:@"http://192.168.1.138:8010/image/%@",FLODERNAME])
+
 #define ASISYSTEMIP    @"http://192.168.1.138:8033/BC_System/WCF"
 #define ASIHTTPADDRESS @"http://cbaisan.w82.dns87.com/babycare/WCF" //接口IP
 #define ASIADDRESS     @"http://192.168.1.138:8010/WCFService"
-#else
-#define WEBPHOTO(FLODERNAME) ([NSString stringWithFormat:@"http://正式服务器地址/image/%@",FLODERNAME])
+#else 
 #define ASISYSTEMIP    @"http://192.168.1.138:8033/BC_System/WCF"
 #define ASIHTTPADDRESS @"http://cbaisan.w82.dns87.com/babycare/WCF" //接口IP
 #define ASIADDRESS     @"http://正式服务器地址/WCFService"
@@ -240,8 +239,10 @@
 //#endif
 #ifdef DEBUG
 #define BASE_URL @"http://114.215.109.90/"
+#define WEBPHOTO(FLODERNAME) ([NSString stringWithFormat:@"%@image/%@",BASE_URL,FLODERNAME])
 #else
 #define BASE_URL @"http://114.215.109.90/" //接口IP
+#define WEBPHOTO(FLODERNAME) ([NSString stringWithFormat:@"%@image/%@",BASE_URL,FLODERNAME])
 #endif
 
 //网络通信提示
@@ -268,8 +269,13 @@
 #define RTYPE_TENCENT 2
 #define RTYPE_SINA 3
 
-//类目同步
+//贴士类目同步
 #define CATEGORY_SYNC_URL ([BASE_URL stringByAppendingString:@"api/User.svc/SyncCategory"])
+#define GETTIPS_SYNC_URL ([BASE_URL stringByAppendingString:@"api/User.svc/GetTips"])
+
+//窍门同步
+#define LITTLETIPS_SYNC_URL ([BASE_URL stringByAppendingString:@"api/User.svc/SyncLittleTips"])
+#define LITTLETIPS_MAXGETNUMBER 100
 
 //***********  END  ************
 

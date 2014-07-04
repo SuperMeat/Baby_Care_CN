@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "BabyDataDB.h"
 #import "TipCategoryDB.h"
+#import "LittleTipsDB.h"
 
 @implementation SyncController
 
@@ -150,9 +151,12 @@
      {
          //请求成功处理
          NSMutableArray *categoryArr = [[result objectForKey:@"body"] objectForKey:@"Bc_Category"];
+         NSString *forDeleteIds=@"";
          for (NSDictionary* category in categoryArr) {
              //处理贴士类目表&创建数据库
              int categoryId = [[category objectForKey:@"categoryId"] intValue];
+             forDeleteIds = [forDeleteIds stringByAppendingString:[NSString stringWithFormat:@"%d,",categoryId]];
+             
              int createTime = [[category objectForKey:@"create_time"] intValue];
              int updateTime = [[category objectForKey:@"update_time"] intValue];
              int parentId = [[category objectForKey:@"parent_id"] intValue];
@@ -160,22 +164,29 @@
              NSString* describe = [category objectForKey:@"describe"];
              NSString* icon = [category objectForKey:@"icon"];
              
+             //检测照片是否一致
+             NSString *docDir = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
+             NSFileManager *fileManager = [NSFileManager defaultManager];
+             NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",docDir,icon];
+             NSString *picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"icon"),icon];
+             if(![icon isEqual:@""] && ![fileManager fileExistsAtPath:pngFilePath] && [[NetWorkConnect sharedRequest] remoteFileExist:picUrl]) //如果不存在
+             {
+                 UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picUrl]]];
+                 NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+                 [data1 writeToFile:pngFilePath atomically:YES];
+             }
+
              //检测该数据是否已入库 返回:YES需要更新 NO不需要更新
              BOOL isUpdate = [TipCategoryDB checkUpdateState:categoryId UpdateTime:updateTime];
              if (isUpdate) {
-                 //更新数据&保存照片
-                 NSString *picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"icon"),icon];
-                 UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picUrl]]];
-                 NSString *docDir = [NSString stringWithFormat:@"%@/Documents",NSHomeDirectory()];
-                 NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",docDir,icon];
-                 NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
-                 [data1 writeToFile:pngFilePath atomically:YES];
-                 
                  [TipCategoryDB insertCategoryDB:categoryId CreateTime:createTime UpdateTime:updateTime ParentId:parentId name:name describe:describe icon:icon];
              }
+        }
+         //处理服务器已删除类目
+         if (![forDeleteIds  isEqual: @""]) {
+             forDeleteIds = [forDeleteIds substringToIndex:[forDeleteIds length]-1];
+             [TipCategoryDB checkDeleteCategory:forDeleteIds];
          }
-
-         
          if (syncFinishBlock) {
              syncFinishBlock();
          }
@@ -194,4 +205,128 @@
 
 }
 
+
+#pragma 根据贴士类目、最后创建时间、条数获取贴士
+-(void)getTips:(int) UserID
+    CategoryID:(int) categoryID
+LastCreateTime:(long) lastCreateTime
+     GetNumber:(int) getNumber
+           HUD:(MBProgressHUD*) hud
+  SyncFinished:(SyncFinishBlockP) syncFinishBlockP
+ViewController:(UIViewController*) viewController{
+    
+    NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:UserID],@"userId",[NSNumber numberWithInt:categoryID],@"categoryId",[NSNumber numberWithLong:lastCreateTime],@"lastCreateTime",[NSNumber numberWithInt:getNumber],@"getNumber",nil];
+    hud = [MBProgressHUD showHUDAddedTo:viewController.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.alpha = 0.5;
+    //提示消息
+    hud.labelText = @"接收数据中";
+    
+    [[NetWorkConnect sharedRequest]httpRequestWithURL:GETTIPS_SYNC_URL
+                                                 data:dictBody
+                                                 mode:@"POST"
+                                                  HUD:hud
+                                       didFinishBlock:^(NSDictionary *result)
+     {
+         //请求成功处理
+         NSMutableArray *categoryArr = [[result objectForKey:@"body"] objectForKey:@"Bc_Tips"];
+         
+         if ([[result objectForKey:@"code"]intValue] == 1) {
+             for (NSDictionary* category in categoryArr) {
+                 //处理贴士类目表&创建数据库
+                 int tipsId = [[category objectForKey:@"tipId"] intValue];
+                 int createTime = [[category objectForKey:@"create_time"] intValue];
+                 int updateTime = [[category objectForKey:@"update_time"] intValue];
+                 int categoryId = [[category objectForKey:@"category_id"] intValue];
+                 NSString* title = [category objectForKey:@"title"];
+                 NSString* summary = [category objectForKey:@"summary"];
+                 NSString* picUrl = [category objectForKey:@"picUrl"];
+                 
+                 //检测该数据是否已入库 返回:YES需要更新 NO不需要更新
+                 //上述已集成到insert方法中
+                 [TipCategoryDB insertTipDB:tipsId CreateTime:createTime UpdateTime:updateTime CategoryId:categoryId Title:title Summary:summary PicUrl:picUrl];
+             }
+             if (syncFinishBlockP) {
+                 syncFinishBlockP(categoryArr);
+             }
+             [hud hide:YES afterDelay:0.8];
+         }
+         else{
+             //请求失败处理
+             if (syncFinishBlockP) {
+                 syncFinishBlockP(nil);
+             }
+             hud.labelText = @"无可更新数据";
+             [hud hide:YES afterDelay:1.5];
+         }
+     }
+                                         didFailBlock:^(NSString *error)
+     {
+         //请求失败处理
+         hud.labelText = http_error;
+         [hud hide:YES afterDelay:0.8];
+     }
+                                       isShowProgress:YES
+                                        isAsynchronic:YES
+                                        netWorkStatus:YES
+                                       viewController:viewController];
+}
+
+#pragma 同步基本内容:小窍门
+-(void)SyncBasicContent{
+    [self SyncBasicLittleTips];
+}
+
+#pragma 同步小窍门
+-(void)SyncBasicLittleTips{
+    
+    long lastUpdateTime = 0;
+    NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:ACCOUNTUID],@"userId",[NSNumber numberWithLong:lastUpdateTime],@"lastUpdateTime",[NSNumber numberWithInt:LITTLETIPS_MAXGETNUMBER],@"maxGetNumber",nil];
+    
+    [[NetWorkConnect sharedRequest]httpRequestWithURL:LITTLETIPS_SYNC_URL
+                                                 data:dictBody
+                                                 mode:@"POST"
+                                                  HUD:nil
+                                       didFinishBlock:^(NSDictionary *result)
+     {
+         //请求成功处理
+         NSMutableArray *littleTipsArr = [[result objectForKey:@"body"] objectForKey:@"Bc_LittleTips"];
+         for (NSDictionary* littleTip in littleTipsArr) {
+             //数据插入
+             int littleTipsId = [[littleTip objectForKey:@"littletips_Id"] intValue];
+             int createTime = [[littleTip objectForKey:@"create_time"] intValue];
+             int updateTime = [[littleTip objectForKey:@"update_time"] intValue];
+             int start = [[littleTip objectForKey:@"start_month"] intValue];
+             int end = [[littleTip objectForKey:@"end_month"] intValue];
+             int lock = [[littleTip objectForKey:@"tips_lock"] intValue];
+             NSString* content = [littleTip objectForKey:@"tips_content"];
+             int feed = [[littleTip objectForKey:@"feed"] intValue];
+             int sleep = [[littleTip objectForKey:@"sleep"] intValue];
+             int bath = [[littleTip objectForKey:@"bath"] intValue];
+             int play = [[littleTip objectForKey:@"play"] intValue];
+             int diaper = [[littleTip objectForKey:@"diaper"] intValue];
+             int cry = [[littleTip objectForKey:@"cry"] intValue];
+             
+             //检测该数据是否已入库 返回:YES需要更新 NO不需要更新
+             //上述已集成到insert方法中
+             //%DEBUG&FIXE
+             [LittleTipsDB insertLittleTip:littleTipsId CreateTime:createTime UpdateTime:updateTime StartMonth:start EndMonth:end TipLock:lock TipContent:content Feed:feed Sleep:sleep Bath:bath Play:play Diaper:diaper Cry:cry];
+         }
+         
+         //如果获取数据集等于最大获取量，则继续获取
+         if([littleTipsArr count]== LITTLETIPS_MAXGETNUMBER)
+         {
+             [self SyncBasicLittleTips];
+         }
+     }
+                                         didFailBlock:^(NSString *error)
+     {
+         //请求失败处理
+         NSLog(@"SyncLittleTips error");
+     }
+                                       isShowProgress:YES
+                                        isAsynchronic:YES
+                                        netWorkStatus:YES
+                                       viewController:nil];
+}
 @end
