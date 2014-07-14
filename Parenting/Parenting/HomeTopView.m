@@ -157,7 +157,7 @@
             }
             
             [[self viewController].tabBarController.tabBar setHidden:YES];
-            [self addSubview:imagePicker.view];
+            [self.superview.superview addSubview:imagePicker.view];
             
         }
     }
@@ -181,7 +181,7 @@
                 [imagePicker.view setFrame:CGRectMake(0, 0, 320, 568)];
             }
             [[self viewController].tabBarController.tabBar setHidden:YES];
-            [self addSubview:imagePicker.view];
+            [self.superview.superview addSubview:imagePicker.view];
         }
         else
         {
@@ -191,7 +191,7 @@
                 [imagePicker.view setFrame:CGRectMake(0, -20, 320, 568)];
             }
             [[self viewController].tabBarController.tabBar setHidden:YES];
-            [self addSubview:imagePicker.view];
+            [self.superview.superview addSubview:imagePicker.view];
             
         }
     }
@@ -226,6 +226,10 @@
         [imagePicker.view removeFromSuperview];
     }
     [[self viewController].tabBarController.tabBar setHidden:NO];
+    
+    if (picker.sourceType==UIImagePickerControllerSourceTypePhotoLibrary) {
+        [self initData];
+    }
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

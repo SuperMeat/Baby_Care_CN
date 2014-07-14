@@ -11,7 +11,7 @@
 #import "MBProgressHUD.h"
 #import "BabyDataDB.h"
 #import "TipCategoryDB.h"
-#import "LittleTipsDB.h"
+#import "UserLittleTips.h"
 
 @implementation SyncController
 
@@ -279,8 +279,7 @@ ViewController:(UIViewController*) viewController{
 
 #pragma 同步小窍门
 -(void)SyncBasicLittleTips{
-    
-    long lastUpdateTime = 0;
+    long lastUpdateTime = [UserLittleTips getLastUpdateTime];
     NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:ACCOUNTUID],@"userId",[NSNumber numberWithLong:lastUpdateTime],@"lastUpdateTime",[NSNumber numberWithInt:LITTLETIPS_MAXGETNUMBER],@"maxGetNumber",nil];
     
     [[NetWorkConnect sharedRequest]httpRequestWithURL:LITTLETIPS_SYNC_URL
@@ -291,6 +290,9 @@ ViewController:(UIViewController*) viewController{
      {
          //请求成功处理
          NSMutableArray *littleTipsArr = [[result objectForKey:@"body"] objectForKey:@"Bc_LittleTips"];
+         if([[result objectForKey:@"code"] intValue] != 1){
+             return;
+         }
          for (NSDictionary* littleTip in littleTipsArr) {
              //数据插入
              int littleTipsId = [[littleTip objectForKey:@"littletips_Id"] intValue];
@@ -310,7 +312,7 @@ ViewController:(UIViewController*) viewController{
              //检测该数据是否已入库 返回:YES需要更新 NO不需要更新
              //上述已集成到insert方法中
              //%DEBUG&FIXE
-             [LittleTipsDB insertLittleTip:littleTipsId CreateTime:createTime UpdateTime:updateTime StartMonth:start EndMonth:end TipLock:lock TipContent:content Feed:feed Sleep:sleep Bath:bath Play:play Diaper:diaper Cry:cry];
+             [UserLittleTips insertLittleTip:littleTipsId CreateTime:createTime UpdateTime:updateTime StartMonth:start EndMonth:end TipLock:lock TipContent:content Feed:feed Sleep:sleep Bath:bath Play:play Diaper:diaper Cry:cry];
          }
          
          //如果获取数据集等于最大获取量，则继续获取

@@ -594,7 +594,6 @@
 		BEB7E2D0192310D200E752B7 /* TipsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2CE192310D100E752B7 /* TipsWebViewController.m */; };
 		BEB7E2D1192310D200E752B7 /* TipsWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */; };
 		BEB7E2D41923167C00E752B7 /* TipCategoryDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */; };
-		BEBB8CF119640240008C2ACA /* LittleTipsDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBB8CF019640240008C2ACA /* LittleTipsDB.m */; };
 		BEBC12951953D31500C1A7E7 /* UIASYImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBC12941953D31500C1A7E7 /* UIASYImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEE539731945B022000703E6 /* TipListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE539711945B022000703E6 /* TipListViewController.m */; };
 		BEE539741945B022000703E6 /* TipListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE539721945B022000703E6 /* TipListViewController.xib */; };
@@ -1457,8 +1456,6 @@
 		BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipsWebViewController.xib; sourceTree = "<group>"; };
 		BEB7E2D21923167C00E752B7 /* TipCategoryDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipCategoryDB.h; sourceTree = "<group>"; };
 		BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipCategoryDB.m; sourceTree = "<group>"; };
-		BEBB8CEF19640240008C2ACA /* LittleTipsDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LittleTipsDB.h; sourceTree = "<group>"; };
-		BEBB8CF019640240008C2ACA /* LittleTipsDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LittleTipsDB.m; sourceTree = "<group>"; };
 		BEBC12931953D31500C1A7E7 /* UIASYImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIASYImageView.h; sourceTree = "<group>"; };
 		BEBC12941953D31500C1A7E7 /* UIASYImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIASYImageView.m; sourceTree = "<group>"; };
 		BEE539701945B022000703E6 /* TipListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipListViewController.h; sourceTree = "<group>"; };
@@ -1860,8 +1857,6 @@
 				BE955F4F190104A000225029 /* WhoDataBase.m */,
 				BEB7E2D21923167C00E752B7 /* TipCategoryDB.h */,
 				BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */,
-				BEBB8CEF19640240008C2ACA /* LittleTipsDB.h */,
-				BEBB8CF019640240008C2ACA /* LittleTipsDB.m */,
 				481FB9CC195035FB009553ED /* UserLittleTips.h */,
 				481FB9CD195035FB009553ED /* UserLittleTips.m */,
 			);
@@ -4354,7 +4349,6 @@
 				48152DD318486AEA009A4900 /* UMEGORefreshTableHeaderView.m in Sources */,
 				48152DED18486B13009A4900 /* UMContactViewController.m in Sources */,
 				BEB475A618E574A80004B649 /* SBJsonStreamWriter.m in Sources */,
-				BEBB8CF119640240008C2ACA /* LittleTipsDB.m in Sources */,
 				48EF60FB18C5C328006C3D5C /* MyMapViewController.m in Sources */,
 				72FAFD9D174694F500901B8B /* LogDBUtil.m in Sources */,
 				481FB9C9194EED0A009553ED /* CacheData.m in Sources */,
@@ -4648,8 +4642,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
+				PROVISIONING_PROFILE = "2DD710F1-929F-44DA-9E10-EEBD4A26D3AF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 arm64";
@@ -4712,8 +4706,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
+				PROVISIONING_PROFILE = "2DD710F1-929F-44DA-9E10-EEBD4A26D3AF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 arm64";

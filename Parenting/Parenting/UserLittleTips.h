@@ -19,4 +19,26 @@
  */
 -(NSArray*)selectLittleTipsByAge:(int)age andCondition:(int)condition;
 -(BOOL)updateReadTime:(int)tips_id;
+
+/*
+ *  插入数据库
+ */
++(BOOL)insertLittleTip:(int)littleTipId
+            CreateTime:(int)createTime
+            UpdateTime:(int)updateTime
+            StartMonth:(int)startMonth
+              EndMonth:(int)endMonth
+               TipLock:(int)tipLock
+            TipContent:(NSString*)tipContent
+                  Feed:(int)feed
+                 Sleep:(int)sleep
+                  Bath:(int)bath
+                  Play:(int)play
+                Diaper:(int)diaper
+                   Cry:(int)cry;
+
+/*
+ *  获取最后更新时间
+ */
++(long)getLastUpdateTime;
 @end

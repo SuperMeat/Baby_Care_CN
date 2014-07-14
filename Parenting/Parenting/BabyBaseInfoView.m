@@ -9,6 +9,7 @@
 #import "BabyBaseInfoView.h"
 #import "BabyDataDb.h"
 #import "HomeTopView.h"
+#import "TimeLineView.h"
 
 @implementation BabyBaseInfoView
 
@@ -165,6 +166,10 @@
         if ([view isKindOfClass:[HomeTopView class]]) {
             HomeTopView *homeTopView = (HomeTopView*)view;
             [homeTopView initData];
+        }
+        if ([view isKindOfClass:[TimeLineView class]]) {
+            TimeLineView *timeLineView = (TimeLineView*)view;
+            [timeLineView initData];
         }
     }
     
