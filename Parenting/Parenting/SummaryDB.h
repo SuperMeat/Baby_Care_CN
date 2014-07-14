@@ -18,12 +18,14 @@
 -(NSArray*)selectbathforsummary;
 -(NSArray*)selectsleepforsummary;
 -(NSArray*)selectplayforsummary;
+-(NSArray*)selectmedicineforsummary;
 
 -(NSString*)selectFromfeed;
 -(NSString*)selectFrombath;
 -(NSString*)selectFromsleep;
 -(NSString*)selectFromplay;
 -(NSString*)selectFromdiaper;
+-(NSString*)selectFrommedicine;
 
 -(NSArray*)searchFromfeed:(NSDate*)start;
 -(NSArray*)searchFromdiaper:(NSDate*)start;
@@ -31,6 +33,7 @@
 -(NSArray*)searchFrombath:(NSDate*)start;
 -(NSArray*)searchFromplay:(NSDate*)start;
 -(NSArray*)searchFromsleep:(NSDate*)start;
+-(NSArray*)searchFrommedicine:(NSDate*)start;
 
 -(NSDictionary*)searchTodayDiaperStatusList;
 -(NSDictionary*)searchYesterdayDiaperStatusList;

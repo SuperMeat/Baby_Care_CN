@@ -13,6 +13,7 @@
 #import "bathViewController.h"
 #import "playViewController.h"
 #import "FeedActivityViewController.h"
+#import "MedicineViewController.h"
 
 @interface ActivityViewController : ACViewController<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 {
@@ -32,6 +33,7 @@
 @property (strong, nonatomic) UIButton *btnPlay;
 @property (strong, nonatomic) UIButton *btnSleep;
 @property (strong, nonatomic) UIButton *btnDiaper;
+@property (strong, nonatomic) UIButton *btnMedicine;
 @property (strong, nonatomic) UIButton *btnSummary;
 @property (strong, nonatomic) UIButton *btnAdvise;
 

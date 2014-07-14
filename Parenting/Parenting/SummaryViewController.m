@@ -552,7 +552,13 @@
                                                             ContentImage:[UIImage imageNamed:@"btn_diapers"]
                                                  highlightedContentImage:[UIImage imageNamed:@"btn_diapers_focus"]];
     
-    NSArray *menus = [NSArray arrayWithObjects:menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, nil];
+    // Sleep MenuItem.
+    QuadCurveMenuItem *menuitemmedicine = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_medicine"]
+                                                                highlightedImage:[UIImage imageNamed:@"btn_medicine_focus"]
+                                                                    ContentImage:[UIImage imageNamed:@"btn_medicine"]
+                                                         highlightedContentImage:[UIImage imageNamed:@"btn_medicine_focus"]];
+    
+    NSArray *menus = [NSArray arrayWithObjects:menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, menuitemmedicine,nil];
     CGRect rx = [ UIScreen mainScreen ].bounds;
     
     if(rx.size.height > 480){
@@ -656,6 +662,17 @@
             [Advise reloadData];
         }
             break;
+        case 5:
+        {
+            ListArray=[[SummaryDB dataBase] selectmedicineforsummary];
+            [List reloadData];
+            
+            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_MEDICINE];
+            AdviseArray = [DataBase selectsuggestiondiaper:advise_lock];
+            chooseAdvise = ADVISE_TYPE_MEDICINE;
+            [Advise reloadData];
+        }
+            break;
 
         default:
             break;
@@ -752,7 +769,18 @@
             [Advise reloadData];
         }
             break;
+        case 5:
+        {
+            ListArray=[[SummaryDB dataBase] selectmedicineforsummary];
+            [List reloadData];
             
+            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_MEDICINE];
+            AdviseArray = [DataBase selectsuggestiondiaper:advise_lock];
+            chooseAdvise = ADVISE_TYPE_MEDICINE;
+            [Advise reloadData];
+        }
+            break;
+
         default:
             break;
     }

@@ -45,7 +45,7 @@
     UILabel *cutaveragesleepmonth;
     UILabel *cutmaxsleepweek;
     UILabel *cutmaxsleepmonth;
-        AdviseScrollview *ad;
+    AdviseScrollview *ad;
 }
 @property (strong, nonatomic)SummaryViewController *summary;
 +(id)shareViewController;

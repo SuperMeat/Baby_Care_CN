@@ -9,9 +9,9 @@
 #import "QuadCurveMenu.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define NEARRADIUS 130.0f
-#define ENDRADIUS 140.0f
-#define FARRADIUS 160.0f
+#define NEARRADIUS 110.0f
+#define ENDRADIUS 160.0f
+#define FARRADIUS 200.0f
 #define STARTPOINT CGPointMake(29, [UIScreen mainScreen].bounds.size.height-20-44-49-29)
 #define TIMEOFFSET 0.026f
 
@@ -33,7 +33,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor redColor];
         
         _menusArray = [aMenusArray copy];
         

@@ -39,9 +39,11 @@
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_bath (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, bath_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_play (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL,play_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL,play_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     
-    FMResultSet *set=[db executeQuery:@"select * from(select starttime,type from bc_baby_feed union all select starttime,type from bc_baby_diaper union all select starttime,type from bc_baby_sleep union all select starttime,type from bc_baby_bath union all select starttime,type from bc_baby_play)order by starttime desc"];
-    while ([set next]) {
+    FMResultSet *set=[db executeQuery:@"select * from(select starttime,type from bc_baby_feed union all select starttime,type from bc_baby_diaper union all select starttime,type from bc_baby_sleep union all select starttime,type from bc_baby_bath union all select starttime,type from bc_baby_play union all select starttime,type from bc_baby_medicine) order by starttime desc"];
+    while ([set next])
+    {
         ActivityItem *item=[[ActivityItem alloc]init];
         item.starttime=[set dateForColumn:@"starttime"];
         item.type=[set stringForColumn:@"type"];
@@ -179,6 +181,49 @@
     [db close];
     return  array;
 }
+
+-(NSArray*)selectmedicineforsummary
+{
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_bath (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, bath_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_play (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL,play_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    if (!res) {
+        NSLog(@"表格创建失败");
+        [db close];
+        return nil;
+        
+    }
+    FMResultSet *set=[db executeQuery:@"select * from bc_baby_diaper order by starttime desc"];
+    while ([set next]) {
+        SummaryItem *item=[[SummaryItem alloc]init];
+        item.starttime=[set dateForColumn:@"starttime"];
+        item.type=[set stringForColumn:@"type"];
+        item.op_type = [set stringForColumn:@"status"];
+        item.createtime   = [set longForColumn:@"create_time"];
+        item.updatetime   = [set longForColumn:@"update_time"];
+        item.duration=[self selectDurationfromStarttime:item.starttime Type:item.type];
+        
+        
+        [array addObject:item];
+    }
+    
+    [db close];
+    return  array;
+}
+
 
 -(NSArray*)selectbathforsummary
 {
@@ -609,6 +654,61 @@
     
 }
 
+-(NSString*)selectFrommedicine
+{
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    if (!res) {
+        NSLog(@"表格创建失败");
+        [db close];
+        return nil;
+        
+    }
+    FMResultSet *set=[db executeQuery:@"select starttime from bc_baby_diaper order by starttime desc"];
+    while ([set next]) {
+        NSDate *date=[set dateForColumn:@"starttime"];
+        NSLog(@"diaperdate %@",date);
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *comps = [[NSDateComponents alloc] init];
+        NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
+        comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
+        if ([comps day] >0) {
+            [db close];
+            return [NSString stringWithFormat:NSLocalizedString(@"DayTips", nil),[comps day]];
+        }
+        else if ([comps hour]>0) {
+            [db close];
+            return [NSString stringWithFormat:NSLocalizedString(@"HourTips", nil),[comps hour]];
+        }
+        else if ([comps minute]>0) {
+            [db close];
+            return [NSString stringWithFormat:NSLocalizedString(@"MinuteTips", nil),[comps minute]];
+        }
+        else if ([comps second]>0) {
+            [db close];
+            return [NSString stringWithFormat:NSLocalizedString(@"SecondTips", nil),[comps second]];
+        }
+        else
+        {
+            [db close];
+            return @"NULL";
+        }
+    }
+    [db close];
+    return @"NULL";
+    
+}
+
+
 -(NSArray*)searchFromfeed:(NSDate*)start
 {
     
@@ -875,6 +975,41 @@
     [db close];
     return  array;
 }
+
+-(NSArray*)searchFrommedicine:(NSDate*)start
+{
+    
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    FMResultSet *set=[db executeQuery:@"select * from bc_baby_sleep where starttime=?",start];
+    [set next];
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    [array addObject:[set dateForColumn:@"starttime"]];
+    [array addObject:[set  objectForColumnName:@"duration"]];
+    
+    if ([set stringForColumn:@"remark"]) {
+        [array addObject:[set stringForColumn:@"remark"]];
+    }
+    else
+    {
+        [array addObject:[NSString stringWithFormat:@""]];
+    }
+    
+    [array addObject:[set stringForColumn:@"place"]];
+    
+    [db close];
+    return  array;
+}
+
 
 -(BOOL)deleteWithStarttime:(NSDate*)starttime
 {

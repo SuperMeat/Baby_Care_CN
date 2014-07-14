@@ -27,6 +27,7 @@
 #import "save_playview.h"
 #import "save_sleepview.h"
 #import "save_diaperview.h"
+#import "save_medicineview.h"
 #import "DataBase.h"
 #import "ActivityItem.h"
 #import "WeatherView.h"
@@ -83,7 +84,8 @@
 #define ADVISE_TYPE_PLAY   3
 #define ADVISE_TYPE_FEED   4
 #define ADVISE_TYPE_BATH   5
-#define ADVISE_TYPE_ALL    6
+#define ADVISE_TYPE_ALL    7
+#define ADVISE_TYPE_MEDICINE 6
 
 #define ADVISE_TYPE_TEMP    11
 #define ADVISE_TYPE_HUMI    12
@@ -116,7 +118,8 @@
 #define QCM_TYPE_FEED   2
 #define QCM_TYPE_SLEEP  3
 #define QCM_TYPE_DIAPER 4
-#define QCM_TYPE_CRY    5
+#define QCM_TYPE_MEDICINE 5
+#define QCM_TYPE_CRY    6
 
 #define TABLE_NAME_DIAPER @"diaper"
 #define TABLE_NAME_PLAY   @"play"
@@ -294,6 +297,8 @@
 
 #define WINDOWSCREEN (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 568:480)
 
+#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
 #define NORECORDTIP @"您还没有任何活动记录哦,\r现在开始记录吧!"
 
 #define BAIDUWEATHERAPI @"http://api.map.baidu.com/telematics/v3/weather?location=%@&output=json&ak=0jqwWuOll53rYRpidLF3XrB9"
@@ -303,6 +308,7 @@
 #define G_WEBVIEWY (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 49:150)
 #define SMALLTEXT 10
 #define MIDTEXT   15
+#define MOREMIDTEXT   20
 #define BIGTEXT   36
 #define TEXTCOLOR @"#7e7a79"
 #define IMAGEVIEWBGCOLOR @"#f6f6f6"

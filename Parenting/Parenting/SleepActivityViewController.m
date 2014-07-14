@@ -75,7 +75,8 @@
     [db setObject:str forKey:@"MARK"];
     [db synchronize];
     [self loadData];
-    if (ad) {
+    if (ad)
+    {
         [ad removeFromSuperview];
         [self makeAdvise];
     }

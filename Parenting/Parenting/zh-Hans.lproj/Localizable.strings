@@ -25,6 +25,7 @@
 "Sleep"="睡觉";
 "Bath"="洗澡";
 "Play"="玩耍";
+"Medicine"="吃药";
 
 "FeedTable"="Feed";
 "DiaperTable"="Diaper";
@@ -352,7 +353,6 @@ Software And Any Associated Documentation Will At All Times Remain With Copyrigh
 "Diaper_T4"="宝宝尿布台的选购指南(From:网络)";
 "Diaper_T5"="湿纸巾的选购指南(From:网络)";
 
-
 "Play_1"="http://114.215.109.90/tips/showTip.aspx?id=70";
 "Play_2"="http://114.215.109.90/tips/showTip.aspx?id=71";
 "Play_3"="http://114.215.109.90/tips/showTip.aspx?id=72";
@@ -370,7 +370,6 @@ Software And Any Associated Documentation Will At All Times Remain With Copyrigh
 "Play_12"="http://114.215.109.90/tips/showTip.aspx?id=81";
 
 "Play_13"="http://114.215.109.90/tips/showTip.aspx?id=82";
-
 
 "Play_T1"="新生儿的触觉(From:网络)";
 "Play_T2"="锻炼宝宝小游戏：拍打玩具(From:网络)";

@@ -209,11 +209,15 @@
 #define DF    52 //DF 52 for APDS-9930
 -(int)getlightluxwithCH0:(int)ch0 andCH1:(int)ch1
 {
-    double    IAC1 = ch0-B*ch1;
-    double    IAC2 = C * ch0 - D * ch1;
-    double    IAC =  MAX(MAX(IAC1, IAC2), 0);
-    double    LPC = GA * DF / ((ALSIT * AGAIN)*1.0);
-    int       Lux = IAC * LPC;
+    int Lux = 1000;
+    if (ch0 != ch1)
+    {
+        double    IAC1 = ch0-B*ch1;
+        double    IAC2 = C * ch0 - D * ch1;
+        double    IAC =  MAX(MAX(IAC1, IAC2), 0);
+        double    LPC = GA * DF / ((ALSIT * AGAIN)*1.0);
+        Lux = IAC * LPC;
+    }
     return    Lux;
 }
 
@@ -259,6 +263,7 @@
     }
     
     curlux = [self getlightluxwithCH0:CH0 andCH1:CH1];
+    [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,光线强度过大,需为宝宝遮光或关闭灯光,以确保宝宝能在适当光线下活动!%ld",curlux] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
     if (curlux > LIGHT_MAX_VALUE)
     {
         [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"宝贝计划监测宝温馨提醒您,光线强度过大,需为宝宝遮光或关闭灯光,以确保宝宝能在适当光线下活动!"] FireDate:[ACDate date] AlarmKey:@"phonewarning"];
