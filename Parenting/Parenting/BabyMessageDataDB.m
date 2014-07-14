@@ -104,7 +104,7 @@
     return res;
 }
 
--(BOOL)deleteBabyMessage:(int) create_time
+-(BOOL)deleteBabyMessage:(NSString*) key
 {
     BOOL res;
     res = [self checkBabyMsgTable];
@@ -116,7 +116,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"delete from bc_baby_msg where create_time = ?", [NSNumber numberWithInt:create_time]];
+    res=[db executeUpdate:@"delete from bc_baby_msg where key = ?", key];
     
     if (!res) {
         NSLog(@"数据库删除失败");

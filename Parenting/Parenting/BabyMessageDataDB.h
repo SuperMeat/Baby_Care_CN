@@ -32,5 +32,5 @@
                           type:(int)msg_type
                        content:(NSString*)msg_content;
 
--(BOOL)deleteBabyMessage:(int) create_time;
+-(BOOL)deleteBabyMessage:(NSString*) key;
 @end

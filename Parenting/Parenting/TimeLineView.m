@@ -49,6 +49,7 @@
 #pragma 加载数据
 -(void)initData{
     //初始化加载消息
+    timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
     if ([timeLineArray count] == 0) {
         NSDate *curdate = [ACDate date];
         //欢迎消息
@@ -57,13 +58,15 @@
         NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
         if (dict) {
             //姓名
-            if ([[dict objectForKey:@"nickname"] isEqual: @""] || [[dict objectForKey:@"birth"] intValue] == 0) {
-                [[BabyMessageDataDB babyMessageDB]insertBabyMessageNormal:curdate UpdateTime:1 key:@"input_babyInfo" type:1 content:@"请完善宝宝基本信息"];
+            long adCreate = [ACDate getTimeStampFromDate:curdate];
+            adCreate = adCreate + 1;
+            if ([[dict objectForKey:@"nickname"] isEqual: @""] || [[dict  objectForKey:@"birth"] intValue] == 0) {
+                [[BabyMessageDataDB babyMessageDB]insertBabyMessageNormal:adCreate UpdateTime:adCreate key:@"input_babyInfo" type:1 content:@"请完善宝宝基本信息"];
             }
             else
             {
                 //删除提醒
-                [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:1];
+                [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:@"input_babyInfo" ];
             }
         }
         timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
@@ -73,7 +76,7 @@
         if (dict) {
             //姓名
             if (![[dict objectForKey:@"nickname"] isEqual: @""] && [[dict objectForKey:@"birth"] intValue] != 0) {
-                [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:00000001];
+                [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:@"input_babyInfo" ];
                 //TODO:填写完宝贝信息后引导做测评 之类的
             }
         }

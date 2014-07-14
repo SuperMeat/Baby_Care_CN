@@ -18,5 +18,5 @@
 }
 
 @property (nonatomic,strong)UITableView *timeLineTableView;
-
+-(void)initData;
 @end

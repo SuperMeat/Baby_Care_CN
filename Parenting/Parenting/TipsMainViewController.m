@@ -323,9 +323,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _tTableView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        TipListViewController *tipList = [[TipListViewController alloc]init];
-//        tipList.categoryId = [NSNumber numberWithInt:1];
-        tipList.categoryId = 1;
+        TipListViewController *tipList = [[TipListViewController alloc]init]; 
+        tipList.categoryId = [[[tipArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
         [self.navigationController pushViewController:tipList animated:YES];
     }
 }
