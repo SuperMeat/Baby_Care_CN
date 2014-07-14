@@ -29,8 +29,6 @@
     UILabel *remark;
 }
 
-@property (strong, nonatomic) IBOutlet UIView *save_view;
-
 @property(nonatomic,assign)BOOL  select;
 @property(nonatomic,strong)NSDate *start;
 @property int curduration;
