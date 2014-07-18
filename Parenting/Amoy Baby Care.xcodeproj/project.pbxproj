@@ -88,9 +88,7 @@
 		480EFA4C18E5155C00D40903 /* icon_timer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF98B18E5155C00D40903 /* icon_timer@2x.png */; };
 		480EFA4E18E5155C00D40903 /* input_timer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF98D18E5155C00D40903 /* input_timer@2x.png */; };
 		480EFA5018E5155C00D40903 /* label_bottle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF98F18E5155C00D40903 /* label_bottle@2x.png */; };
-		480EFA5218E5155C00D40903 /* label_bottle_choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99118E5155C00D40903 /* label_bottle_choose@2x.png */; };
 		480EFA5318E5155C00D40903 /* label_breast@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99218E5155C00D40903 /* label_breast@2x.png */; };
-		480EFA5518E5155C00D40903 /* label_breast_choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99418E5155C00D40903 /* label_breast_choose@2x.png */; };
 		480EFA5918E5155C00D40903 /* btn_bath_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99918E5155C00D40903 /* btn_bath_pause@2x.png */; };
 		480EFA5A18E5155C00D40903 /* btn_bath_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99A18E5155C00D40903 /* btn_bath_play.png */; };
 		48152DD318486AEA009A4900 /* UMEGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48152DD218486AEA009A4900 /* UMEGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -271,14 +269,19 @@
 		48B78142182A20610073EEBD /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B78140182A20610073EEBD /* Util.m */; };
 		48C9AD1418E2AB4800D04FF7 /* SummaryDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C9AD1318E2AB4800D04FF7 /* SummaryDB.m */; };
 		48D42F41196F719E00DFFC5C /* no_record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F40196F719E00DFFC5C /* no_record@2x.png */; };
-		48D42F44196F84BA00DFFC5C /* save_medicineview.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D42F43196F84BA00DFFC5C /* save_medicineview.m */; };
 		48D42F49196FDC9400DFFC5C /* medicine_heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F45196FDC9400DFFC5C /* medicine_heart@2x.png */; };
 		48D42F4A196FDC9400DFFC5C /* medicine_bottle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F46196FDC9400DFFC5C /* medicine_bottle@2x.png */; };
 		48D42F4B196FDC9400DFFC5C /* medicine_zhen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F47196FDC9400DFFC5C /* medicine_zhen@2x.png */; };
 		48D42F4C196FDC9400DFFC5C /* medicine_tingzhen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F48196FDC9400DFFC5C /* medicine_tingzhen@2x.png */; };
-		48D42F4F196FDEAA00DFFC5C /* radio_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F4D196FDEAA00DFFC5C /* radio_focus@2x.png */; };
-		48D42F50196FDEAA00DFFC5C /* radio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F4E196FDEAA00DFFC5C /* radio@2x.png */; };
-		48DCDC031973757300EA7875 /* save_medicineview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC021973757300EA7875 /* save_medicineview.xib */; };
+		48DCDC061973B23300EA7875 /* save_medicineview.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DCDC051973B23300EA7875 /* save_medicineview.m */; };
+		48DCDC0C1975061B00EA7875 /* label_bottle_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC071975061B00EA7875 /* label_bottle_focus@2x.png */; };
+		48DCDC0D1975061B00EA7875 /* label_breast_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC081975061B00EA7875 /* label_breast_focus@2x.png */; };
+		48DCDC0F1975061B00EA7875 /* label_food_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC0A1975061B00EA7875 /* label_food_focus@2x.png */; };
+		48DCDC101975061B00EA7875 /* label_food@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC0B1975061B00EA7875 /* label_food@2x.png */; };
+		48DCDC141975209000EA7875 /* icon_alarm2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC121975209000EA7875 /* icon_alarm2@2x.png */; };
+		48DCDC151975209000EA7875 /* icon_ellipsis@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC131975209000EA7875 /* icon_ellipsis@2x.png */; };
+		48DCDC17197526E700EA7875 /* MedicineDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC16197526E700EA7875 /* MedicineDetailView.xib */; };
+		48DCDC191975791700EA7875 /* FoodDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC181975791700EA7875 /* FoodDetailView.xib */; };
 		48DEA79D17F45E0C00A11316 /* Feed_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 48DEA79817F45E0C00A11316 /* Feed_2.jpg */; };
 		48DEA79E17F45E0C00A11316 /* Feed_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 48DEA79917F45E0C00A11316 /* Feed_3.jpg */; };
 		48DEA79F17F45E0C00A11316 /* Feed_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 48DEA79A17F45E0C00A11316 /* Feed_4.jpg */; };
@@ -816,9 +819,7 @@
 		480EF98B18E5155C00D40903 /* icon_timer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_timer@2x.png"; sourceTree = "<group>"; };
 		480EF98D18E5155C00D40903 /* input_timer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_timer@2x.png"; sourceTree = "<group>"; };
 		480EF98F18E5155C00D40903 /* label_bottle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_bottle@2x.png"; sourceTree = "<group>"; };
-		480EF99118E5155C00D40903 /* label_bottle_choose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_bottle_choose@2x.png"; sourceTree = "<group>"; };
 		480EF99218E5155C00D40903 /* label_breast@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_breast@2x.png"; sourceTree = "<group>"; };
-		480EF99418E5155C00D40903 /* label_breast_choose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_breast_choose@2x.png"; sourceTree = "<group>"; };
 		480EF99918E5155C00D40903 /* btn_bath_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_bath_pause@2x.png"; sourceTree = "<group>"; };
 		480EF99A18E5155C00D40903 /* btn_bath_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_bath_play.png; sourceTree = "<group>"; };
 		48152DD118486AEA009A4900 /* UMEGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMEGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -1067,15 +1068,22 @@
 		48C9AD1218E2AB4800D04FF7 /* SummaryDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryDB.h; sourceTree = "<group>"; };
 		48C9AD1318E2AB4800D04FF7 /* SummaryDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryDB.m; sourceTree = "<group>"; };
 		48D42F40196F719E00DFFC5C /* no_record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_record@2x.png"; sourceTree = "<group>"; };
-		48D42F42196F84BA00DFFC5C /* save_medicineview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = save_medicineview.h; sourceTree = "<group>"; };
-		48D42F43196F84BA00DFFC5C /* save_medicineview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = save_medicineview.m; sourceTree = "<group>"; };
 		48D42F45196FDC9400DFFC5C /* medicine_heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medicine_heart@2x.png"; sourceTree = "<group>"; };
 		48D42F46196FDC9400DFFC5C /* medicine_bottle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medicine_bottle@2x.png"; sourceTree = "<group>"; };
 		48D42F47196FDC9400DFFC5C /* medicine_zhen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medicine_zhen@2x.png"; sourceTree = "<group>"; };
 		48D42F48196FDC9400DFFC5C /* medicine_tingzhen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medicine_tingzhen@2x.png"; sourceTree = "<group>"; };
 		48D42F4D196FDEAA00DFFC5C /* radio_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "radio_focus@2x.png"; path = "Parenting/radio_focus@2x.png"; sourceTree = SOURCE_ROOT; };
 		48D42F4E196FDEAA00DFFC5C /* radio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "radio@2x.png"; path = "Parenting/radio@2x.png"; sourceTree = SOURCE_ROOT; };
-		48DCDC021973757300EA7875 /* save_medicineview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = save_medicineview.xib; sourceTree = "<group>"; };
+		48DCDC041973B23300EA7875 /* save_medicineview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = save_medicineview.h; sourceTree = "<group>"; };
+		48DCDC051973B23300EA7875 /* save_medicineview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = save_medicineview.m; sourceTree = "<group>"; };
+		48DCDC071975061B00EA7875 /* label_bottle_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_bottle_focus@2x.png"; sourceTree = "<group>"; };
+		48DCDC081975061B00EA7875 /* label_breast_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_breast_focus@2x.png"; sourceTree = "<group>"; };
+		48DCDC0A1975061B00EA7875 /* label_food_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_food_focus@2x.png"; sourceTree = "<group>"; };
+		48DCDC0B1975061B00EA7875 /* label_food@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_food@2x.png"; sourceTree = "<group>"; };
+		48DCDC121975209000EA7875 /* icon_alarm2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_alarm2@2x.png"; sourceTree = "<group>"; };
+		48DCDC131975209000EA7875 /* icon_ellipsis@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ellipsis@2x.png"; sourceTree = "<group>"; };
+		48DCDC16197526E700EA7875 /* MedicineDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MedicineDetailView.xib; sourceTree = "<group>"; };
+		48DCDC181975791700EA7875 /* FoodDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodDetailView.xib; sourceTree = "<group>"; };
 		48DEA79817F45E0C00A11316 /* Feed_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Feed_2.jpg; sourceTree = "<group>"; };
 		48DEA79917F45E0C00A11316 /* Feed_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Feed_3.jpg; sourceTree = "<group>"; };
 		48DEA79A17F45E0C00A11316 /* Feed_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Feed_4.jpg; sourceTree = "<group>"; };
@@ -1929,6 +1937,7 @@
 				480EF97518E5155C00D40903 /* 睡觉 */,
 				480EF97B18E5155C00D40903 /* 玩耍 */,
 				480EF98118E5155C00D40903 /* 喂奶 */,
+				48DCDC111975203900EA7875 /* 吃药 */,
 				480EF99718E5155C00D40903 /* 洗澡 */,
 			);
 			name = "活动";
@@ -2065,6 +2074,10 @@
 		480EF98118E5155C00D40903 /* 喂奶 */ = {
 			isa = PBXGroup;
 			children = (
+				48DCDC071975061B00EA7875 /* label_bottle_focus@2x.png */,
+				48DCDC081975061B00EA7875 /* label_breast_focus@2x.png */,
+				48DCDC0A1975061B00EA7875 /* label_food_focus@2x.png */,
+				48DCDC0B1975061B00EA7875 /* label_food@2x.png */,
 				480D6CF01924A75800E5CAC7 /* radio_focus.png */,
 				480D6CF11924A75800E5CAC7 /* radio.png */,
 				480EF98318E5155C00D40903 /* btn_feeding_pause@2x.png */,
@@ -2076,9 +2089,7 @@
 				480EF98B18E5155C00D40903 /* icon_timer@2x.png */,
 				480EF98D18E5155C00D40903 /* input_timer@2x.png */,
 				480EF98F18E5155C00D40903 /* label_bottle@2x.png */,
-				480EF99118E5155C00D40903 /* label_bottle_choose@2x.png */,
 				480EF99218E5155C00D40903 /* label_breast@2x.png */,
-				480EF99418E5155C00D40903 /* label_breast_choose@2x.png */,
 			);
 			name = "喂奶";
 			path = "活动/喂奶";
@@ -2869,6 +2880,16 @@
 			path = MBProgressHUD/util;
 			sourceTree = "<group>";
 		};
+		48DCDC111975203900EA7875 /* 吃药 */ = {
+			isa = PBXGroup;
+			children = (
+				48DCDC121975209000EA7875 /* icon_alarm2@2x.png */,
+				48DCDC131975209000EA7875 /* icon_ellipsis@2x.png */,
+			);
+			name = "吃药";
+			path = "活动/活动信息首页";
+			sourceTree = "<group>";
+		};
 		48DEA79617F45E0C00A11316 /* TipsImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2931,6 +2952,8 @@
 				484A014C196BE3BE00BBB085 /* MedicineViewController.h */,
 				484A014D196BE3BE00BBB085 /* MedicineViewController.m */,
 				484A014E196BE3BE00BBB085 /* MedicineViewController.xib */,
+				48DCDC16197526E700EA7875 /* MedicineDetailView.xib */,
+				48DCDC181975791700EA7875 /* FoodDetailView.xib */,
 			);
 			name = ActivityController;
 			sourceTree = "<group>";
@@ -2957,9 +2980,8 @@
 				4880A589191B27E7005D5E44 /* DiaperPickerView.m */,
 				488005991929EAA400817919 /* FoodTypePickerView.h */,
 				4880059A1929EAA400817919 /* FoodTypePickerView.m */,
-				48D42F42196F84BA00DFFC5C /* save_medicineview.h */,
-				48D42F43196F84BA00DFFC5C /* save_medicineview.m */,
-				48DCDC021973757300EA7875 /* save_medicineview.xib */,
+				48DCDC041973B23300EA7875 /* save_medicineview.h */,
+				48DCDC051973B23300EA7875 /* save_medicineview.m */,
 			);
 			name = SaveController;
 			sourceTree = "<group>";
@@ -3925,10 +3947,12 @@
 				CE0167B7174B059000462363 /* btn_setting.png in Resources */,
 				CE0167B8174B059000462363 /* btn_setting@2x.png in Resources */,
 				CE0167B9174B059000462363 /* btn_setting_focus.png in Resources */,
+				48DCDC0D1975061B00EA7875 /* label_breast_focus@2x.png in Resources */,
 				48FEAF6418E917CB002425E2 /* btn_time@2x.png in Resources */,
 				48152DEE18486B13009A4900 /* UMContactViewController.xib in Resources */,
-				48D42F50196FDEAA00DFFC5C /* radio@2x.png in Resources */,
 				CE0167BA174B059000462363 /* btn_setting_focus@2x.png in Resources */,
+				48DCDC0C1975061B00EA7875 /* label_bottle_focus@2x.png in Resources */,
+				48DCDC141975209000EA7875 /* icon_alarm2@2x.png in Resources */,
 				48FCD5AB195D404F003DBA62 /* 婴儿车@2x.png in Resources */,
 				48152E1A18486C66009A4900 /* messages_tableview_background@2x.png in Resources */,
 				481D0D52195BC2680025281A /* 玩具棒@2x.png in Resources */,
@@ -4074,6 +4098,7 @@
 				CE016899174B4CCB00462363 /* bg_advice.png in Resources */,
 				CE01689A174B4CCB00462363 /* bg_advice@2x.png in Resources */,
 				48F91AB418FB8DF10038DC67 /* noice_level_excellent@2x.png in Resources */,
+				48DCDC0F1975061B00EA7875 /* label_food_focus@2x.png in Resources */,
 				4855BC27182B3FDB00F02A3E /* PushConfig.plist in Resources */,
 				484A0147196BCEC700BBB085 /* label_breast_focus@2x.png in Resources */,
 				482791C71884DE1D003E9724 /* 114.png in Resources */,
@@ -4092,7 +4117,6 @@
 				48F91AAE18FB8DF10038DC67 /* light_level_bad@2x.png in Resources */,
 				BE25764718FE51CA0053683A /* line_red@2x.png in Resources */,
 				482791D81884DE1D003E9724 /* iTunesArtwork@2x.png in Resources */,
-				480EFA5518E5155C00D40903 /* label_breast_choose@2x.png in Resources */,
 				485749971831C3D1000D921B /* NotifyViewController.xib in Resources */,
 				48152E1518486C66009A4900 /* item_ok@2x.png in Resources */,
 				48FEAF5918E917CB002425E2 /* btn_month@2x.png in Resources */,
@@ -4137,6 +4161,7 @@
 				48FEAEF518E91423002425E2 /* icon_bath@2x.png in Resources */,
 				480EFA0A18E5155C00D40903 /* btn_submit@2x.png in Resources */,
 				482791D51884DE1D003E9724 /* Icon.png in Resources */,
+				48DCDC191975791700EA7875 /* FoodDetailView.xib in Resources */,
 				48FEAF6518E917CB002425E2 /* btn_times@2x.png in Resources */,
 				BE004CE218FE2B7500E56833 /* input_word@2x.png in Resources */,
 				48DEA79F17F45E0C00A11316 /* Feed_4.jpg in Resources */,
@@ -4220,7 +4245,6 @@
 				BE75CD1F1872CBA5001EF1C1 /* login_title@2x.png in Resources */,
 				48F91AB818FB8DF10038DC67 /* advise_arrow_right@2x.png in Resources */,
 				484A0146196BCEC700BBB085 /* label_bottle@2x.png in Resources */,
-				48DCDC031973757300EA7875 /* save_medicineview.xib in Resources */,
 				48DEA7AA17F467A000A11316 /* Sleep_1.jpg in Resources */,
 				48DEA7AE17F467A000A11316 /* Sleep_5.jpg in Resources */,
 				48F91AFB18FBB54E0038DC67 /* icon_little_rainy@2x.png in Resources */,
@@ -4232,6 +4256,7 @@
 				48DEA7D317F4703400A11316 /* Play_2.jpg in Resources */,
 				484A0145196BCEC700BBB085 /* label_bottle_focus@2x.png in Resources */,
 				48FEAF7A18E917CB002425E2 /* label2_sum@2x.png in Resources */,
+				48DCDC151975209000EA7875 /* icon_ellipsis@2x.png in Resources */,
 				488BA9191963AD2B00B6D222 /* icon_share@2x.png in Resources */,
 				48FEAF0518E91423002425E2 /* recent_records_cry@2x.png in Resources */,
 				48EC1DDF1862F6E400965254 /* nofity_myadvise_day.png in Resources */,
@@ -4331,7 +4356,6 @@
 				48F91AC218FB8DF10038DC67 /* label_indoor_focus@2x.png in Resources */,
 				48FEAF5B18E917CB002425E2 /* btn_playing@2x.png in Resources */,
 				48152DEF18486B13009A4900 /* umeng_logo.png in Resources */,
-				480EFA5218E5155C00D40903 /* label_bottle_choose@2x.png in Resources */,
 				48FEAF6D18E917CB002425E2 /* histogram_green@2x.png in Resources */,
 				480EFA1B18E5155C00D40903 /* panels_color1@2x.png in Resources */,
 				48152E2318486C66009A4900 /* send_selected@2x.png in Resources */,
@@ -4348,7 +4372,6 @@
 				482791C91884DE1D003E9724 /* 120.png in Resources */,
 				4800B0C218D7F3D20093A6AF /* 活动_按@2x.png in Resources */,
 				480EFA2518E5155C00D40903 /* panels_color5_choose@2x.png in Resources */,
-				48D42F4F196FDEAA00DFFC5C /* radio_focus@2x.png in Resources */,
 				48F91A1618F7DD010038DC67 /* save_text@2x.png in Resources */,
 				BE75CD1C1872CBA5001EF1C1 /* login_tencent.png in Resources */,
 				4880A57A191A0E6B005D5E44 /* btn_sum3@2x_focus.png in Resources */,
@@ -4392,6 +4415,7 @@
 				480EFA1918E5155C00D40903 /* panels_arrow@2x.png in Resources */,
 				48F91ABE18FB8DF10038DC67 /* advise_background@2x.png in Resources */,
 				48F91AF518FBB54E0038DC67 /* cutline_x@2x.png in Resources */,
+				48DCDC17197526E700EA7875 /* MedicineDetailView.xib in Resources */,
 				CE33B5921770612B00EB8124 /* BabyinfoViewController.xib in Resources */,
 				48F91AAA18FB8DF10038DC67 /* light_level_good@2x.png in Resources */,
 				482791CF1884DE1D003E9724 /* Icon-72.png in Resources */,
@@ -4401,6 +4425,7 @@
 				48DEA7B717F4699700A11316 /* Bath_3.jpg in Resources */,
 				48F91B0418FBB54E0038DC67 /* icon_sunnycloudy@2x.png in Resources */,
 				480EFA1E18E5155C00D40903 /* panels_color2@2x.png in Resources */,
+				48DCDC101975061B00EA7875 /* label_food@2x.png in Resources */,
 				480EFA4C18E5155C00D40903 /* icon_timer@2x.png in Resources */,
 				484A0154196D2D1A00BBB085 /* btn_medicine@2x.png in Resources */,
 			);
@@ -4436,7 +4461,6 @@
 				BEB475A018E574A80004B649 /* NSObject+SBJson.m in Sources */,
 				BE7C697C1867F1B300C4B675 /* ASIHTTPRequest.m in Sources */,
 				48EC1DD61862CE2000965254 /* CustonTimeViewController.m in Sources */,
-				48D42F44196F84BA00DFFC5C /* save_medicineview.m in Sources */,
 				48152DD318486AEA009A4900 /* UMEGORefreshTableHeaderView.m in Sources */,
 				48152DED18486B13009A4900 /* UMContactViewController.m in Sources */,
 				BEB475A618E574A80004B649 /* SBJsonStreamWriter.m in Sources */,
@@ -4563,6 +4587,7 @@
 				4800B0DF18D931EF0093A6AF /* MyPageViewController.m in Sources */,
 				BEB475A518E574A80004B649 /* SBJsonStreamParserState.m in Sources */,
 				4800B14618D9880B0093A6AF /* ACTabBarController.m in Sources */,
+				48DCDC061973B23300EA7875 /* save_medicineview.m in Sources */,
 				BE5997C71861930A008D3F6C /* BindingDeviceViewController.m in Sources */,
 				BEB475A418E574A80004B649 /* SBJsonStreamParserAdapter.m in Sources */,
 				BE7C697A1867F1B300C4B675 /* ASIDownloadCache.m in Sources */,

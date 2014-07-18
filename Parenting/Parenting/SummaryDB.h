@@ -19,6 +19,8 @@
 -(NSArray*)selectsleepforsummary;
 -(NSArray*)selectplayforsummary;
 -(NSArray*)selectmedicineforsummary;
+-(NSArray*)selectmedicinedetailforsummary;
+-(NSArray*)selectfeedfooddetailforsummary;
 
 -(NSString*)selectFromfeed;
 -(NSString*)selectFrombath;

@@ -34,12 +34,15 @@
         return nil;
     }
     
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_bath (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, bath_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_play (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL,play_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL,play_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+
     
     FMResultSet *set=[db executeQuery:@"select * from(select starttime,type from bc_baby_feed union all select starttime,type from bc_baby_diaper union all select starttime,type from bc_baby_sleep union all select starttime,type from bc_baby_bath union all select starttime,type from bc_baby_play union all select starttime,type from bc_baby_medicine) order by starttime desc"];
     while ([set next])
@@ -71,6 +74,8 @@
         [db close];
         return nil;
     }
+    
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
@@ -112,6 +117,7 @@
         [db close];
         return nil;
     }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
@@ -140,6 +146,50 @@
     [db close];
     return  array;
 }
+
+-(NSArray*)selectfeedfooddetailforsummary
+{
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
+   
+    if (!res) {
+        NSLog(@"表格创建失败");
+        [db close];
+        return nil;
+    }
+    int month = [ACDate getCurrentMonth];
+    int week  = [ACDate getCurrentWeek];
+    int weekday = [ACDate getCurrentWeekDay];
+    
+    FMResultSet *set=[db executeQuery:@"select * from bc_baby_feed where feed_type='2' and month=? and week=? and weekday=? order by starttime desc", [NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday]];
+    while ([set next]) {
+        SummaryItem *item = [[SummaryItem alloc]init];
+        item.starttime    = [set dateForColumn:@"starttime"];
+        item.type         = [set stringForColumn:@"type"];
+        item.op_type      = [set stringForColumn:@"food_type"];
+        item.amount       = [set stringForColumn:@"oz"];
+        item.feedtype     = [set stringForColumn:@"feed_type"];
+        item.createtime   = [set longForColumn:@"create_time"];
+        item.updatetime   = [set longForColumn:@"update_time"];
+        item.duration     = [self selectDurationfromStarttime:item.starttime Type:item.type];
+        [array addObject:item];
+    }
+    
+    [db close];
+    return  array;
+}
+
+
 -(NSArray*)selectdiaperforsummary
 {
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
@@ -153,6 +203,7 @@
         [db close];
         return nil;
     }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
@@ -195,6 +246,7 @@
         [db close];
         return nil;
     }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
@@ -206,17 +258,17 @@
         return nil;
         
     }
-    FMResultSet *set=[db executeQuery:@"select * from bc_baby_diaper order by starttime desc"];
+    FMResultSet *set=[db executeQuery:@"select * from bc_baby_medicine order by starttime desc"];
     while ([set next]) {
         SummaryItem *item=[[SummaryItem alloc]init];
         item.starttime=[set dateForColumn:@"starttime"];
         item.type=[set stringForColumn:@"type"];
-        item.op_type = [set stringForColumn:@"status"];
         item.createtime   = [set longForColumn:@"create_time"];
         item.updatetime   = [set longForColumn:@"update_time"];
-        item.duration=[self selectDurationfromStarttime:item.starttime Type:item.type];
-        
-        
+        item.medicinename = [set stringForColumn:@"medicine"];
+        item.isreminder   = [set intForColumn:@"isreminder"];
+        item.amount       = [set stringForColumn:@"amount"];
+        item.danwei       = [set stringForColumn:@"danwei"];
         [array addObject:item];
     }
     
@@ -224,6 +276,53 @@
     return  array;
 }
 
+-(NSArray*)selectmedicinedetailforsummary
+{
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    BOOL res;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_bath (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT NULL, remark Varchar DEFAULT NULL, bath_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_play (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, place Varchar DEFAULT NULL,play_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    if (!res) {
+        NSLog(@"表格创建失败");
+        [db close];
+        return nil;
+        
+    }
+    
+    int month = [ACDate getCurrentMonth];
+    int week  = [ACDate getCurrentWeek];
+    int weekday = [ACDate getCurrentWeekDay];
+    
+    FMResultSet *set=[db executeQuery:@"select * from bc_baby_medicine where month=? and week=? and weekday=? order by starttime desc", [NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday]];
+    while ([set next]) {
+        SummaryItem *item=[[SummaryItem alloc]init];
+        item.starttime=[set dateForColumn:@"starttime"];
+        item.type=[set stringForColumn:@"type"];
+        item.createtime   = [set longForColumn:@"create_time"];
+        item.updatetime   = [set longForColumn:@"update_time"];
+        item.medicinename = [set stringForColumn:@"medicine"];
+        item.isreminder   = [set intForColumn:@"isreminder"];
+        item.amount       = [set stringForColumn:@"amount"];
+        item.danwei       = [set stringForColumn:@"danwei"];
+        [array addObject:item];
+    }
+    
+    [db close];
+    return  array;
+}
 
 -(NSArray*)selectbathforsummary
 {
@@ -238,6 +337,7 @@
         [db close];
         return nil;
     }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
@@ -280,6 +380,7 @@
         [db close];
         return nil;
     }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
@@ -323,6 +424,7 @@
         [db close];
         return nil;
     }
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_feed (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, oz Varchar DEFAULT NULL,remark Varchar DEFAULT NULL, feed_type Varchar DEFAULT NULL,food_type Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL,amount integer default 0)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_sleep (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, duration INTEGER DEFAULT 0, remark Varchar DEFAULT NULL, posture Varchar DEFAULT NULL,place Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
@@ -654,6 +756,7 @@
     
 }
 
+
 -(NSString*)selectFrommedicine
 {
     BOOL res;
@@ -666,17 +769,17 @@
         [db close];
         return nil;
     }
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_diaper (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, status Varchar DEFAULT NULL, remark Varchar DEFAULT NULL, color Varchar DEFAULT NULL,hard Varchar DEFAULT NULL,amount Varchar DEFAULT NULL,moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+     res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
     if (!res) {
         NSLog(@"表格创建失败");
         [db close];
         return nil;
         
     }
-    FMResultSet *set=[db executeQuery:@"select starttime from bc_baby_diaper order by starttime desc"];
+    FMResultSet *set=[db executeQuery:@"select starttime from bc_baby_medicine order by starttime desc"];
     while ([set next]) {
         NSDate *date=[set dateForColumn:@"starttime"];
-        NSLog(@"diaperdate %@",date);
+        NSLog(@"medicine %@",date);
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         NSInteger unitFlags =NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
@@ -990,22 +1093,17 @@
         return nil;
     }
     
-    FMResultSet *set=[db executeQuery:@"select * from bc_baby_sleep where starttime=?",start];
+    FMResultSet *set=[db executeQuery:@"select * from bc_baby_medicine where starttime=?",start];
     [set next];
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
     [array addObject:[set dateForColumn:@"starttime"]];
-    [array addObject:[set  objectForColumnName:@"duration"]];
+    [array addObject:[set  objectForColumnName:@"medicine"]];
     
-    if ([set stringForColumn:@"remark"]) {
-        [array addObject:[set stringForColumn:@"remark"]];
-    }
-    else
-    {
-        [array addObject:[NSString stringWithFormat:@""]];
-    }
-    
-    [array addObject:[set stringForColumn:@"place"]];
-    
+    [array addObject:[set stringForColumn:@"amount"]];
+    [array addObject:[set stringForColumn:@"danwei"]];
+    [array addObject:[set stringForColumn:@"medicinedesp"]];
+    [array addObject:[NSNumber numberWithInt:[set intForColumn:@"isreminder"]]];
+    [array addObject:[set stringForColumn:@"timegap"]];
     [db close];
     return  array;
 }
@@ -1029,6 +1127,7 @@
     res=[db executeUpdate:@"delete from bc_baby_diaper where starttime=?",starttime];
     res=[db executeUpdate:@"delete from bc_baby_sleep where starttime=?",starttime];
     res=[db executeUpdate:@"delete from bc_baby_play where starttime=?",starttime];
+     res=[db executeUpdate:@"delete from bc_baby_medicine where starttime=?",starttime];
     [db close];
     return res;
 }
@@ -1576,7 +1675,7 @@
             
             NSString *sql = [NSString stringWithFormat:@"select count(*) from bc_baby_%@ where week = %i and weekday = %i", table, curweek, i];
             NSString *sql1 = [NSString stringWithFormat:@"select sum(duration) from bc_baby_%@ where week = %i and weekday = %i", table, curweek, i];
-            if ([table isEqualToString:@"Diaper"]) {
+            if ([table isEqualToString:@"Diaper"]||[table isEqualToString:@"Medicine"]) {
                 sql1 = [NSString stringWithFormat:@"select count(*) from bc_baby_%@ where week = %i and weekday = %i", table, curweek, i];
             }
             FMResultSet *set  = [db executeQuery:sql];
@@ -1587,7 +1686,7 @@
             if ([set1 next]) {
                 NSString *ss;
                 if (![[set1 objectForColumnIndex:0] isKindOfClass:[NSNull class]]) {
-                    if ([table isEqualToString:@"Diaper"]) {
+                    if ([table isEqualToString:@"Diaper"]||[table isEqualToString:@"Medicine"]) {
                         ss = [NSString stringWithFormat:@"%f", [[set1 objectForColumnIndex:0] floatValue]];
                     }else{
                         ss = [NSString stringWithFormat:@"%f", [[set1 objectForColumnIndex:0] floatValue]/3600];
@@ -1625,7 +1724,7 @@
             duration = [NSMutableArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil];
         }
         NSString *sql;
-        if ([table isEqualToString:@"Diaper"]) {
+        if ([table isEqualToString:@"Diaper"]||[table isEqualToString:@"Medicine"]) {
            sql = [NSString stringWithFormat:@"select starttime from bc_baby_%@ where month = %i", table, curmonth];
         }else{
            sql = [NSString stringWithFormat:@"select starttime,duration from bc_baby_%@ where month = %i", table, curmonth];
@@ -1645,7 +1744,7 @@
             NSString *str1 = [NSString stringWithFormat:@"%i", [set intForColumn:@"duration"]];
             int oldeDurationCount = [[duration objectAtIndex:(day - 1) / 7] intValue];
             [duration removeObjectAtIndex:(day - 1) / 7];
-            if ([table isEqualToString:@"Diaper"]) {
+            if ([table isEqualToString:@"Diaper"] ||[table isEqualToString:@"Medicine"] ) {
                 [duration insertObject:[NSString stringWithFormat:@"%i", oldeCount] atIndex:(day - 1) / 7];
             }
             else
@@ -1723,7 +1822,7 @@
     int weekday = [ACDate getCurrentWeekDay];
     int month = [ACDate getCurrentMonth];
     NSMutableArray *arrayCount = [[NSMutableArray alloc] initWithCapacity:0];
-    NSArray *arr = [NSArray arrayWithObjects:@"play", @"bath", @"feed", @"sleep", @"diaper", nil];
+    NSArray *arr = [NSArray arrayWithObjects:@"play", @"bath", @"feed", @"sleep", @"diaper", @"medicine",nil];
     BOOL res = YES;
     int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
     int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
@@ -1737,7 +1836,7 @@
     }
     for (NSString *table in arr) {
         NSString *cs = @"sum(duration)";
-        if ([table isEqualToString:@"diaper"]) {
+        if ([table isEqualToString:@"diaper"] ||[table isEqualToString:@"medicine"]) {
             cs = @"count(*)";
         }
         NSMutableArray *muarr = [[NSMutableArray alloc] initWithCapacity:0];
@@ -1759,7 +1858,7 @@
                         str=@"0";
                         
                     }else{
-                        if ([table isEqualToString:@"diaper"]) {
+                        if ([table isEqualToString:@"diaper"]||[table isEqualToString:@"medicine"]) {
                             str= [NSString stringWithFormat:@"%f", [[set objectForColumnIndex:0] floatValue]];
                         }else{
                             str= [NSString stringWithFormat:@"%f", [[set objectForColumnIndex:0] floatValue]/3600];
@@ -1787,7 +1886,7 @@
             }
             NSLog(@"datasourcefromdatabase:%@,scrollpage:%d", muarr,scrollpage);
             NSString *sql;
-            if ([table isEqualToString:@"diaper"]) {
+            if ([table isEqualToString:@"diaper"]||[table isEqualToString:@"medicine"]) {
                 sql = [NSString stringWithFormat:@"select starttime from bc_baby_%@ where month = %i", table, month - scrollpage];
             }else{
                 sql = [NSString stringWithFormat:@"select starttime,duration from bc_baby_%@ where month = %i", table, month - scrollpage];
@@ -1802,7 +1901,7 @@
                 int count = [[muarr objectAtIndex:(day - 1) / 7] intValue];
                 NSLog(@"datasourcefromdatabase: count: %d", count);
                 
-                if ([table isEqualToString:@"diaper"]) {
+                if ([table isEqualToString:@"diaper"]||[table isEqualToString:@"medicine"]) {
                     [muarr removeObjectAtIndex:(day - 1) / 7];
                     [muarr insertObject:[NSString stringWithFormat:@"%i", count + 1] atIndex:(day - 1) / 7];
                 }else{
@@ -1812,7 +1911,7 @@
                     else{
                         float dt = [[set stringForColumn:@"duration"] floatValue];
                         float olddt = [[muarr objectAtIndex:(day - 1) / 7] floatValue];
-                        if (![table isEqualToString:@"diaper"]) {
+                        if (!([table isEqualToString:@"diaper"]||[table isEqualToString:@"medicine"])) {
                             str = [NSString stringWithFormat:@"%f", dt / 3600 + olddt];
                         }
                         [muarr removeObjectAtIndex:(day - 1) / 7];
@@ -1858,7 +1957,7 @@
         [db close];
         return nil;
     }
-    NSArray *arr = [NSArray arrayWithObjects:@"bc_baby_play", @"bc_baby_bath", @"bc_baby_feed", @"bc_baby_sleep", @"bc_baby_diaper", nil];
+    NSArray *arr = [NSArray arrayWithObjects:@"bc_baby_play", @"bc_baby_bath", @"bc_baby_feed", @"bc_baby_sleep", @"bc_baby_diaper",@"bc_baby_medicine", nil];
     NSString *distinct = @"week";
     NSString *sql;
     int ret = 0;

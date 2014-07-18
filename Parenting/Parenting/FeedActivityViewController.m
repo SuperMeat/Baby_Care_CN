@@ -62,6 +62,25 @@
     [db synchronize];
 
     [self makeNav];
+    //如果没有记录
+    NSArray *array = [[SummaryDB dataBase]selectfeedfooddetailforsummary];
+    if ([array count] == 0)
+    {
+        self.foodView.hidden = NO;
+        self.foodScrollView.hidden = YES;
+        [self.view bringSubviewToFront:self.foodView];
+    }
+    else
+    {
+        self.foodScrollView.hidden = NO;
+        self.foodView.hidden = YES;
+        [self.foodScrollView setContentSize:CGSizeMake(300, 368)];
+        [self.foodScrollView setBackgroundColor:[UIColor clearColor]];
+        self.foodScrollView.showsHorizontalScrollIndicator=NO;
+        [self.view bringSubviewToFront:self.foodScrollView];
+        [self makeDetailViews];
+    }
+
     adviseImageView.userInteractionEnabled = YES;
     
     if (startButton != nil) {
@@ -81,10 +100,15 @@
 
     UIButton *br=(UIButton*)[self.view viewWithTag:101];
     UIButton *bo=(UIButton*)[self.view viewWithTag:102];
+    UIButton *bf=(UIButton*)[self.view viewWithTag:105];
     self.obj=@"self";
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"breast"]) {
         
         [self feedWay:br];
+    }
+    else if ([[NSUserDefaults standardUserDefaults] objectForKey:@"food"])
+    {
+        [self feedWay:bf];
     }
     else
     {
@@ -237,23 +261,34 @@
     
     chooseBreast=[UIButton buttonWithType:UIButtonTypeCustom];
     chooseBottle=[UIButton buttonWithType:UIButtonTypeCustom];
-    chooseBreast.frame=CGRectMake(140*PNGSCALE+40, 90*PNGSCALE, 140*PNGSCALE, 25*PNGSCALE);
-    chooseBottle.frame=CGRectMake(40, 90*PNGSCALE, 140*PNGSCALE, 25*PNGSCALE);
+    chooseFood  =[UIButton buttonWithType:UIButtonTypeCustom];
+    chooseBreast.frame=CGRectMake(187/2.0*PNGSCALE+40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
+    chooseBottle.frame=CGRectMake(40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
+    chooseFood.frame=CGRectMake(187*PNGSCALE+40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
+    
     [chooseBreast setBackgroundImage:[UIImage imageNamed:@"label_breast"] forState:UIControlStateNormal];
-    [chooseBreast setBackgroundImage:[UIImage imageNamed:@"label_breast_choose"] forState:UIControlStateDisabled];
+    [chooseBreast setBackgroundImage:[UIImage imageNamed:@"label_breast_focus"] forState:UIControlStateDisabled];
     chooseBreast.tag=101;
     chooseBreast.highlighted=NO;
     [chooseBreast addTarget:self action:@selector(feedWay:) forControlEvents:UIControlEventTouchUpInside];
     
     [chooseBottle setBackgroundImage:[UIImage imageNamed:@"label_bottle"] forState:UIControlStateNormal];
-    [chooseBottle setBackgroundImage:[UIImage imageNamed:@"label_bottle_choose"] forState:UIControlStateDisabled];
+    [chooseBottle setBackgroundImage:[UIImage imageNamed:@"label_bottle_focus"] forState:UIControlStateDisabled];
     
     chooseBottle.tag=102;
     chooseBottle.highlighted=NO;
     [chooseBottle addTarget:self action:@selector(feedWay:) forControlEvents:UIControlEventTouchUpInside];
     
+    [chooseFood setBackgroundImage:[UIImage imageNamed:@"label_food"] forState:UIControlStateNormal];
+    [chooseFood setBackgroundImage:[UIImage imageNamed:@"label_food_focus"] forState:UIControlStateDisabled];
+    
+    chooseFood.tag=105;
+    chooseFood.highlighted=NO;
+    [chooseFood addTarget:self action:@selector(feedWay:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:chooseBreast];
     [self.view addSubview:chooseBottle];
+    [self.view addSubview:chooseFood];
     
     historyView = [[UIImageView alloc] initWithFrame:CGRectMake((320-310*PNGSCALE)/2.0, 90*PNGSCALE+20*PNGSCALE+10, 310*PNGSCALE, 100*PNGSCALE)];
     [historyView.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
@@ -434,6 +469,25 @@
     [self.view addSubview:startButtonright];
     [startButtonright addTarget:self action:@selector(startOrPause:) forControlEvents:UIControlEventTouchUpInside];
     
+    //从数据库获取
+    NSArray* array=[[SummaryDB dataBase] selectfeedfooddetailforsummary];
+    if ([array count]  == 0)
+    {
+        self.foodView.hidden = NO;
+        self.foodScrollView.hidden = YES;
+        [self.view bringSubviewToFront:self.foodView];
+    }
+    else
+    {
+        self.foodScrollView.hidden = NO;
+        self.foodView.hidden = YES;
+        [self.foodScrollView setContentSize:CGSizeMake(300, 400)];
+        [self.foodScrollView setBackgroundColor:[UIColor clearColor]];
+        self.foodScrollView.showsHorizontalScrollIndicator=NO;
+        [self.view bringSubviewToFront:self.foodScrollView];
+        [self makeDetailViews];
+    }
+
     addRecordBtn = [[UIButton alloc]initWithFrame:CGRectMake(110, 370*PNGSCALE, 100, 28)];
     [addRecordBtn setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
     [addRecordBtn setTitle:@"添加" forState:UIControlStateNormal];
@@ -444,6 +498,57 @@
     [self.view addSubview:addRecordBtn];
 
     [self loadData];
+}
+
+-(void)makeDetailViews
+{
+    for (UIView *subView in self.foodScrollView.subviews) {
+        [subView removeFromSuperview];
+    }
+
+    //从数据库获取
+    NSArray* array=[[SummaryDB dataBase] selectfeedfooddetailforsummary];
+    if ([array count]<=5) {
+        self.foodScrollView.scrollEnabled = NO;
+    }
+    else
+    {
+        self.foodScrollView.scrollEnabled = YES;
+    }
+    for (int i=0; i<[array count]; i++)
+    {
+        SummaryItem *item = [array objectAtIndex:i];
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"FoodDetailView" owner:self options:nil];
+        
+        UIView *tmpCustomView = [nib objectAtIndex:0];
+        [tmpCustomView setBackgroundColor:[ACFunction colorWithHexString:@"#c2f3d9"]];
+        tmpCustomView.layer.cornerRadius = 8.0f;
+        for (UIView *subView in tmpCustomView.subviews) {
+            if (subView.tag == 102) {
+                UILabel *time = (UILabel*)subView;
+                time.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+                time.font = [UIFont systemFontOfSize:MIDTEXT];
+                NSDateFormatter *formater=[[NSDateFormatter alloc]init];
+                [formater setDateFormat:@"HH:mm"];
+                time.text =[formater stringFromDate:item.starttime];
+            }
+            
+            if (subView.tag == 101) {
+                UILabel *foodname = (UILabel*)subView;
+                foodname.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+                foodname.font = [UIFont systemFontOfSize:MIDTEXT];
+                foodname.text = item.op_type;
+            }
+            
+        }
+        
+        CGRect tmpFrame = [[UIScreen mainScreen] bounds];
+        
+        [tmpCustomView setCenter:CGPointMake(tmpFrame.size.width / 2, 15+40*i)];
+        
+        [self.foodScrollView addSubview:tmpCustomView];
+        
+    }
 }
 
 - (void)loadData
@@ -746,21 +851,59 @@
     
     sender.enabled=NO;
     UIButton *another=nil;
+    UIButton *another2=nil;
     UIImageView *feedway=(UIImageView*)[self.view viewWithTag:103];
     if (sender.tag==101) {
         another=(UIButton*)[self.view viewWithTag:102];
+        another2 = (UIButton*)[self.view viewWithTag:105];
         self.feedWay=@"breast";
         feedway.hidden=YES;
         startButton.hidden=YES;
         startButtonleft.hidden=NO;
         startButtonright.hidden=NO;
         historyView.hidden = YES;
+        timerImage.hidden = NO;
         timerImage.frame = CGRectMake((320-165*PNGSCALE)/2.0, 90*PNGSCALE+20*PNGSCALE, 165*PNGSCALE, 111*PNGSCALE);
+        self.foodView.hidden = YES;
+        self.foodScrollView.hidden = YES;
+        
+    }
+    else if (sender.tag == 105)
+    {
+        another=(UIButton*)[self.view viewWithTag:101];
+        another2 = (UIButton*)[self.view viewWithTag:102];
+        self.feedWay=@"food";
+        feedway.hidden=YES;
+        startButton.hidden=YES;
+        startButtonleft.hidden=YES;
+        startButtonright.hidden=YES;
+        historyView.hidden = YES;
+        timerImage.hidden = YES;
+        //如果没有记录
+        NSArray *array = [[SummaryDB dataBase]selectfeedfooddetailforsummary];
+        if ([array count] == 0)
+        {
+            self.foodView.hidden = NO;
+            self.foodScrollView.hidden = YES;
+            [self.view bringSubviewToFront:self.foodView];
+        }
+        else
+        {
+            self.foodScrollView.hidden = NO;
+            self.foodView.hidden = YES;
+            [self.foodScrollView setContentSize:CGSizeMake(300, 368)];
+            [self.foodScrollView setBackgroundColor:[UIColor clearColor]];
+            self.foodScrollView.showsHorizontalScrollIndicator=NO;
+            [self.view bringSubviewToFront:self.foodScrollView];
+
+        }
         
     }
     else
     {
         another=(UIButton*)[self.view viewWithTag:101];
+        another2 = (UIButton*)[self.view viewWithTag:105];
+        timerImage.hidden = NO;
         self.feedWay=@"bottle";
         historyView.hidden = NO;
         feedway.hidden=NO;
@@ -769,8 +912,12 @@
         startButtonright.hidden=YES;
         timerImage.frame = CGRectMake(140, 150+60*PNGSCALE, 165*PNGSCALE, 111*PNGSCALE);
         
+        self.foodView.hidden = YES;
+        self.foodScrollView.hidden = YES;
+        
     }
-    another.enabled=YES;
+    another.enabled  = YES;
+    another2.enabled = YES;
     self.obj=@"user";
     
 }
@@ -800,12 +947,34 @@
 }
 
 #pragma -mark feeddelegate
--(void)sendFeedSaveChanged:(int)duration andstarttime:(NSDate*)newstarttime
+-(void)sendFeedSaveChanged:(int)duration andIsFood:(BOOL)isfood andstarttime:(NSDate *)newstarttime
 {
-    
+    if (isfood)
+    {
+        //如果没有记录
+        NSArray *array = [[SummaryDB dataBase]selectfeedfooddetailforsummary];
+        if ([array count] == 0)
+        {
+            self.foodView.hidden = NO;
+            self.foodScrollView.hidden = YES;
+            [self.view bringSubviewToFront:self.foodView];
+        }
+        else
+        {
+            self.foodScrollView.hidden = NO;
+            self.foodView.hidden = YES;
+            [self.foodScrollView setContentSize:CGSizeMake(300, 368)];
+            [self.foodScrollView setBackgroundColor:[UIColor clearColor]];
+            self.foodScrollView.showsHorizontalScrollIndicator=NO;
+            [self.view bringSubviewToFront:self.foodScrollView];
+            [self makeDetailViews];
+        }
+    }
 }
+
 -(void)sendFeedReloadData
 {
     [self loadData];
 }
+
 @end

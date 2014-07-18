@@ -445,6 +445,71 @@
              CreateTime:(long)createtime;
 
 /**
+ *  新增吃药记录
+ *
+ *  @param create_time 创建时间
+ *  @param update_time 更新时间
+ *  @param start_time  开始时间
+ *  @param month       月
+ *  @param week        周
+ *  @param weekday     周几
+ *  @param medicine    药名
+ *  @param descption   描述
+ *  @param amount      用量
+ *  @param danwei      单位
+ *  @param timegap     时间间隔
+ *  @param isreminder  提醒
+ *  @param more_info
+ *
+ *  @return
+ */
+-(BOOL)insertBabyMedicineRecord:(long)create_time
+                  UpdateTime:(long)update_time
+                   StartTime:(NSDate *)start_time
+                       Month:(int)month
+                        Week:(int)week
+                     Weekday:(int)weekday
+                    Medicine:(NSString *)medicine
+                 Description:(NSString *)desp
+                      Amount:(NSString *)amount
+                      Danwei:(NSString *)danwei
+                     Timegap:(NSString *)timegap
+                  IsReminder:(BOOL)isreminder
+                    MoreInfo:(NSString *)more_info;
+
+/**
+ *  更新睡觉
+ *
+ *  @param starttime   开始时间
+ *  @param month       月
+ *  @param week        周
+ *  @param weekday     周几
+ *  @param medicine    药名
+ *  @param descption   描述
+ *  @param amount      用量
+ *  @param danwei      单位
+ *  @param timegap     时间间隔
+ *  @param isreminder  提醒
+ *  @param more_info
+ *  @param createtime
+ *
+ *  @return
+ */
+-(BOOL)updateMedicineRecord:(NSDate*)starttime
+                   Month:(int)month
+                    Week:(int)week
+                 WeekDay:(int)weekday
+                Medicine:(NSString *)medicine
+             Description:(NSString *)desp
+                  Amount:(NSString *)amount
+                  Danwei:(NSString *)danwei
+                 Timegap:(NSString *)timegap
+              IsReminder:(BOOL)isreminder
+                MoreInfo:(NSString *)more_info
+              CreateTime:(long)createtime;
+
+
+/**
  *  删除记录
  *
  *  @param create_time 创建时间

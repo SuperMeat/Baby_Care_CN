@@ -15,6 +15,10 @@
 @property(nonatomic,strong)NSString *duration;
 @property(nonatomic,strong)NSString *amount;
 @property(nonatomic,strong)NSString *feedtype;
+@property(nonatomic,strong)NSString *medicinename;
+@property(nonatomic,strong)NSString *danwei;
+
+@property int isreminder;
 @property long createtime;
 @property long updatetime;
 @end

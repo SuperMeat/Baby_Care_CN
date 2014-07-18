@@ -108,7 +108,7 @@
     }
     
 
-      NSLog(@"touchitem");
+     // NSLog(@"touchitem");
     
     // blowup the selected menu button
     CAAnimationGroup *blowup = [self _blowupAnimationAtPoint:item.center];

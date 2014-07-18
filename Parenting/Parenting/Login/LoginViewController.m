@@ -129,7 +129,7 @@
                          //处理反馈信息: code=1为成功  code=99为失败
                          if ([[result objectForKey:@"code"]intValue] == 1) {
                              NSMutableDictionary *resultBody = [result objectForKey:@"body"];
-                             [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
+                             [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_TENCENT] forKey:@"ACCOUNT_TYPE"];
                              [[NSUserDefaults standardUserDefaults] setObject:[resultBody objectForKey:@"userId"] forKey:@"ACCOUNT_UID"];
                              [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];

@@ -185,10 +185,10 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
 
     [controllers addObject:myPageNavigationViewController];
-    [controllers addObject:envirNavigationViewController];
     [controllers addObject:actNavigationViewController];
-    [controllers addObject:phyNavigationViewController];
     [controllers addObject:calendarNavigationViewController];
+    [controllers addObject:phyNavigationViewController];
+    [controllers addObject:envirNavigationViewController];
     
     myTabController = [[MyTabBarController alloc] init];
     [myTabController setViewControllers:controllers];

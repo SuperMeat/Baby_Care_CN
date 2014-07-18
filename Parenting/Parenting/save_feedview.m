@@ -93,6 +93,8 @@
     
     UILabel *duration = [[UILabel alloc]initWithFrame:CGRectMake(10, 120, 100, 30)];
     
+    food = [[UILabel alloc]initWithFrame:CGRectMake(10, 160, 100, 30)];
+
     foodtypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,200, 100,30)];
     
     
@@ -106,6 +108,7 @@
     Oz.backgroundColor        = [UIColor clearColor];
     remark.backgroundColor    = [UIColor clearColor];
     foodtypeLabel.backgroundColor    = [UIColor clearColor];
+    food.backgroundColor      = [UIColor clearColor];
     
     date.textColor=[UIColor grayColor];
     starttime.textColor=[UIColor grayColor];
@@ -113,6 +116,7 @@
     Oz.textColor=[UIColor grayColor];
     foodtypeLabel.textColor=[UIColor grayColor];
     remark.textColor=[UIColor grayColor];
+    food.textColor = [UIColor grayColor];
     
     date.text=NSLocalizedString(@"Date:",nil);
     starttime.text=NSLocalizedString(@"Start Time:",nil);
@@ -121,7 +125,7 @@
         [[NSUserDefaults standardUserDefaults]setObject:@"Oz:" forKey:@"metric" ];
     }
     foodtypeLabel.text = @"食物类型:";
-   
+    food.text = @"辅食名称:";
     Oz.text=NSLocalizedString([[NSUserDefaults standardUserDefaults] objectForKey:@"metric"],nil);
     remark.text=NSLocalizedString(@"Comments:",nil);
     date.textAlignment=NSTextAlignmentRight;
@@ -130,6 +134,7 @@
     Oz.textAlignment=NSTextAlignmentRight;
     remark.textAlignment=NSTextAlignmentRight;
     foodtypeLabel.textAlignment = NSTextAlignmentRight;
+    food.textAlignment = NSTextAlignmentRight;
     
     [imageview addSubview:date];
     [imageview addSubview:starttime];
@@ -137,6 +142,7 @@
     [imageview addSubview:Oz];
     [imageview addSubview:remark];
     [imageview addSubview:foodtypeLabel];
+    [imageview addSubview:food];
     
     datetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 40, 150, 30)];
     [datetext setBackground:[UIImage imageNamed:@"panels_input"]];
@@ -221,6 +227,16 @@
     [foodtypetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     foodtypetext.keyboardType=UIKeyboardTypeNumberPad;
 
+    foodtext=[[UITextField alloc]initWithFrame:CGRectMake(115, 160, 150, 30)];
+    [foodtext setBackground:[UIImage imageNamed:@"panels_input"]];
+    [imageview addSubview:foodtext];
+    foodtext.textColor=[UIColor grayColor];
+    [foodtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
+    [foodtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
+    [foodtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
+    [foodtext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
+    foodtext.keyboardType=UIKeyboardTypeDefault;
+
     
     left=[[UILabel alloc]initWithFrame:CGRectMake(115, 200-30, 50, 20)];
     left.text=NSLocalizedString(@"Left",nil);
@@ -300,8 +316,12 @@
         
         remarktext.text=[array objectAtIndex:4];
         self.foodtype = [array objectAtIndex:5];
+        
         foodtypetext.text = self.foodtype;
+        foodtext.text = self.foodtype;
         if ([[array objectAtIndex:2] intValue]==0) {
+            self.feedway =@"bottle";
+            isfood = NO;
             Oz.hidden=NO;
             Oztext.text=[array objectAtIndex:3];
             Oztext.hidden=NO;
@@ -309,13 +329,35 @@
             rightbutton.hidden=YES;
             left.hidden=YES;
             right.hidden=YES;
+            foodtext.hidden = YES;
+            food.hidden = YES;
             remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0+40);
             remark.center   = CGPointMake(10+100/2.0, 200+30/2.0+40);
             foodtypetext.hidden = NO;
             foodtypeLabel.hidden = NO;
         }
+        else if ([[array objectAtIndex:2] intValue]==2)
+        {
+            self.feedway =@"food";
+            isfood = YES;
+            Oz.hidden=YES;
+            Oztext.hidden=YES;
+            leftbutton.hidden=YES;
+            rightbutton.hidden=YES;
+            left.hidden=YES;
+            right.hidden=YES;
+            food.hidden = NO;
+            foodtext.hidden = NO;
+            remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0);
+            remark.center   = CGPointMake(10+100/2.0, 200+30/2.0);
+            foodtypetext.hidden = YES;
+            foodtypeLabel.hidden = YES;
+
+        }
         else
         {
+            self.feedway =@"breast";
+            isfood = NO;
             Oz.hidden=YES;
             Oztext.hidden=YES;
             leftbutton.hidden=NO;
@@ -324,6 +366,8 @@
             right.hidden=NO;
             foodtypeLabel.hidden = YES;
             foodtypetext.hidden = YES;
+            food.hidden = YES;
+            foodtext.hidden = YES;
             remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0);
             remark.center   = CGPointMake(10+100/2.0, 200+30/2.0);
             if ([[array objectAtIndex:3] isEqual:@"left"]) {
@@ -338,10 +382,10 @@
         }
         
     }
-    
     else
     {
         if ([self.feedway isEqualToString:@"bottle"]) {
+            isfood = NO;
             rightbutton.hidden=YES;
             leftbutton.hidden = YES;
             left.hidden=YES;
@@ -350,12 +394,30 @@
             Oztext.hidden=NO;
             foodtypeLabel.hidden = NO;
             foodtypetext.hidden = NO;
-
+            food.hidden = YES;
+            foodtext.hidden = YES;
             remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0+40);
             remark.center   = CGPointMake(10+100/2.0, 200+30/2.0+40);
         }
-        else{
+        else if ([self.feedway isEqualToString:@"food"])
+        {
+            isfood = YES;
             
+            rightbutton.hidden=YES;
+            leftbutton.hidden = YES;
+            left.hidden=YES;
+            right.hidden=YES;
+            Oz.hidden=YES;
+            Oztext.hidden=YES;
+            foodtypeLabel.hidden = YES;
+            foodtypetext.hidden = YES;
+            food.hidden = NO;
+            foodtext.hidden = NO;
+            remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0);
+            remark.center   = CGPointMake(10+100/2.0, 200+30/2.0);
+        }
+        else{
+            isfood = NO;
             Oz.hidden=YES;
             Oztext.hidden=YES;
             leftbutton.hidden=NO;
@@ -364,7 +426,8 @@
             right.hidden=NO;
             foodtypeLabel.hidden = YES;
             foodtypetext.hidden = YES;
-
+            food.hidden = YES;
+            foodtext.hidden = YES;
             remarkbg.center = CGPointMake(115+150/2.0, 200+60/2.0);
             remark.center   = CGPointMake(10+100/2.0, 200+30/2.0);
         }
@@ -416,11 +479,9 @@
     NSString *oz;
     if ([self.feedway isEqualToString:@"bottle"]) {
         way=0;
-        
-        if (![Oztext.text length]>0) {
-//            UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:NSLocalizedString(@"FeedSaveTips", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//            [alter show];
-//            return;
+        isfood = NO;
+        if (![Oztext.text length]>0)
+        {
             Oztext.text = @"0";
         }
         
@@ -434,10 +495,15 @@
         }
 
     }
+    else if ([self.feedway isEqualToString:@"food"])
+    {
+        way = 2;
+        oz=@"";isfood =  YES;
+    }
     else
     {
         way=1;
-        
+        isfood =  NO;
         if (!leftbtn.enabled) {
             oz=@"left";
         }
@@ -466,20 +532,53 @@
         NSArray *array = [durationtext.text componentsSeparatedByString:@":"];
         duration = [[array objectAtIndex:0] intValue]*60*60 + [[array objectAtIndex:1]intValue]*60+[[array objectAtIndex:2]intValue];
         if (curstarttime == nil) {
-            [db updateFeedRecord:self.start
-                           Month:[ACDate getMonthFromDate:self.start]
-                            Week:[ACDate getWeekFromDate:self.start]
-                         WeekDay:[ACDate getWeekDayFromDate:self.start]
-                        Duration:duration
-                              Oz:oz
-                        FoodType:self.foodtype
-                          Remark:remarktext.text
-                        MoreInfo:@""
-                      CreateTime:_createtime];
+            if ([self.feedway isEqualToString:@"food"]) {
+                [db updateFeedRecord:self.start
+                               Month:[ACDate getMonthFromDate:self.start]
+                                Week:[ACDate getWeekFromDate:self.start]
+                             WeekDay:[ACDate getWeekDayFromDate:self.start]
+                            Duration:duration
+                                  Oz:oz
+                            FoodType:foodtext.text
+                              Remark:remarktext.text
+                            MoreInfo:@""
+                          CreateTime:_createtime];
+
+            }
+            else
+            {
+                [db updateFeedRecord:self.start
+                               Month:[ACDate getMonthFromDate:self.start]
+                                Week:[ACDate getWeekFromDate:self.start]
+                             WeekDay:[ACDate getWeekDayFromDate:self.start]
+                            Duration:duration
+                                  Oz:oz
+                            FoodType:self.foodtype
+                              Remark:remarktext.text
+                            MoreInfo:@""
+                          CreateTime:_createtime];
+            }
+            
         }
         else
         {
-            [db updateFeedRecord:curstarttime
+            if ([self.feedway isEqualToString:@"food"])
+            {
+                [db updateFeedRecord:curstarttime
+                               Month:[ACDate getMonthFromDate:curstarttime]
+                                Week:[ACDate getWeekFromDate:curstarttime]
+                             WeekDay:[ACDate getWeekDayFromDate:curstarttime]
+                            Duration:duration
+                                  Oz:oz
+                            FoodType:foodtext.text
+                              Remark:remarktext.text
+                            MoreInfo:@""
+                          CreateTime:_createtime];
+
+            }
+            else
+            {
+                [db updateFeedRecord:curstarttime
                            Month:[ACDate getMonthFromDate:curstarttime]
                             Week:[ACDate getWeekFromDate:curstarttime]
                          WeekDay:[ACDate getWeekDayFromDate:curstarttime]
@@ -489,7 +588,7 @@
                           Remark:remarktext.text
                         MoreInfo:@""
                       CreateTime:_createtime];
-
+            }
             curstarttime = nil;
         }
 
@@ -501,6 +600,24 @@
         if (curstarttime == nil)
         {
             long createtime = [ACDate getTimeStampFromDate:[ACDate date]];
+            if ([self.feedway isEqualToString:@"food"])
+            {
+
+                [db insertBabyFeedRecord:createtime
+                              UpdateTime:createtime
+                               StartTime:[ACDate date]
+                                   Month:[ACDate getCurrentMonth]
+                                    Week:[ACDate getCurrentWeek]
+                                 Weekday:[ACDate getCurrentWeekDay]
+                                Duration:duration
+                                      Oz:oz
+                                FeedType:[NSString stringWithFormat:@"%d",way]
+                                FoodType:foodtext.text
+                                  Remark:remarktext.text
+                                MoreInfo:@""];
+
+            }
+            else {
             [db insertBabyFeedRecord:createtime
                           UpdateTime:createtime
                            StartTime:[ACDate date]
@@ -513,10 +630,28 @@
                             FoodType:self.foodtype
                               Remark:remarktext.text
                             MoreInfo:@""];
+                            }
         }
         else
         {
             long createtime = [ACDate getTimeStampFromDate:[ACDate date]];
+            if ([self.feedway isEqualToString:@"food"])
+            {
+                [db insertBabyFeedRecord:createtime
+                              UpdateTime:createtime
+                               StartTime:curstarttime
+                                   Month:[ACDate getMonthFromDate:curstarttime]
+                                    Week:[ACDate getWeekFromDate:curstarttime]
+                                 Weekday:[ACDate getWeekDayFromDate:curstarttime]
+                                Duration:duration
+                                      Oz:oz
+                                FeedType:[NSString stringWithFormat:@"%d",way]
+                                FoodType:foodtext.text
+                                  Remark:remarktext.text
+                                MoreInfo:@""];
+            }
+            else
+            {
             [db insertBabyFeedRecord:createtime
                           UpdateTime:createtime
                            StartTime:curstarttime
@@ -529,7 +664,7 @@
                             FoodType:self.foodtype
                               Remark:remarktext.text
                             MoreInfo:@""];
-
+            }
             curstarttime = nil;
         }
 
@@ -537,8 +672,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:[NSNumber numberWithInt:duration]];
     }
     
-    
-    [self.feedSaveDelegate sendFeedSaveChanged:duration andstarttime:curstarttime];
+    [self.feedSaveDelegate sendFeedSaveChanged:duration andIsFood:isfood andstarttime:curstarttime];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"justdoit"];
 }
 -(void)cancle:(UIButton*)sender

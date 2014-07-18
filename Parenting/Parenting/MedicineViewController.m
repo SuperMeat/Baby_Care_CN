@@ -50,19 +50,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (IBAction)SetNextTimeReminder:(UIButton *)sender
-{
-    if (sender.tag == 101) {
-        [sender setImage:[UIImage imageNamed:@"radio_focus"] forState:UIControlStateNormal];
-        sender.tag = 102;
-    }
-   else
-   {
-       [sender setImage:[UIImage imageNamed:@"radio"] forState:UIControlStateNormal];
-       sender.tag = 101;
-   }
-}
-
 +(id)shareViewController
 {
     
@@ -131,35 +118,8 @@
     [backIV setImage:[UIImage imageNamed:@"pattern1"]];
     [self.view addSubview:backIV];
 
-    [self.view bringSubviewToFront:self.detailView];
     self.view.layer.cornerRadius = 8.0f;
-    
-    self.detailTimeLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.detailTimeLabel.font = [UIFont systemFontOfSize:MIDTEXT];
-    
-    self.detailTimeHour.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.detailTimeHour.font = [UIFont systemFontOfSize:MIDTEXT];
 
-    self.detailTimeYear.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.detailTimeYear.font = [UIFont systemFontOfSize:MIDTEXT];
-
-    self.detailMedicineLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.detailMedicineLabel.font = [UIFont systemFontOfSize:MIDTEXT];
-    
-    self.detailMedicine.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.detailMedicine.font = [UIFont systemFontOfSize:MIDTEXT];
-    
-    self.detailMedicineAmount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.detailMedicineAmount.font = [UIFont systemFontOfSize:MIDTEXT];
-
-    self.detailTimeInternalLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.detailTimeInternalLabel.font = [UIFont systemFontOfSize:MIDTEXT];
-    self.detailTimeInternal.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.detailTimeInternal.font = [UIFont systemFontOfSize:MIDTEXT];
-    
-    self.setTimeLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    self.setTimeLabel.font = [UIFont systemFontOfSize:MOREMIDTEXT];
-    
     self.norecordLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     [self.addRecordBtn  setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
@@ -170,15 +130,91 @@
     self.addRecordBtn .layer.cornerRadius = 5.0f;
     [self.view bringSubviewToFront:self.addRecordBtn];
     
-    if (0) {
+    [self.scrollView setContentSize:CGSizeMake(300, 400)];
+    [self.scrollView setBackgroundColor:[UIColor clearColor]];
+    self.scrollView.showsHorizontalScrollIndicator=NO;
+    [self.view bringSubviewToFront:self.scrollView];
+    NSArray* array=[[SummaryDB dataBase] selectmedicinedetailforsummary];
+    if ([array count] == 0) {
         [self.view bringSubviewToFront:self.norecordView];
-        self.detailView.hidden = YES;
+        self.scrollView.hidden = YES;
+        self.norecordView.hidden = NO;
     }
     else
     {
-        [self.view bringSubviewToFront:self.detailView];
-        [self.view bringSubviewToFront:self.setTimeBtn];
-        [self.view bringSubviewToFront:self.setTimeLabel];
+        self.scrollView.hidden = NO;
+        self.norecordView.hidden = YES;
+
+        [self makeDetailViews];
+    }
+    
+}
+
+-(void)makeDetailViews
+{
+    for (UIView *subView in self.scrollView.subviews) {
+        [subView removeFromSuperview];
+    }
+    
+    //从数据库获取
+    NSArray* array=[[SummaryDB dataBase] selectmedicinedetailforsummary];
+    if ([array count]<=4) {
+        self.scrollView.scrollEnabled = NO;
+    }
+    else
+    {
+        self.scrollView.scrollEnabled = YES;
+    }
+
+    for (int i=0; i<[array count]; i++)
+    {
+        SummaryItem *item = [array objectAtIndex:i];
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"MedicineDetailView" owner:self options:nil];
+        
+        UIView *tmpCustomView = [nib objectAtIndex:0];
+        [tmpCustomView setBackgroundColor:[ACFunction colorWithHexString:@"#c2c9f3"]];
+        tmpCustomView.layer.cornerRadius = 8.0f;
+        for (UIView *subView in tmpCustomView.subviews) {
+            if (subView.tag == 101) {
+                UILabel *time = (UILabel*)subView;
+                
+                time.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+                time.font = [UIFont systemFontOfSize:MIDTEXT];
+                NSDateFormatter *formater=[[NSDateFormatter alloc]init];
+                [formater setDateFormat:@"HH:mm"];
+                time.text =[formater stringFromDate:item.starttime];
+                
+            }
+            
+            if (subView.tag == 102) {
+                UILabel *medicine = (UILabel*)subView;
+                medicine.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+                medicine.font = [UIFont systemFontOfSize:MIDTEXT];
+                medicine.text = item.medicinename;
+            }
+            
+            if (subView.tag == 103) {
+                UILabel *amount = (UILabel*)subView;
+                amount.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+                amount.font = [UIFont systemFontOfSize:MIDTEXT];
+                amount.text = [NSString stringWithFormat:@"%@%@", item.amount,item.danwei];
+            }
+            
+            if (subView.tag == 104) {
+                UIImageView *reminderImageView = (UIImageView*)subView;
+                if (!item.isreminder) {
+                    reminderImageView.hidden = YES;
+                }
+            }
+
+        }
+        
+        CGRect tmpFrame = [[UIScreen mainScreen] bounds];
+        
+        [tmpCustomView setCenter:CGPointMake(tmpFrame.size.width / 2, 25+40*i)];
+        
+        [self.scrollView addSubview:tmpCustomView];
+  
     }
 }
 
@@ -195,13 +231,9 @@
     [adviseImageView addSubview:ad];
     [self.view addSubview:adviseImageView];
     CGRect frame = [[UIScreen mainScreen] bounds];
-    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130+17-64, 198/2.0, 190/2.0)];
-    [addIamge1 setImage:[UIImage imageNamed:@"婴儿车"]];
+    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130+17-64, 224/2.0, 204/2.0)];
+    [addIamge1 setImage:[UIImage imageNamed:@"medicine_heart"]];
     [self.view addSubview:addIamge1];
-    
-    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-153/2.0, frame.size.height-114/2.0-64, 153/2.0, 114/2.0)];
-    [addIamge setImage:[UIImage imageNamed:@"奶嘴"]];
-    [self.view addSubview:addIamge];
     
     UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-130-64, 320, 10)];
     [cutline setImage:[UIImage imageNamed:@"分界线"]];
@@ -209,21 +241,28 @@
 }
 
 
--(IBAction)addrecord:(id)sender
+-(void)addrecord:(id)sender
 {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"addplaynow"];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[ACDate date] forKey:@"timerOn"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"play" forKey:@"ctl"];
-    
     [self makeSave];
+}
+
+-(void)stop
+{
+    [saveView removeFromSuperview];
+}
+
+-(void)cancel
+{
+    [saveView removeFromSuperview];
 }
 
 -(void)makeSave
 {
     if (saveView==nil) {
-        saveView=[[save_medicineview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64-SAVEVIEW_YADDONVERSION, self.view.frame.size.width, self.view.frame.size.height)];
+        saveView=[[save_medicineview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64-SAVEVIEW_YADDONVERSION+35, self.view.frame.size.width, self.view.frame.size.height)];
+        
     }
+    saveView.medicineSaveDelegate = self;
     [saveView loaddata];
     [self.view addSubview:saveView];
 
@@ -239,7 +278,24 @@
 {
     [MobClick beginLogPageView:@"吃药"];
     self.hidesBottomBarWhenPushed = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stop) name:@"stop" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancel) name:@"cancel" object:nil];
+
     [self makeNav];
+    NSArray* array=[[SummaryDB dataBase] selectmedicinedetailforsummary];
+    if ([array count] == 0) {
+        [self.view bringSubviewToFront:self.norecordView];
+        self.scrollView.hidden = YES;
+        self.norecordView.hidden = NO;
+    }
+    else
+    {
+        self.scrollView.hidden = NO;
+        self.norecordView.hidden = YES;
+        
+        [self makeDetailViews];
+    }
+
 }
 
 - (void)viewDidLoad
@@ -256,4 +312,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)sendMedicineSaveChanged:(NSString*)medicinename andAmount:(NSString*)amount andIsReminder:(BOOL)isReminder andstarttime:(NSDate*)newstarttime
+{
+    NSLog(@"sendMedicineSaveChanged:%@,%@,%d,%@",medicinename,amount,isReminder,newstarttime);
+    //如果没有记录
+    NSArray *array = [[SummaryDB dataBase]selectmedicinedetailforsummary];
+    if ([array count] == 0)
+    {
+        self.norecordView.hidden = NO;
+        self.scrollView.hidden = YES;
+        [self.view bringSubviewToFront:self.norecordView];
+    }
+    else
+    {
+        self.scrollView.hidden = NO;
+        self.norecordView.hidden = YES;
+        [self.scrollView setContentSize:CGSizeMake(300, 368)];
+        [self.scrollView setBackgroundColor:[UIColor clearColor]];
+        self.scrollView.showsHorizontalScrollIndicator=NO;
+        [self.view bringSubviewToFront:self.scrollView];
+        [self makeDetailViews];
+    }
+
+}
+
+-(void)sendMedicineReloadData
+{
+    
+}
 @end

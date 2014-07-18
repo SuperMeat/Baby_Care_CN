@@ -30,7 +30,7 @@
 -(id)initWithFrame:(CGRect)frame Type:(NSString*)type
 {
     foodtypeList = [[NSMutableArray alloc] initWithCapacity:5];
-    [foodtypeList addObjectsFromArray:[NSArray arrayWithObjects:@"母乳",@"奶粉",@"水",@"辅食", nil]];
+    [foodtypeList addObjectsFromArray:[NSArray arrayWithObjects:@"母乳",@"奶粉",@"水", nil]];
     self.delegate   = self;
     self.dataSource = self;
     _type = type;
@@ -71,7 +71,6 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSLog(@"pickerView : %i, %i",row,component);
     switch (component) {
         case 0:
             [self.foodTypePickerViewDelegate sendFeedTypeSaveChanged:[foodtypeList objectAtIndex:row]];

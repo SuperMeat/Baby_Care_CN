@@ -10,7 +10,7 @@
 #import "FoodTypePickerView.h"
 @protocol save_feedviewDelegate<NSObject>
 @optional
--(void)sendFeedSaveChanged:(int)duration andstarttime:(NSDate*)newstarttime;
+-(void)sendFeedSaveChanged:(int)duration andIsFood:(BOOL)isfood andstarttime:(NSDate*)newstarttime;
 -(void)sendFeedReloadData;
 @end
 
@@ -23,11 +23,14 @@
     UITextField *datetext;
     UITextField *starttimetext;
     UITextField *foodtypetext;
+    UITextField *foodtext;
+    BOOL isfood;
     UILabel *Oz;
     UIButton *leftbutton;
     UIButton *rightbutton;
     UILabel *left;
     UILabel *right;
+    UILabel *food;
     
     UIDatePicker *datepicker;
     UIActionSheet *action;
