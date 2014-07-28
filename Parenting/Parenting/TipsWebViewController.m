@@ -102,10 +102,18 @@
     
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = _url;
 
+    //加载网络图片-无缓存
+    UIImage *image;
+    if (_flag == 1) {
+        image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_showimage]]];
+    }
+    else {
+        image = [UIImage imageNamed:_showimage];
+    }
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UMENGAPPKEY
                                       shareText:_contenttitle
-                                     shareImage:[UIImage imageNamed:_showimage]
+                                     shareImage:image
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,
                                     UMShareToQQ,
                                     UMShareToQzone,
@@ -227,6 +235,11 @@
 -(void)setShowImage:(NSString*)imagePath
 {
     _showimage = imagePath;
+}
+
+-(void) setFlag:(int)flag
+{
+    _flag = flag;
 }
 
 - (void)didReceiveMemoryWarning
