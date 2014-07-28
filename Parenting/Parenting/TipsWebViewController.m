@@ -92,20 +92,16 @@
 - (void)ShareBtn
 {
     [self Share];
+    //[self ShareBtnByImage];
 }
 
--(void)Share
+-(void)ShareImage
 {
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = _url;
-    
-    [UMSocialData defaultData].extConfig.wechatFavoriteData.url = _url;
-    
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = _url;
 
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UMENGAPPKEY
-                                      shareText:_contenttitle
-                                     shareImage:[UIImage imageNamed:_showimage]
+                                      shareText:@"分享我的宝贝每一天的记录"
+                                     shareImage:[UIImage imageWithContentsOfFile:SHAREPATH]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,
                                     UMShareToQQ,
                                     UMShareToQzone,
@@ -114,7 +110,23 @@
                                     UMShareToEmail,nil]
                                        delegate:self];
 
-    }
+}
+
+-(void)Share
+{
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:UMENGAPPKEY
+                                      shareText:_contenttitle
+                                     shareImage:[UIImage imageNamed:_showimage]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,
+                                                 UMShareToQQ,
+                                                 UMShareToQzone,
+                                                 UMShareToFacebook,
+                                                 UMShareToSms,
+                                                 UMShareToEmail,nil]
+                                       delegate:self];
+    
+}
 
 -(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
 {
@@ -162,6 +174,34 @@
     
     }
     
+}
+
+- (void)ShareBtnByImage
+{
+    UIGraphicsBeginImageContext(CGSizeMake(_webView.frame.size.width, _webView.frame.size.height - 65 ));
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
+    CGImageRef imageRef = parentImage.CGImage;
+    CGRect myImageRect=CGRectMake(_webView.frame.origin.x, _webView.frame.origin.y, _webView.frame.size.width, _webView.frame.size.height - 65);
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
+    CGSize size=CGSizeMake(_webView.frame.size.width,  _webView.frame.size.height - 65);
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, myImageRect, subImageRef);
+    UIImage* image = [UIImage imageWithCGImage:subImageRef];
+    
+    
+    NSData *imagedata=UIImagePNGRepresentation(image);
+    [imagedata writeToFile:SHAREPATH atomically:NO];
+    UIGraphicsEndImageContext();
+    CGImageRelease(imageRef);
+    UIGraphicsEndImageContext();
+    [UIView beginAnimations:@"ToggleViews" context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView commitAnimations];
+    
+    [self ShareImage];
 }
 
 -(BOOL)isDirectShareInIconActionSheet

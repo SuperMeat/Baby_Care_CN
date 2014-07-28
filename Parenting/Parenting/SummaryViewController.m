@@ -252,8 +252,6 @@
     UIImageView *imageview=(UIImageView*)[Shareview viewWithTag:10001];
     imageview.image=image;
     [self showshareview];
-    
-    
     [self Share];
 }
 -(void)Share
