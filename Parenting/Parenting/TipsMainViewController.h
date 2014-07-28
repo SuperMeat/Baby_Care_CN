@@ -10,7 +10,7 @@
 #import "SyncController.h"
 #import "MBProgressHUD.h"
 
-@interface TipsMainViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface TipsMainViewController : ACViewController<UITableViewDataSource,UITableViewDelegate>
 {
     NSArray *tipArray;
     NSArray *subArray;

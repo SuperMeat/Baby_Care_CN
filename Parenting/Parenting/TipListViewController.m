@@ -53,7 +53,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-
+    
 }
 
 -(void)initView{
@@ -142,7 +142,6 @@
         [activityView startAnimating];
         _scrollView.scrollEnabled = NO;
         
-        
         long lastCreateTime = [[[arrDS objectAtIndex:0] objectAtIndex:5]longValue];
         [[SyncController syncController]    getTips:ACCOUNTUID
                                          CategoryID:_categoryId
@@ -216,7 +215,8 @@
     [self.navigationController pushViewController:tipsWeb animated:YES];
 }
 
--(void)goBack{
+-(void)goBack
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -63,6 +63,9 @@
 #import "MTA.h"
 #import "UserLittleTips.h"
 #import "FeedMoreController.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define BABYICONPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d.png",NSHomeDirectory(),USERID,BABYID])
@@ -178,6 +181,7 @@
 
 #define ASIHTTPTOKEN @"5788024"  //令牌
 #define AMAP_KEY @"9a6333950c5bf17fdebaf72c68ef97eb"
+#define TESTIN_KEY @"508548bb4d5eea5d6dc1edb85ebb553d"
 
 #define SUGGESTION_TYPE_TEMP    2
 #define SUGGESTION_TYPE_HUMI    1
@@ -332,3 +336,9 @@
 #else
 #define REFRESHBLEADATATIMERAL 5.0
 #endif
+
+#define TABBAR_INDEX_HOME     0
+#define TABBAR_INDEX_ACTIVITY 1
+#define TABBAR_INDEX_CALENDAR 2
+#define TABBAR_INDEX_PHY      3
+#define TABBAR_INDEX_ENVIR    4

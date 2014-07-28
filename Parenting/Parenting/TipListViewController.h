@@ -13,7 +13,7 @@
 #import "SyncController.h"
 #import "MBProgressHUD.h"
 
-@interface TipListViewController : UIViewController<UIScrollViewDelegate>
+@interface TipListViewController : ACViewController<UIScrollViewDelegate>
 {
     UIActivityIndicatorView *activityView;
     MBProgressHUD *hud;

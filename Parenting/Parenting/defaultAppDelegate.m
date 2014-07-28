@@ -8,12 +8,9 @@
 
 #import "defaultAppDelegate.h"
 #import "APService.h"
-#import "UMSocial.h" 
 #import "LoginViewController.h"
-#import "UMSocialWechatHandler.h"
-#import "UMSocialQQHandler.h"
 #import "SyncController.h"
-
+#import <TestinAgent/TestinAgent.h>
 
 @implementation defaultAppDelegate
 
@@ -220,13 +217,16 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (void)initializePlat
 {
+    [TestinAgent init:TESTIN_KEY];
+    
     //添加新浪微博应用
     [UMSocialData setAppKey:UMENGAPPKEY];
+    
     //添加QQ分享
     [UMSocialQQHandler setQQWithAppId:@"1101701660" appKey:@"UD8B7lZmh4FwpP79" url:@"http://www.umeng.com/social"];
     
     //添加微信分享
-    [UMSocialWechatHandler setWXAppId:@"wxC4Y0Nqh5eY2pilsb" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:@"wx8a04549b73aba34b" url:@"http://www.umeng.com/social"];
     
 }
 
