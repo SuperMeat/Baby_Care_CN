@@ -75,7 +75,7 @@
     titleView.backgroundColor=[UIColor clearColor];
     UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     titleText.backgroundColor = [UIColor clearColor];
-    [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
+    [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18]];
     titleText.textColor = [UIColor whiteColor];
     [titleText setTextAlignment:NSTextAlignmentCenter];
     [titleText setText:@"小贴士"];
@@ -329,8 +329,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _tTableView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        TipListViewController *tipList = [[TipListViewController alloc]init]; 
-        tipList.categoryId = [[[tipArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
+        TipListViewController *tipList = [[TipListViewController alloc]initWithCategoryId:[[[tipArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue] Name:[[tipArray objectAtIndex:indexPath.row] objectAtIndex:1]];
         [self.navigationController pushViewController:tipList animated:YES];
     }
 }

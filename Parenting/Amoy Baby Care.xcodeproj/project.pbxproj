@@ -552,6 +552,8 @@
 		BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */; };
 		BE3D75CC1889199F00E1C391 /* MyDevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */; };
 		BE422ADB18C6B5580089219C /* ASIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE422ADA18C6B5580089219C /* ASIController.m */; };
+		BE4A8621197618AB00EB232B /* PHYHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4A8620197618AB00EB232B /* PHYHistoryViewController.m */; };
+		BE4A862319761B5800EB232B /* PHYHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4A862219761B5800EB232B /* PHYHistoryViewController.xib */; };
 		BE5914C418FCDEBC00F0488B /* BabyMessageDataDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5914C318FCDEBC00F0488B /* BabyMessageDataDB.m */; };
 		BE5914C718FCDEE000F0488B /* BabyBaseInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5914C618FCDEE000F0488B /* BabyBaseInfoView.m */; };
 		BE5914CA18FCDEED00F0488B /* HomeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5914C918FCDEED00F0488B /* HomeTopView.m */; };
@@ -1403,6 +1405,9 @@
 		BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesViewController.xib; sourceTree = "<group>"; };
 		BE422AD918C6B5580089219C /* ASIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIController.h; sourceTree = "<group>"; };
 		BE422ADA18C6B5580089219C /* ASIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIController.m; sourceTree = "<group>"; };
+		BE4A861F197618AB00EB232B /* PHYHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHYHistoryViewController.h; sourceTree = "<group>"; };
+		BE4A8620197618AB00EB232B /* PHYHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHYHistoryViewController.m; sourceTree = "<group>"; };
+		BE4A862219761B5800EB232B /* PHYHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHYHistoryViewController.xib; sourceTree = "<group>"; };
 		BE5914C218FCDEBC00F0488B /* BabyMessageDataDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyMessageDataDB.h; sourceTree = "<group>"; };
 		BE5914C318FCDEBC00F0488B /* BabyMessageDataDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyMessageDataDB.m; sourceTree = "<group>"; };
 		BE5914C518FCDEE000F0488B /* BabyBaseInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyBaseInfoView.h; sourceTree = "<group>"; };
@@ -2733,6 +2738,7 @@
 		488C895118B4985E0091C2BF /* 生理 */ = {
 			isa = PBXGroup;
 			children = (
+				BE4A862419761BCE00EB232B /* PHYHistory */,
 				BE6938D31908E80200FC2BB4 /* PhysiologyViewController.h */,
 				BE6938D41908E80200FC2BB4 /* PhysiologyViewController.m */,
 				BE6938D51908E80200FC2BB4 /* PhysiologyViewController.xib */,
@@ -2742,6 +2748,9 @@
 				BE7AB1B1190A3F8D00D9B502 /* AddPHYRecordViewController.h */,
 				BE7AB1B2190A3F8D00D9B502 /* AddPHYRecordViewController.m */,
 				BE7AB1B3190A3F8D00D9B502 /* AddPHYRecordViewController.xib */,
+				BE4A861F197618AB00EB232B /* PHYHistoryViewController.h */,
+				BE4A8620197618AB00EB232B /* PHYHistoryViewController.m */,
+				BE4A862219761B5800EB232B /* PHYHistoryViewController.xib */,
 			);
 			name = "生理";
 			sourceTree = "<group>";
@@ -3538,6 +3547,13 @@
 			path = "身高";
 			sourceTree = "<group>";
 		};
+		BE4A862419761BCE00EB232B /* PHYHistory */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PHYHistory;
+			sourceTree = "<group>";
+		};
 		BE5997BE1861927B008D3F6C /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
@@ -4287,6 +4303,7 @@
 				481D0D4F195BC2680025281A /* 分界线@2x.png in Resources */,
 				484B66FD195D5375006642BA /* pattern3@2x.png in Resources */,
 				48F91AFF18FBB54E0038DC67 /* icon_mostlycloudysun@2x.png in Resources */,
+				BE4A862319761B5800EB232B /* PHYHistoryViewController.xib in Resources */,
 				48152DDC18486AFB009A4900 /* guide_4.png in Resources */,
 				48152E1218486C66009A4900 /* icon_rightArrow_selected@2x.png in Resources */,
 				4800B0C118D7F3D20093A6AF /* 活动@2x.png in Resources */,
@@ -4634,6 +4651,7 @@
 				BE7C69771867F1B300C4B675 /* ASIAuthenticationDialog.m in Sources */,
 				BE6938EA1909165200FC2BB4 /* PHYDetailViewController.m in Sources */,
 				BE955F50190104A000225029 /* WhoDataBase.m in Sources */,
+				BE4A8621197618AB00EB232B /* PHYHistoryViewController.m in Sources */,
 				485749A01831C423000D921B /* MissionViewController.m in Sources */,
 				48152E3B18487EB0009A4900 /* DXAlertView.m in Sources */,
 				48F6AB931867D3AC0032045E /* LocalNotify.m in Sources */,

@@ -71,6 +71,17 @@
     UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBar;
     
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 160, 20)];
+    titleView.backgroundColor=[UIColor clearColor];
+    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
+    titleText.backgroundColor = [UIColor clearColor];
+    [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18]];
+    titleText.textColor = [UIColor whiteColor];
+    [titleText setTextAlignment:NSTextAlignmentCenter];
+    [titleText setText:@"贴士详情"];
+    [titleView addSubview:titleText];
+    
+    self.navigationItem.titleView = titleView;
 }
 
 -(void)viewWillDisappear:(BOOL)animated

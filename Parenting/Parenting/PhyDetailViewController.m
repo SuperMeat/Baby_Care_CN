@@ -9,6 +9,7 @@
 #import "PHYDetailViewController.h"
 #import "BabyDataDB.h"
 #import "WhoDataBase.h"
+#import "PHYHistoryViewController.h"
 
 #define YAXISCOUNT 5
 #define SIZEINTERVA 10
@@ -153,13 +154,16 @@
     //_viewTopHistroy
     _viewHistroy = [[UIView alloc]initWithFrame:CGRectMake(0, 130, self.view.bounds.size.width, 44)];
     _viewHistroy.backgroundColor = [ACFunction colorWithHexString:@"#f6f6f6"];
+    //添加手势
+    UITapGestureRecognizer *tapgesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ShowHistory)];
+    [_viewHistroy addGestureRecognizer:tapgesture];
+
     [self.view addSubview:_viewHistroy];
     
     UILabel *labelHistory = [[UILabel alloc]initWithFrame:CGRectMake(10, 12, 200, 20)];
     labelHistory.font = [UIFont fontWithName:@"Arial" size:16];
     labelHistory.textAlignment = NSTextAlignmentLeft;
     labelHistory.text = @"查看所有记录";
-    
     [_viewHistroy addSubview:labelHistory];
     
     //corePlot
@@ -172,14 +176,56 @@
 
 -(void)initData{
     //_viewTop1
-    //LAST
-    _labelLastValue.text = @"5.2 KG";
-    _labelLastDate.text = @"2014-4-15";
-    //CURRENT
-    _labelCURValue.text = @"5.6 KG";
-    _labelCURDate.text = @"2014-4-23";
-    //CHANGE
-    _labelChangeValue.text = @"+0.3";
+    NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:[[arrayCurrent objectAtIndex:0] intValue]];
+    if ([arrValues count] >= 2) {
+        NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+        [myDateFormatter setDateFormat:@"yyyy-MM-dd"];
+
+        //LAST
+        NSDictionary *dict2 = [arrValues objectAtIndex:1];
+        double v2 = [[dict2 objectForKey:@"value"] doubleValue];
+        NSDate *dateB = [ACDate getDateFromTimeStamp:[[dict2 objectForKey:@"measure_time"] longValue]];
+        _labelLastValue.text = [NSString stringWithFormat:@"%0.1f",[[dict2 objectForKey:@"value"] doubleValue]];
+                _labelLastDate.text = [myDateFormatter stringFromDate:dateB];
+        
+        //CURRENT
+        NSDictionary *dict1 = [arrValues objectAtIndex:0];
+        double v1 = [[dict1 objectForKey:@"value"] doubleValue];
+        NSDate *date = [ACDate getDateFromTimeStamp:[[dict1 objectForKey:@"measure_time"] longValue]];
+        _labelCURValue.text = [NSString stringWithFormat:@"%0.1f",[[dict1 objectForKey:@"value"] doubleValue]];
+        _labelCURDate.text = [myDateFormatter stringFromDate:date];
+        //CHANGE
+        if (v1 >= v2) {
+            _labelChangeValue.text= [NSString stringWithFormat:@"↑%0.1f",v1-v2];
+        }else{
+            _labelChangeValue.text= [NSString stringWithFormat:@"↓%0.1f",v2-v1];
+        }
+    }
+    else if ([arrValues count] == 1){
+        //LAST
+        _labelLastValue.text = @"-";
+        _labelLastDate.text = @"尚无记录";
+        //CURRENT
+        NSDictionary *dict = [arrValues objectAtIndex:0];
+        NSDate *date = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]]; 
+        _labelCURValue.text = [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
+        NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+        [myDateFormatter setDateFormat:@"yyyy-MM-dd"];
+        _labelCURDate.text = [myDateFormatter stringFromDate:date];
+        //CHANGE
+        _labelChangeValue.text = @"-";
+    }
+    else{
+        //LAST
+        _labelLastValue.text = @"-";
+        _labelLastDate.text = @"尚无记录";
+        //CURRENT
+        _labelCURValue.text = @"-";
+        _labelCURDate.text = @"尚无记录";
+        //CHANGE
+        _labelChangeValue.text = @"-";
+    }
+    
 }
 
 -(void)makeAdvise:(CGRect)rect
@@ -237,15 +283,19 @@
     plot = [[PhyCorePlot alloc]initWithFrame:rect Title:@"" XYPlotRange:xyPlot XYTitle:xyTitle Axis:axis YBaseV:yBaseValue YSizeInterval:ySizeInterval];
 }
 
+-(void)ShowHistory{
+    PHYHistoryViewController *pHYHistoryViewController=[[PHYHistoryViewController alloc] init];
+    [self.navigationController pushViewController:pHYHistoryViewController animated:YES];
+}
+
 -(void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)AddRecord{
-//    addPHYRecordViewController = [[AddPHYRecordViewController alloc] init];
-//    [pHYDetailViewController setVar:[arrayPhyItems objectAtIndex:indexPath.row]];
-//    [self.navigationController pushViewController:pHYDetailViewController animated:YES];
-
+    addRecordViewController = [[AddPHYRecordViewController alloc] init];
+    [addRecordViewController setType:[[arrayCurrent objectAtIndex:0]intValue]];
+    [self.navigationController pushViewController:addRecordViewController animated:YES];
 }
 
 -(void)setVar:(NSArray*) array{

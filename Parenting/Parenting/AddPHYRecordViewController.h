@@ -8,6 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddPHYRecordViewController : UIViewController
+@interface AddPHYRecordViewController : UIViewController{
+    UIDatePicker *datepicker;
+    int itemType;
+}
 
+@property (strong, nonatomic) UIImageView *phyDetailImageView;
+@property (strong, nonatomic) UIButton *buttonBack;
+@property (strong, nonatomic) UIButton *buttonSave;
+@property (strong, nonatomic) UILabel *labelPickerDate;
+@property (strong, nonatomic) UILabel *labelValue;
+@property (strong, nonatomic) UILabel *labelUnit;
+@property (strong, nonatomic) UILabel *titleText;
+@property (strong,nonatomic) UISlider *slidlerValue;
+
+@property (strong, nonatomic) UIView *view1;
+@property (strong, nonatomic) UIView *view2;
+@property (strong, nonatomic) UIView *view3;
+@property (strong, nonatomic) UIView *view4;
+
+-(void)setType:(int)Type;
 @end
