@@ -102,6 +102,14 @@
             self.navigationController.navigationBar.hidden = NO;
             [self.navigationController pushViewController:sleep animated:YES];
         }break;
+        case QCM_TYPE_MEDICINE:
+        {
+            MedicineViewController *medicine=[MedicineViewController shareViewController];
+            medicine.summary = [SummaryViewController summary];
+            self.navigationController.navigationBar.hidden = NO;
+            [self.navigationController pushViewController:medicine animated:YES];
+        }
+            break;
         default:
             break;
     }
@@ -174,7 +182,7 @@
 
     //入口按钮
     self.btnFeed = [[UIButton alloc] init];
-    self.btnFeed.frame = CGRectMake(320/2-36*PNGSCALE, 70, 72*PNGSCALE, 72*PNGSCALE);
+    self.btnFeed.frame = CGRectMake(320/2-36, 70+20, 72, 72);
     [self.btnFeed setImage:[UIImage imageNamed:@"icon_feeding"] forState:UIControlStateNormal];
     [self.activityImageView setUserInteractionEnabled:YES];
     [self.activityImageView addSubview:self.btnFeed];
@@ -182,32 +190,39 @@
     [self.btnFeed addTarget:self action:@selector(goToDailyActivity:) forControlEvents:UIControlEventTouchUpInside];
     
     self.btnBath = [[UIButton alloc] init];
-    self.btnBath.frame = CGRectMake(320/4-36*PNGSCALE, 70+54*PNGSCALE, 72*PNGSCALE, 72*PNGSCALE);
+    self.btnBath.frame = CGRectMake(48/2.0, 70+20, 72, 72);
     [self.btnBath setImage:[UIImage imageNamed:@"icon_bath"] forState:UIControlStateNormal];
     [self.activityImageView addSubview:self.btnBath];
     self.btnBath.tag = QCM_TYPE_BATH;
     [self.btnBath addTarget:self action:@selector(goToDailyActivity:) forControlEvents:UIControlEventTouchUpInside];
     
     self.btnPlay = [[UIButton alloc] init];
-    self.btnPlay.frame = CGRectMake(320*3/4-36*PNGSCALE, 70+54*PNGSCALE, 72*PNGSCALE, 72*PNGSCALE);
+    self.btnPlay.frame = CGRectMake(320-24-72, 70+20, 72, 72);
     [self.btnPlay setImage:[UIImage imageNamed:@"icon_playing"] forState:UIControlStateNormal];
     [self.activityImageView addSubview:self.btnPlay];
     self.btnPlay.tag = QCM_TYPE_PLAY;
     [self.btnPlay addTarget:self action:@selector(goToDailyActivity:) forControlEvents:UIControlEventTouchUpInside];
     
     self.btnSleep = [[UIButton alloc] init];
-    self.btnSleep.frame = CGRectMake(320.0/3.0-72*PNGSCALE/2.0, 70+26*PNGSCALE+54*PNGSCALE+72*PNGSCALE, 72*PNGSCALE, 72*PNGSCALE);
+    self.btnSleep.frame = CGRectMake(24, 70+26+54+72-30, 72, 72);
     [self.btnSleep setImage:[UIImage imageNamed:@"icon_sleeping"] forState:UIControlStateNormal];
     [self.activityImageView addSubview:self.btnSleep];
     self.btnSleep.tag = QCM_TYPE_SLEEP;
     [self.btnSleep addTarget:self action:@selector(goToDailyActivity:) forControlEvents:UIControlEventTouchUpInside];
     
     self.btnDiaper = [[UIButton alloc] init];
-    self.btnDiaper.frame = CGRectMake(320.0/3.0*2-72*PNGSCALE/2.0, 70+26*PNGSCALE+54*PNGSCALE+72*PNGSCALE, 72*PNGSCALE, 72*PNGSCALE);
+    self.btnDiaper.frame = CGRectMake(320/2-36, 70+26+54+72-30, 72, 72);
     [self.btnDiaper setImage:[UIImage imageNamed:@"icon_diapers"] forState:UIControlStateNormal];
     [self.activityImageView addSubview:self.btnDiaper];
     self.btnDiaper.tag = QCM_TYPE_DIAPER;
     [self.btnDiaper addTarget:self action:@selector(goToDailyActivity:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.btnMedicine = [[UIButton alloc] init];
+    self.btnMedicine.frame = CGRectMake(320-24-72, 70+26+54+72-30, 72, 72);
+    [self.btnMedicine setImage:[UIImage imageNamed:@"icon_medicine"] forState:UIControlStateNormal];
+    [self.activityImageView addSubview:self.btnMedicine];
+    self.btnMedicine.tag = QCM_TYPE_MEDICINE;
+    [self.btnMedicine addTarget:self action:@selector(goToDailyActivity:) forControlEvents:UIControlEventTouchUpInside];
     
     datatable = [[UITableView alloc] init];
     datatable.frame = CGRectMake(0, 334*PNGSCALE, 320, 62*PNGSCALE);
@@ -277,6 +292,10 @@
         {
             type = @"宝贝睡觉了";
         }
+        else if ([item.type isEqualToString:@"Medicine"])
+        {
+            type = @"给宝贝吃药了";
+        }
         else
         {
             type = @"给宝贝喂食了";
@@ -310,6 +329,10 @@
         else if([type isEqualToString:@"play"])
         {
             ctltype=@"玩耍";
+        }
+        else if([type isEqualToString:@"medicine"])
+        {
+            ctltype=@"吃药";
         }
         else
         {
@@ -422,6 +445,10 @@
         else if([item.type isEqualToString:@"Play"])
         {
             [button setImage:[UIImage imageNamed:@"recent_records_playing"] forState:UIControlStateDisabled];
+        }
+        else if([item.type isEqualToString:@"Medicine"])
+        {
+            [button setImage:[UIImage imageNamed:@"recent records_medicine"] forState:UIControlStateDisabled];
         }
         else
         {

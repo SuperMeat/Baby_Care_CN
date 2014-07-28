@@ -97,8 +97,6 @@
     [backbutton addTarget:self action:@selector(popback:) forControlEvents:UIControlEventTouchUpInside];
     backbutton.frame=CGRectMake(0, 0, 44, 28);
     
-    NSLog(@"%@", self.navigationController);
-    
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
 
@@ -152,7 +150,6 @@
     
     [self.Mark setFrame:CGRectMake(166 , 81+64 , 154, 37)];
     
-    NSLog(@"%@", DBPATH);
     plotArray = [[NSMutableArray alloc] initWithCapacity:0];
     CGRect rx = [ UIScreen mainScreen ].bounds;
     plotScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50+15, 320, rx.size.height-64)];
@@ -307,54 +304,6 @@
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQzone,UMShareToQQ,UMShareToRenren,UMShareToDouban,UMShareToEmail,UMShareToSms,UMShareToFacebook,UMShareToTwitter,nil]
                                        delegate:nil];
     
-    //构造分享内容
-//    id<ISSContent> publishContent = [ShareSDK content:@"分享内容"
-//                                       defaultContent:@"默认分享内容，没内容时显示"
-//                                                image:[ShareSDK imageWithPath:SHAREPATH]
-//                                                title:@"Babycare"
-//                                                  url:@"http://www.sharesdk.cn"
-//                                          description:@"这是一条测试信息"
-//                                            mediaType:SSPublishContentMediaTypeNews];
-//    
-//    
-//    
-//    
-//    NSArray *sharelist=[ShareSDK getShareListWithType:ShareTypeSinaWeibo,ShareTypeFacebook,ShareTypeMail,ShareTypeCopy,ShareTypeAirPrint, nil];
-//    
-//
-//
-//    
-//    
-//    NSArray *oneKeyShareList = [ShareSDK getShareListWithType:ShareTypeSinaWeibo,ShareTypeFacebook,nil];
-//    id<ISSShareOptions> shareOptions = [ShareSDK defaultShareOptionsWithTitle:nil
-//                                                                oneKeyShareList:oneKeyShareList
-//                                                               qqButtonHidden:YES
-//                                                        wxSessionButtonHidden:YES
-//                                                       wxTimelineButtonHidden:YES
-//                                                         showKeyboardOnAppear:NO
-//                                                            shareViewDelegate:nil
-//                                                          friendsViewDelegate:nil  picViewerViewDelegate:nil];
-//    
-//    [ShareSDK showShareActionSheet:nil
-//                         shareList:sharelist
-//                           content:publishContent
-//                     statusBarTips:YES
-//                       authOptions:nil
-//                      shareOptions: shareOptions
-//                            result:^(ShareType type, SSPublishContentState state, id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-//                                if (state == SSPublishContentStateSuccess)
-//                                {
-//                                    NSLog(@"分享成功");
-//                                }
-//                                else if (state == SSPublishContentStateFail)
-//                                {
-//                                    NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode],  [error errorDescription]);
-//                                }
-//                            }];
-//    
-//
-//
-   
 }
 
 -(void)showshareview
@@ -400,7 +349,7 @@
         another2=(UIButton*)[self.view viewWithTag:103];
         self.Mark.hidden=NO;
         plot.hidden=NO;
-        if (!(selectIndex==4)) {
+        if (!(selectIndex==4 ||selectIndex == 5)) {
             Histogram.hidden=NO;
             Plotting.hidden=NO;
         }
@@ -423,8 +372,6 @@
 
     another1.enabled=YES;
     another2.enabled=YES;
-    
-    
 }
 
 -(void)makeHeadSegement
@@ -496,14 +443,8 @@
     }
     another1.enabled=YES;
     
-//    another1.titleLabel.textColor=[UIColor grayColor];
-//    
-//    sender.titleLabel.textColor=[UIColor whiteColor];
     isScroll = NO;
     [plot removeFromSuperview];
-    //CGRect rx = [UIScreen mainScreen ].bounds;
-    
-    //plotScrollView.contentSize = CGSizeMake([DataBase scrollWidth:plotTag] * 320, rx.size.height  - 35 - 49-20);
     plotScrollView.contentSize = CGSizeMake([SummaryDB scrollWidthWithTag:plotTag andTableName:[self tableName:selectIndex]] * 320, 0);
       NSLog(@"%f，%f",plotScrollView.contentSize.height,plotScrollView.contentSize.width);
     for (MyCorePlot *plot_1 in plotArray) {
@@ -522,11 +463,6 @@
 
 -(void)makeMenu
 {
-//    QuadCurveMenuItem *menuitemall = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_all.png"]
-//                                                     highlightedImage:[UIImage imageNamed:@"btn_all_focus.png"]
-//                                                         ContentImage:[UIImage imageNamed:@"btn_all.png"]
-//                                              highlightedContentImage:[UIImage imageNamed:@"btn_all_focus.png"]];
-    // People MenuItem.
     QuadCurveMenuItem *menuitemplay = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_playing"]
                                                       highlightedImage:[UIImage imageNamed:@"btn_playing_focus.png"]
                                                           ContentImage:[UIImage imageNamed:@"btn_playing"]
@@ -552,7 +488,13 @@
                                                             ContentImage:[UIImage imageNamed:@"btn_diapers"]
                                                  highlightedContentImage:[UIImage imageNamed:@"btn_diapers_focus"]];
     
-    NSArray *menus = [NSArray arrayWithObjects:menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, nil];
+    // Sleep MenuItem.
+    QuadCurveMenuItem *menuitemmedicine = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_medicine"]
+                                                                highlightedImage:[UIImage imageNamed:@"btn_medicine_focus"]
+                                                                    ContentImage:[UIImage imageNamed:@"btn_medicine"]
+                                                         highlightedContentImage:[UIImage imageNamed:@"btn_medicine_focus"]];
+    
+    NSArray *menus = [NSArray arrayWithObjects:menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, menuitemmedicine,nil];
     CGRect rx = [ UIScreen mainScreen ].bounds;
     
     if(rx.size.height > 480){
@@ -576,9 +518,7 @@
 {
     
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
-    NSLog(@"idx  %d",idx);
-   
-    if ((idx==4)||btn.enabled) {
+    if ((idx==4)|| btn.enabled || (idx == 5)) {
         Plotting.hidden=YES;
         Histogram.hidden=YES;
     }
@@ -586,28 +526,13 @@
     {
         Plotting.hidden=NO;
         Histogram.hidden=NO;
-        
     }
     switch (idx) {
-//        case 0:
-//        {
-//            ListArray=[[DataBase dataBase] selectAllforsummary];
-//            [List reloadData];
-//            
-//            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
-//            AdviseArray = [DataBase selectsuggestionbath:advise_lock];
-//           // NSLog(@"%@",AdviseArray);
-//            chooseAdvise = ADVISE_TYPE_ALL;
-//            [Advise reloadData];
-//        }
-//            break;
         case 0:
         {
             ListArray=[[SummaryDB dataBase] selectplayforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_PLAY];
-            AdviseArray = [DataBase selectsuggestionplay:advise_lock];
             chooseAdvise = ADVISE_TYPE_PLAY;
             [Advise reloadData];
         }
@@ -617,8 +542,6 @@
             ListArray=[[SummaryDB dataBase] selectbathforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
-            AdviseArray = [DataBase selectsuggestionbath:advise_lock];
             chooseAdvise = ADVISE_TYPE_BATH;
             [Advise reloadData];
         }
@@ -628,8 +551,6 @@
             ListArray=[[SummaryDB dataBase] selectfeedforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_FEED];
-            AdviseArray = [DataBase selectsuggestionfeed:advise_lock];
             chooseAdvise = ADVISE_TYPE_FEED;
             [Advise reloadData];
         }
@@ -639,9 +560,7 @@
             ListArray=[[SummaryDB dataBase] selectsleepforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_SLEEP];
             chooseAdvise = ADVISE_TYPE_SLEEP;
-            AdviseArray = [DataBase selectsuggestionsleep:advise_lock];
             [Advise reloadData];
         }
             break;
@@ -650,9 +569,16 @@
             ListArray=[[SummaryDB dataBase] selectdiaperforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_DIAPER];
-            AdviseArray = [DataBase selectsuggestiondiaper:advise_lock];
             chooseAdvise = ADVISE_TYPE_DIAPER;
+            [Advise reloadData];
+        }
+            break;
+        case 5:
+        {
+            ListArray=[[SummaryDB dataBase] selectmedicineforsummary];
+            [List reloadData];
+            
+            chooseAdvise = ADVISE_TYPE_MEDICINE;
             [Advise reloadData];
         }
             break;
@@ -674,8 +600,7 @@
 -(void)updaterecord:(NSInteger)idx
 {
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
-    NSLog(@"idx  %d",idx);
-    if ((idx==4)||btn.enabled) {
+    if ((idx==4)||btn.enabled|| (idx == 5)) {
         Plotting.hidden=YES;
         Histogram.hidden=YES;
     }
@@ -690,9 +615,7 @@
             ListArray=[[DataBase dataBase] selectAllforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
-            AdviseArray = [DataBase selectsuggestionbath:advise_lock];
-            NSLog(@"%@",AdviseArray);
+           
             chooseAdvise = ADVISE_TYPE_ALL;
             [Advise reloadData];
         }
@@ -702,8 +625,7 @@
             ListArray=[[SummaryDB dataBase] selectplayforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_PLAY];
-            AdviseArray = [DataBase selectsuggestionplay:advise_lock];
+           
             chooseAdvise = ADVISE_TYPE_PLAY;
             [Advise reloadData];
         }
@@ -713,8 +635,7 @@
             ListArray=[[SummaryDB dataBase] selectbathforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
-            AdviseArray = [DataBase selectsuggestionbath:advise_lock];
+            
             chooseAdvise = ADVISE_TYPE_BATH;
             [Advise reloadData];
         }
@@ -724,8 +645,7 @@
             ListArray=[[SummaryDB dataBase] selectfeedforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_FEED];
-            AdviseArray = [DataBase selectsuggestionfeed:advise_lock];
+            
             chooseAdvise = ADVISE_TYPE_FEED;
             [Advise reloadData];
         }
@@ -735,9 +655,9 @@
             ListArray=[[SummaryDB dataBase] selectsleepforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_SLEEP];
+            
             chooseAdvise = ADVISE_TYPE_SLEEP;
-            AdviseArray = [DataBase selectsuggestionsleep:advise_lock];
+           
             [Advise reloadData];
         }
             break;
@@ -746,13 +666,22 @@
             ListArray=[[SummaryDB dataBase] selectdiaperforsummary];
             [List reloadData];
             
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_DIAPER];
-            AdviseArray = [DataBase selectsuggestiondiaper:advise_lock];
+           
             chooseAdvise = ADVISE_TYPE_DIAPER;
             [Advise reloadData];
         }
             break;
+        case 5:
+        {
+            ListArray=[[SummaryDB dataBase] selectmedicineforsummary];
+            [List reloadData];
             
+           
+            chooseAdvise = ADVISE_TYPE_MEDICINE;
+            [Advise reloadData];
+        }
+            break;
+
         default:
             break;
     }
@@ -793,6 +722,11 @@
             selectIndex = 4;
             retStr = @"Diaper";
             break;
+        case 5:
+            selectIndex = 5;
+            retStr = @"Medicine";
+            break;
+
     }
     return retStr;
 }
@@ -835,6 +769,9 @@
                 return 5;
                 break;
             case ADVISE_TYPE_PLAY:
+                return 13;
+                break;
+            case ADVISE_TYPE_MEDICINE:
                 return 13;
                 break;
             default:
@@ -901,10 +838,19 @@
                 cell.MarkLable.text = item.op_type;
                 cell.minutesLable.text = item.amount;
             }
+            else if ([item.feedtype isEqualToString:@"2"])
+            {
+                cell.MarkLable.text = item.op_type;
+            }
             else
             {
                 cell.MarkLable.text = @"哺乳";
             }
+        }
+        else if([item.type isEqualToString:@"Medicine"])
+        {
+            cell.MarkLable.text = item.medicinename;
+            cell.minutesLable.text = [NSString stringWithFormat:@"%@%@",item.amount,item.danwei];
         }
         else
         {
@@ -979,6 +925,13 @@
                 }
 
                 break;
+            case ADVISE_TYPE_MEDICINE:
+                if (indexPath.section < 13) {
+                    imageName = [NSString stringWithFormat:@"Medicine_%d.jpg", indexPath.section + 1];
+                    title =[NSString stringWithFormat:@"Medicine_T%d", indexPath.section + 1];
+                }
+                
+                break;
             default:
                 break;
         }
@@ -1052,6 +1005,13 @@
                     title =[NSString stringWithFormat:@"Play_T%d", indexPath.section + 1];
                 }
                 break;
+            case ADVISE_TYPE_MEDICINE:
+                if (indexPath.section < 13) {
+                    key = [NSString stringWithFormat:@"Medicine_%d", indexPath.section + 1];
+                    title =[NSString stringWithFormat:@"Medicine_T%d", indexPath.section + 1];
+                }
+                break;
+
             default:
                 break;
         }
@@ -1156,6 +1116,13 @@
         [bath loaddata];
         [self.view addSubview:bath];
     }
+    else if ([item.type isEqualToString:@"Medicine"])
+    {
+        medicine=[[save_medicineview alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime Duration:item.duration UpdateTime:item.updatetime CreateTime:item.createtime];
+        medicine.medicineSaveDelegate = self;
+        [medicine loaddata];
+        [self.view addSubview:medicine];
+    }
     else
     {
         diaper=[[save_diaperview alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-20, self.view.frame.size.width, self.view.frame.size.height) Select:YES Start:item.starttime UpdateTime:item.updatetime CreateTime:item.createtime];
@@ -1223,6 +1190,11 @@
     Plotting.contentMode=UIViewContentModeScaleToFill;
     [self.view addSubview:Plotting];
     
+    if (selectIndex == 4 || selectIndex == 5) {
+        Plotting.hidden = YES;
+        Histogram.hidden = YES;
+    }
+    
     [Histogram addTarget:self action:@selector(PLotSelected:) forControlEvents:UIControlEventTouchUpInside];
     [Plotting addTarget:self action:@selector(PLotSelected:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -1272,10 +1244,19 @@
     [self updaterecord:QCM_TYPE_BATH];
 }
 
--(void)sendFeedSaveChanged:(int)duration andstarttime:(NSDate *)newstarttime
+-(void)sendFeedSaveChanged:(int)duration andIsFood:(BOOL)isfood andstarttime:(NSDate *)newstarttime
 {
     [self updaterecord:QCM_TYPE_FEED];
 }
 
+-(void)sendMedicineSaveChanged:(NSString *)medicinename andAmount:(NSString *)amount andIsReminder:(BOOL)isReminder andstarttime:(NSDate *)newstarttime
+{
+    [self updaterecord:QCM_TYPE_MEDICINE];
+}
+
+-(void)sendMedicineReloadData
+{
+    [self updaterecord:QCM_TYPE_MEDICINE];
+}
 
 @end

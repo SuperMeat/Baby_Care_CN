@@ -134,13 +134,13 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
     
-    [[NSUserDefaults standardUserDefaults] setObject:@"BLE_ENV"  forKey:@"BLE_ENV"];
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"] != nil)
-    {
-        bleweatherCtrler = [BLEWeatherController bleweathercontroller];
-
-    }
+//    [[NSUserDefaults standardUserDefaults] setObject:@"BLE_ENV"  forKey:@"BLE_ENV"];
+//    
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BLE_ENV"] != nil)
+//    {
+//        bleweatherCtrler = [BLEWeatherController bleweathercontroller];
+//
+//    }
     
     [MAMapServices sharedServices].apiKey = AMAP_KEY;
     
@@ -185,10 +185,10 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
 
     [controllers addObject:myPageNavigationViewController];
-    [controllers addObject:envirNavigationViewController];
     [controllers addObject:actNavigationViewController];
-    [controllers addObject:phyNavigationViewController];
     [controllers addObject:calendarNavigationViewController];
+    [controllers addObject:phyNavigationViewController];
+    [controllers addObject:envirNavigationViewController];
     
     myTabController = [[MyTabBarController alloc] init];
     [myTabController setViewControllers:controllers];

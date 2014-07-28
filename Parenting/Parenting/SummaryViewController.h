@@ -16,8 +16,9 @@
 #import "save_feedview.h"
 #import "save_playview.h"
 #import "save_sleepview.h"
+#import "save_medicineview.h"
 
-@interface SummaryViewController : ACViewController<QuadCurveMenuDelegate, UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,save_diaperviewDelegate,save_sleepviewDelegate,save_playviewDelegate,save_bathviewDelegate,save_feedviewDelegate,UINavigationControllerDelegate>{
+@interface SummaryViewController : ACViewController<QuadCurveMenuDelegate, UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,save_diaperviewDelegate,save_sleepviewDelegate,save_playviewDelegate,save_bathviewDelegate,save_feedviewDelegate,save_medicineviewDelegate,UINavigationControllerDelegate>{
     MyCorePlot *plot;
     UIButton *backbutton;
     int plotTag;
@@ -41,6 +42,7 @@
     save_feedview   *feed;
     save_playview   *play;
     save_bathview   *bath;
+    save_medicineview *medicine;
 }
 
 +(id)summary;

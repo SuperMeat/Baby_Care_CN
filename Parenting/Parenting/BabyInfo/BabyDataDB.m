@@ -719,6 +719,61 @@
     return res;
 }
 
+-(BOOL)insertBabyMedicineRecord:(long)create_time UpdateTime:(long)update_time StartTime:(NSDate *)start_time Month:(int)month Week:(int)week Weekday:(int)weekday Medicine:(NSString *)medicine Description:(NSString *)desp Amount:(NSString *)amount Danwei:(NSString *)danwei Timegap:(NSString *)timegap IsReminder:(BOOL)isreminder MoreInfo:(NSString *)more_info
+{
+    BOOL res;
+    int user_id = ACCOUNTUID;
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    
+    int remind = 0;
+    if (isreminder)
+    {
+        remind = 1;
+    }
+    
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_medicine (create_time integer NOT NULL PRIMARY KEY, update_time integer DEFAULT 0, starttime Timestamp DEFAULT NULL, month INTEGER DEFAULT NULL, week INTEGER DEFAULT NULL, weekday INTEGER DEFAULT NULL, medicine Varchar DEFAULT NULL,  medicinedesp Varchar DEFAULT NULL, amount Varchar DEFAULT NULL, danwei Varchar DEFAULT NULL,  isreminder INTEGER DEFAULT 0,  timegap  Varchar DEFAULT NULL, moreinfo Varchar DEFAULT NULL,type Varchar DEFAULT NULL)"];
+    
+    if (!res) {
+        NSLog(@"表格创建失败");
+        [db close];
+        return res;
+    }
+    
+    res=[db executeUpdate:@"insert into bc_baby_medicine values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+         [NSNumber numberWithLong:create_time],
+         [NSNumber numberWithLong:update_time],
+         start_time,
+         [NSNumber numberWithInt:month],
+         [NSNumber numberWithInt:week],
+         [NSNumber numberWithInt:weekday],
+         medicine,
+         desp,
+         amount,
+         danwei,
+         [NSNumber numberWithInt:remind],
+         timegap,
+         more_info,
+         @"Medicine"
+         ];
+    
+    if (!res) {
+        NSLog(@"%@",NSHomeDirectory());
+        NSLog(@"插入失败");
+        [db close];
+        return res;
+    }
+    [db close];
+    
+    return res;
+}
+
 -(BOOL)updateBathRecord:(NSDate*)starttime
                   Month:(int)month
                    Week:(int)week
@@ -897,6 +952,46 @@
     [db close];
     return res;
 }
+
+
+-(BOOL)updateMedicineRecord:(NSDate*)starttime
+                      Month:(int)month
+                       Week:(int)week
+                    WeekDay:(int)weekday
+                   Medicine:(NSString *)medicine
+                Description:(NSString *)desp
+                     Amount:(NSString *)amount
+                     Danwei:(NSString *)danwei
+                    Timegap:(NSString *)timegap
+                 IsReminder:(BOOL)isreminder
+                   MoreInfo:(NSString *)more_info
+                 CreateTime:(long)createtime
+{
+    BOOL res;
+    int user_id = ACCOUNTUID;
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    
+    int remind = 0;
+    if (isreminder) {
+        remind = 1;
+    }
+    res=[db executeUpdate:@"update bc_baby_medicine set starttime = ?, month=?,week = ?,weekday=?,medicine=?,medicinedesp = ?,amount = ?,danwei=?,isreminder = ?,timegap = ?,moreinfo = ? where create_time=?",starttime,[NSNumber numberWithInt:month],[NSNumber numberWithInt:week],[NSNumber numberWithInt:weekday],medicine,desp,amount,danwei,[NSNumber numberWithInt:remind],timegap,more_info,[NSNumber numberWithLong:createtime]];
+    if (!res) {
+        NSLog(@"数据库更新失败");
+        [db close];
+        return res;
+    }
+    [db close];
+    return res;
+}
+
 
 -(BOOL)updateDuration:(long)create_time
              Duration:(int)duration

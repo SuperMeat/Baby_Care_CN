@@ -9,6 +9,7 @@
 #import "ACViewController.h"
 #import "SummaryViewController.h"
 #import "save_feedview.h"
+#import "SummaryItem.h"
 
 @interface FeedActivityViewController : ACViewController<save_feedviewDelegate>
 {
@@ -18,6 +19,7 @@
     UIButton * addRecordBtn;
     UIButton * chooseBreast;
     UIButton * chooseBottle;
+    UIButton * chooseFood;
     
     UIImageView *timerImage;
     UIImageView *timerImageView;
@@ -55,6 +57,8 @@
 @property(nonatomic,strong)NSString *activity;
 @property(nonatomic,strong)NSString *feedWay;
 @property(nonatomic,strong)NSString *breast;
+@property (strong, nonatomic) IBOutlet UIView *foodView;
+@property (strong, nonatomic) IBOutlet UIScrollView *foodScrollView;
 @property (strong, nonatomic)SummaryViewController *summary;
 @property(nonatomic,strong)NSString *obj;
 +(id)shareViewController;

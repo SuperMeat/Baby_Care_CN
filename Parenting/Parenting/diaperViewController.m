@@ -490,7 +490,6 @@
 
 }
 -(void)cancel
-
 {
     //[saveView removeFromSuperview];
     startButton.enabled = YES;

@@ -57,14 +57,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Parenting/SummaryViewController.m"
-            timestampString = "425900085.678832"
+            filePath = "Parenting/save_medicineview.m"
+            timestampString = "427270881.366894"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
-            landmarkName = "-ShareBtn"
-            landmarkType = "5">
+            startingLineNumber = "569"
+            endingLineNumber = "569">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
