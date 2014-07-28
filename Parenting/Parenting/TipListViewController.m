@@ -28,11 +28,21 @@
     return self;
 }
 
+- (id)initWithCategoryId:(int)id Name:(NSString*)name
+{
+    _categoryId = id;
+    _categoryName = name;
+    if (self = [super init]) {
+        // Instance variables go here
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initView];
-    
     [[SyncController syncController]    getTips:ACCOUNTUID
                                      CategoryID:_categoryId
                                  LastCreateTime:[ACDate getTimeStampFromDate:[NSDate date]]//Now
@@ -53,44 +63,32 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-
+    
 }
 
 -(void)initView{
-    //加载头部Navigation
-    //加载navigationBar
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 320, 44)];
+    //加载头部Navigation 
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 160, 20)];
     titleView.backgroundColor=[UIColor clearColor];
-    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
     titleText.backgroundColor = [UIColor clearColor];
-    [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
+    [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18]];
     titleText.textColor = [UIColor whiteColor];
     [titleText setTextAlignment:NSTextAlignmentCenter];
-    [titleText setText:@"小贴士"];
+    [titleText setText:[NSString stringWithFormat:@"%@",_categoryName]];
     [titleView addSubview:titleText];
-    self.tipsNavigationImageView = [[UIImageView alloc] init];
-    [self.tipsNavigationImageView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
-    [self.tipsNavigationImageView setBackgroundColor:[ACFunction colorWithHexString:@"#68bfcc"]];
-    [self.tipsNavigationImageView addSubview:titleView];
-    [self.view addSubview:self.tipsNavigationImageView];
-    [self.tipsNavigationImageView setUserInteractionEnabled:YES];
-
-    _buttonBack = [[UIButton alloc] init];
-    _buttonBack.frame = CGRectMake(10, 22, 40, 40);
-    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:16];
-    [_buttonBack setTitle:@"返回" forState:UIControlStateNormal];
-    [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [self.tipsNavigationImageView addSubview:_buttonBack];
+    
+    self.navigationItem.titleView = titleView;
     
     //加载ScrollView 
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 64.0f)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
     _scrollView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:240.0/255.0 blue:236.0/255.0 alpha:1.0];
     _scrollView.pagingEnabled = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = YES;
     _scrollView.delegate = self;
     _scrollView.bounces = YES;
-    [self.view addSubview:_scrollView];
+    [self.view addSubview:_scrollView]; 
     
     activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityView.frame = CGRectMake(self.view.frame.size.width / 2 - 10,
@@ -138,10 +136,12 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if ([arrDS count] == 0) {
+        return;
+    }
     if (_scrollView.contentOffset.y < 0 && !activityView.isAnimating) {
         [activityView startAnimating];
         _scrollView.scrollEnabled = NO;
-        
         
         long lastCreateTime = [[[arrDS objectAtIndex:0] objectAtIndex:5]longValue];
         [[SyncController syncController]    getTips:ACCOUNTUID
@@ -216,7 +216,8 @@
     [self.navigationController pushViewController:tipsWeb animated:YES];
 }
 
--(void)goBack{
+-(void)goBack
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -94,7 +94,7 @@
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit;
     comps=[calendar components:unitFlags fromDate:sender.date];
-    NSString* str = [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02d",[comps year],[comps month],[comps day],[comps hour],[comps minute],0];
+    NSString* str = [NSString stringWithFormat:@"%04ld-%02ld-%02ld %02ld:%02ld:%02d",(long)[comps year],(long)[comps month],(long)[comps day],(long)(long)[comps hour],(long)[comps minute],0];
     notifyDate = [ACDate dateFromString:str];
 }
 

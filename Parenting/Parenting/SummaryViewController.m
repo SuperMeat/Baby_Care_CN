@@ -164,7 +164,7 @@
     [self makeHeadSegement];
     [self makeTimeSegment];
     [self makeMenu];
-    NSLog(@"%f",menu.frame.size.height);
+    
     List =[[UITableView alloc]initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64-49) style:UITableViewStylePlain];
     List.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     [self.view addSubview:List];
@@ -185,44 +185,6 @@
     Advise.delegate=self;
     Advise.dataSource=self;
     Advise.separatorStyle=UITableViewCellSeparatorStyleNone;
-    
-    //分享按钮
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    button.frame = CGRectMake(0, 0, 43, 28);
-//    [button addTarget:self action:@selector(ShareBtn) forControlEvents:UIControlEventTouchUpInside];
-//    [button setBackgroundImage:[UIImage imageNamed:@"btn3.png"] forState:UIControlStateNormal];
-//    [button setImage:[UIImage imageNamed:@"icon_share.png"] forState:UIControlStateNormal];
-//    UIBarButtonItem *rtButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-//    self.navigationItem.rightBarButtonItem = rtButton;
-//    
-//    Shareview=[[UIImageView alloc]initWithFrame:CGRectMake(20, -300+G_YADDONVERSION, 280, 300)];
-//
-//    
-//    [Shareview setImage:[UIImage imageNamed:@"save_bg"]];
-//    [Shareview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-//    Shareview.userInteractionEnabled=YES;
-//    UIImageView *Shareimage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 260, 180)];
-//    [Shareview addSubview:Shareimage];
-//    Shareimage.tag=10001;
-//    Shareimage.contentMode=UIViewContentModeScaleAspectFit;
-//    Sharetext=[[UITextField alloc]initWithFrame:CGRectMake(10, 210, 260, 30)];
-//    [Shareview addSubview:Sharetext];
-//    Sharetext.tag=10002;
-//    Sharetext.borderStyle=UITextBorderStyleRoundedRect;
-//    
-//    UIButton *share=[UIButton buttonWithType:UIButtonTypeCustom];
-//    [share setTitle:NSLocalizedString(@"Share",nil) forState:UIControlStateNormal];
-//    
-//    share.frame=CGRectMake(155, 250, 100, 40);
-//    [share setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-//    [share addTarget:self action:@selector(Share) forControlEvents:UIControlEventTouchUpInside];
-//    UIButton *cancle=[UIButton buttonWithType:UIButtonTypeCustom];
-//    cancle.frame=CGRectMake(15, 250, 100, 40);
-//    [cancle setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
-//    [cancle addTarget:self action:@selector(hidenshareview) forControlEvents:UIControlEventTouchUpInside];
-//    [cancle setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-//    [Shareview addSubview:share];
-//    [Shareview addSubview:cancle];
     
     [self.view bringSubviewToFront:menu];
     
@@ -251,7 +213,7 @@
     NSUserDefaults *db = [NSUserDefaults standardUserDefaults];
     [db setObject:str forKey:@"MARK"];
     [db synchronize];
-    self.tabBarController.selectedIndex = 2;
+    self.tabBarController.selectedIndex = TABBAR_INDEX_ACTIVITY;
     self.navigationController.navigationBar.hidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -296,7 +258,6 @@
 }
 -(void)Share
 {
-
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UMENGAPPKEY
                                       shareText:@"分享我的宝贝每一天的记录"
@@ -772,7 +733,7 @@
                 return 13;
                 break;
             case ADVISE_TYPE_MEDICINE:
-                return 13;
+                return 14;
                 break;
             default:
                 return 5;
@@ -926,7 +887,7 @@
 
                 break;
             case ADVISE_TYPE_MEDICINE:
-                if (indexPath.section < 13) {
+                if (indexPath.section < 14) {
                     imageName = [NSString stringWithFormat:@"Medicine_%d.jpg", indexPath.section + 1];
                     title =[NSString stringWithFormat:@"Medicine_T%d", indexPath.section + 1];
                 }
@@ -974,41 +935,48 @@
             [Advise reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
         
-        NSString *url, *key, *title;
+        NSString *url, *key, *title, *imagePath;
         switch (chooseAdvise) {
             case ADVISE_TYPE_FEED:
                 if (indexPath.section < 35) {
                     key = [NSString stringWithFormat:@"Feed_%d", indexPath.section + 1];
-                    title =[NSString stringWithFormat:@"Feed_T%d", indexPath.section + 1];                }
+                    title =[NSString stringWithFormat:@"Feed_T%d", indexPath.section + 1];
+                    imagePath = [NSString stringWithFormat:@"Feed_%d.jpg", indexPath.section + 1];
+                }
                 break;
             case ADVISE_TYPE_SLEEP:
                 if (indexPath.section < 5) {
                     key = [NSString stringWithFormat:@"Sleep_%d", indexPath.section + 1];
                     title =[NSString stringWithFormat:@"Sleep_T%d", indexPath.section + 1];
+                    imagePath = [NSString stringWithFormat:@"Sleep_%d.jpg", indexPath.section + 1];
                 }
                 break;
             case ADVISE_TYPE_BATH:
                 if (indexPath.section < 6) {
                     key = [NSString stringWithFormat:@"Bath_%d", indexPath.section + 1];
                     title =[NSString stringWithFormat:@"Bath_T%d", indexPath.section + 1];
+                    imagePath = [NSString stringWithFormat:@"Bath_%d.jpg", indexPath.section + 1];
                 }
                 break;
             case ADVISE_TYPE_DIAPER:
                 if (indexPath.section < 5) {
                     key = [NSString stringWithFormat:@"Diaper_%d", indexPath.section + 1];
                     title =[NSString stringWithFormat:@"Diaper_T%d", indexPath.section + 1];
+                    imagePath = [NSString stringWithFormat:@"Diaper_%d.jpg", indexPath.section + 1];
                 }
                 break;
             case ADVISE_TYPE_PLAY:
                 if (indexPath.section < 13) {
                     key = [NSString stringWithFormat:@"Play_%d", indexPath.section + 1];
                     title =[NSString stringWithFormat:@"Play_T%d", indexPath.section + 1];
+                    imagePath = [NSString stringWithFormat:@"Play_%d.jpg", indexPath.section + 1];
                 }
                 break;
             case ADVISE_TYPE_MEDICINE:
-                if (indexPath.section < 13) {
+                if (indexPath.section < 14) {
                     key = [NSString stringWithFormat:@"Medicine_%d", indexPath.section + 1];
                     title =[NSString stringWithFormat:@"Medicine_T%d", indexPath.section + 1];
+                    imagePath = [NSString stringWithFormat:@"Medicine_%d.jpg", indexPath.section + 1];
                 }
                 break;
 
@@ -1021,6 +989,7 @@
         TipsWebViewController *tips = [[TipsWebViewController alloc] init];
         [tips setTipsUrl:url];
         [tips setTipsTitle:NSLocalizedString(title, nil)];
+        [tips setShowImage:imagePath];
         [self.navigationController pushViewController:tips animated:YES];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"gototips"];
 

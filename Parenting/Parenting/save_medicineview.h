@@ -27,9 +27,13 @@ UIDatePicker *datepicker;
 UIActionSheet *action;
 
 NSDate* curstarttime;
+NSString* oldstarttime;
+NSString* oldmedicine;
+    
 long _createtime;
 long _updatetime;
 BOOL isReminder;
+BOOL oldIsReminder;
 }
 
 @property(nonatomic,strong)NSString *feedway;

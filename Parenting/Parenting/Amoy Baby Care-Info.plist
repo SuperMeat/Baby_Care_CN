@@ -49,7 +49,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb315050775296347</string>
-				<string>sinaweibosso.2712555917</string>
 			</array>
 		</dict>
 		<dict>
@@ -58,6 +57,22 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>QQ41AAA21C</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wx8a04549b73aba34b</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sina.52d8843456240b63fb07a8dc</string>
 			</array>
 		</dict>
 	</array>

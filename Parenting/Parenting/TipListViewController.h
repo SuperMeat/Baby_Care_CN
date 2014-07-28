@@ -13,7 +13,7 @@
 #import "SyncController.h"
 #import "MBProgressHUD.h"
 
-@interface TipListViewController : UIViewController<UIScrollViewDelegate>
+@interface TipListViewController : ACViewController<UIScrollViewDelegate>
 {
     UIActivityIndicatorView *activityView;
     MBProgressHUD *hud;
@@ -25,6 +25,7 @@
 @property (strong, nonatomic) UIButton *buttonBack;
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,assign) int categoryId;
-@property (strong, nonatomic) UIImageView *tipsNavigationImageView;
+@property (nonatomic,assign) NSString* categoryName;
 
+- (id)initWithCategoryId:(int)id Name:(NSString*)name;
 @end

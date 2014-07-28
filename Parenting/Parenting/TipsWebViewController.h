@@ -7,17 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TipsWebViewController : UIViewController<UIWebViewDelegate>
+@interface TipsWebViewController : ACViewController<UIWebViewDelegate,UMSocialUIDelegate,UMSocialDataDelegate>
 {
     NSString* _url;
     NSString* _contenttitle;
+    NSString* _showimage;
     int count;
-    UIImageView* Shareview;
-    UITextField *Sharetext;
 }
 @property (strong, nonatomic)  UIWebView *webView;
-@property (strong, nonatomic) UIImageView *tipsNavigationImageView;
 -(void) setTipsUrl:(NSString*)requestUrl;
 -(void) setTipsTitle:(NSString*)title;
+-(void) setShowImage:(NSString*)imagePath;
 @end

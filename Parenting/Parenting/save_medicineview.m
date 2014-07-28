@@ -192,7 +192,7 @@
     amounttext=[[UITextField alloc]initWithFrame:CGRectMake(115, 160, 60, 30)];
     [amounttext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:amounttext];
-    amounttext.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    amounttext.keyboardType = UIKeyboardTypeDecimalPad;
     amounttext.textColor=[UIColor grayColor];
     
     [amounttext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
@@ -214,7 +214,7 @@
     [timeinternaltext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:timeinternaltext];
     timeinternaltext.textColor=[UIColor grayColor];;
-    timeinternaltext.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    timeinternaltext.keyboardType = UIKeyboardTypeDecimalPad;
     [timeinternaltext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
     [timeinternaltext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
     [timeinternaltext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
@@ -252,13 +252,16 @@
         SummaryDB *db=[SummaryDB dataBase];
         NSArray *array= [db searchFrommedicine:start];
         NSDate *date=(NSDate*)[array objectAtIndex:0];
-        
+        curstarttime = date;
         datetext.text=[ACDate dateDetailFomatdate:date];
         medicinedesptext.text=[array objectAtIndex:4];
         medicinenametext.text=[array objectAtIndex:1];
         amounttext.text = [array objectAtIndex:2];
         danweitext.text = [array objectAtIndex:3];
         timeinternaltext.text = [array objectAtIndex:6];
+        oldIsReminder = [[array objectAtIndex:5]intValue];
+        oldstarttime  = datetext.text;
+        oldmedicine   = medicinenametext.text;
         if ([[array objectAtIndex:5]intValue]==0) {
             setNextTimeButton.tag = 101;
             [setNextTimeButton setImage:[UIImage imageNamed:@"radio"] forState:UIControlStateNormal];
@@ -273,7 +276,8 @@
     }
     else
     {
-        datetext.text=[ACDate dateDetailFomatdate:[ACDate date]];
+        curstarttime = [ACDate date];
+        datetext.text=[ACDate dateDetailFomatdate:curstarttime];
         medicinedesptext.text=@"";
         medicinenametext.text=@"";
     }
@@ -293,28 +297,71 @@
     }
 }
 
+-(void)setReminder
+{
+    //先把之前的删除
+    [self deleteReminder];
+    
+    if (![self checkReminderTime]) {
+        return;
+    }
+    
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[curstarttime timeIntervalSince1970]];
+    long time = [timeSp intValue] + 3600 * timeinternaltext.text.doubleValue;
+    NSLog(@"timeSp:%@",timeSp); //时间戳的值
+    
+    NSLog(@"timeSpln:%lf",timeinternaltext.text.doubleValue); //时间戳的值
+    
+    NSDate *reminderdate = [NSDate dateWithTimeIntervalSince1970:time];
+    
+    [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"您该给宝宝喂食%@%@%@了~",amounttext.text,danweitext.text,medicinenametext.text] FireDate:reminderdate AlarmKey:[NSString stringWithFormat:@"%@_%@", datetext.text,medicinenametext.text]];
+}
+
+-(void)deleteReminder
+{
+      [ACFunction deleteLocalNotification:[NSString stringWithFormat:@"%@_%@",oldstarttime, oldmedicine]];
+}
+
+-(BOOL)checkReminderTime
+{
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[curstarttime timeIntervalSince1970]];
+    long time = [timeSp intValue] + 3600 * timeinternaltext.text.doubleValue;
+    
+    NSDate *now = [ACDate date];
+    NSString *nowtimeSp = [NSString stringWithFormat:@"%ld", (long)[now timeIntervalSince1970]];
+    long nowtime = [nowtimeSp intValue];
+    
+    if (time < nowtime)
+    {
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
 - (void)SetNextTimeReminder:(UIButton *)sender
 {
     if (sender.tag == 101) {
-        [sender setImage:[UIImage imageNamed:@"radio_focus"] forState:UIControlStateNormal];
-        sender.tag = 102;
-        isReminder = YES;
-        NSDate *now = [ACDate date];
-        NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[now timeIntervalSince1970]];
-        NSLog(@"timeSp:%@",timeSp); //时间戳的值
-        long time = [timeSp intValue] + 3600 * timeinternaltext.text.doubleValue;
-        NSLog(@"timeSpln:%lf",timeinternaltext.text.doubleValue); //时间戳的值
-        
-        NSDate *reminderdate = [NSDate dateWithTimeIntervalSince1970:time];
-
-        [ACFunction addLocalNotificationWithMessage:[NSString stringWithFormat:@"您该给宝宝喂食%@%@%@了~",amounttext.text,danweitext.text,medicinenametext.text] FireDate:reminderdate AlarmKey:[NSString stringWithFormat:@"%@",medicinenametext.text]];
+        if (![self checkReminderTime]) {
+            UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"" message:NSLocalizedString(@"您设置的提醒时间小于当前时间,无法提醒哦~", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alter show];
+        }
+        else
+        {
+            [sender setImage:[UIImage imageNamed:@"radio_focus"] forState:UIControlStateNormal];
+            sender.tag = 102;
+            isReminder = YES;
+        }
+    
     }
     else
     {
         [sender setImage:[UIImage imageNamed:@"radio"] forState:UIControlStateNormal];
         sender.tag = 101;
         isReminder = NO;
-        [ACFunction deleteLocalNotification:[NSString stringWithFormat:@"%@",medicinenametext.text]];
+      
     }
 }
 
@@ -332,8 +379,20 @@
         {
             [db updateMedicineRecord:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] WeekDay:[ACDate getWeekDayFromDate:curstarttime]
                             Medicine:medicinenametext.text Description:medicinedesptext.text Amount:amounttext.text Danwei:danweitext.text Timegap:timeinternaltext.text IsReminder:isReminder MoreInfo:@"" CreateTime:_createtime];
-            curstarttime = nil;
         }
+        
+        if (isReminder && (oldIsReminder != isReminder))
+        {
+            [self setReminder];
+        }
+        else
+        {
+            if(!isReminder)
+            {
+                [self deleteReminder];
+            }
+        }
+
         
         [self removeFromSuperview];
     }
@@ -349,21 +408,25 @@
             long createtime = [ACDate getTimeStampFromDate:[ACDate date]];
             self.start = curstarttime;
             [db insertBabyMedicineRecord:createtime UpdateTime:createtime StartTime:curstarttime Month:[ACDate getMonthFromDate:curstarttime] Week:[ACDate getWeekFromDate:curstarttime] Weekday:[ACDate getWeekDayFromDate:curstarttime] Medicine:medicinenametext.text Description:medicinedesptext.text Amount:amounttext.text Danwei:danweitext.text Timegap:timeinternaltext.text IsReminder:isReminder MoreInfo:@""];
-
-            curstarttime = nil;
         }
-        
-        [self.medicineSaveDelegate sendMedicineReloadData];
-        [self.medicineSaveDelegate sendMedicineSaveChanged:medicinenametext.text andAmount:[NSString stringWithFormat:@"%@%@",amounttext.text,danweitext.text] andIsReminder:isReminder andstarttime:self.start];
+
         [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:nil];
+        
+        if (isReminder) {
+            [self setReminder];
+        }
+
     }
     
+    
     [self.medicineSaveDelegate sendMedicineReloadData];
+    [self.medicineSaveDelegate sendMedicineSaveChanged:medicinenametext.text andAmount:[NSString stringWithFormat:@"%@%@",amounttext.text,danweitext.text] andIsReminder:isReminder andstarttime:self.start];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"justdoit"];
 }
 -(void)cancle:(UIButton*)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"cancel" object:sender];
+    [self removeFromSuperview];
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
@@ -437,26 +500,7 @@
 {
     NSLog(@"updatedate:%@", sender);
     UIDatePicker *picker = sender;
-    if (self.start == nil) {
-        if (curstarttime == nil) {
-            curstarttime = picker.date;
-        }
-        else
-        {
-            curstarttime = [ACDate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
-        }
-    }
-    else
-    {
-        if (curstarttime == nil) {
-            curstarttime  = [ACDate getNewDateFromOldDate:picker.date andOldDate:self.start];
-        }
-        else
-        {
-            curstarttime  = [ACDate getNewDateFromOldDate:picker.date andOldDate:curstarttime];
-        }
-    }
-    
+    curstarttime  = picker.date;
     datetext.text = [ACDate dateDetailFomatdate:curstarttime];
 }
 
