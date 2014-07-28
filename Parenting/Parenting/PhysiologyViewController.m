@@ -7,6 +7,7 @@
 //
 
 #import "PhysiologyViewController.h"
+#import "BabyDataDB.h"
 
 @interface PhysiologyViewController ()
 
@@ -84,26 +85,56 @@
     //arrayPhyItems 描述
     //itemIndex icon title values unit recorddate
     NSArray *arrayHeight = @[@0,@"icon_height.png",@"当前身高",[self getValues:0],[self getIncrease:0],@"CM",[self getRecordDate:0],@"#84c082"];
-    NSArray *arrayWeight = @[@0,@"icon_weight.png",@"当前体重",[self getValues:1],[self getIncrease:1],@"KG",[self getRecordDate:1],@"#efc654"];
-    NSArray *arrayBMI = @[@0,@"icon_BMI.png",@"当前BMI",[self getValues:2],[self getIncrease:2],@"",[self getRecordDate:2],@"#808fec"];
-    NSArray *arrayCRI = @[@0,@"icon_CIR.png",@"当前头围",[self getValues:3],[self getIncrease:3],@"CM",[self getRecordDate:3],@"#69b3e0"];
-    NSArray *arrayTemperture = @[@0,@"icon_temperture.png",@"当前体温",[self getValues:4],[self getIncrease:4],@"°C",[self getRecordDate:4],@"#f39998"];
+    NSArray *arrayWeight = @[@1,@"icon_weight.png",@"当前体重",[self getValues:1],[self getIncrease:1],@"KG",[self getRecordDate:1],@"#efc654"];
+    NSArray *arrayBMI = @[@2,@"icon_BMI.png",@"当前BMI",[self getValues:2],[self getIncrease:2],@"",[self getRecordDate:2],@"#808fec"];
+    NSArray *arrayCRI = @[@3,@"icon_CIR.png",@"当前头围",[self getValues:3],[self getIncrease:3],@"CM",[self getRecordDate:3],@"#69b3e0"];
+    NSArray *arrayTemperture = @[@4,@"icon_temperture.png",@"当前体温",[self getValues:4],[self getIncrease:4],@"°C",[self getRecordDate:4],@"#f39998"];
     arrayPhyItems = [[NSMutableArray alloc]initWithObjects:arrayHeight,arrayWeight,arrayBMI,arrayCRI,arrayTemperture,nil];
+    [_scorllView reloadData];
 }
 
 -(NSString*)getIncrease:(int)index{
-    if (index == 3) {
-        return @"↓0.5";
+    NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
+    if ([arrValues count] >= 2) {
+        NSDictionary *dict1 = [arrValues objectAtIndex:0];
+        NSDictionary *dict2 = [arrValues objectAtIndex:1];
+        
+        double v1 = [[dict1 objectForKey:@"value"] doubleValue];
+        double v2 = [[dict2 objectForKey:@"value"] doubleValue];
+        
+        if (v1 >= v2) {
+            return [NSString stringWithFormat:@"↑%0.1f",v1-v2];
+        }else{
+            return [NSString stringWithFormat:@"↓%0.1f",v2-v1];
+        }
     }
-    return @"↑1.5";
+    else{
+        return @"";
+    }
 }
 
 -(NSString*)getValues:(int)index{
-    return @"3.5";
+    NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
+    if ([arrValues count] == 0) {
+        return @"0";
+    }
+    else{
+        NSDictionary *dict = [arrValues objectAtIndex:0];
+        return [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
+    }
 }
 
 -(NSString*)getRecordDate:(int)index{
-    return @"0天前";
+    
+    NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
+    if ([arrValues count] > 0) {
+        NSDictionary *dict = [arrValues objectAtIndex:0];
+        NSDate *date = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]];
+        return [ACDate getDaySinceDate:date];
+    }
+    else{
+        return @"尚无记录";
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -157,7 +188,7 @@
         CGSize valueSize = [labelValue.text sizeWithFont:labelValue.font constrainedToSize:CGSizeMake(FLT_MAX,FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
         
         UILabel *labelIncrease = [[UILabel alloc]init];
-        labelIncrease.frame = CGRectMake(75 + valueSize.width + 2, 30, 20, 20);
+        labelIncrease.frame = CGRectMake(75 + valueSize.width + 2, 30, 40, 20);
         labelIncrease.font = [UIFont fontWithName:@"Arial" size:10];
         if ([[arrayCurrent objectAtIndex:4] length] > 0 ) {
             if ([[[arrayCurrent objectAtIndex:4] substringToIndex:1] isEqualToString:@"↑"]) {

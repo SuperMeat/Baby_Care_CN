@@ -192,6 +192,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     myTabController = [[MyTabBarController alloc] init];
     [myTabController setViewControllers:controllers];
+     
     
     //  向导版本有更新则跳转
     if (![[[NSUserDefaults standardUserDefaults] stringForKey:@"GUIDE_V"]  isEqual: GUIDE_V]){
