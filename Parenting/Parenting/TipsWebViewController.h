@@ -12,10 +12,12 @@
     NSString* _url;
     NSString* _contenttitle;
     NSString* _showimage;
+    int _flag;
     int count;
 }
 @property (strong, nonatomic)  UIWebView *webView;
 -(void) setTipsUrl:(NSString*)requestUrl;
 -(void) setTipsTitle:(NSString*)title;
 -(void) setShowImage:(NSString*)imagePath;
+-(void) setFlag:(int)flag;
 @end

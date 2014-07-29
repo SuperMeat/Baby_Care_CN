@@ -77,7 +77,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "170"
             endingLineNumber = "170"
-            landmarkName = "-ShareBtnByImage"
+            landmarkName = "-didSelectSocialPlatform:withSocialData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

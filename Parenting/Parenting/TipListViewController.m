@@ -213,6 +213,17 @@
     TipsWebViewController *tipsWeb = [[TipsWebViewController alloc]init];
     NSString *Url = [NSString stringWithFormat:@"%@/tips/showTip.aspx?id=%d",BASE_URL,tap.view.tag];
     [tipsWeb setTipsUrl:Url];
+    
+    for(NSArray *tempArr in arrDS)
+    {
+        if ([[tempArr objectAtIndex:0] integerValue] == tap.view.tag) {
+            [tipsWeb setTipsTitle:[tempArr objectAtIndex:2]];
+            NSString *picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"Tip"),[tempArr objectAtIndex:4]];
+            [tipsWeb setShowImage:picUrl];
+            [tipsWeb setFlag:1];
+            break;
+        }
+    }
     [self.navigationController pushViewController:tipsWeb animated:YES];
 }
 
