@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface ACViewController : UIViewController
 {
     NSString *ac_title;

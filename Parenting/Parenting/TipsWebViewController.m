@@ -11,6 +11,10 @@
 #import "MBProgressHUD.h"
 #import "UMSocial.h"
 #import "UMSocialSnsData.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialSinaHandler.h"
+#import "UMSocialSnsService.h"
 
 @interface TipsWebViewController ()
 
@@ -91,21 +95,23 @@
 
 - (void)ShareBtn
 {
-    [self Share];
+    [self ShareUrl];
     //[self ShareBtnByImage];
 }
 
 -(void)ShareImage
 {
-
     //加载网络图片-无缓存
     UIImage *image;
-    if (_flag == 1) {
+    if (_flag == 1)
+    {
         image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_showimage]]];
     }
-    else {
+    else
+    {
         image = [UIImage imageNamed:_showimage];
     }
+    
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UMENGAPPKEY
                                       shareText:_contenttitle
@@ -113,75 +119,58 @@
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,
                                     UMShareToQQ,
                                     UMShareToQzone,
-                                    UMShareToFacebook,
-                                    UMShareToSms,
-                                    UMShareToEmail,nil]
+                                    nil]
                                        delegate:self];
 
 }
 
--(void)Share
+-(void)ShareUrl
 {
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:UMENGAPPKEY
-                                      shareText:_contenttitle
-                                     shareImage:[UIImage imageNamed:_showimage]
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,
-                                                 UMShareToQQ,
-                                                 UMShareToQzone,
-                                                 UMShareToFacebook,
-                                                 UMShareToSms,
-                                                 UMShareToEmail,nil]
-                                       delegate:self];
-    
+    UIImage *image;
+    if (_flag == 1) {
+        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_showimage]]];
+    }
+    else
+    {
+        image = [UIImage imageNamed:_showimage];
+    }
+
+    [ACShare shareUrl:self andshareText:_contenttitle andshareImage:image andUrl:_url anddelegate:self];
 }
 
 -(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
 {
-    NSLog(@"%@",platformName);
-    if ([platformName isEqualToString:@"wxsession"])
-    {
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = _contenttitle;
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.url = _url;
-    }
-    else if ([platformName  isEqualToString:@"wxtimeline"])
-    {
-         [UMSocialData defaultData].extConfig.wechatFavoriteData.url = _url;
-    }
-    else if ([platformName  isEqualToString:@"wxfavorite"])
-    {
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = _url;
-    }
-    else if ([platformName  isEqualToString:@"qq"])
-    {
-        [UMSocialData defaultData].extConfig.qqData.url    = _url;
-    }
-    else if ([platformName  isEqualToString:@"qzone"])
-    {
-        [UMSocialData defaultData].extConfig.qzoneData.url = _url;
-
-    }
-    else if ([platformName  isEqualToString:@"sina"])
-    {
-        [UMSocialData defaultData].extConfig.sinaData.shareText = [NSString stringWithFormat:@"%@\r\n%@", _contenttitle ,_url];
-        [UMSocialData defaultData].extConfig.sinaData.shareImage = [UIImage imageNamed:_showimage];
-    }
-    else if ([platformName  isEqualToString:@"sms"])
-    {
-        [UMSocialData defaultData].extConfig.smsData.shareText = [NSString stringWithFormat:@"%@\r\n%@", _contenttitle ,_url];
-    }
-    else if ([platformName  isEqualToString:@"email"])
-    {
-        [UMSocialData defaultData].extConfig.emailData.shareText = [NSString stringWithFormat:@"%@\r\n%@", _contenttitle ,_url];
-
-    }
-    //facebook
-    else
-    {
-    
-    }
-    
+//    if ([platformName isEqualToString:@"wxsession"])
+//    {
+//        [UMSocialWechatHandler setWXAppId:WXAPPID url:_url];
+//        [UMSocialData defaultData].extConfig.wechatSessionData.title = _contenttitle;
+//        [UMSocialData defaultData].extConfig.wechatSessionData.url = _url;
+//    }
+//    else if ([platformName  isEqualToString:@"wxtimeline"])
+//    {
+//        [UMSocialWechatHandler setWXAppId:WXAPPID url:_url];
+//        [UMSocialData defaultData].extConfig.wechatFavoriteData.url = _url;
+//    }
+//    else if ([platformName  isEqualToString:@"wxfavorite"])
+//    {
+//        [UMSocialWechatHandler setWXAppId:WXAPPID url:_url];
+//        [UMSocialData defaultData].extConfig.wechatTimelineData.url = _url;
+//    }
+//    else if ([platformName  isEqualToString:@"qq"])
+//    {
+//        [UMSocialData defaultData].extConfig.qqData.url    = _url;
+//    }
+//    else if ([platformName  isEqualToString:@"qzone"])
+//    {
+//        [UMSocialData defaultData].extConfig.qzoneData.url = _url;
+//
+//    }
+//    else if ([platformName  isEqualToString:@"sina"])
+//    {
+//        [UMSocialData defaultData].extConfig.sinaData.shareText = [NSString stringWithFormat:@"%@\r\n%@", _contenttitle ,_url];
+//        [UMSocialData defaultData].extConfig.sinaData.shareImage = [UIImage imageNamed:_showimage];
+//    }
+//      
 }
 
 - (void)ShareBtnByImage
