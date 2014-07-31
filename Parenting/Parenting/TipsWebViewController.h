@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface TipsWebViewController : ACViewController<UIWebViewDelegate,UMSocialUIDelegate,UMSocialDataDelegate>
+#import "UMSocialShakeService.h"
+
+@interface TipsWebViewController : ACViewController<UIWebViewDelegate,UMSocialUIDelegate,UMSocialDataDelegate,UMSocialShakeDelegate>
 {
     NSString* _url;
     NSString* _contenttitle;

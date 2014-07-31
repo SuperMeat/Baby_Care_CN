@@ -54,7 +54,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES;
     if(_scrollView.contentOffset.x == 0){
-        [_buttonSubscribe setTitle:@"+" forState:UIControlStateNormal];
+        [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     }
 }
 
@@ -89,15 +89,15 @@
     
     _buttonBack = [[UIButton alloc] init];
     _buttonBack.frame = CGRectMake(10, 22, 40, 40);
-    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:16];
+    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:14];
     [_buttonBack setTitle:@"返回" forState:UIControlStateNormal];
     [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [self.tipsNavigationImageView addSubview:_buttonBack];
     //加载订阅贴士按钮
     _buttonSubscribe = [[UIButton alloc] init];
     _buttonSubscribe.frame = CGRectMake(320-10-40,22, 40, 40);
-    _buttonSubscribe.titleLabel.font = [UIFont systemFontOfSize:20];
-    [_buttonSubscribe setTitle:@"+" forState:UIControlStateNormal];
+    _buttonSubscribe.titleLabel.font = [UIFont systemFontOfSize:14];
+    [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     [_buttonSubscribe addTarget:self action:@selector(goSubscribe:) forControlEvents:UIControlEventTouchUpInside];
     [self.tipsNavigationImageView addSubview:_buttonSubscribe];
     
@@ -172,12 +172,12 @@
 }
 
 -(void)goSubscribe:(UIButton*)button{
-    if ([button.titleLabel.text  isEqual:@"+"]) {
+    if ([button.titleLabel.text  isEqual:@"订阅"]) {
         [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
         [button setTitle:@"完成" forState:UIControlStateNormal];
     }else{
         [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-        [button setTitle:@"+" forState:UIControlStateNormal];
+        [button setTitle:@"订阅" forState:UIControlStateNormal];
     }
     
 }

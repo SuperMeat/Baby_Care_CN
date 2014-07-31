@@ -42,4 +42,6 @@
     andshareImage:(id)shareImage
       anddelegate:(id <UMSocialUIDelegate>)ctrldelete;
 
++(void)cutView:(UIView *)view;
+
 @end

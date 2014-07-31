@@ -91,12 +91,24 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [MobClick endLogPageView:[NSString stringWithFormat:@"tips_%@", _url]];
+    
+    [UMSocialShakeService unShakeToSns];
 }
 
 - (void)ShareBtn
 {
     [self ShareUrl];
     //[self ShareBtnByImage];
+}
+
+-(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent*)event
+{
+    if(motion == UIEventSubtypeMotionShake)
+    {
+        //下面使用应用类型截屏，如果是cocos2d游戏或者其他类型，使用相应的截屏对象
+        //UIImage *image = [[UMSocialScreenShoterDefault screenShoter] getScreenShot];
+        
+    }
 }
 
 -(void)ShareImage
@@ -127,7 +139,8 @@
 -(void)ShareUrl 
 {
     UIImage *image;
-    if (_flag == 1) {
+    if (_flag == 1)
+    {
         image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_showimage]]];
     }
     else
@@ -140,49 +153,27 @@
 
 -(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
 {
-//    if ([platformName isEqualToString:@"wxsession"])
-//    {
-//        [UMSocialWechatHandler setWXAppId:WXAPPID url:_url];
-//        [UMSocialData defaultData].extConfig.wechatSessionData.title = _contenttitle;
-//        [UMSocialData defaultData].extConfig.wechatSessionData.url = _url;
-//    }
-//    else if ([platformName  isEqualToString:@"wxtimeline"])
-//    {
-//        [UMSocialWechatHandler setWXAppId:WXAPPID url:_url];
-//        [UMSocialData defaultData].extConfig.wechatFavoriteData.url = _url;
-//    }
-//    else if ([platformName  isEqualToString:@"wxfavorite"])
-//    {
-//        [UMSocialWechatHandler setWXAppId:WXAPPID url:_url];
-//        [UMSocialData defaultData].extConfig.wechatTimelineData.url = _url;
-//    }
-//    else if ([platformName  isEqualToString:@"qq"])
-//    {
-//        [UMSocialData defaultData].extConfig.qqData.url    = _url;
-//    }
-//    else if ([platformName  isEqualToString:@"qzone"])
-//    {
-//        [UMSocialData defaultData].extConfig.qzoneData.url = _url;
-//
-//    }
-//    else if ([platformName  isEqualToString:@"sina"])
-//    {
-//        [UMSocialData defaultData].extConfig.sinaData.shareText = [NSString stringWithFormat:@"%@\r\n%@", _contenttitle ,_url];
-//        [UMSocialData defaultData].extConfig.sinaData.shareImage = [UIImage imageNamed:_showimage];
-//    }
-//      
+ 
 }
 
 - (void)ShareBtnByImage
 {
-    UIGraphicsBeginImageContext(CGSizeMake(_webView.frame.size.width, _webView.frame.size.height - 65 ));
+    UIGraphicsBeginImageContext(CGSizeMake(320, 500));
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
     CGImageRef imageRef = parentImage.CGImage;
-    CGRect myImageRect=CGRectMake(_webView.frame.origin.x, _webView.frame.origin.y, _webView.frame.size.width, _webView.frame.size.height - 65);
+    CGRect windowframe = [[UIScreen mainScreen] bounds];
+    CGRect contentframe = CGRectMake(windowframe.origin.x, windowframe.origin.y, windowframe.size.width, windowframe.size.height);
+    CGRect myImageRect=contentframe;
     CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
-    CGSize size=CGSizeMake(_webView.frame.size.width,  _webView.frame.size.height - 65);
-    UIGraphicsBeginImageContext(size);
+    CGSize size=CGSizeMake(contentframe.size.width,  contentframe.size.height);
+    if(UIGraphicsBeginImageContextWithOptions != NULL)
+    {
+        UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    } else
+    {
+        UIGraphicsBeginImageContext(size);
+    }
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextDrawImage(context, myImageRect, subImageRef);
     UIImage* image = [UIImage imageWithCGImage:subImageRef];
@@ -198,7 +189,7 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView commitAnimations];
     
-    [self ShareImage];
+    [ACShare shareImage:self andshareTitle:_contenttitle andshareImage:[UIImage imageWithContentsOfFile:SHAREPATH] anddelegate:self];
 }
 
 -(BOOL)isDirectShareInIconActionSheet
@@ -244,6 +235,18 @@
     [self.view addSubview:self.webView];
     
     // Do any additional setup after loading the view from its nib.
+}
+
+//在摇一摇的回调方法弹出分享面板
+-(UMSocialShakeConfig)didShakeWithShakeConfig
+{
+//    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMENGAPPKEY shareText:@"你的分享文字" shareImage:shareImage shareToSnsNames:@[UMShareToSina,UMShareToWechatSession,UMShareToWechatSession,UMShareToWechatTimeline] delegate:self];
+    //下面返回值控制是否显示分享编辑页面、是否显示截图、是否有音效，UMSocialShakeConfigNone表示都不显示
+    return UMSocialShakeConfigDefault;
+}
+
+-(BOOL)canBecomeFirstResponder {
+    return YES;
 }
 
 -(void)setTipsUrl:(NSString*)requestUrl
