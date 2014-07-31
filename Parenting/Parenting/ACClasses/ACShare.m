@@ -61,4 +61,37 @@
                                        delegate:ctrldelete];
 }
 
++ (void)cutView:(UIView*)view
+{
+    UIGraphicsBeginImageContext(CGSizeMake(320, 500));
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
+    CGImageRef imageRef = parentImage.CGImage;
+    CGRect windowframe = [[UIScreen mainScreen] bounds];
+    CGRect contentframe = CGRectMake(windowframe.origin.x, windowframe.origin.y, windowframe.size.width, windowframe.size.height);
+    CGRect myImageRect=contentframe;
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
+    CGSize size=CGSizeMake(contentframe.size.width,  contentframe.size.height);
+    if(UIGraphicsBeginImageContextWithOptions != NULL)
+    {
+        UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    } else
+    {
+        UIGraphicsBeginImageContext(size);
+    }
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, myImageRect, subImageRef);
+    UIImage* image = [UIImage imageWithCGImage:subImageRef];
+    
+    
+    NSData *imagedata=UIImagePNGRepresentation(image);
+    [imagedata writeToFile:SHAREPATH atomically:NO];
+    UIGraphicsEndImageContext();
+    CGImageRelease(imageRef);
+    UIGraphicsEndImageContext();
+    [UIView beginAnimations:@"ToggleViews" context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView commitAnimations];
+}
 @end
