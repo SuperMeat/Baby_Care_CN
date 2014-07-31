@@ -122,10 +122,18 @@
 
 -(void)Share
 {
+    UIImage *image;
+    if (_flag == 1) {
+        image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_showimage]]];
+    }
+    else {
+        image = [UIImage imageNamed:_showimage];
+    }
+    
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UMENGAPPKEY
                                       shareText:_contenttitle
-                                     shareImage:[UIImage imageNamed:_showimage]
+                                     shareImage:image
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,
                                                  UMShareToQQ,
                                                  UMShareToQzone,
