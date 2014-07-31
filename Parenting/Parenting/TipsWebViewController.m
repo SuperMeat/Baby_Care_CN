@@ -277,10 +277,21 @@
 }
 
 #pragma mark - webview
-
+#pragma 加载结束后过滤广告条
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
+    [webView stringByEvaluatingJavaScriptFromString:
+     @"var script = document.createElement('script');"
+     "script.type = 'text/javascript';"
+     "script.text = \"function ClearAD() { "
+     "var obj = document.getElementById('divAD');"
+     "obj.style.display = 'none';"
+     "}\";"
+     "document.getElementsByTagName('head')[0].appendChild(script);"];
+    
+    [webView stringByEvaluatingJavaScriptFromString:@"ClearAD();"];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -299,6 +310,8 @@
         count++;
     }
 }
+
+
 
 
 @end
