@@ -183,6 +183,13 @@
 }
 
 -(void)goBack{
+    //如果在订阅页面，则后退按钮只改变scrollView
+    if ([_buttonSubscribe.titleLabel.text  isEqual:@"完成"]) {
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
+        return;
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -232,13 +239,15 @@
         
         //加载类目名字
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, 120, 30)];
-        titleLabel.font = [UIFont fontWithName:@"Arial" size:14];
+        titleLabel.font = [UIFont fontWithName:@"Arial" size:MIDTEXT];
+        titleLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         titleLabel.text = [[tipArray objectAtIndex:indexPath.row] objectAtIndex:1];
         [cell addSubview:titleLabel];
         
         //加载类目描述
         UILabel *describeLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, 200, 24)];
-        describeLabel.font = [UIFont fontWithName:@"Arial" size:12];
+        describeLabel.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
+        describeLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         describeLabel.text = [[tipArray objectAtIndex:indexPath.row] objectAtIndex:2];
         
         [cell addSubview:describeLabel];
@@ -256,13 +265,15 @@
         
         //加载类目名字
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, 120, 30)];
-        titleLabel.font = [UIFont fontWithName:@"Arial" size:14];
+        titleLabel.font = [UIFont fontWithName:@"Arial" size:MIDTEXT];
+        titleLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         titleLabel.text = [[subArray objectAtIndex:indexPath.row] objectAtIndex:1];
         [cell addSubview:titleLabel];
         
         //加载类目描述
         UILabel *describeLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, 200, 24)];
-        describeLabel.font = [UIFont fontWithName:@"Arial" size:12];
+        describeLabel.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
+        describeLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         describeLabel.text = [[subArray objectAtIndex:indexPath.row] objectAtIndex:2];
         [cell addSubview:describeLabel];
         
