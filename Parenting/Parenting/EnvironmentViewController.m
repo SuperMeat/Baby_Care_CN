@@ -99,6 +99,11 @@
     
     [self.view addSubview:chooseIndoor];
     [self.view addSubview:chooseOutdoor];
+    
+    if (!ISBLE) {
+        chooseIndoor.hidden  = YES;
+        chooseOutdoor.hidden = YES;
+    }
 }
 
 - (void)makeWeatherView
@@ -111,16 +116,19 @@
     self.weather.frame=CGRectMake(0, 0+90*PNGSCALE-64+2+25*PNGSCALE, 320, frame.size.height-130-64-49);
     [self.view addSubview:self.weather];
     NSLog(@"weather %@",self.weather);
-    
-    self.bleweather = [BLEWeatherView weatherview];
-    self.bleweather.bleweatherDelegate = self;
-    self.bleweather.chooseType = QCM_TYPE_FEED;
-    [self.bleweather setBackgroundColor:[UIColor whiteColor]];
-    [self.bleweather makeview];
-    self.bleweather.frame=CGRectMake(0, 0+90*PNGSCALE-64+2+25*PNGSCALE, 320, frame.size.height-130-64-49);
-    [self.view addSubview:self.bleweather];
-    [self.bleweather setHidden:YES];
-    NSLog(@"bleweather %@",self.bleweather);
+
+    if (ISBLE) {
+        self.bleweather = [BLEWeatherView weatherview];
+        self.bleweather.bleweatherDelegate = self;
+        self.bleweather.chooseType = QCM_TYPE_FEED;
+        [self.bleweather setBackgroundColor:[UIColor whiteColor]];
+        [self.bleweather makeview];
+        self.bleweather.frame=CGRectMake(0, 0+90*PNGSCALE-64+2+25*PNGSCALE, 320, frame.size.height-130-64-49);
+        [self.view addSubview:self.bleweather];
+        [self.bleweather setHidden:YES];
+        NSLog(@"bleweather %@",self.bleweather);
+
+    }
 
 }
 
