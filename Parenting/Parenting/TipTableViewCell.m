@@ -32,6 +32,8 @@
     _labelDate.text = date;
     _labelSummary.text = summary;
     _labelTitle.text = title;
+    _labelTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    
 //    picUrl = @"13996157820.jpg";
     picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"Tip"),picUrl];
     UIASYImageView *imageView = [[UIASYImageView alloc] initWithFrame:_imagePic.frame];
