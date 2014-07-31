@@ -211,7 +211,7 @@
 -(void)goDetail:(id)sender{
     UITapGestureRecognizer* tap = sender;
     TipsWebViewController *tipsWeb = [[TipsWebViewController alloc]init];
-    NSString *Url = [NSString stringWithFormat:@"%@/tips/showTip.aspx?id=%d",BASE_URL,tap.view.tag];
+    NSString *Url = [NSString stringWithFormat:@"%@tips/showTip.aspx?id=%d",BASE_URL,tap.view.tag];
     [tipsWeb setTipsUrl:Url];
     
     for(NSArray *tempArr in arrDS)
