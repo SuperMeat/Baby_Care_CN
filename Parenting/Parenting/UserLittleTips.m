@@ -50,15 +50,19 @@
         case QCM_TYPE_DIAPER:
             strCondition = @"diaper";
             break;
+        case QCM_TYPE_MEDICINE:
+            strCondition = @"medicine";
+            break;
         default:
             break;
     }
     
     NSString *sql = @"";
-    sql = [NSString stringWithFormat:@"select * from bc_littletips where start_month<= %d and end_month >= %d and %@ = 1 order by read_time asc limit 5", age,age, strCondition];
+    sql = [NSString stringWithFormat:@"select * from bc_littletips where start_month<= %d and end_month >= %d and %@ = 1 order by read_time asc limit 3", age,age, strCondition];
     
     FMResultSet *resultset=[db executeQuery:sql];
-    while ([resultset next]) {
+    while ([resultset next])
+    {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:0];
         [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"littletips_id"]] forKey:@"tips_id"];
         [dic setValue:[resultset stringForColumn:@"tips_content"] forKey:@"content"];
