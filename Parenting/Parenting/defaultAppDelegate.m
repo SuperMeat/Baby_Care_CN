@@ -158,10 +158,10 @@ void UncaughtExceptionHandler(NSException *exception) {
     //homeViewController    = [[HomeViewController alloc] init];
     summaryViewController   = [SummaryViewController summary];
     //adviseViewController  = [[AdviseMasterViewController alloc] init];
-    //settingViewController = [[SettingViewController alloc] init];
+    settingViewController = [[SettingViewController alloc] init];
     //icViewController      = [[InformationCenterViewController alloc] init];
     myPageViewController   = [[MyPageViewController alloc] init];
-    envirViewController    = [[EnvironmentViewController alloc] init];
+    //envirViewController    = [[EnvironmentViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
     calendarViewController = [[CalendarViewController alloc] init];
@@ -170,8 +170,8 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     myPageNavigationViewController   = [[UINavigationController alloc]
                                         initWithRootViewController:myPageViewController];
-    envirNavigationViewController    = [[UINavigationController alloc]
-                                        initWithRootViewController:envirViewController];
+    settingNavigationViewController    = [[UINavigationController alloc]
+                                        initWithRootViewController:settingViewController];
     actNavigationViewController      = [[UINavigationController alloc]
                                         initWithRootViewController:actViewController];
     phyNavigationViewController      = [[UINavigationController alloc]
@@ -182,10 +182,10 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
 
     [controllers addObject:myPageNavigationViewController];
-    [controllers addObject:actNavigationViewController];
     [controllers addObject:calendarNavigationViewController];
+    [controllers addObject:actNavigationViewController];
     [controllers addObject:phyNavigationViewController];
-    [controllers addObject:envirNavigationViewController];
+    [controllers addObject:settingNavigationViewController];
     
     myTabController = [[MyTabBarController alloc] init];
     [myTabController setViewControllers:controllers];

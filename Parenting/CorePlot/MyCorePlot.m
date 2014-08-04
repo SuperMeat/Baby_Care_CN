@@ -221,11 +221,11 @@
         
         lineStyle.lineColor         = [CPTColor colorWithComponentRed:0xEA/255.0 green:0x6B/255.0 blue:0x72/255.0 alpha:0xFF/255.0];
     }else{
-        barPlot.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0]];
+        barPlot.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0x81/255.0 green:0x90/255.0 blue:0xed/255.0 alpha:0xFF/255.0]];
         
-          fillGradient = [CPTGradient gradientWithBeginningColor:[CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0] endingColor:[CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0]];
+          fillGradient = [CPTGradient gradientWithBeginningColor:[CPTColor colorWithComponentRed:0x81/255.0 green:0x90/255.0 blue:0xed/255.0 alpha:0xFF/255.0] endingColor:[CPTColor colorWithComponentRed:0x81/255.0 green:0x90/255.0 blue:0xed/255.0 alpha:0xFF/255.0]];
         
-        lineStyle.lineColor         = [CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0];
+        lineStyle.lineColor         = [CPTColor colorWithComponentRed:0x81/255.0 green:0x90/255.0 blue:0xed/255.0 alpha:0xFF/255.0];
     }
     barPlot = [[CPTBarPlot alloc] init];
     barPlot.lineStyle = lineStyle;
@@ -252,23 +252,56 @@
     lineStyle.lineWidth         = 1.0f;
     //曲线加点
     CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-    if ([table isEqualToString:NSLocalizedString(@"PlayTable",nil)]) {
+    CPTColor *color1;
+    if ([table isEqualToString:NSLocalizedString(@"PlayTable",nil)])
+    {
         lineStyle.lineColor         = [CPTColor colorWithComponentRed:0xF7/255.0 green:0x6E/255.0 blue:0x39/255.0 alpha:0xFF/255.0];
-        plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0xF7/255.0 green:0x6E/255.0 blue:0x39/255.0 alpha:0xFF/255.0]];
+        //plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0xF7/255.0 green:0x6E/255.0 blue:0x39/255.0 alpha:0xFF/255.0]];
+        
+//        // 创建颜色渐变
+        color1	   = [CPTColor colorWithComponentRed:0xF7/255.0 green:0x6E/255.0 blue:0x39/255.0 alpha:0.9];
+                // 设置渐变方向。从X轴正轴方向开始旋转 n 度。n为正，反时针旋转，n为负，正时针旋转。
     }else if([table isEqualToString:NSLocalizedString(@"BathTable",nil)]){
         lineStyle.lineColor         = [CPTColor colorWithComponentRed:0x46/255.0 green:0x90/255.0 blue:0xCD/255.0 alpha:0xFF/255.0];
-        plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0x46/255.0 green:0x90/255.0 blue:0xCD/255.0 alpha:0xFF/255.0]];
+        //plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0x46/255.0 green:0x90/255.0 blue:0xCD/255.0 alpha:0xFF/255.0]];
+        color1	   = lineStyle.lineColor;
+        
     }else if([table isEqualToString:NSLocalizedString(@"FeedTable",nil)]){
         lineStyle.lineColor         = [CPTColor colorWithComponentRed:0x64/255.0 green:0xA7/255.0 blue:0x5B/255.0 alpha:0xFF/255.0];
-        plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0x64/255.0 green:0xA7/255.0 blue:0x5B/255.0 alpha:0xFF/255.0]];
+        //plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0x64/255.0 green:0xA7/255.0 blue:0x5B/255.0 alpha:0xFF/255.0]];
+        color1	   = lineStyle.lineColor;
     }else if([table isEqualToString:NSLocalizedString(@"SleepTable",nil)]){
         lineStyle.lineColor         = [CPTColor colorWithComponentRed:0xEA/255.0 green:0x6B/255.0 blue:0x72/255.0 alpha:0xFF/255.0];
-        plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0xEA/255.0 green:0x6B/255.0 blue:0x72/255.0 alpha:0xFF/255.0]];
+        //plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0xEA/255.0 green:0x6B/255.0 blue:0x72/255.0 alpha:0xFF/255.0]];
+        color1	   = lineStyle.lineColor;
     }else{
-        lineStyle.lineColor         = [CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0];
-        plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0]];
+        lineStyle.lineColor         = [CPTColor colorWithComponentRed:0x81/255.0 green:0x90/255.0 blue:0xed/255.0 alpha:0xFF/255.0];
+        //plotSymbol.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:0xDC/255.0 green:0xA8/255.0 blue:0x33/255.0 alpha:0xFF/255.0]];
+        color1	   = lineStyle.lineColor;
             //yAxis.title=NSLocalizedString(@"Count",nil);
     }
+    
+    CPTGradient *areaGradient1 = [CPTGradient gradientWithBeginningColor:color1 endingColor:[CPTColor colorWithComponentRed:0xF6/255.0 green:0xF6/255.0 blue:0xF6/255.0 alpha:0xFF/255.0]];
+    areaGradient1.angle = -90.0f;
+    
+    // 创建颜色填充区域
+    CPTFill *areaFill = [CPTFill fillWithGradient:areaGradient1];
+    boundLinePlot.areaFill		= areaFill;
+    boundLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
+    
+    // 在数据点处绘制节点符号：一个圆圈
+    CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
+    // 圆圈用黑色绘制
+    symbolLineStyle.lineColor = color1;
+    CPTPlotSymbol *plotSymbol2 = [CPTPlotSymbol ellipsePlotSymbol];
+    // 用浅灰色填充
+    plotSymbol2.fill			 = [CPTFill fillWithColor:[CPTColor clearColor]];
+    plotSymbol2.lineStyle	 = symbolLineStyle;
+    plotSymbol2.size			 = CGSizeMake(15.0, 15.0);
+    
+    // 设定为散点图的节点符号
+    boundLinePlot.plotSymbol = plotSymbol;
+
     boundLinePlot.dataLineStyle = lineStyle;
     boundLinePlot.dataSource    = self;
     boundLinePlot.identifier = @"Single Plot";
