@@ -84,7 +84,36 @@
 }
 
 -(void)initData{
-    arrDS = @[@[@1405478204,@4.5],@[@1405478304,@5.5]];
+    //身高0 体重1 BMI2 头围3 体温4
+    arrDS = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType]]; 
+}
+
+-(void)setType:(int)Type{
+    itemType =Type;
+    switch (itemType) {
+        case 0:
+            itemName = @"身高";
+            itemUnit = @"CM";
+            break;
+        case 1:
+            itemName = @"体重";
+            itemUnit = @"KG";
+            break;
+        case 2:
+            //itemName = @"BMI";
+            break;
+        case 3:
+            itemName = @"头围";
+            itemUnit = @"CM";
+            break;
+        case 4:
+            //itemName = @"体温";
+            //itemUnit = @"°C";
+            break;
+        default:
+            break;
+    }
+
 }
 
 -(void)goBack{
@@ -103,7 +132,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         int index = indexPath.row;
-        NSArray *arrayCurrent = [arrDS objectAtIndex:index];
+        NSDictionary *dictCurrent = [arrDS objectAtIndex:index];
         
         //时间
         UILabel *labelDate = [[UILabel alloc]init];
@@ -112,9 +141,8 @@
         labelDate.textAlignment = NSTextAlignmentLeft;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *dateString = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[arrayCurrent objectAtIndex:0] longValue]]];
+        NSString *dateString = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"create_time"] longValue]]];
         labelDate.text = dateString;
-        
         //隔断
         UIImageView *sepImageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cutoff.png"]];
         sepImageView1.frame = CGRectMake(130, 10, 1, 23);
@@ -124,7 +152,7 @@
         labelType.frame = CGRectMake(153, 12, 30, 20);
         labelType.font = [UIFont fontWithName:@"Arial" size:14];
         labelType.textAlignment = NSTextAlignmentLeft;
-        labelType.text = @"体重";
+        labelType.text = itemName;
 
         
         //隔断
@@ -136,15 +164,13 @@
         labelValue.frame = CGRectMake(220, 12, 40, 20);
         labelValue.font = [UIFont fontWithName:@"Arial" size:14];
         labelValue.textAlignment = NSTextAlignmentRight;
-        labelValue.text = @"5.2";
-//        [NSString stringWithFormat:@"%@",[arrayCurrent objectAtIndex:1]];
-        
+        labelValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"value"] doubleValue]];
         //单位
         UILabel *labelUnit = [[UILabel alloc]init];
         labelUnit.frame = CGRectMake(265, 12, 55, 20);
         labelUnit.font = [UIFont fontWithName:@"Arial" size:14];
         labelUnit.textAlignment = NSTextAlignmentLeft;
-        labelUnit.text = @"KG";
+        labelUnit.text = itemUnit;
         
         [cell addSubview:labelDate];
         [cell addSubview:sepImageView1];
@@ -165,8 +191,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //获取delete ID
         int deleteIndex = indexPath.row;
-        //todo delete DB
-        
+        [[BabyDataDB babyinfoDB] deleteBabyPhysiologyByType:itemType andCreateTime:[[[arrDS objectAtIndex:deleteIndex] objectForKey:@"create_time"] longValue]];
         [arrDS removeObjectAtIndex:deleteIndex];
         [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }

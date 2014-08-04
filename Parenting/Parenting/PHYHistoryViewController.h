@@ -11,10 +11,15 @@
 @interface PHYHistoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *arrDS;
+    NSString* itemName;
+    NSString* itemUnit;
+    int itemType; //身高0 体重1 BMI2 头围3 体温4
 }
 
 @property (strong, nonatomic) UIImageView *phyDetailImageView;
 @property (strong, nonatomic) UIButton *buttonBack;  
 
 @property (strong, nonatomic) UITableView *tableView;
+
+-(void)setType:(int)Type;
 @end

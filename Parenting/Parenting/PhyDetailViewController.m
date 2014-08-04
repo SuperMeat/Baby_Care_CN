@@ -285,6 +285,7 @@
 
 -(void)ShowHistory{
     PHYHistoryViewController *pHYHistoryViewController=[[PHYHistoryViewController alloc] init];
+    [pHYHistoryViewController setType:[[arrayCurrent objectAtIndex:0]intValue]];
     [self.navigationController pushViewController:pHYHistoryViewController animated:YES];
 }
 
