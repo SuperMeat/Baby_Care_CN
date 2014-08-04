@@ -155,13 +155,15 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 -(void)tap
 {
-    //homeViewController    = [[HomeViewController alloc] init];
     summaryViewController   = [SummaryViewController summary];
-    //adviseViewController  = [[AdviseMasterViewController alloc] init];
-    settingViewController = [[SettingViewController alloc] init];
-    //icViewController      = [[InformationCenterViewController alloc] init];
+     if (ISBLE) {
+        envirViewController    = [[EnvironmentViewController alloc] init];
+    }
+    else
+    {
+        settingViewController = [[SettingViewController alloc] init];
+    }
     myPageViewController   = [[MyPageViewController alloc] init];
-    //envirViewController    = [[EnvironmentViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
     calendarViewController = [[CalendarViewController alloc] init];
@@ -170,8 +172,15 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     myPageNavigationViewController   = [[UINavigationController alloc]
                                         initWithRootViewController:myPageViewController];
-    settingNavigationViewController    = [[UINavigationController alloc]
-                                        initWithRootViewController:settingViewController];
+    if (!ISBLE) {
+        settingNavigationViewController    = [[UINavigationController alloc]
+                                              initWithRootViewController:settingViewController];
+    }
+    else
+    {
+        envirNavigationViewController    = [[UINavigationController alloc]
+                                        initWithRootViewController:envirViewController];
+    }
     actNavigationViewController      = [[UINavigationController alloc]
                                         initWithRootViewController:actViewController];
     phyNavigationViewController      = [[UINavigationController alloc]
@@ -181,11 +190,21 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
 
-    [controllers addObject:myPageNavigationViewController];
-    [controllers addObject:calendarNavigationViewController];
-    [controllers addObject:actNavigationViewController];
-    [controllers addObject:phyNavigationViewController];
-    [controllers addObject:settingNavigationViewController];
+    if (!ISBLE) {
+        [controllers addObject:myPageNavigationViewController];
+        [controllers addObject:calendarNavigationViewController];
+        [controllers addObject:actNavigationViewController];
+        [controllers addObject:phyNavigationViewController];
+        [controllers addObject:settingNavigationViewController];
+    }
+    else
+    {
+        [controllers addObject:myPageNavigationViewController];
+        [controllers addObject:calendarNavigationViewController];
+        [controllers addObject:actNavigationViewController];
+        [controllers addObject:phyNavigationViewController];
+        [controllers addObject:envirNavigationViewController];
+    }
     
     myTabController = [[MyTabBarController alloc] init];
     [myTabController setViewControllers:controllers];

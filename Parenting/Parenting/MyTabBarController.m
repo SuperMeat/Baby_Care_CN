@@ -27,8 +27,15 @@
 
 - (void)initResourece
 {
-    [self setBtnImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"首页@2x.png"],[UIImage imageNamed:@"日历@2x.png"],[UIImage imageNamed:@"活动@2x.png"],[UIImage imageNamed:@"生理@2x.png"], [UIImage imageNamed:@"btn_设置"],nil]];
-    [self setBtnHLightImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"首页_按@2x.png"],[UIImage imageNamed:@"日历_按@2x.png"],[UIImage imageNamed:@"活动_按@2x.png"],[UIImage imageNamed:@"生理_按@2x.png"], [UIImage imageNamed:@"btn_设置_focus.png"],nil]];
+    if (!ISBLE) {
+        [self setBtnImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"首页@2x.png"],[UIImage imageNamed:@"日历@2x.png"],[UIImage imageNamed:@"活动@2x.png"],[UIImage imageNamed:@"生理@2x.png"], [UIImage imageNamed:@"btn_设置"],nil]];
+        [self setBtnHLightImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"首页_按@2x.png"],[UIImage imageNamed:@"日历_按@2x.png"],[UIImage imageNamed:@"活动_按@2x.png"],[UIImage imageNamed:@"生理_按@2x.png"], [UIImage imageNamed:@"btn_设置_focus.png"],nil]];
+    }
+    else
+    {
+        [self setBtnImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"首页@2x.png"],[UIImage imageNamed:@"日历@2x.png"],[UIImage imageNamed:@"活动@2x.png"],[UIImage imageNamed:@"生理@2x.png"], [UIImage imageNamed:@"环境"],nil]];
+        [self setBtnHLightImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"首页_按@2x.png"],[UIImage imageNamed:@"日历_按@2x.png"],[UIImage imageNamed:@"活动_按@2x.png"],[UIImage imageNamed:@"生理_按@2x.png"], [UIImage imageNamed:@"环境_按"],nil]];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
