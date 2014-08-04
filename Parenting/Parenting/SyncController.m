@@ -307,12 +307,12 @@ ViewController:(UIViewController*) viewController{
              int bath = [[littleTip objectForKey:@"bath"] intValue];
              int play = [[littleTip objectForKey:@"play"] intValue];
              int diaper = [[littleTip objectForKey:@"diaper"] intValue];
-             int cry = [[littleTip objectForKey:@"cry"] intValue];
+             int medicine = [[littleTip objectForKey:@"medicine"] intValue];
              
              //检测该数据是否已入库 返回:YES需要更新 NO不需要更新
              //上述已集成到insert方法中
              //%DEBUG&FIXE
-             [UserLittleTips insertLittleTip:littleTipsId CreateTime:createTime UpdateTime:updateTime StartMonth:start EndMonth:end TipLock:lock TipContent:content Feed:feed Sleep:sleep Bath:bath Play:play Diaper:diaper Cry:cry];
+             [UserLittleTips insertLittleTip:littleTipsId CreateTime:createTime UpdateTime:updateTime StartMonth:start EndMonth:end TipLock:lock TipContent:content Feed:feed Sleep:sleep Bath:bath Play:play Diaper:diaper Medicine:medicine];
          }
          
          //如果获取数据集等于最大获取量，则继续获取
