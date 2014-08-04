@@ -335,13 +335,19 @@
 #endif
 
 #ifdef DEBUG
+#define ISBLE 0   //秒
+#else
+#define ISBLE 0
+#endif
+
+#ifdef DEBUG
 #define REFRESHBLEDATATIMERAL 5.0   //秒
 #else
 #define REFRESHBLEADATATIMERAL 5.0
 #endif
 
 #define TABBAR_INDEX_HOME     0
-#define TABBAR_INDEX_ACTIVITY 1
-#define TABBAR_INDEX_CALENDAR 2
+#define TABBAR_INDEX_ACTIVITY 2
+#define TABBAR_INDEX_CALENDAR 1
 #define TABBAR_INDEX_PHY      3
 #define TABBAR_INDEX_ENVIR    4
