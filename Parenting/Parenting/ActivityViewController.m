@@ -272,6 +272,14 @@
     [self.view addSubview:statusImageView];
 }
 
+-(void)refreshNone
+{
+    if (timerOnType == 1) {
+        labelText.text = NORECORDTIP;
+        timeTip.hidden = YES;
+    }
+}
+
 -(void)refreshTimeTip
 {
     if (timerOnType == 2) {
@@ -367,6 +375,9 @@
     }
     
     [datatable reloadData];
+    [self refreshTimeTip];
+    [self refreshShowTimer];
+    [self refreshNone];
 }
 
 - (void)tipTimerGo

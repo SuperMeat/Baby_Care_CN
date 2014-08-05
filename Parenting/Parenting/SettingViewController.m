@@ -100,42 +100,44 @@ messageView;
     NSMutableArray *_array3=[[NSMutableArray alloc]initWithCapacity:0];
     
     SettingItem *_item1 = [[SettingItem alloc]init];
-    SettingItem *_item2 = [[SettingItem alloc]init];
-    SettingItem *_item3 = [[SettingItem alloc]init];
-    SettingItem *_item4=[[SettingItem alloc]init];
-    SettingItem *_item5=[[SettingItem alloc]init];
+    //SettingItem *_item2 = [[SettingItem alloc]init];
+    //SettingItem *_item3 = [[SettingItem alloc]init];
+    SettingItem *_item4 = [[SettingItem alloc]init];
+    //SettingItem *_item5 = [[SettingItem alloc]init];
     SettingItem *_item6 = [[SettingItem alloc]init];
     SettingItem *_item7 = [[SettingItem alloc]init];
     SettingItem *_item8 = [[SettingItem alloc]init];
     SettingItem *_item9 = [[SettingItem alloc]init];
+    
     //cwb-AccountManage
     SettingItem *_item10 = [[SettingItem alloc]init];
     SettingItem *_item11 = [[SettingItem alloc] init];
     
     //高德地图
     SettingItem *_item12 = [[SettingItem alloc] init];
-    SettingItem *_item13 = [[SettingItem alloc] init];
+    //SettingItem *_item13 = [[SettingItem alloc] init];
     
     _item1.name=NSLocalizedString(@"Baby information",nil);
-    _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
-    _item3.name=NSLocalizedString(@"Notifications",nil);
+   // _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
+    //_item3.name=NSLocalizedString(@"Notifications",nil);
     _item4.name=NSLocalizedString(@"Submit feedback online",nil);
     //    _item4.name=NSLocalizedString(@"Facebook",nil);
-    _item5.name=NSLocalizedString(@"My Devices",nil);
+    //_item5.name=NSLocalizedString(@"My Devices",nil);
     _item6.name=NSLocalizedString(@"Submit feedback/improvements",nil);
     _item7.name=NSLocalizedString(@"Copyright",nil);
     _item8.name=NSLocalizedString(@"Clear all logged data",nil);
     _item9.name=NSLocalizedString(@"LocalNotify", nil);
     _item11.name = @"2G/3G下自动备份";
-    _item12.name = @"查看小区附近的麻麻们";
-    _item13.name = @"允许发布自己位置及状态";
+    _item12.name = @"查看小区附近的母婴用品店";
+    //_item13.name = @"允许发布自己位置及状态";
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil) {
         _item10.name=@"账号登录";
         UIButton *buttonLogin=[UIButton buttonWithType:UIButtonTypeCustom];
         [buttonLogin setTitle:@"登录" forState:UIControlStateNormal];
         //FIXME:修改图片
-        [buttonLogin setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+        [buttonLogin setBackgroundColor:[UIColor colorWithRed:0.776 green:0.199 blue:0.359 alpha:1.000]];
+        buttonLogin.layer.cornerRadius = 8.0f;
         [buttonLogin addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
         buttonLogin.bounds=CGRectMake(0, 0, 95, 30);
         _item10.accessView = buttonLogin;
@@ -144,8 +146,9 @@ messageView;
         _item10.name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"]];
         UIButton *buttonLoginOut=[UIButton buttonWithType:UIButtonTypeCustom];
         [buttonLoginOut setTitle:@"登出" forState:UIControlStateNormal];
+        buttonLoginOut.layer.cornerRadius = 8.0f;
         //FIXME:修改图片
-        [buttonLoginOut setBackgroundImage:[UIImage imageNamed:@"btn_delete.png"] forState:UIControlStateNormal];
+        [buttonLoginOut setBackgroundColor:[UIColor colorWithRed:0.776 green:0.199 blue:0.359 alpha:1.000]];
         [buttonLoginOut addTarget:self action:@selector(goLoginOut) forControlEvents:UIControlEventTouchUpInside];
         buttonLoginOut.bounds=CGRectMake(0, 0, 95, 30);
         _item10.accessView = buttonLoginOut;
@@ -255,41 +258,47 @@ messageView;
     [buttonForFacebook setTitle:NSLocalizedString(@"Sign in",nil) forState:UIControlStateNormal];
     [buttonForFacebook setTitle:NSLocalizedString(@"Sign out",nil) forState:UIControlStateSelected];
     buttonForFacebook.bounds=CGRectMake(0, 0, 95, 30);
-    [buttonForFacebook setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-    [buttonForFacebook setBackgroundImage:[UIImage imageNamed:@"btn_setting_focus.png"] forState:UIControlStateHighlighted];
+    [buttonForFacebook setBackgroundColor:[UIColor colorWithRed:0.776 green:0.199 blue:0.359 alpha:1.000]];
+//    [buttonForFacebook setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+//    [buttonForFacebook setBackgroundImage:[UIImage imageNamed:@"btn_setting_focus.png"] forState:UIControlStateHighlighted];
     [buttonForFacebook addTarget:self action:@selector(showLogin:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *buttonForClear=[UIButton buttonWithType:UIButtonTypeCustom];
     [buttonForClear setTitle:NSLocalizedString(@"Delete",nil) forState:UIControlStateNormal];
-    [buttonForClear setBackgroundImage:[UIImage imageNamed:@"btn_delete.png"] forState:UIControlStateNormal];
-    [buttonForClear setBackgroundImage:[UIImage imageNamed:@"btn_delete_focus.png"] forState:UIControlStateHighlighted];
+    buttonForClear.layer.cornerRadius = 8.0f;
+//    [buttonForClear setBackgroundImage:[UIImage imageNamed:@"btn_delete.png"] forState:UIControlStateNormal];
+//    [buttonForClear setBackgroundImage:[UIImage imageNamed:@"btn_delete_focus.png"] forState:UIControlStateHighlighted];
+    [buttonForClear setBackgroundColor:[UIColor colorWithRed:0.776 green:0.199 blue:0.359 alpha:1.000]];
     [buttonForClear addTarget:self action:@selector(clearAll) forControlEvents:UIControlEventTouchUpInside];
     buttonForClear.bounds=CGRectMake(0, 0, 95, 30);
     
     _item1.accessView=detailforbaby;
-    _item2.accessView=segementForMetric;
-    _item3.accessView=switchForNotifications;
+   // _item2.accessView=segementForMetric;
+   //_item3.accessView=switchForNotifications;
     _item4.accessView=feedbackOnline;
-    _item5.accessView=myDevices;
+   // _item5.accessView=myDevices;
     _item6.accessView=detailforSubmit;
     _item7.accessView=detailforCopyright;
     _item8.accessView=buttonForClear;
     _item9.accessView=myreminder;
     _item11.accessView = switchForBackup;
     _item12.accessView = detailforMap;
-    _item13.accessView = switchForOpenwild;
+    //_item13.accessView = switchForOpenwild;
     
     [_array1 addObject:_item1];
     [_array1 addObject:_item9];
     [_array1 addObject:_item12];
     
-    [_array2 addObject:_item2];
+    //[_array2 addObject:_item2];
+    //默认是毫升
+    [[NSUserDefaults standardUserDefaults]setObject:@"Mls:" forKey:@"metric" ];
+
     [_array2 addObject:_item11];
-    [_array2 addObject:_item13];
-    [_array2 addObject:_item3];
+    //[_array2 addObject:_item13];
+    //[_array2 addObject:_item3];
     [_array2 addObject:_item4];
 
-    [_array2 addObject:_item5];
+    //[_array2 addObject:_item5];
     [_array2 addObject:_item6];
     [_array2 addObject:_item7];
     [_array3 addObject:_item8];
@@ -477,7 +486,7 @@ messageView;
     {
         [self showCopyright];
     }
-    else if([item.name isEqualToString:NSLocalizedString(@"查看小区附近的麻麻们",nil)])
+    else if([item.name isEqualToString:NSLocalizedString(@"查看小区附近的母婴用品店",nil)])
     {
         [self showMap];
     }
