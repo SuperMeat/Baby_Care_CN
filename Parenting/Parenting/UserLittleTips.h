@@ -35,7 +35,7 @@
                   Bath:(int)bath
                   Play:(int)play
                 Diaper:(int)diaper
-                   Cry:(int)cry;
+                   Medicine:(int)medicine;
 
 /*
  *  获取最后更新时间

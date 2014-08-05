@@ -40,15 +40,7 @@
 {
     [super viewDidLoad];
     [self initView];
-    
     [self initData];
-    
-    [[SyncController syncController] syncCategoryInfo:ACCOUNTUID HUD:hud SyncFinished:^{
-        [self initData];
-        [_sTableView reloadData];
-        [_tTableView reloadData];
-    } ViewController:self];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -175,6 +167,11 @@
     if ([button.titleLabel.text  isEqual:@"订阅"]) {
         [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
         [button setTitle:@"完成" forState:UIControlStateNormal];
+        [[SyncController syncController] syncCategoryInfo:ACCOUNTUID HUD:hud SyncFinished:^{
+            [self initData];
+            [_sTableView reloadData];
+            [_tTableView reloadData];
+        } ViewController:self];
     }else{
         [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         [button setTitle:@"订阅" forState:UIControlStateNormal];

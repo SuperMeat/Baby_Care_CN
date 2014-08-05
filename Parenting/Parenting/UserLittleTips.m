@@ -108,7 +108,7 @@
                   Bath:(int)bath
                   Play:(int)play
                 Diaper:(int)diaper
-                   Cry:(int)cry{
+              Medicine:(int)medicine{
     BOOL res;
     FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
     res=[db open];
@@ -122,7 +122,7 @@
                               FiledName:@"littletips_id"
                               TableName:@"bc_littleTips"
                                  DBPath:UDBPATH]) {
-        res=[db executeUpdate:@"insert into bc_littleTips (littletips_id, create_time, update_time, start_month, end_month,tips_lock, tips_content,feed,sleep,bath,play,diaper,cry) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        res=[db executeUpdate:@"insert into bc_littleTips (littletips_id, create_time, update_time, start_month, end_month,tips_lock, tips_content,feed,sleep,bath,play,diaper,medicine) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
              [NSNumber numberWithInt:littleTipId],
              [NSNumber numberWithInt:createTime],
              [NSNumber numberWithInt:updateTime],
@@ -135,12 +135,12 @@
              [NSNumber numberWithInt:bath],
              [NSNumber numberWithInt:play],
              [NSNumber numberWithInt:diaper],
-             [NSNumber numberWithInt:cry]
+             [NSNumber numberWithInt:medicine]
              ];
     }
     else{
         //更新
-        res=[db executeUpdate:@"update bc_littletips set update_time=?,start_month=?,end_month=?,tips_lock=?,tips_content=?,feed=?,sleep=?,bath=?,play=?,diaper=?,cry=? where littletips_id=?",
+        res=[db executeUpdate:@"update bc_littletips set update_time=?,start_month=?,end_month=?,tips_lock=?,tips_content=?,feed=?,sleep=?,bath=?,play=?,diaper=?,medicine=? where littletips_id=?",
              [NSNumber numberWithInt:updateTime],
              [NSNumber numberWithInt:startMonth],
              [NSNumber numberWithInt:endMonth],
@@ -151,7 +151,7 @@
              [NSNumber numberWithInt:bath],
              [NSNumber numberWithInt:play],
              [NSNumber numberWithInt:diaper],
-             [NSNumber numberWithInt:cry],
+             [NSNumber numberWithInt:medicine],
              [NSNumber numberWithInt:littleTipId]];
     }
     return res;
