@@ -121,15 +121,13 @@
     self.view.layer.cornerRadius = 8.0f;
 
     self.norecordLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    
-    [self.addRecordBtn  setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
-    [self.addRecordBtn  setTitle:@"添加" forState:UIControlStateNormal];
-    [self.addRecordBtn  setAlpha:1];
-    [self.addRecordBtn  setTitle:NSLocalizedString(@"Add", nil) forState:UIControlStateNormal];
-    [self.addRecordBtn  addTarget:self action:@selector(addrecord:) forControlEvents:UIControlEventTouchUpInside];
-    self.addRecordBtn .layer.cornerRadius = 5.0f;
-    [self.view bringSubviewToFront:self.addRecordBtn];
-    
+    if (iPhone5) {
+        [self.scrollView setFrame:CGRectMake(0, 84, 320, 280)];
+    }
+    else
+    {
+        [self.scrollView setFrame:CGRectMake(0, 160, 320, 220)];
+    }
     [self.scrollView setContentSize:CGSizeMake(300, 400)];
     [self.scrollView setBackgroundColor:[UIColor clearColor]];
     self.scrollView.showsHorizontalScrollIndicator=NO;
@@ -144,9 +142,20 @@
     {
         self.scrollView.hidden = NO;
         self.norecordView.hidden = YES;
-
+        
         [self makeDetailViews];
     }
+
+    [self.addRecordBtn setFrame:CGRectMake(110, WINDOWSCREEN-130-64-30-20, 100, 30)];
+
+    [self.addRecordBtn  setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    [self.addRecordBtn  setTitle:@"添加" forState:UIControlStateNormal];
+    [self.addRecordBtn  setAlpha:1];
+    [self.addRecordBtn  setTitle:NSLocalizedString(@"Add", nil) forState:UIControlStateNormal];
+    [self.addRecordBtn  addTarget:self action:@selector(addrecord:) forControlEvents:UIControlEventTouchUpInside];
+    self.addRecordBtn .layer.cornerRadius = 5.0f;
+    [self.view bringSubviewToFront:self.addRecordBtn];
+    
     
 }
 
@@ -248,11 +257,14 @@
 
 -(void)stop
 {
+    self.addRecordBtn.enabled = YES;
+
     [saveView removeFromSuperview];
 }
 
 -(void)cancel
 {
+    self.addRecordBtn.enabled = YES;
     [saveView removeFromSuperview];
 }
 
@@ -264,6 +276,7 @@
     }
     saveView.medicineSaveDelegate = self;
     [saveView loaddata];
+    self.addRecordBtn.enabled = NO;
     [self.view addSubview:saveView];
 
 }

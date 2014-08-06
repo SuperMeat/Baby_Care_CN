@@ -503,11 +503,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0) {
-        return 60*PNGSCALE;
+        return 48;
     }
     else
     {
-        return 20*PNGSCALE;
+        return 20;
     }
 
 }

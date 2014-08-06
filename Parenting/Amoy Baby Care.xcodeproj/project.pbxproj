@@ -180,6 +180,7 @@
 		481EF6DB1988F23500959CB7 /* ACShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 481EF6DA1988F23500959CB7 /* ACShare.m */; };
 		481EF6DE198F79C800959CB7 /* btn_设置_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 481EF6DC198F79C800959CB7 /* btn_设置_focus@2x.png */; };
 		481EF6DF198F79C800959CB7 /* btn_设置@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 481EF6DD198F79C800959CB7 /* btn_设置@2x.png */; };
+		481EF6E61992251400959CB7 /* ACTypeListPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 481EF6E51992251400959CB7 /* ACTypeListPickerView.m */; };
 		481FB9C9194EED0A009553ED /* CacheData.m in Sources */ = {isa = PBXBuildFile; fileRef = 481FB9C8194EED0A009553ED /* CacheData.m */; };
 		481FB9CB194FFA69009553ED /* BC_Info.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 481FB9CA194FFA69009553ED /* BC_Info.sqlite */; };
 		481FB9CE195035FB009553ED /* UserLittleTips.m in Sources */ = {isa = PBXBuildFile; fileRef = 481FB9CD195035FB009553ED /* UserLittleTips.m */; };
@@ -956,6 +957,8 @@
 		481EF6DA1988F23500959CB7 /* ACShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACShare.m; sourceTree = "<group>"; };
 		481EF6DC198F79C800959CB7 /* btn_设置_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_设置_focus@2x.png"; sourceTree = "<group>"; };
 		481EF6DD198F79C800959CB7 /* btn_设置@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_设置@2x.png"; sourceTree = "<group>"; };
+		481EF6E41992251400959CB7 /* ACTypeListPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTypeListPickerView.h; path = ACTypeListPickerView/ACTypeListPickerView.h; sourceTree = "<group>"; };
+		481EF6E51992251400959CB7 /* ACTypeListPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTypeListPickerView.m; path = ACTypeListPickerView/ACTypeListPickerView.m; sourceTree = "<group>"; };
 		481FB9C7194EED0A009553ED /* CacheData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheData.h; path = CacheData/CacheData.h; sourceTree = "<group>"; };
 		481FB9C8194EED0A009553ED /* CacheData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheData.m; path = CacheData/CacheData.m; sourceTree = "<group>"; };
 		481FB9CA194FFA69009553ED /* BC_Info.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BC_Info.sqlite; sourceTree = "<group>"; };
@@ -1912,6 +1915,7 @@
 		4800B13D18D9880B0093A6AF /* ACUIController */ = {
 			isa = PBXGroup;
 			children = (
+				481EF6E0199224AC00959CB7 /* ACTypeListPickerView */,
 				4880059C192B33B100817919 /* ACUILabel */,
 				4800B13E18D9880B0093A6AF /* ACTabBarController */,
 				4800B14118D9880B0093A6AF /* ACViewController */,
@@ -2402,6 +2406,15 @@
 				481EF6D419878ABD00959CB7 /* QuestionSurveyViewController.xib */,
 			);
 			name = QuestionSurvey;
+			sourceTree = "<group>";
+		};
+		481EF6E0199224AC00959CB7 /* ACTypeListPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				481EF6E41992251400959CB7 /* ACTypeListPickerView.h */,
+				481EF6E51992251400959CB7 /* ACTypeListPickerView.m */,
+			);
+			name = ACTypeListPickerView;
 			sourceTree = "<group>";
 		};
 		481F4B5D19482EE000FF414A /* BLEWeather */ = {
@@ -4702,6 +4715,7 @@
 				CE239796176EE4A50096E033 /* BabyinfoViewController.m in Sources */,
 				4800B0CB18D81A300093A6AF /* MyTabBarController.m in Sources */,
 				48EF611D18C6FAC7006C3D5C /* AnimatedAnnotationView.m in Sources */,
+				481EF6E61992251400959CB7 /* ACTypeListPickerView.m in Sources */,
 				48FEAF8D18E943B8002425E2 /* ActivityViewController.m in Sources */,
 				4800B0DF18D931EF0093A6AF /* MyPageViewController.m in Sources */,
 				BEB475A518E574A80004B649 /* SBJsonStreamParserState.m in Sources */,

@@ -107,11 +107,11 @@
     }
     else
     {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeIndeterminate;
-        hud.color = [UIColor grayColor];
-        hud.alpha = 0.5;
-        hud.labelText = NSLocalizedString(@"PlotLoading", nil);
+//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        hud.mode = MBProgressHUDModeIndeterminate;
+//        hud.color = [UIColor grayColor];
+//        hud.alpha = 0.5;
+//        hud.labelText = NSLocalizedString(@"PlotLoading", nil);
         if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"justdoit"] boolValue] == YES) {
             NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(willShowView:) object:[NSNumber numberWithBool:YES]];
             [thread start];
@@ -125,11 +125,15 @@
     }
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [menu setValue:[NSNumber numberWithBool:NO] forKey:@"expanding"];
+
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [MobClick endLogPageView:@"总结页面"];
-    [menu setValue:[NSNumber numberWithBool:NO] forKey:@"expanding"];
-    
 }
 
 -(void)willShowView:(NSNumber*)flag
@@ -141,7 +145,7 @@
     if ([flag boolValue]==YES) {
         [self scrollUpadateData];
     }
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 - (void)viewDidLoad

@@ -203,6 +203,8 @@
     danweitext=[[UITextField alloc]initWithFrame:CGRectMake(220, 160, 45, 30)];
     [danweitext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:danweitext];
+    danweitext.delegate  = self;
+    danweitext.inputView = typelistPickerView;
     danweitext.textColor=[UIColor grayColor];;
     
     [danweitext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
@@ -247,13 +249,13 @@
 
 -(void)loaddata
 {
-    if (self.select) {
-        
-        SummaryDB *db=[SummaryDB dataBase];
-        NSArray *array= [db searchFrommedicine:start];
-        NSDate *date=(NSDate*)[array objectAtIndex:0];
-        curstarttime = date;
-        datetext.text=[ACDate dateDetailFomatdate:date];
+    if (self.select)
+    {
+        SummaryDB *db  = [SummaryDB dataBase];
+        NSArray *array = [db searchFrommedicine:start];
+        NSDate *date   = (NSDate*)[array objectAtIndex:0];
+        curstarttime   = date;
+        datetext.text  = [ACDate dateDetailFomatdate:date];
         medicinedesptext.text=[array objectAtIndex:4];
         medicinenametext.text=[array objectAtIndex:1];
         amounttext.text = [array objectAtIndex:2];
@@ -295,6 +297,8 @@
             [key resignFirstResponder];
         }
     }
+    
+    [danweitext resignFirstResponder];
 }
 
 -(void)setReminder
@@ -448,6 +452,10 @@
         [datetext resignFirstResponder];
     }
     
+    if (textField == danweitext) {
+        [self actionsheetShowTypeList];
+        [danweitext resignFirstResponder];
+    }
 //    if (textField == medicinenametext) {
 //        [self actionsheetStartTimeShow];
 //        [medicinenametext resignFirstResponder];
@@ -466,7 +474,7 @@
         NSTimeInterval animationDuration = 0.25f;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:animationDuration];
-        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y-150, 320, 460-44-49);
+        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y-135, 320, 460-44-49);
         [UIView commitAnimations];
         self.isshow=YES;
     }
@@ -479,7 +487,7 @@
         NSTimeInterval animationDuration = 0.25f;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:animationDuration];
-        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y+150, 320, 460);
+        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y+135, 320, 460);
         [UIView commitAnimations];
         self.isshow=NO;
     }
@@ -526,9 +534,31 @@
     }
 }
 
+
+-(void)actionsheetShowTypeList
+{
+    actionType=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    
+    if (typelistPickerView==nil) {
+        typelistPickerView=[[ACTypeListPickerView alloc]initWithFrame:CGRectMake(0, danweitext.frame.origin.y+45, 320, 100) TypeList:@[@"毫升",@"片",@"颗",@"包"]];
+        typelistPickerView.typeListPickerViewDelegate = self;
+    }
+    
+    typelistPickerView.frame=CGRectMake(0, 0, 320, 100);
+    
+    actionType.bounds=CGRectMake(0, 0, 320, 200);
+    [actionType addSubview:typelistPickerView];
+    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+    if ([window.subviews containsObject:self]) {
+        [actionType showInView:self];
+    } else {
+        [actionType showInView:window];
+    }
+
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-    
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView
@@ -598,6 +628,11 @@
         default:
 			return 1;
 	}
+}
+
+-(void)sendTypeListSaveChanged:(NSString*)type
+{
+    danweitext.text = type;
 }
 
 @end

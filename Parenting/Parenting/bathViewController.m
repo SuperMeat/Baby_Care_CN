@@ -205,17 +205,17 @@
     [self.view addSubview:backIV];
     
     startButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    startButton.frame=CGRectMake(40,180*PNGSCALE, 281*PNGSCALE/2.0, 270*PNGSCALE/2.0);
+    startButton.frame=CGRectMake(10,180*PNGSCALE, 281*PNGSCALE/2.0, 270*PNGSCALE/2.0);
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_bath_play.png"] forState:UIControlStateNormal];
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_bath_pause.png"] forState:UIControlStateSelected];
     [self.view addSubview:startButton];
     [startButton addTarget:self action:@selector(startOrPause:) forControlEvents:UIControlEventTouchUpInside];
     
-    timerImage = [[UIImageView alloc]initWithFrame:CGRectMake(320-20-165*PNGSCALE, 150, 165*PNGSCALE, 111*PNGSCALE)];
+    timerImage = [[UIImageView alloc]initWithFrame:CGRectMake(320-165*PNGSCALE, 180, 165*PNGSCALE, 111*PNGSCALE)];
     [timerImage setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:timerImage];
 
-    UIImageView *timeicon=[[UIImageView alloc]initWithFrame:CGRectMake(140, 150, 165*PNGSCALE, 111*PNGSCALE)];
+    UIImageView *timeicon=[[UIImageView alloc]initWithFrame:CGRectMake(10, 20, 41/2.0*PNGSCALE, 48/2.0*PNGSCALE)];
     
     timeicon.contentMode=UIViewContentModeScaleAspectFit;
     timeicon.image=[UIImage imageNamed:@"icon_timer"];

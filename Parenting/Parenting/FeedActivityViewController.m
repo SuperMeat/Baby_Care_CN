@@ -262,9 +262,18 @@
     chooseBreast=[UIButton buttonWithType:UIButtonTypeCustom];
     chooseBottle=[UIButton buttonWithType:UIButtonTypeCustom];
     chooseFood  =[UIButton buttonWithType:UIButtonTypeCustom];
-    chooseBreast.frame=CGRectMake(187/2.0*PNGSCALE+40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
-    chooseBottle.frame=CGRectMake(40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
-    chooseFood.frame=CGRectMake(187*PNGSCALE+40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
+    if (iPhone5) {
+        chooseBreast.frame=CGRectMake((320 - 187/2.0*3)/2.0+187/2.0, 90, 187/2.0, 49/2.0);
+        chooseBottle.frame=CGRectMake((320 - 187/2.0*3)/2.0, 90, 187/2.0, 49/2.0);
+        chooseFood.frame=CGRectMake((320 - 187/2.0*3)/2.0+187, 90, 187/2.0, 49/2.0);
+    }
+    else
+    {
+        chooseBreast.frame=CGRectMake((320 - 187/2.0*3)/2.0+187/2.0, 76, 187/2.0, 49/2.0);
+        chooseBottle.frame=CGRectMake((320 - 187/2.0*3)/2.0, 76, 187/2.0, 49/2.0);
+        chooseFood.frame=CGRectMake((320 - 187/2.0*3)/2.0+187, 76, 187/2.0, 49/2.0);
+
+    }
     
     [chooseBreast setBackgroundImage:[UIImage imageNamed:@"label_breast"] forState:UIControlStateNormal];
     [chooseBreast setBackgroundImage:[UIImage imageNamed:@"label_breast_focus"] forState:UIControlStateDisabled];
