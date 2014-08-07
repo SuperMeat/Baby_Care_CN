@@ -126,35 +126,20 @@
     self.navigationItem.titleView = titleView;
     
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title.backgroundColor = [UIColor clearColor];
-    [title setTextAlignment:NSTextAlignmentCenter];
-    title.textAlignment = NSTextAlignmentCenter;
-    title.textColor = [UIColor whiteColor];
-    title.text =NSLocalizedString(@"navback", nil);
-    title.font = [UIFont systemFontOfSize:14];
-    [backbutton addSubview:title];
     
-    
+    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    backbutton.frame=CGRectMake(0, 0, 50, 41);
+    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
     [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    backbutton.frame=CGRectMake(0, 0, 44, 28);
-    
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
     
     UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title1.backgroundColor = [UIColor clearColor];
-    [title1 setTextAlignment:NSTextAlignmentCenter];
-    title1.textColor = [UIColor whiteColor];
-    title1.text = NSLocalizedString(@"navsummary", nil);
-    title1.font = [UIFont systemFontOfSize:14];
-    [rightButton addSubview:title1];
-    
-    
-    [rightButton addTarget:self action:@selector(pushSummaryView:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame=CGRectMake(0, 0, 44, 28);
+    [rightButton setImage:[UIImage imageNamed:@"btn_sum1"] forState:UIControlStateNormal];
+    rightButton.frame=CGRectMake(0, 0, 51, 51);
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -40);    [rightButton addTarget:self action:@selector(pushSummaryView:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBar;
 

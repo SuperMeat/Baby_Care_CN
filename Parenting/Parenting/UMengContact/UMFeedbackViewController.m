@@ -327,18 +327,9 @@ static UITapGestureRecognizer *tapRecognizer;
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = backButtonItem;
     
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(12, 0, 34, 28)];
-    title.backgroundColor = [UIColor clearColor];
-    
-    title.textAlignment = NSTextAlignmentCenter;
-    title.textColor = [UIColor whiteColor];
-    title.text = NSLocalizedString(@"navback", nil);
-    title.font = [UIFont systemFontOfSize:14];
-    [backBtn addSubview:title];
-
-    [backBtn setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
-    backBtn.frame = CGRectMake(0, 0, 51.0f, self.navigationController.navigationBar.frame.size.height * 0.7);
-    backBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    [backBtn setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    backBtn.frame=CGRectMake(0, 0, 50, 41);
+    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
 }
 
 - (void)didTapAnywhere:(UITapGestureRecognizer *)recognizer {

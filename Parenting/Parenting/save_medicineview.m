@@ -64,7 +64,7 @@
 -(void)makeSave
 {
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 290, 30)];
-    title.text=NSLocalizedString(@"吃药信息",nil);
+    title.text=NSLocalizedString(@"药品信息",nil);
     title.textAlignment=NSTextAlignmentCenter;
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor grayColor];
@@ -122,7 +122,7 @@
     interaltip.textColor       = [UIColor grayColor];
     setnexttimeLabel.textColor = [UIColor grayColor];
     
-    date.text=NSLocalizedString(@"吃药时间",nil);
+    date.text=NSLocalizedString(@"服用时间",nil);
     starttime.text=NSLocalizedString(@"药品名称",nil);
     duration.text=NSLocalizedString(@"药品描述",nil);
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"metric"]==nil) {
@@ -132,7 +132,7 @@
     amountDW.text = @"单位";
     interalLabel.text = @"时间间隔";
     interaltip.text = @"小时";
-    setnexttimeLabel.text = @"为下一次吃药设置闹钟";
+    setnexttimeLabel.text = @"为下一次服用设置闹钟";
     
     date.textAlignment=NSTextAlignmentRight;
     starttime.textAlignment=NSTextAlignmentRight;
