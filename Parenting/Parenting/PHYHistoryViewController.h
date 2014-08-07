@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EditPhyViewController.h"
 
 @interface PHYHistoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
@@ -14,6 +15,8 @@
     NSString* itemName;
     NSString* itemUnit;
     int itemType; //身高0 体重1 BMI2 头围3 体温4
+    
+    EditPhyViewController *editPhyViewController;
 }
 
 @property (strong, nonatomic) UIImageView *phyDetailImageView;

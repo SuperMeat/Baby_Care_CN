@@ -8,6 +8,7 @@
 
 #import "PHYHistoryViewController.h"
 
+
 @interface PHYHistoryViewController ()
 
 @end
@@ -65,7 +66,7 @@
     
     _buttonBack = [[UIButton alloc] init];
     _buttonBack.frame = CGRectMake(10, 22, 40, 40);
-    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:16];
+    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:14];
     [_buttonBack setTitle:@"返回" forState:UIControlStateNormal];
     [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [_phyDetailImageView addSubview:_buttonBack];
@@ -85,7 +86,8 @@
 
 -(void)initData{
     //身高0 体重1 BMI2 头围3 体温4
-    arrDS = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType]]; 
+    arrDS = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType]];
+    [_tableView reloadData];
 }
 
 -(void)setType:(int)Type{
@@ -141,7 +143,7 @@
         labelDate.textAlignment = NSTextAlignmentLeft;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *dateString = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"create_time"] longValue]]];
+        NSString *dateString = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
         labelDate.text = dateString;
         //隔断
         UIImageView *sepImageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cutoff.png"]];
@@ -200,6 +202,16 @@
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    editPhyViewController = [[EditPhyViewController alloc] init];
+    [editPhyViewController setType:itemType];
+    [editPhyViewController setCreateTime:[[[arrDS objectAtIndex:indexPath.row] objectForKey:@"create_time"]longValue]];
+    [editPhyViewController setMeasureTime:[[[arrDS objectAtIndex:0] objectForKey:@"measure_time"] longValue]];
+    [self.navigationController pushViewController:editPhyViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

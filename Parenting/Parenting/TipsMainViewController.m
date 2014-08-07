@@ -129,8 +129,15 @@
     
     if ([category_ids isEqual:@","]) {
         tipArray = [[NSArray alloc]initWithObjects:nil];
-        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
-        [_buttonSubscribe setTitle:@"完成" forState:UIControlStateNormal];
+        if([subArray count] == 0)
+        {
+            [self goSubscribe:_buttonSubscribe];
+        }
+        else{
+            [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+            [_buttonSubscribe setTitle:@"完成" forState:UIControlStateNormal];
+
+        }
     }
     else{
         NSArray *split = [category_ids componentsSeparatedByString:@","];

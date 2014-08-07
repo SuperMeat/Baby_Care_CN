@@ -130,7 +130,8 @@
     CPTAxis *x = axisSet.xAxis;
     x.title = [CxyTitle objectAtIndex:0];
     x.titleTextStyle = axisTitleStyle;
-    x.titleOffset = 20.0f;
+    x.titleOffset = 20.0f; //20
+    
     x.axisLineStyle = axisLineStyle; 
     x.labelingPolicy = CPTAxisLabelingPolicyNone;
     x.labelTextStyle = axisTextStyle;

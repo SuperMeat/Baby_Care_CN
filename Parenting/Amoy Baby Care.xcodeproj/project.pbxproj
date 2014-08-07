@@ -621,8 +621,9 @@
 		BE900F2218ECFCEA00B06133 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE900F2118ECFCEA00B06133 /* SyncController.m */; };
 		BE955F4C190102A400225029 /* PhyCorePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = BE955F49190102A400225029 /* PhyCorePlot.m */; };
 		BE955F4D190102A400225029 /* PhyCPTTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = BE955F4B190102A400225029 /* PhyCPTTheme.m */; };
-		BE955F50190104A000225029 /* WhoDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = BE955F4F190104A000225029 /* WhoDataBase.m */; };
-		BE955F521901076600225029 /* who.rdb in Resources */ = {isa = PBXBuildFile; fileRef = BE955F511901076600225029 /* who.rdb */; };
+		BE9C6DAD19907ABF00B012A5 /* EditPhyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6DAC19907ABF00B012A5 /* EditPhyViewController.m */; };
+		BEA2F86F1993188200FD2D4E /* TempDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86D1993188200FD2D4E /* TempDetailViewController.m */; };
+		BEA2F8701993188200FD2D4E /* TempDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F86E1993188200FD2D4E /* TempDetailViewController.xib */; };
 		BEB4758118E56DBE0004B649 /* NetWorkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4758018E56DBE0004B649 /* NetWorkConnect.m */; };
 		BEB4758418E572A20004B649 /* DataContract.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4758318E572A20004B649 /* DataContract.m */; };
 		BEB475A018E574A80004B649 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4758818E574A80004B649 /* NSObject+SBJson.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1519,9 +1520,11 @@
 		BE955F49190102A400225029 /* PhyCorePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhyCorePlot.m; sourceTree = "<group>"; };
 		BE955F4A190102A400225029 /* PhyCPTTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhyCPTTheme.h; sourceTree = "<group>"; };
 		BE955F4B190102A400225029 /* PhyCPTTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhyCPTTheme.m; sourceTree = "<group>"; };
-		BE955F4E190104A000225029 /* WhoDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhoDataBase.h; sourceTree = "<group>"; };
-		BE955F4F190104A000225029 /* WhoDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhoDataBase.m; sourceTree = "<group>"; };
-		BE955F511901076600225029 /* who.rdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = who.rdb; sourceTree = "<group>"; };
+		BE9C6DAB19907ABF00B012A5 /* EditPhyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPhyViewController.h; sourceTree = "<group>"; };
+		BE9C6DAC19907ABF00B012A5 /* EditPhyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPhyViewController.m; sourceTree = "<group>"; };
+		BEA2F86C1993188200FD2D4E /* TempDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempDetailViewController.h; sourceTree = "<group>"; };
+		BEA2F86D1993188200FD2D4E /* TempDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempDetailViewController.m; sourceTree = "<group>"; };
+		BEA2F86E1993188200FD2D4E /* TempDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TempDetailViewController.xib; sourceTree = "<group>"; };
 		BEB4757F18E56DBE0004B649 /* NetWorkConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkConnect.h; sourceTree = "<group>"; };
 		BEB4758018E56DBE0004B649 /* NetWorkConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkConnect.m; sourceTree = "<group>"; };
 		BEB4758218E572A20004B649 /* DataContract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataContract.h; sourceTree = "<group>"; };
@@ -1964,8 +1967,6 @@
 				4800B15018DA84F80093A6AF /* UserTipsDB.m */,
 				48C9AD1218E2AB4800D04FF7 /* SummaryDB.h */,
 				48C9AD1318E2AB4800D04FF7 /* SummaryDB.m */,
-				BE955F4E190104A000225029 /* WhoDataBase.h */,
-				BE955F4F190104A000225029 /* WhoDataBase.m */,
 				BEB7E2D21923167C00E752B7 /* TipCategoryDB.h */,
 				BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */,
 				481FB9CC195035FB009553ED /* UserLittleTips.h */,
@@ -2797,6 +2798,11 @@
 				BE4A861F197618AB00EB232B /* PHYHistoryViewController.h */,
 				BE4A8620197618AB00EB232B /* PHYHistoryViewController.m */,
 				BE4A862219761B5800EB232B /* PHYHistoryViewController.xib */,
+				BE9C6DAB19907ABF00B012A5 /* EditPhyViewController.h */,
+				BE9C6DAC19907ABF00B012A5 /* EditPhyViewController.m */,
+				BEA2F86C1993188200FD2D4E /* TempDetailViewController.h */,
+				BEA2F86D1993188200FD2D4E /* TempDetailViewController.m */,
+				BEA2F86E1993188200FD2D4E /* TempDetailViewController.xib */,
 			);
 			name = "生理";
 			sourceTree = "<group>";
@@ -3387,7 +3393,6 @@
 			isa = PBXGroup;
 			children = (
 				481FB9CA194FFA69009553ED /* BC_Info.sqlite */,
-				BE955F511901076600225029 /* who.rdb */,
 				CE23978C176EE37B0096E033 /* Babyinfo.rdb */,
 				7215972817453680006FD415 /* Amoy Baby Care-Info.plist */,
 				7215972917453680006FD415 /* InfoPlist.strings */,
@@ -4359,7 +4364,6 @@
 				48E5EC2319935E3A005FE35F /* btn_back@2x.png in Resources */,
 				480EFA5918E5155C00D40903 /* btn_bath_pause@2x.png in Resources */,
 				BE6938E219090EAD00FC2BB4 /* icon_temperture@2x.png in Resources */,
-				BE955F521901076600225029 /* who.rdb in Resources */,
 				48FEAF7518E917CB002425E2 /* histogram_yellow@2x.png in Resources */,
 				481D0D4F195BC2680025281A /* 分界线@2x.png in Resources */,
 				484B66FD195D5375006642BA /* pattern3@2x.png in Resources */,
@@ -4452,6 +4456,7 @@
 				BE7C698918692ED100C4B675 /* btn_syncBLE.png in Resources */,
 				480EFA2318E5155C00D40903 /* panels_color4_choose@2x.png in Resources */,
 				48EC1DC5185EF4A300965254 /* DurationPickerView.xib in Resources */,
+				BEA2F8701993188200FD2D4E /* TempDetailViewController.xib in Resources */,
 				480EFA5018E5155C00D40903 /* label_bottle@2x.png in Resources */,
 				482791D41884DE1D003E9724 /* Icon-Small@2x.png in Resources */,
 				BE25764918FE51CA0053683A /* point_red@2x.png in Resources */,
@@ -4583,6 +4588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE9C6DAD19907ABF00B012A5 /* EditPhyViewController.m in Sources */,
 				48EF612618C6FAC7006C3D5C /* ReGeocodeAnnotation.m in Sources */,
 				48B78141182A20610073EEBD /* CustomURLCache.m in Sources */,
 				48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */,
@@ -4607,6 +4613,7 @@
 				BEB475A018E574A80004B649 /* NSObject+SBJson.m in Sources */,
 				BE7C697C1867F1B300C4B675 /* ASIHTTPRequest.m in Sources */,
 				48EC1DD61862CE2000965254 /* CustonTimeViewController.m in Sources */,
+				BEA2F86F1993188200FD2D4E /* TempDetailViewController.m in Sources */,
 				48152DD318486AEA009A4900 /* UMEGORefreshTableHeaderView.m in Sources */,
 				48152DED18486B13009A4900 /* UMContactViewController.m in Sources */,
 				BEB475A618E574A80004B649 /* SBJsonStreamWriter.m in Sources */,
@@ -4715,7 +4722,6 @@
 				481EF6D519878ABD00959CB7 /* QuestionSurveyViewController.m in Sources */,
 				BE7C69771867F1B300C4B675 /* ASIAuthenticationDialog.m in Sources */,
 				BE6938EA1909165200FC2BB4 /* PHYDetailViewController.m in Sources */,
-				BE955F50190104A000225029 /* WhoDataBase.m in Sources */,
 				BE4A8621197618AB00EB232B /* PHYHistoryViewController.m in Sources */,
 				485749A01831C423000D921B /* MissionViewController.m in Sources */,
 				48152E3B18487EB0009A4900 /* DXAlertView.m in Sources */,

@@ -136,6 +136,8 @@
  */
 -(BOOL)updateBabyPhysiology:(double)value ByCreateTime:(long)create_time andType:(int)type;
 
+-(BOOL)updateBabyPhysiology:(double)value CreateTime:(long)create_time UpdateTime:(long)update_time MeasureTime:(long)measure_time Type:(int)type;
+
 /**
  *  获取曲线列表
  *
@@ -144,6 +146,21 @@
  *  @return
  */
 -(NSArray*)selectBabyPhysiologyList:(int)type;
+
+/**
+ *  获取宝贝生理数据曲线
+ *
+ *  @param  type            生理类型
+ *  @param  beginDay        曲线开始日数
+ *  @param  endDay          曲线结束日数
+ *  @param  PostnatalDay    宝贝当前日数
+ */
+-(NSArray*)selectBabyPhysiologyList:(int)type BeginDay:(int)beginDay EndDay:(int)endDay BabyBirthTime:(long)babyBirthTime;
+
+/** 
+ *  根据类别及创建时间获取生理条目记录
+ */
+-(NSDictionary*)selectBabyPhysiologyDetail:(int)type CreateTime:(long)createTime;
 
 /**
  *  删除某一条曲线记录
@@ -164,6 +181,18 @@
  *  @return 标准值组成的数组
  */
 -(NSArray*)selectWFAByType:(int)type andSex:(int)sex;
+
+/**
+ *  --TYPE--
+ *  身高:0
+ *  体重:1
+ *  BMI:2
+ *  头围:3
+ *  --SEX--
+ *  女生:0
+ *  男生:1
+ */
+-(NSArray*)getDataArrayByXposition:(NSArray*)xPosition Condition:(NSString*)condition Type:(int)type Sex:(int)sex;
 
 /**
  *  插入一条新的洗澡记录
