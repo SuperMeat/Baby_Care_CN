@@ -119,35 +119,21 @@
     self.navigationItem.titleView = titleView;
     
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title.backgroundColor = [UIColor clearColor];
-    [title setTextAlignment:NSTextAlignmentCenter];
-    title.textAlignment = NSTextAlignmentCenter;
-    title.textColor = [UIColor whiteColor];
-    title.text =NSLocalizedString(@"navback", nil);
-    title.font = [UIFont systemFontOfSize:14];
-    [backbutton addSubview:title];
     
-    
+    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    backbutton.frame=CGRectMake(0, 0, 50, 41);
+    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
     [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    backbutton.frame=CGRectMake(0, 0, 44, 28);
-    
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
     
     UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title1.backgroundColor = [UIColor clearColor];
-    [title1 setTextAlignment:NSTextAlignmentCenter];
-    title1.textColor = [UIColor whiteColor];
-    title1.text = NSLocalizedString(@"navsummary", nil);
-    title1.font = [UIFont systemFontOfSize:14];
-    [rightButton addSubview:title1];
-    
-    
+    [rightButton setImage:[UIImage imageNamed:@"btn_sum1"] forState:UIControlStateNormal];
+    rightButton.frame=CGRectMake(0, 0, 51, 51);
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -40);
     [rightButton addTarget:self action:@selector(pushSummaryView:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame=CGRectMake(0, 0, 44, 28);
     UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBar;
     
@@ -316,17 +302,17 @@
     cutmaxsleepmonth.font = [UIFont systemFontOfSize:SMALLTEXT];
 
     startButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    startButton.frame=CGRectMake(25,200*PNGSCALE+30, 281*PNGSCALE/2.0, 231*PNGSCALE/2.0);
+    startButton.frame=CGRectMake(10,200*PNGSCALE+30, 281*PNGSCALE/2.0, 231*PNGSCALE/2.0);
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_sleeping_play.png"] forState:UIControlStateNormal];
     [startButton setBackgroundImage:[UIImage imageNamed:@"btn_sleeping_pause.png"] forState:UIControlStateSelected];
     [self.view addSubview:startButton];
     [startButton addTarget:self action:@selector(startOrPause:) forControlEvents:UIControlEventTouchUpInside];
     
-    timerImage = [[UIImageView alloc]initWithFrame:CGRectMake(320-20-165*PNGSCALE, 150+30, 165*PNGSCALE, 111*PNGSCALE)];
+    timerImage = [[UIImageView alloc]initWithFrame:CGRectMake(320-165*PNGSCALE, 200, 165*PNGSCALE, 111*PNGSCALE)];
     [timerImage setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:timerImage];
     
-    UIImageView *timeicon=[[UIImageView alloc]initWithFrame:CGRectMake(320-20-165*PNGSCALE, 150, 165*PNGSCALE, 111*PNGSCALE)];
+    UIImageView *timeicon=[[UIImageView alloc]initWithFrame:CGRectMake(10, 20, 41/2.0*PNGSCALE, 48/2.0*PNGSCALE)];
     
     timeicon.contentMode=UIViewContentModeScaleAspectFit;
     timeicon.image=[UIImage imageNamed:@"icon_timer"];

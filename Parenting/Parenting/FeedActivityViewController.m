@@ -222,33 +222,20 @@
     self.navigationItem.titleView = titleView;
     
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title.backgroundColor = [UIColor clearColor];
-    [title setTextAlignment:NSTextAlignmentCenter];
-    title.textAlignment = NSTextAlignmentCenter;
-    title.textColor = [UIColor whiteColor];
-    title.text =NSLocalizedString(@"navback", nil);
-    title.font = [UIFont systemFontOfSize:14];
-    [backbutton addSubview:title];
-      
+    
+    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    backbutton.frame=CGRectMake(0, 0, 50, 41);
+    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
     [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    backbutton.frame=CGRectMake(0, 0, 44, 28);
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
     
     UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title1.backgroundColor = [UIColor clearColor];
-    [title1 setTextAlignment:NSTextAlignmentCenter];
-    title1.textColor = [UIColor whiteColor];
-    title1.text = NSLocalizedString(@"navsummary", nil);
-    title1.font = [UIFont systemFontOfSize:14];
-    [rightButton addSubview:title1];
-    
-    
-    [rightButton addTarget:self action:@selector(pushSummaryView:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame=CGRectMake(0, 0, 44, 28);
+    [rightButton setImage:[UIImage imageNamed:@"btn_sum1"] forState:UIControlStateNormal];
+    rightButton.frame=CGRectMake(0, 0, 51, 51);
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -40);[rightButton addTarget:self action:@selector(pushSummaryView:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBar;
 }
@@ -262,9 +249,18 @@
     chooseBreast=[UIButton buttonWithType:UIButtonTypeCustom];
     chooseBottle=[UIButton buttonWithType:UIButtonTypeCustom];
     chooseFood  =[UIButton buttonWithType:UIButtonTypeCustom];
-    chooseBreast.frame=CGRectMake(187/2.0*PNGSCALE+40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
-    chooseBottle.frame=CGRectMake(40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
-    chooseFood.frame=CGRectMake(187*PNGSCALE+40, 90*PNGSCALE, 187/2.0*PNGSCALE, 25*PNGSCALE);
+    if (iPhone5) {
+        chooseBreast.frame=CGRectMake((320 - 187/2.0*3)/2.0+187/2.0, 90, 187/2.0, 49/2.0);
+        chooseBottle.frame=CGRectMake((320 - 187/2.0*3)/2.0, 90, 187/2.0, 49/2.0);
+        chooseFood.frame=CGRectMake((320 - 187/2.0*3)/2.0+187, 90, 187/2.0, 49/2.0);
+    }
+    else
+    {
+        chooseBreast.frame=CGRectMake((320 - 187/2.0*3)/2.0+187/2.0, 76, 187/2.0, 49/2.0);
+        chooseBottle.frame=CGRectMake((320 - 187/2.0*3)/2.0, 76, 187/2.0, 49/2.0);
+        chooseFood.frame=CGRectMake((320 - 187/2.0*3)/2.0+187, 76, 187/2.0, 49/2.0);
+
+    }
     
     [chooseBreast setBackgroundImage:[UIImage imageNamed:@"label_breast"] forState:UIControlStateNormal];
     [chooseBreast setBackgroundImage:[UIImage imageNamed:@"label_breast_focus"] forState:UIControlStateDisabled];
@@ -504,6 +500,14 @@
 {
     for (UIView *subView in self.foodScrollView.subviews) {
         [subView removeFromSuperview];
+    }
+
+    if (iPhone5) {
+        [self.foodScrollView setFrame:CGRectMake(0, 30, 320, 260)];
+    }
+    else
+    {
+        [self.foodScrollView setFrame:CGRectMake(0, 110, 320, 200)];
     }
 
     //从数据库获取

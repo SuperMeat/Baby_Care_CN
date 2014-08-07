@@ -20,7 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self setTitle:@"吃药"];
+        [self setTitle:@"药剂/保健品"];
 #define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
         
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -65,48 +65,34 @@
 
 -(void)makeNav
 {
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110 , 100, 20)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110 , 200, 20)];
     titleView.backgroundColor=[UIColor clearColor];
-    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
     titleText.backgroundColor = [UIColor clearColor];
     [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
     titleText.textColor = [UIColor whiteColor];
     [titleText setTextAlignment:NSTextAlignmentCenter];
-    [titleText setText:NSLocalizedString(@"Medicine", nil)];
+    [titleText setText:NSLocalizedString(@"MedicineTitle", nil)];
     [titleView addSubview:titleText];
     
     self.navigationItem.titleView = titleView;
     
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title.backgroundColor = [UIColor clearColor];
-    [title setTextAlignment:NSTextAlignmentCenter];
-    title.textAlignment = NSTextAlignmentCenter;
-    title.textColor = [UIColor whiteColor];
-    title.text =NSLocalizedString(@"navback", nil);
-    title.font = [UIFont systemFontOfSize:14];
-    [backbutton addSubview:title];
     
-    
+    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    backbutton.frame=CGRectMake(0, 0, 50, 41);
+    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
     [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    backbutton.frame=CGRectMake(0, 0, 44, 28);
-    
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
     
     UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title1.backgroundColor = [UIColor clearColor];
-    [title1 setTextAlignment:NSTextAlignmentCenter];
-    title1.textColor = [UIColor whiteColor];
-    title1.text = NSLocalizedString(@"navsummary", nil);
-    title1.font = [UIFont systemFontOfSize:14];
-    [rightButton addSubview:title1];
-    
-    
+    [rightButton setImage:[UIImage imageNamed:@"btn_sum1"] forState:UIControlStateNormal];
+    rightButton.frame=CGRectMake(0, 0, 51, 51);
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -40);
     [rightButton addTarget:self action:@selector(pushSummaryView:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame=CGRectMake(0, 0, 44, 28);
     UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBar;
     
@@ -121,15 +107,13 @@
     self.view.layer.cornerRadius = 8.0f;
 
     self.norecordLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-    
-    [self.addRecordBtn  setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
-    [self.addRecordBtn  setTitle:@"添加" forState:UIControlStateNormal];
-    [self.addRecordBtn  setAlpha:1];
-    [self.addRecordBtn  setTitle:NSLocalizedString(@"Add", nil) forState:UIControlStateNormal];
-    [self.addRecordBtn  addTarget:self action:@selector(addrecord:) forControlEvents:UIControlEventTouchUpInside];
-    self.addRecordBtn .layer.cornerRadius = 5.0f;
-    [self.view bringSubviewToFront:self.addRecordBtn];
-    
+    if (iPhone5) {
+        [self.scrollView setFrame:CGRectMake(0, 84, 320, 280)];
+    }
+    else
+    {
+        [self.scrollView setFrame:CGRectMake(0, 160, 320, 220)];
+    }
     [self.scrollView setContentSize:CGSizeMake(300, 400)];
     [self.scrollView setBackgroundColor:[UIColor clearColor]];
     self.scrollView.showsHorizontalScrollIndicator=NO;
@@ -144,9 +128,20 @@
     {
         self.scrollView.hidden = NO;
         self.norecordView.hidden = YES;
-
+        
         [self makeDetailViews];
     }
+
+    [self.addRecordBtn setFrame:CGRectMake(110, WINDOWSCREEN-130-64-30-20, 100, 30)];
+
+    [self.addRecordBtn  setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    [self.addRecordBtn  setTitle:@"添加" forState:UIControlStateNormal];
+    [self.addRecordBtn  setAlpha:1];
+    [self.addRecordBtn  setTitle:NSLocalizedString(@"Add", nil) forState:UIControlStateNormal];
+    [self.addRecordBtn  addTarget:self action:@selector(addrecord:) forControlEvents:UIControlEventTouchUpInside];
+    self.addRecordBtn .layer.cornerRadius = 5.0f;
+    [self.view bringSubviewToFront:self.addRecordBtn];
+    
     
 }
 
@@ -248,11 +243,14 @@
 
 -(void)stop
 {
+    self.addRecordBtn.enabled = YES;
+
     [saveView removeFromSuperview];
 }
 
 -(void)cancel
 {
+    self.addRecordBtn.enabled = YES;
     [saveView removeFromSuperview];
 }
 
@@ -264,6 +262,7 @@
     }
     saveView.medicineSaveDelegate = self;
     [saveView loaddata];
+    self.addRecordBtn.enabled = NO;
     [self.view addSubview:saveView];
 
 }
@@ -276,7 +275,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [MobClick beginLogPageView:@"吃药"];
+    [MobClick beginLogPageView:@"药品/保健品"];
     self.hidesBottomBarWhenPushed = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stop) name:@"stop" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancel) name:@"cancel" object:nil];

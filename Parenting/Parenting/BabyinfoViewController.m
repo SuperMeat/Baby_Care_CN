@@ -132,30 +132,17 @@ static int age = 0;
 -(void)makeNav
 {
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 34, 28)];
-    title.backgroundColor = [UIColor clearColor];
-
-    title.textAlignment = NSTextAlignmentCenter;
-    title.textColor = [UIColor whiteColor];
-    title.text = NSLocalizedString(@"navback", nil);
-    title.font = [UIFont systemFontOfSize:14];
-    [backbutton addSubview:title];
     
-    
+    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    backbutton.frame=CGRectMake(0, 0, 50, 41);
+    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
     [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    backbutton.frame=CGRectMake(0, 0, 44, 28);
-    
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
-
-    
-    
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_title.png"] forBarMetrics:UIBarMetricsDefault];
     
     [self.view setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
-    
 }
 
 - (void)viewDidLoad

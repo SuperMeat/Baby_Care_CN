@@ -155,9 +155,10 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 -(void)tap
 {
-    summaryViewController   = [SummaryViewController summary];
-     if (ISBLE) {
-        envirViewController    = [[EnvironmentViewController alloc] init];
+    summaryViewController     = [SummaryViewController summary];
+    if (ISBLE)
+    {
+        envirViewController   = [[EnvironmentViewController alloc] init];
     }
     else
     {

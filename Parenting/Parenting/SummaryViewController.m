@@ -85,18 +85,10 @@
     self.navigationItem.titleView = titleView;
 
     backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title.backgroundColor = [UIColor clearColor];
-    [title setTextAlignment:NSTextAlignmentCenter];
-    title.textAlignment = NSTextAlignmentCenter;
-    title.textColor = [UIColor whiteColor];
-    title.text =NSLocalizedString(@"navback", nil);
-    title.font = [UIFont systemFontOfSize:14];
-    [backbutton addSubview:title];
-    
+    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
     [backbutton addTarget:self action:@selector(popback:) forControlEvents:UIControlEventTouchUpInside];
-    backbutton.frame=CGRectMake(0, 0, 44, 28);
-    
+    backbutton.frame=CGRectMake(0, 0, 50, 41);
+    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
 
@@ -107,11 +99,11 @@
     }
     else
     {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeIndeterminate;
-        hud.color = [UIColor grayColor];
-        hud.alpha = 0.5;
-        hud.labelText = NSLocalizedString(@"PlotLoading", nil);
+//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        hud.mode = MBProgressHUDModeIndeterminate;
+//        hud.color = [UIColor grayColor];
+//        hud.alpha = 0.5;
+//        hud.labelText = NSLocalizedString(@"PlotLoading", nil);
         if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"justdoit"] boolValue] == YES) {
             NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(willShowView:) object:[NSNumber numberWithBool:YES]];
             [thread start];
@@ -125,11 +117,15 @@
     }
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [menu setValue:[NSNumber numberWithBool:NO] forKey:@"expanding"];
+
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [MobClick endLogPageView:@"总结页面"];
-    [menu setValue:[NSNumber numberWithBool:NO] forKey:@"expanding"];
-    
 }
 
 -(void)willShowView:(NSNumber*)flag
@@ -141,7 +137,7 @@
     if ([flag boolValue]==YES) {
         [self scrollUpadateData];
     }
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 - (void)viewDidLoad
@@ -777,14 +773,22 @@
     return headerView;
 }
 
+- (void)deselect
+{
+    [List deselectRowAtIndexPath:[List indexPathForSelectedRow] animated:YES];
+}
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (tableView == List)
     {
         CustumCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"CustumCell" owner:self options:nil] lastObject];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            //灰色
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            //cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         cell.minutesLable.textColor=cell.timeLable.textColor;
         SummaryItem *item=[ListArray objectAtIndex:indexPath.row];
@@ -843,8 +847,9 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"AdviseTableViewCell" owner:self options:nil] lastObject];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            
+            //cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            //灰色
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
         
         tipsImageView = (UIImageView*)[cell.contentView viewWithTag:1];
@@ -916,6 +921,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+
     if (tableView == List) {
         SummaryItem *item=[ListArray objectAtIndex:indexPath.row];
         [self showHistory:item];

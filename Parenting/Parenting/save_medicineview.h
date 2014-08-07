@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ACTypeListPickerView.h"
+
 @protocol save_medicineviewDelegate<NSObject>
 @optional
 -(void)sendMedicineSaveChanged:(NSString*)medicinename andAmount:(NSString*)amount andIsReminder:(BOOL)isReminder andstarttime:(NSDate*)newstarttime;
 -(void)sendMedicineReloadData;
 @end
-@interface save_medicineview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>
+@interface save_medicineview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,ACTypeListPickerViewDelegate>
 {
 UIImageView *imageview;
 UITextField *medicinedesptext;
@@ -29,6 +31,9 @@ UIActionSheet *action;
 NSDate* curstarttime;
 NSString* oldstarttime;
 NSString* oldmedicine;
+    
+ACTypeListPickerView *typelistPickerView;
+UIActionSheet *actionType;
     
 long _createtime;
 long _updatetime;
