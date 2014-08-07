@@ -202,7 +202,10 @@
         labelIncrease.textAlignment = NSTextAlignmentLeft;
         labelIncrease.text = [arrayCurrent objectAtIndex:4];
         
+        //BMI不需录入值
+        if(indexPath.row != 2){
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         
         [cell addSubview:imageViewIcon];
         [cell addSubview:labelTitle];
@@ -214,9 +217,20 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    pHYDetailViewController = [[PHYDetailViewController alloc] init];
-    [pHYDetailViewController setVar:[arrayPhyItems objectAtIndex:indexPath.row]];
-    [self.navigationController pushViewController:pHYDetailViewController animated:YES];
+    if (indexPath.row == 4) {
+        //选中体温
+        tempDetailViewController = [[TempDetailViewController alloc] init];
+        [self.navigationController pushViewController:tempDetailViewController animated:YES];
+    }
+    else if (indexPath.row ==2) {
+        //选中BMI
+    }
+    else {
+        //选中其他
+        pHYDetailViewController = [[PHYDetailViewController alloc] init];
+        [pHYDetailViewController setVar:[arrayPhyItems objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:pHYDetailViewController animated:YES];
+    }
 }
 
 

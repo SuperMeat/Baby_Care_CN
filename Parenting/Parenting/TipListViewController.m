@@ -50,6 +50,11 @@
                                             HUD:hud
                                    SyncFinished:^(NSArray *retArr){
                                        //取出获取到数据的ids
+                                       if ([retArr count] ==0){
+                                           UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"贴士正在收集整理中,请稍后再试!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                           [alert show];
+                                           return;
+                                       }
                                        tipsIds=@"";
                                        for (NSDictionary* tip in retArr) {
                                            //处理贴士类目表&创建数据库

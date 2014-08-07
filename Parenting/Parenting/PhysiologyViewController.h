@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "PHYDetailViewController.h"
+#import "TempDetailViewController.h"
 
 @interface PhysiologyViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray *arrayPhyItems;
     PHYDetailViewController *pHYDetailViewController;
+    TempDetailViewController *tempDetailViewController;
 }
 
 @property (strong, nonatomic) UITableView *scorllView;

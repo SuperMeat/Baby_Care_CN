@@ -326,6 +326,29 @@
     return res;
 }
 
+-(BOOL)updateBabyPhysiology:(double)value CreateTime:(long)create_time UpdateTime:(long)update_time MeasureTime:(long)measure_time Type:(int)type{
+    BOOL res;
+    int user_id = ACCOUNTUID;
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    
+    res=[db executeUpdate:@"update bc_baby_physiology set value= ?,measure_time= ?,update_time=? where create_time=? and type = ?",[NSNumber numberWithDouble:value],[NSNumber numberWithLong:measure_time],[NSNumber numberWithLong:update_time], [NSNumber numberWithLong:create_time],[NSNumber numberWithInt:type]];
+    if (!res) {
+        NSLog(@"更新失败");
+        [db close];
+        return res;
+    }
+    [db close];
+    return res;
+}
+
 -(NSArray*)selectBabyPhysiologyList:(int)type
 {
     BOOL res;
@@ -357,6 +380,61 @@
     return array;
 }
 
+-(NSArray*)selectBabyPhysiologyList:(int)type BeginDay:(int)beginDay EndDay:(int)endDay BabyBirthTime:(long)babyBirthTime{
+    BOOL res;
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    
+    int user_id = ACCOUNTUID;
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSString *sql =[NSString stringWithFormat:@"select value,((measure_time-%ld)/84600) as recordDay from bc_baby_physiology where type = %d and ((measure_time-%ld)/84600) >= %d and ((measure_time-%ld)/84600) <= %d order by measure_time desc",babyBirthTime,type,babyBirthTime,beginDay,babyBirthTime,endDay];
+    FMResultSet *resultset=[db executeQuery:sql];
+    while ([resultset next]) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];
+        [dic setValue:[NSNumber numberWithDouble:[resultset doubleForColumn:@"value"]] forKey:@"value"];
+        [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"recordDay"]] forKey:@"recordDay"];
+        [array addObject:dic];
+    }
+    [db close];
+    return array;
+}
+
+-(NSDictionary*)selectBabyPhysiologyDetail:(int)type CreateTime:(long)createTime{
+    BOOL res;
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];
+    
+    int user_id = ACCOUNTUID;
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSString *sql =[NSString stringWithFormat:@"select * from bc_baby_physiology where type = %d and create_time = %ld",type,createTime];
+    FMResultSet *resultset=[db executeQuery:sql];
+    while ([resultset next]) {
+        [dic setValue:[NSNumber numberWithInt:[resultset longForColumn:@"create_time"]] forKey:@"create_time"];
+        [dic setValue:[NSNumber numberWithInt:[resultset longForColumn:@"update_time"]] forKey:@"update_time"];
+        [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"type"]] forKey:@"type"];
+        [dic setValue:[NSNumber numberWithDouble:[resultset doubleForColumn:@"value"]] forKey:@"value"];
+        [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"measure_time"]] forKey:@"measure_time"];
+    }
+    [db close];
+    return dic;
+}
+
 -(BOOL)deleteBabyPhysiologyByType:(int)type andCreateTime:(long)create_time
 {
     BOOL res;
@@ -371,7 +449,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"delete bc_baby_physiology where create_time=? and type = ?", [NSNumber numberWithLong:create_time],[NSNumber numberWithInt:type]];
+    res=[db executeUpdate:@"delete from bc_baby_physiology where create_time=? and type = ?", [NSNumber numberWithLong:create_time],[NSNumber numberWithInt:type]];
     if (!res) {
         NSLog(@"删除失败");
         [db close];
@@ -413,6 +491,31 @@
     }
     [db close];
     return array;
+}
+
+#pragma 获取数据库对应X轴的描点数据
+-(NSArray*)getDataArrayByXposition:(NSArray*)xPosition Condition:(NSString*)condition Type:(int)type Sex:(int)sex{
+    NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:xPosition.count];
+    BOOL res;
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
+    FMDatabase *db=[FMDatabase databaseWithPath:path];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        return nil;
+    }
+    
+    NSString *sql = [NSString stringWithFormat:@"select %@ from bc_wfa where age in (%@) and type=%d and sex=%d",condition,[xPosition componentsJoinedByString:@","],type,sex];
+    FMResultSet *set=[db executeQuery:sql];
+    while ([set next]) {
+        [dataArray addObject:[set stringForColumn:condition]];
+    }
+    if (!res) {
+        NSLog(@"查询失败");
+        return nil;
+    }
+    [db close];
+    return dataArray;
 }
 
 -(BOOL)insertBabyBathRecord:(long)create_time
@@ -1036,7 +1139,7 @@
         return res;
     }
     
-    NSString* str = [NSString stringWithFormat:@"delete bc_baby_%@ where create_time = ?", tablename];
+    NSString* str = [NSString stringWithFormat:@"delete from bc_baby_%@ where create_time = ?", tablename];
     res = [db executeUpdate:str, [NSNumber numberWithLong:create_time]];
     if (!res) {
         NSLog(@"数据库更新失败");

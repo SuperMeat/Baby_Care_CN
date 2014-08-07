@@ -1,16 +1,15 @@
 //
-//  PHYDetailViewController.h
+//  TempDetailViewController.h
 //  Amoy Baby Care
 //
-//  Created by CHEN WEIBIN on 14-4-24.
+//  Created by CHEN WEIBIN on 14-8-7.
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "PhyCorePlot.h"
-#import "AddPHYRecordViewController.h"
 
-@interface PHYDetailViewController : UIViewController{
+@interface TempDetailViewController : UIViewController{
     NSArray *arrayCurrent;
     NSArray *arrValues;
     
@@ -46,7 +45,5 @@
 
 //WHO曲线区域
 @property (strong, nonatomic) UIView *viewPlot;
-
--(void)setVar:(NSArray*) array;
 
 @end

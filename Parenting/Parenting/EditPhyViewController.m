@@ -1,23 +1,23 @@
 //
-//  AddPHYRecordViewController.m
+//  EditPhyViewController.m
 //  Amoy Baby Care
 //
-//  Created by CHEN WEIBIN on 14-4-25.
+//  Created by CHEN WEIBIN on 14-8-5.
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
-#import "AddPHYRecordViewController.h"
+#import "EditPhyViewController.h"
 #import "BabyDataDB.h"
 
 #define _APR_VIEW1_H 40
 #define _APR_VIEW2_H 210
 #define _APR_VIEW4_H 60
 
-@interface AddPHYRecordViewController ()
+@interface EditPhyViewController ()
 
 @end
 
-@implementation AddPHYRecordViewController
+@implementation EditPhyViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,8 +40,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
+    [super viewDidLoad]; 
     [self initView];
 }
 
@@ -50,6 +49,8 @@
 }
 
 -(void)initView{
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     //navigationBar
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 320, 44)];
     titleView.backgroundColor=[UIColor clearColor];
@@ -89,7 +90,6 @@
     _labelPickerDate = [[UILabel alloc] initWithFrame:CGRectMake(0, 4, 320, 32)];
     _labelPickerDate.font = [UIFont fontWithName:@"Arial" size:24];
     _labelPickerDate.textAlignment = NSTextAlignmentCenter;
-    _labelPickerDate.text = [self stringFromDate:[ACDate date]];
     [_view1 addSubview:_labelPickerDate];
     
     //选择器
@@ -116,7 +116,7 @@
     
     [_view3 addSubview:_labelUnit];
     
-
+    
     //显示滚动滑竿
     _view4 = [[UIView alloc]initWithFrame:CGRectMake(0, [[UIScreen mainScreen] bounds].size.height -_APR_VIEW4_H, self.view.bounds.size.width, _APR_VIEW4_H)];
     [self.view addSubview:_view4];
@@ -134,9 +134,6 @@
             _labelUnit.text = @"CM";
             _slidlerValue.minimumValue = 40;
             _slidlerValue.maximumValue = 100;
-            
-            //判断是否有历史数据，有则为最后录入数值
-            _slidlerValue.value = 60;
             break;
         case 1:
             _titleText.text = @"体重";
@@ -144,9 +141,6 @@
             
             _slidlerValue.minimumValue = 2.5;
             _slidlerValue.maximumValue = 15;
-            
-            //判断是否有历史数据，有则为最后录入数值
-            _slidlerValue.value = 4;
             break;
         case 2:
             //_titleText.text = @"BMI";
@@ -157,9 +151,6 @@
             
             _slidlerValue.minimumValue = 30;
             _slidlerValue.maximumValue = 55;
-            
-            //判断是否有历史数据，有则为最后录入数值
-            _slidlerValue.value = 35;
             break;
         case 4:
             //_titleText.text = @"体温";
@@ -167,12 +158,24 @@
         default:
             break;
     }
-    
+    //加载数据
+    NSDictionary *dictRes = [[BabyDataDB babyinfoDB] selectBabyPhysiologyDetail:itemType CreateTime:itemCreateTime];
+    [datepicker setDate:[ACDate getDateFromTimeStamp:[[dictRes objectForKey:@"measure_time"] longValue]]];
+    _labelPickerDate.text = [self stringFromDate:datepicker.date];
+    _slidlerValue.value = [[dictRes objectForKey:@"value"] floatValue];
     _labelValue.text = [NSString stringWithFormat:@"%0.1f",_slidlerValue.value];
 }
 
 -(void)setType:(int)Type{
     itemType =Type;
+}
+
+-(void)setCreateTime:(long)createTime{
+    itemCreateTime = createTime;
+}
+
+-(void)setMeasureTime:(long)measureTime{
+    itemMeasureTime = measureTime;
 }
 
 -(void)updatePickerDate:(UIDatePicker*)picker{
@@ -188,8 +191,8 @@
 }
 
 -(void)SaveRecord{
-    if ([[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[datepicker date]] Type:itemType Value:[_labelValue.text doubleValue]]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"添加成功!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    if ([[BabyDataDB babyinfoDB] updateBabyPhysiology:[_labelValue.text doubleValue] CreateTime:itemCreateTime UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[datepicker date]]  Type:itemType]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"修改成功!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -240,10 +243,22 @@
     
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

@@ -102,32 +102,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Parenting/BabyInfo/BabyDataDB.m"
-            timestampString = "428810962.619455"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
-            landmarkName = "-deleteBabyPhysiologyByType:andCreateTime:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Parenting/BabyInfo/BabyDataDB.m"
-            timestampString = "428811039.65721"
+            filePath = "Parenting/TempDetailViewController.m"
+            timestampString = "429091502.085933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "374"
-            endingLineNumber = "374"
-            landmarkName = "-deleteBabyPhysiologyByType:andCreateTime:"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
+            landmarkName = "-drawLine:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

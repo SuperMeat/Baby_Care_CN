@@ -1,23 +1,23 @@
 //
-//  PHYDetailViewController.m
+//  TempDetailViewController.m
 //  Amoy Baby Care
 //
-//  Created by CHEN WEIBIN on 14-4-24.
+//  Created by CHEN WEIBIN on 14-8-7.
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
-#import "PHYDetailViewController.h"
+#import "TempDetailViewController.h"
 #import "BabyDataDB.h"
 #import "PHYHistoryViewController.h"
 
 #define YAXISCOUNT 5
 #define SIZEINTERVA 10
 
-@interface PHYDetailViewController ()
+@interface TempDetailViewController ()
 
 @end
 
-@implementation PHYDetailViewController
+@implementation TempDetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,17 +41,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    itemType = 4;
+    itemName = @"体温";
+    itemUnit = @"°C";
+    
     [self initView];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [MobClick beginLogPageView:@"生理详细页"];
+    [MobClick beginLogPageView:@"体温详细页"];
     self.hidesBottomBarWhenPushed=YES;
     [self initData];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    [MobClick endLogPageView:@"生理详细页"];
+    [MobClick endLogPageView:@"体温详细页"];
 }
 
 -(void)initView{
@@ -91,7 +96,7 @@
     _buttonTip.frame = CGRectMake(50, 22, 40, 40);
     _buttonTip.titleLabel.font = [UIFont systemFontOfSize:14];
     [_buttonTip setTitle:@"i" forState:UIControlStateNormal];
-
+    
     [_phyDetailImageView addSubview:_buttonTip];
     
     //_viewTop1
@@ -149,14 +154,14 @@
     [_viewTop1 addSubview:_labelCURDate];
     [_viewTop1 addSubview:_labelChangeValue];
     [_viewTop1 addSubview:labelChangeTitle];
-
+    
     //_viewTopHistroy
     _viewHistroy = [[UIView alloc]initWithFrame:CGRectMake(0, 130, self.view.bounds.size.width, 44)];
     _viewHistroy.backgroundColor = [ACFunction colorWithHexString:@"#f6f6f6"];
     //添加手势
     UITapGestureRecognizer *tapgesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ShowHistory)];
     [_viewHistroy addGestureRecognizer:tapgesture];
-
+    
     [self.view addSubview:_viewHistroy];
     
     UILabel *labelHistory = [[UILabel alloc]initWithFrame:CGRectMake(10, 12, 200, 20)];
@@ -180,13 +185,13 @@
     if ([arrValues count] >= 2) {
         NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
         [myDateFormatter setDateFormat:@"yyyy-MM-dd"];
-
+        
         //LAST
         NSDictionary *dict2 = [arrValues objectAtIndex:1];
         double v2 = [[dict2 objectForKey:@"value"] doubleValue];
         NSDate *dateB = [ACDate getDateFromTimeStamp:[[dict2 objectForKey:@"measure_time"] longValue]];
         _labelLastValue.text = [NSString stringWithFormat:@"%0.1f",[[dict2 objectForKey:@"value"] doubleValue]];
-                _labelLastDate.text = [myDateFormatter stringFromDate:dateB];
+        _labelLastDate.text = [myDateFormatter stringFromDate:dateB];
         
         //CURRENT
         NSDictionary *dict1 = [arrValues objectAtIndex:0];
@@ -207,7 +212,7 @@
         _labelLastDate.text = @"尚无记录";
         //CURRENT
         NSDictionary *dict = [arrValues objectAtIndex:0];
-        NSDate *date = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]]; 
+        NSDate *date = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]];
         _labelCURValue.text = [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
         NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
         [myDateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -229,34 +234,6 @@
     //加载CorePlot
     [self drawLine:CGRectMake(0, 0, self.view.bounds.size.width, 174)];
     [_viewPlot addSubview:plot];
-    UILabel *labelUnit = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 60, 20)];
-    labelUnit.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
-    labelUnit.text = [NSString stringWithFormat:@"%@/日数",itemUnit];
-    [_viewPlot addSubview:labelUnit];
-    
-    UILabel *labelUserp = [[UILabel alloc]initWithFrame:CGRectMake(200, 5, 30, 18)];
-    labelUserp.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
-    labelUserp.textColor = [UIColor whiteColor];
-    labelUserp.textAlignment = NSTextAlignmentCenter;
-    labelUserp.text = @"用户";
-    labelUserp.backgroundColor = [UIColor redColor];
-    [_viewPlot addSubview:labelUserp];
-    
-    UILabel *label75p = [[UILabel alloc]initWithFrame:CGRectMake(235, 5, 30, 18)];
-    label75p.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
-    label75p.textColor = [UIColor whiteColor];
-    label75p.textAlignment = NSTextAlignmentCenter;
-    label75p.text = @"75分";
-    label75p.backgroundColor = [UIColor blueColor];
-    [_viewPlot addSubview:label75p];
-    
-    UILabel *label25p = [[UILabel alloc]initWithFrame:CGRectMake(270, 5, 30, 18)];
-    label25p.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
-    label25p.textColor = [UIColor whiteColor];
-    label25p.textAlignment = NSTextAlignmentCenter;
-    label25p.text = @"25分";
-    label25p.backgroundColor = [UIColor greenColor];
-    [_viewPlot addSubview:label25p];
 }
 
 -(void)makeAdvise:(CGRect)rect
@@ -281,7 +258,7 @@
     UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-171/2.0, frame.size.height-102/2.0, 171/2.0, 102/2.0)];
     [addIamge setImage:[UIImage imageNamed:@"大象"]];
     [self.view addSubview:addIamge];
-
+    
     UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 10)];
     [cutline setImage:[UIImage imageNamed:@"分界线"]];
     [self.view addSubview:cutline];
@@ -289,26 +266,18 @@
 
 -(void)drawLine:(CGRect)rect{
     //********Start********
-    //Step-1:                           根据宝宝的出生天数得出X轴范围
-    //Argument:postnatalDays            宝宝的出生天数
-    //Method:                           xAsix = GetXAsix(postnatalDays)
-    NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
-    int postnatalDays = [self numberOfDaysFromTodayByTime:[[dict objectForKey:@"birth"] intValue]];
     
-    NSArray *xAsix = [self GetXAsix:postnatalDays];
     
-    BabyDataDB *db = [BabyDataDB babyinfoDB];
-    //Step-2:根据X轴值获取WHO对应数值 
-    NSArray *dataP25 = [db getDataArrayByXposition:xAsix Condition:@"P25" Type:itemType Sex:[[[db selectBabyInfoByBabyId:BABYID] objectForKey:@"sex"] intValue]];
+//    NSArray *xAsix = @[@"21日14:30",@"21日15:00",@"21日17:30"];
+    NSArray *xAsix = @[@1,@2,@3];
     
-    NSArray *dataP75 = [db getDataArrayByXposition:xAsix Condition:@"P75" Type:itemType Sex:[[[db selectBabyInfoByBabyId:BABYID] objectForKey:@"sex"] intValue]];
     //获取用户数据
-    NSArray *dataUser = [self GetUserAsix:xAsix PostnatalDay:postnatalDays];
+    NSArray *dataUser = @[@36,@38,@40.5];
     //Step-3:根据WHO的对应值得出Y轴范围
-    NSArray *yAsix = [self GetYAsixByBiger:dataP75 andSmaller:dataP25];
+    NSArray *yAsix = @[@36,@37,@38,@39,@40,@41,@42];
     
     //录入P25;P75;用户数值
-    NSArray *xyPlot = @[dataP25,dataP75,dataUser];
+    NSArray *xyPlot = @[dataUser];
     NSArray *xyTitle = @[@"",@""];
     NSArray *axis = @[xAsix,yAsix];
     
@@ -336,193 +305,31 @@
     [self.navigationController pushViewController:addRecordViewController animated:YES];
 }
 
--(void)setVar:(NSArray*) array{
-    arrayCurrent = array;
-    
-    switch ([[array objectAtIndex:0]intValue]) {
-        case 0:
-            itemName = @"身高";
-            itemUnit = @"cm";
-            break;
-        case 1:
-            itemName = @"体重";
-            itemUnit = @"kg";
-            break;
-        case 2:
-            itemName = @"BMI";
-            itemUnit = @"指数";
-            break;
-        case 3:
-            itemName = @"头围";
-            itemUnit = @"cm";
-            break;
-        case 4:
-            itemName = @"体温";
-            itemUnit = @"°C";
-            break;
-        default:
-            break;
-    }
-    itemType = [[array objectAtIndex:0]intValue];
-}
-
-- (NSInteger)numberOfDaysFromTodayByTime:(int)birth
-{
-    NSDate *today = [NSDate date];
-    NSTimeZone *localTimeZone = [NSTimeZone systemTimeZone];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:localTimeZone];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    
-    double dBirth = (double)birth;
-    double dToday = [ACDate getTimeStampFromDate:today];
-    NSInteger nSecs = (NSInteger)(dToday - dBirth);
-    NSInteger oneDaySecs = 24*3600;
-    return nSecs / oneDaySecs;
-    
-}
-
 #pragma mark - 获取x轴坐标系
 -(NSArray*)GetXAsix:(int)PostnatalDays
 {
     NSMutableArray * arrXAsix = [[NSMutableArray alloc]initWithCapacity:0];
-    if (PostnatalDays <= 30) {
-        PostnatalDays = 30;
-        sizeInterval = 30 / SIZEINTERVA;
-        for (int i = 0; i <= PostnatalDays; i++) {
-            if (i % sizeInterval == 0) {
-                [arrXAsix addObject:[NSNumber numberWithInt:i]];
-            }
-        }
-        return arrXAsix;
-    }
-    else if (PostnatalDays > 30 && PostnatalDays <=60){
-        PostnatalDays=60;
-        sizeInterval = 60 / SIZEINTERVA;
-        for (int i = 0; i <= PostnatalDays; i++) {
-            if (i % sizeInterval == 0) {
-                [arrXAsix addObject:[NSNumber numberWithInt:i]];
-            }
-        }
-        return arrXAsix;
-    }
-    else if (PostnatalDays> 60 && PostnatalDays <=90){
-        PostnatalDays = 90;
-        sizeInterval = 90 / SIZEINTERVA;
-        for (int i = 0; i <= PostnatalDays; i++) {
-            if (i % sizeInterval == 0) {
-                [arrXAsix addObject:[NSNumber numberWithInt:i]];
-            }
-        }
-        return arrXAsix;
-    }
-    else{
-        sizeInterval = 90 / SIZEINTERVA;
-        while (PostnatalDays % sizeInterval != 0)
-        {
-            PostnatalDays++;
-        }
-        
-        for (int i = (PostnatalDays - 90); i <= PostnatalDays; i++) {
-            if (i % sizeInterval == 0) {
-                [arrXAsix addObject:[NSNumber numberWithInt:i]];
-            }
-        }
-        return arrXAsix;
-    }
+    
+    return arrXAsix;
 }
 
 #pragma mark - 获取y轴坐标系
 -(NSArray*)GetYAsixByBiger:(NSArray*)Barr andSmaller:(NSArray*)Sarr
 {
-    NSComparator cmptr = ^(id obj1, id obj2){
-        if ([obj1 integerValue] > [obj2 integerValue]) {
-            return (NSComparisonResult)NSOrderedDescending;
-        }
-        
-        if ([obj1 integerValue] < [obj2 integerValue]) {
-            return (NSComparisonResult)NSOrderedAscending;
-        }
-        return (NSComparisonResult)NSOrderedSame;
-    };
-    
     NSMutableArray * arrYAsix = [[NSMutableArray alloc]initWithCapacity:0];
-    NSArray *Bsort = [Barr sortedArrayUsingComparator:cmptr];
-    NSArray *Ssort = [Sarr sortedArrayUsingComparator:cmptr];
-    float max = [[NSNumber numberWithFloat:[[NSString stringWithFormat:@"%.0f",[[Bsort lastObject]floatValue]] floatValue]] floatValue];
-    float min = [[NSNumber numberWithFloat:[[NSString stringWithFormat:@"%.0f",[[Ssort firstObject]floatValue]] floatValue]] floatValue];
-    
-    yBaseValue = min;
-    ySizeInterval = [[NSNumber numberWithFloat:[[NSString stringWithFormat:@"%.1f",(max - min) / (YAXISCOUNT-1)] floatValue]] floatValue];
-    
-    [arrYAsix addObject:[NSNumber numberWithFloat:0.0f]];
-    
-    //确保最大值在区间内
-    max += ySizeInterval;
-    for (float i = min; i < max; i=i+ySizeInterval) {
-        [arrYAsix addObject:[NSNumber numberWithFloat:i]];
-    }
     return arrYAsix;
 }
 
 #pragma GetUserData
 -(NSArray*)GetUserAsix:(NSArray*)Barr PostnatalDay:(int)postnatalDays{
-    int beginDay = [[Barr objectAtIndex:0] intValue];
-    int endDay = [[Barr objectAtIndex:[Barr count]-1] intValue];
-    long birthTime =[[[[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:BABYID] objectForKey:@"birth"] longValue];
-    NSMutableArray *arrRes = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType BeginDay:beginDay EndDay:endDay BabyBirthTime:birthTime]];
-    NSArray *arrRet = [[NSArray alloc]init];
-
-    /**
-     *  a.如果区间内无数据,则根据x轴坐标返回:0 0 0 0 0 0
-     *  b.如果只有一个值,则根据x轴返回:0 0 0 值 值 值
-     *  c.如果有两个值以上,则根据x轴返回:0 值1 值1 值2 值2 值3
-     *  ---  X轴对应的值等于前后区间/2的时间长度内所有值的平均值  ---
-     */
-    if ([arrRes count] == 0) {
-        for (int i=0; i<[Barr count]; i++) {
-            arrRet = [arrRet arrayByAddingObject:[NSNumber numberWithDouble:0.0f]];
-        }
-    }
-    else{
-        //归拢到对应坐标轴
-        for (int i=0; i<[arrRes count]; i++) {
-            NSDictionary *tDict = [arrRes objectAtIndex:i];
-            int resDay = [[tDict objectForKey:@"recordDay"]intValue];
-            //iDis:第几个间隔 = (当前日数-开始日数 + 间隔单位 / 2) / 间隔单位
-            int iDis = (resDay - beginDay + sizeInterval / 2 ) / sizeInterval;
-            [tDict setValue:[NSNumber numberWithInt:(beginDay + iDis*sizeInterval)] forKey:@"recordDay"];
-        }
-        
-        //如果有多个数值,求坐标轴对应点上的平均值
-        for (int i=0; i<[Barr count]; i++) {
-            double dTotal = 0;
-            int dCount = 0;
-            for(int k=0;k<[arrRes count];k++)
-            {
-                NSDictionary *tDict = [arrRes objectAtIndex:k];
-                if ([[tDict objectForKey:@"recordDay"]intValue] == [[Barr objectAtIndex:i] intValue]) {
-                    dTotal = dTotal + [[tDict objectForKey:@"value"] doubleValue];
-                    dCount = dCount + 1;
-                }
-            }
-            if (dCount == 0 && [arrRet count] == 0) {
-                arrRet = [arrRet arrayByAddingObject:[NSNumber numberWithDouble:0.0f]];
-            }
-            else if((dCount == 0 && [arrRet count] != 0)){
-                arrRet = [arrRet arrayByAddingObject:[NSNumber numberWithDouble:[[arrRet objectAtIndex:([arrRet count]-1)] doubleValue]]];
-            }
-            else if (dCount != 0){
-                arrRet = [arrRet arrayByAddingObject:[NSNumber  numberWithDouble:(dTotal / dCount)]];
-            }
-        }
-    }
-    return arrRet;
+    NSMutableArray * arrUser = [[NSMutableArray alloc]initWithCapacity:0];
+    return arrUser;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end
