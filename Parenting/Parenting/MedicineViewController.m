@@ -273,6 +273,12 @@
     [self.navigationController pushViewController:summary animated:YES];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+   [MobClick endLogPageView:@"药品/保健品"];
+   [saveView removeFromSuperview];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [MobClick beginLogPageView:@"药品/保健品"];
@@ -282,7 +288,8 @@
 
     [self makeNav];
     NSArray* array=[[SummaryDB dataBase] selectmedicinedetailforsummary];
-    if ([array count] == 0) {
+    if ([array count] == 0)
+    {
         [self.view bringSubviewToFront:self.norecordView];
         self.scrollView.hidden = YES;
         self.norecordView.hidden = NO;
@@ -294,6 +301,11 @@
         
         [self makeDetailViews];
     }
+    
+    if (self.addRecordBtn != nil) {
+        self.addRecordBtn.enabled = YES;
+    }
+
 
 }
 
