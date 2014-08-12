@@ -87,7 +87,6 @@
 		480EFA4B18E5155C00D40903 /* btn_r_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF98A18E5155C00D40903 /* btn_r_play@2x.png */; };
 		480EFA4C18E5155C00D40903 /* icon_timer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF98B18E5155C00D40903 /* icon_timer@2x.png */; };
 		480EFA4E18E5155C00D40903 /* input_timer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF98D18E5155C00D40903 /* input_timer@2x.png */; };
-		480EFA5018E5155C00D40903 /* label_bottle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF98F18E5155C00D40903 /* label_bottle@2x.png */; };
 		480EFA5318E5155C00D40903 /* label_breast@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99218E5155C00D40903 /* label_breast@2x.png */; };
 		480EFA5918E5155C00D40903 /* btn_bath_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99918E5155C00D40903 /* btn_bath_pause@2x.png */; };
 		480EFA5A18E5155C00D40903 /* btn_bath_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99A18E5155C00D40903 /* btn_bath_play.png */; };
@@ -252,6 +251,10 @@
 		485749A4183205A3000D921B /* NotifyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 485749A3183205A3000D921B /* NotifyItem.m */; };
 		48574A6A183B33E8000D921B /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48574A68183B33E8000D921B /* libPushSDK.a */; };
 		485F3F4A17F07CDA00BD876F /* OpenFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F3F4917F07CDA00BD876F /* OpenFunction.m */; };
+		486CD6DE1998625A0026061E /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486CD6DD1998625A0026061E /* AMapSearchKit.framework */; };
+		486CD6E2199894570026061E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E1199894570026061E /* AMap.bundle */; };
+		486CD6E4199894820026061E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486CD6E3199894820026061E /* MAMapKit.framework */; };
+		486CD6E71998A4970026061E /* pin_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E61998A4970026061E /* pin_red@2x.png */; };
 		4880059B1929EAA400817919 /* FoodTypePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4880059A1929EAA400817919 /* FoodTypePickerView.m */; };
 		4880059F192B33E600817919 /* ACLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4880059E192B33E600817919 /* ACLabel.m */; };
 		4880A56E1919CF82005D5E44 /* libmtasdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4880A56B1919CF82005D5E44 /* libmtasdk.a */; };
@@ -295,7 +298,6 @@
 		48D42F4B196FDC9400DFFC5C /* medicine_zhen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F47196FDC9400DFFC5C /* medicine_zhen@2x.png */; };
 		48D42F4C196FDC9400DFFC5C /* medicine_tingzhen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F48196FDC9400DFFC5C /* medicine_tingzhen@2x.png */; };
 		48DCDC061973B23300EA7875 /* save_medicineview.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DCDC051973B23300EA7875 /* save_medicineview.m */; };
-		48DCDC0C1975061B00EA7875 /* label_bottle_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC071975061B00EA7875 /* label_bottle_focus@2x.png */; };
 		48DCDC0F1975061B00EA7875 /* label_food_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC0A1975061B00EA7875 /* label_food_focus@2x.png */; };
 		48DCDC101975061B00EA7875 /* label_food@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC0B1975061B00EA7875 /* label_food@2x.png */; };
 		48DCDC141975209000EA7875 /* icon_alarm2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DCDC121975209000EA7875 /* icon_alarm2@2x.png */; };
@@ -356,9 +358,6 @@
 		48EF60F318C5BDC8006C3D5C /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60F218C5BDC8006C3D5C /* libstdc++.6.0.9.dylib */; };
 		48EF60FB18C5C328006C3D5C /* MyMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF60F918C5C328006C3D5C /* MyMapViewController.m */; };
 		48EF60FC18C5C328006C3D5C /* MyMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EF60FA18C5C328006C3D5C /* MyMapViewController.xib */; };
-		48EF60FE18C5D373006C3D5C /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60FD18C5D373006C3D5C /* AMapSearchKit.framework */; };
-		48EF610018C5D6F7006C3D5C /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48EF60FF18C5D6F7006C3D5C /* AMap.bundle */; };
-		48EF610118C5D706006C3D5C /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF60EE18C5BD7D006C3D5C /* MAMapKit.framework */; };
 		48EF611C18C6FAC7006C3D5C /* AnimatedAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610418C6FAC7006C3D5C /* AnimatedAnnotation.m */; };
 		48EF611D18C6FAC7006C3D5C /* AnimatedAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610618C6FAC7006C3D5C /* AnimatedAnnotationView.m */; };
 		48EF611E18C6FAC7006C3D5C /* BusStopAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF610818C6FAC7006C3D5C /* BusStopAnnotation.m */; };
@@ -1055,6 +1054,10 @@
 		48574A68183B33E8000D921B /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
 		485F3F4817F07CDA00BD876F /* OpenFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenFunction.h; sourceTree = "<group>"; };
 		485F3F4917F07CDA00BD876F /* OpenFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenFunction.m; sourceTree = "<group>"; };
+		486CD6DD1998625A0026061E /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = AMap_iOS_API_Lib_V2.2.1/Search/AMapSearchKit.framework; sourceTree = "<group>"; };
+		486CD6E1199894570026061E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework/Versions/2.2.1.1650.60159/Resources/AMap.bundle; sourceTree = "<group>"; };
+		486CD6E3199894820026061E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework; sourceTree = "<group>"; };
+		486CD6E61998A4970026061E /* pin_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin_red@2x.png"; sourceTree = "<group>"; };
 		488005991929EAA400817919 /* FoodTypePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTypePickerView.h; sourceTree = "<group>"; };
 		4880059A1929EAA400817919 /* FoodTypePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTypePickerView.m; sourceTree = "<group>"; };
 		4880059D192B33E600817919 /* ACLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACLabel.h; path = ACLabel/ACLabel.h; sourceTree = "<group>"; };
@@ -1188,13 +1191,11 @@
 		48EC1DDA1862F6E400965254 /* nofity_myadvise_day_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nofity_myadvise_day_up@2x.png"; sourceTree = "<group>"; };
 		48EC1DDB1862F6E400965254 /* nofity_myadvise_day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nofity_myadvise_day.png; sourceTree = "<group>"; };
 		48EC1DDC1862F6E400965254 /* nofity_myadvise_day@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nofity_myadvise_day@2x.png"; sourceTree = "<group>"; };
-		48EF60EE18C5BD7D006C3D5C /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = AMap_iOS_API_Lib_V2.1.3/3D/MAMapKit.framework; sourceTree = "<group>"; };
 		48EF60F018C5BDAC006C3D5C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		48EF60F218C5BDC8006C3D5C /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		48EF60F818C5C328006C3D5C /* MyMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMapViewController.h; path = "地图/MyMapViewController.h"; sourceTree = "<group>"; };
 		48EF60F918C5C328006C3D5C /* MyMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMapViewController.m; path = "地图/MyMapViewController.m"; sourceTree = "<group>"; };
 		48EF60FA18C5C328006C3D5C /* MyMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyMapViewController.xib; path = "地图/MyMapViewController.xib"; sourceTree = "<group>"; };
-		48EF60FD18C5D373006C3D5C /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = AMap_iOS_API_Lib_V2.1.3/Search/AMapSearchKit.framework; sourceTree = "<group>"; };
 		48EF60FF18C5D6F7006C3D5C /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap_iOS_API_Lib_V2.1.3/3D/MAMapKit.framework/Versions/2.1.3/Resources/AMap.bundle; sourceTree = SOURCE_ROOT; };
 		48EF610318C6FAC7006C3D5C /* AnimatedAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedAnnotation.h; sourceTree = "<group>"; };
 		48EF610418C6FAC7006C3D5C /* AnimatedAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedAnnotation.m; sourceTree = "<group>"; };
@@ -1797,14 +1798,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4880A5701919CFA3005D5E44 /* AdSupport.framework in Frameworks */,
-				48EF610118C5D706006C3D5C /* MAMapKit.framework in Frameworks */,
 				489ABC8419654B9F00477D00 /* libWeChatSDK.a in Frameworks */,
 				489ABC7D19654B9E00477D00 /* libSocialTencentWeibo.a in Frameworks */,
 				489ABC7619654B9E00477D00 /* libSocialFacebook.a in Frameworks */,
 				4880A56E1919CF82005D5E44 /* libmtasdk.a in Frameworks */,
 				481EF6AA197FC1EE00959CB7 /* libUMSocial_Sdk_Comment_4.0.a in Frameworks */,
 				489ABC7E19654B9F00477D00 /* libSocialTwitter.a in Frameworks */,
-				48EF60FE18C5D373006C3D5C /* AMapSearchKit.framework in Frameworks */,
 				48EF60F318C5BDC8006C3D5C /* libstdc++.6.0.9.dylib in Frameworks */,
 				48EF60F118C5BDAC006C3D5C /* OpenGLES.framework in Frameworks */,
 				BE7C69361867DCCE00C4B675 /* MobileCoreServices.framework in Frameworks */,
@@ -1814,6 +1813,7 @@
 				489ABC8319654B9F00477D00 /* libSocialWechat.a in Frameworks */,
 				48013D3D185AE47900F483A6 /* CoreBluetooth.framework in Frameworks */,
 				7215972517453680006FD415 /* CoreGraphics.framework in Frameworks */,
+				486CD6E4199894820026061E /* MAMapKit.framework in Frameworks */,
 				483D08D318164C9B00E720E6 /* CoreTelephony.framework in Frameworks */,
 				4855BC21182B3EDF00F02A3E /* CoreFoundation.framework in Frameworks */,
 				489ABC8019654B9F00477D00 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */,
@@ -1830,6 +1830,7 @@
 				CE31A10E177AAF8D00F7EAE0 /* libz.1.2.5.dylib in Frameworks */,
 				CE31A10C177AAF8400F7EAE0 /* libicucore.dylib in Frameworks */,
 				CE31A10A177AAF7400F7EAE0 /* SystemConfiguration.framework in Frameworks */,
+				486CD6DE1998625A0026061E /* AMapSearchKit.framework in Frameworks */,
 				4855BC15182A7FBB00F02A3E /* libMobClickLibrary.a in Frameworks */,
 				489ABC7919654B9E00477D00 /* libSocialSina.a in Frameworks */,
 				4855BC1C182B237800F02A3E /* libUMFeedback.a in Frameworks */,
@@ -2312,6 +2313,7 @@
 		481D0D49195BC2680025281A /* 装饰 */ = {
 			isa = PBXGroup;
 			children = (
+				486CD6E61998A4970026061E /* pin_red@2x.png */,
 				48D42F4D196FDEAA00DFFC5C /* radio_focus@2x.png */,
 				48D42F4E196FDEAA00DFFC5C /* radio@2x.png */,
 				48D42F45196FDC9400DFFC5C /* medicine_heart@2x.png */,
@@ -2714,6 +2716,16 @@
 				72159747174536B8006FD415 /* Images */,
 			);
 			name = Resource;
+			sourceTree = "<group>";
+		};
+		486CD6E51998948D0026061E /* MAMAP */ = {
+			isa = PBXGroup;
+			children = (
+				486CD6E3199894820026061E /* MAMapKit.framework */,
+				486CD6E1199894570026061E /* AMap.bundle */,
+				486CD6DD1998625A0026061E /* AMapSearchKit.framework */,
+			);
+			name = MAMAP;
 			sourceTree = "<group>";
 		};
 		4880059C192B33B100817919 /* ACUILabel */ = {
@@ -3366,16 +3378,15 @@
 		7215971F17453680006FD415 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				486CD6E51998948D0026061E /* MAMAP */,
 				481EF68C197FC1EE00959CB7 /* UMSocial_Sdk_4.0 */,
 				481859BB197E315600589557 /* CoreText.framework */,
 				481859B9197E310B00589557 /* TestinAgent.framework */,
 				489ABC4119654B9E00477D00 /* UMSocial_Sdk_Extra_Frameworks */,
 				4880A56F1919CFA3005D5E44 /* AdSupport.framework */,
 				48FEAF8F18E94ACE002425E2 /* UartLib */,
-				48EF60FD18C5D373006C3D5C /* AMapSearchKit.framework */,
 				48EF60F218C5BDC8006C3D5C /* libstdc++.6.0.9.dylib */,
 				48EF60F018C5BDAC006C3D5C /* OpenGLES.framework */,
-				48EF60EE18C5BD7D006C3D5C /* MAMapKit.framework */,
 				4855BCF91830B12700F02A3E /* IOSSDK */,
 				4855BCFC1830B1D100F02A3E /* Facebook */,
 				4855BCFB1830B1C400F02A3E /* MobClick */,
@@ -4099,7 +4110,6 @@
 				48FEAF6418E917CB002425E2 /* btn_time@2x.png in Resources */,
 				48152DEE18486B13009A4900 /* UMContactViewController.xib in Resources */,
 				CE0167BA174B059000462363 /* btn_setting_focus@2x.png in Resources */,
-				48DCDC0C1975061B00EA7875 /* label_bottle_focus@2x.png in Resources */,
 				48DCDC141975209000EA7875 /* icon_alarm2@2x.png in Resources */,
 				48FCD5AB195D404F003DBA62 /* 婴儿车@2x.png in Resources */,
 				48152E1A18486C66009A4900 /* messages_tableview_background@2x.png in Resources */,
@@ -4163,6 +4173,7 @@
 				48F91AD818FB8DF10038DC67 /* pm25@2x.png in Resources */,
 				4880A587191A395A005D5E44 /* panels_icon_both@2x.png in Resources */,
 				4800B0C518D7F3D20093A6AF /* 生理@2x.png in Resources */,
+				486CD6E2199894570026061E /* AMap.bundle in Resources */,
 				48F91AA618FB8DF10038DC67 /* UV_level_bad@2x.png in Resources */,
 				482791CB1884DE1D003E9724 /* 57.png in Resources */,
 				48F91AB218FB8DF10038DC67 /* noice_level_good@2x.png in Resources */,
@@ -4206,7 +4217,6 @@
 				480EFA4818E5155C00D40903 /* btn_l_play@2x.png in Resources */,
 				BE25764418FE51CA0053683A /* weight@2x.png in Resources */,
 				BE6938E019090EAD00FC2BB4 /* icon_BMI@2x.png in Resources */,
-				48EF610018C5D6F7006C3D5C /* AMap.bundle in Resources */,
 				482791CA1884DE1D003E9724 /* 29.png in Resources */,
 				481EF6D01980BCC400959CB7 /* Medicine_9.jpg in Resources */,
 				481EF6A8197FC1EE00959CB7 /* UMSocialLocalizable.strings in Resources */,
@@ -4475,7 +4485,6 @@
 				480EFA2318E5155C00D40903 /* panels_color4_choose@2x.png in Resources */,
 				48EC1DC5185EF4A300965254 /* DurationPickerView.xib in Resources */,
 				BEA2F8701993188200FD2D4E /* TempDetailViewController.xib in Resources */,
-				480EFA5018E5155C00D40903 /* label_bottle@2x.png in Resources */,
 				482791D41884DE1D003E9724 /* Icon-Small@2x.png in Resources */,
 				BE25764918FE51CA0053683A /* point_red@2x.png in Resources */,
 				48F91ACA18FB8DF10038DC67 /* temp_level_good@2x.png in Resources */,
@@ -4565,6 +4574,7 @@
 				484B66FB195D5375006642BA /* pattern1@2x.png in Resources */,
 				48F91AD618FB8DF10038DC67 /* humi_level_bad@2x.png in Resources */,
 				48F91B0818FBB54E0038DC67 /* line_dotted_grey@2x.png in Resources */,
+				486CD6E71998A4970026061E /* pin_red@2x.png in Resources */,
 				BE66A3C61924BED800E81C9F /* icon_subscribe.png in Resources */,
 				CE673BA717697A8800A15012 /* Default-568h@2x.png in Resources */,
 				484B66FE195D5375006642BA /* pattern4@2x.png in Resources */,
@@ -4918,16 +4928,16 @@
 		7215974117453680006FD415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/AMap_iOS_API_Lib_V2.1.3/3D",
-					"$(SRCROOT)/AMap_iOS_API_Lib_V2.1.3/Search",
 					"$(PROJECT_DIR)/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Baidu-Frontia-iOS-2/libs",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AMap_iOS_API_Lib_V2.2.1/Search",
+					"$(PROJECT_DIR)/AMap_iOS_API_Lib_V2.2.1/3D",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Parenting/Amoy Baby Care-Prefix.pch";
@@ -4969,8 +4979,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "2DD710F1-929F-44DA-9E10-EEBD4A26D3AF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;
@@ -4981,16 +4991,16 @@
 		7215974217453680006FD415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/AMap_iOS_API_Lib_V2.1.3/3D",
-					"$(SRCROOT)/AMap_iOS_API_Lib_V2.1.3/Search",
 					"$(PROJECT_DIR)/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Baidu-Frontia-iOS-2/libs",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AMap_iOS_API_Lib_V2.2.1/Search",
+					"$(PROJECT_DIR)/AMap_iOS_API_Lib_V2.2.1/3D",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Parenting/Amoy Baby Care-Prefix.pch";
@@ -5032,8 +5042,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "2DD710F1-929F-44DA-9E10-EEBD4A26D3AF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;

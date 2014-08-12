@@ -87,7 +87,7 @@
         notification.soundName = @"钟琴.m4a";
         notification.alertBody = message;
         notification.hasAction = YES;
-        notification.userInfo  = [[NSDictionary alloc] initWithObjectsAndKeys:alarmKey,alarmKey, nil];
+        notification.userInfo  = [[NSMutableDictionary alloc] initWithObjectsAndKeys:alarmKey,alarmKey, nil];
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
     
@@ -110,7 +110,7 @@
         notification.soundName = UILocalNotificationDefaultSoundName;
         notification.alertBody = message;
         notification.hasAction = YES;
-        notification.userInfo  = [[NSDictionary alloc] initWithObjectsAndKeys:alarmKey,alarmKey, nil];
+        notification.userInfo  = [[NSMutableDictionary alloc] initWithObjectsAndKeys:alarmKey,alarmKey, nil];
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
     
@@ -122,8 +122,10 @@
 +(void)deleteLocalNotification:(NSString*) alarmKey
 {
     NSArray * allLocalNotification=[[UIApplication sharedApplication] scheduledLocalNotifications];
+    NSLog(@"%@", allLocalNotification);
     
-    for (UILocalNotification * localNotification in allLocalNotification) {
+    for (UILocalNotification * localNotification in allLocalNotification)
+    {
         NSString * alarmValue=[localNotification.userInfo objectForKey:alarmKey];
         if ([alarmValue isEqualToString:alarmKey]) {
             [[UIApplication sharedApplication] cancelLocalNotification:localNotification];

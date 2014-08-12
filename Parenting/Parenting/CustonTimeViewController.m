@@ -57,44 +57,61 @@
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
+    
+    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    rightButton.frame=CGRectMake(0, 0, 50, 41);
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0,0,0,30);
+    [rightButton setTitle:@"全选" forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(chooseAll:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBar;
+
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    chooseCount = 0;
     if (_tag1 == 102) {
         [self.btn1 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
         self.btn1.tag = _tag1;
+        chooseCount++;
     }
     
     if (_tag2 == 202) {
         [self.btn2 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
         self.btn2.tag = _tag2;
+        chooseCount++;
     }
     
     if (_tag3 == 302) {
         [self.btn3 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
         self.btn3.tag = _tag3;
+        chooseCount++;
     }
     
     if (_tag4 == 402) {
         [self.btn4 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
         self.btn4.tag = _tag4;
+        chooseCount++;
     }
     
     if (_tag5 == 502) {
         [self.btn5 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
         self.btn5.tag = _tag5;
+        chooseCount++;
     }
     
     if (_tag6 == 602) {
         [self.btn6 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
         self.btn6.tag = _tag6;
+        chooseCount++;
     }
     
     if (_tag7 == 702) {
         [self.btn7 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
         self.btn7.tag = _tag7;
+        chooseCount++;
     }
     
     self.imageview1.userInteractionEnabled = YES;
@@ -136,6 +153,100 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void)chooseAll:(UIButton *)sender
+{
+    BOOL isAll = NO;
+    if (self.btn1.tag == 102
+        && self.btn2.tag == 202
+        && self.btn3.tag == 302
+        && self.btn4.tag == 402
+        && self.btn5.tag == 502
+        && self.btn6.tag == 602
+        && self.btn7.tag == 702)
+    {
+        isAll = YES;
+    }
+    
+    if (isAll) {
+        if (self.btn1.tag == 102) {
+            [self.btn1 setImage:[UIImage imageNamed:@"nofity_myadvise_day@2x.png"] forState:UIControlStateNormal];
+            self.btn1.tag = 101;
+        }
+        
+        if (self.btn2.tag == 202) {
+            [self.btn2 setImage:[UIImage imageNamed:@"nofity_myadvise_day@2x.png"] forState:UIControlStateNormal];
+            self.btn2.tag = 201;
+        }
+
+        if (self.btn3.tag == 302) {
+            [self.btn3 setImage:[UIImage imageNamed:@"nofity_myadvise_day@2x.png"] forState:UIControlStateNormal];
+            self.btn3.tag = 301;
+        }
+
+        if (self.btn4.tag == 402) {
+            [self.btn4 setImage:[UIImage imageNamed:@"nofity_myadvise_day@2x.png"] forState:UIControlStateNormal];
+            self.btn4.tag = 401;
+        }
+
+        if (self.btn5.tag == 502) {
+            [self.btn5 setImage:[UIImage imageNamed:@"nofity_myadvise_day@2x.png"] forState:UIControlStateNormal];
+            self.btn5.tag = 501;
+        }
+
+        if (self.btn6.tag == 602) {
+            [self.btn6 setImage:[UIImage imageNamed:@"nofity_myadvise_day@2x.png"] forState:UIControlStateNormal];
+            self.btn6.tag = 601;
+        }
+
+        if (self.btn7.tag == 702) {
+            [self.btn7 setImage:[UIImage imageNamed:@"nofity_myadvise_day@2x.png"] forState:UIControlStateNormal];
+            self.btn7.tag = 701;
+        }
+
+        chooseCount = 0;
+    }
+    else
+    {
+        if (self.btn1.tag == 101) {
+            [self.btn1 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
+            self.btn1.tag = 102;
+        }
+        
+        if (self.btn2.tag == 201) {
+            [self.btn2 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
+            self.btn2.tag = 202;
+        }
+        
+        if (self.btn3.tag == 301) {
+            [self.btn3 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
+            self.btn3.tag = 302;
+        }
+        
+        if (self.btn4.tag == 401) {
+            [self.btn4 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
+            self.btn4.tag = 402;
+        }
+        
+        if (self.btn5.tag == 501) {
+            [self.btn5 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
+            self.btn5.tag = 502;
+        }
+        
+        if (self.btn6.tag == 601) {
+            [self.btn6 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
+            self.btn6.tag = 602;
+        }
+        
+        if (self.btn7.tag == 701) {
+            [self.btn7 setImage:[UIImage imageNamed:@"nofity_myadvise_day_up@2x.png"] forState:UIControlStateNormal];
+            self.btn7.tag = 702;
+        }
+        
+        chooseCount = 6;
+    }
 }
 
 - (IBAction)selectbtn1:(UIButton *)sender

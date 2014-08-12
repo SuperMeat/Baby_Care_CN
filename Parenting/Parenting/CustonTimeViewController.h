@@ -21,6 +21,8 @@
     int _tag5;
     int _tag6;
     int _tag7;
+    
+    int chooseCount;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *btn7;

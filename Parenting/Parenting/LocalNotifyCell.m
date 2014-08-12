@@ -32,6 +32,41 @@
     _notifyswitch.onTintColor = [UIColor colorWithRed:1/255.0 green:161/255.0 blue:190/255.0 alpha:1.000];
 
 }
+
+- (NSString*)changeStr:(NSString*)str
+{
+    NSString *changeStr = @"";
+    if ([str isEqual:@"日"]) {
+        changeStr = @"0";
+    }
+    
+    if ([str isEqual:@"一"]) {
+        changeStr = @"1";
+    }
+    
+    if ([str isEqual:@"二"]) {
+        changeStr = @"2";
+    }
+    
+    if ([str isEqual:@"三"]) {
+        changeStr = @"3";
+    }
+    
+    if ([str isEqual:@"四"]) {
+        changeStr = @"4";
+    }
+    
+    if ([str isEqual:@"五"]) {
+        changeStr = @"5";
+    }
+    
+    if ([str isEqual:@"六"]) {
+        changeStr = @"6";
+    }
+    
+    return changeStr;
+}
+
 - (IBAction)changeValue:(UISwitch *)sender
 {
     if (sender.isOn)
@@ -40,7 +75,7 @@
         NSArray *array  = [str componentsSeparatedByString:@","];
         //再重新更新
         for (NSString *str in array) {
-            NSString *key = [NSString stringWithFormat:@"%@%@", self.ln.createtime, str];
+            NSString *key = [NSString stringWithFormat:@"%@%@", self.ln.createtime, [self changeStr:str] ];
             [ACFunction addLocalNotification:self.ln.title RepeatDay:str FireDate:self.ln.time AlarmKey:key];
         }
 
@@ -51,7 +86,7 @@
     {
         NSArray* delarray = [[NSArray alloc]initWithObjects:@"日",@"一",@"二",@"三",@"四",@"五",@"六", nil];
         for (NSString *str in delarray) {
-            NSString *key = [NSString stringWithFormat:@"%@%@", self.ln.createtime, str];
+            NSString *key = [NSString stringWithFormat:@"%@%@", self.ln.createtime, [self changeStr:str]];
             [ACFunction deleteLocalNotification:key];
         }
         [DataBase updateNotifyTimeStatus:self.ln.createtime andStatus:0];

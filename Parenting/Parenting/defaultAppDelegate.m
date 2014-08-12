@@ -65,7 +65,7 @@ void UncaughtExceptionHandler(NSException *exception) {
         if ([fileManager copyItemAtPath:oldFile toPath:newFile error:&error]) {
              [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"ISEXISIT_BC_INFO"];
         }
-    }
+    } 
     [self tap];
     
 //    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn_back.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,14, 0, 8)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -134,7 +134,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 //    }
 //    NSLog(@"{\"oid\": \"%@\"}", deviceID);
     [MTA startWithAppkey:MTA_KEY];
-    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     return YES;
 }
 

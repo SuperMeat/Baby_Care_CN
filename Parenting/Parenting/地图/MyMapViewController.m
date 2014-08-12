@@ -29,14 +29,14 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 100, 20)];
+        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 200, 20)];
         titleView.backgroundColor=[UIColor clearColor];
-        UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+        UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
         titleText.backgroundColor = [UIColor clearColor];
         [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
         titleText.textColor = [UIColor whiteColor];
         [titleText setTextAlignment:NSTextAlignmentCenter];
-        [titleText setText:NSLocalizedString(@"附近", nil)];
+        [titleText setText:NSLocalizedString(@"附近母婴店", nil)];
         [titleView addSubview:titleText];
         
         self.navigationItem.titleView = titleView;
@@ -72,13 +72,20 @@
     [self.mapView setUserTrackingMode: MAUserTrackingModeFollow animated:YES];  //设置为地图跟着位置移动}
 }
 
+- (void)searchPlaceByID:(NSString*)UID
+{
+    AMapPlaceSearchRequest *poiRequest = [[AMapPlaceSearchRequest alloc] init];
+    poiRequest.searchType = AMapSearchType_PlaceID;
+    poiRequest.uid = UID ;
+    [self.search AMapPlaceSearch: poiRequest];
+}
+
 -(void)mapView:(MAMapView*)mapView didUpdateUserLocation:(MAUserLocation*)userLocation
 updatingLocation:(BOOL)updatingLocation
 {
     if (userLocation.location != _mylocation) {
         self.mylocation = userLocation.location;
         [self searchPlaceByAround:userLocation andPlace:@"母婴"];
-//        [[ASIController asiController] createUserLocationMap:@"小李" andLocation:userLocation andStatus:@"吃奶"];
     }
 }
 
@@ -86,9 +93,21 @@ updatingLocation:(BOOL)updatingLocation
 {
     [super viewWillAppear: animated];
     
+    UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    
+    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    backbutton.frame=CGRectMake(0, 0, 50, 41);
+    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
+    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
+    self.navigationItem.leftBarButtonItem=backbar;
+
+    
     self.mapView=[[MAMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
     
-    self.mapView.frame = self.view.bounds;
+    self.mapView.frame    = self.view.bounds;
     
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;    //YES 为打开定位，NO为关闭定位
@@ -140,8 +159,9 @@ updatingLocation:(BOOL)updatingLocation
     id<MAAnnotation> annotation = view.annotation;
     if ([annotation isKindOfClass:[POIAnnotation class]])
     {
-      //  POIAnnotation *poiAnnotation = (POIAnnotation*)annotation;
-        
+        POIAnnotation *poiAnnotation = (POIAnnotation*)annotation;
+        [self searchPlaceByID:poiAnnotation.poi.uid];
+//        
 //        PoiDetailViewController *detail = [[PoiDetailViewController alloc] init];
 //        detail.poi = poiAnnotation.poi;
 //        
@@ -164,6 +184,7 @@ updatingLocation:(BOOL)updatingLocation
             poiAnnotationView.canShowCallout = YES;
             
             poiAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            poiAnnotationView.image = [UIImage imageNamed:@"pin_red"];
         }
         
         return poiAnnotationView;
@@ -209,10 +230,12 @@ updatingLocation:(BOOL)updatingLocation
     
     [respons.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop)
      {
-        [poiAnnotations addObject:[[POIAnnotation alloc] initWithPOI:obj]];
+         POIAnnotation *poiAnnotation = [[POIAnnotation alloc] initWithPOI:obj];
+         [poiAnnotations addObject:poiAnnotation];
     }];
     
     /* 将结果以annotation的形式加载到地图上. */
+    
     [self.mapView addAnnotations:poiAnnotations];
     
     /* 如果只有一个结果，设置其为中心点. */
