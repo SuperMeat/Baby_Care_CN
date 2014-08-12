@@ -66,21 +66,6 @@ void UncaughtExceptionHandler(NSException *exception) {
              [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"ISEXISIT_BC_INFO"];
         }
     }
-    //FIXME:复制who数据库
-    {
-        NSString *document  = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-        NSString *newFile = [document stringByAppendingPathComponent:@"who.rdb"];
-        NSString *oldFile = [[NSBundle mainBundle] pathForResource:@"who" ofType:@"rdb"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSError *error;
-        if ([fileManager copyItemAtPath:oldFile toPath:newFile error:&error]) { 
-        }
-
-    }
-    
-    
-
-    
     [self tap];
     
 //    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn_back.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,14, 0, 8)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];

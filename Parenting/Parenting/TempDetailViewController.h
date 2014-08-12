@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PhyCorePlot.h"
+#import "TempCorePlot.h"
+#import "TempSaveView.h"
 
 @interface TempDetailViewController : UIViewController{
     NSArray *arrayCurrent;
@@ -19,11 +20,12 @@
     NSString *itemUnit;
     int itemType;
     
-    PhyCorePlot *plot;
+    TempCorePlot *plot;
     float yBaseValue;
     float ySizeInterval;
     UIImageView *adviseImageView;
     
+    TempSaveView *tempSaveView;
     AddPHYRecordViewController *addRecordViewController;
 }
 
@@ -45,5 +47,7 @@
 
 //WHO曲线区域
 @property (strong, nonatomic) UIView *viewPlot;
+
+-(void)setVar:(NSArray*) array;
 
 @end
