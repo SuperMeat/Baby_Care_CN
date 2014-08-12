@@ -171,7 +171,7 @@
     [_viewHistroy addSubview:labelHistory];
     
     //corePlot
-    _viewPlot = [[UIView alloc]initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, 65)];
+    _viewPlot = [[UIView alloc]initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, 174)];
     _viewPlot.backgroundColor = [ACFunction colorWithHexString:@"#f6f6f6"];
     [self.view addSubview:_viewPlot];
     
@@ -236,6 +236,13 @@
     [_viewPlot addSubview:plot];
 }
 
+-(void)setVar:(NSArray*) array{
+    arrayCurrent = array;
+    itemName = @"体温";
+    itemUnit = @"°C";
+    itemType = [[array objectAtIndex:0]intValue];
+}
+
 -(void)makeAdvise:(CGRect)rect
 {
     NSDictionary *dict1=[[NSDictionary alloc]initWithObjectsAndKeys:@"问：一个婴儿低于或仅仅稍高于其年龄体重或身高意味着什么？或者说，世卫组织的生长标准是一个标准适合所有人吗？\n\r答：这并不一定意味着儿童有什么问题；这意味着儿科医生应当注意。世卫组织的研究及其他许多研究都已经证明，对于直到10岁左右的儿童，假如他们获得适当的照料、喂养和免疫，则均有可能生长到平均水平。在生长模式中，没有所谓的“统一尺寸”，然而（从0到100百分值的）数值分布使得基因造成的高和矮的儿童均能够成为一样的健康分布中的一部分。",@"content", nil];
@@ -266,22 +273,7 @@
 
 -(void)drawLine:(CGRect)rect{
     //********Start********
-    
-    
-//    NSArray *xAsix = @[@"21日14:30",@"21日15:00",@"21日17:30"];
-    NSArray *xAsix = @[@1,@2,@3];
-    
-    //获取用户数据
-    NSArray *dataUser = @[@36,@38,@40.5];
-    //Step-3:根据WHO的对应值得出Y轴范围
-    NSArray *yAsix = @[@36,@37,@38,@39,@40,@41,@42];
-    
-    //录入P25;P75;用户数值
-    NSArray *xyPlot = @[dataUser];
-    NSArray *xyTitle = @[@"",@""];
-    NSArray *axis = @[xAsix,yAsix];
-    
-    plot = [[PhyCorePlot alloc]initWithFrame:rect Title:@"" XYPlotRange:xyPlot XYTitle:xyTitle Axis:axis YBaseV:yBaseValue YSizeInterval:ySizeInterval];
+    plot = [[TempCorePlot alloc]initWithFrame:rect];
 }
 
 -(void)ShowHistory{
@@ -300,9 +292,13 @@
 }
 
 -(void)AddRecord{
-    addRecordViewController = [[AddPHYRecordViewController alloc] init];
-    [addRecordViewController setType:[[arrayCurrent objectAtIndex:0]intValue]];
-    [self.navigationController pushViewController:addRecordViewController animated:YES];
+    if (tempSaveView==nil) {
+        tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"SAVE"];
+        [self.view addSubview:tempSaveView];
+    }
+    else {
+        [self.view addSubview:tempSaveView];
+    }
 }
 
 #pragma mark - 获取x轴坐标系

@@ -533,6 +533,8 @@
 		BE004CE218FE2B7500E56833 /* input_word@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE004CD718FE2B7500E56833 /* input_word@2x.png */; };
 		BE004CE318FE2B7500E56833 /* timeline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE004CD818FE2B7500E56833 /* timeline@2x.png */; };
 		BE004CE418FE2B7500E56833 /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = BE004CD918FE2B7500E56833 /* top.png */; };
+		BE0677861998605200794A28 /* TempCorePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0677851998605200794A28 /* TempCorePlot.m */; };
+		BE06778A19986D7400794A28 /* TempSaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE06778919986D7400794A28 /* TempSaveView.m */; };
 		BE25763318FE51CA0053683A /* title_BMI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761918FE51CA0053683A /* title_BMI@2x.png */; };
 		BE25763418FE51CA0053683A /* title_circumference@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761A18FE51CA0053683A /* title_circumference@2x.png */; };
 		BE25763518FE51CA0053683A /* title_temperature@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761B18FE51CA0053683A /* title_temperature@2x.png */; };
@@ -1399,6 +1401,10 @@
 		BE004CD718FE2B7500E56833 /* input_word@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_word@2x.png"; sourceTree = "<group>"; };
 		BE004CD818FE2B7500E56833 /* timeline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline@2x.png"; sourceTree = "<group>"; };
 		BE004CD918FE2B7500E56833 /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top.png; sourceTree = "<group>"; };
+		BE0677841998605200794A28 /* TempCorePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempCorePlot.h; sourceTree = "<group>"; };
+		BE0677851998605200794A28 /* TempCorePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempCorePlot.m; sourceTree = "<group>"; };
+		BE06778819986D7400794A28 /* TempSaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempSaveView.h; sourceTree = "<group>"; };
+		BE06778919986D7400794A28 /* TempSaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempSaveView.m; sourceTree = "<group>"; };
 		BE25761918FE51CA0053683A /* title_BMI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_BMI@2x.png"; sourceTree = "<group>"; };
 		BE25761A18FE51CA0053683A /* title_circumference@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_circumference@2x.png"; sourceTree = "<group>"; };
 		BE25761B18FE51CA0053683A /* title_temperature@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_temperature@2x.png"; sourceTree = "<group>"; };
@@ -2797,6 +2803,7 @@
 		488C895118B4985E0091C2BF /* 生理 */ = {
 			isa = PBXGroup;
 			children = (
+				BE06778719986D3600794A28 /* SaveController */,
 				BE4A862419761BCE00EB232B /* PHYHistory */,
 				BE6938D31908E80200FC2BB4 /* PhysiologyViewController.h */,
 				BE6938D41908E80200FC2BB4 /* PhysiologyViewController.m */,
@@ -3568,6 +3575,15 @@
 			path = "首页";
 			sourceTree = "<group>";
 		};
+		BE06778719986D3600794A28 /* SaveController */ = {
+			isa = PBXGroup;
+			children = (
+				BE06778819986D7400794A28 /* TempSaveView.h */,
+				BE06778919986D7400794A28 /* TempSaveView.m */,
+			);
+			name = SaveController;
+			sourceTree = "<group>";
+		};
 		BE25761818FE51CA0053683A /* 生理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3870,6 +3886,8 @@
 				CE0C33CF17618A2100B1B683 /* MyCPTTheme.m */,
 				CE0C33C9176189CE00B1B683 /* MyCorePlot.h */,
 				CE0C33CA176189CE00B1B683 /* MyCorePlot.m */,
+				BE0677841998605200794A28 /* TempCorePlot.h */,
+				BE0677851998605200794A28 /* TempCorePlot.m */,
 			);
 			name = CorePlot;
 			path = ../CorePlot;
@@ -4009,8 +4027,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7215974017453680006FD415 /* Build configuration list for PBXNativeTarget "Amoy Baby Care" */;
 			buildPhases = (
-				7215971817453680006FD415 /* Sources */,
 				7215971917453680006FD415 /* Frameworks */,
+				7215971817453680006FD415 /* Sources */,
 				7215971A17453680006FD415 /* Resources */,
 			);
 			buildRules = (
@@ -4685,6 +4703,7 @@
 				CE638B52174F5FCE009A60AB /* QuadCurveMenuItem.m in Sources */,
 				CE075A37175081AE00C57E27 /* save_feedview.m in Sources */,
 				CE075A3A1750820C00C57E27 /* save_diaperview.m in Sources */,
+				BE0677861998605200794A28 /* TempCorePlot.m in Sources */,
 				CE075A3D1750821E00C57E27 /* save_sleepview.m in Sources */,
 				BE7C697E1867F1B300C4B675 /* ASINetworkQueue.m in Sources */,
 				CE075A401750822D00C57E27 /* save_playview.m in Sources */,
@@ -4714,6 +4733,7 @@
 				489AABF5180E777200EB607E /* RNGridMenu.m in Sources */,
 				48EF612018C6FAC7006C3D5C /* CustomCalloutView.m in Sources */,
 				48F6ABBD187D2B6E0032045E /* BLEWeather.m in Sources */,
+				BE06778A19986D7400794A28 /* TempSaveView.m in Sources */,
 				BE7C698D1869977300C4B675 /* MyDevicesTableCell.m in Sources */,
 				BE422ADB18C6B5580089219C /* ASIController.m in Sources */,
 				CE0D0EAD175735B3005A3200 /* WeatherView.m in Sources */,
@@ -4908,8 +4928,8 @@
 		7215974117453680006FD415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -4959,8 +4979,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;
@@ -4971,8 +4991,8 @@
 		7215974217453680006FD415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -5022,8 +5042,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;

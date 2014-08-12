@@ -220,6 +220,7 @@
     if (indexPath.row == 4) {
         //选中体温
         tempDetailViewController = [[TempDetailViewController alloc] init];
+        [tempDetailViewController setVar:[arrayPhyItems objectAtIndex:indexPath.row]];
         [self.navigationController pushViewController:tempDetailViewController animated:YES];
     }
     else if (indexPath.row ==2) {
