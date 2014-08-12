@@ -71,16 +71,16 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1.0f];
     
-    UIButton *remind = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [remind setFrame:CGRectMake(100.0f, 300.0f, 120.0f, 40.0f)];
-    [remind setTitle:@"定制闹钟" forState:UIControlStateNormal];
-    [remind addTarget:self action:@selector(clock:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:remind];
+//    UIButton *remind = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    [remind setFrame:CGRectMake(100.0f, 300.0f, 120.0f, 40.0f)];
+//    [remind setTitle:@"定制闹钟" forState:UIControlStateNormal];
+//    [remind addTarget:self action:@selector(clock:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:remind];
     
     notifylist = [DataBase selectNotifyTime:nil];
     
     if (notifytableview == nil) {
-        notifytableview =[[UITableView alloc]initWithFrame:CGRectMake(0, 15, 320, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        notifytableview =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) style:UITableViewStyleGrouped];
         notifytableview.backgroundColor=[UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1.0f];
         notifytableview.delegate=self;
         notifytableview.dataSource=self;
@@ -110,7 +110,6 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-    [ACFunction addLocalNotificationWithMessage:@"干嘛干嘛" FireDate:notifyDate AlarmKey:@"ddd"];
 }
 
 /**
@@ -128,7 +127,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[self actionsheetShow];
     CustomNotifyViewController *cnvc = [[CustomNotifyViewController alloc]init];
     if (indexPath.section < [notifylist count]) {
         LocalNotifyCell* tvc = (LocalNotifyCell*)[tableView cellForRowAtIndexPath:indexPath];
@@ -154,6 +152,7 @@
     {
         return 90.0f;
     }
+    
     return 50;
 }
 
@@ -165,7 +164,7 @@
         LocalNotifyCell *Cell=[tableView dequeueReusableCellWithIdentifier:@"Notify"];
         if (Cell == nil) {
             Cell = [[[NSBundle mainBundle] loadNibNamed:@"LocalNotifyCell" owner:self options:nil] lastObject];
-            Cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            Cell.selectionStyle=UITableViewCellSelectionStyleGray;
             
         }
         LocalNotify *ln      = [notifylist objectAtIndex:indexPath.section];
@@ -214,10 +213,10 @@
         UITableViewCell *Cell=[tableView dequeueReusableCellWithIdentifier:@"NotifyAdd"];
         if (Cell == nil) {
             Cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NotifyAdd"];
-            Cell.textLabel.font=[UIFont systemFontOfSize:30];
+            Cell.textLabel.font=[UIFont systemFontOfSize:26];
             Cell.textLabel.textColor=[UIColor colorWithRed:0xAF/255.0 green:0xAF/255.0 blue:0xAF/255.0 alpha:0xFF/255.0];
             Cell.textLabel.textAlignment = NSTextAlignmentCenter;
-            Cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            Cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
         Cell.textLabel.text = @"添加提醒";
         Cell.accessoryView.contentMode=UIViewContentModeScaleAspectFit;

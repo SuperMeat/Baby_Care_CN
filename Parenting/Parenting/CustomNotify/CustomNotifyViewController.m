@@ -585,6 +585,40 @@
     
 }
 
+- (NSString*)changeStr:(NSString*)str
+{
+    NSString *changeStr = @"";
+    if ([str isEqual:@"日"]) {
+        changeStr = @"0";
+    }
+    
+    if ([str isEqual:@"一"]) {
+        changeStr = @"1";
+    }
+    
+    if ([str isEqual:@"二"]) {
+        changeStr = @"2";
+    }
+    
+    if ([str isEqual:@"三"]) {
+        changeStr = @"3";
+    }
+    
+    if ([str isEqual:@"四"]) {
+        changeStr = @"4";
+    }
+    
+    if ([str isEqual:@"五"]) {
+        changeStr = @"5";
+    }
+    
+    if ([str isEqual:@"六"]) {
+        changeStr = @"6";
+    }
+    
+    return changeStr;
+}
+
 -(void)changelocalnotify
 {
     if (self.ln.redundant != nil && [self.ln.redundant isEqualToString:@"永不"] == NO)
@@ -594,7 +628,7 @@
         if (self.ln.status == 1) {
             //再重新更新
             for (NSString *str in array) {
-                NSString *key = [NSString stringWithFormat:@"%@%@", self.ln.createtime, str];
+                NSString *key = [NSString stringWithFormat:@"%@%@", self.ln.createtime, [self changeStr:str]];
                 [ACFunction addLocalNotification:self.ln.title RepeatDay:str FireDate:self.ln.time AlarmKey:key];
             }
         }
