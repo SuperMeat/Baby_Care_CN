@@ -14,7 +14,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oZI-ee-bCL">
                     <rect key="frame" x="8" y="9" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="btn_left@2x.png">
+                    <state key="normal" image="btn_note_left.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -22,9 +22,9 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bZi-Qi-vKb">
-                    <rect key="frame" x="278" y="9" width="32" height="32"/>
+                    <rect key="frame" x="282" y="9" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="btn_right@2x.png">
+                    <state key="normal" image="btn_note_right.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -32,9 +32,9 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nlR-5i-jYp">
-                    <rect key="frame" x="148" y="7" width="25" height="35"/>
+                    <rect key="frame" x="149" y="10" width="23" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="btn_delete@2x.png">
+                    <state key="normal" image="btn_note_delete.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -46,8 +46,8 @@
         </view>
     </objects>
     <resources>
-        <image name="btn_delete@2x.png" width="128" height="128"/>
-        <image name="btn_left@2x.png" width="128" height="128"/>
-        <image name="btn_right@2x.png" width="128" height="128"/>
+        <image name="btn_note_delete.png" width="46" height="59"/>
+        <image name="btn_note_left.png" width="64" height="64"/>
+        <image name="btn_note_right.png" width="64" height="64"/>
     </resources>
 </document>
