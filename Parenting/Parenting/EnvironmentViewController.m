@@ -129,7 +129,6 @@
         NSLog(@"bleweather %@",self.bleweather);
 
     }
-
 }
 
 -(void)makeAdvise

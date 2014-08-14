@@ -20,6 +20,9 @@
 #import "PhysiologyViewController.h"
 #import "CalendarViewController.h"
 #import "MyPageViewController.h"
+#import "CalendarController.h"
+
+#import "BaseNavigationController.h"
 
 @class defaultViewController;
 @interface defaultAppDelegate : UIResponder <UIApplicationDelegate>
@@ -31,7 +34,7 @@
     EnvironmentViewController       *envirViewController;
     ActivityViewController          *actViewController;
     PhysiologyViewController        *phyViewController;
-    CalendarViewController          *calendarViewController;
+    CalendarController              *calendarViewController;
     
     SettingViewController           *settingViewController;
     InformationCenterViewController *icViewController;
@@ -41,17 +44,17 @@
     
     BLEWeatherController            *bleweatherCtrler;
    
-    UINavigationController          *settingNavigationViewController;
-    UINavigationController          *adviseNavigationViewController;
-    UINavigationController          *summaryNavigationViewController;
-    UINavigationController          *homeNavigationViewController;
-    UINavigationController          *icNavigationViewController;
+    BaseNavigationController          *settingNavigationViewController;
+    BaseNavigationController          *adviseNavigationViewController;
+    BaseNavigationController          *summaryNavigationViewController;
+    BaseNavigationController          *homeNavigationViewController;
+    BaseNavigationController          *icNavigationViewController;
     
-    UINavigationController          *myPageNavigationViewController;
-    UINavigationController          *envirNavigationViewController;
-    UINavigationController          *actNavigationViewController;
-    UINavigationController          *phyNavigationViewController;
-    UINavigationController          *calendarNavigationViewController; 
+    BaseNavigationController          *myPageNavigationViewController;
+    BaseNavigationController          *envirNavigationViewController;
+    BaseNavigationController          *actNavigationViewController;
+    BaseNavigationController          *phyNavigationViewController;
+    BaseNavigationController          *calendarNavigationViewController; 
 
 }
 @property (strong, nonatomic) UIWindow *window;
