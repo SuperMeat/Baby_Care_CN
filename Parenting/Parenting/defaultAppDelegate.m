@@ -68,8 +68,6 @@ void UncaughtExceptionHandler(NSException *exception) {
     } 
     [self tap];
     
-//    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn_back.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,14, 0, 8)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    
     [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn3.png"] stretchableImageWithLeftCapWidth:3 topCapHeight:3] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn3.png"] stretchableImageWithLeftCapWidth:3 topCapHeight:3] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     
@@ -77,7 +75,6 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,nil] forState:UIControlStateNormal];
     
-    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0f) {
         [[UINavigationBar appearance] setBarTintColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
 
@@ -152,26 +149,26 @@ void UncaughtExceptionHandler(NSException *exception) {
     myPageViewController   = [[MyPageViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
-    calendarViewController = [[CalendarViewController alloc] init];
+    calendarViewController = [[CalendarController alloc] init];
     guideViewController    = [[GuideViewController alloc] init];
     loginViewController    = [[LoginViewController alloc] init];
     
-    myPageNavigationViewController   = [[UINavigationController alloc]
+    myPageNavigationViewController   = [[BaseNavigationController alloc]
                                         initWithRootViewController:myPageViewController];
     if (!ISBLE) {
-        settingNavigationViewController    = [[UINavigationController alloc]
+        settingNavigationViewController    = [[BaseNavigationController alloc]
                                               initWithRootViewController:settingViewController];
     }
     else
     {
-        envirNavigationViewController    = [[UINavigationController alloc]
+        envirNavigationViewController    = [[BaseNavigationController alloc]
                                         initWithRootViewController:envirViewController];
     }
-    actNavigationViewController      = [[UINavigationController alloc]
+    actNavigationViewController      = [[BaseNavigationController alloc]
                                         initWithRootViewController:actViewController];
-    phyNavigationViewController      = [[UINavigationController alloc]
+    phyNavigationViewController      = [[BaseNavigationController alloc]
                                         initWithRootViewController:phyViewController];
-    calendarNavigationViewController = [[UINavigationController alloc]
+    calendarNavigationViewController = [[BaseNavigationController alloc]
                                         initWithRootViewController:calendarViewController];
     
     NSMutableArray *controllers = [[NSMutableArray alloc] init];

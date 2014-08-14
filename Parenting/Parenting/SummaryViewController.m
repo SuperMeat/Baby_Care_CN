@@ -99,11 +99,6 @@
     }
     else
     {
-//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//        hud.mode = MBProgressHUDModeIndeterminate;
-//        hud.color = [UIColor grayColor];
-//        hud.alpha = 0.5;
-//        hud.labelText = NSLocalizedString(@"PlotLoading", nil);
         if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"justdoit"] boolValue] == YES) {
             NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(willShowView:) object:[NSNumber numberWithBool:YES]];
             [thread start];
@@ -137,7 +132,6 @@
     if ([flag boolValue]==YES) {
         [self scrollUpadateData];
     }
-    //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 - (void)viewDidLoad
