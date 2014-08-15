@@ -29,9 +29,30 @@
     return self;
 }
 
+- (void)ShareBtnByImage
+{
+    UIImage *image = [ACFunction cutView:self.view  andWidth:kShareImageWidth_Note andHeight:kShareImageHeight_Note];
+    [ACShare shareImage:self andshareTitle:@"" andshareImage:image anddelegate:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
+    title1.backgroundColor = [UIColor clearColor];
+    [title1 setTextAlignment:NSTextAlignmentCenter];
+    title1.textColor = [UIColor whiteColor];
+    title1.text = NSLocalizedString(@"分享", nil);
+    title1.font = [UIFont systemFontOfSize:14];
+    [rightButton addSubview:title1];
+    
+    [rightButton addTarget:self action:@selector(ShareBtnByImage) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame=CGRectMake(0, 0, 44, 28);
+    
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBar;
     
     self.title = @"宝宝日记";
     

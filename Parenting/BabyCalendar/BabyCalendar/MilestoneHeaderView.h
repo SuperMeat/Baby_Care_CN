@@ -15,6 +15,7 @@
 - (void)MilestoneHeaderView_left;
 - (void)MilestoneHeaderView_right;
 - (void)PortraitImageView_changeImage:(MilestoneHeaderView*)headerView;
+- (void)ShareToFriendByImage;
 @end
 
 @interface MilestoneHeaderView : UIView<PortraitImageViewDelegate,CustomIOS7AlertViewDelegate>
@@ -28,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnDate;
 @property (weak, nonatomic) IBOutlet UILabel *labWeekday;
 
+- (IBAction)shareToFriends:(UIButton *)sender;
 
 - (IBAction)leftAction:(id)sender;
 - (IBAction)rightAction:(id)sender;

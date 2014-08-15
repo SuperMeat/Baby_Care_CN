@@ -35,4 +35,6 @@
 
 + (NSString*)getbabyage;
 + (int)getbabyagefrommonth;
++ (NSString*)getbabybirth;
+
 @end

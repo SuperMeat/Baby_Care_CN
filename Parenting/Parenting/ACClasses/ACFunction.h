@@ -33,4 +33,6 @@
 
 +(void)writeFile:(NSString *)file;
 
++(UIImage*)cutView:(UIView*)view andWidth:(CGFloat)width andHeight:(CGFloat)height;
+
 @end

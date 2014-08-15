@@ -17,7 +17,7 @@
 #import "LoadingView.h"
 #import "BaseView.h"
 #import "MyNoteView.h"
-
+#import "BabyinfoViewController.h"
 
 #define kDeviceWidth    [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight   [UIScreen mainScreen].bounds.size.height
@@ -81,7 +81,7 @@
 #define kDis_right_width             20                                    
 
 // 出生日期
-#define kBirthday                       @"2014年06月01日"
+#define kBirthday                       ([BabyinfoViewController getbabybirth])
 
 // event/Train
 #define kFontsize_untrain_content       12.0f
@@ -130,6 +130,15 @@
 #define kTest_type_society               @"社交"
 
 #define kTodayRow                        @"kTodayRow"
+
+/**
+ *  分享的image尺寸
+ */
+#define kShareImageWidth_Note 320        //日记分享宽度
+#define kShareImageHeight_Note 360       //日记分享高度
+#define kShareImageWidth_Milestone  320        //日记分享宽度
+#define kShareImageHeight_Milestone 400        //日记分享高度
+
 typedef enum
 {
     creatMilestoneType_model,

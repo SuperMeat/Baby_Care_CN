@@ -70,6 +70,8 @@
 #import "PublicDefine.h"
 #import "UIViewExt.h"
 #import "CustomUISwitchView.h"
+#import "BabyinfoViewController.h"
+
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define BABYICONPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d.png",NSHomeDirectory(),USERID,BABYID])
 

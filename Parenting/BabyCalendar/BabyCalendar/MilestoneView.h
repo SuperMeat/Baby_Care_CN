@@ -9,6 +9,9 @@
 #import "BaseView.h"
 #import "MilestoneHeaderView.h"
 @class MilestoneContentView;
+@protocol MilestoneViewDelegate <NSObject>
+- (void)ShareToFriend;
+@end
 @interface MilestoneView : BaseView<MilestoneHeaderViewDelegate>
 {
     
@@ -20,4 +23,5 @@
 @property(nonatomic,retain)MilestoneContentView* contentView;
 @property(nonatomic,retain)NSMutableArray* SQLDatas;
 @property(nonatomic,assign)NSInteger index;
+@property(nonatomic,assign)id<MilestoneViewDelegate> delegate;
 @end

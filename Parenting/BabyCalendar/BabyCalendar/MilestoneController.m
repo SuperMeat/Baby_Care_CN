@@ -14,7 +14,7 @@
 #import "AddIemView.h"
 #import "MilestoneContentView.h"
 #import "MilestoneHeaderView.h"
-@interface MilestoneController ()<EditeViewDelegate,AddIemViewDelegate>
+@interface MilestoneController ()<EditeViewDelegate,AddIemViewDelegate,MilestoneViewDelegate>
 {
     MilestoneView* _milestoneView;
     
@@ -52,6 +52,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addItemView];
     
     _milestoneView = [[MilestoneView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-64)];
+    _milestoneView.delegate = self;
     [self.view addSubview:_milestoneView];
     
     [self _initDatas];
@@ -123,7 +124,6 @@
         NSString* timeStr = [formatter stringFromDate:[NSDate date]];
         NSString *photoName = [NSString stringWithFormat:@"%@.jpg",timeStr];
         
-        
         MilestoneModel* model = _milestoneView.SQLDatas[_milestoneView.index];
         model.content = _milestoneView.contentView.textView.text;
         NSString* old_photo = model.photo_path;
@@ -140,6 +140,13 @@
         [BaseMethod saveNewPhoto:_milestoneView.headerView.photoView.image withPhotoName:photoName];
         // 删除旧照片
         [BaseMethod deleteOldPhoto:old_photo];
+        
+        // 刷新日历列表
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_SQLDatas object:nil];
+        
+        // 刷新日历
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_calendarView object:nil];
+
         
     }
     
@@ -160,6 +167,12 @@
     [self addAction];
 }
 
+#pragma mark - MilestonViewDelegate
+- (void)ShareToFriend
+{
+    UIImage *image = [ACFunction cutView:self.view andWidth:kShareImageWidth_Milestone andHeight:kShareImageHeight_Milestone];
+    [ACShare shareImage:self andshareTitle:@"" andshareImage:image anddelegate:self];
+}
 
 - (void)dealloc
 {

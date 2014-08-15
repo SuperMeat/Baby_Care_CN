@@ -15,7 +15,7 @@
 - (void)awakeFromNib
 {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    _labMonth.textColor = UIColorFromRGB(kColor_milestone_detailText);
+    //_labMonth.textColor = UIColorFromRGB(kColor_milestone_detailText);
 }
 
 - (void)setModel:(MilestoneModel *)model
@@ -23,8 +23,8 @@
     _model = model;
     
     _labTitle.text = _model.title;
-    _labMonth.text = _model.month;
-    _labDate.text = _model.date;
+    //_labMonth.text = _model.month;
+    _labDate.text  = _model.date;
     if ([_model.completed boolValue]) {
         _labCompleted.hidden = NO;
         _labDate.hidden = NO;

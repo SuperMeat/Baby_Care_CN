@@ -10,8 +10,6 @@
 #import "MilestoneModel.h"
 #import "MilestoneContentView.h"
 #import "AddMilestoneController.h"
-#import "UIViewExt.h"
-
 @implementation MilestoneView
 
 - (id)initWithFrame:(CGRect)frame
@@ -86,7 +84,7 @@
 - (void)showAtIndex:(NSInteger)index
 {
     MilestoneModel* model = self.SQLDatas[index];
-    [_headerView.btnDate setTitle:model.date forState:UIControlStateDisabled];
+    [_headerView.btnDate setTitle:model.date forState:UIControlStateNormal];
     _headerView.labWeekday.text = [BaseMethod weekdayFromDate:[BaseMethod dateFormString:model.date]];
     NSString* photoPath = [BaseMethod dataFilePath:model.photo_path];
     _headerView.photoView.image = [UIImage imageWithContentsOfFile:photoPath];
@@ -130,6 +128,11 @@
 //    [BaseSQL saveImage_local_SQL:topImageData withTitle:_contentView.labTitle.text];
     
     
+}
+
+- (void)ShareToFriendByImage
+{
+    [self.delegate ShareToFriend];
 }
 
 @end

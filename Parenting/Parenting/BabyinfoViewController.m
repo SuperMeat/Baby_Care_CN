@@ -621,15 +621,28 @@ static int age = 0;
 }
 
 #pragma -mark function#
++ (NSString*)getbabybirth
+{
+    long birthTime = [[[[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:BABYID] objectForKey:@"birth"] longValue];
+    if (birthTime == 0) {
+        return @"";
+    }
+    NSDate *birthDate = [ACDate getDateFromTimeStamp:birthTime];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSMonthCalendarUnit | NSYearCalendarUnit | NSDayCalendarUnit;
+    comps=[calendar components:unitFlags fromDate:birthDate];
+    return [NSString stringWithFormat:@"%d年%d月%d日", [comps year], [comps month],[comps day]];
+}
+
 + (NSString*)getbabyage
 {
     NSString *age = [[NSUserDefaults standardUserDefaults] objectForKey:@"birthday"];
-    //NSLog(@"getbabyage: %@",age);
     NSDateFormatter *fomatter=[[NSDateFormatter alloc]init];
     [fomatter setLocale:[NSLocale currentLocale]];
     [fomatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *date=[fomatter dateFromString:age];
-    //NSLog(@"getbabyage: %@",date);
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];

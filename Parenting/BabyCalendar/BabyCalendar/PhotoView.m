@@ -97,7 +97,7 @@
         
         //
         _btnDelete = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_btnDelete setImage:[UIImage imageNamed:@"btn_delete"] forState:UIControlStateNormal];
+        [_btnDelete setImage:[UIImage imageNamed:@"btn_note_delete"] forState:UIControlStateNormal];
         _btnDelete.frame = CGRectMake(kDeviceWidth-50, kDeviceHeight-50, 23, 30);
         [_btnDelete addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
         
