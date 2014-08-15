@@ -54,7 +54,7 @@
     [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
     titleText.textColor = [UIColor whiteColor];
     [titleText setTextAlignment:NSTextAlignmentCenter];
-    [titleText setText:@"身高-历史"];
+    [titleText setText:[NSString stringWithFormat:@"%@-历史",itemName]];
     [titleView addSubview:titleText];
     self.phyDetailImageView = [[UIImageView alloc] init];
     [self.phyDetailImageView setFrame:CGRectMake(0, 0, 320, 64)];
@@ -109,8 +109,8 @@
             itemUnit = @"CM";
             break;
         case 4:
-            //itemName = @"体温";
-            //itemUnit = @"°C";
+            itemName = @"体温";
+            itemUnit = @"°C";
             break;
         default:
             break;
@@ -143,8 +143,15 @@
         labelDate.textAlignment = NSTextAlignmentLeft;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *dateString = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
-        labelDate.text = dateString;
+        
+        if (itemType != 4) {
+            NSString *dateString = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
+            labelDate.text = dateString;
+        }
+        else{
+            labelDate.text = [ACDate dateDetailFomatdate2:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
+        }
+        
         //隔断
         UIImageView *sepImageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cutoff.png"]];
         sepImageView1.frame = CGRectMake(130, 10, 1, 23);
@@ -207,11 +214,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    editPhyViewController = [[EditPhyViewController alloc] init];
-    [editPhyViewController setType:itemType];
-    [editPhyViewController setCreateTime:[[[arrDS objectAtIndex:indexPath.row] objectForKey:@"create_time"]longValue]];
-    [editPhyViewController setMeasureTime:[[[arrDS objectAtIndex:0] objectForKey:@"measure_time"] longValue]];
-    [self.navigationController pushViewController:editPhyViewController animated:YES];
+    switch (itemType) {
+        case 4:     //体温
+            tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"UPDATE" CreateTime:[[[arrDS objectAtIndex:indexPath.row] objectForKey:@"create_time"]longValue]];
+            tempSaveView.TempSaveDelegate = self; 
+            [self.view addSubview:tempSaveView];
+            break;
+        default:
+            editPhyViewController = [[EditPhyViewController alloc] init];
+            [editPhyViewController setType:itemType];
+            [editPhyViewController setCreateTime:[[[arrDS objectAtIndex:indexPath.row] objectForKey:@"create_time"]longValue]];
+            [editPhyViewController setMeasureTime:[[[arrDS objectAtIndex:0] objectForKey:@"measure_time"] longValue]];
+            [self.navigationController pushViewController:editPhyViewController animated:YES];
+            break;
+    }
+}
+
+#pragma saveview delegate
+-(void)sendTempReloadData{
+    [self initData];
 }
 
 - (void)didReceiveMemoryWarning

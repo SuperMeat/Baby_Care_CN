@@ -19,6 +19,7 @@
 +(NSString *)dateFomatdate:(NSDate*)date;
 +(NSString *)getDayBeforeDespFromDate:(NSDate*)date;
 +(NSString *)dateDetailFomatdate:(NSDate*)date;
++(NSString *)dateDetailFomatdate2:(NSDate*)date;
 
 +(int)getMonth;
 +(int)getWeek;
