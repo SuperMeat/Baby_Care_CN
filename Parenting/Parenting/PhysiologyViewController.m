@@ -94,46 +94,93 @@
 }
 
 -(NSString*)getIncrease:(int)index{
-    NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
-    if ([arrValues count] >= 2) {
-        NSDictionary *dict1 = [arrValues objectAtIndex:0];
-        NSDictionary *dict2 = [arrValues objectAtIndex:1];
-        
-        double v1 = [[dict1 objectForKey:@"value"] doubleValue];
-        double v2 = [[dict2 objectForKey:@"value"] doubleValue];
-        
-        if (v1 >= v2) {
-            return [NSString stringWithFormat:@"↑%0.1f",v1-v2];
-        }else{
-            return [NSString stringWithFormat:@"↓%0.1f",v2-v1];
+    if (index != 2) {
+        NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
+        if ([arrValues count] >= 2) {
+            NSDictionary *dict1 = [arrValues objectAtIndex:0];
+            NSDictionary *dict2 = [arrValues objectAtIndex:1];
+            
+            double v1 = [[dict1 objectForKey:@"value"] doubleValue];
+            double v2 = [[dict2 objectForKey:@"value"] doubleValue];
+            
+            if (v1 >= v2) {
+                return [NSString stringWithFormat:@"↑%0.1f",v1-v2];
+            }else{
+                return [NSString stringWithFormat:@"↓%0.1f",v2-v1];
+            }
+        }
+        else{
+            return @"";
         }
     }
     else{
-        return @"";
+        NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyBMIList];
+        if ([arrValues count] >= 2) {
+            NSDictionary *dict1 = [arrValues objectAtIndex:0];
+            NSDictionary *dict2 = [arrValues objectAtIndex:1];
+            
+            double v1 = [[dict1 objectForKey:@"value"] doubleValue];
+            double v2 = [[dict2 objectForKey:@"value"] doubleValue];
+            
+            if (v1 >= v2) {
+                return [NSString stringWithFormat:@"↑%0.1f",v1-v2];
+            }else{
+                return [NSString stringWithFormat:@"↓%0.1f",v2-v1];
+            }
+        }
+        else{
+            return @"";
+        }
     }
 }
 
 -(NSString*)getValues:(int)index{
-    NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
-    if ([arrValues count] == 0) {
-        return @"0";
+    //非BMI
+    if (index != 2){
+        NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
+        if ([arrValues count] == 0) {
+            return @"--";
+        }
+        else{
+            NSDictionary *dict = [arrValues objectAtIndex:0];
+            return [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
+        }
+    }else{
+        NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyBMIList];
+        if ([arrValues count] == 0) {
+            return @"--";
+        }
+        else{
+            NSDictionary *dict = [arrValues objectAtIndex:0];
+            return [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
+        }
     }
-    else{
-        NSDictionary *dict = [arrValues objectAtIndex:0];
-        return [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
-    }
+    
 }
 
 -(NSString*)getRecordDate:(int)index{
-    
-    NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
-    if ([arrValues count] > 0) {
-        NSDictionary *dict = [arrValues objectAtIndex:0];
-        NSDate *date = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]];
-        return [ACDate getDaySinceDate:date];
+    //非BMI
+    if (index != 2){
+        NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:index];
+        if ([arrValues count] > 0) {
+            NSDictionary *dict = [arrValues objectAtIndex:0];
+            NSDate *date = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]];
+            return [ACDate getDaySinceDate:date];
+        }
+        else{
+            return @"尚无记录";
+        }
     }
     else{
-        return @"尚无记录";
+        NSArray *arrValues = [[BabyDataDB babyinfoDB] selectBabyBMIList];
+        if ([arrValues count] > 0) {
+            NSDictionary *dict = [arrValues objectAtIndex:0];
+            NSDate *date = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]];
+            return [ACDate getDaySinceDate:date];
+        }
+        else{
+            return @"尚无记录";
+        }
     }
 }
 
@@ -202,10 +249,8 @@
         labelIncrease.textAlignment = NSTextAlignmentLeft;
         labelIncrease.text = [arrayCurrent objectAtIndex:4];
         
-        //BMI不需录入值
-        if(indexPath.row != 2){
+        
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
         
         [cell addSubview:imageViewIcon];
         [cell addSubview:labelTitle];
@@ -223,9 +268,8 @@
         [tempDetailViewController setVar:[arrayPhyItems objectAtIndex:indexPath.row]];
         [self.navigationController pushViewController:tempDetailViewController animated:YES];
     }
-    else if (indexPath.row ==2) {
-        //选中BMI
-    }
+    //BMI
+    //else if (indexPath.row ==2) {}
     else {
         //选中其他
         pHYDetailViewController = [[PHYDetailViewController alloc] init];

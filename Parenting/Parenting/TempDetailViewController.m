@@ -97,7 +97,7 @@
     _buttonTip.titleLabel.font = [UIFont systemFontOfSize:14];
     [_buttonTip setTitle:@"i" forState:UIControlStateNormal];
     
-    [_phyDetailImageView addSubview:_buttonTip];
+//    [_phyDetailImageView addSubview:_buttonTip];
     
     //_viewTop1
     _viewTop1 = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 65)];
@@ -280,7 +280,7 @@
 
 -(void)drawLine:(CGRect)rect{
     //********Start********@[
-    NSArray *userData = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType];
+    NSArray *userData = [[BabyDataDB babyinfoDB] selectBabyTempList:itemType Days:3];
     NSMutableArray *proUserDate = [[NSMutableArray alloc]init];
     int day;
     for (int i = 0; i<[userData count];i++){
@@ -326,37 +326,13 @@
     if (tempSaveView==nil) {
         tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"SAVE" CreateTime:0];
         tempSaveView.TempSaveDelegate = self;
-        [self.view addSubview:tempSaveView];
     }
-    else {
-        [self.view addSubview:tempSaveView];
-    }
+    [self.view addSubview:tempSaveView];
 }
 
 #pragma saveview delegate
 -(void)sendTempReloadData{
     [self initData];
-}
-
-#pragma mark - 获取x轴坐标系
--(NSArray*)GetXAsix:(int)PostnatalDays
-{
-    NSMutableArray * arrXAsix = [[NSMutableArray alloc]initWithCapacity:0];
-    
-    return arrXAsix;
-}
-
-#pragma mark - 获取y轴坐标系
--(NSArray*)GetYAsixByBiger:(NSArray*)Barr andSmaller:(NSArray*)Sarr
-{
-    NSMutableArray * arrYAsix = [[NSMutableArray alloc]initWithCapacity:0];
-    return arrYAsix;
-}
-
-#pragma GetUserData
--(NSArray*)GetUserAsix:(NSArray*)Barr PostnatalDay:(int)postnatalDays{
-    NSMutableArray * arrUser = [[NSMutableArray alloc]initWithCapacity:0];
-    return arrUser;
 }
 
 - (void)didReceiveMemoryWarning

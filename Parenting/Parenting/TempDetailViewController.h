@@ -27,7 +27,6 @@
     UIImageView *adviseImageView;
     
     TempSaveView *tempSaveView;
-    AddPHYRecordViewController *addRecordViewController;
 }
 
 @property (strong, nonatomic) UIImageView *phyDetailImageView;

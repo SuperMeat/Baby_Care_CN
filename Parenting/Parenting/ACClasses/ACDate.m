@@ -197,6 +197,46 @@
     return [NSString stringWithFormat:@"%02d-%02d %02d:%02d",[comps month],[comps day],[comps hour],[comps minute]];
 }
 
+#pragma return:星期三 2014-08-31
++(NSString *)dateDetailFomatdate3:(NSDate*)date
+{
+    //NSLog(@"date  %@",date);
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit;
+    
+    comps=[calendar components:unitFlags fromDate:date];
+    NSString *week;
+    switch ([comps weekday]) {
+        case 1:
+            week=NSLocalizedString(@"Sunday", nil);
+            break;
+        case 2:
+            week=NSLocalizedString(@"Monday", nil);
+            break;
+        case 3:
+            week=NSLocalizedString(@"Tuesday", nil);
+            break;
+        case 4:
+            week=NSLocalizedString(@"Wednesday", nil);
+            break;
+        case 5:
+            week=NSLocalizedString(@"Thursday", nil);
+            break;
+        case 6:
+            week=NSLocalizedString(@"Friday", nil);
+            break;
+        case 7:
+            week=NSLocalizedString(@"Saturday", nil);
+            break;
+            
+        default:
+            break;
+    }
+    
+    return [NSString stringWithFormat:@"%@ %02d-%02d-%02d",week,[comps year],[comps month],[comps day]];
+}
+
 
 +(NSString*)getDayBeforeDespFromDate:(NSDate *)date
 {

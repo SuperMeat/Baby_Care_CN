@@ -7,7 +7,8 @@
 //
 
 #import "PHYHistoryViewController.h"
-
+#import "PHYTableViewCell.h"
+#import "BMITableViewCell.h"
 
 @interface PHYHistoryViewController ()
 
@@ -54,7 +55,7 @@
     [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
     titleText.textColor = [UIColor whiteColor];
     [titleText setTextAlignment:NSTextAlignmentCenter];
-    [titleText setText:[NSString stringWithFormat:@"%@-历史",itemName]];
+    [titleText setText:@"记录列表"];
     [titleView addSubview:titleText];
     self.phyDetailImageView = [[UIImageView alloc] init];
     [self.phyDetailImageView setFrame:CGRectMake(0, 0, 320, 64)];
@@ -86,7 +87,13 @@
 
 -(void)initData{
     //身高0 体重1 BMI2 头围3 体温4
-    arrDS = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType]];
+    if (itemType != 2) {
+        arrDS = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType]];
+    }
+    else{
+        arrDS = [[NSMutableArray alloc] initWithArray:[[BabyDataDB babyinfoDB] selectBabyBMIList]];
+    }
+    
     [_tableView reloadData];
 }
 
@@ -127,73 +134,64 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIndentifier = @"Cell";
-    UITableViewCell *cell = (UITableViewCell *)[_tableView dequeueReusableCellWithIdentifier:CellIndentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]init];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        int index = indexPath.row;
-        NSDictionary *dictCurrent = [arrDS objectAtIndex:index];
-        
-        //时间
-        UILabel *labelDate = [[UILabel alloc]init];
-        labelDate.frame = CGRectMake(30, 12, 80, 20);
-        labelDate.font = [UIFont fontWithName:@"Arial" size:14];
-        labelDate.textAlignment = NSTextAlignmentLeft;
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        
-        if (itemType != 4) {
-            NSString *dateString = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
-            labelDate.text = dateString;
-        }
-        else{
-            labelDate.text = [ACDate dateDetailFomatdate2:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
-        }
-        
-        //隔断
-        UIImageView *sepImageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cutoff.png"]];
-        sepImageView1.frame = CGRectMake(130, 10, 1, 23);
-        
-        //数值
-        UILabel *labelType = [[UILabel alloc]init];
-        labelType.frame = CGRectMake(153, 12, 30, 20);
-        labelType.font = [UIFont fontWithName:@"Arial" size:14];
-        labelType.textAlignment = NSTextAlignmentLeft;
-        labelType.text = itemName;
+    //身高、体重、头围、体温CELL
+    int index = indexPath.row;
+    NSDictionary *dictCurrent = [arrDS objectAtIndex:index];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    if (itemType != 2) {
+        PHYTableViewCell *cell = (PHYTableViewCell*) [self.tableView dequeueReusableCellWithIdentifier:@"PHYTableViewCell"];
+        if(cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PHYTableViewCell" owner:[PHYTableViewCell class] options:nil];
+            cell = (PHYTableViewCell *)[nib objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            if (itemType != 4) {
+                NSString *dateString = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
+                cell.labelDate.text = dateString;
+            }
+            else{
+                cell.labelDate.text = [ACDate dateDetailFomatdate2:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
+            }
 
-        
-        //隔断
-        UIImageView *sepImageView2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cutoff.png"]];
-        sepImageView2.frame = CGRectMake(203, 12, 1, 23);
-        
-        //数值
-        UILabel *labelValue = [[UILabel alloc]init];
-        labelValue.frame = CGRectMake(220, 12, 40, 20);
-        labelValue.font = [UIFont fontWithName:@"Arial" size:14];
-        labelValue.textAlignment = NSTextAlignmentRight;
-        labelValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"value"] doubleValue]];
-        //单位
-        UILabel *labelUnit = [[UILabel alloc]init];
-        labelUnit.frame = CGRectMake(265, 12, 55, 20);
-        labelUnit.font = [UIFont fontWithName:@"Arial" size:14];
-        labelUnit.textAlignment = NSTextAlignmentLeft;
-        labelUnit.text = itemUnit;
-        
-        [cell addSubview:labelDate];
-        [cell addSubview:sepImageView1];
-        [cell addSubview:labelType];
-        [cell addSubview:sepImageView2];
-        [cell addSubview:labelValue];
-        [cell addSubview:labelUnit];
+            cell.labelType.text = itemName;
+            cell.labelValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"value"] doubleValue]];
+            cell.labelUnit.text = itemUnit;
+        }
+        return cell;
     }
-    return cell;
+    else{
+        BMITableViewCell *cell = (BMITableViewCell*) [self.tableView dequeueReusableCellWithIdentifier:@"BMITableViewCell"];
+        if(cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"BMITableViewCell" owner:[BMITableViewCell class] options:nil];
+            cell = (BMITableViewCell *)[nib objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.labelBMIValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"value"] doubleValue]];
+            cell.labelHeightDate.text = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"h_measure_time"] longValue]]];
+            cell.labelWeightDate.text = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"w_measure_time"] longValue]]];
+            cell.labelHeightValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"h_value"] doubleValue]];
+            cell.labelWeightValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"w_value"] doubleValue]];
+        }
+        return cell;
+    }
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (itemType != 2) {
+        return 44.0f;
+    }
+    else {
+        return 90.0f;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -208,7 +206,10 @@
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    if (itemType!=2) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -217,21 +218,26 @@
     switch (itemType) {
         case 4:     //体温
             tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"UPDATE" CreateTime:[[[arrDS objectAtIndex:indexPath.row] objectForKey:@"create_time"]longValue]];
-            tempSaveView.TempSaveDelegate = self; 
+                tempSaveView.TempSaveDelegate = self;
             [self.view addSubview:tempSaveView];
             break;
+        case 2:
+            //BMI不能编辑
+            break;
         default:
-            editPhyViewController = [[EditPhyViewController alloc] init];
-            [editPhyViewController setType:itemType];
-            [editPhyViewController setCreateTime:[[[arrDS objectAtIndex:indexPath.row] objectForKey:@"create_time"]longValue]];
-            [editPhyViewController setMeasureTime:[[[arrDS objectAtIndex:0] objectForKey:@"measure_time"] longValue]];
-            [self.navigationController pushViewController:editPhyViewController animated:YES];
+            phySaveView = [[PhySaveView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:itemType OpType:@"UPDATE" CreateTime:[[[arrDS objectAtIndex:indexPath.row] objectForKey:@"create_time"]longValue]];
+            phySaveView.PhySaveDelegate = self;
+            [self.view addSubview:phySaveView];
             break;
     }
 }
 
 #pragma saveview delegate
 -(void)sendTempReloadData{
+    [self initData];
+}
+
+-(void)sendPhyReloadData{
     [self initData];
 }
 

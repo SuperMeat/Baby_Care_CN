@@ -147,6 +147,12 @@
  */
 -(NSArray*)selectBabyPhysiologyList:(int)type;
 
+/*
+ *  获取BMI换算值
+ *  BMI值为相邻三天内的体重（kg）/身高（m）²
+ */
+-(NSArray*)selectBabyBMIList;
+
 /**
  *  获取宝贝生理数据曲线
  *
@@ -156,6 +162,14 @@
  *  @param  PostnatalDay    宝贝当前日数
  */
 -(NSArray*)selectBabyPhysiologyList:(int)type BeginDay:(int)beginDay EndDay:(int)endDay BabyBirthTime:(long)babyBirthTime;
+
+-(NSArray*)selectBabyBMIList:(int)type BeginDay:(int)beginDay EndDay:(int)endDay BabyBirthTime:(long)babyBirthTime;
+
+/**
+ *  获取宝贝生理数据曲线
+ *  @param  days        获取最近x天的数据
+ */
+-(NSArray*)selectBabyTempList:(int)type Days:(int)days;
 
 /** 
  *  根据类别及创建时间获取生理条目记录

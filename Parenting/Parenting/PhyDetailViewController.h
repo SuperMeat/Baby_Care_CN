@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PhyCorePlot.h"
-#import "AddPHYRecordViewController.h"
+#import "PhySaveView.h"
 
-@interface PHYDetailViewController : UIViewController{
+@interface PHYDetailViewController : UIViewController<PhySaveViewDelegate>{
     NSArray *arrayCurrent;
     NSArray *arrValues;
     
@@ -25,7 +25,7 @@
     float ySizeInterval;
     UIImageView *adviseImageView;
     
-    AddPHYRecordViewController *addRecordViewController;
+    PhySaveView *phySaveView;
 }
 
 @property (strong, nonatomic) UIImageView *phyDetailImageView;

@@ -20,16 +20,13 @@
     NSDate* measureTime;
     
     UIImageView *imageview;
-    UITextField *textRecordDate;
-    UITextField *textRecordTime;
+    UITextField *textRecordDate; 
     UITextField *textValue;
     UIButton *buttonSave;
     UIButton *buttonCancel;
     
     UIDatePicker *datepicker;
     UIActionSheet *action;
-    UIDatePicker *timepicker;
-    UIActionSheet *action2;
 }
 
 - (id)initWithFrame:(CGRect)frame Type:(NSString *)type CreateTime:(long)create_time;

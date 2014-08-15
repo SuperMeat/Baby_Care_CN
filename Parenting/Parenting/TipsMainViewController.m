@@ -115,7 +115,7 @@
 
 -(void)initData{
     //获取所有贴士类目
-    subArray = [TipCategoryDB selectAllCategoryList];
+    subArray = [TipCategoryDB selectCategoryList:0];
     tipArray = [[NSArray alloc]initWithObjects: nil];
     
     //根据用户category_ids获取用户已订阅列表
