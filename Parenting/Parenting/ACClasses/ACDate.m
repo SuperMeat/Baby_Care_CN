@@ -184,6 +184,19 @@
     return [NSString stringWithFormat:@"%@ %02d/%02d %02d:%02d",week,[comps month],[comps day],[comps hour],[comps minute]];;
 }
 
+#pragma return:08-31 14:00
++(NSString *)dateDetailFomatdate2:(NSDate*)date
+{
+    //NSLog(@"date  %@",date);
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit;
+    
+    comps=[calendar components:unitFlags fromDate:date];
+    
+    return [NSString stringWithFormat:@"%02d-%02d %02d:%02d",[comps month],[comps day],[comps hour],[comps minute]];
+}
+
 
 +(NSString*)getDayBeforeDespFromDate:(NSDate *)date
 {

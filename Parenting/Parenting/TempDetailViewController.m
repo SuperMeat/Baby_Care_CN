@@ -115,7 +115,7 @@
     labelLastTitle.textAlignment = NSTextAlignmentLeft;
     labelLastTitle.text = [NSString stringWithFormat:@"上次%@",itemName];
     
-    _labelLastDate = [[UILabel alloc]initWithFrame:CGRectMake(10, 42, 80, 20)];
+    _labelLastDate = [[UILabel alloc]initWithFrame:CGRectMake(10, 42, 120, 20)];
     _labelLastDate.font = [UIFont fontWithName:@"Arial" size:12];
     _labelLastDate.textAlignment = NSTextAlignmentLeft;
     
@@ -134,7 +134,7 @@
     labelCURTitle.textAlignment = NSTextAlignmentLeft;
     labelCURTitle.text = [NSString stringWithFormat:@"当前%@",itemName];
     
-    _labelCURDate = [[UILabel alloc]initWithFrame:CGRectMake(135, 42, 80, 20)];
+    _labelCURDate = [[UILabel alloc]initWithFrame:CGRectMake(135, 42, 120, 20)];
     _labelCURDate.font = [UIFont fontWithName:@"Arial" size:12];
     _labelCURDate.textAlignment = NSTextAlignmentLeft;
     
@@ -191,14 +191,14 @@
         double v2 = [[dict2 objectForKey:@"value"] doubleValue];
         NSDate *dateB = [ACDate getDateFromTimeStamp:[[dict2 objectForKey:@"measure_time"] longValue]];
         _labelLastValue.text = [NSString stringWithFormat:@"%0.1f",[[dict2 objectForKey:@"value"] doubleValue]];
-        _labelLastDate.text = [myDateFormatter stringFromDate:dateB];
+        _labelLastDate.text = [ACDate dateDetailFomatdate2:dateB];
         
         //CURRENT
         NSDictionary *dict1 = [arrValues objectAtIndex:0];
         double v1 = [[dict1 objectForKey:@"value"] doubleValue];
         NSDate *date = [ACDate getDateFromTimeStamp:[[dict1 objectForKey:@"measure_time"] longValue]];
         _labelCURValue.text = [NSString stringWithFormat:@"%0.1f",[[dict1 objectForKey:@"value"] doubleValue]];
-        _labelCURDate.text = [myDateFormatter stringFromDate:date];
+        _labelCURDate.text = [ACDate dateDetailFomatdate2:date];
         //CHANGE
         if (v1 >= v2) {
             _labelChangeValue.text= [NSString stringWithFormat:@"↑%0.1f",v1-v2];
@@ -216,7 +216,7 @@
         _labelCURValue.text = [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
         NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
         [myDateFormatter setDateFormat:@"yyyy-MM-dd"];
-        _labelCURDate.text = [myDateFormatter stringFromDate:date];
+        _labelCURDate.text = [ACDate dateDetailFomatdate2:date];
         //CHANGE
         _labelChangeValue.text = @"-";
     }
@@ -234,6 +234,13 @@
     //加载CorePlot
     [self drawLine:CGRectMake(0, 0, self.view.bounds.size.width, 174)];
     [_viewPlot addSubview:plot];
+    
+    UILabel *labelPoloTitle = [[UILabel alloc]initWithFrame:CGRectMake(120, 5, 80, 18)];
+    labelPoloTitle.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
+    labelPoloTitle.textColor = [UIColor blackColor];
+    labelPoloTitle.textAlignment = NSTextAlignmentCenter;
+    labelPoloTitle.text = @"最近三日体温记录";
+    [_viewPlot addSubview:labelPoloTitle];
 }
 
 -(void)setVar:(NSArray*) array{
@@ -272,8 +279,32 @@
 }
 
 -(void)drawLine:(CGRect)rect{
-    //********Start********
-    plot = [[TempCorePlot alloc]initWithFrame:rect];
+    //********Start********@[
+    NSArray *userData = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType];
+    NSMutableArray *proUserDate = [[NSMutableArray alloc]init];
+    int day;
+    for (int i = 0; i<[userData count];i++){
+        NSDictionary *dict = [userData objectAtIndex:i];
+        NSDate *date = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSInteger unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+        NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+        NSString *strDate;
+        int hour = [comps hour];
+        int min = [comps minute];
+        if (day != [comps day]){
+            day = [comps day];
+            strDate = [NSString stringWithFormat:@"%d-%d:%d",day,hour,min];
+        }
+        else{
+            strDate = [NSString stringWithFormat:@"%d:%d",hour,min];
+        }
+        
+        NSArray *arr = [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:i],strDate,[dict objectForKey:@"value"],nil];
+        [proUserDate addObject:arr];
+    }
+    
+    plot = [[TempCorePlot alloc]initWithFrame:rect XasixAndValue:proUserDate];
 }
 
 -(void)ShowHistory{
@@ -293,12 +324,18 @@
 
 -(void)AddRecord{
     if (tempSaveView==nil) {
-        tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"SAVE"];
+        tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"SAVE" CreateTime:0];
+        tempSaveView.TempSaveDelegate = self;
         [self.view addSubview:tempSaveView];
     }
     else {
         [self.view addSubview:tempSaveView];
     }
+}
+
+#pragma saveview delegate
+-(void)sendTempReloadData{
+    [self initData];
 }
 
 #pragma mark - 获取x轴坐标系
