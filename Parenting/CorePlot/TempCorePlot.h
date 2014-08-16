@@ -11,7 +11,11 @@
 @interface TempCorePlot : CPTGraphHostingView<CPTPlotDataSource>{
     float   yBaseValue;     // y轴坐标基础
     float   ySizeInterval;  // y轴坐标间隔
-    
+    /*
+     *  x轴内容数组: 序号   标题(时间)
+     *  Xaxis = @[@[@1,@"标题1"],@[@2,@"标题2"]]
+     */
+    NSArray * Xaxis;
     
     /*
      *  y轴内容静态数组:温度
@@ -20,12 +24,11 @@
     NSArray * Yaxis;
     
     /*
-     *  x轴内容数组: 序号   标题(时间)
-     *  XaxisAndValue = @[@[@1,@"标题1",value],@[@2,@"标题2",45]]
+     *  坐标数组:       序号  值
+     *  CoordArr = @[@[@1,@36.7],@[@2,@36.8],...]
      */
-    NSArray * XaxisAndValue;
+    NSArray * CoordArr;
 }
 @property (retain, nonatomic)CPTGraph *graph;
--(id)initWithFrame:(CGRect)frame XasixAndValue:(NSArray*)arr;
 
 @end

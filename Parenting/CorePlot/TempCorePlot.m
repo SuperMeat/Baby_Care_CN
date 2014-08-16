@@ -12,16 +12,21 @@
 @implementation TempCorePlot
 
 #pragma 参数:
--(id)initWithFrame:(CGRect)frame XasixAndValue:(NSArray*)arr{
+-(id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        //静态数据
         yBaseValue  = 1;
         ySizeInterval  = 1;
+        
+        Xaxis = @[@[@0,@"21:15"],@[@1,@"21:18"],@[@2,@"21:27"],@[@3,@"22:11"],
+                  @[@4,@"23:15"],@[@5,@"23:21"],@[@6,@"23:55"],@[@7,@"00:03"]
+                  ];
         Yaxis = @[@35,@36,@37,@38,@39,@40];
         yBaseValue  = 35;
         ySizeInterval  = 1;
+        CoordArr = @[@[@0,@39.7],@[@1,@39.5],@[@2,@39.1],@[@3,@38.5],
+                     @[@4,@38.7],@[@5,@38.1],@[@6,@37.7],@[@7,@37.1]];
         
-        XaxisAndValue = arr;
+        
         
         //Step1:配置Graph画布
         [self configureGraph];
@@ -94,7 +99,7 @@
     baseTempPlot.plotSymbol = baseTempSymbol;
     
     //设置x、y轴的滚动范围，如果不设置，默认是无线长的
-    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat([XaxisAndValue count])];
+    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat([Xaxis count])];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromFloat(5)];
 }
 
@@ -127,15 +132,15 @@
     x.labelTextStyle = axisTextStyle;
     x.majorIntervalLength = CPTDecimalFromInt(3);
     x.tickDirection = CPTSignNegative;
-    CGFloat dateCount = [XaxisAndValue count];
+    CGFloat dateCount = [Xaxis count];
     NSMutableSet *xLabels = [NSMutableSet setWithCapacity:dateCount];
     NSMutableSet *xLocations = [NSMutableSet setWithCapacity:dateCount];
     NSInteger i = 0;
     //TODO:画X轴label
     
-    for ( NSInteger j = 0; j < [XaxisAndValue count]; j++) {
+    for ( NSInteger j = 0; j < [Xaxis count]; j++) {
         NSString *xLabel;
-        xLabel = [NSString stringWithFormat:@"%@", [[XaxisAndValue objectAtIndex:j] objectAtIndex:1]];
+        xLabel = [NSString stringWithFormat:@"%@", [[Xaxis objectAtIndex:j] objectAtIndex:1]];
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:xLabel textStyle:x.labelTextStyle];
         label.rotation = 0.5f; //设置倾斜角度
         CGFloat location = i++;
@@ -188,12 +193,12 @@
 
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
-    return [XaxisAndValue count];
+    return [CoordArr count];
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
     
-    NSInteger valueCount = [XaxisAndValue count];
+    NSInteger valueCount = [CoordArr count];
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
             if (index < valueCount) {
@@ -203,7 +208,7 @@
         case CPTScatterPlotFieldY:
             if ([plot.identifier isEqual:@"Temp"] == YES) {
                 //                [NSNumber numberWithFloat:]
-                NSNumber *tempNum = [[XaxisAndValue objectAtIndex:index] objectAtIndex:2];
+                NSNumber *tempNum = [[CoordArr objectAtIndex:index] objectAtIndex:1];
                 return [self getYAxisValue:tempNum];
             }
             break;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EditPhyViewController.h"
 
-@interface PHYHistoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TempSaveViewDelegate>
+@interface PHYHistoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *arrDS;
     NSString* itemName;
@@ -17,8 +17,6 @@
     int itemType; //身高0 体重1 BMI2 头围3 体温4
     
     EditPhyViewController *editPhyViewController;
-    
-    TempSaveView *tempSaveView;
 }
 
 @property (strong, nonatomic) UIImageView *phyDetailImageView;

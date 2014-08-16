@@ -882,7 +882,9 @@
 		48866F9A199A12E6007B16AA /* MilestoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E07199A12E5007B16AA /* MilestoneController.m */; };
 		48866F9B199A12E6007B16AA /* MilestoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E09199A12E5007B16AA /* MilestoneView.m */; };
 		48866F9C199A12E6007B16AA /* MilestoneHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E0B199A12E5007B16AA /* MilestoneHeaderView.m */; };
+		48866F9D199A12E6007B16AA /* MilestoneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */; };
 		48866F9E199A12E6007B16AA /* MilestoneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E0E199A12E5007B16AA /* MilestoneContentView.m */; };
+		48866F9F199A12E6007B16AA /* MilestoneContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48866E0F199A12E5007B16AA /* MilestoneContentView.xib */; };
 		48866FA0199A12E6007B16AA /* MilestoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E11199A12E5007B16AA /* MilestoneModel.m */; };
 		48866FA1199A12E6007B16AA /* EditeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E13199A12E5007B16AA /* EditeView.m */; };
 		48866FA2199A12E6007B16AA /* EditeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48866E14199A12E5007B16AA /* EditeView.xib */; };
@@ -1315,8 +1317,6 @@
 		BEB7E2D0192310D200E752B7 /* TipsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2CE192310D100E752B7 /* TipsWebViewController.m */; };
 		BEB7E2D1192310D200E752B7 /* TipsWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */; };
 		BEB7E2D41923167C00E752B7 /* TipCategoryDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */; };
-		BEBA4593199C90C300EEEC5B /* MilestoneContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEBA4592199C90C300EEEC5B /* MilestoneContentView.xib */; };
-		BEBA4595199C910600EEEC5B /* MilestoneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEBA4594199C910600EEEC5B /* MilestoneHeaderView.xib */; };
 		BEBC12951953D31500C1A7E7 /* UIASYImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBC12941953D31500C1A7E7 /* UIASYImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEE539731945B022000703E6 /* TipListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE539711945B022000703E6 /* TipListViewController.m */; };
 		BEE539741945B022000703E6 /* TipListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE539721945B022000703E6 /* TipListViewController.xib */; };
@@ -2439,8 +2439,10 @@
 		48866E09199A12E5007B16AA /* MilestoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneView.m; sourceTree = "<group>"; };
 		48866E0A199A12E5007B16AA /* MilestoneHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilestoneHeaderView.h; sourceTree = "<group>"; };
 		48866E0B199A12E5007B16AA /* MilestoneHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneHeaderView.m; sourceTree = "<group>"; };
+		48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneHeaderView.xib; sourceTree = "<group>"; };
 		48866E0D199A12E5007B16AA /* MilestoneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilestoneContentView.h; sourceTree = "<group>"; };
 		48866E0E199A12E5007B16AA /* MilestoneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneContentView.m; sourceTree = "<group>"; };
+		48866E0F199A12E5007B16AA /* MilestoneContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneContentView.xib; sourceTree = "<group>"; };
 		48866E10199A12E5007B16AA /* MilestoneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilestoneModel.h; sourceTree = "<group>"; };
 		48866E11199A12E5007B16AA /* MilestoneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneModel.m; sourceTree = "<group>"; };
 		48866E12199A12E5007B16AA /* EditeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditeView.h; sourceTree = "<group>"; };
@@ -3027,8 +3029,6 @@
 		BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipsWebViewController.xib; sourceTree = "<group>"; };
 		BEB7E2D21923167C00E752B7 /* TipCategoryDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipCategoryDB.h; sourceTree = "<group>"; };
 		BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipCategoryDB.m; sourceTree = "<group>"; };
-		BEBA4592199C90C300EEEC5B /* MilestoneContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneContentView.xib; sourceTree = "<group>"; };
-		BEBA4594199C910600EEEC5B /* MilestoneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneHeaderView.xib; sourceTree = "<group>"; };
 		BEBC12931953D31500C1A7E7 /* UIASYImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIASYImageView.h; sourceTree = "<group>"; };
 		BEBC12941953D31500C1A7E7 /* UIASYImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIASYImageView.m; sourceTree = "<group>"; };
 		BEE539701945B022000703E6 /* TipListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipListViewController.h; sourceTree = "<group>"; };
@@ -5234,10 +5234,10 @@
 				48866E09199A12E5007B16AA /* MilestoneView.m */,
 				48866E0A199A12E5007B16AA /* MilestoneHeaderView.h */,
 				48866E0B199A12E5007B16AA /* MilestoneHeaderView.m */,
-				BEBA4594199C910600EEEC5B /* MilestoneHeaderView.xib */,
+				48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */,
 				48866E0D199A12E5007B16AA /* MilestoneContentView.h */,
 				48866E0E199A12E5007B16AA /* MilestoneContentView.m */,
-				BEBA4592199C90C300EEEC5B /* MilestoneContentView.xib */,
+				48866E0F199A12E5007B16AA /* MilestoneContentView.xib */,
 				48866E10199A12E5007B16AA /* MilestoneModel.h */,
 				48866E11199A12E5007B16AA /* MilestoneModel.m */,
 				48866E12199A12E5007B16AA /* EditeView.h */,
@@ -7199,11 +7199,8 @@
 				488016FE199DF72900F6778B /* 16.4.1.jpg in Resources */,
 				4800B0C618D7F3D20093A6AF /* 生理_按@2x.png in Resources */,
 				481EF6C71980BCC400959CB7 /* Medicine_13.jpg in Resources */,
-<<<<<<< HEAD
 				4880178D199DF72900F6778B /* 4.2.1.jpg in Resources */,
 				48866F9F199A12E6007B16AA /* MilestoneContentView.xib in Resources */,
-=======
->>>>>>> FETCH_HEAD
 				48866EF1199A12E6007B16AA /* bg_train_red.png in Resources */,
 				BE6938EB1909165200FC2BB4 /* PHYDetailViewController.xib in Resources */,
 				48866E9B199A12E6007B16AA /* 2.1.3.jpg in Resources */,
@@ -7510,7 +7507,6 @@
 				BE7C698918692ED100C4B675 /* btn_syncBLE.png in Resources */,
 				480EFA2318E5155C00D40903 /* panels_color4_choose@2x.png in Resources */,
 				48866FB6199A12E6007B16AA /* TrainHeaderView.xib in Resources */,
-				BEBA4593199C90C300EEEC5B /* MilestoneContentView.xib in Resources */,
 				48866F2A199A12E6007B16AA /* icon_backward.png in Resources */,
 				48801799199DF72900F6778B /* 5.1.3.jpg in Resources */,
 				48EC1DC5185EF4A300965254 /* DurationPickerView.xib in Resources */,
@@ -7580,7 +7576,6 @@
 				48801740199DF72900F6778B /* 20.2.2.jpg in Resources */,
 				488016D3199DF72900F6778B /* 14.2.3.jpg in Resources */,
 				48F91AFD18FBB54E0038DC67 /* icon_mooncloudy@2x.png in Resources */,
-				BEBA4595199C910600EEEC5B /* MilestoneHeaderView.xib in Resources */,
 				48FCD5A6195D404F003DBA62 /* 饭桌@2x.png in Resources */,
 				BE7C698F186997AA00C4B675 /* MyDevicesTableCell.xib in Resources */,
 				BE75CD091872C3FC001EF1C1 /* LoginMainViewController.xib in Resources */,
@@ -7636,12 +7631,9 @@
 				48801788199DF72900F6778B /* 3.4.1.jpg in Resources */,
 				488016E3199DF72900F6778B /* 15.2.3.jpg in Resources */,
 				482791CE1884DE1D003E9724 /* 80.png in Resources */,
-<<<<<<< HEAD
 				48801709199DF72900F6778B /* 17.2.3.jpg in Resources */,
 				48801759199DF72900F6778B /* 21.4.5.jpg in Resources */,
 				48866F9D199A12E6007B16AA /* MilestoneHeaderView.xib in Resources */,
-=======
->>>>>>> FETCH_HEAD
 				48FEAEFF18E91423002425E2 /* icon_sleeping@2x.png in Resources */,
 				488016DE199DF72900F6778B /* 15.1.3.jpg in Resources */,
 				48866F20199A12E6007B16AA /* icon_ milestone.png in Resources */,
@@ -8261,7 +8253,7 @@
 					"$(SRCROOT)",
 				);
 				INFOPLIST_FILE = "Parenting/Amoy Baby Care-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -8294,8 +8286,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				PROVISIONING_PROFILE = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = NO;
@@ -8307,8 +8299,8 @@
 		7215974217453680006FD415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -8325,7 +8317,7 @@
 					"$(SRCROOT)",
 				);
 				INFOPLIST_FILE = "Parenting/Amoy Baby Care-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -8358,8 +8350,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				PROVISIONING_PROFILE = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;

@@ -7,17 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol TempSaveViewDelegate<NSObject>
-@optional
--(void)sendTempReloadData;
-@end
 
 @interface TempSaveView : UIView<UITextFieldDelegate,UIActionSheetDelegate>
-{ 
-    NSString *opType;
-    int itemType;
-    long createTime;
-    NSDate* measureTime;
+{
+    NSString *strType;
     
     UIImageView *imageview;
     UITextField *textRecordDate;
@@ -32,7 +25,5 @@
     UIActionSheet *action2;
 }
 
-- (id)initWithFrame:(CGRect)frame Type:(NSString *)type CreateTime:(long)create_time;
-
-@property (assign) id<TempSaveViewDelegate> TempSaveDelegate;
+- (id)initWithFrame:(CGRect)frame Type:(NSString *)type;
 @end
