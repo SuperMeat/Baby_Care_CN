@@ -134,10 +134,15 @@
 /**
  *  分享的image尺寸
  */
-#define kShareImageWidth_Note 320        //日记分享宽度
-#define kShareImageHeight_Note 360       //日记分享高度
+#define kShareImageWidth_Note 320              //日记分享宽度
+#define kShareImageHeight_Note 360             //日记分享高度
 #define kShareImageWidth_Milestone  320        //日记分享宽度
 #define kShareImageHeight_Milestone 400        //日记分享高度
+
+#define kShareImageFontSize        15
+#define kShareImageFontColor       @"#338f9f"
+#define kShareImageIconFontColor   @"#858585"
+#define kShareImageBackgroundColor @"#ecf4f5"
 
 typedef enum
 {

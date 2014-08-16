@@ -114,7 +114,7 @@
 // 两个日期间隔天数
 + (int)fromStartDate:(NSDate*)startDate withEndDate:(NSDate*)endDate
 {
-    if (endDate == nil) {
+    if (endDate == nil || startDate == nil) {
         return 0;
     }
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];

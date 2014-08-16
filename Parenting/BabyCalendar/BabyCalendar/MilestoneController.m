@@ -14,6 +14,7 @@
 #import "AddIemView.h"
 #import "MilestoneContentView.h"
 #import "MilestoneHeaderView.h"
+#import "ShareInfoView.h"
 @interface MilestoneController ()<EditeViewDelegate,AddIemViewDelegate,MilestoneViewDelegate>
 {
     MilestoneView* _milestoneView;
@@ -170,8 +171,12 @@
 #pragma mark - MilestonViewDelegate
 - (void)ShareToFriend
 {
-    UIImage *image = [ACFunction cutView:self.view andWidth:kShareImageWidth_Milestone andHeight:kShareImageHeight_Milestone];
-    [ACShare shareImage:self andshareTitle:@"" andshareImage:image anddelegate:self];
+    UIImage *detailImage = [ACFunction cutView:self.view andWidth:kShareImageWidth_Milestone andHeight:kShareImageHeight_Milestone];
+    ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
+    [shareView.shareInfoImageView setImage:detailImage];
+    shareView.titleDetail.text = @"今天是宝宝第100天,宝宝会笑了,记录下成长的第一次!❤️";
+    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
+    [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
 }
 
 - (void)dealloc

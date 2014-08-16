@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ShareInfoView : UIView
+@property (strong, nonatomic) IBOutlet UILabel *titleDetail;
+@property (strong, nonatomic) IBOutlet UIImageView *shareInfoImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (strong, nonatomic) IBOutlet UILabel *iconDetail;
 
 @end
