@@ -7,8 +7,10 @@
 //
 
 #import "BaseViewController.h"
-
+@class TestReportView;
 @interface TestReportController : BaseViewController
-
+{
+    TestReportView* reportView;
+}
 @property(nonatomic,assign)NSInteger month;
 @end

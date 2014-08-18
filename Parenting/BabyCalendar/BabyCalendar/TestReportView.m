@@ -45,6 +45,7 @@
     _middleView.datas = self.datas;
     _headerView.model = self.datas[_month];
     _footView.model = self.datas[_month];
+    
 }
 
 
@@ -58,11 +59,12 @@
     [self addSubview:_middleView];
     
 
-    _footView.frame = CGRectMake(20, _middleView.bottom, kDeviceWidth-20, 26*7);
+    _footView.frame = CGRectMake(20, _middleView.bottom, kDeviceWidth, 26*7);
     [self addSubview:_footView];
     
     self.contentSize = CGSizeMake(0, _footView.bottom);
     
+    self.contentheight = _headerView.size.height + _middleView.size.height + _footView.size.height;
     
 }
 @end

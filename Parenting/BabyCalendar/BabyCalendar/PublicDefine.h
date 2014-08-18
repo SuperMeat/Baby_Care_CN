@@ -147,6 +147,7 @@
 #define kShareImageFont @"方正卡通简体"
 #define kShareMilestoneTitle @"%@%@,%@,记录下成长过程中的第一次~💗"  //宝宝姓名+日龄,里程碑title
 #define kShareNoteTitle @"%@%@,分享我的宝宝日记~💗"
+#define kShareTestTitle @"分享我家%@第%d月的测评得了%@分,大家也来给自己宝宝测一测~🎇"
 
 typedef enum
 {

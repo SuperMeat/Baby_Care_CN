@@ -626,9 +626,9 @@ static int age = 0;
     NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
     if (dict) {
         //姓名
-        if ([[dict objectForKey:@"nickname"] isEqual: @""]!=NO) {
+        if (![[dict objectForKey:@"nickname"] isEqual: @""])
+        {
             return [dict objectForKey:@"nickname"];
-
         }
     }
     

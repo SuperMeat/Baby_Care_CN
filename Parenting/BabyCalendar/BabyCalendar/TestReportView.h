@@ -19,4 +19,6 @@
 }
 @property(nonatomic,assign)NSInteger month;
 @property(nonatomic,retain)NSMutableArray* datas;
+@property float contentheight;
+@property(nonatomic,strong)UIImage *detailImage;
 @end

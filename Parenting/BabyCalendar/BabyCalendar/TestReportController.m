@@ -8,6 +8,9 @@
 
 #import "TestReportController.h"
 #import "TestReportView.h"
+#import "ShareInfoView.h"
+#import "TestModel.h"
+
 @interface TestReportController ()
 
 @end
@@ -31,10 +34,9 @@
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"item_share" title:nil action:@selector(shareAction)];
     
-    TestReportView* reportView = [[TestReportView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-64)];
+    reportView = [[TestReportView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-64)];
     reportView.month = _month;
     [self.view addSubview:reportView];
-    
     
 }
 //
@@ -48,6 +50,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
     [userDef setObject:[NSNumber numberWithBool:YES] forKey:kPush_testReportVc];
@@ -64,7 +68,14 @@
 
 - (void)shareAction
 {
-    
+    UIImage *detailImage = [ACFunction cutView:reportView andWidth:reportView.width andHeight:reportView.contentheight+64];
+    ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
+    [shareView.shareInfoImageView setImage:detailImage];
+    TestModel *testmodel = reportView.datas[_month];
+    shareView.titleDetail.text = [NSString stringWithFormat:kShareTestTitle,[BabyinfoViewController getbabyname],_month+1,testmodel.score];
+    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
+    [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
+
 }
 
 @end

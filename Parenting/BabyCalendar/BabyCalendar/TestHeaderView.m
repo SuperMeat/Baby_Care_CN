@@ -53,6 +53,4 @@
     _imgView.image = [UIImage imageNamed:image];
 }
 
-
-
 @end
