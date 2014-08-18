@@ -1,49 +1,37 @@
 //
-//  TipDetailViewController.m
+//  ActiveTipsView.m
 //  Amoy Baby Care
 //
-//  Created by CHEN WEIBIN on 14-6-9.
+//  Created by CHEN WEIBIN on 14-8-18.
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
-#import "TipListViewController.h"
+#import "ActiveTipsView.h"
 
 #define SCROLLPADDINGTOP 40
 #define SCROLLPADDINGBOTTOM (_scrollView.frame.size.height - CELLHEIGHT)
 #define CELLHEIGHT 325
 #define CELLWIDTH 320
 
-@interface TipListViewController ()
+@implementation ActiveTipsView
 
-@end
-
-@implementation TipListViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithFrame:(CGRect)frame ParentViewController:(UIViewController*)parentViewController
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    _categoryName = @"";
+    _parentViewController = parentViewController;
+    
+    self = [super initWithFrame:frame];
     if (self) {
-        // Custom initialization
+        [self initView];
     }
     return self;
 }
 
-- (id)initWithCategoryId:(int)id Name:(NSString*)name
-{
-    _categoryId = id;
-    _categoryName = name;
-    if (self = [super init]) {
-        // Instance variables go here
-        
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self initView];
-    [[SyncController syncController]    getTips:ACCOUNTUID
+-(void)showTipsView:(int)CategoryId{
+    if(_categoryId != CategoryId)
+    {
+        _categoryId = CategoryId;
+        [[SyncController syncController]    getTips:ACCOUNTUID
                                      CategoryID:_categoryId
                                  LastCreateTime:[ACDate getTimeStampFromDate:[NSDate date]]//Now
                                       GetNumber:3
@@ -64,39 +52,23 @@
                                        tipsIds = [tipsIds substringToIndex:[tipsIds length]-1];
                                        [self initData];
                                    }
-                                 ViewController:self];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    
+                                 ViewController:_parentViewController];
+    }
 }
 
 -(void)initView{
-    //加载头部Navigation 
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 160, 20)];
-    titleView.backgroundColor=[UIColor clearColor];
-    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
-    titleText.backgroundColor = [UIColor clearColor];
-    [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18]];
-    titleText.textColor = [UIColor whiteColor];
-    [titleText setTextAlignment:NSTextAlignmentCenter];
-    [titleText setText:[NSString stringWithFormat:@"%@",_categoryName]];
-    [titleView addSubview:titleText];
-    
-    self.navigationItem.titleView = titleView;
-    
-    //加载ScrollView 
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+    //加载ScrollView
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     _scrollView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:240.0/255.0 blue:236.0/255.0 alpha:1.0];
     _scrollView.pagingEnabled = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = YES;
     _scrollView.delegate = self;
     _scrollView.bounces = YES;
-    [self.view addSubview:_scrollView]; 
+    [self addSubview:_scrollView];
     
     activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.frame = CGRectMake(self.view.frame.size.width / 2 - 10,
+    activityView.frame = CGRectMake(self.frame.size.width / 2 - 10,
                                     SCROLLPADDINGTOP / 2, 20.0f, 20.0f);
     [_scrollView addSubview:activityView];
 }
@@ -169,7 +141,7 @@
                                            tipsIds = [tipsIds substringToIndex:[tipsIds length]-1];
                                            [self uploadData];
                                        }
-                                     ViewController:self];
+                                     ViewController:_parentViewController];
     }
 }
 
@@ -226,18 +198,9 @@
             break;
         }
     }
-    [self.navigationController pushViewController:tipsWeb animated:YES];
+    [_parentViewController.navigationController pushViewController:tipsWeb animated:YES];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"gototips"];
 }
 
--(void)goBack
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

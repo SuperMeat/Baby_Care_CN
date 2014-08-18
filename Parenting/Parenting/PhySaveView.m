@@ -1,23 +1,40 @@
 //
-//  TempSaveView.m
+//  PhySaveView.m
 //  Amoy Baby Care
 //
-//  Created by CHEN WEIBIN on 14-8-11.
+//  Created by CHEN WEIBIN on 14-8-14.
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
-#import "TempSaveView.h"
-#import "BabyDataDB.h"
-@implementation TempSaveView
+#import "PhySaveView.h"
 
-- (id)initWithFrame:(CGRect)frame Type:(NSString *)type CreateTime:(long)create_time
+@implementation PhySaveView
+
+- (id)initWithFrame:(CGRect)frame Type:(int)type OpType:(NSString *)operateType CreateTime:(long)create_time
 {
     self = [super initWithFrame:frame];
     if (self) {
-        itemType = 4;
-        opType = type;
+        itemType = type;
+        switch (itemType) {
+            case 0:
+                itemName = @"身高";
+                itemUnit = @"CM";
+                break;
+            case 1:
+                itemName = @"体重";
+                itemUnit = @"KG";
+                break;
+            case 3:
+                itemName = @"头围";
+                itemUnit = @"CM";
+                break;
+            default:
+                break;
+        }
+
+        opType = operateType;
         [self initView];
-        if ([type isEqual:@"UPDATE"]) {
+        if ([opType isEqual:@"UPDATE"]) {
             createTime = create_time;
             [self initData];
         }
@@ -28,7 +45,7 @@
 -(void)initView{
     //标题
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 5,290, 30)];
-    title.text=@"体温详情";
+    title.text = [NSString stringWithFormat:@"%@详情",itemName];
     title.textAlignment=NSTextAlignmentCenter;
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor grayColor];
@@ -50,7 +67,7 @@
     labelValue.textAlignment = NSTextAlignmentRight;
     labelValue.backgroundColor = [UIColor clearColor];
     labelValue.textColor=[UIColor grayColor];
-    labelValue.text=@"记录体温:";
+    labelValue.text = [NSString stringWithFormat:@"记录%@:",itemName];
     
     textValue=[[UITextField alloc]initWithFrame:CGRectMake(115, 80, 150, 30)];
     textValue.textColor=[UIColor grayColor];
@@ -88,9 +105,9 @@
 }
 
 -(void)initData{
-    NSDictionary *dict = [[BabyDataDB babyinfoDB] selectBabyPhysiologyDetail:4 CreateTime:createTime];
+    NSDictionary *dict = [[BabyDataDB babyinfoDB] selectBabyPhysiologyDetail:itemType CreateTime:createTime];
     measureTime = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]];
-    textRecordDate.text=[ACDate dateDetailFomatdate:measureTime];
+    textRecordDate.text=[ACDate dateDetailFomatdate3:measureTime];
     textValue.text = [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
 }
 
@@ -99,7 +116,7 @@
         if ([[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[datepicker date]] Type:itemType Value:[textValue.text doubleValue]]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"添加成功!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [self.TempSaveDelegate sendTempReloadData];
+            [self.PhySaveDelegate sendPhyReloadData];
         }
         else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"添加失败!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -110,7 +127,7 @@
         if ([[BabyDataDB babyinfoDB] updateBabyPhysiology:[textValue.text doubleValue] CreateTime:createTime UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:measureTime]  Type:itemType]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"修改成功!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [self.TempSaveDelegate sendTempReloadData];
+            [self.PhySaveDelegate sendPhyReloadData];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"添加失败!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -139,13 +156,13 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == textValue && ![self isPureFloat:textValue.text]) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"体温数值异常,必须为数字!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@数值异常,必须为数字!",itemName]  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         textValue.text = @"";
         return NO;
     }
     else if (textField == textValue && ![self isLegal:textValue.text]){
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"体温数值异常,体温必须在正常范围内!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@数值异常,%@必须在正常范围内!",itemName,itemName]  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         textValue.text = @"";
         return NO;
@@ -166,8 +183,24 @@
 #pragma 判断是否为正确范围
 -(BOOL)isLegal:(NSString*)string{
     double value = [string doubleValue];
-    if (value < 30 || value > 45) {
-        return NO;
+    switch (itemType) {
+        case 0:
+            if (value < 30 || value > 110) {
+                return NO;
+            }
+            break;
+        case 1:
+            if (value < 2 || value > 16) {
+                return NO;
+            }
+            break;
+        case 3:
+            if (value < 25 || value > 60) {
+                return NO;
+            }
+            break;
+        default:
+            break;
     }
     return YES;
 }
@@ -178,7 +211,7 @@
     
     if (datepicker==nil) {
         datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, textRecordDate.frame.origin.y+45+G_YADDONVERSION, 320, 162)];
-        datepicker.datePickerMode=UIDatePickerModeDateAndTime;
+        datepicker.datePickerMode=UIDatePickerModeDate;
         [datepicker addTarget:self action:@selector(updateRecordDate:) forControlEvents:UIControlEventValueChanged];
     }
     
@@ -190,7 +223,7 @@
 
 -(void)updateRecordDate:(UIDatePicker*)sender{
     measureTime = sender.date;
-    textRecordDate.text=[ACDate dateDetailFomatdate:sender.date];
+    textRecordDate.text= [ACDate dateDetailFomatdate3:measureTime];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -199,5 +232,6 @@
         [self updateRecordDate:datepicker];
     }
 }
+
 
 @end

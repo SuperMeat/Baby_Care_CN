@@ -885,7 +885,6 @@
 		48866F9C199A12E6007B16AA /* MilestoneHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E0B199A12E5007B16AA /* MilestoneHeaderView.m */; };
 		48866F9D199A12E6007B16AA /* MilestoneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */; };
 		48866F9E199A12E6007B16AA /* MilestoneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E0E199A12E5007B16AA /* MilestoneContentView.m */; };
-		48866F9F199A12E6007B16AA /* MilestoneContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48866E0F199A12E5007B16AA /* MilestoneContentView.xib */; };
 		48866FA0199A12E6007B16AA /* MilestoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E11199A12E5007B16AA /* MilestoneModel.m */; };
 		48866FA1199A12E6007B16AA /* EditeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E13199A12E5007B16AA /* EditeView.m */; };
 		48866FA2199A12E6007B16AA /* EditeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48866E14199A12E5007B16AA /* EditeView.xib */; };
@@ -1208,6 +1207,15 @@
 		BE004CE418FE2B7500E56833 /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = BE004CD918FE2B7500E56833 /* top.png */; };
 		BE0677861998605200794A28 /* TempCorePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0677851998605200794A28 /* TempCorePlot.m */; };
 		BE06778A19986D7400794A28 /* TempSaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE06778919986D7400794A28 /* TempSaveView.m */; };
+		BE1EB96A199DEB3700C3ED0B /* BMITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB968199DEB3700C3ED0B /* BMITableViewCell.m */; };
+		BE1EB96B199DEB3700C3ED0B /* BMITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1EB969199DEB3700C3ED0B /* BMITableViewCell.xib */; };
+		BE1EB96F199DEC0B00C3ED0B /* PHYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB96D199DEC0B00C3ED0B /* PHYTableViewCell.m */; };
+		BE1EB970199DEC0B00C3ED0B /* PHYTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */; };
+		BE1F0C6819A19520000BFEED /* ActiveTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1F0C6719A19520000BFEED /* ActiveTipsView.m */; };
+		BE1F0C6D19A1DE51000BFEED /* btn_add_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */; };
+		BE1F0C6E19A1DE51000BFEED /* btn_add.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6A19A1DE51000BFEED /* btn_add.png */; };
+		BE1F0C6F19A1DE51000BFEED /* btn_minus_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */; };
+		BE1F0C7019A1DE51000BFEED /* btn_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6C19A1DE51000BFEED /* btn_minus.png */; };
 		BE25763318FE51CA0053683A /* title_BMI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761918FE51CA0053683A /* title_BMI@2x.png */; };
 		BE25763418FE51CA0053683A /* title_circumference@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761A18FE51CA0053683A /* title_circumference@2x.png */; };
 		BE25763518FE51CA0053683A /* title_temperature@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761B18FE51CA0053683A /* title_temperature@2x.png */; };
@@ -1246,8 +1254,8 @@
 		BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */; };
 		BE5997D418619339008D3F6C /* lookingDevice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D218619339008D3F6C /* lookingDevice.jpg */; };
 		BE5997D518619339008D3F6C /* scanfail_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D318619339008D3F6C /* scanfail_1.jpg */; };
-		BE66A3C51924BED800E81C9F /* icon_desubscribe.png in Resources */ = {isa = PBXBuildFile; fileRef = BE66A3C31924BED700E81C9F /* icon_desubscribe.png */; };
-		BE66A3C61924BED800E81C9F /* icon_subscribe.png in Resources */ = {isa = PBXBuildFile; fileRef = BE66A3C41924BED800E81C9F /* icon_subscribe.png */; };
+		BE5B383C19A1FB5F00246B6A /* MilestoneContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5B383B19A1FB5F00246B6A /* MilestoneContentView.xib */; };
+		BE67211C199CAD9C00EC5D1B /* PhySaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67211B199CAD9C00EC5D1B /* PhySaveView.m */; };
 		BE6938D61908E80200FC2BB4 /* PhysiologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6938D41908E80200FC2BB4 /* PhysiologyViewController.m */; };
 		BE6938D71908E80200FC2BB4 /* PhysiologyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE6938D51908E80200FC2BB4 /* PhysiologyViewController.xib */; };
 		BE6938DB19090C4B00FC2BB4 /* icon_height@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE6938DA19090C4B00FC2BB4 /* icon_height@2x.png */; };
@@ -1272,8 +1280,6 @@
 		BE75CD1D1872CBA5001EF1C1 /* login_tencent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE75CD151872CBA5001EF1C1 /* login_tencent@2x.png */; };
 		BE75CD1E1872CBA5001EF1C1 /* login_title.png in Resources */ = {isa = PBXBuildFile; fileRef = BE75CD161872CBA5001EF1C1 /* login_title.png */; };
 		BE75CD1F1872CBA5001EF1C1 /* login_title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE75CD171872CBA5001EF1C1 /* login_title@2x.png */; };
-		BE7AB1B4190A3F8D00D9B502 /* AddPHYRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7AB1B2190A3F8D00D9B502 /* AddPHYRecordViewController.m */; };
-		BE7AB1B5190A3F8D00D9B502 /* AddPHYRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7AB1B3190A3F8D00D9B502 /* AddPHYRecordViewController.xib */; };
 		BE7C69341867D87000C4B675 /* ASIHTTPController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C69331867D87000C4B675 /* ASIHTTPController.m */; };
 		BE7C69361867DCCE00C4B675 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7C69351867DCCE00C4B675 /* MobileCoreServices.framework */; };
 		BE7C69771867F1B300C4B675 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C69641867F1B300C4B675 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1295,7 +1301,6 @@
 		BE900F2218ECFCEA00B06133 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE900F2118ECFCEA00B06133 /* SyncController.m */; };
 		BE955F4C190102A400225029 /* PhyCorePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = BE955F49190102A400225029 /* PhyCorePlot.m */; };
 		BE955F4D190102A400225029 /* PhyCPTTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = BE955F4B190102A400225029 /* PhyCPTTheme.m */; };
-		BE9C6DAD19907ABF00B012A5 /* EditPhyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6DAC19907ABF00B012A5 /* EditPhyViewController.m */; };
 		BEA2F86F1993188200FD2D4E /* TempDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86D1993188200FD2D4E /* TempDetailViewController.m */; };
 		BEA2F8701993188200FD2D4E /* TempDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F86E1993188200FD2D4E /* TempDetailViewController.xib */; };
 		BEB4758118E56DBE0004B649 /* NetWorkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4758018E56DBE0004B649 /* NetWorkConnect.m */; };
@@ -2444,7 +2449,6 @@
 		48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneHeaderView.xib; sourceTree = "<group>"; };
 		48866E0D199A12E5007B16AA /* MilestoneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilestoneContentView.h; sourceTree = "<group>"; };
 		48866E0E199A12E5007B16AA /* MilestoneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneContentView.m; sourceTree = "<group>"; };
-		48866E0F199A12E5007B16AA /* MilestoneContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneContentView.xib; sourceTree = "<group>"; };
 		48866E10199A12E5007B16AA /* MilestoneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilestoneModel.h; sourceTree = "<group>"; };
 		48866E11199A12E5007B16AA /* MilestoneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneModel.m; sourceTree = "<group>"; };
 		48866E12199A12E5007B16AA /* EditeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditeView.h; sourceTree = "<group>"; };
@@ -2864,6 +2868,18 @@
 		BE0677851998605200794A28 /* TempCorePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempCorePlot.m; sourceTree = "<group>"; };
 		BE06778819986D7400794A28 /* TempSaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempSaveView.h; sourceTree = "<group>"; };
 		BE06778919986D7400794A28 /* TempSaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempSaveView.m; sourceTree = "<group>"; };
+		BE1EB967199DEB3700C3ED0B /* BMITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMITableViewCell.h; sourceTree = "<group>"; };
+		BE1EB968199DEB3700C3ED0B /* BMITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMITableViewCell.m; sourceTree = "<group>"; };
+		BE1EB969199DEB3700C3ED0B /* BMITableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMITableViewCell.xib; sourceTree = "<group>"; };
+		BE1EB96C199DEC0B00C3ED0B /* PHYTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHYTableViewCell.h; sourceTree = "<group>"; };
+		BE1EB96D199DEC0B00C3ED0B /* PHYTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHYTableViewCell.m; sourceTree = "<group>"; };
+		BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHYTableViewCell.xib; sourceTree = "<group>"; };
+		BE1F0C6619A19520000BFEED /* ActiveTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveTipsView.h; sourceTree = "<group>"; };
+		BE1F0C6719A19520000BFEED /* ActiveTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveTipsView.m; sourceTree = "<group>"; };
+		BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_add_focus.png; sourceTree = "<group>"; };
+		BE1F0C6A19A1DE51000BFEED /* btn_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_add.png; sourceTree = "<group>"; };
+		BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_minus_focus.png; sourceTree = "<group>"; };
+		BE1F0C6C19A1DE51000BFEED /* btn_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_minus.png; sourceTree = "<group>"; };
 		BE25761918FE51CA0053683A /* title_BMI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_BMI@2x.png"; sourceTree = "<group>"; };
 		BE25761A18FE51CA0053683A /* title_circumference@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_circumference@2x.png"; sourceTree = "<group>"; };
 		BE25761B18FE51CA0053683A /* title_temperature@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_temperature@2x.png"; sourceTree = "<group>"; };
@@ -2911,8 +2927,9 @@
 		BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookingForDeviceViewController.m; sourceTree = "<group>"; };
 		BE5997D218619339008D3F6C /* lookingDevice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lookingDevice.jpg; sourceTree = "<group>"; };
 		BE5997D318619339008D3F6C /* scanfail_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scanfail_1.jpg; sourceTree = "<group>"; };
-		BE66A3C31924BED700E81C9F /* icon_desubscribe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_desubscribe.png; sourceTree = "<group>"; };
-		BE66A3C41924BED800E81C9F /* icon_subscribe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subscribe.png; sourceTree = "<group>"; };
+		BE5B383B19A1FB5F00246B6A /* MilestoneContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneContentView.xib; sourceTree = "<group>"; };
+		BE67211A199CAD9C00EC5D1B /* PhySaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhySaveView.h; sourceTree = "<group>"; };
+		BE67211B199CAD9C00EC5D1B /* PhySaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhySaveView.m; sourceTree = "<group>"; };
 		BE6938D31908E80200FC2BB4 /* PhysiologyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysiologyViewController.h; sourceTree = "<group>"; };
 		BE6938D41908E80200FC2BB4 /* PhysiologyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysiologyViewController.m; sourceTree = "<group>"; };
 		BE6938D51908E80200FC2BB4 /* PhysiologyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhysiologyViewController.xib; sourceTree = "<group>"; };
@@ -2943,9 +2960,6 @@
 		BE75CD151872CBA5001EF1C1 /* login_tencent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_tencent@2x.png"; sourceTree = "<group>"; };
 		BE75CD161872CBA5001EF1C1 /* login_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_title.png; sourceTree = "<group>"; };
 		BE75CD171872CBA5001EF1C1 /* login_title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_title@2x.png"; sourceTree = "<group>"; };
-		BE7AB1B1190A3F8D00D9B502 /* AddPHYRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPHYRecordViewController.h; sourceTree = "<group>"; };
-		BE7AB1B2190A3F8D00D9B502 /* AddPHYRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPHYRecordViewController.m; sourceTree = "<group>"; };
-		BE7AB1B3190A3F8D00D9B502 /* AddPHYRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPHYRecordViewController.xib; sourceTree = "<group>"; };
 		BE7C69321867D87000C4B675 /* ASIHTTPController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIHTTPController.h; path = ASIHTTPController/ASIHTTPController.h; sourceTree = "<group>"; };
 		BE7C69331867D87000C4B675 /* ASIHTTPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIHTTPController.m; path = ASIHTTPController/ASIHTTPController.m; sourceTree = "<group>"; };
 		BE7C69351867DCCE00C4B675 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -2986,8 +3000,6 @@
 		BE955F49190102A400225029 /* PhyCorePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhyCorePlot.m; sourceTree = "<group>"; };
 		BE955F4A190102A400225029 /* PhyCPTTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhyCPTTheme.h; sourceTree = "<group>"; };
 		BE955F4B190102A400225029 /* PhyCPTTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhyCPTTheme.m; sourceTree = "<group>"; };
-		BE9C6DAB19907ABF00B012A5 /* EditPhyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPhyViewController.h; sourceTree = "<group>"; };
-		BE9C6DAC19907ABF00B012A5 /* EditPhyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPhyViewController.m; sourceTree = "<group>"; };
 		BEA2F86C1993188200FD2D4E /* TempDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempDetailViewController.h; sourceTree = "<group>"; };
 		BEA2F86D1993188200FD2D4E /* TempDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempDetailViewController.m; sourceTree = "<group>"; };
 		BEA2F86E1993188200FD2D4E /* TempDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TempDetailViewController.xib; sourceTree = "<group>"; };
@@ -3923,8 +3935,10 @@
 		482791B41884DE1D003E9724 /* icon */ = {
 			isa = PBXGroup;
 			children = (
-				BE66A3C31924BED700E81C9F /* icon_desubscribe.png */,
-				BE66A3C41924BED800E81C9F /* icon_subscribe.png */,
+				BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */,
+				BE1F0C6A19A1DE51000BFEED /* btn_add.png */,
+				BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */,
+				BE1F0C6C19A1DE51000BFEED /* btn_minus.png */,
 				482791B51884DE1D003E9724 /* 114.png */,
 				482791B61884DE1D003E9724 /* 120 2.png */,
 				482791B71884DE1D003E9724 /* 120.png */,
@@ -5230,6 +5244,7 @@
 		48866E31199A12E5007B16AA /* Milestone */ = {
 			isa = PBXGroup;
 			children = (
+				BE5B383B19A1FB5F00246B6A /* MilestoneContentView.xib */,
 				48866E06199A12E5007B16AA /* MilestoneController.h */,
 				48866E07199A12E5007B16AA /* MilestoneController.m */,
 				48866E08199A12E5007B16AA /* MilestoneView.h */,
@@ -5239,7 +5254,6 @@
 				48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */,
 				48866E0D199A12E5007B16AA /* MilestoneContentView.h */,
 				48866E0E199A12E5007B16AA /* MilestoneContentView.m */,
-				48866E0F199A12E5007B16AA /* MilestoneContentView.xib */,
 				48866E10199A12E5007B16AA /* MilestoneModel.h */,
 				48866E11199A12E5007B16AA /* MilestoneModel.m */,
 				48866E12199A12E5007B16AA /* EditeView.h */,
@@ -5455,22 +5469,14 @@
 		488C895118B4985E0091C2BF /* 生理 */ = {
 			isa = PBXGroup;
 			children = (
+				BE1EB966199DEAF100C3ED0B /* HistoryController */,
 				BE06778719986D3600794A28 /* SaveController */,
-				BE4A862419761BCE00EB232B /* PHYHistory */,
 				BE6938D31908E80200FC2BB4 /* PhysiologyViewController.h */,
 				BE6938D41908E80200FC2BB4 /* PhysiologyViewController.m */,
 				BE6938D51908E80200FC2BB4 /* PhysiologyViewController.xib */,
 				BE6938E71909165200FC2BB4 /* PHYDetailViewController.h */,
 				BE6938E81909165200FC2BB4 /* PHYDetailViewController.m */,
 				BE6938E91909165200FC2BB4 /* PHYDetailViewController.xib */,
-				BE7AB1B1190A3F8D00D9B502 /* AddPHYRecordViewController.h */,
-				BE7AB1B2190A3F8D00D9B502 /* AddPHYRecordViewController.m */,
-				BE7AB1B3190A3F8D00D9B502 /* AddPHYRecordViewController.xib */,
-				BE4A861F197618AB00EB232B /* PHYHistoryViewController.h */,
-				BE4A8620197618AB00EB232B /* PHYHistoryViewController.m */,
-				BE4A862219761B5800EB232B /* PHYHistoryViewController.xib */,
-				BE9C6DAB19907ABF00B012A5 /* EditPhyViewController.h */,
-				BE9C6DAC19907ABF00B012A5 /* EditPhyViewController.m */,
 				BEA2F86C1993188200FD2D4E /* TempDetailViewController.h */,
 				BEA2F86D1993188200FD2D4E /* TempDetailViewController.m */,
 				BEA2F86E1993188200FD2D4E /* TempDetailViewController.xib */,
@@ -6164,6 +6170,8 @@
 				F365CADA176C537900EA1406 /* CustumCell.h */,
 				F365CADB176C537900EA1406 /* CustumCell.m */,
 				CE239798176EF5CF0096E033 /* CustumCell.xib */,
+				BE1F0C6619A19520000BFEED /* ActiveTipsView.h */,
+				BE1F0C6719A19520000BFEED /* ActiveTipsView.m */,
 			);
 			name = Summary;
 			sourceTree = "<group>";
@@ -6234,8 +6242,26 @@
 			children = (
 				BE06778819986D7400794A28 /* TempSaveView.h */,
 				BE06778919986D7400794A28 /* TempSaveView.m */,
+				BE67211A199CAD9C00EC5D1B /* PhySaveView.h */,
+				BE67211B199CAD9C00EC5D1B /* PhySaveView.m */,
 			);
 			name = SaveController;
+			sourceTree = "<group>";
+		};
+		BE1EB966199DEAF100C3ED0B /* HistoryController */ = {
+			isa = PBXGroup;
+			children = (
+				BE4A861F197618AB00EB232B /* PHYHistoryViewController.h */,
+				BE4A8620197618AB00EB232B /* PHYHistoryViewController.m */,
+				BE4A862219761B5800EB232B /* PHYHistoryViewController.xib */,
+				BE1EB967199DEB3700C3ED0B /* BMITableViewCell.h */,
+				BE1EB968199DEB3700C3ED0B /* BMITableViewCell.m */,
+				BE1EB969199DEB3700C3ED0B /* BMITableViewCell.xib */,
+				BE1EB96C199DEC0B00C3ED0B /* PHYTableViewCell.h */,
+				BE1EB96D199DEC0B00C3ED0B /* PHYTableViewCell.m */,
+				BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */,
+			);
+			name = HistoryController;
 			sourceTree = "<group>";
 		};
 		BE25761818FE51CA0053683A /* 生理 */ = {
@@ -6288,13 +6314,6 @@
 				BE25763218FE51CA0053683A /* title_height@2x.png */,
 			);
 			path = "身高";
-			sourceTree = "<group>";
-		};
-		BE4A862419761BCE00EB232B /* PHYHistory */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = PHYHistory;
 			sourceTree = "<group>";
 		};
 		BE5997BE1861927B008D3F6C /* Bluetooth */ = {
@@ -6765,6 +6784,7 @@
 				480EFA1718E5155C00D40903 /* panels@2x.png in Resources */,
 				48866EEF199A12E6007B16AA /* bg_headView.jpg in Resources */,
 				480D6CF21924A75800E5CAC7 /* radio_focus.png in Resources */,
+				BE1F0C6E19A1DE51000BFEED /* btn_add.png in Resources */,
 				48866FD1199A12E6007B16AA /* FootView.xib in Resources */,
 				4880A582191A3639005D5E44 /* panels_icon_both_choose@2x.png in Resources */,
 				488016CC199DF72900F6778B /* 13.4.3.jpg in Resources */,
@@ -6889,6 +6909,7 @@
 				48866F74199A12E6007B16AA /* TestHeaderView.xib in Resources */,
 				BEB7D89A1904B1F800E13893 /* icon_sunny@2x.png in Resources */,
 				CE0167C7174B059000462363 /* radio_focus.png in Resources */,
+				BE1F0C6F19A1DE51000BFEED /* btn_minus_focus.png in Resources */,
 				488016B2199DF72900F6778B /* 12.1.5.jpg in Resources */,
 				48866EE3199A12E6007B16AA /* bg_date.png in Resources */,
 				488016E5199DF72900F6778B /* 15.3.1.jpg in Resources */,
@@ -7011,7 +7032,6 @@
 				488017DF199DF72900F6778B /* IMG_1469.jpg in Resources */,
 				488016E4199DF72900F6778B /* 15.2.4.jpg in Resources */,
 				488017C8199DF72900F6778B /* 8.3.1.jpg in Resources */,
-				BE66A3C51924BED800E81C9F /* icon_desubscribe.png in Resources */,
 				480EFA4818E5155C00D40903 /* btn_l_play@2x.png in Resources */,
 				BE25764418FE51CA0053683A /* weight@2x.png in Resources */,
 				48866EB4199A12E6007B16AA /* icon_move_selected.png in Resources */,
@@ -7126,7 +7146,6 @@
 				488016D1199DF72900F6778B /* 14.2.1.jpg in Resources */,
 				48801789199DF72900F6778B /* 3.4.2.jpg in Resources */,
 				48FEAEFE18E91423002425E2 /* icon_sleeping_timing@2x.png in Resources */,
-				BE7AB1B5190A3F8D00D9B502 /* AddPHYRecordViewController.xib in Resources */,
 				48866F36199A12E6007B16AA /* bg_cell_buttom.jpg in Resources */,
 				48866EF3199A12E6007B16AA /* bg_train_green.png in Resources */,
 				48DEA7A417F4644000A11316 /* Feed_1.jpg in Resources */,
@@ -7203,7 +7222,6 @@
 				4800B0C618D7F3D20093A6AF /* 生理_按@2x.png in Resources */,
 				481EF6C71980BCC400959CB7 /* Medicine_13.jpg in Resources */,
 				4880178D199DF72900F6778B /* 4.2.1.jpg in Resources */,
-				48866F9F199A12E6007B16AA /* MilestoneContentView.xib in Resources */,
 				48866EF1199A12E6007B16AA /* bg_train_red.png in Resources */,
 				BE6938EB1909165200FC2BB4 /* PHYDetailViewController.xib in Resources */,
 				48866E9B199A12E6007B16AA /* 2.1.3.jpg in Resources */,
@@ -7287,6 +7305,7 @@
 				48F6ABA818710AE40032045E /* myadvise_me@2x.png in Resources */,
 				480EFA0118E5155C00D40903 /* btn_cry_play@2x.png in Resources */,
 				48866F93199A12E6007B16AA /* VaccineAddContentView.xib in Resources */,
+				BE1F0C6D19A1DE51000BFEED /* btn_add_focus.png in Resources */,
 				48DEA7DC17F4703400A11316 /* Play_11.jpg in Resources */,
 				48FEAF7918E917CB002425E2 /* label1_sum_choose@2x.png in Resources */,
 				BE75CD1A1872CBA5001EF1C1 /* login_sina.png in Resources */,
@@ -7451,6 +7470,7 @@
 				488017A3199DF72900F6778B /* 5.4.3.jpg in Resources */,
 				48866F27199A12E6007B16AA /* icon_train.png in Resources */,
 				48866F2C199A12E6007B16AA /* btn_arrow_down.png in Resources */,
+				BE1EB96B199DEB3700C3ED0B /* BMITableViewCell.xib in Resources */,
 				4800B0C818D7F3D20093A6AF /* 首页_按@2x.png in Resources */,
 				4836F8A3190F5A490042006E /* DataCustomCell.xib in Resources */,
 				48801798199DF72900F6778B /* 5.1.2.jpg in Resources */,
@@ -7584,7 +7604,9 @@
 				BE7C698F186997AA00C4B675 /* MyDevicesTableCell.xib in Resources */,
 				BE75CD091872C3FC001EF1C1 /* LoginMainViewController.xib in Resources */,
 				BE25763318FE51CA0053683A /* title_BMI@2x.png in Resources */,
+				BE5B383C19A1FB5F00246B6A /* MilestoneContentView.xib in Resources */,
 				4855BC1D182B237800F02A3E /* umFeedback.bundle in Resources */,
+				BE1EB970199DEC0B00C3ED0B /* PHYTableViewCell.xib in Resources */,
 				488016BC199DF72900F6778B /* 12.3.5.jpg in Resources */,
 				488017E0199DF72900F6778B /* RV-1404060_副本_副本.jpg in Resources */,
 				4880175D199DF72900F6778B /* 22.2.1.jpg in Resources */,
@@ -7730,7 +7752,6 @@
 				48801778199DF72900F6778B /* 24.3.1.jpg in Resources */,
 				486CD6E71998A4970026061E /* pin_red@2x.png in Resources */,
 				48866EE9199A12E6007B16AA /* btn_right_train.png in Resources */,
-				BE66A3C61924BED800E81C9F /* icon_subscribe.png in Resources */,
 				48801724199DF72900F6778B /* 19.1.5.jpg in Resources */,
 				48866EAB199A12E6007B16AA /* btn_cannot.png in Resources */,
 				CE673BA717697A8800A15012 /* Default-568h@2x.png in Resources */,
@@ -7776,6 +7797,7 @@
 				48DCDC17197526E700EA7875 /* MedicineDetailView.xib in Resources */,
 				48866F88199A12E6007B16AA /* VaccineHeaderView.xib in Resources */,
 				CE33B5921770612B00EB8124 /* BabyinfoViewController.xib in Resources */,
+				BE1F0C7019A1DE51000BFEED /* btn_minus.png in Resources */,
 				488016C2199DF72900F6778B /* 13.1.1.jpg in Resources */,
 				48F91AAA18FB8DF10038DC67 /* light_level_good@2x.png in Resources */,
 				482791CF1884DE1D003E9724 /* Icon-72.png in Resources */,
@@ -7810,7 +7832,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				48866F54199A12E6007B16AA /* PWSCalendarViewFlowLayout.m in Sources */,
-				BE9C6DAD19907ABF00B012A5 /* EditPhyViewController.m in Sources */,
 				48866F48199A12E6007B16AA /* UINavigationBar+CustomImage.m in Sources */,
 				48EF612618C6FAC7006C3D5C /* ReGeocodeAnnotation.m in Sources */,
 				48B78141182A20610073EEBD /* CustomURLCache.m in Sources */,
@@ -7951,6 +7972,7 @@
 				CE075A3D1750821E00C57E27 /* save_sleepview.m in Sources */,
 				48866F9C199A12E6007B16AA /* MilestoneHeaderView.m in Sources */,
 				BE7C697E1867F1B300C4B675 /* ASINetworkQueue.m in Sources */,
+				BE67211C199CAD9C00EC5D1B /* PhySaveView.m in Sources */,
 				CE075A401750822D00C57E27 /* save_playview.m in Sources */,
 				48866FB5199A12E6007B16AA /* TrainHeaderView.m in Sources */,
 				48866FAF199A12E6007B16AA /* CreatMilestoneContentView.m in Sources */,
@@ -7994,6 +8016,7 @@
 				BE6938D61908E80200FC2BB4 /* PhysiologyViewController.m in Sources */,
 				48801276199DECE300F6778B /* ShareInfoView.m in Sources */,
 				48152E2E1848721F009A4900 /* GuideViewController.m in Sources */,
+				BE1F0C6819A19520000BFEED /* ActiveTipsView.m in Sources */,
 				BEB475A218E574A80004B649 /* SBJsonStreamParser.m in Sources */,
 				4824D0AC196111B30098C715 /* FeedMoreController.m in Sources */,
 				BEB7E2C919230E4A00E752B7 /* TipsMainViewController.m in Sources */,
@@ -8024,13 +8047,13 @@
 				48866F52199A12E6007B16AA /* PWSCalendarViewCell.m in Sources */,
 				BEB475A118E574A80004B649 /* SBJsonParser.m in Sources */,
 				48866FC3199A12E6007B16AA /* NoteController.m in Sources */,
-				BE7AB1B4190A3F8D00D9B502 /* AddPHYRecordViewController.m in Sources */,
 				48866FB7199A12E6007B16AA /* TrainList.m in Sources */,
 				48866F47199A12E6007B16AA /* BaseMethod.m in Sources */,
 				4800B0D518D822C20093A6AF /* CalendarViewController.m in Sources */,
 				48866E8B199A12E6007B16AA /* Zheline.m in Sources */,
 				48866FAD199A12E6007B16AA /* CreatMilestoneHeaderView.m in Sources */,
 				BEE539781945B079000703E6 /* TipTableViewCell.m in Sources */,
+				BE1EB96A199DEB3700C3ED0B /* BMITableViewCell.m in Sources */,
 				BEB4758418E572A20004B649 /* DataContract.m in Sources */,
 				48EF611F18C6FAC7006C3D5C /* CusAnnotationView.m in Sources */,
 				48866F7A199A12E6007B16AA /* TestQuestionModel.m in Sources */,
@@ -8054,6 +8077,7 @@
 				48152E3B18487EB0009A4900 /* DXAlertView.m in Sources */,
 				48F6AB931867D3AC0032045E /* LocalNotify.m in Sources */,
 				CE0C33DC17618AF100B1B683 /* SummaryViewController.m in Sources */,
+				BE1EB96F199DEC0B00C3ED0B /* PHYTableViewCell.m in Sources */,
 				48866F5D199A12E6007B16AA /* NSDateComponents+AllComponents.m in Sources */,
 				48F47F0618BF1F9C009A504B /* BabyDataDB.m in Sources */,
 				48EF611E18C6FAC7006C3D5C /* BusStopAnnotation.m in Sources */,
@@ -8239,8 +8263,8 @@
 		7215974117453680006FD415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -8290,8 +8314,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = NO;
@@ -8303,8 +8327,8 @@
 		7215974217453680006FD415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -8354,8 +8378,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;

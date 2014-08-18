@@ -7,23 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol TempSaveViewDelegate<NSObject>
+@optional
+-(void)sendTempReloadData;
+@end
 
 @interface TempSaveView : UIView<UITextFieldDelegate,UIActionSheetDelegate>
 {
-    NSString *strType;
+    NSString *opType;
+    int itemType;
+    long createTime;
+    NSDate* measureTime;
     
     UIImageView *imageview;
     UITextField *textRecordDate;
-    UITextField *textRecordTime;
     UITextField *textValue;
     UIButton *buttonSave;
     UIButton *buttonCancel;
     
     UIDatePicker *datepicker;
     UIActionSheet *action;
-    UIDatePicker *timepicker;
-    UIActionSheet *action2;
 }
 
-- (id)initWithFrame:(CGRect)frame Type:(NSString *)type;
+- (id)initWithFrame:(CGRect)frame Type:(NSString *)type CreateTime:(long)create_time;
+
+@property (assign) id<TempSaveViewDelegate> TempSaveDelegate;
 @end

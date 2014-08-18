@@ -85,14 +85,17 @@
     _buttonAdd.titleLabel.font = [UIFont systemFontOfSize:14];
     [_buttonAdd setTitle:@"添加" forState:UIControlStateNormal];
     [_buttonAdd addTarget:self action:@selector(AddRecord) forControlEvents:UIControlEventTouchUpInside];
-    [_phyDetailImageView addSubview:_buttonAdd];
+    //BMI无需添加
+    if (itemType!=2) {
+        [_phyDetailImageView addSubview:_buttonAdd];
+    }
     
     _buttonTip = [[UIButton alloc] init];
     _buttonTip.frame = CGRectMake(50, 22, 40, 40);
     _buttonTip.titleLabel.font = [UIFont systemFontOfSize:14];
     [_buttonTip setTitle:@"i" forState:UIControlStateNormal];
 
-    [_phyDetailImageView addSubview:_buttonTip];
+    //[_phyDetailImageView addSubview:_buttonTip];
     
     //_viewTop1
     _viewTop1 = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 65)];
@@ -176,7 +179,13 @@
 
 -(void)initData{
     //_viewTop1
-    arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:[[arrayCurrent objectAtIndex:0] intValue]];
+    if (itemType != 2) {
+        arrValues = [[BabyDataDB babyinfoDB] selectBabyPhysiologyList:[[arrayCurrent objectAtIndex:0] intValue]];
+    }
+    else{
+        arrValues = [[BabyDataDB babyinfoDB] selectBabyBMIList];
+    }
+    
     if ([arrValues count] >= 2) {
         NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
         [myDateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -331,9 +340,11 @@
 }
 
 -(void)AddRecord{
-    addRecordViewController = [[AddPHYRecordViewController alloc] init];
-    [addRecordViewController setType:[[arrayCurrent objectAtIndex:0]intValue]];
-    [self.navigationController pushViewController:addRecordViewController animated:YES];
+    if (phySaveView==nil) {
+        phySaveView = [[PhySaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:itemType OpType:@"SAVE" CreateTime:0];
+        phySaveView.PhySaveDelegate = self;
+    }
+    [self.view addSubview:phySaveView];
 }
 
 -(void)setVar:(NSArray*) array{
@@ -470,7 +481,13 @@
     int beginDay = [[Barr objectAtIndex:0] intValue];
     int endDay = [[Barr objectAtIndex:[Barr count]-1] intValue];
     long birthTime =[[[[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:BABYID] objectForKey:@"birth"] longValue];
-    NSMutableArray *arrRes = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType BeginDay:beginDay EndDay:endDay BabyBirthTime:birthTime]];
+    NSMutableArray *arrRes = [[NSMutableArray alloc] initWithCapacity:50];
+    if (itemType != 2) {
+        arrRes = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyPhysiologyList:itemType BeginDay:beginDay EndDay:endDay BabyBirthTime:birthTime]];
+    }
+    else{
+        arrRes = [[NSMutableArray alloc]initWithArray:[[BabyDataDB babyinfoDB] selectBabyBMIList:itemType BeginDay:beginDay EndDay:endDay BabyBirthTime:birthTime]]; 
+    }
     NSArray *arrRet = [[NSArray alloc]init];
 
     /**
@@ -518,6 +535,10 @@
         }
     }
     return arrRet;
+}
+
+-(void)sendPhyReloadData{
+    [self initData];
 }
 
 - (void)didReceiveMemoryWarning

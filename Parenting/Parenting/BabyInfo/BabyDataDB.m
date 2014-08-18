@@ -380,6 +380,101 @@
     return array;
 }
 
+-(NSArray*)selectBabyBMIList
+{
+    BOOL res;
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    
+    int user_id = ACCOUNTUID;
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSString *sql = @"select TH.create_time,TH.update_time,2,TW.value / (TH.value * 0.01 * TH.value * 0.01) as value,TH.measure_time,TH.measure_time / 86400 as Days,TH.measure_time as h_measure_time,TW.measure_time as w_measure_time,TH.value as h_value,TW.value as w_value from bc_baby_physiology TH,bc_baby_physiology TW where TH.type=0 and TW.type=1 and TH.measure_time / 86400 -3 <= TW.measure_time / 86400 and TH.measure_time / 86400 + 3 >= TW.measure_time / 86400 group by Days order by Days desc";
+    
+    FMResultSet *resultset=[db executeQuery:sql];
+    while ([resultset next]) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];
+        [dic setValue:[NSNumber numberWithInt:[resultset longForColumn:@"create_time"]] forKey:@"create_time"];
+        [dic setValue:[NSNumber numberWithInt:[resultset longForColumn:@"update_time"]] forKey:@"update_time"];
+        [dic setValue:[NSNumber numberWithInt:2] forKey:@"type"];
+        [dic setValue:[NSNumber numberWithDouble:[resultset doubleForColumn:@"value"]] forKey:@"value"];
+        [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"measure_time"]] forKey:@"measure_time"];
+        
+        [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"h_measure_time"]] forKey:@"h_measure_time"];
+        [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"w_measure_time"]] forKey:@"w_measure_time"];
+        [dic setValue:[NSNumber numberWithDouble:[resultset doubleForColumn:@"h_value"]] forKey:@"h_value"];
+        [dic setValue:[NSNumber numberWithDouble:[resultset doubleForColumn:@"w_value"]] forKey:@"w_value"];
+        [array addObject:dic];
+    }
+    [db close];
+    return array;
+}
+
+-(NSArray*)selectBabyBMIList:(int)type BeginDay:(int)beginDay EndDay:(int)endDay BabyBirthTime:(long)babyBirthTime{
+    BOOL res;
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    
+    int user_id = ACCOUNTUID;
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSString *sql =[NSString stringWithFormat:@"select TW.value / (TH.value * 0.01 * TH.value * 0.01) as value,((TH.measure_time-%ld)/84600) as recordDay,TH.measure_time / 86400 as Days from bc_baby_physiology TH,bc_baby_physiology TW where TH.type=0 and TW.type=1 and TH.measure_time / 86400 -3 <= TW.measure_time / 86400 and TH.measure_time / 86400 + 3 >= TW.measure_time / 86400 and ((TH.measure_time-%ld)/84600) >= %d and ((TH.measure_time-%ld)/84600) <= %d and ((TW.measure_time-%ld)/84600) >= %d and ((TW.measure_time-%ld)/84600) <= %d group by Days order by Days desc",babyBirthTime,babyBirthTime,beginDay,babyBirthTime,endDay,babyBirthTime,beginDay,babyBirthTime,endDay];
+    FMResultSet *resultset=[db executeQuery:sql];
+    while ([resultset next]) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];
+        [dic setValue:[NSNumber numberWithDouble:[resultset doubleForColumn:@"value"]] forKey:@"value"];
+        [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"recordDay"]] forKey:@"recordDay"];
+        [array addObject:dic];
+    }
+    [db close];
+    return array;
+}
+
+-(NSArray*)selectBabyTempList:(int)type Days:(int)days
+{
+    BOOL res;
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    
+    int user_id = ACCOUNTUID;
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    long lDate = [ACDate getTimeStampFromDate:[NSDate date]];
+    NSString *sql =[NSString stringWithFormat:@"select * from bc_baby_physiology where type = %d and measure_time <= %ld and measure_time >= (%ld - %d * 86400) order by measure_time desc",type,lDate,lDate,days];
+    FMResultSet *resultset=[db executeQuery:sql];
+    while ([resultset next]) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];
+        [dic setValue:[NSNumber numberWithInt:[resultset longForColumn:@"create_time"]] forKey:@"create_time"];
+        [dic setValue:[NSNumber numberWithInt:[resultset longForColumn:@"update_time"]] forKey:@"update_time"];
+        [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"type"]] forKey:@"type"];
+        [dic setValue:[NSNumber numberWithDouble:[resultset doubleForColumn:@"value"]] forKey:@"value"];
+        [dic setValue:[NSNumber numberWithLong:[resultset longForColumn:@"measure_time"]] forKey:@"measure_time"];
+        [array addObject:dic];
+    }
+    [db close];
+    return array;
+}
+
 -(NSArray*)selectBabyPhysiologyList:(int)type BeginDay:(int)beginDay EndDay:(int)endDay BabyBirthTime:(long)babyBirthTime{
     BOOL res;
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];

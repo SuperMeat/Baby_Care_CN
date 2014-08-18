@@ -13,6 +13,7 @@
 +(id)tipCategoryDB;
 
 +(NSArray*)selectAllCategoryList;
++(NSArray*)selectCategoryList:(int)parent_id;
 
 +(BOOL)checkUpdateState:(int)categoryId
              UpdateTime:(int)updateTime;

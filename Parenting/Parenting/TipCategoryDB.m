@@ -49,6 +49,34 @@
     return resArray;
 }
 
++(NSArray*)selectCategoryList:(int)parent_id{
+    NSArray *resArray = [[NSArray alloc]init];;
+    BOOL res;
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from bc_tips_category where parent_id=%d order by category_id",parent_id];
+    FMResultSet *resultset=[db executeQuery:sql];
+    while ([resultset next]) {
+        int category_id = [resultset intForColumn:@"category_id"];
+        NSString * name = [resultset stringForColumn:@"name"];
+        NSString * describe = [resultset stringForColumn:@"describe"];
+        NSString * icon = [resultset stringForColumn:@"icon"];
+        
+        NSArray *arr = [[NSArray alloc] initWithObjects:
+                        [NSNumber numberWithInt:category_id],name,describe,icon,
+                        nil];
+        resArray = [resArray arrayByAddingObject:arr];
+    }
+    [db close];
+    return resArray;
+}
+
 +(BOOL)insertCategoryDB:(int)categoryId
              CreateTime:(int)createTime
              UpdateTime:(int)updateTime
