@@ -287,12 +287,14 @@
         subButton.tag = [[[subArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
         if (![TipCategoryDB checkSubscribe:ACCOUNTUID categoryId:[[[subArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue]]) {
             //加载订阅按钮
-            [subButton setBackgroundImage:[UIImage imageNamed:@"icon_subscribe.png"] forState:UIControlStateNormal];
+            [subButton setBackgroundImage:[UIImage imageNamed:@"btn_add.png"] forState:UIControlStateNormal];
+            [subButton setBackgroundImage:[UIImage imageNamed:@"btn_add_focus.png"] forState:UIControlStateHighlighted];
             [subButton addTarget:self action:@selector(subscribe:) forControlEvents:UIControlEventTouchUpInside];
         }
         else {
             //加载取消订阅按钮
-            [subButton setBackgroundImage:[UIImage imageNamed:@"icon_desubscribe.png"] forState:UIControlStateNormal];
+            [subButton setBackgroundImage:[UIImage imageNamed:@"btn_minus.png"] forState:UIControlStateNormal];
+            [subButton setBackgroundImage:[UIImage imageNamed:@"btn_minus_foucs.png"] forState:UIControlStateHighlighted];
             [subButton addTarget:self action:@selector(desubscribe:) forControlEvents:UIControlEventTouchUpInside];
         }
         [cell addSubview:subButton];

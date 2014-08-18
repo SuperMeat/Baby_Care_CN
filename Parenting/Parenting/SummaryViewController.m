@@ -98,10 +98,8 @@
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"gototips"]boolValue] == YES) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"gototips"];
         //从贴士详情页回转时候复原状态
-        if (haveShowTips) {
-            UIButton *btn = (UIButton*)[self.view viewWithTag:103];
-            [self segmentSelected:btn];
-        }
+        UIButton *btn = (UIButton*)[self.view viewWithTag:103];
+        [self segmentSelected:btn];
     }
     else
     {
@@ -1287,7 +1285,6 @@
             break;
     }
     [activeTipsView showTipsView:categoryId];
-    haveShowTips = YES;
 }
 
 @end

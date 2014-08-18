@@ -868,6 +868,10 @@
 		BE1EB96F199DEC0B00C3ED0B /* PHYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB96D199DEC0B00C3ED0B /* PHYTableViewCell.m */; };
 		BE1EB970199DEC0B00C3ED0B /* PHYTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */; };
 		BE1F0C6819A19520000BFEED /* ActiveTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1F0C6719A19520000BFEED /* ActiveTipsView.m */; };
+		BE1F0C6D19A1DE51000BFEED /* btn_add_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */; };
+		BE1F0C6E19A1DE51000BFEED /* btn_add.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6A19A1DE51000BFEED /* btn_add.png */; };
+		BE1F0C6F19A1DE51000BFEED /* btn_minus_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */; };
+		BE1F0C7019A1DE51000BFEED /* btn_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6C19A1DE51000BFEED /* btn_minus.png */; };
 		BE25763318FE51CA0053683A /* title_BMI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761918FE51CA0053683A /* title_BMI@2x.png */; };
 		BE25763418FE51CA0053683A /* title_circumference@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761A18FE51CA0053683A /* title_circumference@2x.png */; };
 		BE25763518FE51CA0053683A /* title_temperature@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761B18FE51CA0053683A /* title_temperature@2x.png */; };
@@ -906,8 +910,6 @@
 		BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */; };
 		BE5997D418619339008D3F6C /* lookingDevice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D218619339008D3F6C /* lookingDevice.jpg */; };
 		BE5997D518619339008D3F6C /* scanfail_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D318619339008D3F6C /* scanfail_1.jpg */; };
-		BE66A3C51924BED800E81C9F /* icon_desubscribe.png in Resources */ = {isa = PBXBuildFile; fileRef = BE66A3C31924BED700E81C9F /* icon_desubscribe.png */; };
-		BE66A3C61924BED800E81C9F /* icon_subscribe.png in Resources */ = {isa = PBXBuildFile; fileRef = BE66A3C41924BED800E81C9F /* icon_subscribe.png */; };
 		BE67211C199CAD9C00EC5D1B /* PhySaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67211B199CAD9C00EC5D1B /* PhySaveView.m */; };
 		BE6938D61908E80200FC2BB4 /* PhysiologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6938D41908E80200FC2BB4 /* PhysiologyViewController.m */; };
 		BE6938D71908E80200FC2BB4 /* PhysiologyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE6938D51908E80200FC2BB4 /* PhysiologyViewController.xib */; };
@@ -2185,6 +2187,10 @@
 		BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHYTableViewCell.xib; sourceTree = "<group>"; };
 		BE1F0C6619A19520000BFEED /* ActiveTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveTipsView.h; sourceTree = "<group>"; };
 		BE1F0C6719A19520000BFEED /* ActiveTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveTipsView.m; sourceTree = "<group>"; };
+		BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_add_focus.png; sourceTree = "<group>"; };
+		BE1F0C6A19A1DE51000BFEED /* btn_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_add.png; sourceTree = "<group>"; };
+		BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_minus_focus.png; sourceTree = "<group>"; };
+		BE1F0C6C19A1DE51000BFEED /* btn_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_minus.png; sourceTree = "<group>"; };
 		BE25761918FE51CA0053683A /* title_BMI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_BMI@2x.png"; sourceTree = "<group>"; };
 		BE25761A18FE51CA0053683A /* title_circumference@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_circumference@2x.png"; sourceTree = "<group>"; };
 		BE25761B18FE51CA0053683A /* title_temperature@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_temperature@2x.png"; sourceTree = "<group>"; };
@@ -2232,8 +2238,6 @@
 		BE5997C31861930A008D3F6C /* LookingForDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookingForDeviceViewController.m; sourceTree = "<group>"; };
 		BE5997D218619339008D3F6C /* lookingDevice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lookingDevice.jpg; sourceTree = "<group>"; };
 		BE5997D318619339008D3F6C /* scanfail_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scanfail_1.jpg; sourceTree = "<group>"; };
-		BE66A3C31924BED700E81C9F /* icon_desubscribe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_desubscribe.png; sourceTree = "<group>"; };
-		BE66A3C41924BED800E81C9F /* icon_subscribe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subscribe.png; sourceTree = "<group>"; };
 		BE67211A199CAD9C00EC5D1B /* PhySaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhySaveView.h; sourceTree = "<group>"; };
 		BE67211B199CAD9C00EC5D1B /* PhySaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhySaveView.m; sourceTree = "<group>"; };
 		BE6938D31908E80200FC2BB4 /* PhysiologyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysiologyViewController.h; sourceTree = "<group>"; };
@@ -3243,8 +3247,10 @@
 		482791B41884DE1D003E9724 /* icon */ = {
 			isa = PBXGroup;
 			children = (
-				BE66A3C31924BED700E81C9F /* icon_desubscribe.png */,
-				BE66A3C41924BED800E81C9F /* icon_subscribe.png */,
+				BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */,
+				BE1F0C6A19A1DE51000BFEED /* btn_add.png */,
+				BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */,
+				BE1F0C6C19A1DE51000BFEED /* btn_minus.png */,
 				482791B51884DE1D003E9724 /* 114.png */,
 				482791B61884DE1D003E9724 /* 120 2.png */,
 				482791B71884DE1D003E9724 /* 120.png */,
@@ -5730,6 +5736,7 @@
 				480EFA1718E5155C00D40903 /* panels@2x.png in Resources */,
 				48866EEF199A12E6007B16AA /* bg_headView.jpg in Resources */,
 				480D6CF21924A75800E5CAC7 /* radio_focus.png in Resources */,
+				BE1F0C6E19A1DE51000BFEED /* btn_add.png in Resources */,
 				48866FD1199A12E6007B16AA /* FootView.xib in Resources */,
 				4880A582191A3639005D5E44 /* panels_icon_both_choose@2x.png in Resources */,
 				CE0167B6174B059000462363 /* btn_delete_focus@2x.png in Resources */,
@@ -5816,6 +5823,7 @@
 				48866F74199A12E6007B16AA /* TestHeaderView.xib in Resources */,
 				BEB7D89A1904B1F800E13893 /* icon_sunny@2x.png in Resources */,
 				CE0167C7174B059000462363 /* radio_focus.png in Resources */,
+				BE1F0C6F19A1DE51000BFEED /* btn_minus_focus.png in Resources */,
 				48866EE3199A12E6007B16AA /* bg_date.png in Resources */,
 				48F91AA218FB8DF10038DC67 /* UV_level_good@2x.png in Resources */,
 				48F91AA018FB8DF10038DC67 /* UV@2x.png in Resources */,
@@ -5893,7 +5901,6 @@
 				BE25763918FE51CA0053683A /* btn_chart_focus@2x.png in Resources */,
 				48D42F4C196FDC9400DFFC5C /* medicine_tingzhen@2x.png in Resources */,
 				BE5997D518619339008D3F6C /* scanfail_1.jpg in Resources */,
-				BE66A3C51924BED800E81C9F /* icon_desubscribe.png in Resources */,
 				480EFA4818E5155C00D40903 /* btn_l_play@2x.png in Resources */,
 				BE25764418FE51CA0053683A /* weight@2x.png in Resources */,
 				48866EB4199A12E6007B16AA /* icon_move_selected.png in Resources */,
@@ -6094,6 +6101,7 @@
 				48F6ABA818710AE40032045E /* myadvise_me@2x.png in Resources */,
 				480EFA0118E5155C00D40903 /* btn_cry_play@2x.png in Resources */,
 				48866F93199A12E6007B16AA /* VaccineAddContentView.xib in Resources */,
+				BE1F0C6D19A1DE51000BFEED /* btn_add_focus.png in Resources */,
 				48DEA7DC17F4703400A11316 /* Play_11.jpg in Resources */,
 				48FEAF7918E917CB002425E2 /* label1_sum_choose@2x.png in Resources */,
 				BE75CD1A1872CBA5001EF1C1 /* login_sina.png in Resources */,
@@ -6386,7 +6394,6 @@
 				48F91B0818FBB54E0038DC67 /* line_dotted_grey@2x.png in Resources */,
 				486CD6E71998A4970026061E /* pin_red@2x.png in Resources */,
 				48866EE9199A12E6007B16AA /* btn_right_train.png in Resources */,
-				BE66A3C61924BED800E81C9F /* icon_subscribe.png in Resources */,
 				48866EAB199A12E6007B16AA /* btn_cannot.png in Resources */,
 				CE673BA717697A8800A15012 /* Default-568h@2x.png in Resources */,
 				484B66FE195D5375006642BA /* pattern4@2x.png in Resources */,
@@ -6415,6 +6422,7 @@
 				48DCDC17197526E700EA7875 /* MedicineDetailView.xib in Resources */,
 				48866F88199A12E6007B16AA /* VaccineHeaderView.xib in Resources */,
 				CE33B5921770612B00EB8124 /* BabyinfoViewController.xib in Resources */,
+				BE1F0C7019A1DE51000BFEED /* btn_minus.png in Resources */,
 				48F91AAA18FB8DF10038DC67 /* light_level_good@2x.png in Resources */,
 				482791CF1884DE1D003E9724 /* Icon-72.png in Resources */,
 				4800B0C418D7F3D20093A6AF /* 环境_按@2x.png in Resources */,
