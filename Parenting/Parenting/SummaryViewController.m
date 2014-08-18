@@ -14,6 +14,7 @@
 #import "AdviseData.h"
 #import "AdviseTableViewCell.h"
 #import "TipsWebViewController.h"
+#import "ActiveTipsView.h"
 
 #define originalHeight 25.0f
 #define newHeight 100.0f
@@ -96,6 +97,11 @@
 
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"gototips"]boolValue] == YES) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"gototips"];
+        //从贴士详情页回转时候复原状态
+        if (haveShowTips) {
+            UIButton *btn = (UIButton*)[self.view viewWithTag:103];
+            [self segmentSelected:btn];
+        }
     }
     else
     {
@@ -169,12 +175,21 @@
     mHeight = originalHeight;
     sectionIndex = 0;
     dicClicked = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    /*** 废弃的活动贴士
     Advise =[[UITableView alloc]initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64-49) style:UITableViewStylePlain];
     Advise.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
-    [self.view addSubview:Advise];
+    //[self.view addSubview:Advise];
     Advise.delegate=self;
     Advise.dataSource=self;
-    Advise.separatorStyle=UITableViewCellSeparatorStyleNone;
+    Advise.separatorStyle=UITableViewCellSeparatorStyleNone; 
+    ***/
+    
+    /**  新的活动贴士  **/
+    activeTipsView = [[ActiveTipsView alloc] initWithFrame:CGRectMake(0, 50+64, 320, rx.size.height-64-49) ParentViewController:self];
+    activeTipsView.backgroundColor = [UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+    [self.view addSubview:activeTipsView];
+    
     
     [self.view bringSubviewToFront:menu];
     
@@ -288,6 +303,8 @@
     plot.hidden=YES;
     Histogram.hidden=YES;
     Plotting.hidden=YES;
+    
+    activeTipsView.hidden = YES;
     //sender.titleLabel.textColor=[UIColor whiteColor];
     [[self.view viewWithTag:201] setHidden:YES];
     [[self.view viewWithTag:202] setHidden:YES];
@@ -317,6 +334,9 @@
         another1=(UIButton*)[self.view viewWithTag:101];
         another2=(UIButton*)[self.view viewWithTag:102];
         Advise.hidden = NO;
+        
+        activeTipsView.hidden = NO;
+        [self roadTipsView];
     }
 
     another1.enabled=YES;
@@ -459,13 +479,11 @@
 }
 
 - (void)MenuSelectIndex:(int)index{
-    
     [self quadCurveMenu:menu didSelectIndex:index];
 }
 
 -(void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
 {
-    
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
     if ((idx==4)|| btn.enabled || (idx == 5)) {
         Plotting.hidden=YES;
@@ -544,6 +562,11 @@
     [plotArray removeAllObjects];
     
     [self scrollUpadateData];
+    
+    UIButton *btnTips = (UIButton*)[self.view viewWithTag:103];
+    if (!btnTips.enabled) {
+        [self roadTipsView];
+    }
 }
 
 -(void)updaterecord:(NSInteger)idx
@@ -1225,6 +1248,46 @@
 -(void)sendMedicineReloadData
 {
     [self updaterecord:QCM_TYPE_MEDICINE];
+}
+
+
+#pragma 刷新贴士视图
+-(void)roadTipsView{
+    int categoryId;
+    /*  chooseAdvise case
+     *  0:玩耍    对应categoryID:1
+     *  1:洗澡
+     *  2:喂食
+     *  3:睡觉
+     *  4:排泄
+     *  5:吃药
+     */
+    switch (chooseAdvise)
+    {
+        case ADVISE_TYPE_PLAY:
+            categoryId = 1;
+            break;
+        case ADVISE_TYPE_BATH:
+            categoryId = 2;
+            break;
+        case ADVISE_TYPE_FEED:
+            categoryId = 3;
+            break;
+        case ADVISE_TYPE_SLEEP:
+            categoryId = 4;
+            break;
+        case ADVISE_TYPE_DIAPER:
+            categoryId = 5;
+            break;
+        case ADVISE_TYPE_MEDICINE:
+            categoryId = 6;
+            break;
+        default:
+            categoryId=-1;
+            break;
+    }
+    [activeTipsView showTipsView:categoryId];
+    haveShowTips = YES;
 }
 
 @end

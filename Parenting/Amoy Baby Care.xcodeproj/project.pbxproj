@@ -867,6 +867,7 @@
 		BE1EB96B199DEB3700C3ED0B /* BMITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1EB969199DEB3700C3ED0B /* BMITableViewCell.xib */; };
 		BE1EB96F199DEC0B00C3ED0B /* PHYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB96D199DEC0B00C3ED0B /* PHYTableViewCell.m */; };
 		BE1EB970199DEC0B00C3ED0B /* PHYTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */; };
+		BE1F0C6819A19520000BFEED /* ActiveTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1F0C6719A19520000BFEED /* ActiveTipsView.m */; };
 		BE25763318FE51CA0053683A /* title_BMI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761918FE51CA0053683A /* title_BMI@2x.png */; };
 		BE25763418FE51CA0053683A /* title_circumference@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761A18FE51CA0053683A /* title_circumference@2x.png */; };
 		BE25763518FE51CA0053683A /* title_temperature@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761B18FE51CA0053683A /* title_temperature@2x.png */; };
@@ -2182,6 +2183,8 @@
 		BE1EB96C199DEC0B00C3ED0B /* PHYTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHYTableViewCell.h; sourceTree = "<group>"; };
 		BE1EB96D199DEC0B00C3ED0B /* PHYTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHYTableViewCell.m; sourceTree = "<group>"; };
 		BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHYTableViewCell.xib; sourceTree = "<group>"; };
+		BE1F0C6619A19520000BFEED /* ActiveTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveTipsView.h; sourceTree = "<group>"; };
+		BE1F0C6719A19520000BFEED /* ActiveTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveTipsView.m; sourceTree = "<group>"; };
 		BE25761918FE51CA0053683A /* title_BMI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_BMI@2x.png"; sourceTree = "<group>"; };
 		BE25761A18FE51CA0053683A /* title_circumference@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_circumference@2x.png"; sourceTree = "<group>"; };
 		BE25761B18FE51CA0053683A /* title_temperature@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_temperature@2x.png"; sourceTree = "<group>"; };
@@ -5120,6 +5123,8 @@
 				F365CADA176C537900EA1406 /* CustumCell.h */,
 				F365CADB176C537900EA1406 /* CustumCell.m */,
 				CE239798176EF5CF0096E033 /* CustumCell.xib */,
+				BE1F0C6619A19520000BFEED /* ActiveTipsView.h */,
+				BE1F0C6719A19520000BFEED /* ActiveTipsView.m */,
 			);
 			name = Summary;
 			sourceTree = "<group>";
@@ -6619,6 +6624,7 @@
 				48866FAA199A12E6007B16AA /* AddMilestoneModel.m in Sources */,
 				BE6938D61908E80200FC2BB4 /* PhysiologyViewController.m in Sources */,
 				48152E2E1848721F009A4900 /* GuideViewController.m in Sources */,
+				BE1F0C6819A19520000BFEED /* ActiveTipsView.m in Sources */,
 				BEB475A218E574A80004B649 /* SBJsonStreamParser.m in Sources */,
 				4824D0AC196111B30098C715 /* FeedMoreController.m in Sources */,
 				BEB7E2C919230E4A00E752B7 /* TipsMainViewController.m in Sources */,
