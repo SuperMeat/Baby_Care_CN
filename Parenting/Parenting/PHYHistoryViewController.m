@@ -72,13 +72,13 @@
     [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [_phyDetailImageView addSubview:_buttonBack];
     
-    //TableView 
+    //TableView
     _tableView = [[UITableView alloc]
-                   initWithFrame:CGRectMake(0,
-                                            64,
-                                            self.view.bounds.size.width ,
-                                            self.view.bounds.size.height - 64)
-                   style:UITableViewStyleGrouped];
+                  initWithFrame:CGRectMake(0,
+                                           64,
+                                           self.view.bounds.size.width ,
+                                           self.view.bounds.size.height - 64)
+                  style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _tableView.bounds.size.width, 0.01f)];
@@ -122,7 +122,7 @@
         default:
             break;
     }
-
+    
 }
 
 -(void)goBack{
@@ -155,7 +155,7 @@
             else{
                 cell.labelDate.text = [ACDate dateDetailFomatdate2:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
             }
-
+            
             cell.labelType.text = itemName;
             cell.labelValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"value"] doubleValue]];
             cell.labelUnit.text = itemUnit;
@@ -218,7 +218,7 @@
     switch (itemType) {
         case 4:     //体温
             tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"UPDATE" CreateTime:[[[arrDS objectAtIndex:indexPath.row] objectForKey:@"create_time"]longValue]];
-                tempSaveView.TempSaveDelegate = self;
+            tempSaveView.TempSaveDelegate = self;
             [self.view addSubview:tempSaveView];
             break;
         case 2:

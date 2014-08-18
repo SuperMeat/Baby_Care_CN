@@ -117,4 +117,9 @@
     
 }
 
+-(void)didFinishGetUMSocialDataResponse:(UMSocialResponseEntity *)response
+{
+    
+}
+
 @end

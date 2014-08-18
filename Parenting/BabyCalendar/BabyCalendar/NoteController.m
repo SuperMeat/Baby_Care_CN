@@ -10,6 +10,7 @@
 #import "NoteView.h"
 #import "FootView.h"
 #import "NoteModel.h"
+#import "ShareInfoView.h"
 @interface NoteController ()<NoteViewDelegate,FootViewDelegate>
 {
     float startContentOffsetX;
@@ -29,9 +30,21 @@
     return self;
 }
 
+- (void)ShareBtnByImage
+{
+    UIImage *detailImage = [ACFunction cutView:self.view andWidth:kShareImageWidth_Note andHeight:kShareImageHeight_Note];
+    ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
+    [shareView.shareInfoImageView setImage:detailImage];
+    shareView.titleDetail.text = [NSString stringWithFormat:kShareNoteTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage]];
+    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
+    [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"item_share" title:nil action:@selector(ShareBtnByImage)];
     
     self.title = @"宝宝日记";
     
@@ -41,7 +54,6 @@
     _scrollView.showsHorizontalScrollIndicator = NO;
     [_scrollView setPagingEnabled:YES];
     [self.view addSubview:_scrollView];
-    
     
     FootView* footView = [[[NSBundle mainBundle] loadNibNamed:@"FootView" owner:self options:nil] lastObject];
     footView.delegate = self;

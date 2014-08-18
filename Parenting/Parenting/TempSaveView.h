@@ -13,14 +13,14 @@
 @end
 
 @interface TempSaveView : UIView<UITextFieldDelegate,UIActionSheetDelegate>
-{ 
+{
     NSString *opType;
     int itemType;
     long createTime;
     NSDate* measureTime;
     
     UIImageView *imageview;
-    UITextField *textRecordDate; 
+    UITextField *textRecordDate;
     UITextField *textValue;
     UIButton *buttonSave;
     UIButton *buttonCancel;

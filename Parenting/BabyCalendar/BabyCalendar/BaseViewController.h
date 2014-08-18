@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "UIViewExt.h"
 #import "LoadingView.h"
+#import "UMSocialShakeService.h"
+#import "UMSocial.h"
+#import "UMSocialSnsData.h"
+#import "UMSocialSnsService.h"
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController<UMSocialUIDelegate,UMSocialDataDelegate,UMSocialShakeDelegate>
 {
     LoadingView* _loadingView;
 }

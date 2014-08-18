@@ -56,20 +56,7 @@
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
     
-    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title1.backgroundColor = [UIColor clearColor];
-    [title1 setTextAlignment:NSTextAlignmentCenter];
-    title1.textColor = [UIColor whiteColor];
-    title1.text = NSLocalizedString(@"分享", nil);
-    title1.font = [UIFont systemFontOfSize:14];
-    [rightButton addSubview:title1];
-    
-    [rightButton addTarget:self action:@selector(ShareBtn) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame=CGRectMake(0, 0, 44, 28);
-    
-    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightBar;
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"item_share" title:nil action:@selector(ShareBtn)];
     
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 160, 20)];
     titleView.backgroundColor=[UIColor clearColor];
@@ -150,42 +137,6 @@
 -(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
 {
  
-}
-
-- (void)ShareBtnByImage
-{
-    UIGraphicsBeginImageContext(CGSizeMake(320, 500));
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
-    CGImageRef imageRef = parentImage.CGImage;
-    CGRect windowframe = [[UIScreen mainScreen] bounds];
-    CGRect contentframe = CGRectMake(windowframe.origin.x, windowframe.origin.y, windowframe.size.width, windowframe.size.height);
-    CGRect myImageRect=contentframe;
-    CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, myImageRect);
-    CGSize size=CGSizeMake(contentframe.size.width,  contentframe.size.height);
-    if(UIGraphicsBeginImageContextWithOptions != NULL)
-    {
-        UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
-    } else
-    {
-        UIGraphicsBeginImageContext(size);
-    }
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextDrawImage(context, myImageRect, subImageRef);
-    UIImage* image = [UIImage imageWithCGImage:subImageRef];
-    
-    
-    NSData *imagedata=UIImagePNGRepresentation(image);
-    [imagedata writeToFile:SHAREPATH atomically:NO];
-    UIGraphicsEndImageContext();
-    CGImageRelease(imageRef);
-    UIGraphicsEndImageContext();
-    [UIView beginAnimations:@"ToggleViews" context:nil];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView commitAnimations];
-    
-    [ACShare shareImage:self andshareTitle:_contenttitle andshareImage:[UIImage imageWithContentsOfFile:SHAREPATH] anddelegate:self];
 }
 
 -(BOOL)isDirectShareInIconActionSheet

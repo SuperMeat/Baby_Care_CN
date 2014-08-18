@@ -237,7 +237,6 @@
     return [NSString stringWithFormat:@"%@ %02d-%02d-%02d",week,[comps year],[comps month],[comps day]];
 }
 
-
 +(NSString*)getDayBeforeDespFromDate:(NSDate *)date
 {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];

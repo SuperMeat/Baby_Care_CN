@@ -37,6 +37,11 @@
     
 }
 
+- (IBAction)shareToFriends:(UIButton *)sender
+{
+    [self.delegate ShareToFriendByImage];
+}
+
 - (IBAction)leftAction:(id)sender {
     if ([self.delegate respondsToSelector:@selector(MilestoneHeaderView_left)]) {
         [self.delegate MilestoneHeaderView_left];
@@ -69,6 +74,7 @@
         [formatter setDateFormat:kDateFormat];
         NSString* dateString = [formatter stringFromDate:selectedDate];
         [_btnDate setTitle:dateString forState:UIControlStateNormal];
+        _labWeekday.text = [BaseMethod weekdayFromDate:[BaseMethod dateFormString:dateString]];
 
     }
     

@@ -23,7 +23,7 @@
         }
     }
     return self;
-} 
+}
 
 -(void)initView{
     //标题

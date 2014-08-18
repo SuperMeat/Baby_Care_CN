@@ -97,7 +97,7 @@
     _buttonTip.titleLabel.font = [UIFont systemFontOfSize:14];
     [_buttonTip setTitle:@"i" forState:UIControlStateNormal];
     
-//    [_phyDetailImageView addSubview:_buttonTip];
+    //    [_phyDetailImageView addSubview:_buttonTip];
     
     //_viewTop1
     _viewTop1 = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 65)];

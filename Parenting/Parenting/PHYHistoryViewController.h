@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>  
+#import <UIKit/UIKit.h>   
 
 @interface PHYHistoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TempSaveViewDelegate,PhySaveViewDelegate>
 {
@@ -14,7 +14,6 @@
     NSString* itemName;
     NSString* itemUnit;
     int itemType; //身高0 体重1 BMI2 头围3 体温4
-    
     
     TempSaveView *tempSaveView;
     PhySaveView *phySaveView;

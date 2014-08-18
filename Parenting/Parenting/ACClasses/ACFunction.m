@@ -199,5 +199,22 @@
     [writer writeToFile:path atomically:YES];
 }
 
++(UIImage*)cutView:(UIView*)view andWidth:(CGFloat)width andHeight:(CGFloat)height
+{
+    CGSize parentsize=CGSizeMake(width,height);
+    if(UIGraphicsBeginImageContextWithOptions != NULL)
+    {
+        UIGraphicsBeginImageContextWithOptions(parentsize, NO, 0.0);
+    }
+    else
+    {
+        UIGraphicsBeginImageContext(parentsize);
+    }
+   
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 
 @end

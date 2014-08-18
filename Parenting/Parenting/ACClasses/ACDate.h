@@ -18,7 +18,7 @@
 +(NSString *)getDurationfromdate:(NSDate*)date second:(int)second;
 +(NSString *)dateFomatdate:(NSDate*)date;
 +(NSString *)getDayBeforeDespFromDate:(NSDate*)date;
-+(NSString *)dateDetailFomatdate:(NSDate*)date;
++(NSString *)dateDetailFomatdate:(NSDate*)date; 
 +(NSString *)dateDetailFomatdate2:(NSDate*)date;
 +(NSString *)dateDetailFomatdate3:(NSDate*)date;
 
