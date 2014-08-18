@@ -17,6 +17,7 @@
         [self setBackgroundColor:[ACFunction colorWithHexString:kShareImageBackgroundColor]];
         self.iconDetail.textColor  = [ACFunction colorWithHexString:kShareImageIconFontColor];
         self.titleDetail.textColor = [ACFunction colorWithHexString:kShareImageFontColor];
+        self.titleDetail.font = [UIFont fontWithName:kShareImageFont size:15];
     }
     return self;
 }

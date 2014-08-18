@@ -13,9 +13,9 @@
 
 @interface TestView : BaseView<TestMiddleViewDelegate,TestFootViewDelegate>
 {
-    UIScrollView* _scrollView;
-    TestHeaderView* _headerView;
-    TestFootView*   _footView;
+    UIScrollView    *_scrollView;
+    TestHeaderView  *_headerView;
+    TestFootView    *_footView;
     
 
 }

@@ -144,6 +144,10 @@
 #define kShareImageIconFontColor   @"#858585"
 #define kShareImageBackgroundColor @"#ecf4f5"
 
+#define kShareImageFont @"方正卡通简体"
+#define kShareMilestoneTitle @"%@%@,%@,记录下成长过程中的第一次~💗"  //宝宝姓名+日龄,里程碑title
+#define kShareNoteTitle @"%@%@,分享我的宝宝日记~💗"
+
 typedef enum
 {
     creatMilestoneType_model,

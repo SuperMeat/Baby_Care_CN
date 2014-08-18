@@ -35,7 +35,7 @@
     UIImage *detailImage = [ACFunction cutView:self.view andWidth:kShareImageWidth_Note andHeight:kShareImageHeight_Note];
     ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
     [shareView.shareInfoImageView setImage:detailImage];
-    shareView.titleDetail.text = @"今天是宝宝第100天,分享我的宝宝日记!💗";
+    shareView.titleDetail.text = [NSString stringWithFormat:kShareNoteTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage]];
     UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
     [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
 }
@@ -44,20 +44,7 @@
 {
     [super viewDidLoad];
     
-    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *title1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 28)];
-    title1.backgroundColor = [UIColor clearColor];
-    [title1 setTextAlignment:NSTextAlignmentCenter];
-    title1.textColor = [UIColor whiteColor];
-    title1.text = NSLocalizedString(@"分享", nil);
-    title1.font = [UIFont systemFontOfSize:14];
-    [rightButton addSubview:title1];
-    
-    [rightButton addTarget:self action:@selector(ShareBtnByImage) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame=CGRectMake(0, 0, 44, 28);
-    
-    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightBar;
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"item_share" title:nil action:@selector(ShareBtnByImage)];
     
     self.title = @"宝宝日记";
     
@@ -67,7 +54,6 @@
     _scrollView.showsHorizontalScrollIndicator = NO;
     [_scrollView setPagingEnabled:YES];
     [self.view addSubview:_scrollView];
-    
     
     FootView* footView = [[[NSBundle mainBundle] loadNibNamed:@"FootView" owner:self options:nil] lastObject];
     footView.delegate = self;

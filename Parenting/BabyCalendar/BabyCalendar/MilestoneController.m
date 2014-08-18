@@ -174,7 +174,7 @@
     UIImage *detailImage = [ACFunction cutView:self.view andWidth:kShareImageWidth_Milestone andHeight:kShareImageHeight_Milestone];
     ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
     [shareView.shareInfoImageView setImage:detailImage];
-    shareView.titleDetail.text = @"今天是宝宝第100天,宝宝会笑了,记录下成长的第一次!❤️";
+    shareView.titleDetail.text = [NSString stringWithFormat:kShareMilestoneTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage],_milestoneView.contentView.labTitle.text];;
     UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
     [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
 }
