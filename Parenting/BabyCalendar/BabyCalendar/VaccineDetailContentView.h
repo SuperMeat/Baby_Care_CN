@@ -13,6 +13,8 @@
 {
     __weak IBOutlet UIScrollView *_scrollView;
     RTLabel* _contentView;
-    
+      __weak IBOutlet UIScrollView *_scrollView2;
+     RTLabel* _contentView2;
 }
+@property (strong, nonatomic) IBOutlet UIImageView *title2;
 @end

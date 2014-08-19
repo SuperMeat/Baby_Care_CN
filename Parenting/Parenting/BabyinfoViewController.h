@@ -12,7 +12,6 @@
     UIDatePicker *datepicker;
     UIImagePickerController *imagePicker;
     UIActionSheet *action;
-    
 }
 @property (weak, nonatomic) IBOutlet UITextField *nametextfield;
 @property (weak, nonatomic) IBOutlet UITextField *birthdaytextfield;

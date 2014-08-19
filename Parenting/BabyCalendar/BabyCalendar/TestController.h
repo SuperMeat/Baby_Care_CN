@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface TestController : BaseViewController
+@interface TestController : BaseViewController<UIAlertViewDelegate>
 @property(nonatomic,assign)NSInteger month;
 @end

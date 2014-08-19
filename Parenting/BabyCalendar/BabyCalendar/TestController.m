@@ -46,7 +46,7 @@
     
     self.title = [NSString stringWithFormat:@"第%d个月测评",_month+1];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"btn_back" title:nil action:@selector(doneAction)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"btn_end" title:nil action:@selector(doneAction)];
     
     _testView = [[TestView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-64)];
     _testView.month = _month;
@@ -55,21 +55,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doneAction) name:kNotifi_done_test object:nil];
 }
 
-- (void)doneAction
+- (void)GotoEnd
 {
     // 计算测评分数
-    
     NSArray* tests = _testView.middleView.datas;
     float each_score = 100.0f/(float)tests.count;
     float total_score = 0.0f;
     for (TestQuestionModel* model in tests) {
         // 总分
         total_score += [self score:[model.answer intValue] withEachScore:each_score withType:model.type];
-        
     }
     
-    
-
     TestModel* model = [[TestModel alloc] init];
     NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
     model.date = [userDef objectForKey:kSelectedDate];
@@ -95,9 +91,13 @@
         reportVc.month = _month;
         [self.navigationController pushViewController:reportVc animated:YES];
     }
-    
-    
-    
+
+}
+
+- (void)doneAction
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"为了保证测评的有效性,请核实题目完成后再查看结果!" delegate:self cancelButtonTitle:@"已完成请评分" otherButtonTitles:@"重新审题",nil];
+    [alertView show];
 }
 
 - (float)score:(NSInteger)answer withEachScore:(float)each_score withType:(NSString*)type
@@ -149,8 +149,18 @@
     }
     
 }
+
+#pragma -mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self GotoEnd];
+    }
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 @end
