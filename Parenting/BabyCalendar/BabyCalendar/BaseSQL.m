@@ -271,7 +271,7 @@
         NSLog(@"OPEN FAIL");
     }
     
-    [dataBase executeUpdate:@"CREATE TABLE IF NOT EXISTS train_table(id int,type text,title text,content text,trained bool,date text)"];
+    [dataBase executeUpdate:@"CREATE TABLE IF NOT EXISTS train_table(id int,type text,title text,content text,trained bool,date text,month int)"];
     [dataBase close];
     
     return dataBase;
