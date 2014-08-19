@@ -91,7 +91,6 @@
     CGContextAddArc(context, center_x, center_y, 30, 0*M_PI/180, 360*M_PI/180, 0);
     CGContextFillPath(context);
     
-    
     // 分数圈
     CGContextSetLineWidth(context, 15);
     

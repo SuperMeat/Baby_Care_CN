@@ -201,7 +201,7 @@
 
 +(UIImage*)cutView:(UIView*)view andWidth:(CGFloat)width andHeight:(CGFloat)height
 {
-    CGSize parentsize=CGSizeMake(width,height);
+    CGSize parentsize=CGSizeMake(width,568);
     if(UIGraphicsBeginImageContextWithOptions != NULL)
     {
         UIGraphicsBeginImageContextWithOptions(parentsize, NO, 0.0);
