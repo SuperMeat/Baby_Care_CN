@@ -15,5 +15,5 @@
 @property(nonatomic,copy)NSString* content;
 @property(nonatomic,retain)NSNumber *trained;
 @property(nonatomic,copy)NSString* date;
-
+@property(nonatomic,retain)NSNumber* month;
 @end
