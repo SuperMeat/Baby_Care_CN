@@ -68,10 +68,10 @@
 
 - (void)shareAction
 {
-    [reportView setBounds:CGRectMake(0, 0, 320, 568)];
-    UIImage *detailImage = [ACFunction cutView:reportView andWidth:reportView.width andHeight:reportView.contentheight+64];
+    UIImage *detailImage = [ACFunction cutScrollView:reportView];
     [reportView setNeedsDisplay];
     ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
+    [shareView.shareInfoImageView setFrame:CGRectMake((320-193)/2.0, shareView.shareInfoImageView.origin.y, 193, 342)];
     [shareView.shareInfoImageView setImage:detailImage];
     TestModel *testmodel = reportView.datas[_month];
     shareView.titleDetail.text = [NSString stringWithFormat:kShareTestTitle,[BabyinfoViewController getbabyname],_month+1,testmodel.score];

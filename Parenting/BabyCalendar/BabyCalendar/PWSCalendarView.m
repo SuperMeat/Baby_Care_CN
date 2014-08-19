@@ -640,8 +640,6 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
             MilestoneController* milestoneVc = [[MilestoneController alloc] init];
             [vc.navigationController pushViewController:milestoneVc animated:YES];
         }
-        
-        
        
     }
     // 疫苗
@@ -723,12 +721,15 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
         }
     }
     for (TrainModel* t_model in self.trains) {
-        if ([t_model.date isEqualToString:dateStr]) {
+        if ([t_model.date isEqualToString:dateStr])
+        {
             model.train = [NSNumber numberWithBool:YES];
             
         }
     }
-    for (TestModel* t_model in self.tests) {
+    for (TestModel* t_model in self.tests)
+    {
+        NSLog(@"birth : %@",[BabyinfoViewController getbabybirth]);
         NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
         NSDate* testDate = [BaseMethod dateFormString:t_model.date];
         NSDate* selectedDate = [BaseMethod dateFormString:dateStr];
@@ -738,7 +739,8 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
         
         int days_bith_selected = [BaseMethod fromStartDate:birthDate withEndDate:selectedDate]/30;
         
-        if (days_bith_test == days_bith_selected) {
+        if (days_bith_test == days_bith_selected)
+        {
             model.test = [NSNumber numberWithBool:YES];
             model.testModel = t_model;
         }

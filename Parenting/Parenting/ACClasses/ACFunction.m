@@ -201,7 +201,7 @@
 
 +(UIImage*)cutView:(UIView*)view andWidth:(CGFloat)width andHeight:(CGFloat)height
 {
-    CGSize parentsize=CGSizeMake(width,568);
+    CGSize parentsize=CGSizeMake(width,height);
     if(UIGraphicsBeginImageContextWithOptions != NULL)
     {
         UIGraphicsBeginImageContextWithOptions(parentsize, NO, 0.0);
@@ -215,6 +215,30 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
++(UIImage*)cutScrollView:(UIScrollView*)scrollView
+{
+    UIImage* image = nil;
+    UIGraphicsBeginImageContext(CGSizeMake(320, 568));
+    {
+        CGPoint savedContentOffset = scrollView.contentOffset;
+        CGRect savedFrame = scrollView.frame;
+        scrollView.contentOffset = CGPointZero;
+        scrollView.frame = CGRectMake(0, 0, 320, scrollView.contentSize.height);
+        
+        [scrollView.layer renderInContext: UIGraphicsGetCurrentContext()];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        scrollView.contentOffset = savedContentOffset;
+        scrollView.frame = savedFrame;
+    }
+    UIGraphicsEndImageContext();
+    
+    if (image != nil) {
+        return image;
+    }
+    return nil;
 }
 
 @end

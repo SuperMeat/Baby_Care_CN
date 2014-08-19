@@ -173,6 +173,7 @@
 {
     UIImage *detailImage = [ACFunction cutView:self.view andWidth:kShareImageWidth_Milestone andHeight:kShareImageHeight_Milestone];
     ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
+    [shareView.shareInfoImageView setFrame:CGRectMake((320-193)/2.0, shareView.shareInfoImageView.origin.y, 217, 342)];
     [shareView.shareInfoImageView setImage:detailImage];
     shareView.titleDetail.text = [NSString stringWithFormat:kShareMilestoneTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage],_milestoneView.contentView.labTitle.text];;
     UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
