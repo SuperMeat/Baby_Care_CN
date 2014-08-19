@@ -70,8 +70,10 @@
         NSArray* types = @[kKnowledge,kActive,kLive,kSociety];
         NSString* path = [[NSBundle mainBundle] pathForResource:@"TrainData" ofType:@"plist"];
         NSArray* trainDatas = [NSArray arrayWithContentsOfFile:path];
-        for (NSArray* trainData in trainDatas) {
-            for (NSDictionary* dic in trainData) {
+        for (NSArray* trainData in trainDatas)
+        {
+            for (NSDictionary* dic in trainData[0])
+            {
                 index++;
                 TrainModel* model = [[TrainModel alloc] init];
                 model.id = [NSNumber numberWithInt:index];
@@ -80,8 +82,53 @@
                 model.content = [dic objectForKey:@"content"];
                 model.trained = [NSNumber numberWithBool:NO];
                 model.date = @"";
+                model.month = [NSNumber numberWithInt:3];
                 [BaseSQL insertData_train:model];
            
+            }
+            
+            for (NSDictionary* dic in trainData[1])
+            {
+                index++;
+                TrainModel* model = [[TrainModel alloc] init];
+                model.id = [NSNumber numberWithInt:index];
+                model.type = types[i];
+                model.title = [dic objectForKey:@"title"];
+                model.content = [dic objectForKey:@"content"];
+                model.trained = [NSNumber numberWithBool:NO];
+                model.date = @"";
+                model.month = [NSNumber numberWithInt:6];
+                [BaseSQL insertData_train:model];
+                
+            }
+            
+            for (NSDictionary* dic in trainData[2])
+            {
+                index++;
+                TrainModel* model = [[TrainModel alloc] init];
+                model.id = [NSNumber numberWithInt:index];
+                model.type = types[i];
+                model.title = [dic objectForKey:@"title"];
+                model.content = [dic objectForKey:@"content"];
+                model.trained = [NSNumber numberWithBool:NO];
+                model.date = @"";
+                model.month = [NSNumber numberWithInt:9];
+                [BaseSQL insertData_train:model];
+                
+            }
+            
+            for (NSDictionary* dic in trainData[3])
+            {
+                index++;
+                TrainModel* model = [[TrainModel alloc] init];
+                model.id = [NSNumber numberWithInt:index];
+                model.type = types[i];
+                model.title = [dic objectForKey:@"title"];
+                model.content = [dic objectForKey:@"content"];
+                model.trained = [NSNumber numberWithBool:NO];
+                model.date = @"";
+                model.month = [NSNumber numberWithInt:12];
+                [BaseSQL insertData_train:model];
                 
             }
             i++;

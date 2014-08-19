@@ -279,11 +279,10 @@
 // 插入数据
 +(BOOL)insertData_train:(TrainModel*)model
 {
-    
     //插入数据库
     FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
     [dataBase open];
-    BOOL success = [dataBase executeUpdate:@"INSERT INTO train_table (id,type,title,content,date,trained) VALUES (?,?,?,?,?,?)",model.id,model.type,model.title,model.content,model.date,model.trained];
+    BOOL success = [dataBase executeUpdate:@"INSERT INTO train_table (id,type,title,content,date,trained,month) VALUES (?,?,?,?,?,?,?)",model.id,model.type,model.title,model.content,model.date,model.trained,model.month];
     [dataBase close];
     
     return success;
