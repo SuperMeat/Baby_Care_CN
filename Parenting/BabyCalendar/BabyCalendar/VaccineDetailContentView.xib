@@ -16,18 +16,30 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="e5U-wz-pqh">
-                    <rect key="frame" x="0.0" y="40" width="320" height="270"/>
+                    <rect key="frame" x="0.0" y="40" width="320" height="115"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </scrollView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="4DZ-oS-ah5">
+                    <rect key="frame" x="0.0" y="195" width="320" height="115"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </scrollView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_content_detail2.png" id="Enw-0s-hxb">
+                    <rect key="frame" x="0.0" y="155" width="320" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="_scrollView" destination="e5U-wz-pqh" id="5nv-lT-Ax0"/>
+                <outlet property="_scrollView2" destination="4DZ-oS-ah5" id="3rk-Fz-SeR"/>
+                <outlet property="title2" destination="Enw-0s-hxb" id="Zs5-sJ-IjI"/>
             </connections>
         </view>
     </objects>
     <resources>
         <image name="bg_content_detail.png" width="1280" height="152"/>
+        <image name="bg_content_detail2.png" width="640" height="76"/>
     </resources>
 </document>

@@ -206,6 +206,7 @@
 		482791D61884DE1D003E9724 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791C41884DE1D003E9724 /* Icon@2x.png */; };
 		482791D71884DE1D003E9724 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791C51884DE1D003E9724 /* iTunesArtwork.png */; };
 		482791D81884DE1D003E9724 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 482791C61884DE1D003E9724 /* iTunesArtwork@2x.png */; };
+		4828F26319A340AA00D04926 /* bg_content_detail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4828F26219A340AA00D04926 /* bg_content_detail2.png */; };
 		482B34B118C032D500EFA963 /* UpLoadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 482B34B018C032D500EFA963 /* UpLoadController.m */; };
 		48357E231846ED2A00BCF799 /* EnvironmentAdviceDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E221846ED2A00BCF799 /* EnvironmentAdviceDB.m */; };
 		48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2518472BB500BCF799 /* AdviseLevel.m */; };
@@ -1656,6 +1657,7 @@
 		482791C41884DE1D003E9724 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		482791C51884DE1D003E9724 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		482791C61884DE1D003E9724 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		4828F26219A340AA00D04926 /* bg_content_detail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_content_detail2.png; sourceTree = "<group>"; };
 		482B34AF18C032D500EFA963 /* UpLoadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpLoadController.h; path = UpLoadController/UpLoadController.h; sourceTree = "<group>"; };
 		482B34B018C032D500EFA963 /* UpLoadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpLoadController.m; path = UpLoadController/UpLoadController.m; sourceTree = "<group>"; };
 		48357E211846ED2A00BCF799 /* EnvironmentAdviceDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvironmentAdviceDB.h; path = LocalData/EnvironmentAdviceDB.h; sourceTree = "<group>"; };
@@ -4727,6 +4729,7 @@
 		48866CDE199A12E5007B16AA /* vaccine */ = {
 			isa = PBXGroup;
 			children = (
+				4828F26219A340AA00D04926 /* bg_content_detail2.png */,
 				48866CC6199A12E5007B16AA /* btn_lung.png */,
 				48866CC7199A12E5007B16AA /* btn_hepatitis.png */,
 				48866CC8199A12E5007B16AA /* btn_ grippe.png */,
@@ -6854,6 +6857,7 @@
 				48866F2D199A12E6007B16AA /* btn_arrow_up.png in Resources */,
 				48152E1D18486C66009A4900 /* nav_bar_bg@2x.png in Resources */,
 				48866EE4199A12E6007B16AA /* bg_addphoto.png in Resources */,
+				4828F26319A340AA00D04926 /* bg_content_detail2.png in Resources */,
 				481EF6CB1980BCC400959CB7 /* Medicine_4.jpg in Resources */,
 				480D6CF81924ABE800E5CAC7 /* arrow_down@2x.png in Resources */,
 				48866EBC199A12E6007B16AA /* color_knowledge.png in Resources */,
