@@ -243,6 +243,24 @@
     [dataBase close];
     return success;
 }
+// 查询
++ (BOOL)queryData_vaccine_withModel:(VaccineModel*)model
+{
+    
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        
+        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM vaccineTable WHERE vaccine=?",model.vaccine];
+        while ([rs next]){
+            [rs close];
+            [dataBase close];
+            return YES;
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return NO;
+}
 
 /**************训练**************/
 // 创建数据库

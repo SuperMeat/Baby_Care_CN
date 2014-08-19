@@ -41,6 +41,8 @@
 // ２.查询数据
 + (NSMutableArray*)queryData_vaccine;
 + (NSMutableArray*)queryData_vaccine:(NSString*)date;
+// 查询
++ (BOOL)queryData_vaccine_withModel:(VaccineModel*)model;
 // 插入数据
 +(BOOL)insertData_vaccine:(VaccineModel*)model;
 //删除行

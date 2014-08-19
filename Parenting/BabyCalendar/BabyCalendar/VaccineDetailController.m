@@ -49,7 +49,13 @@
          // 计划外
         BOOL success = NO;
         if ([model.completed boolValue]) {
-            success = [BaseSQL insertData_vaccine:model];
+            if ([BaseSQL queryData_vaccine_withModel:model]) {
+                success = [BaseSQL updateData_vaccine:model];
+            }else
+            {
+                success = [BaseSQL insertData_vaccine:model];
+            }
+            
         }else
         {
             success = [BaseSQL deleteData_vaccine:model];
