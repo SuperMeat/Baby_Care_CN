@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		48000EFC19A1985B00AD04D5 /* 方正卡通简体.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48000EFB19A1985B00AD04D5 /* 方正卡通简体.ttf */; };
+		48000EFE19A2069D00AD04D5 /* 方正卡通简体.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */; };
+		48000F0219A2076000AD04D5 /* MilestoneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */; };
 		4800B0BF18D7F3D20093A6AF /* 日历@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800B0B518D7F3D20093A6AF /* 日历@2x.png */; };
 		4800B0C018D7F3D20093A6AF /* 日历_按@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800B0B618D7F3D20093A6AF /* 日历_按@2x.png */; };
 		4800B0C118D7F3D20093A6AF /* 活动@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800B0B718D7F3D20093A6AF /* 活动@2x.png */; };
@@ -883,7 +885,6 @@
 		48866F9A199A12E6007B16AA /* MilestoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E07199A12E5007B16AA /* MilestoneController.m */; };
 		48866F9B199A12E6007B16AA /* MilestoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E09199A12E5007B16AA /* MilestoneView.m */; };
 		48866F9C199A12E6007B16AA /* MilestoneHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E0B199A12E5007B16AA /* MilestoneHeaderView.m */; };
-		48866F9D199A12E6007B16AA /* MilestoneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */; };
 		48866F9E199A12E6007B16AA /* MilestoneContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E0E199A12E5007B16AA /* MilestoneContentView.m */; };
 		48866FA0199A12E6007B16AA /* MilestoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E11199A12E5007B16AA /* MilestoneModel.m */; };
 		48866FA1199A12E6007B16AA /* EditeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48866E13199A12E5007B16AA /* EditeView.m */; };
@@ -1412,6 +1413,8 @@
 
 /* Begin PBXFileReference section */
 		48000EFB19A1985B00AD04D5 /* 方正卡通简体.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正卡通简体.ttf"; sourceTree = "<group>"; };
+		48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正卡通简体.ttf"; sourceTree = "<group>"; };
+		48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneHeaderView.xib; sourceTree = "<group>"; };
 		4800B0B518D7F3D20093A6AF /* 日历@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "日历@2x.png"; sourceTree = "<group>"; };
 		4800B0B618D7F3D20093A6AF /* 日历_按@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "日历_按@2x.png"; sourceTree = "<group>"; };
 		4800B0B718D7F3D20093A6AF /* 活动@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动@2x.png"; sourceTree = "<group>"; };
@@ -2446,7 +2449,6 @@
 		48866E09199A12E5007B16AA /* MilestoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneView.m; sourceTree = "<group>"; };
 		48866E0A199A12E5007B16AA /* MilestoneHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilestoneHeaderView.h; sourceTree = "<group>"; };
 		48866E0B199A12E5007B16AA /* MilestoneHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneHeaderView.m; sourceTree = "<group>"; };
-		48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneHeaderView.xib; sourceTree = "<group>"; };
 		48866E0D199A12E5007B16AA /* MilestoneContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilestoneContentView.h; sourceTree = "<group>"; };
 		48866E0E199A12E5007B16AA /* MilestoneContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilestoneContentView.m; sourceTree = "<group>"; };
 		48866E10199A12E5007B16AA /* MilestoneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilestoneModel.h; sourceTree = "<group>"; };
@@ -5244,6 +5246,8 @@
 		48866E31199A12E5007B16AA /* Milestone */ = {
 			isa = PBXGroup;
 			children = (
+				48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */,
+				48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */,
 				BE5B383B19A1FB5F00246B6A /* MilestoneContentView.xib */,
 				48866E06199A12E5007B16AA /* MilestoneController.h */,
 				48866E07199A12E5007B16AA /* MilestoneController.m */,
@@ -5251,7 +5255,6 @@
 				48866E09199A12E5007B16AA /* MilestoneView.m */,
 				48866E0A199A12E5007B16AA /* MilestoneHeaderView.h */,
 				48866E0B199A12E5007B16AA /* MilestoneHeaderView.m */,
-				48866E0C199A12E5007B16AA /* MilestoneHeaderView.xib */,
 				48866E0D199A12E5007B16AA /* MilestoneContentView.h */,
 				48866E0E199A12E5007B16AA /* MilestoneContentView.m */,
 				48866E10199A12E5007B16AA /* MilestoneModel.h */,
@@ -6985,6 +6988,7 @@
 				48152E1C18486C66009A4900 /* messages_toolbar_background@2x.png in Resources */,
 				480D6CEF19248D1700E5CAC7 /* line.png in Resources */,
 				48866F40199A12E6007B16AA /* cell_bg_selected_0.png in Resources */,
+				48000EFE19A2069D00AD04D5 /* 方正卡通简体.ttf in Resources */,
 				BE004CDF18FE2B7500E56833 /* icon_news@2x.png in Resources */,
 				480EFA2218E5155C00D40903 /* panels_color4@2x.png in Resources */,
 				488017B4199DF72900F6778B /* 6.4.4.jpg in Resources */,
@@ -7659,7 +7663,6 @@
 				482791CE1884DE1D003E9724 /* 80.png in Resources */,
 				48801709199DF72900F6778B /* 17.2.3.jpg in Resources */,
 				48801759199DF72900F6778B /* 21.4.5.jpg in Resources */,
-				48866F9D199A12E6007B16AA /* MilestoneHeaderView.xib in Resources */,
 				48FEAEFF18E91423002425E2 /* icon_sleeping@2x.png in Resources */,
 				488016DE199DF72900F6778B /* 15.1.3.jpg in Resources */,
 				48866F20199A12E6007B16AA /* icon_ milestone.png in Resources */,
@@ -7692,6 +7695,7 @@
 				48866F34199A12E6007B16AA /* bg_table.png in Resources */,
 				488017CB199DF72900F6778B /* 8.3.4.jpg in Resources */,
 				48866F8C199A12E6007B16AA /* VaccineListCell.xib in Resources */,
+				48000F0219A2076000AD04D5 /* MilestoneHeaderView.xib in Resources */,
 				488017B5199DF72900F6778B /* 7.1.1.jpg in Resources */,
 				4880A57A191A0E6B005D5E44 /* btn_sum3@2x_focus.png in Resources */,
 				488016AC199DF72900F6778B /* 11.4.3.jpg in Resources */,
