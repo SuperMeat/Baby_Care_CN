@@ -298,7 +298,7 @@
     //Argument:postnatalDays            宝宝的出生天数
     //Method:                           xAsix = GetXAsix(postnatalDays)
     NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
-    int postnatalDays = [self numberOfDaysFromTodayByTime:[[dict objectForKey:@"birth"] intValue]];
+    int postnatalDays = [self numberOfDaysFromTodayByTime:[[dict objectForKey:@"birth"] intValue]] + 1;
     
     NSArray *xAsix = [self GetXAsix:postnatalDays];
     
@@ -467,7 +467,9 @@
     //确保最大值在区间内
     max += ySizeInterval;
     for (float i = min; i < max; i=i+ySizeInterval) {
-        [arrYAsix addObject:[NSNumber numberWithFloat:i]];
+        NSString *strI = [NSString stringWithFormat:@"%.1f",i];
+        NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:strI];
+        [arrYAsix addObject:number];
     }
     return arrYAsix;
 }
