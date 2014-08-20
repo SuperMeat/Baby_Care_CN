@@ -236,8 +236,12 @@
 
 // 数据库路径
 + (NSString*) getSQLPath {
-    NSArray* paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) ;
-    return [[paths objectAtIndex:0]stringByAppendingPathComponent:@"MyTable.db"] ;
+//    NSArray* paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) ;
+//    return [[paths objectAtIndex:0]stringByAppendingPathComponent:@"MyTable.db"] ;
+    int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
+    int baby_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_babyid"] integerValue];
+
+    return CALENDARDBPATH(user_id,baby_id);
 }
 
 // 删除旧照片
