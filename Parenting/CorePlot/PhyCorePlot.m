@@ -116,7 +116,7 @@
     // 3 - 设置绘制控件
     [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:baseP25Plot,baseP75Plot,targetUserPlot,nil]];
     //TODO:XY轴起始刻度根据时间情况判断
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat([[Caxis objectAtIndex:0]count] - 1)]; 
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat([[Caxis objectAtIndex:0]count] - 0.5)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(5.5f)];
     // 4 - 设置绘制样式和描点样式 style symbol
     CPTMutableLineStyle *baseP25LineStyle = [baseP25Plot.dataLineStyle mutableCopy];
