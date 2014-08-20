@@ -11,6 +11,8 @@
 #import "PortraitImageView.h"
 #import "CreatMilestoneAddphotoView.h"
 #import "MilestoneModel.h"
+#import "ShareInfoView.h"
+
 @interface CreatMilestoneController ()
 @property(nonatomic,retain)CreatMilestoneView* creatMilestoneView;
 @end
@@ -33,18 +35,52 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"新建里程碑";
-    
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"btn_done" title:nil action:@selector(doneAction)];
     
     _creatMilestoneView.type = _type;
     _creatMilestoneView.model = _model;
+    if ([_model.completed intValue] == 1) {
+        self.title = @"已完成";
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"item_share" title:nil action:@selector(ShareToFriend)];
+        
+        UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+        
+        backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+        [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+        backbutton.frame=CGRectMake(0, 0, 50, 41);
+        backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
+        [backbutton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
+        self.navigationItem.leftBarButtonItem=backbar;
+    }
+    else
+    {
+        self.title = @"新建里程碑";
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"btn_done" title:nil action:@selector(doneAction)];
+
+    }
+    
     [self.view addSubview:_creatMilestoneView];
     
 
 }
 
+- (void)goBack
+{
+    [self doneAction];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
+- (void)ShareToFriend
+{
+    UIImage *detailImage = [ACFunction cutView:self.view andWidth:kShareImageWidth_Milestone andHeight:kDeviceHeight-64];
+    ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
+    [shareView.shareInfoImageView setFrame:CGRectMake((320-217)/2.0, shareView.shareInfoImageView.origin.y, 217, (kDeviceHeight-64)*217/320.0)];
+    [shareView.shareInfoImageView setImage:detailImage];
+    shareView.titleDetail.text = [NSString stringWithFormat:kShareMilestoneTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage],_model.title];;
+    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
+    [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
+}
 
 // 保存里程碑
 - (void)doneAction
