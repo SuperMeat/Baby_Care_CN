@@ -291,31 +291,33 @@
 // ２.查询数据
 + (NSMutableArray*)queryData_train
 {
-    int maxmonth = 3;
+    int maxmonth = 3,minmonth = 0;
     int curmonth = [BabyinfoViewController getbabyagefrommonth];
     if (curmonth >= 10) {
         maxmonth = 13;
+        minmonth = 10;
     }
     else if (curmonth >= 7)
     {
         maxmonth = 10;
+        minmonth = 7;
     }
     else if (curmonth >= 4)
     {
         maxmonth = 7;
+        minmonth = 4;
     }
     else if (curmonth >= 0)
     {
         maxmonth = 4;
     }
-        
     
     NSMutableArray* datas = [NSMutableArray array];
-    
     FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
-    if ([dataBase open]) {
+    if ([dataBase open])
+    {
 //        int index = 0;
-        NSString* string =[NSString stringWithFormat:@"SELECT * FROM train_table where month < %d order by month desc",maxmonth];
+        NSString* string =[NSString stringWithFormat:@"SELECT * FROM train_table where month < %d and month > %d order by month desc",maxmonth,minmonth];
         FMResultSet *rs = [dataBase executeQuery:string];
         while ([rs next]){
 //            index++;
