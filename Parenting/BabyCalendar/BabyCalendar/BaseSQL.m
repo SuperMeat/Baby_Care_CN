@@ -322,7 +322,8 @@
     if ([dataBase open]) {
         
         FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM train_table WHERE date=?",date];
-        while ([rs next]){
+        while ([rs next])
+        {
             TrainModel* model = [[TrainModel alloc]init];
             model.id = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
             model.type = [rs stringForColumn:@"type"];
