@@ -106,7 +106,7 @@ messageView;
     //SettingItem *_item5 = [[SettingItem alloc]init];
     SettingItem *_item6 = [[SettingItem alloc]init];
     SettingItem *_item7 = [[SettingItem alloc]init];
-    SettingItem *_item8 = [[SettingItem alloc]init];
+    //SettingItem *_item8 = [[SettingItem alloc]init];
     SettingItem *_item9 = [[SettingItem alloc]init];
     
     //cwb-AccountManage
@@ -125,7 +125,7 @@ messageView;
     //_item5.name=NSLocalizedString(@"My Devices",nil);
     _item6.name=NSLocalizedString(@"Submit feedback/improvements",nil);
     _item7.name=NSLocalizedString(@"Copyright",nil);
-    _item8.name=NSLocalizedString(@"Clear all logged data",nil);
+    //_item8.name=NSLocalizedString(@"Clear all logged data",nil);
     _item9.name=NSLocalizedString(@"LocalNotify", nil);
     _item11.name = @"2G/3G下自动备份";
     _item12.name = @"查看小区附近的母婴用品店";
@@ -279,7 +279,7 @@ messageView;
    // _item5.accessView=myDevices;
     _item6.accessView=detailforSubmit;
     _item7.accessView=detailforCopyright;
-    _item8.accessView=buttonForClear;
+    //_item8.accessView=buttonForClear;
     _item9.accessView=myreminder;
     _item11.accessView = switchForBackup;
     _item12.accessView = detailforMap;
@@ -301,7 +301,7 @@ messageView;
     //[_array2 addObject:_item5];
     [_array2 addObject:_item6];
     [_array2 addObject:_item7];
-    [_array3 addObject:_item8];
+    //[_array3 addObject:_item8];
     [_array3 addObject:_item10];
     
     _settingArray=[[NSArray alloc]initWithObjects:_array1,_array2,_array3, nil];
@@ -415,6 +415,8 @@ messageView;
         if (buttonIndex==1)
         {
             [[NSFileManager defaultManager] removeItemAtPath:USERDBPATH(user_id, baby_id) error:nil];
+            
+            [[NSFileManager defaultManager] removeItemAtPath:CALENDARDBPATH(user_id, baby_id) error:nil];
         }
     }
     else
