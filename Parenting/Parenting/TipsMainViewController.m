@@ -287,8 +287,8 @@
         subButton.tag = [[[subArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
         if (![TipCategoryDB checkSubscribe:ACCOUNTUID categoryId:[[[subArray objectAtIndex:indexPath.row] objectAtIndex:0] intValue]]) {
             //加载订阅按钮
-            [subButton setBackgroundImage:[UIImage imageNamed:@"btn_add.png"] forState:UIControlStateNormal];
-            [subButton setBackgroundImage:[UIImage imageNamed:@"btn_add_focus.png"] forState:UIControlStateHighlighted];
+            [subButton setBackgroundImage:[UIImage imageNamed:@"btn_tips_add.png"] forState:UIControlStateNormal];
+            [subButton setBackgroundImage:[UIImage imageNamed:@"btn_tips_add_focus.png"] forState:UIControlStateHighlighted];
             [subButton addTarget:self action:@selector(subscribe:) forControlEvents:UIControlEventTouchUpInside];
         }
         else {

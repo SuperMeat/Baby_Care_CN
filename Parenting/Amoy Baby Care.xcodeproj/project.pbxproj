@@ -553,6 +553,7 @@
 		4828F51619A495D700D04926 /* 9.4.2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4828F3BE19A495D700D04926 /* 9.4.2.jpg */; };
 		4828F51719A495D700D04926 /* 9.4.3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4828F3BF19A495D700D04926 /* 9.4.3.jpg */; };
 		4828F51819A495D700D04926 /* 9.4.4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4828F3C019A495D700D04926 /* 9.4.4.jpg */; };
+		4828F51A19A5F85400D04926 /* phy_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4828F51919A5F85400D04926 /* phy_shadow@2x.png */; };
 		482B34B118C032D500EFA963 /* UpLoadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 482B34B018C032D500EFA963 /* UpLoadController.m */; };
 		48357E231846ED2A00BCF799 /* EnvironmentAdviceDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E221846ED2A00BCF799 /* EnvironmentAdviceDB.m */; };
 		48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2518472BB500BCF799 /* AdviseLevel.m */; };
@@ -1200,8 +1201,8 @@
 		BE1EB96F199DEC0B00C3ED0B /* PHYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB96D199DEC0B00C3ED0B /* PHYTableViewCell.m */; };
 		BE1EB970199DEC0B00C3ED0B /* PHYTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */; };
 		BE1F0C6819A19520000BFEED /* ActiveTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1F0C6719A19520000BFEED /* ActiveTipsView.m */; };
-		BE1F0C6D19A1DE51000BFEED /* btn_add_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */; };
-		BE1F0C6E19A1DE51000BFEED /* btn_add.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6A19A1DE51000BFEED /* btn_add.png */; };
+		BE1F0C6D19A1DE51000BFEED /* btn_tips_add_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6919A1DE51000BFEED /* btn_tips_add_focus.png */; };
+		BE1F0C6E19A1DE51000BFEED /* btn_tips_add.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6A19A1DE51000BFEED /* btn_tips_add.png */; };
 		BE1F0C6F19A1DE51000BFEED /* btn_minus_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */; };
 		BE1F0C7019A1DE51000BFEED /* btn_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1F0C6C19A1DE51000BFEED /* btn_minus.png */; };
 		BE25763318FE51CA0053683A /* title_BMI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25761918FE51CA0053683A /* title_BMI@2x.png */; };
@@ -1287,7 +1288,6 @@
 		BE7C698F186997AA00C4B675 /* MyDevicesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7C698E186997AA00C4B675 /* MyDevicesTableCell.xib */; };
 		BE7C699218699B8C00C4B675 /* temp_icon_ADD.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7C699018699B8C00C4B675 /* temp_icon_ADD.png */; };
 		BE7C699318699B8C00C4B675 /* temp_icon_ADD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7C699118699B8C00C4B675 /* temp_icon_ADD@2x.png */; };
-		BE8FA4BE19A2FA2400B2C0A5 /* phy_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8FA4BD19A2FA2400B2C0A5 /* phy_shadow@2x.png */; };
 		BE900F2218ECFCEA00B06133 /* SyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE900F2118ECFCEA00B06133 /* SyncController.m */; };
 		BE955F4C190102A400225029 /* PhyCorePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = BE955F49190102A400225029 /* PhyCorePlot.m */; };
 		BE955F4D190102A400225029 /* PhyCPTTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = BE955F4B190102A400225029 /* PhyCPTTheme.m */; };
@@ -1992,6 +1992,7 @@
 		4828F3BE19A495D700D04926 /* 9.4.2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.4.2.jpg; sourceTree = "<group>"; };
 		4828F3BF19A495D700D04926 /* 9.4.3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.4.3.jpg; sourceTree = "<group>"; };
 		4828F3C019A495D700D04926 /* 9.4.4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.4.4.jpg; sourceTree = "<group>"; };
+		4828F51919A5F85400D04926 /* phy_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phy_shadow@2x.png"; sourceTree = "<group>"; };
 		482B34AF18C032D500EFA963 /* UpLoadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpLoadController.h; path = UpLoadController/UpLoadController.h; sourceTree = "<group>"; };
 		482B34B018C032D500EFA963 /* UpLoadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpLoadController.m; path = UpLoadController/UpLoadController.m; sourceTree = "<group>"; };
 		48357E211846ED2A00BCF799 /* EnvironmentAdviceDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvironmentAdviceDB.h; path = LocalData/EnvironmentAdviceDB.h; sourceTree = "<group>"; };
@@ -2871,8 +2872,8 @@
 		BE1EB96E199DEC0B00C3ED0B /* PHYTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHYTableViewCell.xib; sourceTree = "<group>"; };
 		BE1F0C6619A19520000BFEED /* ActiveTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveTipsView.h; sourceTree = "<group>"; };
 		BE1F0C6719A19520000BFEED /* ActiveTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveTipsView.m; sourceTree = "<group>"; };
-		BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_add_focus.png; sourceTree = "<group>"; };
-		BE1F0C6A19A1DE51000BFEED /* btn_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_add.png; sourceTree = "<group>"; };
+		BE1F0C6919A1DE51000BFEED /* btn_tips_add_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_tips_add_focus.png; sourceTree = "<group>"; };
+		BE1F0C6A19A1DE51000BFEED /* btn_tips_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_tips_add.png; sourceTree = "<group>"; };
 		BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_minus_focus.png; sourceTree = "<group>"; };
 		BE1F0C6C19A1DE51000BFEED /* btn_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_minus.png; sourceTree = "<group>"; };
 		BE25761918FE51CA0053683A /* title_BMI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_BMI@2x.png"; sourceTree = "<group>"; };
@@ -2990,7 +2991,6 @@
 		BE7C698E186997AA00C4B675 /* MyDevicesTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesTableCell.xib; sourceTree = "<group>"; };
 		BE7C699018699B8C00C4B675 /* temp_icon_ADD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_icon_ADD.png; sourceTree = "<group>"; };
 		BE7C699118699B8C00C4B675 /* temp_icon_ADD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "temp_icon_ADD@2x.png"; sourceTree = "<group>"; };
-		BE8FA4BD19A2FA2400B2C0A5 /* phy_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phy_shadow@2x.png"; sourceTree = "<group>"; };
 		BE900F2018ECFCEA00B06133 /* SyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncController.h; sourceTree = "<group>"; };
 		BE900F2118ECFCEA00B06133 /* SyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncController.m; sourceTree = "<group>"; };
 		BE955F48190102A400225029 /* PhyCorePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhyCorePlot.h; sourceTree = "<group>"; };
@@ -3932,8 +3932,8 @@
 		482791B41884DE1D003E9724 /* icon */ = {
 			isa = PBXGroup;
 			children = (
-				BE1F0C6919A1DE51000BFEED /* btn_add_focus.png */,
-				BE1F0C6A19A1DE51000BFEED /* btn_add.png */,
+				BE1F0C6919A1DE51000BFEED /* btn_tips_add_focus.png */,
+				BE1F0C6A19A1DE51000BFEED /* btn_tips_add.png */,
 				BE1F0C6B19A1DE51000BFEED /* btn_minus_focus.png */,
 				BE1F0C6C19A1DE51000BFEED /* btn_minus.png */,
 				482791B51884DE1D003E9724 /* 114.png */,
@@ -6269,8 +6269,8 @@
 		BE25761818FE51CA0053683A /* 生理 */ = {
 			isa = PBXGroup;
 			children = (
+				4828F51919A5F85400D04926 /* phy_shadow@2x.png */,
 				BE4DA7E419A3570300A46CC5 /* plot_area_title@2x.png */,
-				BE8FA4BD19A2FA2400B2C0A5 /* phy_shadow@2x.png */,
 				BE6938DC19090EAD00FC2BB4 /* icon_BMI@2x.png */,
 				BE6938DD19090EAD00FC2BB4 /* icon_CIR@2x.png */,
 				BE6938DE19090EAD00FC2BB4 /* icon_temperture@2x.png */,
@@ -6788,7 +6788,7 @@
 				480EFA1718E5155C00D40903 /* panels@2x.png in Resources */,
 				48866EEF199A12E6007B16AA /* bg_headView.jpg in Resources */,
 				480D6CF21924A75800E5CAC7 /* radio_focus.png in Resources */,
-				BE1F0C6E19A1DE51000BFEED /* btn_add.png in Resources */,
+				BE1F0C6E19A1DE51000BFEED /* btn_tips_add.png in Resources */,
 				48866FD1199A12E6007B16AA /* FootView.xib in Resources */,
 				4828F4FC19A495D700D04926 /* 8.1.1.jpg in Resources */,
 				4828F40A19A495D700D04926 /* 14.3.1.jpg in Resources */,
@@ -7178,7 +7178,6 @@
 				4828F44219A495D700D04926 /* 17.4.2.jpg in Resources */,
 				4828F4DC19A495D700D04926 /* 5.4.4.jpg in Resources */,
 				48F91AAE18FB8DF10038DC67 /* light_level_bad@2x.png in Resources */,
-				BE8FA4BE19A2FA2400B2C0A5 /* phy_shadow@2x.png in Resources */,
 				BE25764718FE51CA0053683A /* line_red@2x.png in Resources */,
 				482791D81884DE1D003E9724 /* iTunesArtwork@2x.png in Resources */,
 				485749971831C3D1000D921B /* NotifyViewController.xib in Resources */,
@@ -7207,6 +7206,7 @@
 				48866EF0199A12E6007B16AA /* bg_train_orange.png in Resources */,
 				4828F45619A495D700D04926 /* 19.1.2.jpg in Resources */,
 				4828F3F219A495D700D04926 /* 12.3.6.jpg in Resources */,
+				4828F51A19A5F85400D04926 /* phy_shadow@2x.png in Resources */,
 				48866F0F199A12E6007B16AA /* btn_mood_1.png in Resources */,
 				48FCD5AE195D404F003DBA62 /* 大象@2x.png in Resources */,
 				4828F49719A495D700D04926 /* 22.4.2.jpg in Resources */,
@@ -7338,7 +7338,7 @@
 				480EFA0118E5155C00D40903 /* btn_cry_play@2x.png in Resources */,
 				48866F93199A12E6007B16AA /* VaccineAddContentView.xib in Resources */,
 				4828F41519A495D700D04926 /* 15.1.5.jpg in Resources */,
-				BE1F0C6D19A1DE51000BFEED /* btn_add_focus.png in Resources */,
+				BE1F0C6D19A1DE51000BFEED /* btn_tips_add_focus.png in Resources */,
 				4828F47D19A495D700D04926 /* 20.4.2.jpg in Resources */,
 				48DEA7DC17F4703400A11316 /* Play_11.jpg in Resources */,
 				48FEAF7918E917CB002425E2 /* label1_sum_choose@2x.png in Resources */,
