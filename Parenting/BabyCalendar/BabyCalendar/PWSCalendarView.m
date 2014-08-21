@@ -696,7 +696,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
         
         NSLog(@"====%d",month);
         
-        if (month < [BaseMethod month_test]) {
+        if (month < [BaseMethod month_test] && month >= 0) {
             
             TestModel* model = tests[month];
             if ([model.completed boolValue]) {
