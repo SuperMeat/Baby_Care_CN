@@ -60,13 +60,15 @@
     
     //saveButton
     buttonSave = [[UIButton alloc]initWithFrame:CGRectMake(42, 123, 94, 28)];
-    [buttonSave setTitle:@"保存" forState:UIControlStateNormal];
-    [buttonSave setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+    [buttonSave setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    buttonSave.layer.cornerRadius = 5.0f;
+    [buttonSave setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
     [buttonSave addTarget:self action:@selector(saveRecord) forControlEvents:UIControlEventTouchUpInside];
     //cancelButton
     buttonCancel = [[UIButton alloc]initWithFrame:CGRectMake(152, 123, 94, 28)];
-    [buttonCancel setTitle:@"取消" forState:UIControlStateNormal];
-    [buttonCancel setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+    [buttonCancel setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    buttonCancel.layer.cornerRadius = 5.0f;
+    [buttonCancel setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
     [buttonCancel addTarget:self action:@selector(cancelSave) forControlEvents:UIControlEventTouchUpInside];
     
     //设置imageView

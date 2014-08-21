@@ -79,9 +79,9 @@
     [self.phyDetailImageView setUserInteractionEnabled:YES];
     
     _buttonBack = [[UIButton alloc] init];
-    _buttonBack.frame = CGRectMake(10, 22, 40, 40);
-    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:14];
-    [_buttonBack setTitle:@"返回" forState:UIControlStateNormal];
+    _buttonBack=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_buttonBack setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    _buttonBack.frame = CGRectMake(0, 22, 50, 41);
     [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [_phyDetailImageView addSubview:_buttonBack];
     
@@ -171,12 +171,13 @@
     [_viewHistroy addSubview:labelHistory];
     
     //corePlot
-    _viewPlot = [[UIView alloc]initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, 174)];
-    _viewPlot.backgroundColor = [ACFunction colorWithHexString:@"#f6f6f6"];
+    _viewPlot = [[UIView alloc]initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, 200)];
+    _viewPlot.backgroundColor = [UIColor colorWithRed:250/255.0  green:250/255.0 blue:250/255.0 alpha:1.0];
+    //[ACFunction colorWithHexString:@"#f6f6f6"];
     [self.view addSubview:_viewPlot];
     
     //adviseView
-    [self makeAdvise:CGRectMake(0, 480-130, 320, 130)];
+    [self makeAdvise:CGRectMake(0,175+200, 320, [UIScreen mainScreen].bounds.size.height - 175 - 200)];
 }
 
 -(void)initData{
@@ -232,7 +233,7 @@
     }
     
     //加载CorePlot
-    [self drawLine:CGRectMake(0, 0, self.view.bounds.size.width, 174)];
+    [self drawLine:CGRectMake(0, 0, self.view.bounds.size.width, 190)];
     [_viewPlot addSubview:plot];
     
     UILabel *labelPoloTitle = [[UILabel alloc]initWithFrame:CGRectMake(120, 5, 80, 18)];
@@ -265,15 +266,15 @@
     [adviseImageView addSubview:ad];
     [self.view addSubview:adviseImageView];
     CGRect frame = [[UIScreen mainScreen] bounds];
-    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-130+7, 130/2.0, 256/2.0)];
+    UIImageView *addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-110+7, 130/2.0, 256/2.0)];
     [addIamge1 setImage:[UIImage imageNamed:@"长颈鹿"]];
     [self.view addSubview:addIamge1];
     
-    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-171/2.0, frame.size.height-102/2.0, 171/2.0, 102/2.0)];
+    UIImageView *addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-100/2.0, frame.size.height-102/2.0, 171/2.0, 102/2.0)];
     [addIamge setImage:[UIImage imageNamed:@"大象"]];
     [self.view addSubview:addIamge];
     
-    UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-130, 320, 10)];
+    UIImageView *cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-110, 320, 10)];
     [cutline setImage:[UIImage imageNamed:@"分界线"]];
     [self.view addSubview:cutline];
 }

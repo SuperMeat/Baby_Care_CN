@@ -1,30 +1,64 @@
-//
-//  PhyCorePlot.m
-//  Physiological
-//
-//  Created by CHEN WEIBIN on 14-1-22.
-//  Copyright (c) 2014年 CHEN WEIBIN. All rights reserved.
-//
+/******************************
+ *          X轴:控制可显示范围为11个坐标点(包括原点)且不可拉升    实际显示11个坐标点
+ *  开始坐标点(原点):   (第一次记录时间 / 10) * 10
+ *  结束坐标点:        (最后一次记录时间 / 10 + 1 ) * 10 (增加1格以查看趋势)
+ *  间隔:             结束值-开始值 / 10 段
+ 
+ *          Y轴:控制可显示范围7个坐标点(包括原点)且可拉升       实际显示5个坐标点
+ *  开始坐标点:      WHO最小值取整
+ *  结束坐标点:      WHO与用户最大值取整 + 1
+ *  间隔:           (WHO与用户最大值取整 + 1) - WHO最小值取整 / 4
+ *
+ *          用户数据:数据集@[日龄,数值]
+ *
+ *
+ *
+ *
+ ******************************/
 
 #import "PhyCorePlot.h"
 #import "PhyCPTTheme.h"
 
 @implementation PhyCorePlot
 
-#pragma 参数:Frame、标题、X/Y轴坐标、X/Y轴名称、线条描点集合
-//XY轴坐标XYPlotRange:@[X轴坐标,Y轴坐标]
-//XY轴名称相上
-//线条描点axis:@[@[@"线条含义",UIColor,NSArray<描点内容>],...]
--(id)initWithFrame:(CGRect)frame Title:(NSString*)title XYPlotRange:(NSArray*)xyRange XYTitle:(NSArray*)xyTitle Axis:(NSArray*)axis YBaseV:(float)yBaseV YSizeInterval:(float)ySizeinter{
+-(id)initWithFrame:(CGRect)frame
+          UserAxis:(NSArray*)userAxis
+        HeightAxis:(NSArray*)heightAxis
+           LowAxis:(NSArray*)lowAxis
+             XAxis:(NSArray*)x
+             YAxis:(NSArray*)y
+            XTitle:(NSString*)tX
+            YTitle:(NSString*)tY{
     if (self = [super initWithFrame:frame]) {
-        Ctitle      = title;
-        CxyRange    = xyRange;
-        CxyTitle    = xyTitle;
-        Caxis       = axis;
+        //用户数据
+        arrUser = userAxis;
+        //参考线
+        arrP25 = lowAxis;
+        arrP75 = heightAxis;
+        //画布标题
+        titleG = @"";
+        //XY轴刻度值
+        xAxis = x;
+        yAxis = y;
         
-        //Fixed:
-        yBaseValue  = yBaseV;
-        ySizeInterval  = ySizeinter;
+        xInterval = [[xAxis objectAtIndex:1] intValue] - [[xAxis objectAtIndex:0] intValue];
+        yInterval = [[yAxis objectAtIndex:1] doubleValue] - [[yAxis objectAtIndex:0] doubleValue];
+        
+        yBase = [[yAxis firstObject]doubleValue];
+        xBase = [[xAxis firstObject]doubleValue];
+        
+        //XY轴标题
+        titleX = tX;
+        titleY = tY;
+        xLen = [xAxis count]; //XY轴默认显示长度
+        yLen = [yAxis count] + 1;   //Y轴由于要跳过原点,需要+1
+        //XY轴显示范围
+        xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(xLen)];
+        yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(yLen)];
+        
+        colorUser = [CPTColor blueColor];
+        colorP25 = [CPTColor blueColor];
+        colorP75 = [CPTColor blueColor];
         
         //Step1:配置Graph画布
         [self configureGraph];
@@ -39,11 +73,11 @@
 -(void)configureGraph {
     // 1 - 创建画布
     _graph = [[CPTXYGraph alloc] initWithFrame:self.bounds];
-     PhyCPTTheme *theme = [[PhyCPTTheme alloc] init];
+    PhyCPTTheme *theme = [[PhyCPTTheme alloc] init];
     [_graph applyTheme:theme];
     self.hostedGraph = _graph;
     // 2 - 设置画布标题
-    _graph.title = Ctitle;
+    _graph.title = titleG;
     // 3 - 创建且设置文字样式
     // 4 - 设置画布留空
     _graph.plotAreaFrame.borderLineStyle = nil;
@@ -72,7 +106,7 @@
     CPTScatterPlot *baseP75Plot = [[CPTScatterPlot alloc] init];    //P25参考线
     baseP75Plot.dataSource = self;
     baseP75Plot.identifier = @"P75";
-    CPTColor *baseP75Color = [CPTColor blueColor];
+    CPTColor *baseP75Color = colorP75;
     [_graph addPlot:baseP75Plot toPlotSpace:plotSpace];
     
     //P75填充区域
@@ -86,7 +120,7 @@
     CPTScatterPlot *baseP25Plot = [[CPTScatterPlot alloc] init];    //P25参考线
     baseP25Plot.dataSource = self;
     baseP25Plot.identifier = @"P25";
-    CPTColor *baseP25Color = [CPTColor blueColor];
+    CPTColor *baseP25Color = colorP25;
     [_graph addPlot:baseP25Plot toPlotSpace:plotSpace];
     
     //P25填充区域
@@ -98,26 +132,26 @@
     CPTScatterPlot *targetUserPlot = [[CPTScatterPlot alloc] init];    //用户参考线
     targetUserPlot.dataSource = self;
     targetUserPlot.identifier = @"targetUser";
-    CPTColor *targetUserColor = [CPTColor blueColor];
+    CPTColor *targetUserColor = colorUser;
     [_graph addPlot:targetUserPlot toPlotSpace:plotSpace];
     
     /* 用户参考线描点 */
     CPTMutableLineStyle * symbolUserLineStyle = [CPTMutableLineStyle lineStyle];
-    symbolUserLineStyle.lineColor = [CPTColor greenColor];
+    symbolUserLineStyle.lineColor = colorUser;
     symbolUserLineStyle.lineWidth = 2;
     
     CPTPlotSymbol * plotSymbolUser = [CPTPlotSymbol ellipsePlotSymbol];
-    plotSymbolUser.fill          = [CPTFill fillWithColor:[CPTColor blueColor]];
+    //    plotSymbolUser.fill          = [CPTFill fillWithColor:[CPTColor blueColor]];
     plotSymbolUser.lineStyle     = symbolUserLineStyle;
-    plotSymbolUser.size          = CGSizeMake(7.0, 7.0);
+    plotSymbolUser.size          = CGSizeMake(3.0, 3.0);
     targetUserPlot.plotSymbol = plotSymbolUser;
     
     
     // 3 - 设置绘制控件
     [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:baseP25Plot,baseP75Plot,targetUserPlot,nil]];
     //TODO:XY轴起始刻度根据时间情况判断
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat([[Caxis objectAtIndex:0]count] - 0.5)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(5.5f)];
+    plotSpace.xRange = xRange;
+    plotSpace.yRange = yRange;
     // 4 - 设置绘制样式和描点样式 style symbol
     CPTMutableLineStyle *baseP25LineStyle = [baseP25Plot.dataLineStyle mutableCopy];
     baseP25LineStyle.lineWidth = 0.2;
@@ -157,27 +191,24 @@
     
     // 3 - 配置X轴
     CPTAxis *x = axisSet.xAxis;
-    x.title = [CxyTitle objectAtIndex:0];
-    x.titleLocation = CPTDecimalFromDouble(10);
-    x.titleTextStyle = axisTitleStyle;
+    x.title = titleX;
+    x.titleLocation = CPTDecimalFromDouble(xLen); //标题所在的刻度值
     x.titleOffset = -19.5f;
-    
-    x.axisLineStyle = axisLineStyle; 
+    x.titleTextStyle = axisTitleStyle;
+    x.axisLineStyle = axisLineStyle;
     x.labelingPolicy = CPTAxisLabelingPolicyNone;
     x.labelTextStyle = axisTextStyle;
-    x.majorIntervalLength = CPTDecimalFromInt(3);
     x.tickDirection = CPTSignNegative;
     
-    CGFloat dateCount = [[Caxis objectAtIndex:0] count];
+    //画X轴label
+    CGFloat dateCount = [xAxis count];
     NSMutableSet *xLabels = [NSMutableSet setWithCapacity:dateCount];
     NSMutableSet *xLocations = [NSMutableSet setWithCapacity:dateCount];
     NSInteger i = 0;
-    //TODO:画X轴label 
-    
-    for ( NSInteger j = 0; j < [[Caxis objectAtIndex:0]count]; j++) {
+    for ( NSInteger j = 0; j < [xAxis count]; j++) {
         NSString *xLabel;
-        xLabel = [NSString stringWithFormat:@"%@", [[Caxis objectAtIndex:0] objectAtIndex:j]];
-         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:xLabel textStyle:x.labelTextStyle];
+        xLabel = [NSString stringWithFormat:@"%d", [[xAxis objectAtIndex:j] intValue]];
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:xLabel textStyle:x.labelTextStyle];
         
         CGFloat location = i++;
         label.tickLocation = CPTDecimalFromCGFloat(location);
@@ -187,39 +218,36 @@
             [xLocations addObject:[NSNumber numberWithFloat:location]];
         }
     }
-
-    
     x.axisLabels = xLabels;
+    
+    
     // 4 - Configure y-axis
     CPTAxis *y = axisSet.yAxis;
-    y.title = [CxyTitle objectAtIndex:1];
+    y.title = titleY;
     y.titleTextStyle = axisTitleStyle;
-    y.titleRotation=0; 
-    y.titleLocation=CPTDecimalFromDouble(6.2);
+    y.titleRotation=0;  //标题旋转度
+    y.titleLocation=CPTDecimalFromDouble(yLen + 0.8);   //y轴标题微调
     y.titleOffset=0.1;
-    
     y.axisLineStyle = axisLineStyle;
     y.labelingPolicy = CPTAxisLabelingPolicyNone;
     y.labelTextStyle = axisTextStyle;
     y.labelOffset = 10.0f;
     y.tickDirection = CPTSignPositive;
     
-    //TODO:画Y轴label
-    CGFloat yDateCount = [[Caxis objectAtIndex:1] count];
+    //画Y轴label
+    CGFloat yDateCount = [yAxis count];
     NSMutableSet *yLabels = [NSMutableSet setWithCapacity:yDateCount];
     NSMutableSet *yLocations = [NSMutableSet setWithCapacity:yDateCount];
     NSInteger k = 0;
-    //TODO:画X轴label
-    for ( NSInteger l = 0; l < [[Caxis objectAtIndex:1]count]; l++) {
+    for ( NSInteger l = 0; l < [yAxis count]; l++) {
         NSString *yLabel;
-        yLabel = [NSString stringWithFormat:@"%@", [[Caxis objectAtIndex:1] objectAtIndex:l]];
+        yLabel = [NSString stringWithFormat:@"%.1f", [[yAxis objectAtIndex:l] doubleValue]];
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:yLabel textStyle:y.labelTextStyle];
-        
         CGFloat location = k++;
-        label.tickLocation = CPTDecimalFromCGFloat(location);
+        label.tickLocation = CPTDecimalFromCGFloat(location + 1);   //原点不显示y轴刻度 +1
         label.offset = -21.0f;
-        //y轴刻度0不现实
-        if (label && l != 0) {
+        
+        if (label) {
             [yLabels addObject:label];
             [yLocations addObject:[NSNumber numberWithFloat:location]];
         }
@@ -232,55 +260,75 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
     if ([plot.identifier  isEqual: @"targetUser"]) {
-        return [[CxyRange objectAtIndex:2] count];
+        return [arrUser count];
     }
     else{
-        return [[CxyRange objectAtIndex:0] count];
+        return [xAxis count];
     }
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
-    
-    NSInteger valueCount = [[CxyRange objectAtIndex:0] count];
+    NSInteger valueCount = [xAxis count];
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
             if (index < valueCount) {
                 //+0.1是为了避免填充区域覆盖XY轴
                 if ([plot.identifier  isEqual: @"targetUser"]) {
-                    double dXNum = [[[[CxyRange objectAtIndex:2] objectAtIndex:index] objectAtIndex:0] intValue] + 0.1;
-                    return [NSNumber numberWithDouble:dXNum];
+                    double dXnum = [[[arrUser objectAtIndex:index] objectAtIndex:0] doubleValue];
+                    return [NSNumber numberWithDouble:([self getXAxisValue:dXnum] + 0.05)];
                 }
                 else{
-                    return [NSNumber numberWithDouble:(index + 0.1)];
+                    return [NSNumber numberWithDouble:index + 0.05]; //微调0.05
                 }
             }
             break;
         case CPTScatterPlotFieldY:
             if ([plot.identifier isEqual:@"P25"] == YES) {
-//                [NSNumber numberWithFloat:]
-                NSNumber *num25 = [[CxyRange objectAtIndex:0] objectAtIndex:index];
-                return [self getYAxisValue:num25];
+                double dYnum = [[arrP25 objectAtIndex:index] doubleValue];
+                return [NSNumber numberWithDouble:[self getYAxisValue:dYnum]];
             } else if ([plot.identifier isEqual:@"P75"] == YES) {
-                NSNumber *num75 = [[CxyRange objectAtIndex:1] objectAtIndex:index];
-                return [self getYAxisValue:num75];
+                double dYnum = [[arrP75 objectAtIndex:index] doubleValue];
+                return [NSNumber numberWithDouble:[self getYAxisValue:dYnum]];
             } else if ([plot.identifier isEqual:@"targetUser"] == YES) {
-                NSNumber *numUser = [[[CxyRange objectAtIndex:2] objectAtIndex:index] objectAtIndex:1];
-                return [self getYAxisValue:numUser];
+                double dYnum = [[[arrUser objectAtIndex:index] objectAtIndex:1] doubleValue];
+                return [NSNumber numberWithDouble:[self getYAxisValue:dYnum]];
+            }
+            else {
+                return [NSNumber numberWithDouble:-1];
             }
             break;
-    } 
+    }
     return [NSDecimalNumber zero];
 }
 
--(NSNumber *)getYAxisValue:(NSNumber*)value
+
+#pragma 求出Y轴对应值
+/*
+ *  Y轴值等于
+ *  case:   如果输入值 <= Y轴基础值
+ *          返回 输入值 / 基础值
+ */
+-(double)getYAxisValue:(double)yValue
 {
     //如果小于最基础值
-    if ([value floatValue] <= yBaseValue) {
-        return [NSNumber numberWithFloat:[value floatValue]/yBaseValue];
+    if (yValue <= yBase) {
+        return yValue / yBase;
     }
     else {
-        float newValue = [value floatValue] - yBaseValue;
-        return [NSNumber numberWithFloat:(newValue / ySizeInterval + 1)];
+        double newValue = yValue - yBase;
+        return newValue / yInterval + 1;
+    }
+}
+
+-(double)getXAxisValue:(double)xValue
+{
+    //如果小于最基础值
+    if (xValue <= xBase) {
+        return xValue / xBase;
+    }
+    else {
+        double newValue = xValue - xBase;
+        return newValue / xInterval;
     }
 }
 

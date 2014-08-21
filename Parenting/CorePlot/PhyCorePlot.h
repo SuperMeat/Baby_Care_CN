@@ -10,15 +10,26 @@
 #import "CorePlot-CocoaTouch.h"
 
 @interface PhyCorePlot : CPTGraphHostingView<CPTPlotDataSource>{
-    NSString    *   Ctitle;
-    NSArray     *   CxyRange;
-    NSArray     *   CxyTitle;
-    NSArray     *   Caxis;
-    float   yBaseValue;
-    float   ySizeInterval;
+    NSArray *xAxis,*yAxis;          //XY轴刻度值
+    double yBase,xBase;             //XY轴基础值
+    double yInterval,xInterval;     //XY轴单位度量
+    NSString *titleG;               //画布标题
+    NSString *titleX,*titleY;       //XY轴标题
+    int xLen,yLen;                  //XY轴数据长度
+    CPTPlotRange *xRange,*yRange;   //XY轴显示范围
+    
+    NSArray *arrUser,*arrP75,*arrP25;               //用户数据
+    CPTColor *colorUser,*colorP25,*colorP75;             //用户数据线颜色
 }
 @property (retain, nonatomic)CPTGraph *graph;
- 
--(id)initWithFrame:(CGRect)frame Title:(NSString*)title XYPlotRange:(NSArray*)xyRange XYTitle:(NSArray*)xyTitle Axis:(NSArray*)axis YBaseV:(float)yBaseV YSizeInterval:(float)ySizeInterval;
+
+-(id)initWithFrame:(CGRect)frame
+          UserAxis:(NSArray*)userAxis
+        HeightAxis:(NSArray*)heightAxis
+           LowAxis:(NSArray*)lowAxis
+             XAxis:(NSArray*)x
+             YAxis:(NSArray*)y
+            XTitle:(NSString*)tX
+            YTitle:(NSString*)tY;
 
 @end
