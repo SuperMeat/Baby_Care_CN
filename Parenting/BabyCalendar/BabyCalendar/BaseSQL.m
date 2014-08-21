@@ -33,6 +33,35 @@
 
 
 // ２.查询数据
++ (NSMutableDictionary*)queryData_milesDic
+{
+    NSMutableDictionary* datas = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM milestoneTable ORDER BY date"];
+        while ([rs next]){
+            MilestoneModel* model = [[MilestoneModel alloc]init];
+            model.id = [rs stringForColumn:@"id"];
+            model.date = [rs stringForColumn:@"date"];
+            model.month = [rs stringForColumn:@"month"];
+            model.title = [rs stringForColumn:@"title"];
+            model.content = [rs stringForColumn:@"content"];
+            model.photo_path = [rs stringForColumn:@"photo_path"];
+            model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
+            if (![model.date isEqual:@""]&& model.date != nil) {
+                [datas setObject:model forKey:model.date];
+                
+            }
+
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return datas;
+
+}
+
 + (NSMutableArray*)queryData_milestone
 {
     NSMutableArray* datas = [NSMutableArray array];
@@ -161,6 +190,36 @@
 
 
 // ２.查询数据
++ (NSMutableDictionary*)queryData_vaccineDic
+{
+    NSMutableDictionary* datas = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM vaccineTable ORDER BY completedDate DESC"];
+        while ([rs next]){
+            VaccineModel* model = [[VaccineModel alloc]init];
+            model.vaccine = [rs stringForColumn:@"vaccine"];
+            model.illness = [rs stringForColumn:@"illness"];
+            model.times = [rs stringForColumn:@"times"];
+            model.completedDate = [rs stringForColumn:@"completedDate"];
+            model.willDate = [rs stringForColumn:@"willDate"];
+            model.inplan = [NSNumber numberWithBool:[rs boolForColumn:@"inplan"]];
+            model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
+            model.id = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
+            if (![model.completedDate isEqual:@""]&& model.completedDate != nil) {
+                [datas setObject:model forKey:model.completedDate];
+                
+            }
+
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return datas;
+
+}
+
 + (NSMutableArray*)queryData_vaccine
 {
     NSMutableArray* datas = [NSMutableArray array];
@@ -289,14 +348,64 @@
 }
 
 // ２.查询数据
++ (NSMutableDictionary*)queryData_trainDic
+{
+    NSMutableDictionary* datas = [NSMutableDictionary dictionaryWithCapacity:0];
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open])
+    {
+        //        int index = 0;
+        NSString* string =[NSString stringWithFormat:@"SELECT * FROM train_table "];
+        FMResultSet *rs = [dataBase executeQuery:string];
+        while ([rs next]){
+            //            index++;
+            TrainModel* model = [[TrainModel alloc]init];
+            model.id = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
+            model.type = [rs stringForColumn:@"type"];
+            model.title = [rs stringForColumn:@"title"];
+            model.content = [rs stringForColumn:@"content"];
+            model.trained = [NSNumber numberWithBool:[rs boolForColumn:@"trained"]];
+            model.date = [rs stringForColumn:@"date"];
+            if (![model.date isEqual:@""]&& model.date != nil) {
+                [datas setObject:model forKey:model.date];
+                
+            }
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return datas;
+}
+
 + (NSMutableArray*)queryData_train
 {
-    NSMutableArray* datas = [NSMutableArray array];
+    int maxmonth = 3,minmonth = 0;
+    int curmonth = [BabyinfoViewController getbabyagefrommonth];
+    if (curmonth >= 10) {
+        maxmonth = 13;
+        minmonth = 10;
+    }
+    else if (curmonth >= 7)
+    {
+        maxmonth = 10;
+        minmonth = 7;
+    }
+    else if (curmonth >= 4)
+    {
+        maxmonth = 7;
+        minmonth = 4;
+    }
+    else if (curmonth >= 0)
+    {
+        maxmonth = 4;
+    }
     
+    NSMutableArray* datas = [NSMutableArray array];
     FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
-    if ([dataBase open]) {
+    if ([dataBase open])
+    {
 //        int index = 0;
-        NSString* string = @"SELECT * FROM train_table";
+        NSString* string =[NSString stringWithFormat:@"SELECT * FROM train_table where month < %d and month > %d order by month desc",maxmonth,minmonth];
         FMResultSet *rs = [dataBase executeQuery:string];
         while ([rs next]){
 //            index++;
@@ -314,6 +423,7 @@
     }
     return datas;
 }
+
 + (NSMutableArray*)queryData_train:(NSString*)date
 {
     NSMutableArray* datas = [NSMutableArray array];
@@ -322,7 +432,8 @@
     if ([dataBase open]) {
         
         FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM train_table WHERE date=?",date];
-        while ([rs next]){
+        while ([rs next])
+        {
             TrainModel* model = [[TrainModel alloc]init];
             model.id = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
             model.type = [rs stringForColumn:@"type"];
@@ -402,6 +513,36 @@
 }
 
 // ２.查询数据
++ (NSMutableDictionary*)queryData_testDic
+{
+    NSMutableDictionary* datas = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        NSString* string = @"SELECT * FROM test_table";
+        FMResultSet *rs = [dataBase executeQuery:string];
+        while ([rs next]){
+            TestModel* model = [[TestModel alloc] init];
+            model.date = [rs stringForColumn:@"date"];
+            model.month = [NSNumber numberWithInt:[rs intForColumn:@"month"]];
+            model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
+            model.score = [NSNumber numberWithInt:[rs intForColumn:@"score"]];
+            model.knowledge_score = [NSNumber numberWithInt:[rs intForColumn:@"knowledge_score"]];
+            model.active_score = [NSNumber numberWithInt:[rs intForColumn:@"active_score"]];
+            model.language_score = [NSNumber numberWithInt:[rs intForColumn:@"language_score"]];
+            model.society_score = [NSNumber numberWithInt:[rs intForColumn:@"society_score"]];
+            if ([model.completed boolValue])
+            {
+                 [datas setObject:model forKey:model.month];
+            }
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return datas;
+
+}
+
 + (NSMutableArray*)queryData_test
 {
     NSMutableArray* datas = [NSMutableArray array];
@@ -522,6 +663,34 @@
 }
 
 // ２.查询数据
++ (NSMutableDictionary*)queryData_noteDic
+{
+    NSMutableDictionary* datas = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        NSString* string = @"SELECT * FROM note_table ORDER BY date";
+        FMResultSet *rs = [dataBase executeQuery:string];
+        while ([rs next]){
+            NoteModel* model = [[NoteModel alloc] init];
+            model.id = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
+            model.date = [rs stringForColumn:@"date"];
+            model.content = [rs stringForColumn:@"content"];
+            model.mood = [NSNumber numberWithInt:[rs intForColumn:@"mood"]];
+            model.photo = [rs stringForColumn:@"photo"];
+            
+            if (![model.date isEqual:@""]&& model.date != nil) {
+                [datas setObject:model forKey:model.date];
+
+            }
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return datas;
+
+}
+
 + (NSMutableArray*)queryData_note
 {
     NSMutableArray* datas = [NSMutableArray array];

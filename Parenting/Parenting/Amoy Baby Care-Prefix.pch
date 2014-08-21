@@ -77,7 +77,7 @@
 
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
 #define USERDBPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d/userdata.db",NSHomeDirectory(),USERID,BABYID])
-
+#define CALENDARDBPATH(USERID,BABYID) ([NSString stringWithFormat:@"%@/Documents/%d_%d/Calendar.db",NSHomeDirectory(),USERID,BABYID])
 
 #define UDBPATH ([NSString stringWithFormat:@"%@/Documents/BC_Info.sqlite",NSHomeDirectory()])
 

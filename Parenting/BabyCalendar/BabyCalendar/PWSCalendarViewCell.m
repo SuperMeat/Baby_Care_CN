@@ -241,7 +241,6 @@ UICollectionViewDelegateFlowLayout>
     return rt;
 }
 
-
 - (CKCalendarModel*)eventsFromSQLWtihDate:(NSString*)date
 {
     CKCalendarModel* model = [[CKCalendarModel alloc] init];

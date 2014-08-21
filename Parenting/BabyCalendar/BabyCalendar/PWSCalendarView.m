@@ -77,6 +77,12 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 @property (nonatomic,retain)NSMutableArray* trains;
 @property (nonatomic,retain)NSMutableArray* tests;
 
+@property (nonatomic,retain)NSMutableDictionary* dicnotes;
+@property (nonatomic,retain)NSMutableDictionary* dicmilestones;
+@property (nonatomic,retain)NSMutableDictionary* dicvaccines;
+@property (nonatomic,retain)NSMutableDictionary* dictrains;
+@property (nonatomic,retain)NSMutableDictionary* dictests;
+
 @end
 //////////////////////////////////////////////////////////////////////////////
 @implementation PWSCalendarView
@@ -118,11 +124,17 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 
 - (void)reloadSQLDatas
 {
-    self.notes = [BaseSQL queryData_note];
-    self.milestones = [BaseSQL queryData_milestone];
-    self.vaccines = [BaseSQL queryData_vaccine];
-    self.trains = [BaseSQL queryData_train];
-    self.tests = [BaseSQL queryData_test];
+//    self.notes = [BaseSQL queryData_note];
+//    self.milestones = [BaseSQL queryData_milestone];
+//    self.vaccines = [BaseSQL queryData_vaccine];
+//    self.trains = [BaseSQL queryData_train];
+//    self.tests = [BaseSQL queryData_test];
+    
+    self.dicnotes      = [BaseSQL queryData_noteDic];
+    self.dicmilestones = [BaseSQL queryData_milesDic];
+    self.dicvaccines   = [BaseSQL queryData_vaccineDic];
+    self.dictrains     = [BaseSQL queryData_trainDic];
+    self.dictests      = [BaseSQL queryData_testDic];
     
     [_tableView reloadData];
     [_m_view_calendar reloadData];
@@ -206,6 +218,8 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     [_m_view_calendar registerClass:[PWSCalendarViewCell class] forCellWithReuseIdentifier:PWSCalendarViewCellId.copy];
     
     _m_current_page = PWSCalendarViewNumber/2;
+    _m_init_page    = _m_current_page;
+    
     NSIndexPath* mid_index = [NSIndexPath indexPathForRow:_m_current_page inSection:0];
     [_m_view_calendar scrollToItemAtIndexPath:mid_index atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     
@@ -371,6 +385,25 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 //        }
     }
     
+    //超过当前月份显示回到今天
+    if (_m_init_page < _m_current_page) {
+        _backTodayView.hidden = NO;
+        _tableView.hidden = YES;
+    }
+    else
+    {
+        NSString* selectDateStr = [BaseMethod selectedDateFromSave];
+        NSDate* selectDate = [BaseMethod dateFormString:selectDateStr];
+        long valueSelectDate = [ACDate getTimeStampFromDate:selectDate];
+        long valueCurrentDate = [ACDate getTimeStampFromDate:m_current_date];
+        if ([PWSHelper CheckSameWeek:m_current_date AnotherWeek:selectDate] || valueSelectDate <= valueCurrentDate)
+        {
+            _backTodayView.hidden = YES;
+            _tableView.hidden = NO;
+        }
+       
+    }
+
     [self SetLabelDate:m_current_date];
     [self PWSCalendar:nil didChangeViewHeight:0];
 }
@@ -463,7 +496,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
         }
     }
     
-     [BaseMethod saveSelectedDate:today];
+    [BaseMethod saveSelectedDate:today];
     [_tableView reloadData];
 //
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_calendarView object:nil];
@@ -513,7 +546,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     if (days > 0 || before_birthday > 0) {
         _tableView.hidden = YES;
         _backTodayView.hidden = NO;
-        if (days > 0) {
+        if (days > 0 || _m_init_page < _m_current_page) {
             _backTodayView.infoLab.text = @"日子还没到来呢！";
         }
         if (before_birthday > 0) {
@@ -552,8 +585,6 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 
     _m_current_page = m_current_page;
     
-
-
 }
 - (void)changeCalendarHeight
 {
@@ -589,7 +620,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     NSString* date = [userDef objectForKey:kSelectedDate];
     
     cell.row = indexPath.row;
-    cell.ckModel = [self eventsFromSQLWtihDate:date];
+    cell.ckModel = [self eventsFromDicSQLWtihDate:date];
     cell.model = self.datas[indexPath.row];
 
     return cell;
@@ -693,6 +724,53 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     [self ScrollToToday];
 }
 
+- (CKCalendarModel*)eventsFromDicSQLWtihDate:(NSString*)dateStr
+{
+    CKCalendarModel* model = [[CKCalendarModel alloc] init];
+    
+    if ([self.dicnotes objectForKey:dateStr] != nil) {
+         model.noteModel = [self.dicnotes objectForKey:dateStr];
+    }
+    
+    if ([self.dicmilestones objectForKey:dateStr] != nil) {
+        model.milestone = [NSNumber numberWithBool:YES];
+        model.milestoneModel = [self.dicmilestones objectForKey:dateStr];
+    }
+    
+    int vaccineNum = 0;
+    
+    for (VaccineModel* v_model in self.vaccines) {
+        if ([v_model.completedDate isEqualToString:dateStr] && [v_model.completed boolValue]) {
+            model.vaccine = [NSNumber numberWithBool:YES];
+            model.vaccineModel = v_model;
+            vaccineNum++;
+            model.vaccineNum = vaccineNum;
+        }
+    }
+    
+    if ([self.dictrains objectForKey:dateStr] != nil) {
+        model.train = [NSNumber numberWithBool:YES];
+    }
+    
+    NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
+    NSDate* testDate = [BaseMethod dateFormString:dateStr];
+    NSDate* selectedDate = [BaseMethod dateFormString:dateStr];
+    
+    int days_bith_test =  [BaseMethod fromStartDate:birthDate withEndDate:testDate]/30;
+    
+    int days_bith_selected = [BaseMethod fromStartDate:birthDate withEndDate:selectedDate]/30;
+    
+    if ((days_bith_test == days_bith_selected) &&
+        [self.dictests objectForKey:[NSNumber numberWithInt:days_bith_selected+1]] != nil)
+    {
+             TestModel *t_model = [self.dictests objectForKey:[NSNumber numberWithInt:days_bith_selected+1]];
+             model.test = [NSNumber numberWithBool:YES];
+             model.testModel = t_model;
+    }
+    
+    return model;
+}
+
 - (CKCalendarModel*)eventsFromSQLWtihDate:(NSString*)dateStr
 {
     CKCalendarModel* model = [[CKCalendarModel alloc] init];
@@ -727,13 +805,12 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
             
         }
     }
+    
     for (TestModel* t_model in self.tests)
     {
-        NSLog(@"birth : %@",[BabyinfoViewController getbabybirth]);
         NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
         NSDate* testDate = [BaseMethod dateFormString:t_model.date];
         NSDate* selectedDate = [BaseMethod dateFormString:dateStr];
-        
         
         int days_bith_test =  [BaseMethod fromStartDate:birthDate withEndDate:testDate]/30;
         

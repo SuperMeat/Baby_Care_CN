@@ -685,12 +685,11 @@ static int age = 0;
 
 +(int)getbabyagefrommonth
 {
-    NSString *age = [[NSUserDefaults standardUserDefaults] objectForKey:@"birthday"];
-    NSDateFormatter *fomatter=[[NSDateFormatter alloc]init];
-    [fomatter setLocale:[NSLocale currentLocale]];
-    [fomatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *date=[fomatter dateFromString:age];
-    
+    long birthTime = [[[[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:BABYID] objectForKey:@"birth"] longValue];
+    if (birthTime == 0) {
+        return 0;
+    }
+    NSDate *date = [ACDate getDateFromTimeStamp:birthTime];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;

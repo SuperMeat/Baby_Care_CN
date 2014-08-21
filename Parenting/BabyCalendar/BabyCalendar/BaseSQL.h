@@ -22,6 +22,7 @@
 +(FMDatabase*)createTable_milestone;
 // 查询数据
 +(NSMutableArray*)queryData_milestone;
++(NSMutableDictionary*)queryData_milesDic;
 // 根据日期查询数据
 + (NSMutableArray*)queryData__milestone:(NSString*)date;
 // 插入数据
@@ -40,6 +41,7 @@
 +(FMDatabase*)createTable_vaccine;
 // ２.查询数据
 + (NSMutableArray*)queryData_vaccine;
++ (NSMutableDictionary*)queryData_vaccineDic;
 + (NSMutableArray*)queryData_vaccine:(NSString*)date;
 // 查询
 + (BOOL)queryData_vaccine_withModel:(VaccineModel*)model;
@@ -56,6 +58,8 @@
 // 插入数据
 +(BOOL)insertData_train:(TrainModel*)model;
 + (NSMutableArray*)queryData_train;
++ (NSMutableDictionary*)queryData_trainDic;
+
 // ２.查询数据
 + (NSMutableArray*)queryData_train:(NSString*)type withTrained:(NSNumber*)trained;
 + (NSMutableArray*)queryData_train:(NSString*)date;
@@ -69,6 +73,7 @@
 +(BOOL)insertData_test:(TestModel*)model;
 // ２.查询数据
 + (NSMutableArray*)queryData_test;
++ (NSMutableDictionary*)queryData_testDic;
 + (NSMutableArray*)queryData_test:(NSString*)date;
 // 更新
 + (BOOL)updateData_test:(TestModel*)model;
@@ -83,6 +88,7 @@
 
 // ２.查询数据
 + (NSMutableArray*)queryData_note;
++ (NSMutableDictionary*)queryData_noteDic;
 // 根据日期查询数据
 + (NSMutableArray*)queryData_note_withDate:(NSString*)date;
 // 删除所有行
