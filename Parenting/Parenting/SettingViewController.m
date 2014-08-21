@@ -86,14 +86,14 @@ messageView;
 
 -(void)makeArray
 {
-    UIButton *tongbuBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [tongbuBtn setBackgroundImage:[UIImage imageNamed:@"all_toptongbu"] forState:UIControlStateNormal];
-    
-    [tongbuBtn addTarget:self action:@selector(tongbu) forControlEvents:UIControlEventTouchUpInside];
-    tongbuBtn.frame=CGRectMake(0, 0, 22, 22);
-    
-    UIBarButtonItem *rightbar=[[UIBarButtonItem alloc]initWithCustomView:tongbuBtn];
-    self.navigationItem.rightBarButtonItem=rightbar;
+//    UIButton *tongbuBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [tongbuBtn setBackgroundImage:[UIImage imageNamed:@"all_toptongbu"] forState:UIControlStateNormal];
+//    
+//    [tongbuBtn addTarget:self action:@selector(tongbu) forControlEvents:UIControlEventTouchUpInside];
+//    tongbuBtn.frame=CGRectMake(0, 0, 22, 22);
+//    
+//    UIBarButtonItem *rightbar=[[UIBarButtonItem alloc]initWithCustomView:tongbuBtn];
+//    self.navigationItem.rightBarButtonItem=rightbar;
 
     NSMutableArray *_array1=[[NSMutableArray alloc]initWithCapacity:0];
     NSMutableArray *_array2=[[NSMutableArray alloc]initWithCapacity:0];
@@ -111,7 +111,7 @@ messageView;
     
     //cwb-AccountManage
     SettingItem *_item10 = [[SettingItem alloc]init];
-    SettingItem *_item11 = [[SettingItem alloc] init];
+    //SettingItem *_item11 = [[SettingItem alloc] init];
     
     //高德地图
     SettingItem *_item12 = [[SettingItem alloc] init];
@@ -127,7 +127,7 @@ messageView;
     _item7.name=NSLocalizedString(@"Copyright",nil);
     //_item8.name=NSLocalizedString(@"Clear all logged data",nil);
     _item9.name=NSLocalizedString(@"LocalNotify", nil);
-    _item11.name = @"2G/3G下自动备份";
+    //_item11.name = @"2G/3G下自动备份";
     _item12.name = @"查看小区附近的母婴用品店";
     //_item13.name = @"允许发布自己位置及状态";
     
@@ -281,7 +281,7 @@ messageView;
     _item7.accessView=detailforCopyright;
     //_item8.accessView=buttonForClear;
     _item9.accessView=myreminder;
-    _item11.accessView = switchForBackup;
+    //_item11.accessView = switchForBackup;
     _item12.accessView = detailforMap;
     //_item13.accessView = switchForOpenwild;
     
@@ -293,7 +293,7 @@ messageView;
     //默认是毫升
     [[NSUserDefaults standardUserDefaults]setObject:@"Mls:" forKey:@"metric" ];
 
-    [_array2 addObject:_item11];
+    //[_array2 addObject:_item11];
     //[_array2 addObject:_item13];
     //[_array2 addObject:_item3];
     [_array2 addObject:_item4];

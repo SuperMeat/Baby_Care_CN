@@ -30,6 +30,7 @@
 @property (nonatomic, strong) UIView*                 customTimeView;
 @property (nonatomic, strong) UIView*                 customDataView;
 @property(nonatomic,assign)int                m_current_page;
+@property(nonatomic,assign)int                m_init_page;
 @property(nonatomic,retain)UICollectionView*  m_view_calendar;
 @property(nonatomic,assign)BOOL  isResetFrame;
 

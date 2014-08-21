@@ -206,6 +206,8 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     [_m_view_calendar registerClass:[PWSCalendarViewCell class] forCellWithReuseIdentifier:PWSCalendarViewCellId.copy];
     
     _m_current_page = PWSCalendarViewNumber/2;
+    _m_init_page    = _m_current_page;
+    
     NSIndexPath* mid_index = [NSIndexPath indexPathForRow:_m_current_page inSection:0];
     [_m_view_calendar scrollToItemAtIndexPath:mid_index atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     
@@ -371,6 +373,26 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 //        }
     }
     
+    //超过当前月份显示回到今天
+    if (_m_init_page < _m_current_page) {
+        _backTodayView.hidden = NO;
+        _tableView.hidden = YES;
+    }
+    else
+    {
+       
+        NSString* selectDateStr = [BaseMethod selectedDateFromSave];
+        NSDate* selectDate = [BaseMethod dateFormString:selectDateStr];
+        long valueSelectDate = [ACDate getTimeStampFromDate:selectDate];
+        long valueCurrentDate = [ACDate getTimeStampFromDate:m_current_date];
+        if ([PWSHelper CheckSameWeek:m_current_date AnotherWeek:selectDate] || valueSelectDate <= valueCurrentDate)
+        {
+            _backTodayView.hidden = YES;
+            _tableView.hidden = NO;
+        }
+       
+    }
+
     [self SetLabelDate:m_current_date];
     [self PWSCalendar:nil didChangeViewHeight:0];
 }
@@ -513,7 +535,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     if (days > 0 || before_birthday > 0) {
         _tableView.hidden = YES;
         _backTodayView.hidden = NO;
-        if (days > 0) {
+        if (days > 0 || _m_init_page < _m_current_page) {
             _backTodayView.infoLab.text = @"日子还没到来呢！";
         }
         if (before_birthday > 0) {
@@ -552,8 +574,6 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 
     _m_current_page = m_current_page;
     
-
-
 }
 - (void)changeCalendarHeight
 {

@@ -115,8 +115,9 @@
 + (int)fromStartDate:(NSDate*)startDate withEndDate:(NSDate*)endDate
 {
     if (endDate == nil || startDate == nil) {
-        return 0;
+        return -999;
     }
+    
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSCalendarUnitDay fromDate:startDate  toDate:endDate  options:0];
     int days = [comps day];
