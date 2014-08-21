@@ -77,6 +77,12 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 @property (nonatomic,retain)NSMutableArray* trains;
 @property (nonatomic,retain)NSMutableArray* tests;
 
+@property (nonatomic,retain)NSMutableDictionary* dicnotes;
+@property (nonatomic,retain)NSMutableDictionary* dicmilestones;
+@property (nonatomic,retain)NSMutableDictionary* dicvaccines;
+@property (nonatomic,retain)NSMutableDictionary* dictrains;
+@property (nonatomic,retain)NSMutableDictionary* dictests;
+
 @end
 //////////////////////////////////////////////////////////////////////////////
 @implementation PWSCalendarView
@@ -123,6 +129,12 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     self.vaccines = [BaseSQL queryData_vaccine];
     self.trains = [BaseSQL queryData_train];
     self.tests = [BaseSQL queryData_test];
+    
+    self.dicnotes      = [BaseSQL queryData_noteDic];
+    self.dicmilestones = [BaseSQL queryData_milesDic];
+    self.dicvaccines   = [BaseSQL queryData_vaccineDic];
+    self.dictrains     = [BaseSQL queryData_trainDic];
+    self.dictests      = [BaseSQL queryData_testDic];
     
     [_tableView reloadData];
     [_m_view_calendar reloadData];
@@ -609,7 +621,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     NSString* date = [userDef objectForKey:kSelectedDate];
     
     cell.row = indexPath.row;
-    cell.ckModel = [self eventsFromSQLWtihDate:date];
+    cell.ckModel = [self eventsFromDicSQLWtihDate:date];
     cell.model = self.datas[indexPath.row];
 
     return cell;
@@ -713,6 +725,56 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     [self ScrollToToday];
 }
 
+- (CKCalendarModel*)eventsFromDicSQLWtihDate:(NSString*)dateStr
+{
+    CKCalendarModel* model = [[CKCalendarModel alloc] init];
+    
+    if ([self.dicnotes objectForKey:dateStr] != nil) {
+         model.noteModel = [self.dicnotes objectForKey:dateStr];
+    }
+    
+    if ([self.dicmilestones objectForKey:dateStr] != nil) {
+        model.milestone = [NSNumber numberWithBool:YES];
+        model.milestoneModel = [self.dicmilestones objectForKey:dateStr];
+    }
+    
+    int vaccineNum = 0;
+    
+    for (VaccineModel* v_model in self.vaccines) {
+        if ([v_model.completedDate isEqualToString:dateStr] && [v_model.completed boolValue]) {
+            model.vaccine = [NSNumber numberWithBool:YES];
+            model.vaccineModel = v_model;
+            vaccineNum++;
+            model.vaccineNum = vaccineNum;
+        }
+    }
+    
+    if ([self.dictrains objectForKey:dateStr] != nil) {
+        model.train = [NSNumber numberWithBool:YES];
+    }
+    
+    if ([self.dictests objectForKey:dateStr] != nil)
+    {
+        TestModel *t_model = [self.dictests objectForKey:dateStr];
+        NSLog(@"birth : %@",[BabyinfoViewController getbabybirth]);
+        NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
+        NSDate* testDate = [BaseMethod dateFormString:t_model.date];
+        NSDate* selectedDate = [BaseMethod dateFormString:dateStr];
+        
+        int days_bith_test =  [BaseMethod fromStartDate:birthDate withEndDate:testDate]/30;
+        
+        int days_bith_selected = [BaseMethod fromStartDate:birthDate withEndDate:selectedDate]/30;
+        
+        if (days_bith_test == days_bith_selected)
+        {
+            model.test = [NSNumber numberWithBool:YES];
+            model.testModel = t_model;
+        }
+    }
+    
+    return model;
+}
+
 - (CKCalendarModel*)eventsFromSQLWtihDate:(NSString*)dateStr
 {
     CKCalendarModel* model = [[CKCalendarModel alloc] init];
@@ -747,13 +809,13 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
             
         }
     }
+    
     for (TestModel* t_model in self.tests)
     {
         NSLog(@"birth : %@",[BabyinfoViewController getbabybirth]);
         NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
         NSDate* testDate = [BaseMethod dateFormString:t_model.date];
         NSDate* selectedDate = [BaseMethod dateFormString:dateStr];
-        
         
         int days_bith_test =  [BaseMethod fromStartDate:birthDate withEndDate:testDate]/30;
         

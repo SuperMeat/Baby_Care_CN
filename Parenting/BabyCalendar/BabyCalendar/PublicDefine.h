@@ -81,7 +81,7 @@
 #define kDis_right_width             20                                    
 
 // 出生日期
-#define kBirthday                     @"2014年7月17日"//([BabyinfoViewController getbabybirth])
+#define kBirthday                       ([BabyinfoViewController getbabybirth])
 
 // event/Train
 #define kFontsize_untrain_content       12.0f
