@@ -157,13 +157,9 @@
  *  获取宝贝生理数据曲线
  *
  *  @param  type            生理类型
- *  @param  beginDay        曲线开始日数
- *  @param  endDay          曲线结束日数
- *  @param  PostnatalDay    宝贝当前日数
+ *  @param  babyBirthTime   出生时间
  */
--(NSArray*)selectBabyPhysiologyList:(int)type BeginDay:(int)beginDay EndDay:(int)endDay BabyBirthTime:(long)babyBirthTime;
-
--(NSArray*)selectBabyBMIList:(int)type BeginDay:(int)beginDay EndDay:(int)endDay BabyBirthTime:(long)babyBirthTime;
+-(NSArray*)selectBabyPhysiologyList:(int)type BabyBirthTime:(long)babyBirthTime;
 
 /**
  *  获取宝贝生理数据曲线

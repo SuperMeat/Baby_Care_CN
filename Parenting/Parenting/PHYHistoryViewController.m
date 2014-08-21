@@ -66,9 +66,9 @@
     [self.phyDetailImageView setUserInteractionEnabled:YES];
     
     _buttonBack = [[UIButton alloc] init];
-    _buttonBack.frame = CGRectMake(10, 22, 40, 40);
-    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:14];
-    [_buttonBack setTitle:@"返回" forState:UIControlStateNormal];
+    _buttonBack=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_buttonBack setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    _buttonBack.frame = CGRectMake(0, 22, 50, 41);
     [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [_phyDetailImageView addSubview:_buttonBack];
     

@@ -10,7 +10,7 @@
 #import "TempCorePlot.h"
 #import "TempSaveView.h"
 
-@interface TempDetailViewController : UIViewController{
+@interface TempDetailViewController : UIViewController<TempSaveViewDelegate>{
     NSArray *arrayCurrent;
     NSArray *arrValues;
     
