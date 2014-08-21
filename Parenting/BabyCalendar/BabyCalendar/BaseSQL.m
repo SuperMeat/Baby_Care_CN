@@ -531,9 +531,9 @@
             model.active_score = [NSNumber numberWithInt:[rs intForColumn:@"active_score"]];
             model.language_score = [NSNumber numberWithInt:[rs intForColumn:@"language_score"]];
             model.society_score = [NSNumber numberWithInt:[rs intForColumn:@"society_score"]];
-            if (![model.date isEqual:@""]&& model.date != nil) {
-                [datas setObject:model forKey:model.date];
-                
+            if ([model.completed boolValue])
+            {
+                 [datas setObject:model forKey:model.month];
             }
         }
         [rs close];

@@ -124,11 +124,11 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 
 - (void)reloadSQLDatas
 {
-    self.notes = [BaseSQL queryData_note];
-    self.milestones = [BaseSQL queryData_milestone];
-    self.vaccines = [BaseSQL queryData_vaccine];
-    self.trains = [BaseSQL queryData_train];
-    self.tests = [BaseSQL queryData_test];
+//    self.notes = [BaseSQL queryData_note];
+//    self.milestones = [BaseSQL queryData_milestone];
+//    self.vaccines = [BaseSQL queryData_vaccine];
+//    self.trains = [BaseSQL queryData_train];
+//    self.tests = [BaseSQL queryData_test];
     
     self.dicnotes      = [BaseSQL queryData_noteDic];
     self.dicmilestones = [BaseSQL queryData_milesDic];
@@ -392,7 +392,6 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     }
     else
     {
-       
         NSString* selectDateStr = [BaseMethod selectedDateFromSave];
         NSDate* selectDate = [BaseMethod dateFormString:selectDateStr];
         long valueSelectDate = [ACDate getTimeStampFromDate:selectDate];
@@ -497,7 +496,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
         }
     }
     
-     [BaseMethod saveSelectedDate:today];
+    [BaseMethod saveSelectedDate:today];
     [_tableView reloadData];
 //
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_calendarView object:nil];
@@ -753,23 +752,20 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
         model.train = [NSNumber numberWithBool:YES];
     }
     
-    if ([self.dictests objectForKey:dateStr] != nil)
+    NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
+    NSDate* testDate = [BaseMethod dateFormString:dateStr];
+    NSDate* selectedDate = [BaseMethod dateFormString:dateStr];
+    
+    int days_bith_test =  [BaseMethod fromStartDate:birthDate withEndDate:testDate]/30;
+    
+    int days_bith_selected = [BaseMethod fromStartDate:birthDate withEndDate:selectedDate]/30;
+    
+    if ((days_bith_test == days_bith_selected) &&
+        [self.dictests objectForKey:[NSNumber numberWithInt:days_bith_selected+1]] != nil)
     {
-        TestModel *t_model = [self.dictests objectForKey:dateStr];
-        NSLog(@"birth : %@",[BabyinfoViewController getbabybirth]);
-        NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
-        NSDate* testDate = [BaseMethod dateFormString:t_model.date];
-        NSDate* selectedDate = [BaseMethod dateFormString:dateStr];
-        
-        int days_bith_test =  [BaseMethod fromStartDate:birthDate withEndDate:testDate]/30;
-        
-        int days_bith_selected = [BaseMethod fromStartDate:birthDate withEndDate:selectedDate]/30;
-        
-        if (days_bith_test == days_bith_selected)
-        {
-            model.test = [NSNumber numberWithBool:YES];
-            model.testModel = t_model;
-        }
+             TestModel *t_model = [self.dictests objectForKey:[NSNumber numberWithInt:days_bith_selected+1]];
+             model.test = [NSNumber numberWithBool:YES];
+             model.testModel = t_model;
     }
     
     return model;
@@ -812,7 +808,6 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     
     for (TestModel* t_model in self.tests)
     {
-        NSLog(@"birth : %@",[BabyinfoViewController getbabybirth]);
         NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
         NSDate* testDate = [BaseMethod dateFormString:t_model.date];
         NSDate* selectedDate = [BaseMethod dateFormString:dateStr];
