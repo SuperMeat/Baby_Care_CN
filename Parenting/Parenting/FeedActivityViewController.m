@@ -467,6 +467,14 @@
     
     //从数据库获取
     NSArray* array=[[SummaryDB dataBase] selectfeedfooddetailforsummary];
+    if (iPhone5) {
+        [self.foodScrollView setFrame:CGRectMake(0, 55+64, 320, 235)];
+    }
+    else
+    {
+        [self.foodScrollView setFrame:CGRectMake(0, 110, 320, 200)];
+    }
+
     if ([array count]  == 0)
     {
         self.foodView.hidden = NO;
@@ -961,6 +969,14 @@
     {
         //如果没有记录
         NSArray *array = [[SummaryDB dataBase]selectfeedfooddetailforsummary];
+        if (iPhone5) {
+            [self.foodScrollView setFrame:CGRectMake(0, 55+64, 320, 235)];
+        }
+        else
+        {
+            [self.foodScrollView setFrame:CGRectMake(0, 110, 320, 200)];
+        }
+
         if ([array count] == 0)
         {
             self.foodView.hidden = NO;
