@@ -75,9 +75,9 @@
         self.foodScrollView.hidden = NO;
         self.foodView.hidden = YES;
         [self.foodScrollView setContentSize:CGSizeMake(300, 368)];
-        [self.foodScrollView setBackgroundColor:[UIColor clearColor]];
+        [self.foodScrollView setBackgroundColor:[UIColor redColor]];
         self.foodScrollView.showsHorizontalScrollIndicator=NO;
-        [self.view bringSubviewToFront:self.foodScrollView];
+        [self.view addSubview:self.foodScrollView];
         [self makeDetailViews];
     }
 
@@ -503,7 +503,7 @@
     }
 
     if (iPhone5) {
-        [self.foodScrollView setFrame:CGRectMake(0, 30, 320, 260)];
+        [self.foodScrollView setFrame:CGRectMake(0, 55+64, 320, 235)];
     }
     else
     {
@@ -798,7 +798,9 @@
     startButton.enabled = NO;
     startButtonright.enabled = NO;
     startButtonleft.enabled = NO;
+    //self.foodScrollView.userInteractionEnabled = NO;
     [self.view bringSubviewToFront:adviseImageView];
+    [saveView resignFirstResponder];
     [self.view addSubview:saveView];
 }
 
@@ -821,6 +823,7 @@
     startButton.selected=NO;
     startButtonleft.selected=NO;
     startButtonright.selected=NO;
+    
     [saveView removeFromSuperview];
     labletip.text=@"The end time,a total of...";
     NSNumber *dur=noti.object;
@@ -841,6 +844,7 @@
     startButtonright.enabled = YES;
     startButtonleft.enabled = YES;
     adviseImageView.userInteractionEnabled = YES;
+    self.foodScrollView.userInteractionEnabled = YES;
 }
 
 -(void)feedWay:(UIButton *)sender
@@ -889,7 +893,7 @@
         {
             self.foodView.hidden = NO;
             self.foodScrollView.hidden = YES;
-            [self.view bringSubviewToFront:self.foodView];
+            [self.view addSubview:self.foodView];
         }
         else
         {
@@ -898,7 +902,7 @@
             [self.foodScrollView setContentSize:CGSizeMake(300, 368)];
             [self.foodScrollView setBackgroundColor:[UIColor clearColor]];
             self.foodScrollView.showsHorizontalScrollIndicator=NO;
-            [self.view bringSubviewToFront:self.foodScrollView];
+            [self.view addSubview:self.foodScrollView];
 
         }
         

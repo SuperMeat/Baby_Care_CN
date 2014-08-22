@@ -474,7 +474,7 @@
         NSTimeInterval animationDuration = 0.25f;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:animationDuration];
-        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y-135, 320, 460-44-49);
+        self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y-135, 320, 460);
         [UIView commitAnimations];
         self.isshow=YES;
     }

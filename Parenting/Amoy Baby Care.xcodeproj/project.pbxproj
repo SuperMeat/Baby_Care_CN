@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48000EFC19A1985B00AD04D5 /* 方正卡通简体.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48000EFB19A1985B00AD04D5 /* 方正卡通简体.ttf */; };
+		48000EFC19A1985B00AD04D5 /* fangzhengjiantikatong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48000EFB19A1985B00AD04D5 /* fangzhengjiantikatong.ttf */; };
 		48000EFE19A2069D00AD04D5 /* 方正卡通简体.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */; };
 		48000F0219A2076000AD04D5 /* MilestoneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */; };
 		4800B0BF18D7F3D20093A6AF /* 日历@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800B0B518D7F3D20093A6AF /* 日历@2x.png */; };
@@ -1401,7 +1401,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		48000EFB19A1985B00AD04D5 /* 方正卡通简体.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正卡通简体.ttf"; sourceTree = "<group>"; };
+		48000EFB19A1985B00AD04D5 /* fangzhengjiantikatong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = fangzhengjiantikatong.ttf; path = ../../Parenting/fangzhengjiantikatong.ttf; sourceTree = "<group>"; };
 		48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正卡通简体.ttf"; sourceTree = "<group>"; };
 		48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneHeaderView.xib; sourceTree = "<group>"; };
 		4800B0B518D7F3D20093A6AF /* 日历@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "日历@2x.png"; sourceTree = "<group>"; };
@@ -4690,8 +4690,6 @@
 		48866CC5199A12E5007B16AA /* test */ = {
 			isa = PBXGroup;
 			children = (
-				4828F26419A470BB00D04926 /* icon_mood_selected.png */,
-				4828F26519A470BB00D04926 /* icon_mood.png */,
 				48866C9F199A12E5007B16AA /* 2 */,
 				48866CAA199A12E5007B16AA /* 1 */,
 				48866CAB199A12E5007B16AA /* pic.jpg */,
@@ -4703,6 +4701,8 @@
 				48866CB2199A12E5007B16AA /* icon_language.png */,
 				48866CB4199A12E5007B16AA /* icon_know_selected.png */,
 				48866CB5199A12E5007B16AA /* icon_move_selected.png */,
+				4828F26419A470BB00D04926 /* icon_mood_selected.png */,
+				4828F26519A470BB00D04926 /* icon_mood.png */,
 				48866CB6199A12E5007B16AA /* icon_language_selected.png */,
 				48866CB7199A12E5007B16AA /* btn_end.png */,
 				48866CB8199A12E5007B16AA /* bg_header_testReport.png */,
@@ -5385,6 +5385,7 @@
 				48801274199DECE300F6778B /* ShareInfoView.h */,
 				48801275199DECE300F6778B /* ShareInfoView.m */,
 				48801277199DED1700F6778B /* ShareInfoView.xib */,
+				48000EFB19A1985B00AD04D5 /* fangzhengjiantikatong.ttf */,
 				48866E6B199A12E5007B16AA /* events */,
 			);
 			name = Calendar;
@@ -6070,7 +6071,6 @@
 		7215972717453680006FD415 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				48000EFB19A1985B00AD04D5 /* 方正卡通简体.ttf */,
 				481FB9CA194FFA69009553ED /* BC_Info.sqlite */,
 				CE23978C176EE37B0096E033 /* Babyinfo.rdb */,
 				7215972817453680006FD415 /* Amoy Baby Care-Info.plist */,
@@ -7573,7 +7573,7 @@
 				4828F4B419A495D700D04926 /* 3.1.1.jpg in Resources */,
 				BE25763618FE51CA0053683A /* title_weight@2x.png in Resources */,
 				484B66FC195D5375006642BA /* pattern2@2x.png in Resources */,
-				48000EFC19A1985B00AD04D5 /* 方正卡通简体.ttf in Resources */,
+				48000EFC19A1985B00AD04D5 /* fangzhengjiantikatong.ttf in Resources */,
 				48FEAF7318E917CB002425E2 /* histogram_red@2x.png in Resources */,
 				BE25764118FE51CA0053683A /* slider_focus@2x.png in Resources */,
 				4828F51719A495D700D04926 /* 9.4.3.jpg in Resources */,

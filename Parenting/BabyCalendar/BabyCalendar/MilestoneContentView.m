@@ -25,7 +25,7 @@
     
     
     _textView.delegate = self;
-    [_textView setFont:[UIFont fontWithName:@"BaroqueScript" size:14]];
+    [_textView setFont:[UIFont fontWithName:@"MicrosoftYaHei" size:14]];
     [_textView setTextColor:UIColorFromRGB(kColor_textViewText)];
     
     _labTitle.font = [UIFont fontWithName:kFont size:15.f];

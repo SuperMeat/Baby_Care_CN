@@ -71,11 +71,15 @@
     model.date = [userDef objectForKey:kSelectedDate];
     model.month = [NSNumber numberWithInteger:_month+1];
     model.completed = [NSNumber numberWithBool:YES];
-    model.score = [NSNumber numberWithInteger:total_score];
     model.knowledge_score = [NSNumber numberWithFloat:_knowledge_score/(_knowledge_times*each_score)*100.0];
     model.active_score = [NSNumber numberWithFloat:_active_score/(_active_times*each_score)*100.0];
     model.language_score = [NSNumber numberWithFloat:_language_score/(_language_times*each_score)*100.0];
     model.society_score = [NSNumber numberWithFloat:_society_score/(_society_times*each_score)*100.0];
+    if ([model.knowledge_score intValue] == 100 && [model.active_score intValue] == 100 && [model.language_score intValue] == 100 && [model.society_score intValue] == 100) {
+        total_score = 100;
+    }
+    
+    model.score = [NSNumber numberWithInteger:total_score];
     
     BOOL success = [BaseSQL updateData_test:model];
     if (success) {
