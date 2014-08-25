@@ -362,4 +362,21 @@
     }
     
 }
+
++ (int)getbabyagefrommonth
+{
+    long birthTime = [[[[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:BABYID] objectForKey:@"birth"] longValue];
+    if (birthTime == 0) {
+        return 0;
+    }
+    NSDate *date = [ACDate getDateFromTimeStamp:birthTime];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
+    
+    int allmonth = [comps year] * 12 + [comps month];
+    return allmonth;
+}
+
 @end

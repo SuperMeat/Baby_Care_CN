@@ -39,6 +39,7 @@
 "Review App"="Review App";
 "Submit feedback/improvements"="Contact us";
 "Submit feedback online"="Submit feedback online";
+"Look up around" = "Around";
 
 "My Devices" = "My Devices";
 
@@ -158,7 +159,7 @@
 "DurationMin"  = "min";
 "DurationSec"  = "sec";
 
-"Add" = "ADD";
+"Add" = "Submit";
 
 "InformationCenter"="Discovery";
 

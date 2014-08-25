@@ -123,7 +123,7 @@
 
 -(void)makeAdvise
 {
-    NSArray *adviseArray = [[UserLittleTips dataBase]selectLittleTipsByAge:1 andCondition:QCM_TYPE_DIAPER];
+    NSArray *adviseArray = [[UserLittleTips dataBase]selectLittleTipsByAge:[BaseMethod getbabyagefrommonth] andCondition:QCM_TYPE_DIAPER];
     ad=[[AdviseScrollview alloc]initWithArray:adviseArray];
     
     adviseImageView = [[UIImageView alloc] init];

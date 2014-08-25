@@ -128,15 +128,15 @@ messageView;
     //_item8.name=NSLocalizedString(@"Clear all logged data",nil);
     _item9.name=NSLocalizedString(@"LocalNotify", nil);
     //_item11.name = @"2G/3G下自动备份";
-    _item12.name = @"查看小区附近的母婴用品店";
+    _item12.name = NSLocalizedString(@"Look up around", nil);
     //_item13.name = @"允许发布自己位置及状态";
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil) {
         _item10.name=@"账号登录";
         UIButton *buttonLogin=[UIButton buttonWithType:UIButtonTypeCustom];
-        [buttonLogin setTitle:@"登录" forState:UIControlStateNormal];
+        [buttonLogin setTitle:NSLocalizedString(@"Sign in", nil) forState:UIControlStateNormal];
         //FIXME:修改图片
-        [buttonLogin setBackgroundColor:[UIColor colorWithRed:0.776 green:0.199 blue:0.359 alpha:1.000]];
+        [buttonLogin setBackgroundColor:[UIColor colorWithRed:0.307 green:0.735 blue:0.776 alpha:1.000]];
         buttonLogin.layer.cornerRadius = 8.0f;
         [buttonLogin addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
         buttonLogin.bounds=CGRectMake(0, 0, 95, 30);
@@ -145,7 +145,7 @@ messageView;
     else{
         _item10.name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"]];
         UIButton *buttonLoginOut=[UIButton buttonWithType:UIButtonTypeCustom];
-        [buttonLoginOut setTitle:@"登出" forState:UIControlStateNormal];
+        [buttonLoginOut setTitle:NSLocalizedString(@"Sign out", nil)  forState:UIControlStateNormal];
         buttonLoginOut.layer.cornerRadius = 8.0f;
         //FIXME:修改图片
         [buttonLoginOut setBackgroundColor:[UIColor colorWithRed:0.776 green:0.199 blue:0.359 alpha:1.000]];
@@ -488,7 +488,7 @@ messageView;
     {
         [self showCopyright];
     }
-    else if([item.name isEqualToString:NSLocalizedString(@"查看小区附近的母婴用品店",nil)])
+    else if([item.name isEqualToString:NSLocalizedString(@"Look up around", nil)])
     {
         [self showMap];
     }
