@@ -350,4 +350,16 @@
     return color;
     
 }
+
++ (NSString*)getBabyNickname
+{
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:kBabyNickname]!=nil) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:kBabyNickname];
+    }
+    else
+    {
+        return @"宝宝";
+    }
+    
+}
 @end

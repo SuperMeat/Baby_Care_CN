@@ -11,7 +11,7 @@
 @interface MilestoneModel : NSObject
 @property(nonatomic,copy)NSString* id;
 @property(nonatomic,copy)NSString* date;
-@property(nonatomic,copy)NSString* month;
+@property(nonatomic,copy)NSNumber* month;
 @property(nonatomic,copy)NSString* title;
 @property(nonatomic,copy)NSString* content;
 @property(nonatomic,copy)NSString* photo_path;

@@ -286,30 +286,31 @@
         ActivityItem *item=[dataArray firstObject];
         NSString *type = @"";
         if ([item.type isEqualToString:@"Diaper"]) {
-            type = @"给宝贝换尿布了";
+            type = @"给%@换尿布了";
         }
         else if ([item.type isEqualToString:@"Play"])
         {
-            type = @"跟宝贝玩耍了";
+            type = @"跟%@玩耍了";
         }
         else if ([item.type isEqualToString:@"Bath"])
         {
-            type = @"帮宝贝洗澡了";
+            type = @"帮%@洗澡了";
         }
         else if ([item.type isEqualToString:@"Sleep"])
         {
-            type = @"宝贝睡觉了";
+            type = @"%@睡觉了";
         }
         else if ([item.type isEqualToString:@"Medicine"])
         {
-            type = @"给宝贝吃药了";
+            type = @"给%@吃药了";
         }
         else
         {
-            type = @"给宝贝喂食了";
+            type = @"给%@喂食了";
         }
         
-        labelText.text = [NSString stringWithFormat:@"最近一次:\r%@%@",[ACDate getDayBeforeDespFromDate:item.starttime], type];
+        
+        labelText.text = [NSString stringWithFormat:@"最近一次:\r%@%@",[ACDate getDayBeforeDespFromDate:item.starttime], [NSString stringWithFormat:type,[BaseMethod getBabyNickname]]];
         labelText.lineBreakMode = NSLineBreakByWordWrapping;
         labelText.numberOfLines = 0;
         labelText.frame = CGRectMake(10, 8, statusImageView.frame.size.width-20, 50);

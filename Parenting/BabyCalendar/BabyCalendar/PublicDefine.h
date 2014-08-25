@@ -95,6 +95,7 @@
 #define kToday_unselected               @"kToday_unselected"
 #define kPush_testReportVc              @"kPush_testReportVc"
 
+#define kBabyNickname                   @"kBabyNickname"
 
 #define kDateFormat                     @"yyyy年MM月dd日"
 

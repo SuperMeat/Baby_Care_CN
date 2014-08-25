@@ -4,135 +4,135 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>宝宝出生了</string>
+		<string>%@出生了</string>
 		<key>month</key>
-		<string>用户输入的出生时间</string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝回家了</string>
+		<string>%@回家了</string>
 		<key>month</key>
-		<string>不确定</string>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝第一次笑</string>
+		<string>%@第一次笑</string>
 		<key>month</key>
-		<string>不确定</string>
+		<integer>2</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝第一次模仿</string>
+		<string>%@第一次模仿</string>
 		<key>month</key>
-		<string>不确定</string>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝可以吃手了</string>
+		<string>%@可以吃手了</string>
 		<key>month</key>
-		<string>0-1月</string>
+		<integer>4</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝会翻身了</string>
+		<string>%@会翻身了</string>
 		<key>month</key>
-		<string>4-7月</string>
+		<integer>5</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝可以吃大脚趾了</string>
+		<string>%@可以拉坐了</string>
 		<key>month</key>
-		<string>不确定</string>
+		<integer>5</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝可以拉坐了</string>
+		<string>%@可以吃大脚趾了</string>
 		<key>month</key>
-		<string>4个月</string>
+		<integer>6</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>第一次给宝宝添加辅食</string>
+		<string>第一次给%@添加辅食</string>
 		<key>month</key>
-		<string>4个月</string>
+		<integer>4</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝长牙了</string>
+		<string>%@长牙了</string>
 		<key>month</key>
-		<string>6个月</string>
+		<integer>6</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝可以独坐了</string>
+		<string>%@可以独坐了</string>
 		<key>month</key>
-		<string>6个月</string>
+		<integer>7</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝会爬了</string>
+		<string>%@会爬了</string>
 		<key>month</key>
-		<string>6-9个月</string>
+		<integer>8</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝可以扶站了</string>
+		<string>%@可以扶站了</string>
 		<key>month</key>
-		<string>8个月</string>
+		<integer>9</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝会站了</string>
+		<string>%@会站了</string>
 		<key>month</key>
-		<string>8个月后</string>
+		<integer>10</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝可以扶着家具走了</string>
+		<string>%@可以扶着家具走了</string>
 		<key>month</key>
-		<string>9个月后</string>
+		<integer>11</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝能独自走了</string>
+		<string>%@能独自走了</string>
 		<key>month</key>
-		<string>9个月后</string>
+		<integer>12</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝第一次叫妈妈</string>
+		<string>%@断奶了</string>
 		<key>month</key>
-		<string>不定时</string>
+		<integer>12</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝第一次叫爸爸</string>
+		<string>%@第一次叫妈妈</string>
 		<key>month</key>
-		<string>不定时</string>
+		<integer>13</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝断奶了</string>
+		<string>%@第一次叫爸爸</string>
 		<key>month</key>
-		<string>不定时</string>
+		<integer>13</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝可以自己吃饭了</string>
+		<string>%@可以自己吃饭了</string>
 		<key>month</key>
-		<string>周岁</string>
+		<integer>14</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝可以自己穿衣服了</string>
+		<string>%@可以自己穿衣服了</string>
 		<key>month</key>
-		<string>周岁</string>
+		<integer>16</integer>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>宝宝能够自己上厕所了</string>
+		<string>%@能够自己上厕所了</string>
 		<key>month</key>
-		<string>2岁</string>
+		<integer>24</integer>
 	</dict>
 </array>
 </plist>

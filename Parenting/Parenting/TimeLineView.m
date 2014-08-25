@@ -78,6 +78,12 @@
             if (![[dict objectForKey:@"nickname"] isEqual: @""] && [[dict objectForKey:@"birth"] intValue] != 0) {
                 [[BabyMessageDataDB babyMessageDB]deleteBabyMessage:@"input_babyInfo" ];
                 //TODO:填写完宝贝信息后引导做测评 之类的
+                /**
+                 *  宝贝昵称用户信息 lzw0825
+                 */
+                [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"nickname"] forKey:kBabyNickname];
+
+                
             }
         }
          timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];

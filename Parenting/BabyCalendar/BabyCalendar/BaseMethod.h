@@ -51,4 +51,6 @@
 /***********color**************/
 + (NSDictionary *) colorWithHexString: (NSString *)color;
 +(CGColorRef) getColorFromRed:(float)red Green:(float)green Blue:(float)blue Alpha:(float)alpha;
+
++ (NSString*)getBabyNickname;
 @end

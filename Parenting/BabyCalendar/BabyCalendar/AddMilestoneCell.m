@@ -22,7 +22,7 @@
 {
     _model = model;
     
-    _labTitle.text = _model.title;
+    _labTitle.text = [NSString stringWithFormat:_model.title,[BaseMethod getBabyNickname]];
     //_labMonth.text = _model.month;
     _labDate.text  = _model.date;
     if ([_model.completed boolValue]) {

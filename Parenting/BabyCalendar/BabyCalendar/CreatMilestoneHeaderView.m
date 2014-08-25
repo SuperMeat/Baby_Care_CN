@@ -41,7 +41,14 @@
 {
     _model = model;
     
-    _textField.text = _model.title;
+    if (_model.title == nil) {
+        _textField.text = _model.title;
+    }
+    else
+    {
+        _textField.text = [NSString stringWithFormat:_model.title,[BaseMethod getBabyNickname]];
+    }
+    
     if (_model.date == nil || [_model.date isEqualToString:@""]) {
         
         _model.date = [BaseMethod selectedDateFromSave];

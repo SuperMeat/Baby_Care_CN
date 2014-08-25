@@ -25,7 +25,7 @@
         NSLog(@"OPEN FAIL");
     }
     
-    [dataBase executeUpdate:@"CREATE TABLE IF NOT EXISTS milestoneTable(id text long,date text,month text,title text,content text,photo_path text,completed bool)"];
+    [dataBase executeUpdate:@"CREATE TABLE IF NOT EXISTS milestoneTable(id text long,date text,month int,title text,content text,photo_path text,completed bool)"];
     [dataBase close];
     
     return dataBase;
@@ -73,7 +73,7 @@
             MilestoneModel* model = [[MilestoneModel alloc]init];
             model.id = [rs stringForColumn:@"id"];
             model.date = [rs stringForColumn:@"date"];
-            model.month = [rs stringForColumn:@"month"];
+            model.month = [NSNumber numberWithInt:[rs intForColumn:@"month"]];
             model.title = [rs stringForColumn:@"title"];
             model.content = [rs stringForColumn:@"content"];
             model.photo_path = [rs stringForColumn:@"photo_path"];
