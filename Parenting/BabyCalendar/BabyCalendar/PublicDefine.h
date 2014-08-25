@@ -30,6 +30,7 @@
 #define kColor_baseView              0xf6f6f6
 /************日记************/
 #define kColor_note_line             0x69becd
+//#define kColor_note_line             0xffffff
 
 /************日历************/
 #define kColor_calendarDay_num       0x828687
