@@ -44,7 +44,7 @@
             MilestoneModel* model = [[MilestoneModel alloc]init];
             model.id = [rs stringForColumn:@"id"];
             model.date = [rs stringForColumn:@"date"];
-            model.month = [rs stringForColumn:@"month"];
+            model.month = [NSNumber numberWithInteger:[rs intForColumn:@"month"]];
             model.title = [rs stringForColumn:@"title"];
             model.content = [rs stringForColumn:@"content"];
             model.photo_path = [rs stringForColumn:@"photo_path"];
@@ -99,7 +99,7 @@
             MilestoneModel* model = [[MilestoneModel alloc]init];
             model.id = [rs stringForColumn:@"id"];
             model.date = [rs stringForColumn:@"date"];
-            model.month = [rs stringForColumn:@"month"];
+            model.month = [NSNumber numberWithInteger:[rs intForColumn:@"month"]];
             model.title = [rs stringForColumn:@"title"];
             model.content = [rs stringForColumn:@"content"];
             model.photo_path = [rs stringForColumn:@"photo_path"];

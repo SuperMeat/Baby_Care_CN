@@ -161,6 +161,8 @@
 
 #define G_XREDUCEONVERSION ([ACFunction getSystemVersion] >= 7.0 ?20.0:0)
 
+#define ISSYSTEM7_0 ([ACFunction getSystemVersion] >= 7.0 ?1:0)
+
 #define CUSTOMER_COUNTRY 1 // US,1 CN
 
 #define PM25INTOKEN    @"xNKhsJsD9fM2yCU9mXvp"
