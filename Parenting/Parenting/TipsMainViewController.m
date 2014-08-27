@@ -22,16 +22,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.hidesBottomBarWhenPushed=YES;
-#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
-        
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        if ( IOS7_OR_LATER )
-        {
-            self.edgesForExtendedLayout = UIRectEdgeNone;
-            self.extendedLayoutIncludesOpaqueBars = NO;
-            self.modalPresentationCapturesStatusBarAppearance = NO;
-        }
-#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     }
     return self;
 }
@@ -44,7 +34,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBarHidden = YES;
+    //self.navigationController.navigationBarHidden = YES;
     if(_scrollView.contentOffset.x == 0){
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     }
@@ -63,38 +53,43 @@
 -(void)initView{
     //加载头部Navigation
     //加载navigationBar
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 320, 44)];
+    UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    
+    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    backbutton.frame=CGRectMake(0, 0, 50, 41);
+    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
+    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
+    self.navigationItem.leftBarButtonItem=backbar;
+    
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 160, 20)];
     titleView.backgroundColor=[UIColor clearColor];
-    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
     titleText.backgroundColor = [UIColor clearColor];
     [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18]];
     titleText.textColor = [UIColor whiteColor];
     [titleText setTextAlignment:NSTextAlignmentCenter];
     [titleText setText:@"小贴士"];
     [titleView addSubview:titleText];
-    self.tipsNavigationImageView = [[UIImageView alloc] init];
-    [self.tipsNavigationImageView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
-    [self.tipsNavigationImageView setBackgroundColor:[ACFunction colorWithHexString:@"#68bfcc"]];
-    [self.tipsNavigationImageView addSubview:titleView];
-    [self.view addSubview:self.tipsNavigationImageView];
-    [self.tipsNavigationImageView setUserInteractionEnabled:YES];
     
-    _buttonBack = [[UIButton alloc] init];
-    _buttonBack.frame = CGRectMake(10, 22, 40, 40);
-    _buttonBack.titleLabel.font = [UIFont systemFontOfSize:14];
-    [_buttonBack setTitle:@"返回" forState:UIControlStateNormal];
-    [_buttonBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [self.tipsNavigationImageView addSubview:_buttonBack];
+    self.navigationItem.titleView = titleView;
+    
     //加载订阅贴士按钮
+    
     _buttonSubscribe = [[UIButton alloc] init];
-    _buttonSubscribe.frame = CGRectMake(320-10-40,22, 40, 40);
+    _buttonSubscribe.frame=CGRectMake(0, 0, 51, 51);
+    _buttonSubscribe.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -40);
     _buttonSubscribe.titleLabel.font = [UIFont systemFontOfSize:14];
     [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     [_buttonSubscribe addTarget:self action:@selector(goSubscribe:) forControlEvents:UIControlEventTouchUpInside];
-    [self.tipsNavigationImageView addSubview:_buttonSubscribe];
-    
+    UIBarButtonItem *rightbar=[[UIBarButtonItem alloc]initWithCustomView:_buttonSubscribe];
+
+    self.navigationItem.rightBarButtonItem = rightbar;
     //加载ScrollView
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width * 2, self.view.frame.size.height-64)];
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width * 2, kDeviceHeight)];
     _scrollView.scrollEnabled = false;
     _scrollView.showsHorizontalScrollIndicator = false;
     _scrollView.showsVerticalScrollIndicator = false;
@@ -172,15 +167,17 @@
 
 -(void)goSubscribe:(UIButton*)button{
     if ([button.titleLabel.text  isEqual:@"订阅"]) {
-        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, -64) animated:YES];
         [button setTitle:@"完成" forState:UIControlStateNormal];
         [[SyncController syncController] syncCategoryInfo:ACCOUNTUID HUD:hud SyncFinished:^{
             [self initData];
             [_sTableView reloadData];
             [_tTableView reloadData];
         } ViewController:self];
-    }else{
-        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+    else
+    {
+        [_scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
         [button setTitle:@"订阅" forState:UIControlStateNormal];
     }
     

@@ -24,6 +24,5 @@
 @property (strong, nonatomic) UIButton *buttonBack;
 @property (nonatomic,strong) UIButton *buttonSubscribe;
 
-@property (strong, nonatomic) UIImageView *tipsNavigationImageView;
 
 @end
