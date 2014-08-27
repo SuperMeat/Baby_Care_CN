@@ -15,6 +15,7 @@
 #import "MyLocalNofityViewController.h"
 #import "MyDevicesViewController.h"
 #import "LoginViewController.h"
+#import "UserProtocolViewController.h"
 
 @interface SettingViewController ()
 @property (strong, nonatomic) UITableView *settingTable;
@@ -117,6 +118,9 @@ messageView;
     SettingItem *_item12 = [[SettingItem alloc] init];
     //SettingItem *_item13 = [[SettingItem alloc] init];
     
+    //用户协议
+    SettingItem *_item13 = [[SettingItem alloc] init];
+    
     _item1.name=NSLocalizedString(@"Baby information",nil);
    // _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
     //_item3.name=NSLocalizedString(@"Notifications",nil);
@@ -131,6 +135,8 @@ messageView;
     _item12.name = NSLocalizedString(@"Look up around", nil);
     //_item13.name = @"允许发布自己位置及状态";
     
+    _item13.name=NSLocalizedString(@"用户协议",nil);
+
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil) {
         _item10.name=@"账号登录";
         UIButton *buttonLogin=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -184,6 +190,12 @@ messageView;
     [detailforCopyright setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
     detailforCopyright.frame=CGRectMake(0, 0, 20, 20);
     [detailforCopyright addTarget:self action:@selector(showCopyright) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *protocolforUser=[UIButton buttonWithType:UIButtonTypeCustom];
+    [protocolforUser setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
+    protocolforUser.frame=CGRectMake(0, 0, 20, 20);
+    [protocolforUser addTarget:self action:@selector(showProtocol) forControlEvents:UIControlEventTouchUpInside];
+
     
     segementForMetric=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
     
@@ -284,6 +296,7 @@ messageView;
     //_item11.accessView = switchForBackup;
     _item12.accessView = detailforMap;
     //_item13.accessView = switchForOpenwild;
+    _item13.accessView = protocolforUser;
     
     [_array1 addObject:_item1];
     [_array1 addObject:_item9];
@@ -301,8 +314,10 @@ messageView;
     //[_array2 addObject:_item5];
     [_array2 addObject:_item6];
     [_array2 addObject:_item7];
+    [_array2 addObject:_item13];
     //[_array3 addObject:_item8];
     [_array3 addObject:_item10];
+    
     
     _settingArray=[[NSArray alloc]initWithObjects:_array1,_array2,_array3, nil];
 }
@@ -488,6 +503,10 @@ messageView;
     {
         [self showCopyright];
     }
+    else if([item.name isEqualToString:NSLocalizedString(@"用户协议",nil)])
+    {
+        [self showProtocol];
+    }
     else if([item.name isEqualToString:NSLocalizedString(@"Look up around", nil)])
     {
         [self showMap];
@@ -503,6 +522,12 @@ messageView;
 {
     CopyrightViewController *copyright=[[CopyrightViewController alloc]initWithNibName:@"CopyrightViewController" bundle:nil];
     [self.navigationController pushViewController:copyright animated:YES];
+}
+
+-(void)showProtocol
+{
+    UserProtocolViewController *userprotocol=[[UserProtocolViewController alloc]init];
+    [self.navigationController pushViewController:userprotocol animated:YES];
 }
 
 -(void)chageOpenwild:(UISwitch*)sender

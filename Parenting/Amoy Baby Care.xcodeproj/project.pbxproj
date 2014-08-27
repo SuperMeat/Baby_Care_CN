@@ -38,6 +38,7 @@
 		480D464E19AD880A005AC58A /* 640-960.1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 480D464819AD880A005AC58A /* 640-960.1.jpg */; };
 		480D464F19AD880A005AC58A /* 640-960.2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 480D464919AD880A005AC58A /* 640-960.2.jpg */; };
 		480D465019AD880A005AC58A /* 640-960.3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 480D464A19AD880A005AC58A /* 640-960.3.jpg */; };
+		480D465719ADBC1B005AC58A /* UserProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480D465619ADBC1B005AC58A /* UserProtocolViewController.m */; };
 		480D6CEF19248D1700E5CAC7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CEE19248D1700E5CAC7 /* line.png */; };
 		480D6CF21924A75800E5CAC7 /* radio_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF01924A75800E5CAC7 /* radio_focus.png */; };
 		480D6CF31924A75800E5CAC7 /* radio.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF11924A75800E5CAC7 /* radio.png */; };
@@ -1452,6 +1453,8 @@
 		480D464819AD880A005AC58A /* 640-960.1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "640-960.1.jpg"; sourceTree = "<group>"; };
 		480D464919AD880A005AC58A /* 640-960.2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "640-960.2.jpg"; sourceTree = "<group>"; };
 		480D464A19AD880A005AC58A /* 640-960.3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "640-960.3.jpg"; sourceTree = "<group>"; };
+		480D465519ADBC1B005AC58A /* UserProtocolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProtocolViewController.h; sourceTree = "<group>"; };
+		480D465619ADBC1B005AC58A /* UserProtocolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProtocolViewController.m; sourceTree = "<group>"; };
 		480D6CEE19248D1700E5CAC7 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		480D6CF01924A75800E5CAC7 /* radio_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_focus.png; sourceTree = "<group>"; };
 		480D6CF11924A75800E5CAC7 /* radio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio.png; sourceTree = "<group>"; };
@@ -3484,6 +3487,15 @@
 			path = "引导页";
 			sourceTree = "<group>";
 		};
+		480D465119ADBB8A005AC58A /* UserProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				480D465519ADBC1B005AC58A /* UserProtocolViewController.h */,
+				480D465619ADBC1B005AC58A /* UserProtocolViewController.m */,
+			);
+			name = UserProtocol;
+			sourceTree = "<group>";
+		};
 		480EF91418E5123700D40903 /* 活动 */ = {
 			isa = PBXGroup;
 			children = (
@@ -5461,6 +5473,7 @@
 				48152E2A18487204009A4900 /* 引导 */,
 				488C895318B498D60091C2BF /* 环境 */,
 				488C895118B4985E0091C2BF /* 生理 */,
+				72159752174539A3006FD415 /* 设置 */,
 				488C895018B498460091C2BF /* 日历 */,
 				488C894F18B497ED0091C2BF /* 活动 */,
 				7215974F17453980006FD415 /* 首页 */,
@@ -5489,7 +5502,6 @@
 				48866E84199A12E5007B16AA /* BabyCalendar */,
 				4800B0D318D822C20093A6AF /* CalendarViewController.h */,
 				4800B0D418D822C20093A6AF /* CalendarViewController.m */,
-				72159752174539A3006FD415 /* Settings */,
 			);
 			name = "日历";
 			sourceTree = "<group>";
@@ -6204,9 +6216,10 @@
 			name = Summary;
 			sourceTree = "<group>";
 		};
-		72159752174539A3006FD415 /* Settings */ = {
+		72159752174539A3006FD415 /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
+				480D465119ADBB8A005AC58A /* UserProtocol */,
 				48152E4A1851B79F009A4900 /* LocalNofication */,
 				48152E491851B74A009A4900 /* BabyInfo */,
 				48152E481851B736009A4900 /* Copyright */,
@@ -6217,7 +6230,7 @@
 				CECE7F8C174A214F0036D0BC /* SettingItem.h */,
 				CECE7F8D174A214F0036D0BC /* SettingItem.m */,
 			);
-			name = Settings;
+			name = "设置";
 			sourceTree = "<group>";
 		};
 		7215975717453DE9006FD415 /* advise */ = {
@@ -8024,6 +8037,7 @@
 				48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */,
 				48866FC7199A12E6007B16AA /* MoodView.m in Sources */,
 				48866F50199A12E6007B16AA /* PWSCalendarDayCell.m in Sources */,
+				480D465719ADBC1B005AC58A /* UserProtocolViewController.m in Sources */,
 				4880059F192B33E600817919 /* ACLabel.m in Sources */,
 				CEF1F4971754AEAC005B3ECD /* ActivityItem.m in Sources */,
 				48866F57199A12E6007B16AA /* NSCalendar+DateComparison.m in Sources */,
