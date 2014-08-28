@@ -23,6 +23,16 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"训练页面"];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"训练页面"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

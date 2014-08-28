@@ -111,6 +111,18 @@
     
 }
 
+// 当前时间距离n月后的日期
++ (NSDate*)fromCurDate:(NSDate*)curDate withMonth:(int)month
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setMonth:month];
+    NSDate *date = [gregorian dateByAddingComponents:offsetComponents toDate:curDate options:0];
+    return date;
+    
+}
+
+
 // 两个日期间隔天数
 + (int)fromStartDate:(NSDate*)startDate withEndDate:(NSDate*)endDate
 {

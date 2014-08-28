@@ -171,7 +171,7 @@
 
 #define JPUSHAPPKEY    @"415aa5c57db9b6d73d91c2af"
 
-#define GUIDE_V    @"T1.0.00827014"
+#define GUIDE_V    @"T1.0.00828003"
 
 #define MTA_KEY @"I6A97SFF8ERU"
 

@@ -19,8 +19,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //    [self.tabBarController.tabBarItem setImage:[UIImage imageNamed:@"menu1.png"]];
-        //self.automaticallyAdjustsScrollViewInsets = NO;
 #define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
         
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -33,6 +31,21 @@
 #endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self prefersStatusBarHidden];
+    
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self prefersStatusBarHidden];
+    
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+
 }
 
 - (void)viewDidLoad
@@ -58,15 +71,17 @@
     // 初始化数组
     _slideImages = [[NSMutableArray alloc] init];
     if ([UIScreen mainScreen].bounds.size.height >= 568) {
-        [_slideImages addObject:@"640-1136.1.jpg"];
-        [_slideImages addObject:@"640-1136.2.jpg"];
-        [_slideImages addObject:@"640-1136.3.jpg"];
+        [_slideImages addObject:@"640-1136.1.png"];
+        [_slideImages addObject:@"640-1136.2.png"];
+        [_slideImages addObject:@"640-1136.3.png"];
+        [_slideImages addObject:@"640-1136.4.png"];
     }
     else
     {
-        [_slideImages addObject:@"640-960.1.jpg"];
-        [_slideImages addObject:@"640-960.2.jpg"];
-        [_slideImages addObject:@"640-960.3.jpg"];
+        [_slideImages addObject:@"640-960.1.png"];
+        [_slideImages addObject:@"640-960.2.png"];
+        [_slideImages addObject:@"640-960.3.png"];
+        [_slideImages addObject:@"640-960.4.png"];
     }
     
     // 创建四个UImageIVew到UIScrollView中

@@ -37,6 +37,16 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"里程碑页面"];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"里程碑页面"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

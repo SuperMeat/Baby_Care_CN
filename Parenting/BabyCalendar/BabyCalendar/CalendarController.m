@@ -51,10 +51,17 @@
     return self;
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
-
+    [MobClick beginLogPageView:@"日历页面"];
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"日历页面"];
+}
+
 
 - (void)viewDidLoad
 {

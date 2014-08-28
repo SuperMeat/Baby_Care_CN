@@ -40,6 +40,16 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"测评页面"];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"测评页面"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

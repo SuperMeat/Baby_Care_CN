@@ -82,10 +82,9 @@
                  *  宝贝昵称用户信息 lzw0825
                  */
                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"nickname"] forKey:kBabyNickname];
-
-                
             }
         }
+        
          timeLineArray = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
     }
 }

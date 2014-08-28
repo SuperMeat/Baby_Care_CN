@@ -30,6 +30,11 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"日记页面"];
+}
+
 - (void)ShareBtnByImage
 {
     UIImage *detailImage = [ACFunction cutView:self.view andWidth:kShareImageWidth_Note andHeight:kDeviceHeight-64];
@@ -80,6 +85,7 @@
     
     [self saveDatas];
     
+    [MobClick endLogPageView:@"日记页面"];
 
 }
 

@@ -269,6 +269,32 @@
     }
     return datas;
 }
+
++ (NSMutableArray*)queryData_vaccinebyvaccinename:(NSString*)vaccine andTimes:(NSString*)times
+{
+    NSMutableArray* datas = [NSMutableArray array];
+    
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM vaccineTable WHERE vaccine =? and times = ?",vaccine,times];
+        while ([rs next]){
+            VaccineModel* model = [[VaccineModel alloc]init];
+            model.vaccine = [rs stringForColumn:@"vaccine"];
+            model.illness = [rs stringForColumn:@"illness"];
+            model.times = [rs stringForColumn:@"times"];
+            model.completedDate = [rs stringForColumn:@"completedDate"];
+            model.willDate = [rs stringForColumn:@"willDate"];
+            model.inplan = [NSNumber numberWithBool:[rs boolForColumn:@"inplan"]];
+            model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
+            model.id = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
+            [datas addObject:model];
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return datas;
+}
+
 // 插入数据
 +(BOOL)insertData_vaccine:(VaccineModel*)model
 {
@@ -302,6 +328,16 @@
     [dataBase close];
     return success;
 }
+
++ (BOOL)updateData_vaccineSpecial:(VaccineModel*)model
+{
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    [dataBase open];
+    BOOL success = [dataBase executeUpdate:@"UPDATE vaccineTable SET completedDate = ?, willDate = ?, completed = ? WHERE id = ? ",model.completedDate,model.willDate,model.completed,model.id];
+    [dataBase close];
+    return success;
+}
+
 // 查询
 + (BOOL)queryData_vaccine_withModel:(VaccineModel*)model
 {

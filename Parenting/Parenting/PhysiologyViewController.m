@@ -39,7 +39,7 @@
     [self initView];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated{
     [MobClick endLogPageView:@"生理页面"];
 }
 
