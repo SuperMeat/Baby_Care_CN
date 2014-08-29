@@ -37,6 +37,16 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"里程碑页面"];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"里程碑页面"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -128,7 +138,7 @@
         MilestoneModel* model = _milestoneView.SQLDatas[_milestoneView.index];
         model.content = _milestoneView.contentView.textView.text;
         NSString* old_photo = model.photo_path;
-        model.photo_path = photoName;
+        model.photo_path    = photoName;
         model.date = _milestoneView.headerView.btnDate.titleLabel.text;
         
         [_milestoneView.SQLDatas replaceObjectAtIndex:_milestoneView.index withObject:model];

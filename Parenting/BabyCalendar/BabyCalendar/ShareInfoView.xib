@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天是宝宝第十天,分享我的宝宝日记~❤️" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lsS-5H-0Zo">
-                    <rect key="frame" x="62" y="25" width="196" height="63"/>
+                    <rect key="frame" x="71" y="25" width="179" height="63"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
                     <color key="textColor" red="0.228443062" green="0.75953209919999998" blue="0.74875812539999997" alpha="1" colorSpace="calibratedRGB"/>

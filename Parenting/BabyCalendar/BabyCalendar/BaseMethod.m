@@ -111,6 +111,18 @@
     
 }
 
+// 当前时间距离n月后的日期
++ (NSDate*)fromCurDate:(NSDate*)curDate withMonth:(int)month
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setMonth:month];
+    NSDate *date = [gregorian dateByAddingComponents:offsetComponents toDate:curDate options:0];
+    return date;
+    
+}
+
+
 // 两个日期间隔天数
 + (int)fromStartDate:(NSDate*)startDate withEndDate:(NSDate*)endDate
 {
@@ -350,4 +362,33 @@
     return color;
     
 }
+
++ (NSString*)getBabyNickname
+{
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:kBabyNickname]!=nil) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:kBabyNickname];
+    }
+    else
+    {
+        return @"宝宝";
+    }
+    
+}
+
++ (int)getbabyagefrommonth
+{
+    long birthTime = [[[[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:BABYID] objectForKey:@"birth"] longValue];
+    if (birthTime == 0) {
+        return 0;
+    }
+    NSDate *date = [ACDate getDateFromTimeStamp:birthTime];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
+    
+    int allmonth = [comps year] * 12 + [comps month];
+    return allmonth;
+}
+
 @end

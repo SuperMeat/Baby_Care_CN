@@ -293,4 +293,14 @@
     }
     
 }
+
+-(void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController
+{
+    
+}
+
+-(void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
+{
+    
+}
 @end

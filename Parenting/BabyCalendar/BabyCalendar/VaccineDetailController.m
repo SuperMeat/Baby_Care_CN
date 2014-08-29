@@ -77,6 +77,29 @@
         // 计划内
         BOOL success = [BaseSQL updateData_vaccine:model];
         
+        // 如果是A群流脑疫苗第一针，第二针就需要特殊处理,更新接种时间
+        if ([model.vaccine isEqualToString:@"A群流脑疫苗"] && [model.times isEqualToString:@"第一针"])
+        {
+            NSArray* array = [BaseSQL queryData_vaccinebyvaccinename:@"A群流脑疫苗" andTimes:@"第二针"];
+            if ([array count]>0 && [array objectAtIndex:0])
+            {
+                VaccineModel *vaccineModel = [array objectAtIndex:0];
+                if (model.completedDate == nil) {
+                    NSDate *completeDate = [BaseMethod dateFormString:model.willDate];
+                    NSDate *willDate = [BaseMethod fromCurDate:completeDate withMonth:3];
+                    vaccineModel.willDate = [BaseMethod stringFromDate:willDate];
+                }
+                else
+                {
+                    NSDate *completeDate = [BaseMethod dateFormString:model.completedDate];
+                    NSDate *willDate = [BaseMethod fromCurDate:completeDate withMonth:3];
+                    vaccineModel.willDate = [BaseMethod stringFromDate:willDate];
+                }
+                [BaseSQL updateData_vaccineSpecial:vaccineModel];
+            }
+            
+        }
+        
         if (success) {
             [self alertView:kSave_success];
         }else

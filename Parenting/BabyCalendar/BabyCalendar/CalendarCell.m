@@ -88,7 +88,8 @@
     }
     if (_row == 2 && [_ckModel.vaccine boolValue]) {
         NSString* andsoText = @"";
-        if (_ckModel.vaccineNum > 1) {
+        if (_ckModel.vaccineNum > 1)
+        {
             andsoText = @" 等";
         }
         

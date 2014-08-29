@@ -24,7 +24,8 @@
     return self;
 }
 
--(void)initData{
+-(void)initData
+{
     NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
     if (dict) {
         //姓名

@@ -30,6 +30,7 @@
 #define kColor_baseView              0xf6f6f6
 /************日记************/
 #define kColor_note_line             0x69becd
+//#define kColor_note_line             0xffffff
 
 /************日历************/
 #define kColor_calendarDay_num       0x828687
@@ -95,6 +96,7 @@
 #define kToday_unselected               @"kToday_unselected"
 #define kPush_testReportVc              @"kPush_testReportVc"
 
+#define kBabyNickname                   @"kBabyNickname"
 
 #define kDateFormat                     @"yyyy年MM月dd日"
 
@@ -144,7 +146,7 @@
 #define kShareImageIconFontColor   @"#858585"
 #define kShareImageBackgroundColor @"#ecf4f5"
 
-#define kShareImageFont @"方正卡通简体"
+#define kShareImageFont @"fangzhengjiantikatong"
 #define kShareMilestoneTitle @"%@%@,%@,记录下成长过程中的第一次~💗"  //宝宝姓名+日龄,里程碑title
 #define kShareNoteTitle @"%@%@,分享我的宝宝日记~💗"
 #define kShareTestTitle @"分享我家%@第%d月的测评得了%@分,大家也来给自己宝宝测一测~🎇"

@@ -24,7 +24,7 @@
     [super awakeFromNib];
     _textView.delegate = self;
 
-    [_textView setFont:[UIFont fontWithName:@"BaroqueScript" size:14]];
+    [_textView setFont:[UIFont fontWithName:@"MicrosoftYaHei" size:14]];
     _textView.textColor = UIColorFromRGB(kColor_textViewText);
     [self addKeyboardNotif];
 }

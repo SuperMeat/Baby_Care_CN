@@ -257,7 +257,7 @@
     }
     else
     {
-        return @"NULL";
+        return @"";
     }
 
 }

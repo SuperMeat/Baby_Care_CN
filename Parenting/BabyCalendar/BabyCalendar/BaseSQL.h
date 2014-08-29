@@ -49,6 +49,7 @@
 + (NSMutableArray*)queryData_vaccine;
 + (NSMutableDictionary*)queryData_vaccineDic;
 + (NSMutableArray*)queryData_vaccine:(NSString*)date;
++ (NSMutableArray*)queryData_vaccinebyvaccinename:(NSString*)vaccine andTimes:(NSString*)times;
 // 查询
 + (BOOL)queryData_vaccine_withModel:(VaccineModel*)model;
 // 插入数据
@@ -57,6 +58,8 @@
 + (BOOL)deleteData_vaccine:(VaccineModel*)model;
 // 更新
 + (BOOL)updateData_vaccine:(VaccineModel*)model;
+// 更新特殊情况
++ (BOOL)updateData_vaccineSpecial:(VaccineModel*)model;
 
 /**************训练**************/
 // 创建数据库

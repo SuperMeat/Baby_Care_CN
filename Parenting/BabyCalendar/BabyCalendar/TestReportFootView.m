@@ -46,11 +46,12 @@
 {
     _model = model;
     
-    NSArray* titles = @[kTest_type_knowledge,kTest_type_active,kTest_type_language,kTest_type_society];
-    NSArray* values = @[_model.knowledge_score,_model.active_score,_model.language_score,_model.society_score];
-    NSArray* colors = @[UIColorFromRGB(kColor_test_knowledge),UIColorFromRGB(kColor_test_active),UIColorFromRGB(kColor_test_mood),UIColorFromRGB(kColor_test_society)];
+    NSArray* titles = @[kTest_type_active,kTest_type_knowledge,kTest_type_language,kTest_type_society];
+    NSArray* values = @[_model.active_score,_model.knowledge_score,_model.language_score,_model.society_score];
+    NSArray* colors = @[UIColorFromRGB(kColor_test_active),UIColorFromRGB(kColor_test_knowledge),UIColorFromRGB(kColor_test_mood),UIColorFromRGB(kColor_test_society)];
     int width = 30;
-    NSArray* zhuViews = @[_knowledge_zhuView,_active_zhuView,_language_zhuView,_society_zhuView];
+    
+    NSArray* zhuViews = @[_active_zhuView,_knowledge_zhuView,_language_zhuView,_society_zhuView];
     for (int index = 0; index < titles.count; index++) {
         ZhuView* zhuView = zhuViews[index];
         zhuView.frame = CGRectMake(index*(width+40)+30, 20, width, 10);
@@ -58,8 +59,7 @@
         zhuModel.title = titles[index];
         zhuModel.value = values[index];
         zhuModel.color = colors[index];
-        zhuView.model = zhuModel;
-        
+        zhuView.model  = zhuModel;
     }
 }
 

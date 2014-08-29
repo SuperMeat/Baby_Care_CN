@@ -17,7 +17,8 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     _labDate.font = [UIFont fontWithName:kFont size:9];
     _labVaccine.textColor = UIColorFromRGB(kColor_val_cell_title);
-    _labVaccine.font = [UIFont fontWithName:kFont size:15.0f];
+    _labTimes.textColor = UIColorFromRGB(kColor_val_cell_title);
+    _labVaccine.font = [UIFont fontWithName:kFont size:12.0f];
     _labCompleted.font = [UIFont fontWithName:kFont size:12.0f];
     _labCompleted.textColor = UIColorFromRGB(kColor_testReport_month);
     _labInplan.font = [UIFont fontWithName:kFont size:12.f];
@@ -28,7 +29,9 @@
 {
     _model = model;
     
-    _labVaccine.text = [NSString stringWithFormat:@"%@(%@)",_model.vaccine,_model.times];
+    _labVaccine.text = [NSString stringWithFormat:@"%@",_model.vaccine];
+    _labTimes.text = [NSString stringWithFormat:@"(%@)",_model.times];
+    
     if ([_model.inplan boolValue]) {
         _labInplan.textColor = UIColorFromRGB(kColor_inplan);
         _labInplan.text = @"计划";

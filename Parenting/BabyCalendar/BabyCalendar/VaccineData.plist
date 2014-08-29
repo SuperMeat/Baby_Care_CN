@@ -4,12 +4,12 @@
 <array>
 	<dict>
 		<key>vaccine</key>
-		<string>乙型肝炎疫苗</string>
+		<string>乙肝疫苗</string>
 		<key>illness</key>
 		<string>乙型病毒性肝炎</string>
 		<key>times</key>
 		<string>第一针</string>
-		<key>days</key>
+		<key>month</key>
 		<integer>0</integer>
 	</dict>
 	<dict>
@@ -19,78 +19,78 @@
 		<string>结核病</string>
 		<key>times</key>
 		<string>初种</string>
-		<key>days</key>
-		<string>0</string>
+		<key>month</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>乙型肝炎疫苗</string>
+		<string>乙肝疫苗</string>
 		<key>illness</key>
 		<string>乙型病毒性肝炎</string>
 		<key>times</key>
 		<string>第二针</string>
-		<key>days</key>
-		<string>30</string>
+		<key>month</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎糖丸</string>
+		<string>脊髓灰质炎减毒活疫苗</string>
 		<key>illness</key>
 		<string>小儿麻痹症</string>
 		<key>times</key>
-		<string>第一次</string>
-		<key>days</key>
-		<string>60</string>
+		<string>口服第一次</string>
+		<key>month</key>
+		<integer>2</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎糖丸</string>
+		<string>脊髓灰质炎减毒活疫苗</string>
 		<key>illness</key>
 		<string>小儿麻痹症</string>
 		<key>times</key>
-		<string>第二次</string>
-		<key>days</key>
-		<string>90</string>
+		<string>口服第二次</string>
+		<key>month</key>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>百白破三联疫苗</string>
+		<string>无细胞百白破疫苗</string>
 		<key>illness</key>
 		<string>百日咳、白喉、破伤风</string>
 		<key>times</key>
-		<string>第一次</string>
-		<key>days</key>
-		<string>90</string>
+		<string>第一针</string>
+		<key>month</key>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎糖丸</string>
+		<string>脊髓灰质炎减毒活疫苗</string>
 		<key>illness</key>
 		<string>小儿麻痹</string>
 		<key>times</key>
-		<string>第三次</string>
-		<key>days</key>
-		<string>120</string>
+		<string>口服第三次</string>
+		<key>month</key>
+		<integer>4</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>百白破疫苗</string>
+		<string>无细胞百白破疫苗</string>
 		<key>illness</key>
 		<string>百日咳、白喉、破伤风</string>
 		<key>times</key>
 		<string>第二针</string>
-		<key>days</key>
-		<string>120</string>
+		<key>month</key>
+		<integer>4</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>百白破疫苗</string>
+		<string>无细胞百白破疫苗</string>
 		<key>illness</key>
 		<string>百日咳、白喉、破伤风</string>
 		<key>times</key>
 		<string>第三针</string>
-		<key>days</key>
-		<string>150</string>
+		<key>month</key>
+		<integer>5</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
@@ -99,28 +99,48 @@
 		<string>乙型病毒性肝炎</string>
 		<key>times</key>
 		<string>第三针</string>
-		<key>days</key>
-		<string>180</string>
+		<key>month</key>
+		<integer>6</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>麻疹疫苗</string>
+		<string>乙肝疫苗</string>
 		<key>illness</key>
-		<string>麻疹</string>
+		<string>乙型病毒性肝炎</string>
+		<key>times</key>
+		<string>第三针</string>
+		<key>month</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>vaccine</key>
+		<string>A群流脑疫苗</string>
+		<key>illness</key>
+		<string>流行性脑脊髓膜炎</string>
 		<key>times</key>
 		<string>第一针</string>
-		<key>days</key>
-		<string>240</string>
+		<key>month</key>
+		<integer>6</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>乙脑疫苗</string>
+		<string>麻风二联疫苗</string>
+		<key>illness</key>
+		<string>麻疹、风疹</string>
+		<key>times</key>
+		<string>第一针</string>
+		<key>month</key>
+		<integer>8</integer>
+	</dict>
+	<dict>
+		<key>vaccine</key>
+		<string>乙脑减毒活疫苗</string>
 		<key>illness</key>
 		<string>流行性乙型脑炎</string>
 		<key>times</key>
-		<string>非活第一、二次</string>
-		<key>days</key>
-		<string>240</string>
+		<string>第一针</string>
+		<key>month</key>
+		<integer>8</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
@@ -129,68 +149,68 @@
 		<string>流行性脑脊髓膜炎</string>
 		<key>times</key>
 		<string>第二针</string>
-		<key>days</key>
-		<string>270</string>
+		<key>month</key>
+		<integer>9</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>百白破疫苗</string>
+		<string>甲肝减毒活疫苗</string>
+		<key>illness</key>
+		<string>甲型肝炎</string>
+		<key>times</key>
+		<string>第一针</string>
+		<key>month</key>
+		<integer>18</integer>
+	</dict>
+	<dict>
+		<key>vaccine</key>
+		<string>无细胞百白破疫苗</string>
 		<key>illness</key>
 		<string>百日咳、白喉、破伤风</string>
 		<key>times</key>
 		<string>第四针</string>
-		<key>days</key>
-		<string>540</string>
+		<key>month</key>
+		<integer>18</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>麻疹疫苗</string>
+		<string>麻腮风三联疫苗</string>
 		<key>illness</key>
-		<string>麻疹</string>
+		<string>麻疹、流行性腮腺炎、风疹</string>
 		<key>times</key>
-		<string>第二次</string>
-		<key>days</key>
-		<string>540</string>
+		<string>第一针</string>
+		<key>month</key>
+		<integer>18</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎糖丸</string>
-		<key>illness</key>
-		<string>小儿麻痹</string>
-		<key>times</key>
-		<string>加强</string>
-		<key>days</key>
-		<string>540</string>
-	</dict>
-	<dict>
-		<key>vaccine</key>
-		<string>乙脑疫苗</string>
+		<string>乙脑减毒活疫苗</string>
 		<key>illness</key>
 		<string>流行性乙型脑炎</string>
 		<key>times</key>
-		<string>加强</string>
-		<key>days</key>
-		<string>540</string>
+		<string>第二针</string>
+		<key>month</key>
+		<integer>24</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎疫苗</string>
+		<string>A+C群流脑疫苗</string>
 		<key>illness</key>
-		<string>脊髓灰质炎（小儿麻痹）</string>
+		<string>流行性脑脊髓膜炎</string>
 		<key>times</key>
-		<string>加强</string>
-		<key>days</key>
-		<string>1460</string>
+		<string>第一针</string>
+		<key>month</key>
+		<integer>36</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>麻疹疫苗</string>
+		<string>脊髓灰质炎减毒活疫苗</string>
 		<key>illness</key>
-		<string>麻疹</string>
+		<string>小儿麻痹</string>
 		<key>times</key>
-		<string>加强</string>
-		<key>days</key>
-		<string>2555</string>
+		<string>口服第四次</string>
+		<key>month</key>
+		<integer>48</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
@@ -198,29 +218,19 @@
 		<key>illness</key>
 		<string>白喉、破伤风</string>
 		<key>times</key>
-		<string>加强</string>
-		<key>days</key>
-		<string>2555</string>
+		<string>第一针</string>
+		<key>month</key>
+		<integer>72</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>乙脑疫苗</string>
-		<key>illness</key>
-		<string>流行性乙型脑炎</string>
-		<key>times</key>
-		<string>初免两针</string>
-		<key>days</key>
-		<string>2555</string>
-	</dict>
-	<dict>
-		<key>vaccine</key>
-		<string>A群流脑疫苗</string>
+		<string>A+C群流脑疫苗</string>
 		<key>illness</key>
 		<string>流行性脑脊髓膜炎</string>
 		<key>times</key>
-		<string>第四针</string>
-		<key>days</key>
-		<string>2555</string>
+		<string>第二针</string>
+		<key>month</key>
+		<integer>72</integer>
 	</dict>
 </array>
 </plist>

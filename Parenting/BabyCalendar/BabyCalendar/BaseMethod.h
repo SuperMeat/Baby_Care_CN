@@ -30,6 +30,8 @@
 + (NSString*)stringFromDate:(NSDate*)date;
 // 当前时间距离day天后的日期
 + (NSDate*)fromCurDate:(NSDate*)curDate withDay:(int)day;
++ (NSDate*)fromCurDate:(NSDate*)curDate withMonth:(int)month;
+
 // 两个日期间隔天数
 + (int)fromStartDate:(NSDate*)startDate withEndDate:(NSDate*)endDate;
 //农历转换函数
@@ -51,4 +53,8 @@
 /***********color**************/
 + (NSDictionary *) colorWithHexString: (NSString *)color;
 +(CGColorRef) getColorFromRed:(float)red Green:(float)green Blue:(float)blue Alpha:(float)alpha;
+
++ (NSString*)getBabyNickname;
+
++(int)getbabyagefrommonth;
 @end

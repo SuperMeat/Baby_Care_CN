@@ -12,7 +12,7 @@
 @interface GuideViewController : UIViewController<UIScrollViewDelegate>
  
 @property NSInteger fitHeight;
-@property (strong,nonatomic) UIScrollView *scrollView;
+@property (strong,nonatomic) UIScrollView   *scrollView;
 @property (strong,nonatomic) NSMutableArray *slideImages;
 @property (strong,nonatomic) UIViewController   *mainViewController; 
 

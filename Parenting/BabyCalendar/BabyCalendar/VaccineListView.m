@@ -74,8 +74,8 @@
         model.id = [NSNumber numberWithInt:index];
         
         
-        int days = [[dic objectForKey:@"days"] intValue];
-        NSDate* date = [BaseMethod fromCurDate:birthdayDate withDay:days];
+        int month = [[dic objectForKey:@"month"] intValue];
+        NSDate* date = [BaseMethod fromCurDate:birthdayDate withMonth:month];
         model.willDate = [BaseMethod stringFromDate:date];
         
         [self.SQLDatas addObject:model];

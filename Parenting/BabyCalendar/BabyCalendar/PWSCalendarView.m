@@ -126,7 +126,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 {
 //    self.notes = [BaseSQL queryData_note];
 //    self.milestones = [BaseSQL queryData_milestone];
-//    self.vaccines = [BaseSQL queryData_vaccine];
+    self.vaccines = [BaseSQL queryData_vaccine];
 //    self.trains = [BaseSQL queryData_train];
 //    self.tests = [BaseSQL queryData_test];
     

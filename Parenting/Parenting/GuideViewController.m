@@ -19,8 +19,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //    [self.tabBarController.tabBarItem setImage:[UIImage imageNamed:@"menu1.png"]];
-        //self.automaticallyAdjustsScrollViewInsets = NO;
 #define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
         
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -35,18 +33,33 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self prefersStatusBarHidden];
+    
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self prefersStatusBarHidden];
+    
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //版本适配尺寸
     if ([UIScreen mainScreen].bounds.size.height==568){
-        fitHeight = 568;
+        fitHeight = 996/2.0;
     }
     else if ([UIScreen mainScreen].bounds.size.height==480){
-        fitHeight = 480;
+        fitHeight = 827/2.0;
     }
   
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, fitHeight)];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, kDeviceHeight)];
     _scrollView.bounces = YES; //检查是否已到边界
     _scrollView.pagingEnabled = YES;
     _scrollView.delegate = self;
@@ -57,40 +70,41 @@
     
     // 初始化数组
     _slideImages = [[NSMutableArray alloc] init];
-    if ([UIScreen mainScreen].bounds.size.height == 568) {
-        [_slideImages addObject:@"1136.1.png"];
-        [_slideImages addObject:@"1136.2.png"];
-        [_slideImages addObject:@"1136.3.png"];
+    if ([UIScreen mainScreen].bounds.size.height >= 568) {
+        [_slideImages addObject:@"640-1136.1.png"];
+        [_slideImages addObject:@"640-1136.2.png"];
+        [_slideImages addObject:@"640-1136.3.png"];
+        [_slideImages addObject:@"640-1136.4.png"];
     }
     else
     {
-        [_slideImages addObject:@"960.1.png"];
-        [_slideImages addObject:@"960.2.png"];
-        [_slideImages addObject:@"960.3.png"];
+        [_slideImages addObject:@"640-960.1.png"];
+        [_slideImages addObject:@"640-960.2.png"];
+        [_slideImages addObject:@"640-960.3.png"];
+        [_slideImages addObject:@"640-960.4.png"];
     }
     
     // 创建四个UImageIVew到UIScrollView中
     for (int i = 0;i<[_slideImages count];i++)
     {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[_slideImages objectAtIndex:i]]];
-        imageView.frame = CGRectMake(320 * i, 0, 320, fitHeight);
+        imageView.frame = CGRectMake(320 * i, 0, 320, kDeviceHeight);
+        
+        UIButton *buttonSkip = [[UIButton alloc]initWithFrame:CGRectMake(107/2.0, fitHeight, 213, 39)];
+        [buttonSkip setAlpha:0.1];
+        buttonSkip.layer.cornerRadius = 8.0f;
+        [buttonSkip setBackgroundColor:[UIColor clearColor]];
+        [buttonSkip addTarget:self action:@selector(skipToMain:) forControlEvents:(UIControlEventTouchUpInside)];
+        [imageView addSubview:buttonSkip];
+        
+        [imageView setUserInteractionEnabled:YES];
         [_scrollView addSubview:imageView];
     }
     
     //设置UIScrollView的page 定义实际内容大小，会让滚动生效
-    [_scrollView setContentSize:CGSizeMake(320*_slideImages.count, fitHeight)]; //不知道什么用
+    [_scrollView setContentSize:CGSizeMake(320*_slideImages.count, kDeviceHeight)]; //不知道什么用
     [_scrollView setContentOffset:CGPointMake(0, 0)];
-    [_scrollView scrollRectToVisible:CGRectMake(0,0,320,fitHeight) animated:NO];
-    
-    
-    UIButton *buttonSkip = [[UIButton alloc]initWithFrame:CGRectMake(320*(_slideImages.count-1)+110, 0.8*fitHeight, 100, 44)];
-    [buttonSkip setTitle:@"开始体验" forState:UIControlStateNormal];
-    buttonSkip.titleLabel.font = [UIFont fontWithName:@"Arial-BOLDMT" size:20.0f];
-    [buttonSkip setAlpha:0.8];
-    [buttonSkip setBackgroundImage:[UIImage imageNamed:@"btn1"] forState:UIControlStateNormal];
-    [buttonSkip addTarget:self action:@selector(skipToMain:) forControlEvents:(UIControlEventTouchUpInside)];
-    [_scrollView addSubview:buttonSkip];
-
+    [_scrollView scrollRectToVisible:CGRectMake(0,0,320,kDeviceHeight) animated:NO];
 }
 
 -(void)skipToMain:(id)sender{ 

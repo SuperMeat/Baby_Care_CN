@@ -46,12 +46,17 @@
     
     FMResultSet *set=[db executeQuery:@"select * from(select starttime,type from bc_baby_feed where month= ? and week = ? and weekday = ? union all select starttime,type from bc_baby_diaper where month= ? and week = ? and weekday = ?union all select starttime,type from bc_baby_sleep where month= ? and week = ? and weekday = ? union all select starttime,type from bc_baby_bath where month= ? and week = ? and weekday = ? union all select starttime,type from bc_baby_play  where month= ? and week = ? and weekday = ? union all select starttime,type from bc_baby_medicine where month= ? and week = ? and weekday = ?) order by starttime desc",[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]],[NSNumber numberWithInt:[ACDate getCurrentMonth]],[NSNumber numberWithInt:[ACDate getCurrentWeek]],[NSNumber numberWithInt:[ACDate getCurrentWeekDay]]];
     
+    long curDate = [ACDate getTimeStampFromDate:[ACDate date]];
     while ([set next])
     {
-        ActivityItem *item=[[ActivityItem alloc]init];
-        item.starttime=[set dateForColumn:@"starttime"];
-        item.type=[set stringForColumn:@"type"];
-        [array addObject:item];
+        long starttime = [ACDate getTimeStampFromDate:[set dateForColumn:@"starttime"]];
+        if (starttime <= curDate)
+        {
+            ActivityItem *item=[[ActivityItem alloc]init];
+            item.starttime=[set dateForColumn:@"starttime"];
+            item.type=[set stringForColumn:@"type"];
+            [array addObject:item];
+        }
     }
     if (!res) {
         NSLog(@"插入失败");

@@ -19,6 +19,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        if (ISSYSTEM7_0) {
+            self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        }
         
     }
     return self;

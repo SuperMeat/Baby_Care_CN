@@ -44,7 +44,7 @@
         
         //0.5f offset lines up line with pixel boundary
         CGContextMoveToPoint(context, self.bounds.origin.x+5, self.font.leading*x + 0.5f + baselineOffset);
-        CGContextAddLineToPoint(context, self.bounds.size.width-5, self.font.leading*x + 0.5f + baselineOffset);
+        //CGContextAddLineToPoint(context, self.bounds.size.width-5, self.font.leading*x + 0.5f + baselineOffset);
     }
 	
     //Close our Path and Stroke (draw) it
