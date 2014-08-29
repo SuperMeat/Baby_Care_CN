@@ -19,7 +19,7 @@
 #import "ActivityViewController.h"
 #import "PhysiologyViewController.h"
 #import "CalendarViewController.h"
-#import "MyPageViewController.h"
+#import "HomeViewController.h"
 #import "CalendarController.h"
 
 #import "BaseNavigationController.h"
@@ -30,7 +30,7 @@
     ACTabBarController              *TabbarController;
     MyTabBarController              *myTabController;
     
-    MyPageViewController            *myPageViewController;
+    HomeViewController            *homeViewController;
     EnvironmentViewController       *envirViewController;
     ActivityViewController          *actViewController;
     PhysiologyViewController        *phyViewController;

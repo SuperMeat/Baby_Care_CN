@@ -30,7 +30,7 @@
         return NO;
     }
     
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_msg (create_time int PRIMARY KEY NOT NULL,update_time int not NULL,msg_type int not NULL,key Varchar  DEFAULT NULL,msg_content Varchar  DEFAULT NULL,pic_url Varchar  DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_msg (create_time int NOT NULL,update_time int not NULL,msg_type int not NULL,key Varchar  DEFAULT NULL,msg_content Varchar  DEFAULT NULL,pic_url Varchar  DEFAULT NULL)"];
     if (!res) {
         NSLog(@"表格创建失败");
         [db close];
@@ -124,6 +124,142 @@
         return res;
     }
     
+    [db close];
+    return res;
+}
+
+
+/** vaccineExist **/
+/*
+ *  res:0 该条提醒未入库->入库 | 1 该条提醒已入库->更新 | -1 不需操作
+ */
+-(int)isVaccineExistWithKey:(int)keyId Days:(int)days{
+    int res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    res = 0;
+    NSString *sql = [NSString stringWithFormat:@"select * from bc_baby_msg where msg_type = 10 and key = '%d' order by create_time desc",keyId];
+    FMResultSet *resultset=[db executeQuery:sql];
+    if ([resultset next]) {
+        NSDate *create_date = [ACDate getDateFromTimeStamp:[resultset longForColumn:@"create_time"]];
+        //判断是否今日插入更新
+        if ((days == 5 || days == 3|| days == 1) && ([[ACDate dateFomatdate:create_date] isEqualToString:[ACDate dateFomatdate:[NSDate date]]]))
+        {
+            res = 1;
+        }else{
+            res = -1;
+        }
+    }
+    [db close];
+    return res;
+}
+
+/* 评测:今日内是否已插入提醒消息 */
+/* res:0 该条提醒未入库->入库 | -1 不需操作 */
+-(int)isTestExistTodayWithKey:(int)keyId{
+    int res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    res = 0;
+    NSString *sql = [NSString stringWithFormat:@"select * from bc_baby_msg where msg_type = 11 and key = '%d' order by create_time desc",keyId];
+    FMResultSet *resultset=[db executeQuery:sql];
+    if ([resultset next]) {
+        NSDate *create_date = [ACDate getDateFromTimeStamp:[resultset longForColumn:@"create_time"]];
+        //判断是否今日插入更新
+        if ([[ACDate dateFomatdate:create_date] isEqualToString:[ACDate dateFomatdate:[NSDate date]]])
+        {
+            res = -1;
+        }
+    }
+    [db close];
+    return res;
+}
+
+//日志提醒
+-(BOOL)isNoteRemind{
+    BOOL res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return NO;
+    }
+    
+    res = NO;
+    FMResultSet *resultset=[db executeQuery:@"select * from bc_baby_msg where msg_type = 12 order by create_time desc"];
+    if ([resultset next]) {
+        NSDate *create_date = [ACDate getDateFromTimeStamp:[resultset longForColumn:@"create_time"]];
+        //判断是否今日插入更新
+        if ([ACDate getDiffDayFormNowToDate:create_date] > 3)
+        {
+            res = YES;
+        }
+    }
+    else {
+        res = YES;
+    }
+    [db close];
+    return res;
+}
+
+/* 评测:今日内是否已插入生理记录提醒消息 */
+/* res:0 该条提醒未入库->入库 | -1 不需操作 */
+-(int)isPhyExistTodayWithType:(int)type{
+    int res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    res = 0;
+    NSString *sql = [NSString stringWithFormat:@"select * from bc_baby_msg where msg_type = %d order by create_time desc",type];
+    FMResultSet *resultset=[db executeQuery:sql];
+    if ([resultset next]) {
+        NSDate *create_date = [ACDate getDateFromTimeStamp:[resultset longForColumn:@"create_time"]];
+        //判断是否今日插入更新
+        if ([[ACDate dateFomatdate:create_date] isEqualToString:[ACDate dateFomatdate:[NSDate date]]])
+        {
+            res = -1;
+        }
+    }
+    [db close];
+    return res;
+}
+
+/** 检测系统更新消息是否存在 **/
+-(BOOL)isSysUpdateMsgExist:(NSString*)version{
+    BOOL res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return NO;
+    }
+    
+    res = NO;
+    FMResultSet *resultset=[db executeQuery:@"select * from bc_baby_msg where msg_type = 0 and key=? order by create_time desc",version];
+    if ([resultset next]) {
+        return YES;
+    }
     [db close];
     return res;
 }

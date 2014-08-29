@@ -33,4 +33,14 @@
                        content:(NSString*)msg_content;
 
 -(BOOL)deleteBabyMessage:(NSString*) key;
+
+/** 日志提醒相关 **/
+-(int)isVaccineExistWithKey:(int)keyId Days:(int)days;
+-(int)isTestExistTodayWithKey:(int)keyId;
+-(BOOL)isNoteRemind;
+/** 生理提醒相关 **/
+-(int)isPhyExistTodayWithType:(int)type;
+/** 系统更新消息相关 **/
+-(BOOL)isSysUpdateMsgExist:(NSString*)version;
 @end
+

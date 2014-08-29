@@ -281,6 +281,33 @@
     }
 }
 
++(NSString*)getMsgTimeSinceDate:(NSDate *)date
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit|NSHourCalendarUnit;
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
+    if ([comps year] > 0)
+    {
+        return [NSString stringWithFormat:@"%d年前",[comps year]];
+    }
+    else if([comps month] > 0){
+        return [NSString stringWithFormat:@"%d月前",[comps month]];
+    }
+    else if([comps day] > 0){
+        return [NSString stringWithFormat:@"%d天前",[comps day]];
+    }
+    else if([comps hour] > 0){
+        return [NSString stringWithFormat:@"%d小时前",[comps hour]];
+    }
+    else if([comps minute] > 0){
+        return [NSString stringWithFormat:@"%d分钟前",[comps minute]];
+    }
+    else{
+        return @"现在";
+    }
+}
+
 +(NSDate*)getStarttime
 {
     NSDate *date=[[NSUserDefaults standardUserDefaults] objectForKey:@"timerOn"];
@@ -482,6 +509,19 @@
     
 }
 
++(NSDate *) dateFromStringCN:(NSString *)dateString
+{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat: @"yyyy年MM月dd日"];
+    
+    NSDate *destDate= [dateFormatter dateFromString:dateString];
+    
+    return destDate;
+    
+}
+
 +(NSDate*)getNewDateFromOldDate:(NSDate*)newdate andOldDate:(NSDate*)olddate
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -583,6 +623,61 @@
 +(NSDate*)getDateFromTimeStamp:(long)timestamp
 {
     return [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)timestamp];
+}
+
+
+//strDate格式 - 2014年06年12日
++(int)getDiffFormNowToDateCN:(NSString*)strDate{
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSRange range;
+    range.length = 1;
+    range.location = 4;
+    NSMutableString *mstrDate = [NSMutableString stringWithString:strDate];
+    [mstrDate replaceCharactersInRange:range withString:@"-"];
+    range.location = 7;
+    [mstrDate replaceCharactersInRange:range withString:@"-"];
+    range.location = 10;
+    [mstrDate replaceCharactersInRange:range withString:@""];
+    
+    NSDate *now=[NSDate date];
+    now = [dateFormatter dateFromString:[dateFormatter stringFromDate:now]];
+    NSDate *target = [dateFormatter dateFromString:mstrDate];
+    
+    //得到相差秒数
+    NSTimeInterval time=[target timeIntervalSinceDate:now];
+    
+    int days = ((int)time)/(3600*24);
+    
+    return days;
+}
+
++(int)getDiffDayFormNowToDate:(NSDate*)date{
+    //得到相差秒数
+    NSTimeInterval time=[date timeIntervalSinceDate:[NSDate date]];
+    int days = ((int)time)/(3600*24);
+    return days;
+}
+
++(int)getDiffMonthFromBirth:(NSDate*)birthDate{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
+    unsigned units  = NSMonthCalendarUnit|NSDayCalendarUnit|NSYearCalendarUnit;
+    NSDateComponents *birthComps = [calendar components:units fromDate:birthDate];
+    NSDateComponents *nowComps = [calendar components:units fromDate:[NSDate date]];
+    //婴儿计算月份需要+1
+    return ([nowComps year] - [birthComps year]) * 12 + ([nowComps month] - [birthComps month]) + 1;
+}
+
++(int)getDiffMonthFromDate:(NSDate*)date{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
+    unsigned units  = NSMonthCalendarUnit|NSDayCalendarUnit|NSYearCalendarUnit;
+    NSDateComponents *dateComps = [calendar components:units fromDate:date];
+    NSDateComponents *nowComps = [calendar components:units fromDate:[NSDate date]];
+    //婴儿计算月份需要+1
+    return ([nowComps year] - [dateComps year]) * 12 + ([nowComps month] - [dateComps month]);
 }
 
 @end

@@ -1196,6 +1196,11 @@
 		BE004CE418FE2B7500E56833 /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = BE004CD918FE2B7500E56833 /* top.png */; };
 		BE0677861998605200794A28 /* TempCorePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0677851998605200794A28 /* TempCorePlot.m */; };
 		BE06778A19986D7400794A28 /* TempSaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE06778919986D7400794A28 /* TempSaveView.m */; };
+		BE14CC3319AB3AD000274DC7 /* PhotoAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE14CC3119AB3AD000274DC7 /* PhotoAreaView.m */; };
+		BE14CC3419AB3AD000274DC7 /* PhotoAreaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE14CC3219AB3AD000274DC7 /* PhotoAreaView.xib */; };
+		BE14CC3819AB41F300274DC7 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE14CC3619AB41F300274DC7 /* HomeViewController.m */; };
+		BE14CC3919AB41F300274DC7 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE14CC3719AB41F300274DC7 /* HomeViewController.xib */; };
+		BE14CC3C19AB537900274DC7 /* InitTimeLineData.m in Sources */ = {isa = PBXBuildFile; fileRef = BE14CC3B19AB537900274DC7 /* InitTimeLineData.m */; };
 		BE1EB96A199DEB3700C3ED0B /* BMITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB968199DEB3700C3ED0B /* BMITableViewCell.m */; };
 		BE1EB96B199DEB3700C3ED0B /* BMITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1EB969199DEB3700C3ED0B /* BMITableViewCell.xib */; };
 		BE1EB96F199DEC0B00C3ED0B /* PHYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB96D199DEC0B00C3ED0B /* PHYTableViewCell.m */; };
@@ -1245,6 +1250,8 @@
 		BE5997D418619339008D3F6C /* lookingDevice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D218619339008D3F6C /* lookingDevice.jpg */; };
 		BE5997D518619339008D3F6C /* scanfail_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE5997D318619339008D3F6C /* scanfail_1.jpg */; };
 		BE5B383C19A1FB5F00246B6A /* MilestoneContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5B383B19A1FB5F00246B6A /* MilestoneContentView.xib */; };
+		BE654DCF19AECBBF002DDC5D /* InitBabyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE654DCD19AECBBF002DDC5D /* InitBabyInfoViewController.m */; };
+		BE654DD019AECBBF002DDC5D /* InitBabyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE654DCE19AECBBF002DDC5D /* InitBabyInfoViewController.xib */; };
 		BE67211C199CAD9C00EC5D1B /* PhySaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67211B199CAD9C00EC5D1B /* PhySaveView.m */; };
 		BE6938D61908E80200FC2BB4 /* PhysiologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6938D41908E80200FC2BB4 /* PhysiologyViewController.m */; };
 		BE6938D71908E80200FC2BB4 /* PhysiologyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE6938D51908E80200FC2BB4 /* PhysiologyViewController.xib */; };
@@ -2864,6 +2871,14 @@
 		BE0677851998605200794A28 /* TempCorePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempCorePlot.m; sourceTree = "<group>"; };
 		BE06778819986D7400794A28 /* TempSaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempSaveView.h; sourceTree = "<group>"; };
 		BE06778919986D7400794A28 /* TempSaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempSaveView.m; sourceTree = "<group>"; };
+		BE14CC3019AB3AD000274DC7 /* PhotoAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAreaView.h; sourceTree = "<group>"; };
+		BE14CC3119AB3AD000274DC7 /* PhotoAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAreaView.m; sourceTree = "<group>"; };
+		BE14CC3219AB3AD000274DC7 /* PhotoAreaView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAreaView.xib; sourceTree = "<group>"; };
+		BE14CC3519AB41F300274DC7 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		BE14CC3619AB41F300274DC7 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		BE14CC3719AB41F300274DC7 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		BE14CC3A19AB537900274DC7 /* InitTimeLineData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitTimeLineData.h; sourceTree = "<group>"; };
+		BE14CC3B19AB537900274DC7 /* InitTimeLineData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitTimeLineData.m; sourceTree = "<group>"; };
 		BE1EB967199DEB3700C3ED0B /* BMITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMITableViewCell.h; sourceTree = "<group>"; };
 		BE1EB968199DEB3700C3ED0B /* BMITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMITableViewCell.m; sourceTree = "<group>"; };
 		BE1EB969199DEB3700C3ED0B /* BMITableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMITableViewCell.xib; sourceTree = "<group>"; };
@@ -2925,6 +2940,9 @@
 		BE5997D218619339008D3F6C /* lookingDevice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lookingDevice.jpg; sourceTree = "<group>"; };
 		BE5997D318619339008D3F6C /* scanfail_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scanfail_1.jpg; sourceTree = "<group>"; };
 		BE5B383B19A1FB5F00246B6A /* MilestoneContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneContentView.xib; sourceTree = "<group>"; };
+		BE654DCC19AECBBE002DDC5D /* InitBabyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitBabyInfoViewController.h; sourceTree = "<group>"; };
+		BE654DCD19AECBBF002DDC5D /* InitBabyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitBabyInfoViewController.m; sourceTree = "<group>"; };
+		BE654DCE19AECBBF002DDC5D /* InitBabyInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitBabyInfoViewController.xib; sourceTree = "<group>"; };
 		BE67211A199CAD9C00EC5D1B /* PhySaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhySaveView.h; sourceTree = "<group>"; };
 		BE67211B199CAD9C00EC5D1B /* PhySaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhySaveView.m; sourceTree = "<group>"; };
 		BE6938D31908E80200FC2BB4 /* PhysiologyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysiologyViewController.h; sourceTree = "<group>"; };
@@ -6145,15 +6163,18 @@
 		7215974F17453980006FD415 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
-				BE5914CB18FCDEF900F0488B /* TimeLineView.h */,
-				BE5914CC18FCDEF900F0488B /* TimeLineView.m */,
-				BE5914C818FCDEED00F0488B /* HomeTopView.h */,
-				BE5914C918FCDEED00F0488B /* HomeTopView.m */,
-				BE5914C518FCDEE000F0488B /* BabyBaseInfoView.h */,
-				BE5914C618FCDEE000F0488B /* BabyBaseInfoView.m */,
-				4800B0DC18D931EF0093A6AF /* MyPageViewController.h */,
-				4800B0DD18D931EF0093A6AF /* MyPageViewController.m */,
-				4800B0DE18D931EF0093A6AF /* MyPageViewController.xib */,
+				BE14CC2F19AB3A7B00274DC7 /* old */,
+				BE14CC3519AB41F300274DC7 /* HomeViewController.h */,
+				BE14CC3619AB41F300274DC7 /* HomeViewController.m */,
+				BE14CC3719AB41F300274DC7 /* HomeViewController.xib */,
+				BE14CC3019AB3AD000274DC7 /* PhotoAreaView.h */,
+				BE14CC3119AB3AD000274DC7 /* PhotoAreaView.m */,
+				BE14CC3219AB3AD000274DC7 /* PhotoAreaView.xib */,
+				BE14CC3A19AB537900274DC7 /* InitTimeLineData.h */,
+				BE14CC3B19AB537900274DC7 /* InitTimeLineData.m */,
+				BE654DCC19AECBBE002DDC5D /* InitBabyInfoViewController.h */,
+				BE654DCD19AECBBF002DDC5D /* InitBabyInfoViewController.m */,
+				BE654DCE19AECBBF002DDC5D /* InitBabyInfoViewController.xib */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -6248,6 +6269,22 @@
 				BE67211B199CAD9C00EC5D1B /* PhySaveView.m */,
 			);
 			name = SaveController;
+			sourceTree = "<group>";
+		};
+		BE14CC2F19AB3A7B00274DC7 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				4800B0DC18D931EF0093A6AF /* MyPageViewController.h */,
+				4800B0DD18D931EF0093A6AF /* MyPageViewController.m */,
+				4800B0DE18D931EF0093A6AF /* MyPageViewController.xib */,
+				BE5914CB18FCDEF900F0488B /* TimeLineView.h */,
+				BE5914CC18FCDEF900F0488B /* TimeLineView.m */,
+				BE5914C818FCDEED00F0488B /* HomeTopView.h */,
+				BE5914C918FCDEED00F0488B /* HomeTopView.m */,
+				BE5914C518FCDEE000F0488B /* BabyBaseInfoView.h */,
+				BE5914C618FCDEE000F0488B /* BabyBaseInfoView.m */,
+			);
+			name = old;
 			sourceTree = "<group>";
 		};
 		BE1EB966199DEAF100C3ED0B /* HistoryController */ = {
@@ -6932,6 +6969,7 @@
 				48801270199C5D0000F6778B /* btn_note_left_selected@2x.png in Resources */,
 				4880A587191A395A005D5E44 /* panels_icon_both@2x.png in Resources */,
 				4800B0C518D7F3D20093A6AF /* 生理@2x.png in Resources */,
+				BE654DD019AECBBF002DDC5D /* InitBabyInfoViewController.xib in Resources */,
 				486CD6E2199894570026061E /* AMap.bundle in Resources */,
 				4828F41D19A495D700D04926 /* 15.3.4.jpg in Resources */,
 				48F91AA618FB8DF10038DC67 /* UV_level_bad@2x.png in Resources */,
@@ -7444,6 +7482,7 @@
 				48D42F4B196FDC9400DFFC5C /* medicine_zhen@2x.png in Resources */,
 				484A014A196BCEC700BBB085 /* label_food@2x.png in Resources */,
 				480EFA0418E5155C00D40903 /* btn_cancel@2x.png in Resources */,
+				BE14CC3919AB41F300274DC7 /* HomeViewController.xib in Resources */,
 				480EFA3B18E5155C00D40903 /* btn_sleeping_play@2x.png in Resources */,
 				4828F4EF19A495D700D04926 /* 7.1.2.jpg in Resources */,
 				48DEA7D317F4703400A11316 /* Play_2.jpg in Resources */,
@@ -7624,6 +7663,7 @@
 				BE5B383C19A1FB5F00246B6A /* MilestoneContentView.xib in Resources */,
 				4855BC1D182B237800F02A3E /* umFeedback.bundle in Resources */,
 				BE1EB970199DEC0B00C3ED0B /* PHYTableViewCell.xib in Resources */,
+				BE14CC3419AB3AD000274DC7 /* PhotoAreaView.xib in Resources */,
 				48EC1DDE1862F6E400965254 /* nofity_myadvise_day_up@2x.png in Resources */,
 				48F91AC618FB8DF10038DC67 /* environment_title.png in Resources */,
 				4828F41219A495D700D04926 /* 15.1.2.jpg in Resources */,
@@ -7867,6 +7907,7 @@
 				48EC1DD61862CE2000965254 /* CustonTimeViewController.m in Sources */,
 				BEA2F86F1993188200FD2D4E /* TempDetailViewController.m in Sources */,
 				48152DD318486AEA009A4900 /* UMEGORefreshTableHeaderView.m in Sources */,
+				BE14CC3819AB41F300274DC7 /* HomeViewController.m in Sources */,
 				48866F58199A12E6007B16AA /* NSCalendar+DateManipulation.m in Sources */,
 				48152DED18486B13009A4900 /* UMContactViewController.m in Sources */,
 				BEB475A618E574A80004B649 /* SBJsonStreamWriter.m in Sources */,
@@ -7955,6 +7996,7 @@
 				CE638B51174F5FCE009A60AB /* QuadCurveMenu.m in Sources */,
 				CE638B52174F5FCE009A60AB /* QuadCurveMenuItem.m in Sources */,
 				48866E98199A12E6007B16AA /* RTLabel.m in Sources */,
+				BE654DCF19AECBBF002DDC5D /* InitBabyInfoViewController.m in Sources */,
 				CE075A37175081AE00C57E27 /* save_feedview.m in Sources */,
 				48866FA5199A12E6007B16AA /* AddMilestoneController.m in Sources */,
 				48866F96199A12E6007B16AA /* VaccineDetailHeaderView.m in Sources */,
@@ -8025,6 +8067,7 @@
 				4880A58A191B27E7005D5E44 /* DiaperPickerView.m in Sources */,
 				48866E90199A12E6007B16AA /* LoadingView.m in Sources */,
 				489AABF5180E777200EB607E /* RNGridMenu.m in Sources */,
+				BE14CC3319AB3AD000274DC7 /* PhotoAreaView.m in Sources */,
 				48EF612018C6FAC7006C3D5C /* CustomCalloutView.m in Sources */,
 				48866FB4199A12E6007B16AA /* TrainView.m in Sources */,
 				48866FD0199A12E6007B16AA /* FootView.m in Sources */,
@@ -8061,6 +8104,7 @@
 				CE0C33D817618AC200B1B683 /* DataBase.m in Sources */,
 				481EF6D519878ABD00959CB7 /* QuestionSurveyViewController.m in Sources */,
 				48866F84199A12E6007B16AA /* TestReportScoreView.m in Sources */,
+				BE14CC3C19AB537900274DC7 /* InitTimeLineData.m in Sources */,
 				48866F67199A12E6007B16AA /* MBPolygonView.m in Sources */,
 				48866F6A199A12E6007B16AA /* CKCalendarModel.m in Sources */,
 				BE7C69771867F1B300C4B675 /* ASIAuthenticationDialog.m in Sources */,

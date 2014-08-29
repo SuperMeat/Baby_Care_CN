@@ -189,9 +189,9 @@
 -(void)goBack{
     //如果在订阅页面，则后退按钮只改变scrollView
     if ([_buttonSubscribe.titleLabel.text  isEqual:@"完成"]) {
-        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+//        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
-        return;
+//        return;
     }
     
     [self.navigationController popViewControllerAnimated:YES];

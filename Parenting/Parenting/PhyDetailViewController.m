@@ -253,7 +253,7 @@
     [_viewPlot addSubview:labelArea];
     
     UIImageView *imageViewUser = [[UIImageView alloc]initWithFrame:CGRectMake(232, 5, 20, 20)];
-    imageViewUser.backgroundColor = [UIColor blueColor];
+    imageViewUser.backgroundColor = [ACFunction colorWithHexString:@"#f39998"];
     [_viewPlot addSubview:imageViewUser];
     
     UILabel *labelUser = [[UILabel alloc]initWithFrame:CGRectMake(228, 25, 30, 18)];

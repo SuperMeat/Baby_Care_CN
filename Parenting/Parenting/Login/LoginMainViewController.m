@@ -32,16 +32,25 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self initView];
+}
+
+-(void)initView{
     [self.view setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
     [self.tableView setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
     
     //UINavigationItem stuff
     self.tableView.scrollEnabled = NO;
     self.navigationItem.title = NSLocalizedString(@"navLogin", nil);
-
+    
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
     
     backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -67,14 +76,12 @@
     UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBar;
     
-    
     NSArray *arr1 = [[NSArray alloc]init];
     NSArray *arr2 = [[NSArray alloc]init];
-    
     arr1 = @[@"邮箱",@"密码"];
     arr2 = @[@"注册账号"];
     arrData = [[NSArray alloc]initWithObjects:arr1,arr2,nil];
-} 
+}
 
 -(void)doLogin{
     //输入判断
@@ -107,15 +114,14 @@
     }
     
     //注册接口
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //隐藏键盘
-    [inputEmail resignFirstResponder];
-    [inputPd resignFirstResponder]; 
-    hud.yOffset = -60.0f;
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.alpha = 0.5;
-    hud.color = [UIColor grayColor];
-    hud.labelText = http_requesting;
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //隐藏键盘
+        [inputEmail resignFirstResponder];
+        [inputPd resignFirstResponder];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.alpha = 0.5;
+        hud.color = [UIColor grayColor];
+        hud.labelText = http_requesting;
     
     //封装数据
     NSMutableDictionary *dictBody = [[DataContract dataContract]UserLoginDict:RTYPE_APP account:inputEmail.text password:[MD5 md5:inputPd.text]];
@@ -141,9 +147,9 @@
                 [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_APP andUserAccount:inputEmail.text  andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
                 
             }
-             //提示是否同步数据
-             [hud hide:YES];
-             [self performSelector:@selector(isSyncData) withObject:nil afterDelay:0.8];
+
+             //[hud hide:YES];
+             [self performSelector:@selector(isSyncData) withObject:nil afterDelay:1];
          }
          else{
              [hud hide:YES afterDelay:1.2];
@@ -161,14 +167,69 @@
 }
 
 -(void)doGoBack{
-    self.navigationController.navigationBarHidden = YES;
-    [self.navigationController popViewControllerAnimated:YES];
+//    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)isSyncData{
-    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否同步该账户数据" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+    [self checkBaby];
+    
+    /*UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否同步该账户数据" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
     alertView.tag = 10109;
     [alertView show];
+     */
+}
+
+#pragma 检测or创建宝贝
+-(void)checkBaby{
+    if (ACCOUNTUID) {
+        if (!BABYID) {
+            //注册接口
+            if (![hud isHidden]) {
+                hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                //隐藏键盘
+                hud.mode = MBProgressHUDModeIndeterminate;
+                hud.alpha = 0.5;
+                hud.color = [UIColor grayColor];
+            }
+            hud.labelText = http_requesting;
+            //封装数据
+            NSMutableDictionary *dictBody = [[DataContract dataContract]BabyCreateByUserIdDict:ACCOUNTUID];
+            //Http请求
+            [[NetWorkConnect sharedRequest]
+             httpRequestWithURL:BABY_CREATEBYUSERID_URL
+             data:dictBody
+             mode:@"POST"
+             HUD:hud
+             didFinishBlock:^(NSDictionary *result){
+                 hud.labelText = [result objectForKey:@"msg"];
+                 //处理反馈信息: code=1为成功  code=99为失败
+                 if ([[result objectForKey:@"code"]intValue] == 1) {
+                     NSMutableDictionary *resultBody = [result objectForKey:@"body"];
+                     //保存Babyid
+                     [[NSUserDefaults standardUserDefaults]setObject:[resultBody objectForKey:@"babyId"] forKey:@"BABYID"];
+                     //数据库保存Baby信息
+                     [BabyDataDB createNewBabyInfo:ACCOUNTUID BabyId:BABYID Nickname:@"" Birthday:nil Sex:nil HeadPhoto:@"" RelationShip:@"" RelationShipNickName:@"" Permission:nil CreateTime:[resultBody objectForKey:@"create_time"] UpdateTime:nil]; 
+                     _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                     [self presentViewController:_mainViewController animated:YES completion:^{}];
+                     [hud hide:YES afterDelay:1];
+                 }
+                 else{
+                     hud.labelText = http_error;
+                     [hud hide:YES afterDelay:1];
+                 }
+             }
+             didFailBlock:^(NSString *error){
+                 //请求失败处理
+                 hud.labelText = http_error;
+                 [hud hide:YES afterDelay:1];
+             }
+             isShowProgress:YES
+             isAsynchronic:NO
+             netWorkStatus:YES
+             viewController:self];
+        }
+    }
 }
 
 #pragma textfield protocol
