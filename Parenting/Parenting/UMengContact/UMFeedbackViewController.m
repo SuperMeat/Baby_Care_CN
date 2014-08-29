@@ -12,7 +12,7 @@
 #import "UMContactViewController.h"
 
 #define TOP_MARGIN 20.0f
-#define kNavigationBar_ToolBarBackGroundColor  [UIColor colorWithRed:0.007843 green:0.619607 blue:0.737254 alpha:1.0]
+#define kNavigationBar_ToolBarBackGroundColor  [ACFunction colorWithHexString:@"0x68bfcc"]
 #define kContactViewBackgroundColor  [UIColor colorWithRed:0.078 green:0.584 blue:0.97 alpha:1.0]
 
 static UITapGestureRecognizer *tapRecognizer;
@@ -36,6 +36,16 @@ static UITapGestureRecognizer *tapRecognizer;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+        
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        if ( IOS7_OR_LATER )
+        {
+            self.edgesForExtendedLayout = UIRectEdgeNone;
+            self.extendedLayoutIncludesOpaqueBars = NO;
+            self.modalPresentationCapturesStatusBarAppearance = NO;
+        }
+#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
         
     }
     return self;
@@ -354,7 +364,6 @@ static UITapGestureRecognizer *tapRecognizer;
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-
                          CGRect toolbarFrame = self.mToolBar.frame;
                          toolbarFrame.origin.y = self.view.bounds.size.height - keyboardHeight - toolbarFrame.size.height;
                          self.mToolBar.frame = toolbarFrame;
