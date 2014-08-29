@@ -16,6 +16,8 @@
     NSArray *subArray;
     MBProgressHUD *hud;
     NSString *category_ids;
+    
+    int _tempOffset;
 }
 
 @property (nonatomic,strong) UIScrollView   *scrollView;

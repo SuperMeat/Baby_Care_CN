@@ -166,13 +166,25 @@
         /** init cell data **/
         switch ([[curData objectAtIndex:0]intValue]) {
             case 0:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_remind.png"];
+                imageViewIcon.image = [UIImage imageNamed:@"icon_news.png"];
                 break;
             case 1:
                 imageViewIcon.image = [UIImage imageNamed:@"icon_alarm.png"];
                 break;
             case 10:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_ vaccine.png"];
+                imageViewIcon.image = [UIImage imageNamed:@"icon_alerm_vaccine.png"];
+                break;
+            case 11:
+                imageViewIcon.image = [UIImage imageNamed:@"icon_alerm_milstone.png"];
+                break;
+            case 12:
+                imageViewIcon.image = [UIImage imageNamed:@"icon_alerm_dialy.png"];
+                break;
+            case 20:
+                imageViewIcon.image = [UIImage imageNamed:@"icon_height.png"];
+                break;
+            case 21:
+                imageViewIcon.image = [UIImage imageNamed:@"icon_weight.png"];
                 break;
             default:
                 imageViewIcon.image = [UIImage imageNamed:@"icon_news.png"];
@@ -237,15 +249,15 @@
 
 #pragma tableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"小喵喵要开始打疫苗啦" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"小喵喵要开始打疫苗啦" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//    [alert show];
 }
 
 #pragma scrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView.contentOffset.y < -50 && !_activityView.isAnimating) {
         /** TODO 加载数据 **/
-        [_activityView startAnimating];
+//        [_activityView startAnimating];
     }
 }
 

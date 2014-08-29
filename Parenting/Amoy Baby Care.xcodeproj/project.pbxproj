@@ -1333,6 +1333,11 @@
 		BEB7E2D1192310D200E752B7 /* TipsWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */; };
 		BEB7E2D41923167C00E752B7 /* TipCategoryDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */; };
 		BEBC12951953D31500C1A7E7 /* UIASYImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBC12941953D31500C1A7E7 /* UIASYImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BEE3CEF019B0787F00ABC528 /* GetPhyAdvise.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3CEEF19B0787F00ABC528 /* GetPhyAdvise.m */; };
+		BEE3CEF519B07D9A00ABC528 /* icon_alerm_dialy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */; };
+		BEE3CEF619B07D9A00ABC528 /* icon_alerm_milstone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CEF219B07D9A00ABC528 /* icon_alerm_milstone@2x.png */; };
+		BEE3CEF719B07D9A00ABC528 /* icon_alerm_test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CEF319B07D9A00ABC528 /* icon_alerm_test@2x.png */; };
+		BEE3CEF819B07D9A00ABC528 /* icon_alerm_vaccine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CEF419B07D9A00ABC528 /* icon_alerm_vaccine@2x.png */; };
 		BEE539731945B022000703E6 /* TipListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE539711945B022000703E6 /* TipListViewController.m */; };
 		BEE539741945B022000703E6 /* TipListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE539721945B022000703E6 /* TipListViewController.xib */; };
 		BEE539781945B079000703E6 /* TipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE539761945B079000703E6 /* TipTableViewCell.m */; };
@@ -3077,6 +3082,12 @@
 		BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipCategoryDB.m; sourceTree = "<group>"; };
 		BEBC12931953D31500C1A7E7 /* UIASYImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIASYImageView.h; sourceTree = "<group>"; };
 		BEBC12941953D31500C1A7E7 /* UIASYImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIASYImageView.m; sourceTree = "<group>"; };
+		BEE3CEEE19B0787F00ABC528 /* GetPhyAdvise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPhyAdvise.h; sourceTree = "<group>"; };
+		BEE3CEEF19B0787F00ABC528 /* GetPhyAdvise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPhyAdvise.m; sourceTree = "<group>"; };
+		BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_alerm_dialy@2x.png"; sourceTree = "<group>"; };
+		BEE3CEF219B07D9A00ABC528 /* icon_alerm_milstone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_alerm_milstone@2x.png"; sourceTree = "<group>"; };
+		BEE3CEF319B07D9A00ABC528 /* icon_alerm_test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_alerm_test@2x.png"; sourceTree = "<group>"; };
+		BEE3CEF419B07D9A00ABC528 /* icon_alerm_vaccine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_alerm_vaccine@2x.png"; sourceTree = "<group>"; };
 		BEE539701945B022000703E6 /* TipListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipListViewController.h; sourceTree = "<group>"; };
 		BEE539711945B022000703E6 /* TipListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipListViewController.m; sourceTree = "<group>"; };
 		BEE539721945B022000703E6 /* TipListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipListViewController.xib; sourceTree = "<group>"; };
@@ -5536,6 +5547,8 @@
 				BEA2F86C1993188200FD2D4E /* TempDetailViewController.h */,
 				BEA2F86D1993188200FD2D4E /* TempDetailViewController.m */,
 				BEA2F86E1993188200FD2D4E /* TempDetailViewController.xib */,
+				BEE3CEEE19B0787F00ABC528 /* GetPhyAdvise.h */,
+				BEE3CEEF19B0787F00ABC528 /* GetPhyAdvise.m */,
 			);
 			name = "生理";
 			sourceTree = "<group>";
@@ -6279,6 +6292,10 @@
 		BE004CCE18FE2B7500E56833 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */,
+				BEE3CEF219B07D9A00ABC528 /* icon_alerm_milstone@2x.png */,
+				BEE3CEF319B07D9A00ABC528 /* icon_alerm_test@2x.png */,
+				BEE3CEF419B07D9A00ABC528 /* icon_alerm_vaccine@2x.png */,
 				BE004CCF18FE2B7500E56833 /* bg_days@2x.png */,
 				BE004CD018FE2B7500E56833 /* bg_leave_msg_text.png */,
 				BE004CD118FE2B7500E56833 /* icon_advertisement@2x.png */,
@@ -6924,6 +6941,7 @@
 				4828F4BF19A495D700D04926 /* 3.4.2.jpg in Resources */,
 				480D6CF81924ABE800E5CAC7 /* arrow_down@2x.png in Resources */,
 				48866EBC199A12E6007B16AA /* color_knowledge.png in Resources */,
+				BEE3CEF519B07D9A00ABC528 /* icon_alerm_dialy@2x.png in Resources */,
 				48866FDE199A12E6007B16AA /* TestData.plist in Resources */,
 				CE0167BF174B059000462363 /* input3.png in Resources */,
 				4828F44019A495D700D04926 /* 17.3.2.jpg in Resources */,
@@ -7200,6 +7218,7 @@
 				48866EEC199A12E6007B16AA /* icon_knowledge.png in Resources */,
 				4828F40719A495D700D04926 /* 14.2.2.jpg in Resources */,
 				4828F45419A495D700D04926 /* 18.4.3.jpg in Resources */,
+				BEE3CEF719B07D9A00ABC528 /* icon_alerm_test@2x.png in Resources */,
 				480D467519B0234D005AC58A /* 启动界面320-480.png in Resources */,
 				48866EF5199A12E6007B16AA /* btn_unselected.png in Resources */,
 				4828F43019A495D700D04926 /* 16.3.2.jpg in Resources */,
@@ -7796,6 +7815,7 @@
 				481EF6D81988E69C00959CB7 /* 1.jpg in Resources */,
 				480EFA4E18E5155C00D40903 /* input_timer@2x.png in Resources */,
 				48866ED0199A12E6007B16AA /* btn_ grippe_unabled.png in Resources */,
+				BEE3CEF819B07D9A00ABC528 /* icon_alerm_vaccine@2x.png in Resources */,
 				481EF6C51980BCC400959CB7 /* Medicine_11.jpg in Resources */,
 				4828F48C19A495D700D04926 /* 21.4.3.jpg in Resources */,
 				48866FCA199A12E6007B16AA /* PicView.xib in Resources */,
@@ -7832,6 +7852,7 @@
 				4828F4EA19A495D700D04926 /* 6.4.1.jpg in Resources */,
 				48F91B0818FBB54E0038DC67 /* line_dotted_grey@2x.png in Resources */,
 				4828F51619A495D700D04926 /* 9.4.2.jpg in Resources */,
+				BEE3CEF619B07D9A00ABC528 /* icon_alerm_milstone@2x.png in Resources */,
 				4828F4D819A495D700D04926 /* 5.3.3.jpg in Resources */,
 				486CD6E71998A4970026061E /* pin_red@2x.png in Resources */,
 				4828F4D619A495D700D04926 /* 5.3.1.jpg in Resources */,
@@ -8017,6 +8038,7 @@
 				48866F4A199A12E6007B16AA /* ItemView.m in Sources */,
 				48866F56199A12E6007B16AA /* NSCalendar+Components.m in Sources */,
 				48866F79199A12E6007B16AA /* TestModel.m in Sources */,
+				BEE3CEF019B0787F00ABC528 /* GetPhyAdvise.m in Sources */,
 				48866FBC199A12E6007B16AA /* UnTrainController.m in Sources */,
 				48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */,
 				48866F7B199A12E6007B16AA /* TestReportController.m in Sources */,

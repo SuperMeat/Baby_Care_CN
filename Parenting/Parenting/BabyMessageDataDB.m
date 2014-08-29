@@ -149,7 +149,7 @@
     if ([resultset next]) {
         NSDate *create_date = [ACDate getDateFromTimeStamp:[resultset longForColumn:@"create_time"]];
         //判断是否今日插入更新
-        if ((days == 5 || days == 3|| days == 1) && ([[ACDate dateFomatdate:create_date] isEqualToString:[ACDate dateFomatdate:[NSDate date]]]))
+        if ((days == 5 || days == 3|| days == 1) && (![[ACDate dateFomatdate:create_date] isEqualToString:[ACDate dateFomatdate:[NSDate date]]]))
         {
             res = 1;
         }else{

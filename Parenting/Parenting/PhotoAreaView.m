@@ -245,8 +245,9 @@
 }
 
 - (IBAction)goTips:(id)sender {
+    [self viewController].navigationController.navigationBarHidden = NO;
     TipsMainViewController *tipsMasterViewController = [[TipsMainViewController alloc] init];
-    [self viewController].navigationController.navigationBar.hidden = NO;
+    
     [[self viewController].navigationController pushViewController:tipsMasterViewController animated:YES];
 }
 

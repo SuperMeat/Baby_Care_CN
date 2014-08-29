@@ -96,7 +96,14 @@
         
         // res:0 该条提醒未入库->入库 | 1 该条提醒已入库->更新 | -1 不需操作
         int res = [[BabyMessageDataDB babyMessageDB] isVaccineExistWithKey:targetId Days:days];
-        NSString *msgContent = [NSString stringWithFormat:@"%d天后宝宝要接种%@哦!",days,vaccinceName];
+        NSString *msgContent;
+        if (days == 0) {
+            msgContent = [NSString stringWithFormat:@"今天宝宝要接种%@哦!",vaccinceName];
+        }
+        else{
+            msgContent = [NSString stringWithFormat:@"%d天后宝宝要接种%@哦!",days,vaccinceName];
+        }
+        
         if (res == 0 || res == 1) {
             [[BabyMessageDataDB babyMessageDB] insertBabyMessageNormal:[ACDate getTimeStampFromDate:[NSDate date]] UpdateTime:[ACDate getTimeStampFromDate:[NSDate date]] key:[NSString stringWithFormat:@"%d",targetId] type:msgType content:msgContent];
         }

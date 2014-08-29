@@ -38,9 +38,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7zT-ob-pNR">
-                    <rect key="frame" x="269" y="118" width="51" height="51"/>
+                    <rect key="frame" x="269" y="125" width="51" height="51"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="btn_sum1.png">
+                    <state key="normal" image="btn_sum2.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -59,7 +59,7 @@
     <resources>
         <image name="114.png" width="114" height="114"/>
         <image name="bg_days.png" width="38" height="38"/>
-        <image name="btn_sum1.png" width="51" height="51"/>
+        <image name="btn_sum2.png" width="51" height="51"/>
         <image name="top.png" width="640" height="429"/>
     </resources>
 </document>
