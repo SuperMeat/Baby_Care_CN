@@ -114,6 +114,12 @@
 }
 
 -(void)saveRecord{
+    if ([textRecordDate.text  isEqual: @""] || [textValue.text  isEqual: @""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"提交异常,请填写记录时间及数值哦!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
     if ([opType isEqualToString:@"SAVE"]) {
         if ([[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[datepicker date]] Type:itemType Value:[textValue.text doubleValue]]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"添加成功!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

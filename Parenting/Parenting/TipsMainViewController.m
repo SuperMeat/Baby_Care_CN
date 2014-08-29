@@ -30,14 +30,13 @@
 {
     [super viewDidLoad];
     [self initView];
-    
+    [self initData];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     if(_scrollView.contentOffset.x == 0){
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     }
-    [self initData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -77,7 +76,6 @@
     self.navigationItem.titleView = titleView;
     
     //加载订阅贴士按钮
-    
     _buttonSubscribe = [[UIButton alloc] init];
     _buttonSubscribe.frame=CGRectMake(0, 0, 51, 51);
     _buttonSubscribe.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -40);
@@ -105,6 +103,7 @@
     _sTableView.dataSource = self;
     _sTableView.delegate = self;
     [_scrollView addSubview:_sTableView];
+    _scrollView.backgroundColor = _tTableView.backgroundColor;
 }
 
 -(void)initData{
@@ -169,7 +168,7 @@
 
 -(void)goSubscribe:(UIButton*)button{
     if ([button.titleLabel.text  isEqual:@"订阅"]) {
-        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, -64) animated:YES];
+        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, _tempOffset) animated:YES];
         [button setTitle:@"完成" forState:UIControlStateNormal];
         [[SyncController syncController] syncCategoryInfo:ACCOUNTUID HUD:hud SyncFinished:^{
             [self initData];
@@ -179,7 +178,7 @@
     }
     else
     {
-        [_scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
+        [_scrollView setContentOffset:CGPointMake(0, _tempOffset) animated:YES];
         [button setTitle:@"订阅" forState:UIControlStateNormal];
     }
     NSLog(@"Height:%f",_scrollView.top);
