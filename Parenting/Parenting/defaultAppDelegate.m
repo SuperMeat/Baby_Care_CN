@@ -146,7 +146,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     {
         settingViewController = [[SettingViewController alloc] init];
     }
-    myPageViewController   = [[MyPageViewController alloc] init];
+    homeViewController   = [[HomeViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
     calendarViewController = [[CalendarController alloc] init];
@@ -154,7 +154,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     loginViewController    = [[LoginViewController alloc] init];
     
     myPageNavigationViewController   = [[BaseNavigationController alloc]
-                                        initWithRootViewController:myPageViewController];
+                                        initWithRootViewController:homeViewController];
     if (!ISBLE) {
         settingNavigationViewController    = [[BaseNavigationController alloc]
                                               initWithRootViewController:settingViewController];

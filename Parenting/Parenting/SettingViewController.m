@@ -65,8 +65,16 @@ messageView;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kBabyNickname"] == nil) {
+        HomeViewController *home = [[HomeViewController alloc]init];
+        [self.navigationController pushViewController:home animated:NO];
+        return;
+    }
+    
     
     [super viewWillAppear:animated];
+    
+    
     
     [MobClick beginLogPageView:@"设置页面"];
     
@@ -298,7 +306,8 @@ messageView;
     //_item13.accessView = switchForOpenwild;
     _item13.accessView = protocolforUser;
     
-    [_array1 addObject:_item1];
+    //隐藏宝贝信息
+    //[_array1 addObject:_item1];
     [_array1 addObject:_item9];
     [_array1 addObject:_item12];
     
@@ -333,7 +342,7 @@ messageView;
 {
     //TODO:同步数据 实现AlertDelegate里面的同步方法
 //    logoutAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是否同步本地数据至服务器?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"同步",@"不同步", nil];
-    logoutAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确定登出账号?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登出",nil];
+    logoutAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"本版本尚未开放云端数据存储功能,登出后会导致数据丢失,是否确定退出?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登出",nil];
     [logoutAlert show];
 }
 
@@ -453,10 +462,20 @@ messageView;
             //TODO:同步数据
             [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"ACCOUNT_NAME"];
             [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"ACCOUNT_TYPE"];
+            [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"kBabyNickname"];
+            [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
+            [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"cur_userid"];
+            [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"cur_babyid"];
+            //20140829 本版本登出后直接到登陆页面
+            /*
             [self makeArray];
             [self.settingTable reloadData];
-            
-            [[ASIController asiController] postLoginState:-1];
+            [[ASIController asiController] postLoginState:-1];*/
+            LoginViewController *loginViewController = [[LoginViewController alloc] init];
+            UINavigationController *loginNavigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+            loginViewController.mainViewController = self.tabBarController;
+            self.view.window.rootViewController = loginNavigationController;
+            //end 20140829
         }
         else if (buttonIndex==2){
             //TODO:不同步数据

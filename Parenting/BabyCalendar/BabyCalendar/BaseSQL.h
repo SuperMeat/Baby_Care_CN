@@ -15,6 +15,12 @@
 @class MilestoneModel;
 @interface BaseSQL : NSObject
 
+/** ADD by cwb **/
+
+//查询近5日未接种疫苗
++(NSMutableArray*)queryData_vaccine_recent;
+ 
+
 
 /****************里程碑********************/
 
@@ -82,7 +88,8 @@
 + (BOOL)updateData_test:(TestModel*)model;
 // 初始化测评
 + (void)addDatas_test;
-
+//返回:某月份是否有完成评测
++ (BOOL)isFinishTestWithMonth:(int)month;
 /**************日记**************/
 // 创建数据库
 +(FMDatabase*)createTable_note;
@@ -96,4 +103,6 @@
 + (NSMutableArray*)queryData_note_withDate:(NSString*)date;
 // 删除所有行
 + (BOOL)delete_noteTable;
+// 进3日内是否有日志
++(BOOL)isNoteRecent;
 @end

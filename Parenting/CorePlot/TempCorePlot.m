@@ -67,7 +67,7 @@
     CPTScatterPlot *baseTempPlot = [[CPTScatterPlot alloc] init];    //Temp参考线
     baseTempPlot.dataSource = self;
     baseTempPlot.identifier = @"Temp";
-    CPTColor *baseTempColor = [CPTColor blueColor];
+    CPTColor *baseTempColor = [CPTColor colorWithCGColor:[[ACFunction colorWithHexString:@"#f39998"] CGColor]];
     [_graph addPlot:baseTempPlot toPlotSpace:plotSpace];
     
     // 3 - 设置绘制控件

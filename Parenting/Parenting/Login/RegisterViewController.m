@@ -133,7 +133,6 @@
     [inputEmail resignFirstResponder];
     [inputPd resignFirstResponder];
     [inputRePd resignFirstResponder];
-    hud.yOffset = -60.0f;
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.alpha = 0.5;
     hud.color = [UIColor grayColor];

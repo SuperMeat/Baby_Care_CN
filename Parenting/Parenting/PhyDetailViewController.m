@@ -9,6 +9,7 @@
 #import "PHYDetailViewController.h"
 #import "BabyDataDB.h"
 #import "PHYHistoryViewController.h"
+#import "GetPhyAdvise.h"
 
 #define YAXISCOUNT 5
 #define SIZEINTERVA 10
@@ -168,6 +169,13 @@
     labelHistory.text = @"查看所有记录";
     [_viewHistroy addSubview:labelHistory];
     
+    UILabel *labelHistoryArrow = [[UILabel alloc]initWithFrame:CGRectMake(285, 12, 25, 25)];
+    labelHistoryArrow.font = [UIFont fontWithName:@"Arial" size:24];
+    labelHistoryArrow.textAlignment = NSTextAlignmentLeft;
+    labelHistoryArrow.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    labelHistoryArrow.text = @">";
+    [_viewHistroy addSubview:labelHistoryArrow];
+    
     //corePlot
     _viewPlot = [[UIView alloc]initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, 200)];
     _viewPlot.backgroundColor = [ACFunction colorWithHexString:@"#f6f6f6"];
@@ -253,7 +261,7 @@
     [_viewPlot addSubview:labelArea];
     
     UIImageView *imageViewUser = [[UIImageView alloc]initWithFrame:CGRectMake(232, 5, 20, 20)];
-    imageViewUser.backgroundColor = [UIColor blueColor];
+    imageViewUser.backgroundColor = [ACFunction colorWithHexString:@"#f39998"];
     [_viewPlot addSubview:imageViewUser];
     
     UILabel *labelUser = [[UILabel alloc]initWithFrame:CGRectMake(228, 25, 30, 18)];
@@ -266,11 +274,24 @@
 
 -(void)makeAdvise:(CGRect)rect
 {
-    NSDictionary *dict1=[[NSDictionary alloc]initWithObjectsAndKeys:@"问：一个婴儿低于或仅仅稍高于其年龄体重或身高意味着什么？或者说，世卫组织的生长标准是一个标准适合所有人吗？\n\r答：这并不一定意味着儿童有什么问题；这意味着儿科医生应当注意。世卫组织的研究及其他许多研究都已经证明，对于直到10岁左右的儿童，假如他们获得适当的照料、喂养和免疫，则均有可能生长到平均水平。在生长模式中，没有所谓的“统一尺寸”，然而（从0到100百分值的）数值分布使得基因造成的高和矮的儿童均能够成为一样的健康分布中的一部分。",@"content", nil];
-    NSDictionary *dict2=[[NSDictionary alloc]initWithObjectsAndKeys:@"问：世卫组织生长标准是如何制定的？\n\r答：世卫组织的生长标准以（1997-2003）世卫组织多中心生长参照研究为基础，这一研究所运用的一套严谨方法可以作为开展国际研究合作的模型。由于以生长环境不受约束的健康儿童为样本，因而此项研究为标准的制定提供了坚实的基础。另外，为制定标准而选择的这些儿童的母亲均参与了关键的健康促进做法，即母乳喂养和不吸烟。标准的产生则遵照了最高技术水平的统计学方法。",@"content", nil];
-    NSDictionary *dict3=[[NSDictionary alloc]initWithObjectsAndKeys:@"问:什么是世卫组织儿童生长标准？\n\r答：这些图表是评估儿童是否按照他们应达到的速度生长和发展的简单工具。它们也可以用来检查降低儿童死亡率和疾病的努力是否有效。新标准首次证明：如果出生在世界不同地区的儿童被赋予最有利的开端，那么他们将有潜力生长和发展到年龄身高和体重的相同范围之内。标准同时还用于发现未达到完全生长能力或平均体重不足或超重的儿童。",@"content", nil];
+    AdviseScrollview *ad;
     
-    AdviseScrollview *ad=[[AdviseScrollview alloc]initWithArray:[NSArray arrayWithObjects:dict1,dict2,dict3, nil]];
+    switch (itemType) {
+        case 0:
+            ad = [[AdviseScrollview alloc] initWithArray:[GetPhyAdvise getHeight]];
+            break;
+        case 1:
+            ad = [[AdviseScrollview alloc] initWithArray:[GetPhyAdvise getWeight]];
+            break;
+        case 2:
+            ad = [[AdviseScrollview alloc] initWithArray:[GetPhyAdvise getBMI]];
+            break;
+        case 3:
+            ad = [[AdviseScrollview alloc] initWithArray:[GetPhyAdvise getHS]];
+            break;
+        default:
+            break;
+    }
     
     adviseImageView = [[UIImageView alloc] init];
     [adviseImageView setFrame:rect];

@@ -30,19 +30,18 @@
 {
     [super viewDidLoad];
     [self initView];
-    [self initData];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    //self.navigationController.navigationBarHidden = YES;
     if(_scrollView.contentOffset.x == 0){
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     }
+    [self initData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = NO;
 }
 
 
@@ -129,8 +128,11 @@
             [self goSubscribe:_buttonSubscribe];
         }
         else{
-            [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+            [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, _tempOffset) animated:YES];
             [_buttonSubscribe setTitle:@"完成" forState:UIControlStateNormal];
+            if (_tempOffset != -64) {
+                _tempOffset = -64;
+            }
 
         }
     }
@@ -180,17 +182,10 @@
         [_scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
         [button setTitle:@"订阅" forState:UIControlStateNormal];
     }
-    
+    NSLog(@"Height:%f",_scrollView.top);
 }
 
 -(void)goBack{
-    //如果在订阅页面，则后退按钮只改变scrollView
-    if ([_buttonSubscribe.titleLabel.text  isEqual:@"完成"]) {
-        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-        [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
-        return;
-    }
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

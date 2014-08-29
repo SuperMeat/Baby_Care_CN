@@ -56,7 +56,8 @@
         xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(xLen)];
         yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(yLen)];
         
-        colorUser = [CPTColor blueColor];
+        colorUser = [CPTColor colorWithCGColor:[[ACFunction colorWithHexString:@"#f39998"] CGColor]];
+        
         colorP25 = [CPTColor blueColor];
         colorP75 = [CPTColor blueColor];
         
@@ -322,7 +323,10 @@
 -(double)getXAxisValue:(double)xValue
 {
     //如果小于最基础值
-    if (xValue <= xBase) {
+    if  (xValue == 0){
+        return 0.0;
+    }
+    else if (xValue <= xBase) {
         return xValue / xBase;
     }
     else {

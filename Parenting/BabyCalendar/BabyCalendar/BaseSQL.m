@@ -357,6 +357,29 @@
     return NO;
 }
 
++(NSMutableArray*)queryData_vaccine_recent{
+    NSMutableArray* datas = [NSMutableArray array];
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        NSString *sql = @"select * from vaccineTable";
+        FMResultSet *rs = [dataBase executeQuery:sql];
+        while ([rs next]){
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];
+            int days = [ACDate getDiffFormNowToDateCN:[rs stringForColumn:@"willdate"]];
+            if (days <= 5 && days >= 0) { 
+                [dic setValue:[NSNumber numberWithInt:[rs intForColumn:@"id"]] forKey:@"id"];
+                [dic setValue:[NSNumber numberWithInt:days] forKeyPath:@"days"];
+                [dic setValue:[rs stringForColumn:@"vaccine"] forKeyPath:@"vaccine"];
+                [dic setValue:[rs stringForColumn:@"willdate"] forKeyPath:@"willdate"];
+                [datas addObject:dic];
+            }
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return datas;
+}
+
 /**************训练**************/
 // 创建数据库
 +(FMDatabase*)createTable_train
@@ -631,6 +654,24 @@
     }
     return datas;
 }
+
+//返回:某月份是否有完成评测,未完成则返回YES
++ (BOOL)isFinishTestWithMonth:(int)month
+{
+    BOOL res = NO;
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        
+        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM test_table WHERE month=? and date=''",[NSNumber numberWithInt:month]];
+        if ([rs next]) {
+            res = YES;
+        }
+        [rs close];
+        [dataBase close];
+    }
+    return res;
+}
+
 // 更新
 + (BOOL)updateData_test:(TestModel*)model
 {
@@ -785,6 +826,30 @@
     [dataBase close];
     
     return success;
+}
+
+// 近期是否有记录日志
++(BOOL)isNoteRecent{
+    BOOL res = YES;
+    
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    if ([dataBase open]) {
+        NSString* string = @"SELECT * FROM note_table ORDER BY date desc";
+        FMResultSet *rs = [dataBase executeQuery:string];
+        if ([rs next]) { 
+            int diffDays = [ACDate getDiffFormNowToDateCN:[rs stringForColumn:@"date"]];
+            if (diffDays <= -3) {
+                res = NO;
+            }
+        }
+        else{
+            res = NO;
+        }
+        [rs close];
+        [dataBase close];
+    } 
+    return res;
+
 }
 
 @end
