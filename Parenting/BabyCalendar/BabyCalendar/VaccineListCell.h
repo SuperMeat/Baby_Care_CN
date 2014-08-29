@@ -13,6 +13,7 @@
 {
     __weak IBOutlet UILabel *_labVaccine;
     __weak IBOutlet UILabel *_labInplan;
+    __weak IBOutlet UILabel *_labTimes;
     __weak IBOutlet UILabel *_labCompleted;
     __weak IBOutlet UILabel *_labDate;
     

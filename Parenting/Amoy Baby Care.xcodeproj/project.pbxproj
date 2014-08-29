@@ -43,6 +43,7 @@
 		480D466B19AF04B6005AC58A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 480D466A19AF04B6005AC58A /* Images.xcassets */; };
 		480D467219AF12CC005AC58A /* 启动界面640-960.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467019AF12CC005AC58A /* 启动界面640-960.png */; };
 		480D467319AF12CC005AC58A /* 启动界面640-1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467119AF12CC005AC58A /* 启动界面640-1136.png */; };
+		480D467519B0234D005AC58A /* 启动界面320-480.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467419B0234D005AC58A /* 启动界面320-480.png */; };
 		480D6CEF19248D1700E5CAC7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CEE19248D1700E5CAC7 /* line.png */; };
 		480D6CF21924A75800E5CAC7 /* radio_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF01924A75800E5CAC7 /* radio_focus.png */; };
 		480D6CF31924A75800E5CAC7 /* radio.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF11924A75800E5CAC7 /* radio.png */; };
@@ -1455,6 +1456,7 @@
 		480D466A19AF04B6005AC58A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Amoy Baby Care/Images.xcassets"; sourceTree = "<group>"; };
 		480D467019AF12CC005AC58A /* 启动界面640-960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面640-960.png"; sourceTree = "<group>"; };
 		480D467119AF12CC005AC58A /* 启动界面640-1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面640-1136.png"; sourceTree = "<group>"; };
+		480D467419B0234D005AC58A /* 启动界面320-480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面320-480.png"; sourceTree = "<group>"; };
 		480D6CEE19248D1700E5CAC7 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		480D6CF01924A75800E5CAC7 /* radio_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_focus.png; sourceTree = "<group>"; };
 		480D6CF11924A75800E5CAC7 /* radio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio.png; sourceTree = "<group>"; };
@@ -6120,6 +6122,7 @@
 		72159747174536B8006FD415 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				480D467419B0234D005AC58A /* 启动界面320-480.png */,
 				480D467019AF12CC005AC58A /* 启动界面640-960.png */,
 				480D467119AF12CC005AC58A /* 启动界面640-1136.png */,
 				480D464419AD8809005AC58A /* 引导页 */,
@@ -7159,6 +7162,7 @@
 				48866EEC199A12E6007B16AA /* icon_knowledge.png in Resources */,
 				4828F40719A495D700D04926 /* 14.2.2.jpg in Resources */,
 				4828F45419A495D700D04926 /* 18.4.3.jpg in Resources */,
+				480D467519B0234D005AC58A /* 启动界面320-480.png in Resources */,
 				48866EF5199A12E6007B16AA /* btn_unselected.png in Resources */,
 				4828F43019A495D700D04926 /* 16.3.2.jpg in Resources */,
 				48801278199DED1700F6778B /* ShareInfoView.xib in Resources */,

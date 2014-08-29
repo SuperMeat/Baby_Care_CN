@@ -34,21 +34,21 @@
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎减毒活疫苗（口服）</string>
+		<string>脊髓灰质炎减毒活疫苗</string>
 		<key>illness</key>
 		<string>小儿麻痹症</string>
 		<key>times</key>
-		<string>第一次</string>
+		<string>口服第一次</string>
 		<key>month</key>
 		<integer>2</integer>
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎减毒活疫苗（口服）</string>
+		<string>脊髓灰质炎减毒活疫苗</string>
 		<key>illness</key>
 		<string>小儿麻痹症</string>
 		<key>times</key>
-		<string>第二次</string>
+		<string>口服第二次</string>
 		<key>month</key>
 		<integer>3</integer>
 	</dict>
@@ -64,11 +64,11 @@
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎减毒活疫苗（口服）</string>
+		<string>脊髓灰质炎减毒活疫苗</string>
 		<key>illness</key>
 		<string>小儿麻痹</string>
 		<key>times</key>
-		<string>第三次</string>
+		<string>口服第三次</string>
 		<key>month</key>
 		<integer>4</integer>
 	</dict>
@@ -204,11 +204,11 @@
 	</dict>
 	<dict>
 		<key>vaccine</key>
-		<string>脊髓灰质炎减毒活疫苗（口服）</string>
+		<string>脊髓灰质炎减毒活疫苗</string>
 		<key>illness</key>
 		<string>小儿麻痹</string>
 		<key>times</key>
-		<string>加强</string>
+		<string>口服第四次</string>
 		<key>month</key>
 		<integer>48</integer>
 	</dict>

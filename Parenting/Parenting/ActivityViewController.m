@@ -168,17 +168,17 @@
     
     //总结跟建议
     self.btnSummary = [[UIButton alloc] init];
-    self.btnSummary.frame = CGRectMake(0, 16, 51, 51);
+    self.btnSummary.frame = CGRectMake(320-51,16, 51, 51);
     [self.btnSummary setImage:[UIImage imageNamed:@"btn_sum1"] forState:UIControlStateNormal];
     [self.btnSummary addTarget:self action:@selector(showSummary) forControlEvents:UIControlEventTouchUpInside];
     
     [self.activityImageView addSubview:self.btnSummary];
     
-    self.btnAdvise = [[UIButton alloc] init];
-    self.btnAdvise.frame = CGRectMake(320-51,16, 51, 51);
-    [self.btnAdvise setImage:[UIImage imageNamed:@"btn_sum2"] forState:UIControlStateNormal];
-    [self.activityImageView addSubview:self.btnAdvise];
-    [self.btnAdvise addTarget:self action:@selector(showAdvise) forControlEvents:UIControlEventTouchUpInside];
+//    self.btnAdvise = [[UIButton alloc] init];
+//    self.btnAdvise.frame = CGRectMake(320-51,16, 51, 51);
+//    [self.btnAdvise setImage:[UIImage imageNamed:@"btn_sum2"] forState:UIControlStateNormal];
+//    [self.activityImageView addSubview:self.btnAdvise];
+//    [self.btnAdvise addTarget:self action:@selector(showAdvise) forControlEvents:UIControlEventTouchUpInside];
 
     //入口按钮
     self.btnFeed = [[UIButton alloc] init];
