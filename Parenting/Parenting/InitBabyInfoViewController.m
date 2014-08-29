@@ -106,7 +106,7 @@
     
     
     UILabel *lable4=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
-    lable4.text=@"出生身高";
+    lable4.text=@"当前身高";
     lable4.textAlignment=NSTextAlignmentRight;
     lable4.backgroundColor=[UIColor clearColor];
     lable4.textColor=[UIColor colorWithRed:0xAF/255.0 green:0xAF/255.0 blue:0xAF/255.0 alpha:0xFF/255.0];
@@ -120,7 +120,7 @@
     
     
     UILabel *lable5=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
-    lable5.text=@"出生体重";
+    lable5.text=@"当前体重";
     lable5.textAlignment=NSTextAlignmentRight;
     lable5.backgroundColor=[UIColor clearColor];
     lable5.textColor=[UIColor colorWithRed:0xAF/255.0 green:0xAF/255.0 blue:0xAF/255.0 alpha:0xFF/255.0];
@@ -134,7 +134,7 @@
     
     
     UILabel *lable6=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
-    lable6.text=@"出生头围";
+    lable6.text=@"当前头围";
     lable6.textAlignment=NSTextAlignmentRight;
     lable6.backgroundColor=[UIColor clearColor];
     lable6.textColor=[UIColor colorWithRed:0xAF/255.0 green:0xAF/255.0 blue:0xAF/255.0 alpha:0xFF/255.0];
@@ -214,15 +214,15 @@
     }
     
     if (![_textFiledHeight.text isEqualToString:@""]) {
-        [[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[_datepicker date]] Type:0 Value:[_textFiledHeight.text doubleValue]];
+        [[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[ACDate date]] Type:0 Value:[_textFiledHeight.text doubleValue]];
     }
     
     if (![_textFiledWeight.text isEqualToString:@""]) {
-        [[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[_datepicker date]] Type:1 Value:[_textFiledHeight.text doubleValue]];
+        [[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[ACDate date]] Type:1 Value:[_textFiledHeight.text doubleValue]];
     }
     
     if (![_textFiledHS.text isEqualToString:@""]) {
-        [[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[_datepicker date]] Type:3 Value:[_textFiledHS.text doubleValue]];
+        [[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[ACDate date]] Type:3 Value:[_textFiledHS.text doubleValue]];
     }
     
     [self.navigationController popViewControllerAnimated:NO];
