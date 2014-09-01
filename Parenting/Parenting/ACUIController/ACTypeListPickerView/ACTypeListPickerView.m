@@ -34,6 +34,7 @@
     self.delegate   = self;
     self.dataSource = self;
     self=[self initWithFrame:frame];
+    
     return self;
 }
 
@@ -57,6 +58,7 @@
 	switch (component) {
 		case 0:
             ret = [typelist objectAtIndex:row];
+            [self.typeListPickerViewDelegate sendTypeListSaveChanged:[typelist objectAtIndex:row]];
             break;
         default:
             break;

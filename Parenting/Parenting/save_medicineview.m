@@ -24,6 +24,9 @@
     if (self) {
         // Initialization code
         self.foodtype = @"";
+        
+        danweiList  = @[@"毫升",@"片",@"颗",@"包"];
+        
         [self  makeSave];
     }
     return self;
@@ -31,6 +34,7 @@
 -(id)initWithFrame:(CGRect)frame FeedWay:(NSString*)way Breasttype:(NSString*)type
 {
     self.feedway = way;
+    
     self=[self initWithFrame:frame];
     
     return self;
@@ -50,7 +54,10 @@
     _updatetime = updatetime;
     NSLog(@"init feed duration:%d",self.curduration);
     
+    danweiList  = @[@"毫升",@"片",@"颗",@"包"];
+    
     self=[self initWithFrame:frame];
+    
     return self;
 }
 
@@ -540,8 +547,25 @@
     actionType=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
     
     if (typelistPickerView==nil) {
-        typelistPickerView=[[ACTypeListPickerView alloc]initWithFrame:CGRectMake(0, danweitext.frame.origin.y+45, 320, 100) TypeList:@[@"毫升",@"片",@"颗",@"包"]];
+        typelistPickerView=[[ACTypeListPickerView alloc]initWithFrame:CGRectMake(0, danweitext.frame.origin.y+45, 320, 100) TypeList:danweiList];
         typelistPickerView.typeListPickerViewDelegate = self;
+    }
+    
+    if ([danweitext.text isEqualToString:@""] || [danweitext.text isEqualToString:@"毫升"])
+    {
+        [typelistPickerView selectRow:0 inComponent:0 animated:YES];
+    }
+    else if ([danweitext.text isEqualToString:@"片"])
+    {
+        [typelistPickerView selectRow:1 inComponent:0 animated:YES];
+    }
+    else if ([danweitext.text isEqualToString:@"颗"])
+    {
+        [typelistPickerView selectRow:2 inComponent:0 animated:YES];
+    }
+    else if ([danweitext.text isEqualToString:@"包"])
+    {
+        [typelistPickerView selectRow:3 inComponent:0 animated:YES];
     }
     
     typelistPickerView.frame=CGRectMake(0, 0, 320, 100);
@@ -559,6 +583,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
+
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView

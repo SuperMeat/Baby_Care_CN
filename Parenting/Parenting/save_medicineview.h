@@ -39,6 +39,8 @@ long _createtime;
 long _updatetime;
 BOOL isReminder;
 BOOL oldIsReminder;
+    
+NSArray *danweiList;
 }
 
 @property(nonatomic,strong)NSString *feedway;
