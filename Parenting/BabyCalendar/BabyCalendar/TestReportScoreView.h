@@ -14,6 +14,7 @@
     UILabel* _scoreLab;
     UILabel* _levLab;
     UILabel* _levTitleLab;
+    UILabel* _levDespLab;
 }
 @property(nonatomic,retain)TestModel* model;
 @end
