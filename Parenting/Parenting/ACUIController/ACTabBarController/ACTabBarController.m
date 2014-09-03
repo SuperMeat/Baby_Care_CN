@@ -122,9 +122,9 @@
     
     CGRect frame = [[UIScreen mainScreen] bounds];
     if (frame.size.height >= 568) {
-        tab_view.frame = CGRectMake(0, 499, 320, 49);
+        tab_view.frame = CGRectMake(0, 499, kDeviceWidth, 49);
     }else{
-        tab_view.frame = CGRectMake(0, 411, 320, 49);
+        tab_view.frame = CGRectMake(0, 411, kDeviceWidth, 49);
     }
     tab_view.tag = 220;
     [tab_view setClipsToBounds:YES];
@@ -133,7 +133,7 @@
 	self.buttons = [NSMutableArray arrayWithCapacity:viewCount];
     
 	for (int i = 0; i < viewCount; i++) {
-		UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(320/self.viewControllers.count*i, -4, 320/self.viewControllers.count, self.tabBar.frame.size.height+4)];
+		UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(kDeviceWidth/self.viewControllers.count*i, -4, kDeviceWidth/self.viewControllers.count, self.tabBar.frame.size.height+4)];
         [btn setBackgroundImage:[btnImages objectAtIndex:i] forState:UIControlStateNormal];
         [btn setBackgroundImage:[btnHLightImages objectAtIndex:i]  forState:UIControlStateDisabled];
         [btn setBackgroundImage:[btnHLightImages objectAtIndex:i] forState:UIControlStateHighlighted];

@@ -63,7 +63,7 @@
 
 + (void)cutView:(UIView*)view
 {
-    UIGraphicsBeginImageContext(CGSizeMake(320, 500));
+    UIGraphicsBeginImageContext(CGSizeMake(kDeviceWidth, 500));
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
     CGImageRef imageRef = parentImage.CGImage;

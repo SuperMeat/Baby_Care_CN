@@ -220,12 +220,12 @@
 +(UIImage*)cutScrollView:(UIScrollView*)scrollView
 {
     UIImage* image = nil;
-    UIGraphicsBeginImageContext(CGSizeMake(320, 568));
+    UIGraphicsBeginImageContext(CGSizeMake(kDeviceWidth, 568));
     {
         CGPoint savedContentOffset = scrollView.contentOffset;
         CGRect savedFrame = scrollView.frame;
         scrollView.contentOffset = CGPointZero;
-        scrollView.frame = CGRectMake(0, 0, 320, scrollView.contentSize.height);
+        scrollView.frame = CGRectMake(0, 0, kDeviceWidth, scrollView.contentSize.height);
         
         [scrollView.layer renderInContext: UIGraphicsGetCurrentContext()];
         image = UIGraphicsGetImageFromCurrentImageContext();

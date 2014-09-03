@@ -51,6 +51,16 @@
 {
     [super viewDidLoad];
     self.title = @"里程碑";
+    UISwipeGestureRecognizer *recognizer;
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self view] addGestureRecognizer:recognizer];
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self view] addGestureRecognizer:recognizer];
     
 //    self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"btn_add" title:nil action:@selector(addAction)];
     
@@ -109,6 +119,23 @@
 {
     AddMilestoneController* addVc = [[AddMilestoneController alloc] init];
     [self.navigationController pushViewController:addVc animated:YES];
+}
+
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
+{
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft)
+    {
+        NSLog(@"下一页");
+        [_milestoneView MilestoneHeaderView_right];
+
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight)
+    {
+        NSLog(@"上一页");
+        [_milestoneView MilestoneHeaderView_left];
+    }
+    
 }
 
 #pragma mark - EditeViewDelegate
