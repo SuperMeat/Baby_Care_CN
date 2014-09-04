@@ -54,7 +54,7 @@
     
     self.title = @"宝宝日记";
     
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-64-50)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-64-50-70)];
     _scrollView.delegate = self;
     _scrollView.bounces = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
@@ -63,7 +63,7 @@
     
     FootView* footView = [[[NSBundle mainBundle] loadNibNamed:@"FootView" owner:self options:nil] lastObject];
     footView.delegate = self;
-    footView.top = kDeviceHeight-64-50;
+    footView.top = kDeviceHeight-64-50-70;
     [self.view insertSubview:footView aboveSubview:_scrollView];
     
     [self _initDatas];

@@ -23,6 +23,7 @@
 }
 @property(nonatomic,retain)NoteModel* model;
 @property (weak, nonatomic) IBOutlet MyNoteView *textView;
+@property (strong, nonatomic) IBOutlet UIImageView *notetipsView;
 @property(nonatomic,assign)id<ContentViewDelegate> delegate;
 
 @end

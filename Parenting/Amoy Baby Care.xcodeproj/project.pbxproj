@@ -103,6 +103,9 @@
 		480EFA5318E5155C00D40903 /* label_breast@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99218E5155C00D40903 /* label_breast@2x.png */; };
 		480EFA5918E5155C00D40903 /* btn_bath_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99918E5155C00D40903 /* btn_bath_pause@2x.png */; };
 		480EFA5A18E5155C00D40903 /* btn_bath_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 480EF99A18E5155C00D40903 /* btn_bath_play.png */; };
+		481482F919B7F78400A9DFFB /* notebottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 481482F719B7F78400A9DFFB /* notebottom.png */; };
+		481482FA19B7F78400A9DFFB /* notetips.png in Resources */ = {isa = PBXBuildFile; fileRef = 481482F819B7F78400A9DFFB /* notetips.png */; };
+		4814830019B843B900A9DFFB /* baby.png in Resources */ = {isa = PBXBuildFile; fileRef = 481482FF19B843B900A9DFFB /* baby.png */; };
 		48152DED18486B13009A4900 /* UMContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48152DDF18486B13009A4900 /* UMContactViewController.m */; };
 		48152DEE18486B13009A4900 /* UMContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48152DE018486B13009A4900 /* UMContactViewController.xib */; };
 		48152DEF18486B13009A4900 /* umeng_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 48152DE118486B13009A4900 /* umeng_logo.png */; };
@@ -1436,6 +1439,9 @@
 		480EF99218E5155C00D40903 /* label_breast@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_breast@2x.png"; sourceTree = "<group>"; };
 		480EF99918E5155C00D40903 /* btn_bath_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_bath_pause@2x.png"; sourceTree = "<group>"; };
 		480EF99A18E5155C00D40903 /* btn_bath_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_bath_play.png; sourceTree = "<group>"; };
+		481482F719B7F78400A9DFFB /* notebottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notebottom.png; sourceTree = "<group>"; };
+		481482F819B7F78400A9DFFB /* notetips.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notetips.png; sourceTree = "<group>"; };
+		481482FF19B843B900A9DFFB /* baby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baby.png; sourceTree = "<group>"; };
 		48152DDE18486B13009A4900 /* UMContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMContactViewController.h; sourceTree = "<group>"; };
 		48152DDF18486B13009A4900 /* UMContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMContactViewController.m; sourceTree = "<group>"; };
 		48152DE018486B13009A4900 /* UMContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMContactViewController.xib; sourceTree = "<group>"; };
@@ -3565,6 +3571,7 @@
 		481D0D49195BC2680025281A /* 装饰 */ = {
 			isa = PBXGroup;
 			children = (
+				481482FF19B843B900A9DFFB /* baby.png */,
 				486CD6E61998A4970026061E /* pin_red@2x.png */,
 				48D42F4D196FDEAA00DFFC5C /* radio_focus@2x.png */,
 				48D42F4E196FDEAA00DFFC5C /* radio@2x.png */,
@@ -4650,6 +4657,8 @@
 		48866D26199A12E5007B16AA /* other */ = {
 			isa = PBXGroup;
 			children = (
+				481482F719B7F78400A9DFFB /* notebottom.png */,
+				481482F819B7F78400A9DFFB /* notetips.png */,
 				48866D1B199A12E5007B16AA /* image_default.png */,
 				48866D1C199A12E5007B16AA /* start_top250.png */,
 				48866D1D199A12E5007B16AA /* more_setting@2x.png */,
@@ -5053,17 +5062,17 @@
 		48866E31199A12E5007B16AA /* Milestone */ = {
 			isa = PBXGroup;
 			children = (
-				48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */,
 				48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */,
-				BE5B383B19A1FB5F00246B6A /* MilestoneContentView.xib */,
 				48866E06199A12E5007B16AA /* MilestoneController.h */,
 				48866E07199A12E5007B16AA /* MilestoneController.m */,
 				48866E08199A12E5007B16AA /* MilestoneView.h */,
 				48866E09199A12E5007B16AA /* MilestoneView.m */,
 				48866E0A199A12E5007B16AA /* MilestoneHeaderView.h */,
 				48866E0B199A12E5007B16AA /* MilestoneHeaderView.m */,
+				48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */,
 				48866E0D199A12E5007B16AA /* MilestoneContentView.h */,
 				48866E0E199A12E5007B16AA /* MilestoneContentView.m */,
+				BE5B383B19A1FB5F00246B6A /* MilestoneContentView.xib */,
 				48866E10199A12E5007B16AA /* MilestoneModel.h */,
 				48866E11199A12E5007B16AA /* MilestoneModel.m */,
 				48866E12199A12E5007B16AA /* EditeView.h */,
@@ -6486,6 +6495,7 @@
 				480EFA2618E5155C00D40903 /* panels_color6@2x.png in Resources */,
 				4828F4E219A495D700D04926 /* 6.2.1.jpg in Resources */,
 				BE004CE418FE2B7500E56833 /* top.png in Resources */,
+				481482FA19B7F78400A9DFFB /* notetips.png in Resources */,
 				CE0167C3174B059000462363 /* pic_default.png in Resources */,
 				CE0167C4174B059000462363 /* pic_default@2x.png in Resources */,
 				48866EC0199A12E6007B16AA /* btn_cannot_selected.png in Resources */,
@@ -6649,6 +6659,7 @@
 				48866F26199A12E6007B16AA /* icon_milestone.png in Resources */,
 				4828F4A619A495D700D04926 /* 24.1.1.jpg in Resources */,
 				4828F49619A495D700D04926 /* 22.4.1.jpg in Resources */,
+				481482F919B7F78400A9DFFB /* notebottom.png in Resources */,
 				4828F40019A495D700D04926 /* 13.4.2.jpg in Resources */,
 				48F91ACE18FB8DF10038DC67 /* temp_level_bad@2x.png in Resources */,
 				48866EBA199A12E6007B16AA /* color_active.png in Resources */,
@@ -7297,6 +7308,7 @@
 				4828F3FD19A495D700D04926 /* 13.3.1.jpg in Resources */,
 				48866EE9199A12E6007B16AA /* btn_right_train.png in Resources */,
 				48866EAB199A12E6007B16AA /* btn_cannot.png in Resources */,
+				4814830019B843B900A9DFFB /* baby.png in Resources */,
 				4828F4A719A495D700D04926 /* 24.1.2.jpg in Resources */,
 				4828F4BB19A495D700D04926 /* 3.3.1.jpg in Resources */,
 				4828F43819A495D700D04926 /* 17.1.2.jpg in Resources */,

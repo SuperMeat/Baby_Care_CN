@@ -56,10 +56,10 @@
     [self addSubview:_headerView];
     
     _contentView.top = _headerView.bottom;
-    _contentView.height = kDeviceHeight-64-_headerView.height-_addphotoView.height;
+    _contentView.height = kDeviceHeight-64-_headerView.height;
     [self addSubview:_contentView];
     
-    _addphotoView.top = _contentView.bottom+10;
+    _addphotoView.top = _contentView.bottom+10-_addphotoView.height;
     [self addSubview:_addphotoView];
     
 }

@@ -22,16 +22,12 @@
     return self;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-//- (void)drawRect:(CGRect)rect
-//{
-//    // Drawing code
-//    [self bringSubviewToFront:self.titleDetail];
-//    [self bringSubviewToFront:self.shareInfoImageView];
-//    [self bringSubviewToFront:self.iconImageView];
-//    [self bringSubviewToFront:self.iconDetail];
-//    [self setBackgroundColor:[UIColor redColor]];
-//}
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    _shareInfoImageView.top = _headView.bottom+10;
+    _footView.top = _shareInfoImageView.bottom+10;
+    self.height   = _headView.height + _shareInfoImageView.height + _footView.height;
+}
 
 @end

@@ -146,15 +146,25 @@
     _milestoneView.headerView.photoView.canTap = NO;
     _milestoneView.contentView.textView.editable = NO;
     _milestoneView.headerView.btnDate.enabled = NO;
+    if (_milestoneView.SQLDatas.count > 0) {
+        MilestoneModel* model = _milestoneView.SQLDatas[_milestoneView.index];
+        _milestoneView.contentView.textView.text = model.content;
+        _milestoneView.contentView.notetipsView.hidden = YES;
+    }
 }
 - (void)editeViewDidDone
 {
+    if ([_milestoneView.contentView.textView.text isEqualToString:@""]) {
+        [self alertView:kContent_none];
+        return;
+    }
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addItemView];
     _milestoneView.headerView.photoView.canTap = NO;
     _milestoneView.contentView.textView.editable = NO;
     _milestoneView.headerView.btnDate.enabled = NO;
     
-    // 更新数据
+       // 更新数据
     if (_milestoneView.SQLDatas.count > 0) {
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
