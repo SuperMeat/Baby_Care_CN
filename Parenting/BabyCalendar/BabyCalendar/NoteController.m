@@ -39,10 +39,10 @@
 {
     UIImage *detailImage = [ACFunction cutView:self.view andWidth:kShareImageWidth_Note andHeight:kDeviceHeight-64];
     ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
-    [shareView.shareInfoImageView setFrame:CGRectMake((320-217)/2.0, shareView.shareInfoImageView.origin.y, 217, (kDeviceHeight-64)*217/320.0)];
+    [shareView.shareInfoImageView setFrame:CGRectMake((kDeviceWidth-217)/2.0, shareView.shareInfoImageView.origin.y, 217, (kDeviceHeight-64)*217/kDeviceWidth)];
     [shareView.shareInfoImageView setImage:detailImage];
     shareView.titleDetail.text = [NSString stringWithFormat:kShareNoteTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage]];
-    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
+    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:kDeviceHeight];
     [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
 }
 
