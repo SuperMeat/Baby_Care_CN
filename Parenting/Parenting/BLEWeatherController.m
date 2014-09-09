@@ -61,7 +61,7 @@
 {
     self.blecontroller = [[BLEController alloc] init];
     self.blecontroller.bleControllerDelegate = self;
-    getDataTimeInterval = GETBLEDATATIMERAL;
+    getDataTimeInterval = GETBLEADATATIMERAL;
     isFistTip = YES;
     [self checkbluetooth];
 }

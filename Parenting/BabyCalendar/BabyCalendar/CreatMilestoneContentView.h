@@ -23,6 +23,7 @@
 @property(nonatomic,retain)MilestoneModel* model;
 @property (weak, nonatomic) IBOutlet MyNoteView *textView;
 @property (nonatomic,assign)float disMoveH;
+@property (strong, nonatomic) IBOutlet UIImageView *notetipsView;
 @property (nonatomic,assign)id<CreatMilestoneContentViewDelegate> delegate;
 
 

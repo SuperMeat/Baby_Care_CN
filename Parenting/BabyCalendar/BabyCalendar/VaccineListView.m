@@ -78,6 +78,15 @@
         NSDate* date = [BaseMethod fromCurDate:birthdayDate withMonth:month];
         model.willDate = [BaseMethod stringFromDate:date];
         
+        //超过接种一天以上时间默认接种
+        long curTimeStamp = [ACDate getTimeStampFromDate:[ACDate date]];
+        long willDateTimeStamp = [ACDate getTimeStampFromDate:date];
+        if ((curTimeStamp - 86400)> willDateTimeStamp)
+        {
+            model.completedDate = model.willDate;
+            model.completed     = [NSNumber numberWithInt:1];
+        }
+        
         [self.SQLDatas addObject:model];
         
         // 保存数据库

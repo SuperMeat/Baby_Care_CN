@@ -40,7 +40,13 @@
         _levLab.font = [UIFont fontWithName:kFont size:20];
         _levLab.textColor = UIColorFromRGB(kColor_testReport_score);
         
-        _levTitleLab.text = @"得分";
+        _levDespLab = [[UILabel alloc] init];
+        _levDespLab.backgroundColor = [UIColor clearColor];
+        _levDespLab.textAlignment = NSTextAlignmentCenter;
+        _levDespLab.font = [UIFont fontWithName:kFont size:15.0f];
+        _levDespLab.textColor = UIColorFromRGB(kColor_testReport_score);
+
+        _levTitleLab.text = @"评级";
         _zeroLab.text = @"0";
         
     }
@@ -55,12 +61,15 @@
     _scoreLab.frame = CGRectMake(85,75, 30, 20);
     _levTitleLab.frame = CGRectMake((self.width-50)/2, (self.height-20)/2-10, 50, 20);
     _levLab.frame = CGRectMake(_levTitleLab.left, _levTitleLab.bottom, 50, 20);
-    
+    _levDespLab.frame = CGRectMake(_levLab.left, _levLab.bottom+15, 50, 20);
+
     
     [self addSubview:_zeroLab];
     [self addSubview:_scoreLab];
     [self addSubview:_levLab];
     [self addSubview:_levTitleLab];
+    [self addSubview:_levDespLab];
+    
 }
 - (void)setModel:(TestModel *)model
 {
@@ -125,18 +134,23 @@
     NSString* leavl = @"";
     if (score>89) {
         leavl = @"A";
+        _levDespLab.text = @"超常";
     }else if(score>74)
     {
         leavl = @"B";
+        _levDespLab.text = @"较好";
     }else if(score>59)
     {
         leavl = @"C";
+        _levDespLab.text = @"中等";
     }else if(score>44)
     {
         leavl = @"D";
+        _levDespLab.text = @"不足";
     }else
     {
         leavl = @"E";
+        _levDespLab.text = @"落后";
     }
     return leavl;
 }

@@ -67,8 +67,10 @@
 
 - (void)goBack
 {
-    [self doneAction];
-    [self.navigationController popViewControllerAnimated:YES];
+    BOOL result  = [self doneAction];
+    if (result) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)ShareToFriend
@@ -78,12 +80,12 @@
     [shareView.shareInfoImageView setFrame:CGRectMake((320-217)/2.0, shareView.shareInfoImageView.origin.y, 217, (kDeviceHeight-64)*217/320.0)];
     [shareView.shareInfoImageView setImage:detailImage];
     shareView.titleDetail.text = [NSString stringWithFormat:kShareMilestoneTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage],_model.title];;
-    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
+    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:kDeviceHeight];
     [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
 }
 
 // 保存里程碑
-- (void)doneAction
+- (BOOL)doneAction
 {
     
     [self.view endEditing:YES];
@@ -100,12 +102,12 @@
     
     if ( title == nil || [title isEqualToString:@""]) {
         [self alertView:kTitle_none];
-        return;
+        return NO;
     }
     
     if ( content == nil || [content isEqualToString:@""]) {
         [self alertView:kContent_none];
-        return;
+        return NO;
     }
     
     NSString* old_PhotoName = _model.photo_path;
@@ -130,7 +132,7 @@
     }else
     {
         [self alertView:kSave_fail];
-        return;
+        return NO;
     }
     
     // 保存新图片
@@ -152,7 +154,7 @@
     
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(back:) userInfo:nil repeats:NO];
     
-    
+    return YES;
 }
 
 - (void)back:(NSTimer*)timer

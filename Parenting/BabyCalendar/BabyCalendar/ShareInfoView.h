@@ -12,6 +12,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleDetail;
 @property (strong, nonatomic) IBOutlet UIImageView *shareInfoImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (strong, nonatomic) IBOutlet UIView *footView;
 @property (strong, nonatomic) IBOutlet UILabel *iconDetail;
+@property (strong, nonatomic) IBOutlet UIView *headView;
 
 @end

@@ -45,6 +45,13 @@
     if (_disMoveH > 0) {
         return;
     }
+    
+    self.notetipsView.center = CGPointMake(kDeviceWidth/2.0, self.height/2.0);
+    if (![_model.content isEqualToString:@""] && _model.content != nil)
+    {
+        self.notetipsView.hidden = YES;
+    }
+
 
     _textView.height = self.height;
 }
@@ -105,6 +112,18 @@
         [textView resignFirstResponder];
         return NO;
     }
+    
+    if (![text isEqualToString:@""])
+    {
+        self.notetipsView.hidden = YES;
+    }
+    else
+    {
+        if (range.location == 0) {
+            self.notetipsView.hidden = NO;
+        }
+    }
+
     return YES;
 }
 

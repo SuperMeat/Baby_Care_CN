@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet MyNoteView *textView;
 
+@property (strong, nonatomic) IBOutlet UIImageView *notetipsView;
 
 @end

@@ -146,9 +146,9 @@
 
 - (void)initView
 {
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 320, 44)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, kDeviceWidth, 44)];
     titleView.backgroundColor=[UIColor clearColor];
-    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
     titleText.textColor = [UIColor whiteColor];
@@ -159,7 +159,7 @@
     [self LoadData];
     
     self.activityImageView = [[UIImageView alloc] init];
-    [self.activityImageView setFrame:CGRectMake(0, 0, 320, 334*PNGSCALE)];
+    [self.activityImageView setFrame:CGRectMake(0, 0, kDeviceWidth, 334*PNGSCALE)];
     [self.activityImageView setBackgroundColor:[ACFunction colorWithHexString:@"#68bfcc"]];
     
     [self.activityImageView addSubview:titleView];
@@ -168,7 +168,7 @@
     
     //总结跟建议
     self.btnSummary = [[UIButton alloc] init];
-    self.btnSummary.frame = CGRectMake(320-51,16, 51, 51);
+    self.btnSummary.frame = CGRectMake(kDeviceWidth-51,16, 51, 51);
     [self.btnSummary setImage:[UIImage imageNamed:@"btn_sum1"] forState:UIControlStateNormal];
     [self.btnSummary addTarget:self action:@selector(showSummary) forControlEvents:UIControlEventTouchUpInside];
     
@@ -182,7 +182,7 @@
 
     //入口按钮
     self.btnFeed = [[UIButton alloc] init];
-    self.btnFeed.frame = CGRectMake(320/2-36, 70+20, 72, 72);
+    self.btnFeed.frame = CGRectMake(kDeviceWidth/2-36, 70+20, 72, 72);
     [self.btnFeed setImage:[UIImage imageNamed:@"icon_feeding"] forState:UIControlStateNormal];
     [self.activityImageView setUserInteractionEnabled:YES];
     [self.activityImageView addSubview:self.btnFeed];

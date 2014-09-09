@@ -70,7 +70,7 @@
     _picView.top = _headerView.bottom;
     [self addSubview:_picView];
     
-    _contentView.frame = CGRectMake(10, _picView.bottom, kDeviceWidth-20, _contentView.height);
+    _contentView.frame = CGRectMake(10, _picView.bottom, kDeviceWidth-20, _contentView.height-40);
     _contentView.delegate = self;
     [self addSubview:_contentView];
     

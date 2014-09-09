@@ -51,6 +51,16 @@
 {
     [super viewDidLoad];
     self.title = @"里程碑";
+    UISwipeGestureRecognizer *recognizer;
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self view] addGestureRecognizer:recognizer];
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self view] addGestureRecognizer:recognizer];
     
 //    self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"btn_add" title:nil action:@selector(addAction)];
     
@@ -111,6 +121,23 @@
     [self.navigationController pushViewController:addVc animated:YES];
 }
 
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
+{
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft)
+    {
+        NSLog(@"下一页");
+        [_milestoneView MilestoneHeaderView_right];
+
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight)
+    {
+        NSLog(@"上一页");
+        [_milestoneView MilestoneHeaderView_left];
+    }
+    
+}
+
 #pragma mark - EditeViewDelegate
 
 - (void)editeViewDidCancel
@@ -119,15 +146,25 @@
     _milestoneView.headerView.photoView.canTap = NO;
     _milestoneView.contentView.textView.editable = NO;
     _milestoneView.headerView.btnDate.enabled = NO;
+    if (_milestoneView.SQLDatas.count > 0) {
+        MilestoneModel* model = _milestoneView.SQLDatas[_milestoneView.index];
+        _milestoneView.contentView.textView.text = model.content;
+        _milestoneView.contentView.notetipsView.hidden = YES;
+    }
 }
 - (void)editeViewDidDone
 {
+    if ([_milestoneView.contentView.textView.text isEqualToString:@""]) {
+        [self alertView:kContent_none];
+        return;
+    }
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addItemView];
     _milestoneView.headerView.photoView.canTap = NO;
     _milestoneView.contentView.textView.editable = NO;
     _milestoneView.headerView.btnDate.enabled = NO;
     
-    // 更新数据
+       // 更新数据
     if (_milestoneView.SQLDatas.count > 0) {
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -186,7 +223,7 @@
     [shareView.shareInfoImageView setFrame:CGRectMake((320-217)/2.0, shareView.shareInfoImageView.origin.y, 217, (kDeviceHeight-64)*217/320.0)];
     [shareView.shareInfoImageView setImage:detailImage];
     shareView.titleDetail.text = [NSString stringWithFormat:kShareMilestoneTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage],_milestoneView.contentView.labTitle.text];;
-    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
+    UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:kDeviceHeight];
     [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
 }
 

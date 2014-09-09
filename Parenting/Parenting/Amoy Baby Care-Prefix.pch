@@ -41,7 +41,6 @@
 #import "OpenFunction.h"
 #import "ChineseToPinyin.h"
 #import "defaultAppDelegate.h"
-#import "RNGridMenu.h"
 #import "MobClick.h"
 #import "MBProgressHUD.h"
 #import "AdviseData.h"
@@ -60,7 +59,6 @@
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import "MyMapViewController.h"
 #import "ASIController.h"
-#import "MTA.h"
 #import "UserLittleTips.h"
 #import "FeedMoreController.h"
 #import "UMSocial.h"
@@ -337,7 +335,7 @@
 #define FOOD_TYPE_SOLIDFOOD 3
 
 #ifdef DEBUG
-#define GETBLEDATATIMERAL 30.0   //秒
+#define GETBLEADATATIMERAL 30.0   //秒
 #else
 #define GETBLEADATATIMERAL 30.0
 #endif
