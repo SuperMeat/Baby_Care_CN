@@ -66,7 +66,7 @@
     [_imageViewPic addGestureRecognizer:tapgesture];
     _imagePicker=[[UIImagePickerController alloc]init];
     
-    [_mainScrollView setContentSize:CGSizeMake(320, 420)];
+    [_mainScrollView setContentSize:CGSizeMake(320, 500)];
     
     _textFiledName.leftViewMode=UITextFieldViewModeAlways;
     _textFiledBirth.leftViewMode=UITextFieldViewModeAlways;

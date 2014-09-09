@@ -272,6 +272,57 @@ ViewController:(UIViewController*) viewController{
                                        viewController:viewController];
 }
 
+#pragma 根据贴士类目、最后创建时间、条数获取贴士
+-(void)getTipsHome:(int) UserID
+    LastCreateTime:(long) lastCreateTime
+        BabyMonths:(int) babyMonth
+               HUD:(MBProgressHUD*) hud
+      SyncFinished:(SyncFinishBlockP) syncFinishBlockP
+    ViewController:(UIViewController*) viewController{
+    
+    NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:UserID],@"userId",[NSNumber numberWithInt:babyMonth],@"babyMonths",[NSNumber numberWithLong:lastCreateTime],@"lastCreateTime",nil];
+    hud = [MBProgressHUD showHUDAddedTo:viewController.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.alpha = 0.5;
+    //提示消息
+    hud.labelText = @"接收数据中";
+    
+    [[NetWorkConnect sharedRequest]httpRequestWithURL:GETTIPSHOME_SYNC_URL
+                                                 data:dictBody
+                                                 mode:@"POST"
+                                                  HUD:hud
+                                       didFinishBlock:^(NSDictionary *result)
+     {
+         //请求成功处理
+//         NSMutableArray *categoryArr = [[result objectForKey:@"body"] objectForKey:@"Bc_Tips"];
+         
+         NSLog(@"%@",[result objectForKey:@"msg"]);
+         
+         if ([[result objectForKey:@"code"]intValue] == 1) {
+             
+         }
+         else{
+             hud.labelText = @"无可更新数据";
+             [hud hide:YES afterDelay:1.5];
+         }
+         //请求失败处理
+         /*
+          if (syncFinishBlockP) {
+             syncFinishBlockP(categoryArr);
+         }*/
+     }
+                                         didFailBlock:^(NSString *error)
+     {
+         //请求失败处理
+         hud.labelText = http_error;
+         [hud hide:YES afterDelay:0.8];
+     }
+                                       isShowProgress:YES
+                                        isAsynchronic:YES
+                                        netWorkStatus:YES
+                                       viewController:viewController];
+}
+
 #pragma 同步基本内容:小窍门
 -(void)SyncBasicContent{
     [self SyncBasicLittleTips];

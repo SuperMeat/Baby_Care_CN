@@ -20,6 +20,7 @@
  */
 
 #import "InitTimeLineData.h"
+#import "SyncController.h"
 #import "BaseSQL.h"
 
 @implementation InitTimeLineData
@@ -55,7 +56,7 @@
     [initDs checkSysMsg];
     
     /** 检测贴士推送:99 **/
-    [initDs checkTips];
+//    [initDs checkTips];
     
     NSArray *res = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
     return res;
@@ -171,9 +172,6 @@
 -(void)checkBabyHS{
     return;
 }
-/** 检测贴士推送:99 **/
--(void)checkTips{
-    
-}
+
 
 @end

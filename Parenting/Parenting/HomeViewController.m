@@ -89,6 +89,7 @@
     [_photoAreaView initData];
     
     //加载数据源
+    [self checkTips];
     _data = [InitTimeLineData getTimeLineData];
     
     //计算表格高度
@@ -268,6 +269,23 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma 同步贴士
+/** 检测贴士推送:99 **/
+-(void)checkTips{
+    [[SyncController syncController] getTipsHome:ACCOUNTUID
+                                  LastCreateTime:2
+                                      BabyMonths:2
+                                             HUD:_hud
+                                    SyncFinished:^(NSArray *retArr){
+                                        //取出获取到数据的ids
+                                        if ([retArr count] ==0){
+                                            //
+                                        }
+                                        
+                                    }
+                                  ViewController:self];
 }
 
 @end

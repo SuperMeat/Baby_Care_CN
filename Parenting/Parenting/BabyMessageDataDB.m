@@ -30,7 +30,7 @@
         return NO;
     }
     
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_msg (create_time int NOT NULL,update_time int not NULL,msg_type int not NULL,key Varchar  DEFAULT NULL,msg_content Varchar  DEFAULT NULL,pic_url Varchar  DEFAULT NULL)"];
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_baby_msg (create_time int NOT NULL,update_time int not NULL,msg_type int not NULL,key Varchar  DEFAULT NULL,msg_content Varchar  DEFAULT NULL,pic_url Varchar  DEFAULT NULL)"]; 
     if (!res) {
         NSLog(@"表格创建失败");
         [db close];

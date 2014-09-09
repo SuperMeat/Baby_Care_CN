@@ -288,6 +288,7 @@
 //贴士类目同步
 #define CATEGORY_SYNC_URL ([BASE_URL stringByAppendingString:@"api/User.svc/SyncCategory"])
 #define GETTIPS_SYNC_URL ([BASE_URL stringByAppendingString:@"api/User.svc/GetTips"])
+#define GETTIPSHOME_SYNC_URL ([BASE_URL stringByAppendingString:@"api/User.svc/GetTipsHome"])
 
 //窍门同步
 #define LITTLETIPS_SYNC_URL ([BASE_URL stringByAppendingString:@"api/User.svc/SyncLittleTips"])
