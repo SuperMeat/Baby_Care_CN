@@ -131,15 +131,6 @@ void UncaughtExceptionHandler(NSException *exception) {
 //    }
 //    NSLog(@"{\"oid\": \"%@\"}", deviceID);
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    for(NSString *familyName in [UIFont familyNames])
-    {
-        NSLog(@"familyName = %@", familyName);
-        
-        for(NSString *fontName in [UIFont fontNamesForFamilyName:familyName])
-        {
-            NSLog(@"\tfontName = %@", fontName);
-        }  
-    }
     return YES;
 }
 
@@ -154,7 +145,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     {
         settingViewController = [[SettingViewController alloc] init];
     }
-    homeViewController   = [[HomeViewController alloc] init];
+    homeViewController     = [[HomeViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
     calendarViewController = [[CalendarController alloc] init];

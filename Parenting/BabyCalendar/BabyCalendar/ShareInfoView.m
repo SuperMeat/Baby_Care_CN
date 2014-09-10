@@ -27,7 +27,7 @@
     self.titleDetail.textColor = [ACFunction colorWithHexString:kShareImageFontColor];
     self.titleDetail.font = [UIFont fontWithName:kShareImageFont size:15];
 
-    _shareInfoImageView.top = _headView.bottom+10;
+    _shareInfoImageView.top = _headView.bottom;
     _footView.top = _shareInfoImageView.bottom+10;
     self.height   = _headView.height + _shareInfoImageView.height + _footView.height;
 }
