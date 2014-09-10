@@ -131,6 +131,15 @@ void UncaughtExceptionHandler(NSException *exception) {
 //    }
 //    NSLog(@"{\"oid\": \"%@\"}", deviceID);
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    for(NSString *familyName in [UIFont familyNames])
+    {
+        NSLog(@"familyName = %@", familyName);
+        
+        for(NSString *fontName in [UIFont fontNamesForFamilyName:familyName])
+        {
+            NSLog(@"\tfontName = %@", fontName);
+        }  
+    }
     return YES;
 }
 
