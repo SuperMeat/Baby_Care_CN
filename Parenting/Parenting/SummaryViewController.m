@@ -347,7 +347,7 @@
     [lable1_sum setBackgroundImage:[UIImage imageNamed:@"label1_sum"] forState:UIControlStateNormal];
     [lable1_sum setBackgroundImage:[UIImage  imageNamed:@"label1_sum_choose"] forState:UIControlStateDisabled];
     [lable1_sum addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
-    lable1_sum.frame=CGRectMake(2, 23/2.0+64, 211/2.0, 65/2.0+1);
+    lable1_sum.frame=CGRectMake(54.5, 23/2.0+64, 211/2.0, 65/2.0+1);
     lable1_sum.tag=101;
     [self.view addSubview:lable1_sum];
     
@@ -356,17 +356,17 @@
     [lable2_sum setBackgroundImage:[UIImage imageNamed:@"label2_sum_choose"]  forState:UIControlStateDisabled];
     [lable2_sum addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
     lable2_sum.tag=102;
-    lable2_sum.frame=CGRectMake(211/2.0+2, 23/2.0+64, 211/2.0, 65/2.0+1);
+    lable2_sum.frame=CGRectMake(54.5+211/2.0, 23/2.0+64, 211/2.0, 65/2.0+1);
     [self.view addSubview:lable2_sum];
     
-    UIButton *lable3_sum=[UIButton buttonWithType:UIButtonTypeCustom];
-    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum"] forState:UIControlStateNormal];
-    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum_choose"] forState:UIControlStateDisabled];
-    [lable3_sum addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
-    lable3_sum.frame=CGRectMake(211+2, 23/2.0+64, 211/2.0, 65/2.0+1);
-    lable3_sum.tag=103;
-    
-    [self.view addSubview:lable3_sum];
+//    UIButton *lable3_sum=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum"] forState:UIControlStateNormal];
+//    [lable3_sum setBackgroundImage:[UIImage imageNamed:@"label3_sum_choose"] forState:UIControlStateDisabled];
+//    [lable3_sum addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
+//    lable3_sum.frame=CGRectMake(211+2, 23/2.0+64, 211/2.0, 65/2.0+1);
+//    lable3_sum.tag=103;
+//    
+//    [self.view addSubview:lable3_sum];
     
 }
 -(void)makeTimeSegment
