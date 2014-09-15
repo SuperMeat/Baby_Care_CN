@@ -69,7 +69,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>fangzhengjiantikatong.ttf</string>
+		<string>FZKaTong-M19S.ttf</string>
 		<string>BaroqueScript.ttf</string>
 		<string>renaissance.ttf</string>
 		<string>MicrosoftYaHei.ttf</string>

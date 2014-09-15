@@ -920,11 +920,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabyCalendar/BabyCalendar/ShareInfoView.m"
-            timestampString = "431592400.96067"
+            timestampString = "432025190.889869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "-layoutSubviews"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabyCalendar/BabyCalendar/ShareInfoView.m"
+            timestampString = "432025204.946062"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "-layoutSubviews"
             landmarkType = "5">
          </BreakpointContent>

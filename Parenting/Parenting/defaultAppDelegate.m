@@ -156,7 +156,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     {
         settingViewController = [[SettingViewController alloc] init];
     }
-    homeViewController   = [[HomeViewController alloc] init];
+    homeViewController     = [[HomeViewController alloc] init];
     actViewController      = [[ActivityViewController alloc] init];
     phyViewController      = [[PhysiologyViewController alloc] init];
     calendarViewController = [[CalendarController alloc] init];

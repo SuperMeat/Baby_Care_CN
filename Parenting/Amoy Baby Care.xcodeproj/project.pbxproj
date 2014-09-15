@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48000EFC19A1985B00AD04D5 /* fangzhengjiantikatong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48000EFB19A1985B00AD04D5 /* fangzhengjiantikatong.ttf */; };
-		48000EFE19A2069D00AD04D5 /* 方正卡通简体.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */; };
 		48000F0219A2076000AD04D5 /* MilestoneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */; };
 		4800B0BF18D7F3D20093A6AF /* 日历@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800B0B518D7F3D20093A6AF /* 日历@2x.png */; };
 		4800B0C018D7F3D20093A6AF /* 日历_按@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800B0B618D7F3D20093A6AF /* 日历_按@2x.png */; };
@@ -606,6 +604,7 @@
 		486CD6E2199894570026061E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E1199894570026061E /* AMap.bundle */; };
 		486CD6E4199894820026061E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486CD6E3199894820026061E /* MAMapKit.framework */; };
 		486CD6E71998A4970026061E /* pin_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E61998A4970026061E /* pin_red@2x.png */; };
+		4876AE9119C02C33009135E8 /* FZKaTong-M19S.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4876AE9019C02C33009135E8 /* FZKaTong-M19S.ttf */; };
 		4880059B1929EAA400817919 /* FoodTypePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4880059A1929EAA400817919 /* FoodTypePickerView.m */; };
 		4880059F192B33E600817919 /* ACLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4880059E192B33E600817919 /* ACLabel.m */; };
 		4880126E199C5D0000F6778B /* btn_note_delete_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48801268199C5D0000F6778B /* btn_note_delete_selected@2x.png */; };
@@ -1328,8 +1327,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		48000EFB19A1985B00AD04D5 /* fangzhengjiantikatong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = fangzhengjiantikatong.ttf; path = ../../Parenting/fangzhengjiantikatong.ttf; sourceTree = "<group>"; };
-		48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正卡通简体.ttf"; sourceTree = "<group>"; };
 		48000F0119A2076000AD04D5 /* MilestoneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MilestoneHeaderView.xib; sourceTree = "<group>"; };
 		4800B0B518D7F3D20093A6AF /* 日历@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "日历@2x.png"; sourceTree = "<group>"; };
 		4800B0B618D7F3D20093A6AF /* 日历_按@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "日历_按@2x.png"; sourceTree = "<group>"; };
@@ -1999,6 +1996,7 @@
 		486CD6E1199894570026061E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework/Versions/2.2.1.1650.60159/Resources/AMap.bundle; sourceTree = "<group>"; };
 		486CD6E3199894820026061E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework; sourceTree = "<group>"; };
 		486CD6E61998A4970026061E /* pin_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin_red@2x.png"; sourceTree = "<group>"; };
+		4876AE9019C02C33009135E8 /* FZKaTong-M19S.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZKaTong-M19S.ttf"; sourceTree = "<group>"; };
 		488005991929EAA400817919 /* FoodTypePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTypePickerView.h; sourceTree = "<group>"; };
 		4880059A1929EAA400817919 /* FoodTypePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTypePickerView.m; sourceTree = "<group>"; };
 		4880059D192B33E600817919 /* ACLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACLabel.h; path = ACLabel/ACLabel.h; sourceTree = "<group>"; };
@@ -5056,7 +5054,6 @@
 		48866E31199A12E5007B16AA /* Milestone */ = {
 			isa = PBXGroup;
 			children = (
-				48000EFD19A2069D00AD04D5 /* 方正卡通简体.ttf */,
 				48866E06199A12E5007B16AA /* MilestoneController.h */,
 				48866E07199A12E5007B16AA /* MilestoneController.m */,
 				48866E08199A12E5007B16AA /* MilestoneView.h */,
@@ -5196,7 +5193,6 @@
 				48801274199DECE300F6778B /* ShareInfoView.h */,
 				48801275199DECE300F6778B /* ShareInfoView.m */,
 				48801277199DED1700F6778B /* ShareInfoView.xib */,
-				48000EFB19A1985B00AD04D5 /* fangzhengjiantikatong.ttf */,
 				48866E6B199A12E5007B16AA /* events */,
 			);
 			name = Calendar;
@@ -5777,6 +5773,7 @@
 		7215972717453680006FD415 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4876AE9019C02C33009135E8 /* FZKaTong-M19S.ttf */,
 				481FB9CA194FFA69009553ED /* BC_Info.sqlite */,
 				CE23978C176EE37B0096E033 /* Babyinfo.rdb */,
 				7215972817453680006FD415 /* Amoy Baby Care-Info.plist */,
@@ -6587,7 +6584,6 @@
 				4828F50F19A495D700D04926 /* 9.2.1.jpg in Resources */,
 				4828F3E219A495D700D04926 /* 11.4.4.jpg in Resources */,
 				4828F4C319A495D700D04926 /* 4.2.1.jpg in Resources */,
-				48000EFE19A2069D00AD04D5 /* 方正卡通简体.ttf in Resources */,
 				BE004CDF18FE2B7500E56833 /* icon_news@2x.png in Resources */,
 				480EFA2218E5155C00D40903 /* panels_color4@2x.png in Resources */,
 				48866ED7199A12E6007B16AA /* btn_lung_focus.png in Resources */,
@@ -6691,6 +6687,7 @@
 				4828F41019A495D700D04926 /* 14.4.4.jpg in Resources */,
 				481EF6B1197FC1EE00959CB7 /* UMSnsAccountViewController.xib in Resources */,
 				48866EF9199A12E6007B16AA /* mood_quite.png in Resources */,
+				4876AE9119C02C33009135E8 /* FZKaTong-M19S.ttf in Resources */,
 				4828F3EE19A495D700D04926 /* 12.3.2.jpg in Resources */,
 				BE25764518FE51CA0053683A /* horizontal@2x.png in Resources */,
 				4828F4BD19A495D700D04926 /* 3.3.3.jpg in Resources */,
@@ -7128,7 +7125,6 @@
 				4828F4B419A495D700D04926 /* 3.1.1.jpg in Resources */,
 				BE25763618FE51CA0053683A /* title_weight@2x.png in Resources */,
 				484B66FC195D5375006642BA /* pattern2@2x.png in Resources */,
-				48000EFC19A1985B00AD04D5 /* fangzhengjiantikatong.ttf in Resources */,
 				48FEAF7318E917CB002425E2 /* histogram_red@2x.png in Resources */,
 				BE25764118FE51CA0053683A /* slider_focus@2x.png in Resources */,
 				4828F51719A495D700D04926 /* 9.4.3.jpg in Resources */,
