@@ -5428,6 +5428,13 @@
 			path = MBProgressHUD/util;
 			sourceTree = "<group>";
 		};
+		48D41F3F19C6EE80005A8E6B /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "登录";
+			sourceTree = "<group>";
+		};
 		48DCDC111975203900EA7875 /* 吃药 */ = {
 			isa = PBXGroup;
 			children = (
@@ -5801,6 +5808,7 @@
 		72159747174536B8006FD415 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				48D41F3F19C6EE80005A8E6B /* 登录 */,
 				486B40D019B57F0E00749192 /* 启动 */,
 				CE01679C174B059000462363 /* 设置 */,
 				480D464419AD8809005AC58A /* 引导页 */,
