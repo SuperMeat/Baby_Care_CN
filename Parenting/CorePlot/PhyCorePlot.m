@@ -58,8 +58,8 @@
         
         colorUser = [CPTColor colorWithCGColor:[[ACFunction colorWithHexString:@"#f39998"] CGColor]];
         
-        colorP25 = [CPTColor blueColor];
-        colorP75 = [CPTColor blueColor];
+        colorP25 = [CPTColor colorWithCGColor:[[ACFunction colorWithHexString:@"#0fdaf4"] CGColor]];
+        colorP75 = [CPTColor colorWithCGColor:[[ACFunction colorWithHexString:@"#0fdaf4"] CGColor]];
         
         //Step1:配置Graph画布
         [self configureGraph];
@@ -182,7 +182,7 @@
     axisTextStyle.textAlignment = NSTextAlignmentRight;
     axisTextStyle.fontSize = 9.0f;
     CPTMutableLineStyle *tickLineStyle = [CPTMutableLineStyle lineStyle];
-    tickLineStyle.lineColor = [CPTColor blackColor];
+    tickLineStyle.lineColor = [CPTColor greenColor];
     tickLineStyle.lineWidth = 1.0f;
     // 2 - Get axis set
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostedGraph.axisSet;
@@ -232,7 +232,23 @@
     y.labelingPolicy = CPTAxisLabelingPolicyNone;
     y.labelTextStyle = axisTextStyle;
     y.labelOffset = 10.0f;
+    
     y.tickDirection = CPTSignPositive;
+    
+    /* y轴刻度
+     
+    // 大刻度线：线型设置
+    y. majorTickLineStyle = tickLineStyle;
+    // 大刻度线：长度
+    y. majorTickLength = 2 ;
+    // 小刻度线：无
+    y. minorTickLineStyle =tickLineStyle;
+    // 小刻度线：长度
+    y. minorTickLength = 1 ;
+    // 大刻度线间隔单位： 2 个单位
+    y. majorIntervalLength = CPTDecimalFromString ( @"1" );
+     
+    */
     
     //画Y轴label
     CGFloat yDateCount = [yAxis count];

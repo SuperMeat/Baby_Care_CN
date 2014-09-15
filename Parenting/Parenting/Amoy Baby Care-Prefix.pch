@@ -298,6 +298,9 @@
 
 #define ACCOUNTNAME ([[NSUserDefaults standardUserDefaults]stringForKey:@"ACCOUNT_NAME"])
 
+#define kAccountGuest @"0"
+#define kTempBaby @"0"
+
 #define ACCOUNTUID ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ACCOUNT_UID"]intValue])
 
 #define BABYID ([[[NSUserDefaults standardUserDefaults]objectForKey:@"BABYID"]intValue])

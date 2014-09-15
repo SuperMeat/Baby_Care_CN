@@ -70,6 +70,42 @@
     return nil;
 }
 
+-(NSMutableArray*)selectByLast:(long)lastCreateTime Count:(int)count{
+    BOOL res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    if (res) {
+        NSString *sql;
+        if (lastCreateTime != 0) {
+            sql = [NSString stringWithFormat:@"select * from bc_baby_msg where create_Time<%ld order by create_time desc limit 0,%d",lastCreateTime,count];
+        }else{
+            sql = [NSString stringWithFormat:@"select * from bc_baby_msg order by create_time desc limit 0,%d",count];
+        }
+        FMResultSet *resultset=[db executeQuery:sql];
+        NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+        while ([resultset next])
+        {
+            NSMutableArray *singleData = [[NSMutableArray alloc]initWithCapacity:0];
+            [singleData addObject:[NSNumber numberWithInt:[resultset intForColumn:@"msg_type"]]];
+            [singleData addObject:[resultset stringForColumn:@"msg_content"]];
+            [singleData addObject:[resultset stringForColumn:@"pic_url"]];
+            [singleData addObject:@""]; //keyword
+            [singleData addObject:[NSNumber numberWithInt:[resultset intForColumn:@"create_time"]]]; //create_time
+            [singleData addObject:[resultset stringForColumn:@"key"]];
+            [array addObject:singleData];
+        }
+        return array;
+        [db close];
+    }
+    return nil;
+}
+
 -(BOOL)insertBabyMessageNormal:(int)create_time
                     UpdateTime:(int)update_time
                            key:(NSString*)key
@@ -91,6 +127,41 @@
          key,
          msg_content,
          [NSString stringWithFormat:@""]
+         ];
+    
+    if (!res) {
+        NSLog(@"%@",NSHomeDirectory());
+        NSLog(@"插入失败");
+        [db close];
+        return res;
+    }
+    
+    [db close];
+    return res;
+}
+
+-(BOOL)insertBabyMessageTip:(int)create_time
+                    UpdateTime:(int)update_time
+                           key:(NSString*)key
+                          type:(int)msg_type
+                       content:(NSString*)msg_content
+                        picUrl:(NSString*)picUrl{
+    BOOL res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    res=[db executeUpdate:@"insert into bc_baby_msg values(?,?,?,?,?,?)",
+         [NSNumber numberWithLong:create_time],
+         [NSNumber numberWithLong:update_time],
+         [NSNumber numberWithInt:msg_type],
+         key,
+         msg_content,
+         picUrl
          ];
     
     if (!res) {
@@ -264,4 +335,50 @@
     return res;
 }
 
+-(long)getMsgTipLastInsertCreateTime:(NSArray*)timeList{
+    BOOL res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return 0;
+    }
+    
+    long lastCreateTime = 0;
+    
+    for (int i=0; i < [timeList count]; i++) {
+        NSString *sql = [NSString stringWithFormat:@"select * from bc_baby_msg where msg_type=99 and create_time=%ld",[[timeList objectAtIndex:i] longValue]];
+        FMResultSet *resultset=[db executeQuery:sql];
+        if (![resultset next]) {
+            lastCreateTime = [[timeList objectAtIndex:i] longValue];
+            [db close];
+            return lastCreateTime;
+        }
+    }
+    return lastCreateTime;
+}
+
+/** 贴士:获取最后插入数据的服务器create_time **/
+-(long)getMsgTipLastCreateTime{
+    BOOL res; 
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return 0;
+    }
+    
+    long lastCreateTime = 0;
+    FMResultSet *resultset=[db executeQuery:@"select max(update_time) as lastCreateTime from bc_baby_msg where msg_type=99"];
+    if ([resultset next]) {
+        lastCreateTime = [resultset longForColumn:@"lastCreateTime"];
+    }
+    [db close];
+    return lastCreateTime;
+}
+ 
 @end

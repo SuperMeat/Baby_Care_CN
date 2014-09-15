@@ -57,6 +57,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     //复制db到document才
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"ISEXISIT_BC_INFO"])
     {
+        //BC_INFO表
         NSString *document  = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         NSString *newFile = [document stringByAppendingPathComponent:@"BC_Info.sqlite"];
         NSString *oldFile = [[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
@@ -65,7 +66,17 @@ void UncaughtExceptionHandler(NSException *exception) {
         if ([fileManager copyItemAtPath:oldFile toPath:newFile error:&error]) {
              [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"ISEXISIT_BC_INFO"];
         }
-    } 
+        
+        /*
+         *  新装APP由于未初始化数据库会导致数据库失败
+         *  临时解决办法 - cwb
+         */
+        [[NSUserDefaults standardUserDefaults] setObject:kAccountGuest forKey:@"ACCOUNT_UID"];
+        [[NSUserDefaults standardUserDefaults] setObject:kTempBaby forKey:@"BABYID"];
+        
+        [BabyDataDB createNewBabyInfo:ACCOUNTUID BabyId:BABYID Nickname:@"" Birthday:nil Sex:nil HeadPhoto:@"" RelationShip:@"" RelationShipNickName:@"" Permission:nil CreateTime:nil UpdateTime:nil];
+        
+    }
     [self tap];
     
     [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn3.png"] stretchableImageWithLeftCapWidth:3 topCapHeight:3] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -198,12 +209,13 @@ void UncaughtExceptionHandler(NSException *exception) {
         self.window.rootViewController = guideViewController;
         [[NSUserDefaults standardUserDefaults] setObject:GUIDE_V forKey:@"GUIDE_V"];
     }
-    //  未登录账号则跳转
+    /*  未登录账号则跳转
+     *  登陆移到首页时处理 - 20140914 by cwb
     else if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil){
         UINavigationController *loginNavigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         loginViewController.mainViewController = myTabController;
         self.window.rootViewController = loginNavigationController;
-    }
+    }*/
     else{
         self.window.rootViewController  = myTabController;
     }

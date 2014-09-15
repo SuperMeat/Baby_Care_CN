@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InitBabyInfoViewController">
             <connections>
+                <outlet property="_TopView" destination="tDX-2i-7kW" id="iBA-Qe-elo"/>
                 <outlet property="_buttonFemale" destination="5mv-Ot-KeX" id="mZI-GU-Nq5"/>
                 <outlet property="_buttonMale" destination="ylD-Wp-KrM" id="wWE-ML-Ne5"/>
                 <outlet property="_imageViewPic" destination="YFd-ZI-zp7" id="CoD-3W-LW8"/>
@@ -25,16 +26,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="tDX-2i-7kW">
+                <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="top" id="tDX-2i-7kW">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top.png" id="arH-al-QnJ">
-                            <rect key="frame" x="0.0" y="-22" width="320" height="215"/>
+                            <rect key="frame" x="0.0" y="-20" width="320" height="210"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="114.png" id="YFd-ZI-zp7">
-                            <rect key="frame" x="103" y="34" width="114" height="114"/>
+                            <rect key="frame" x="102" y="33" width="116" height="116"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xtn-Uh-Iiy">

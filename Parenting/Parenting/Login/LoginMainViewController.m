@@ -28,6 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.hidesBottomBarWhenPushed=YES;
     }
     return self;
 }
@@ -57,7 +58,8 @@
     [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
     backbutton.frame=CGRectMake(0, 0, 50, 41);
     backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
-    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+//    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    [backbutton addTarget:self action:@selector(doGoBack) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
@@ -211,7 +213,7 @@
                      //数据库保存Baby信息
                      [BabyDataDB createNewBabyInfo:ACCOUNTUID BabyId:BABYID Nickname:@"" Birthday:nil Sex:nil HeadPhoto:@"" RelationShip:@"" RelationShipNickName:@"" Permission:nil CreateTime:[resultBody objectForKey:@"create_time"] UpdateTime:nil]; 
                      _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-                     [self presentViewController:_mainViewController animated:YES completion:^{}];
+                     [self.navigationController popToViewController:_mainViewController animated:NO];
                      [hud hide:YES afterDelay:1];
                  }
                  else{

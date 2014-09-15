@@ -283,8 +283,9 @@
                      [[NSUserDefaults standardUserDefaults]setObject:[resultBody objectForKey:@"babyId"] forKey:@"BABYID"];
                      //数据库保存Baby信息
                      [BabyDataDB createNewBabyInfo:ACCOUNTUID BabyId:BABYID Nickname:@"" Birthday:nil Sex:nil HeadPhoto:@"" RelationShip:@"" RelationShipNickName:@"" Permission:nil CreateTime:[resultBody objectForKey:@"create_time"] UpdateTime:nil];
-                     _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-                     [self presentViewController:_mainViewController animated:YES completion:^{}]; 
+                     
+                     //TODO:
+                     
                      [hud hide:YES afterDelay:0.5];
                  }
                  else{

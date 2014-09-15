@@ -20,7 +20,11 @@
     UIDatePicker *_datepicker;
     UIActionSheet *_action;
     
+    __weak IBOutlet UIView *_TopView;
     __weak IBOutlet UIScrollView *_mainScrollView;
+    
+    
+    
     __weak IBOutlet UIImageView *_imageViewPic;
     __weak IBOutlet UITextField *_textFiledName;
     __weak IBOutlet UITextField *_textFiledBirth;
@@ -29,7 +33,7 @@
     __weak IBOutlet UITextField *_textFiledHS;
     __weak IBOutlet UITextField *_textFiledSex;
     __weak IBOutlet UIButton *_buttonMale;
-    __weak IBOutlet UIButton *_buttonFemale;
+    __weak IBOutlet UIButton *_buttonFemale; 
     
     UITextField* _tempTextField;
     double _oldYOffset;

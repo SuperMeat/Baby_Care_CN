@@ -14,6 +14,7 @@
 
 +(NSArray*)selectAllCategoryList;
 +(NSArray*)selectCategoryList:(int)parent_id;
++(NSArray*)selectCategoryById:(int)category_id;
 
 +(BOOL)checkUpdateState:(int)categoryId
              UpdateTime:(int)updateTime;

@@ -74,8 +74,11 @@
 
 #pragma 注册成功跳转到主页
 -(void)doGoMain{
+//    _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [self presentViewController:_mainViewController animated:YES completion:^{}];
+    
     _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:_mainViewController animated:YES completion:^{}];
+    [self.navigationController popToViewController:_mainViewController animated:NO];
 }
 
 -(void)doRegister{

@@ -280,8 +280,8 @@ ViewController:(UIViewController*) viewController{
       SyncFinished:(SyncFinishBlockP) syncFinishBlockP
     ViewController:(UIViewController*) viewController{
     
-    NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:UserID],@"userId",[NSNumber numberWithInt:babyMonth],@"babyMonths",[NSNumber numberWithLong:lastCreateTime],@"lastCreateTime",nil];
-    hud = [MBProgressHUD showHUDAddedTo:viewController.view animated:YES];
+    NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:UserID],@"userId",[NSNumber numberWithInt:babyMonth],@"babyMonths",[NSNumber numberWithLong:lastCreateTime],@"lastCreateTime",nil]; 
+//    hud = [MBProgressHUD showHUDAddedTo:viewController.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.alpha = 0.5;
     //提示消息
@@ -294,22 +294,22 @@ ViewController:(UIViewController*) viewController{
                                        didFinishBlock:^(NSDictionary *result)
      {
          //请求成功处理
-//         NSMutableArray *categoryArr = [[result objectForKey:@"body"] objectForKey:@"Bc_Tips"];
-         
-         NSLog(@"%@",[result objectForKey:@"msg"]);
+         NSMutableArray *categoryArr = [[result objectForKey:@"body"] objectForKey:@"Bc_Tips"];
          
          if ([[result objectForKey:@"code"]intValue] == 1) {
              
+             [hud hide:YES afterDelay:1.0];
+             if (syncFinishBlockP) {
+                 syncFinishBlockP(categoryArr);
+             }
          }
          else{
              hud.labelText = @"无可更新数据";
              [hud hide:YES afterDelay:1.5];
+             if (syncFinishBlockP) {
+                 syncFinishBlockP(nil);
+             }
          }
-         //请求失败处理
-         /*
-          if (syncFinishBlockP) {
-             syncFinishBlockP(categoryArr);
-         }*/
      }
                                          didFailBlock:^(NSString *error)
      {
