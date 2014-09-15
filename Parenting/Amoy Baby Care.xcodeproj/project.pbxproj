@@ -1259,6 +1259,12 @@
 		BEE539741945B022000703E6 /* TipListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE539721945B022000703E6 /* TipListViewController.xib */; };
 		BEE539781945B079000703E6 /* TipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE539761945B079000703E6 /* TipTableViewCell.m */; };
 		BEE539791945B079000703E6 /* TipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE539771945B079000703E6 /* TipTableViewCell.xib */; };
+		BEEF30C819C6F05F006F0367 /* btn_login_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C219C6F05F006F0367 /* btn_login_focus@2x.png */; };
+		BEEF30C919C6F05F006F0367 /* btn_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C319C6F05F006F0367 /* btn_login@2x.png */; };
+		BEEF30CA19C6F05F006F0367 /* btn_sina_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C419C6F05F006F0367 /* btn_sina_focus@2x.png */; };
+		BEEF30CB19C6F05F006F0367 /* btn_sina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C519C6F05F006F0367 /* btn_sina@2x.png */; };
+		BEEF30CC19C6F05F006F0367 /* btn_ten_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C619C6F05F006F0367 /* btn_ten_focus@2x.png */; };
+		BEEF30CD19C6F05F006F0367 /* btn_ten@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C719C6F05F006F0367 /* btn_ten@2x.png */; };
 		BEF3434C1949917E0064E2C0 /* icon_share.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF3434A1949917E0064E2C0 /* icon_share.png */; };
 		CE0167BB174B059000462363 /* input1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167A5174B059000462363 /* input1.png */; };
 		CE0167BC174B059000462363 /* input1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167A6174B059000462363 /* input1@2x.png */; };
@@ -2908,6 +2914,12 @@
 		BEE539751945B079000703E6 /* TipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipTableViewCell.h; sourceTree = "<group>"; };
 		BEE539761945B079000703E6 /* TipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipTableViewCell.m; sourceTree = "<group>"; };
 		BEE539771945B079000703E6 /* TipTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipTableViewCell.xib; sourceTree = "<group>"; };
+		BEEF30C219C6F05F006F0367 /* btn_login_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_login_focus@2x.png"; sourceTree = "<group>"; };
+		BEEF30C319C6F05F006F0367 /* btn_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_login@2x.png"; sourceTree = "<group>"; };
+		BEEF30C419C6F05F006F0367 /* btn_sina_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_sina_focus@2x.png"; sourceTree = "<group>"; };
+		BEEF30C519C6F05F006F0367 /* btn_sina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_sina@2x.png"; sourceTree = "<group>"; };
+		BEEF30C619C6F05F006F0367 /* btn_ten_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_ten_focus@2x.png"; sourceTree = "<group>"; };
+		BEEF30C719C6F05F006F0367 /* btn_ten@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_ten@2x.png"; sourceTree = "<group>"; };
 		BEF3434A1949917E0064E2C0 /* icon_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_share.png; path = "../基本框架/icon_share.png"; sourceTree = "<group>"; };
 		BEF3434B1949917E0064E2C0 /* icon_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_share@2x.png"; path = "../基本框架/icon_share@2x.png"; sourceTree = "<group>"; };
 		CE0167A5174B059000462363 /* input1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = input1.png; sourceTree = "<group>"; };
@@ -5905,6 +5917,12 @@
 		BE004CCE18FE2B7500E56833 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				BEEF30C219C6F05F006F0367 /* btn_login_focus@2x.png */,
+				BEEF30C319C6F05F006F0367 /* btn_login@2x.png */,
+				BEEF30C419C6F05F006F0367 /* btn_sina_focus@2x.png */,
+				BEEF30C519C6F05F006F0367 /* btn_sina@2x.png */,
+				BEEF30C619C6F05F006F0367 /* btn_ten_focus@2x.png */,
+				BEEF30C719C6F05F006F0367 /* btn_ten@2x.png */,
 				BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */,
 				BEE3CEF219B07D9A00ABC528 /* icon_alerm_milstone@2x.png */,
 				BEE3CEF319B07D9A00ABC528 /* icon_alerm_test@2x.png */,
@@ -6477,6 +6495,7 @@
 				4828F46519A495D700D04926 /* 19.4.5.jpg in Resources */,
 				4828F3D519A495D700D04926 /* 10.4.1.jpg in Resources */,
 				4828F4F919A495D700D04926 /* 7.4.2.jpg in Resources */,
+				BEEF30C819C6F05F006F0367 /* btn_login_focus@2x.png in Resources */,
 				48866EC9199A12E6007B16AA /* bg_addContent_2.png in Resources */,
 				48866F2E199A12E6007B16AA /* cell_bg_4.png in Resources */,
 				480D467219AF12CC005AC58A /* 启动界面640-960.png in Resources */,
@@ -6689,6 +6708,7 @@
 				48866EF9199A12E6007B16AA /* mood_quite.png in Resources */,
 				4876AE9119C02C33009135E8 /* FZKaTong-M19S.ttf in Resources */,
 				4828F3EE19A495D700D04926 /* 12.3.2.jpg in Resources */,
+				BEEF30CB19C6F05F006F0367 /* btn_sina@2x.png in Resources */,
 				BE25764518FE51CA0053683A /* horizontal@2x.png in Resources */,
 				4828F4BD19A495D700D04926 /* 3.3.3.jpg in Resources */,
 				4828F4F619A495D700D04926 /* 7.3.1.jpg in Resources */,
@@ -6779,6 +6799,7 @@
 				48866EC5199A12E6007B16AA /* btn_hepatitis.png in Resources */,
 				4828F48B19A495D700D04926 /* 21.4.2.jpg in Resources */,
 				BE25763F18FE51CA0053683A /* plunger_grey@2x.png in Resources */,
+				BEEF30CD19C6F05F006F0367 /* btn_ten@2x.png in Resources */,
 				4828F48419A495D700D04926 /* 21.1.5.jpg in Resources */,
 				BE25763518FE51CA0053683A /* title_temperature@2x.png in Resources */,
 				48866EC7199A12E6007B16AA /* btn_dou.png in Resources */,
@@ -6855,6 +6876,7 @@
 				4828F3CE19A495D700D04926 /* 10.1.4.jpg in Resources */,
 				BE004CE218FE2B7500E56833 /* input_word@2x.png in Resources */,
 				4828F4B219A495D700D04926 /* 24.4.3.jpg in Resources */,
+				BEEF30CA19C6F05F006F0367 /* btn_sina_focus@2x.png in Resources */,
 				4828F41619A495D700D04926 /* 15.2.1.jpg in Resources */,
 				4828F4E319A495D700D04926 /* 6.2.2.jpg in Resources */,
 				4828F51119A495D700D04926 /* 9.2.3.jpg in Resources */,
@@ -6862,6 +6884,7 @@
 				4828F48919A495D700D04926 /* 21.3.3.jpg in Resources */,
 				48866EB5199A12E6007B16AA /* icon_language_selected.png in Resources */,
 				48866FDD199A12E6007B16AA /* TrainData.plist in Resources */,
+				BEEF30CC19C6F05F006F0367 /* btn_ten_focus@2x.png in Resources */,
 				BE25763418FE51CA0053683A /* title_circumference@2x.png in Resources */,
 				48152E1018486C66009A4900 /* blueArrow@2x.png in Resources */,
 				4828F3E319A495D700D04926 /* 12.1.1.jpg in Resources */,
@@ -6969,6 +6992,7 @@
 				480EFA1318E5155C00D40903 /* icon_wet@2x.png in Resources */,
 				48866F1D199A12E6007B16AA /* item_right.png in Resources */,
 				4828F43419A495D700D04926 /* 16.4.2.jpg in Resources */,
+				BEEF30C919C6F05F006F0367 /* btn_login@2x.png in Resources */,
 				48EC1DCC1860439100965254 /* LocalNotifyCell.xib in Resources */,
 				4880126E199C5D0000F6778B /* btn_note_delete_selected@2x.png in Resources */,
 				48866FDB199A12E6007B16AA /* MilestoneData.plist in Resources */,
