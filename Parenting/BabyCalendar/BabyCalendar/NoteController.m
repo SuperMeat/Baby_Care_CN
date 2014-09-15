@@ -33,6 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [MobClick beginLogPageView:@"日记页面"];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)ShareBtnByImage

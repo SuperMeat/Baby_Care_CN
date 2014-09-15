@@ -323,7 +323,7 @@
     NSInteger unitFlags = NSMonthCalendarUnit;
     comps=[calendar components:unitFlags fromDate:time];
     return [comps month];
-}
+} 
 
 + (int)getday:(NSDate*) date{
     NSCalendar *calendar = [NSCalendar currentCalendar];

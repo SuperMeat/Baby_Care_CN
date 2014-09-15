@@ -1153,7 +1153,6 @@
 		BE0677861998605200794A28 /* TempCorePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0677851998605200794A28 /* TempCorePlot.m */; };
 		BE06778A19986D7400794A28 /* TempSaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE06778919986D7400794A28 /* TempSaveView.m */; };
 		BE14CC3319AB3AD000274DC7 /* PhotoAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE14CC3119AB3AD000274DC7 /* PhotoAreaView.m */; };
-		BE14CC3419AB3AD000274DC7 /* PhotoAreaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE14CC3219AB3AD000274DC7 /* PhotoAreaView.xib */; };
 		BE14CC3819AB41F300274DC7 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE14CC3619AB41F300274DC7 /* HomeViewController.m */; };
 		BE14CC3919AB41F300274DC7 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE14CC3719AB41F300274DC7 /* HomeViewController.xib */; };
 		BE14CC3C19AB537900274DC7 /* InitTimeLineData.m in Sources */ = {isa = PBXBuildFile; fileRef = BE14CC3B19AB537900274DC7 /* InitTimeLineData.m */; };
@@ -1271,8 +1270,6 @@
 		CE0167C2174B059000462363 /* input_single@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167AC174B059000462363 /* input_single@2x.png */; };
 		CE0167C3174B059000462363 /* pic_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167AD174B059000462363 /* pic_default.png */; };
 		CE0167C4174B059000462363 /* pic_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167AE174B059000462363 /* pic_default@2x.png */; };
-		CE0167C5174B059000462363 /* radio.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167AF174B059000462363 /* radio.png */; };
-		CE0167C6174B059000462363 /* radio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167B0174B059000462363 /* radio@2x.png */; };
 		CE0167C7174B059000462363 /* radio_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167B1174B059000462363 /* radio_focus.png */; };
 		CE0167C8174B059000462363 /* radio_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167B2174B059000462363 /* radio_focus@2x.png */; };
 		CE0167D4174B217C00462363 /* CopyrightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0167D2174B217C00462363 /* CopyrightViewController.m */; };
@@ -2753,7 +2750,6 @@
 		BE06778919986D7400794A28 /* TempSaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempSaveView.m; sourceTree = "<group>"; };
 		BE14CC3019AB3AD000274DC7 /* PhotoAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAreaView.h; sourceTree = "<group>"; };
 		BE14CC3119AB3AD000274DC7 /* PhotoAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAreaView.m; sourceTree = "<group>"; };
-		BE14CC3219AB3AD000274DC7 /* PhotoAreaView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAreaView.xib; sourceTree = "<group>"; };
 		BE14CC3519AB41F300274DC7 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		BE14CC3619AB41F300274DC7 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		BE14CC3719AB41F300274DC7 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -2924,8 +2920,6 @@
 		CE0167AC174B059000462363 /* input_single@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_single@2x.png"; sourceTree = "<group>"; };
 		CE0167AD174B059000462363 /* pic_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_default.png; sourceTree = "<group>"; };
 		CE0167AE174B059000462363 /* pic_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic_default@2x.png"; sourceTree = "<group>"; };
-		CE0167AF174B059000462363 /* radio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio.png; sourceTree = "<group>"; };
-		CE0167B0174B059000462363 /* radio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio@2x.png"; sourceTree = "<group>"; };
 		CE0167B1174B059000462363 /* radio_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_focus.png; sourceTree = "<group>"; };
 		CE0167B2174B059000462363 /* radio_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_focus@2x.png"; sourceTree = "<group>"; };
 		CE0167D1174B217C00462363 /* CopyrightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyrightViewController.h; sourceTree = "<group>"; };
@@ -5851,7 +5845,6 @@
 				BE14CC3719AB41F300274DC7 /* HomeViewController.xib */,
 				BE14CC3019AB3AD000274DC7 /* PhotoAreaView.h */,
 				BE14CC3119AB3AD000274DC7 /* PhotoAreaView.m */,
-				BE14CC3219AB3AD000274DC7 /* PhotoAreaView.xib */,
 				BE14CC3A19AB537900274DC7 /* InitTimeLineData.h */,
 				BE14CC3B19AB537900274DC7 /* InitTimeLineData.m */,
 				BE654DCC19AECBBE002DDC5D /* InitBabyInfoViewController.h */,
@@ -6151,8 +6144,6 @@
 				CE0167AC174B059000462363 /* input_single@2x.png */,
 				CE0167AD174B059000462363 /* pic_default.png */,
 				CE0167AE174B059000462363 /* pic_default@2x.png */,
-				CE0167AF174B059000462363 /* radio.png */,
-				CE0167B0174B059000462363 /* radio@2x.png */,
 				CE0167B1174B059000462363 /* radio_focus.png */,
 				CE0167B2174B059000462363 /* radio_focus@2x.png */,
 			);
@@ -6497,9 +6488,7 @@
 				CE0167C4174B059000462363 /* pic_default@2x.png in Resources */,
 				48866EC0199A12E6007B16AA /* btn_cannot_selected.png in Resources */,
 				4828F46919A495D700D04926 /* 2.2.1.jpg in Resources */,
-				CE0167C5174B059000462363 /* radio.png in Resources */,
 				48F91AC018FB8DF10038DC67 /* label_indoor@2x.png in Resources */,
-				CE0167C6174B059000462363 /* radio@2x.png in Resources */,
 				48F91AC518FB8DF10038DC67 /* label_outdoor_focus@2x.png in Resources */,
 				48866F6D199A12E6007B16AA /* CalendarCell.xib in Resources */,
 				481D0D50195BC2680025281A /* 挂饰@2x.png in Resources */,
@@ -7185,7 +7174,6 @@
 				BE5B383C19A1FB5F00246B6A /* MilestoneContentView.xib in Resources */,
 				4855BC1D182B237800F02A3E /* umFeedback.bundle in Resources */,
 				BE1EB970199DEC0B00C3ED0B /* PHYTableViewCell.xib in Resources */,
-				BE14CC3419AB3AD000274DC7 /* PhotoAreaView.xib in Resources */,
 				48EC1DDE1862F6E400965254 /* nofity_myadvise_day_up@2x.png in Resources */,
 				48F91AC618FB8DF10038DC67 /* environment_title.png in Resources */,
 				4828F41219A495D700D04926 /* 15.1.2.jpg in Resources */,
@@ -7852,8 +7840,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
+				PROVISIONING_PROFILE = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = NO;
@@ -7909,8 +7897,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
+				PROVISIONING_PROFILE = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;

@@ -18,4 +18,5 @@
 
 @property (strong, nonatomic) UITableView *scorllView;
 @property (strong, nonatomic) UIImageView *physiologyImageView;
+ 
 @end

@@ -9,6 +9,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self initView];
     }
     return self;
 }
@@ -18,15 +19,48 @@
 }
 
 -(void)initView{
+    self.backgroundColor = [UIColor colorWithRed:104.0f/255.0f green:191.0f/255.0f blue:204.0f/255.0f alpha:1.0f];
+    
+    _imageViewBG = [[UIImageView alloc]initWithFrame:CGRectMake(0, -15, self.bounds.size.width, 215)];
+    _imageViewBG.image = [UIImage imageNamed:@"top.png"];
+    [self addSubview:_imageViewBG];
+    
+    _imageViewHeadPic = [[UIImageView alloc] initWithFrame:CGRectMake(160-57, 41, 114, 114)];
+    _imageViewHeadPic.image = [UIImage imageNamed:@"114.png"];
     _imageViewHeadPic.layer.masksToBounds = YES;
     _imageViewHeadPic.layer.cornerRadius = 57.0;
     _imageViewHeadPic.userInteractionEnabled=YES;
     _imageViewHeadPic.clipsToBounds=YES;
+    [self addSubview:_imageViewHeadPic];
     
     UITapGestureRecognizer *tapgesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ActionSheetShow)];
     [_imageViewHeadPic addGestureRecognizer:tapgesture];
     
     imagePicker=[[UIImagePickerController alloc]init];
+    
+    _imageViewDayBG = [[UIImageView alloc]initWithFrame:CGRectMake(88, 32, 40, 40)];
+    _imageViewDayBG.image = [UIImage imageNamed:@"bg_days.png"];
+    [self addSubview:_imageViewDayBG];
+    
+    _labelDays = [[UILabel alloc] initWithFrame:CGRectMake(89, 40, 38, 24)];
+    _labelDays.font = [UIFont fontWithName:@"Arial-BoldMT" size:10];
+    _labelDays.textColor = [UIColor whiteColor];
+    _labelDays.textAlignment = NSTextAlignmentCenter;
+    _labelDays.lineBreakMode = NSLineBreakByWordWrapping;
+    _labelDays.text = @"年龄";
+    [self addSubview:_labelDays];
+    
+    _labelBabyName = [[UILabel alloc] initWithFrame:CGRectMake(60, 159, 200, 24)];
+    _labelBabyName.font = [UIFont fontWithName:@"Arial-BoldMT" size:16];
+    _labelBabyName.textColor = [UIColor whiteColor];
+    _labelBabyName.textAlignment = NSTextAlignmentCenter;
+    _labelBabyName.text = @"宝宝昵称";
+    [self addSubview:_labelBabyName];
+    
+    _btnTips = [[UIButton alloc] initWithFrame:CGRectMake(270, 10, 51, 51)];
+    [_btnTips setBackgroundImage:[UIImage imageNamed:@"btn_sum2.png"] forState:UIControlStateNormal];
+    [_btnTips addTarget:self action:@selector(goTips:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_btnTips];
 }
 
 -(void)initData{

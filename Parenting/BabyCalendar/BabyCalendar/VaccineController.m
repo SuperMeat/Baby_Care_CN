@@ -27,6 +27,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [MobClick beginLogPageView:@"疫苗页面"];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated

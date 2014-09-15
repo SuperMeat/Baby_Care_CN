@@ -40,5 +40,10 @@ LastCreateTime:(long) lastCreateTime
 ViewController:(UIViewController*) viewController;
 
 -(void)SyncBasicContent;
-
+-(void)getTipsHome:(int) UserID
+    LastCreateTime:(long) lastCreateTime
+        BabyMonths:(int) babyMonth
+               HUD:(MBProgressHUD*) hud
+      SyncFinished:(SyncFinishBlockP) syncFinishBlockP
+    ViewController:(UIViewController*) viewController;
 @end

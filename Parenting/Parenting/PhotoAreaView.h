@@ -11,13 +11,16 @@
 @interface PhotoAreaView : UIView<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>{
     UIImagePickerController *imagePicker;
     UIActionSheet *action;
+    
+    UIImageView *_imageViewHeadPic;
+    UIImageView *_imageViewBG;
+    UIImageView *_imageViewDayBG;
+    UILabel *_labelBabyName;
+    UILabel *_labelDays;
+    UIButton *_btnTips;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewHeadPic;
-@property (weak, nonatomic) IBOutlet UILabel *labelBabyName;
-@property (weak, nonatomic) IBOutlet UILabel *labelDays;
 
--(void)initData; 
-- (IBAction)goTips:(id)sender;
+-(void)initData;  
 
 @end

@@ -7,13 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BabyMessageDataDB.h"
+#import "HomeViewController.h"
 
 @interface InitTimeLineData : NSObject{
     BabyMessageDataDB *baby;
+    MBProgressHUD *_hud;
 }
 
-+(id)initTimeLineData;
-+(NSArray*)getTimeLineData;//获取时间轴数据
+@property (weak, nonatomic) UIViewController *targetViewController;
 
++(id)initTimeLineData;
+-(void)getTimeLineData;//获取时间轴数据
+ 
 -(void)checkSysMsg;
+-(void)checkTips:(long)date;
 @end

@@ -43,6 +43,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = NO;
     [MobClick beginLogPageView:[NSString stringWithFormat:@"tips_%@", _url]];
     
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -69,6 +70,8 @@
     [titleView addSubview:titleText];
     
     self.navigationItem.titleView = titleView;
+    
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated

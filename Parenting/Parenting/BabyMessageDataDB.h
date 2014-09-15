@@ -25,12 +25,19 @@
  */
 
 -(NSMutableArray*)selectAll;
+-(NSMutableArray*)selectByLast:(long)lastCreateTime Count:(int)count;
 
 -(BOOL)insertBabyMessageNormal:(int)create_time
                     UpdateTime:(int)update_time
                            key:(NSString*)key
                           type:(int)msg_type
                        content:(NSString*)msg_content;
+-(BOOL)insertBabyMessageTip:(int)create_time
+                 UpdateTime:(int)update_time
+                        key:(NSString*)key
+                       type:(int)msg_type
+                    content:(NSString*)msg_content
+                     picUrl:(NSString*)picUrl;
 
 -(BOOL)deleteBabyMessage:(NSString*) key;
 
@@ -42,5 +49,9 @@
 -(int)isPhyExistTodayWithType:(int)type;
 /** 系统更新消息相关 **/
 -(BOOL)isSysUpdateMsgExist:(NSString*)version;
+/** 贴士消息相关 **/
+-(long)getMsgTipLastCreateTime;
+/** 获取应插入的最后一条贴士消息时间 **/
+-(long)getMsgTipLastInsertCreateTime:(NSArray*)timeList;
 @end
 

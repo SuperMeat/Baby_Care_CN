@@ -20,6 +20,7 @@
  */
 
 #import "InitTimeLineData.h"
+#import "SyncController.h"
 #import "BaseSQL.h"
 
 @implementation InitTimeLineData
@@ -34,31 +35,26 @@
     return _sharedObject;
 }
 
-+(NSArray*)getTimeLineData{
-    InitTimeLineData *initDs = [InitTimeLineData initTimeLineData];
-    
+-(void)getTimeLineData{
     /** 检测用户自定义提醒:1 **/
-    [initDs checkUserRemind];
+    [self checkUserRemind];
     /** 检测疫苗提醒:10 **/
-    [initDs checkBabyVaccine];
+    [self checkBabyVaccine];
     /** 检测评测提醒:11 **/
-    [initDs checkBabyEvaluating];
+    [self checkBabyEvaluating];
     /** 检测日志提醒:12 **/
-    [initDs checkBabyLog];
+    [self checkBabyLog];
     /** 检测身高记录提醒:20 **/
-    [initDs checkBabyHeight];
+    [self checkBabyHeight];
     /** 检测体重记录提醒:21 **/
-    [initDs checkBabyWeight];
+    [self checkBabyWeight];
     /** 检测头围记录提醒:22 **/
-    [initDs checkBabyHS];
+    [self checkBabyHS];
     /** 检测系统消息:0 **/
-    [initDs checkSysMsg];
+    [self checkSysMsg];
     
     /** 检测贴士推送:99 **/
-    [initDs checkTips];
-    
-    NSArray *res = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectAll]];
-    return res;
+    [self checkTips:0];
 }
 
 /** 检测系统消息:0 **/
@@ -171,9 +167,174 @@
 -(void)checkBabyHS{
     return;
 }
+
+#pragma 同步贴士
 /** 检测贴士推送:99 **/
--(void)checkTips{
+-(void)checkTips:(long)date{
+    /*
+     *  获取5条数据，判断之前4天的贴士插入情况。
+     *  如果在4天内的每12点、18点整不存在数据，则插入贴士
+     */
+    int msgType = 99;
+    long lastCreateTime = [[BabyMessageDataDB babyMessageDB] getMsgTipLastCreateTime];
+    int months = [self getbabyMonths];
     
+    [[SyncController syncController] getTipsHome:ACCOUNTUID
+                                  LastCreateTime:lastCreateTime
+                                      BabyMonths:months
+                                             HUD:_hud
+                                    SyncFinished:^(NSArray *retArr)
+    {
+        //取出获取到数据的ids
+        int iArrCount = [retArr count];
+        if (iArrCount !=0){
+            
+            NSArray *insertTimeList = [self getLastMsgTipInsertTime:date];
+            
+            for (int i = 0; i < iArrCount; i++) {
+                NSDictionary *dict = [retArr objectAtIndex:i];
+                NSString *msgContent = [dict objectForKey:@"title"];
+                //key格式:categoryId|tipId
+                NSString *key = [NSString stringWithFormat:@"%d,%d",[[dict objectForKey:@"category_id"] intValue],[[dict objectForKey:@"tipId"] intValue]];
+                NSString *picUrl = [dict objectForKey:@"picUrl"];
+                
+                long insertCreateTime = [[BabyMessageDataDB babyMessageDB] getMsgTipLastInsertCreateTime:insertTimeList];
+                
+                if (insertCreateTime != 0) {
+                    [[BabyMessageDataDB babyMessageDB] insertBabyMessageTip:insertCreateTime UpdateTime:[[dict objectForKey:@"update_time"] longValue] key:key type:msgType content:msgContent picUrl:picUrl];
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        HomeViewController *homeViewController = (HomeViewController*)_targetViewController;
+        [homeViewController initTimeLineData];
+    }
+                                  ViewController:_targetViewController];
+}
+
+#pragma 获取贴士的后5个消息的插入时间点-返回0表示不需插入
+-(NSArray*)getLastMsgTipInsertTime:(long)timeNow
+{
+    if (timeNow == 0) {
+        timeNow = [ACDate getTimeStampFromDate:[NSDate date]];
+    }
+    
+    NSDate *time=[ACDate getDateFromTimeStamp:timeNow];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit  | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    comps=[calendar components:unitFlags fromDate:time];
+    
+    long time12 = 12*3600;
+    long time18 = 18*3600;
+    long now = [comps hour]*3600 + [comps minute]*60 + [comps second];
+    
+    NSString *strdate12 = [NSString stringWithFormat:@"%d-%d-%d 12:00:00",[comps year],[comps month],[comps day]];
+    NSDateFormatter *formater=[[NSDateFormatter alloc]init];
+    [formater setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    long date12 = [ACDate getTimeStampFromDate:[formater dateFromString:strdate12]];
+    
+    NSMutableArray *timeArr = [[NSMutableArray alloc] initWithCapacity:5];
+    long date=0;
+    if (now < time12) {
+        //-18小时
+        date = date - 18*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-6
+        date = date - 6*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-18
+        date = date - 18*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-6
+        date = date - 6*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-18
+        date = date - 18*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+    }
+    else if (time12 <= now < time18){
+        //12点
+        date = date12;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-18
+        date = date - 18*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-6
+        date = date - 6*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-18
+        date = date - 18*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-6
+        date = date - 6*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+    }
+    else if (time18 <= now){
+        //18点
+        date = date12;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-6
+        date = date - 6*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-18
+        date = date - 18*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-6
+        date = date - 6*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+        //-18
+        date = date - 18*3600;
+        [timeArr addObject:[NSNumber numberWithLong:date]];
+    }
+    
+    return timeArr;
+}
+
+- (int)getbabyMonths
+{
+    long birth = 0;
+    NSDictionary *dict = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
+    if ([[dict objectForKey:@"birth"] intValue] != 0){
+        birth = [[dict objectForKey:@"birth"] longValue];
+    }
+    //时间戳转date
+    NSDate *birthDate = [ACDate getDateFromTimeStamp:birth];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat: @"yyyy-MM-dd"];
+    NSString *age = [dateFormatter stringFromDate:birthDate];
+    
+    NSDateFormatter *fomatter=[[NSDateFormatter alloc]init];
+    [fomatter setLocale:[NSLocale currentLocale]];
+    [fomatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date=[fomatter dateFromString:age];
+    //NSLog(@"getbabyage: %@",date);
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
+    if ([comps year] == 0 && [comps month] == 0) {
+        return 1;
+    }
+    else if ([comps year] ==0 && [comps month] != 0)
+    {
+        return [comps month] + 1;
+    }
+    else if ([comps year] !=0 && [comps month] == 0)
+    {
+        return [comps year] * 12;
+    }
+    else if ([comps year] !=0 && [comps month] != 0)
+    {
+        return [comps year] * 12 + [comps month] + 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 @end

@@ -34,6 +34,7 @@
 #endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
         //self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    
     return self;
 }
 
@@ -57,6 +58,19 @@
 }
 
 -(void)initView{
+    
+    #define DEVICE_IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height == 568)
+    
+    if (DEVICE_IS_IPHONE5) {
+        _TopView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 100);
+        
+    }else{
+        _TopView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 170);
+    }
+    
+    
+    _mainScrollView.frame = CGRectMake(0, _TopView.height,  [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - _TopView.height);
+    
     _imageViewPic.layer.masksToBounds = YES;
     _imageViewPic.layer.cornerRadius = 57.0;
     _imageViewPic.userInteractionEnabled=YES;
@@ -66,7 +80,7 @@
     [_imageViewPic addGestureRecognizer:tapgesture];
     _imagePicker=[[UIImagePickerController alloc]init];
     
-    [_mainScrollView setContentSize:CGSizeMake(320, 420)];
+    [_mainScrollView setContentSize:CGSizeMake(320, 500)];
     
     _textFiledName.leftViewMode=UITextFieldViewModeAlways;
     _textFiledBirth.leftViewMode=UITextFieldViewModeAlways;
