@@ -133,7 +133,7 @@
     [_loginView addSubview:buttonLogin];
     
     UIButton *buttonTen = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50, 230, 38)];
-    [buttonTen setImage:[UIImage imageNamed:@"btn_ten.png"] forState:UIControlStateNormal];
+    [buttonTen setImage:[UIImage imageNamed:@"btn_tent"] forState:UIControlStateNormal];
     [buttonTen addTarget:self action:@selector(doTenLogin) forControlEvents:UIControlEventTouchUpInside];
     [_loginView addSubview:buttonTen];
     
