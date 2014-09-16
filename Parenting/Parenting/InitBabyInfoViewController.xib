@@ -10,6 +10,7 @@
                 <outlet property="_TopView" destination="tDX-2i-7kW" id="iBA-Qe-elo"/>
                 <outlet property="_buttonFemale" destination="5mv-Ot-KeX" id="mZI-GU-Nq5"/>
                 <outlet property="_buttonMale" destination="ylD-Wp-KrM" id="wWE-ML-Ne5"/>
+                <outlet property="_buttonSave" destination="gC0-Dj-wFJ" id="odb-Ge-bQc"/>
                 <outlet property="_imageViewPic" destination="YFd-ZI-zp7" id="CoD-3W-LW8"/>
                 <outlet property="_mainScrollView" destination="KoS-ob-eOY" id="dEf-Ll-x77"/>
                 <outlet property="_textFiledBirth" destination="Rzc-M4-mr5" id="YNa-Uh-Rgl"/>
@@ -120,7 +121,7 @@
                             <rect key="frame" x="113" y="285" width="94" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" title="保存" backgroundImage="btn_setting.png">
+                            <state key="normal" title="保存">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -194,7 +195,6 @@
     </objects>
     <resources>
         <image name="114.png" width="114" height="114"/>
-        <image name="btn_setting.png" width="94" height="28"/>
         <image name="input1.png" width="301" height="46"/>
         <image name="input2.png" width="301" height="46"/>
         <image name="input3.png" width="301" height="46"/>

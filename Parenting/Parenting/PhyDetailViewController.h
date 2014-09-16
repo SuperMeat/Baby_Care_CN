@@ -19,6 +19,7 @@
     NSString *itemName;
     NSString *itemUnit;
     int itemType;
+    long plotHeight;
     
     PhyCorePlot *plot;
     float yBaseValue;

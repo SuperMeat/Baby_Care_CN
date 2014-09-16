@@ -25,6 +25,7 @@
     
     
     
+    __weak IBOutlet UIButton *_buttonSave;
     __weak IBOutlet UIImageView *_imageViewPic;
     __weak IBOutlet UITextField *_textFiledName;
     __weak IBOutlet UITextField *_textFiledBirth;

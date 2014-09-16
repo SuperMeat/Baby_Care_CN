@@ -16,6 +16,8 @@
 #import "MBProgressHUD.h"
 #import "MD5.h"
 #import "APService.h"
+#import "InitCreateDB.h"
+
 
 @interface LoginMainViewController ()
 
@@ -50,7 +52,7 @@
     
     //UINavigationItem stuff
     self.tableView.scrollEnabled = NO;
-    self.navigationItem.title = NSLocalizedString(@"navLogin", nil);
+    self.navigationItem.title = @"提交";
     
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -211,7 +213,8 @@
                      //保存Babyid
                      [[NSUserDefaults standardUserDefaults]setObject:[resultBody objectForKey:@"babyId"] forKey:@"BABYID"];
                      //数据库保存Baby信息
-                     [BabyDataDB createNewBabyInfo:ACCOUNTUID BabyId:BABYID Nickname:@"" Birthday:nil Sex:nil HeadPhoto:@"" RelationShip:@"" RelationShipNickName:@"" Permission:nil CreateTime:[resultBody objectForKey:@"create_time"] UpdateTime:nil]; 
+                     [BabyDataDB createNewBabyInfo:ACCOUNTUID BabyId:BABYID Nickname:@"" Birthday:nil Sex:nil HeadPhoto:@"" RelationShip:@"" RelationShipNickName:@"" Permission:nil CreateTime:[resultBody objectForKey:@"create_time"] UpdateTime:nil];
+                      
                      _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                      [self.navigationController popToViewController:_mainViewController animated:NO];
                      [hud hide:YES afterDelay:1];
