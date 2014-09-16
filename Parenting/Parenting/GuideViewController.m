@@ -110,8 +110,12 @@
 -(void)skipToMain:(id)sender{ 
     //根据登录状态跳转
 //     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil)  {
-        _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentViewController:_mainViewController animated:YES completion:^{}];
+    
+//        [self presentViewController:_mainViewController animated:YES completion:^{ }];
+    _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [self presentModalViewController:_mainViewController animated:YES];
+    self.view.window.rootViewController = _mainViewController;
+    NSLog(@"a");
 //    }
 //    else{
 //        LoginViewController *loginViewController = [[LoginViewController alloc]init];
