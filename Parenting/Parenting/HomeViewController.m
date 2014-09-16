@@ -133,7 +133,7 @@
     [_loginView addSubview:buttonLogin];
     
     UIButton *buttonTen = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50, 230, 38)];
-    [buttonTen setImage:[UIImage imageNamed:@"btn_ten.png"] forState:UIControlStateNormal];
+    [buttonTen setImage:[UIImage imageNamed:@"btn_tent"] forState:UIControlStateNormal];
     [buttonTen addTarget:self action:@selector(doTenLogin) forControlEvents:UIControlEventTouchUpInside];
     [_loginView addSubview:buttonTen];
     
@@ -391,7 +391,7 @@
         
         NSArray* tests = [BaseSQL queryData_test];
         
-        if (month < [BaseMethod month_test]) {
+        if (month < [BaseMethod month_test] && month >= 0 &&[BaseMethod month_test]>0) {
             
             TestModel* model = tests[month];
             if ([model.completed boolValue]) {
@@ -610,7 +610,7 @@
                                                        [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
                                                        //数据库保存用户信息
                                                        if ([[UserDataDB dataBase] selectUser:[[resultBody objectForKey:@"userId"] intValue]] == nil){
-                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_TENCENT andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
+                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_TENCENT andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
                                                        } 
                                                        //提示是否同步数据
                                                                                     [_hud hide:YES];

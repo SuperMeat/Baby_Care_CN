@@ -947,6 +947,8 @@
 		48B78141182A20610073EEBD /* CustomURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B7813D182A20610073EEBD /* CustomURLCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		48B78142182A20610073EEBD /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B78140182A20610073EEBD /* Util.m */; };
 		48C9AD1418E2AB4800D04FF7 /* SummaryDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C9AD1318E2AB4800D04FF7 /* SummaryDB.m */; };
+		48D41F4219C7E743005A8E6B /* btn_tent_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D41F4019C7E743005A8E6B /* btn_tent_focus@2x.png */; };
+		48D41F4319C7E743005A8E6B /* btn_tent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D41F4119C7E743005A8E6B /* btn_tent@2x.png */; };
 		48D42F41196F719E00DFFC5C /* no_record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F40196F719E00DFFC5C /* no_record@2x.png */; };
 		48D42F49196FDC9400DFFC5C /* medicine_heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F45196FDC9400DFFC5C /* medicine_heart@2x.png */; };
 		48D42F4A196FDC9400DFFC5C /* medicine_bottle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D42F46196FDC9400DFFC5C /* medicine_bottle@2x.png */; };
@@ -1264,8 +1266,6 @@
 		BEEF30C919C6F05F006F0367 /* btn_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C319C6F05F006F0367 /* btn_login@2x.png */; };
 		BEEF30CA19C6F05F006F0367 /* btn_sina_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C419C6F05F006F0367 /* btn_sina_focus@2x.png */; };
 		BEEF30CB19C6F05F006F0367 /* btn_sina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C519C6F05F006F0367 /* btn_sina@2x.png */; };
-		BEEF30CC19C6F05F006F0367 /* btn_ten_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C619C6F05F006F0367 /* btn_ten_focus@2x.png */; };
-		BEEF30CD19C6F05F006F0367 /* btn_ten@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF30C719C6F05F006F0367 /* btn_ten@2x.png */; };
 		BEF3434C1949917E0064E2C0 /* icon_share.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF3434A1949917E0064E2C0 /* icon_share.png */; };
 		CE0167BB174B059000462363 /* input1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167A5174B059000462363 /* input1.png */; };
 		CE0167BC174B059000462363 /* input1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0167A6174B059000462363 /* input1@2x.png */; };
@@ -2507,6 +2507,8 @@
 		48B78140182A20610073EEBD /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		48C9AD1218E2AB4800D04FF7 /* SummaryDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryDB.h; sourceTree = "<group>"; };
 		48C9AD1318E2AB4800D04FF7 /* SummaryDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryDB.m; sourceTree = "<group>"; };
+		48D41F4019C7E743005A8E6B /* btn_tent_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_tent_focus@2x.png"; sourceTree = "<group>"; };
+		48D41F4119C7E743005A8E6B /* btn_tent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_tent@2x.png"; sourceTree = "<group>"; };
 		48D42F40196F719E00DFFC5C /* no_record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_record@2x.png"; sourceTree = "<group>"; };
 		48D42F45196FDC9400DFFC5C /* medicine_heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medicine_heart@2x.png"; sourceTree = "<group>"; };
 		48D42F46196FDC9400DFFC5C /* medicine_bottle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medicine_bottle@2x.png"; sourceTree = "<group>"; };
@@ -2921,8 +2923,6 @@
 		BEEF30C319C6F05F006F0367 /* btn_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_login@2x.png"; sourceTree = "<group>"; };
 		BEEF30C419C6F05F006F0367 /* btn_sina_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_sina_focus@2x.png"; sourceTree = "<group>"; };
 		BEEF30C519C6F05F006F0367 /* btn_sina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_sina@2x.png"; sourceTree = "<group>"; };
-		BEEF30C619C6F05F006F0367 /* btn_ten_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_ten_focus@2x.png"; sourceTree = "<group>"; };
-		BEEF30C719C6F05F006F0367 /* btn_ten@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_ten@2x.png"; sourceTree = "<group>"; };
 		BEF3434A1949917E0064E2C0 /* icon_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_share.png; path = "../基本框架/icon_share.png"; sourceTree = "<group>"; };
 		BEF3434B1949917E0064E2C0 /* icon_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_share@2x.png"; path = "../基本框架/icon_share@2x.png"; sourceTree = "<group>"; };
 		CE0167A5174B059000462363 /* input1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = input1.png; sourceTree = "<group>"; };
@@ -5920,12 +5920,12 @@
 		BE004CCE18FE2B7500E56833 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				48D41F4019C7E743005A8E6B /* btn_tent_focus@2x.png */,
+				48D41F4119C7E743005A8E6B /* btn_tent@2x.png */,
 				BEEF30C219C6F05F006F0367 /* btn_login_focus@2x.png */,
 				BEEF30C319C6F05F006F0367 /* btn_login@2x.png */,
 				BEEF30C419C6F05F006F0367 /* btn_sina_focus@2x.png */,
 				BEEF30C519C6F05F006F0367 /* btn_sina@2x.png */,
-				BEEF30C619C6F05F006F0367 /* btn_ten_focus@2x.png */,
-				BEEF30C719C6F05F006F0367 /* btn_ten@2x.png */,
 				BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */,
 				BEE3CEF219B07D9A00ABC528 /* icon_alerm_milstone@2x.png */,
 				BEE3CEF319B07D9A00ABC528 /* icon_alerm_test@2x.png */,
@@ -6472,6 +6472,7 @@
 				4828F26319A340AA00D04926 /* bg_content_detail2.png in Resources */,
 				4828F4BF19A495D700D04926 /* 3.4.2.jpg in Resources */,
 				480D6CF81924ABE800E5CAC7 /* arrow_down@2x.png in Resources */,
+				48D41F4319C7E743005A8E6B /* btn_tent@2x.png in Resources */,
 				48866EBC199A12E6007B16AA /* color_knowledge.png in Resources */,
 				BEE3CEF519B07D9A00ABC528 /* icon_alerm_dialy@2x.png in Resources */,
 				48866FDE199A12E6007B16AA /* TestData.plist in Resources */,
@@ -6489,6 +6490,7 @@
 				4828F50D19A495D700D04926 /* 9.1.4.jpg in Resources */,
 				48866EAC199A12E6007B16AA /* btn_unclear.png in Resources */,
 				48F6ABAA18710CBB0032045E /* set_switch_on_off_bg@2x.png in Resources */,
+				48D41F4219C7E743005A8E6B /* btn_tent_focus@2x.png in Resources */,
 				4828F3EF19A495D700D04926 /* 12.3.3.jpg in Resources */,
 				BE25764018FE51CA0053683A /* slider@2x.png in Resources */,
 				48FCD5AC195D404F003DBA62 /* 婴儿奶瓶@2x.png in Resources */,
@@ -6804,7 +6806,6 @@
 				48866EC5199A12E6007B16AA /* btn_hepatitis.png in Resources */,
 				4828F48B19A495D700D04926 /* 21.4.2.jpg in Resources */,
 				BE25763F18FE51CA0053683A /* plunger_grey@2x.png in Resources */,
-				BEEF30CD19C6F05F006F0367 /* btn_ten@2x.png in Resources */,
 				4828F48419A495D700D04926 /* 21.1.5.jpg in Resources */,
 				BE25763518FE51CA0053683A /* title_temperature@2x.png in Resources */,
 				48866EC7199A12E6007B16AA /* btn_dou.png in Resources */,
@@ -6889,7 +6890,6 @@
 				4828F48919A495D700D04926 /* 21.3.3.jpg in Resources */,
 				48866EB5199A12E6007B16AA /* icon_language_selected.png in Resources */,
 				48866FDD199A12E6007B16AA /* TrainData.plist in Resources */,
-				BEEF30CC19C6F05F006F0367 /* btn_ten_focus@2x.png in Resources */,
 				BE25763418FE51CA0053683A /* title_circumference@2x.png in Resources */,
 				48152E1018486C66009A4900 /* blueArrow@2x.png in Resources */,
 				4828F3E319A495D700D04926 /* 12.1.1.jpg in Resources */,
@@ -7768,8 +7768,8 @@
 					"$(SRCROOT)/UMSocial_Sdk_4.0/frameworks/TencentOpenAPI",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DB6309BF-4344-4B0F-95F6-A3119BD43195";
+				PROVISIONING_PROFILE = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
