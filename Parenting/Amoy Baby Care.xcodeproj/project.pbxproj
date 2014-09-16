@@ -1189,6 +1189,7 @@
 		BE25764818FE51CA0053683A /* point_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25763018FE51CA0053683A /* point_blue@2x.png */; };
 		BE25764918FE51CA0053683A /* point_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25763118FE51CA0053683A /* point_red@2x.png */; };
 		BE25764A18FE51CA0053683A /* title_height@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE25763218FE51CA0053683A /* title_height@2x.png */; };
+		BE301C2B19C825780083BA10 /* InitCreateDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BE301C2A19C825780083BA10 /* InitCreateDB.m */; };
 		BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */; };
 		BE3D75CC1889199F00E1C391 /* MyDevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */; };
 		BE422ADB18C6B5580089219C /* ASIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE422ADA18C6B5580089219C /* ASIController.m */; };
@@ -2797,6 +2798,8 @@
 		BE25763018FE51CA0053683A /* point_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "point_blue@2x.png"; sourceTree = "<group>"; };
 		BE25763118FE51CA0053683A /* point_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "point_red@2x.png"; sourceTree = "<group>"; };
 		BE25763218FE51CA0053683A /* title_height@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_height@2x.png"; sourceTree = "<group>"; };
+		BE301C2919C825780083BA10 /* InitCreateDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitCreateDB.h; sourceTree = "<group>"; };
+		BE301C2A19C825780083BA10 /* InitCreateDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitCreateDB.m; sourceTree = "<group>"; };
 		BE3D75C81889199F00E1C391 /* MyDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesViewController.h; sourceTree = "<group>"; };
 		BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesViewController.m; sourceTree = "<group>"; };
 		BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesViewController.xib; sourceTree = "<group>"; };
@@ -6078,6 +6081,8 @@
 				BE75CD051872C3FC001EF1C1 /* LoginMainViewController.h */,
 				BE75CD061872C3FC001EF1C1 /* LoginMainViewController.m */,
 				BE75CD071872C3FC001EF1C1 /* LoginMainViewController.xib */,
+				BE301C2919C825780083BA10 /* InitCreateDB.h */,
+				BE301C2A19C825780083BA10 /* InitCreateDB.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -7467,6 +7472,7 @@
 				48866F92199A12E6007B16AA /* VaccineAddContentView.m in Sources */,
 				48866FCE199A12E6007B16AA /* ContentView.m in Sources */,
 				485F3F4A17F07CDA00BD876F /* OpenFunction.m in Sources */,
+				BE301C2B19C825780083BA10 /* InitCreateDB.m in Sources */,
 				CE3826F8174DEB0B009AD8DA /* playViewController.m in Sources */,
 				CE3826FD174DEB22009AD8DA /* bathViewController.m in Sources */,
 				CE638AB3174F4899009A60AB /* FMDatabase.m in Sources */,

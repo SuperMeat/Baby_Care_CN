@@ -282,6 +282,10 @@
         return res;
     }
     
+    while (![self CheckPhyInsertCreateTime:create_time]) {
+        create_time = create_time + 1;
+    }
+    
     res=[db executeUpdate:@"insert into bc_baby_physiology values(?,?,?,?,?)",
         [NSNumber numberWithLong:create_time],
         [NSNumber numberWithLong:update_time],
@@ -300,6 +304,29 @@
     [db close];
     return res;
 
+}
+
+#pragma insert时候createtime检测,避免重复
+-(BOOL)CheckPhyInsertCreateTime:(long)create_time{
+    BOOL res;
+    int user_id = ACCOUNTUID;
+    int baby_id = BABYID;
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(user_id, baby_id)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    NSString *sql =[NSString stringWithFormat:@"select * from bc_baby_physiology where create_time=%ld",create_time];
+    FMResultSet *resultset=[db executeQuery:sql];
+    if ([resultset next]) {
+        res = NO;
+    }else{
+        res = YES;
+    }
+    [db close];
+    return res;
 }
 
 -(BOOL)updateBabyPhysiology:(double)value ByCreateTime:(long)create_time andType:(int)type

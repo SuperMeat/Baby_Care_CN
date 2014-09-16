@@ -7,7 +7,7 @@
 //
 
 #import "InitBabyInfoViewController.h"
-
+#import "InitCreateDB.h"
 #define _SHOW_HEIGHT 170
 
 @interface InitBabyInfoViewController ()
@@ -182,6 +182,10 @@
     _buttonFemale.contentMode=UIViewContentModeScaleAspectFit;
     [_buttonFemale setImage:[UIImage imageNamed:@"radio_focus.png"] forState:UIControlStateDisabled];
     [_buttonMale setImage:[UIImage imageNamed:@"radio_focus.png"] forState:UIControlStateDisabled];
+    
+    [_buttonSave setBackgroundColor:[ACFunction colorWithHexString:@"0x68bfcc"]];
+    _buttonSave.layer.cornerRadius = 5.0f;
+    [_buttonSave setTitle:NSLocalizedString(@"Save",nil) forState:UIControlStateNormal];
 }
 
 - (IBAction)Radiobuttonselect:(id)sender {
@@ -232,7 +236,7 @@
     }
     
     if (![_textFiledWeight.text isEqualToString:@""]) {
-        [[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[ACDate date]] Type:1 Value:[_textFiledHeight.text doubleValue]];
+        [[BabyDataDB babyinfoDB] insertBabyPhysiology:[ACDate getTimeStampFromDate:[ACDate date]] UpdateTime:[ACDate getTimeStampFromDate:[ACDate date]] MeasureTime:[ACDate getTimeStampFromDate:[ACDate date]] Type:1 Value:[_textFiledWeight.text doubleValue]];
     }
     
     if (![_textFiledHS.text isEqualToString:@""]) {
@@ -240,6 +244,9 @@
     }
     
     [self.navigationController popViewControllerAnimated:NO];
+    //日历相关数据创建
+    [InitCreateDB create_CalendarDB];
+    
     [self.initBabyInfoDelegate initHomeData];
 }
 
@@ -252,6 +259,7 @@
         [_textFiledBirth resignFirstResponder];
     }
 }
+
 
 -(void)actionsheetShow
 {
@@ -279,11 +287,6 @@
 
 -(void)keyboradshow
 {
-    
-    NSTimeInterval animationDuration = 0.25f;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    
     _oldYOffset = _mainScrollView.contentOffset.y;
     _yOffset = 0;
     if (_textFiledName == _tempTextField) {
@@ -298,11 +301,9 @@
     else if (_textFiledHS == _tempTextField){
         _yOffset = 180;
     }
-    
-    _mainScrollView.contentOffset=CGPointMake(_mainScrollView.contentOffset.x, _yOffset);
-    
-    [UIView commitAnimations];
-    
+    if (_yOffset != 0) {
+        [_mainScrollView setContentOffset:CGPointMake(0, _yOffset) animated:YES];
+    }
 }
 
 -(void)keyboradhidden
@@ -315,12 +316,12 @@
 }
 
 - (void)keyboardWillShown:(NSNotification*)aNotification{
-    [self keyboradshow];
+//    [self keyboradshow];
 }
 
 -(void)keyboardWillHidden:(NSNotification*)aNotification
 {
-    [self keyboradhidden];
+    //[self keyboradhidden];
 }
 
 - (IBAction)selectPic:(id)sender {

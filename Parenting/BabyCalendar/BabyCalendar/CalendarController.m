@@ -85,9 +85,7 @@
     
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStylePlain target:self action:@selector(todayAction)];
-    
     [BaseSQL addDatas_test];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
