@@ -256,7 +256,8 @@
     
     //图例
     UIImageView *imageViewArea = [[UIImageView alloc]initWithFrame:CGRectMake(200, 5, 20, 20)];
-    imageViewArea.image = [UIImage imageNamed:@"plot_area_title@2x.png"];
+    imageViewArea.backgroundColor = [ACFunction colorWithHexString:@"#f39998"];
+//    imageViewArea.image = [UIImage imageNamed:@"plot_area_title@2x.png"];
     [_viewPlot addSubview:imageViewArea];
     
     UILabel *labelArea = [[UILabel alloc]initWithFrame:CGRectMake(195, 25, 30, 18)];
@@ -267,7 +268,7 @@
     [_viewPlot addSubview:labelArea];
     
     UIImageView *imageViewUser = [[UIImageView alloc]initWithFrame:CGRectMake(232, 5, 20, 20)];
-    imageViewUser.backgroundColor = [ACFunction colorWithHexString:@"#f39998"];
+    imageViewUser.backgroundColor = [UIColor colorWithRed:104/255.0 green:191/255.0 blue:204/255.0 alpha:0.3];
     [_viewPlot addSubview:imageViewUser];
     
     UILabel *labelUser = [[UILabel alloc]initWithFrame:CGRectMake(228, 25, 30, 18)];

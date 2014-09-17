@@ -34,13 +34,17 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
+    
     if(_scrollView.contentOffset.x == 0){
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     }
+    [_scrollView setContentOffset:CGPointMake(0, 64) animated:NO];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    
 }
 
 
@@ -49,7 +53,6 @@
 }
 
 -(void)initView{
-    //加载头部Navigation
     //加载navigationBar
     UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -86,7 +89,8 @@
 
     self.navigationItem.rightBarButtonItem = rightbar;
     //加载ScrollView
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width * 2, kDeviceHeight)];
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width * 2, kDeviceHeight-64)];
+ 
     _scrollView.scrollEnabled = false;
     _scrollView.showsHorizontalScrollIndicator = false;
     _scrollView.showsVerticalScrollIndicator = false;
@@ -104,6 +108,7 @@
     _sTableView.delegate = self;
     [_scrollView addSubview:_sTableView];
     _scrollView.backgroundColor = _tTableView.backgroundColor;
+    
 }
 
 -(void)initData{
@@ -127,11 +132,8 @@
             [self goSubscribe:_buttonSubscribe];
         }
         else{
-            [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, _tempOffset) animated:YES];
+            [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
             [_buttonSubscribe setTitle:@"完成" forState:UIControlStateNormal];
-            if (_tempOffset != -64) {
-                _tempOffset = -64;
-            }
 
         }
     }
@@ -164,11 +166,13 @@
         return result == NSOrderedDescending; // 升序
         return result == NSOrderedAscending;  // 降序
     }];
+    
 }
 
 -(void)goSubscribe:(UIButton*)button{
     if ([button.titleLabel.text  isEqual:@"订阅"]) {
-        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, _tempOffset) animated:YES];
+//        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, _tempOffset) animated:YES];
+        [_scrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
         [button setTitle:@"完成" forState:UIControlStateNormal];
         [[SyncController syncController] syncCategoryInfo:ACCOUNTUID HUD:hud SyncFinished:^{
             [self initData];
@@ -178,10 +182,11 @@
     }
     else
     {
-        [_scrollView setContentOffset:CGPointMake(0, _tempOffset) animated:YES];
+//        [_scrollView setContentOffset:CGPointMake(0, _tempOffset) animated:YES];
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         [button setTitle:@"订阅" forState:UIControlStateNormal];
     }
-    NSLog(@"Height:%f",_scrollView.top);
+    
 }
 
 -(void)goBack{
@@ -194,6 +199,7 @@
     [self initData];
     [_tTableView reloadData];
     [_sTableView reloadData];
+    
 }
 
 -(void)desubscribe:(UIButton*)button{
@@ -204,6 +210,7 @@
     [self initData];
     [_tTableView reloadData];
     [_sTableView reloadData];
+    
 }
 
 #pragma tableview datasource

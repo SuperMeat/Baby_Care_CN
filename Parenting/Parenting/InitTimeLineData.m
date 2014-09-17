@@ -241,7 +241,7 @@
     long date=0;
     if (now < time12) {
         //-18小时
-        date = date - 18*3600;
+        date = date12 - 18*3600;
         [timeArr addObject:[NSNumber numberWithLong:date]];
         //-6
         date = date - 6*3600;

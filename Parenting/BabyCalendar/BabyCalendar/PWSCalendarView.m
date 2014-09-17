@@ -177,7 +177,6 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
         {
             [_customTimeView removeFromSuperview];
         }
-        
     }
 }
 
