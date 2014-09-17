@@ -214,7 +214,6 @@ UICollectionViewDelegateFlowLayout>
 //        }
 //    }
 
-   
     cell.model = [self eventsFromSQLWtihDate:[BaseMethod stringFromDate:cell_date]];
     
     return cell;

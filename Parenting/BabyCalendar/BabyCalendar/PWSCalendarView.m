@@ -619,6 +619,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     NSString* date = [userDef objectForKey:kSelectedDate];
     
     cell.row = indexPath.row;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.ckModel = [self eventsFromDicSQLWtihDate:date];
     cell.model = self.datas[indexPath.row];
 
@@ -630,7 +631,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     UIViewController* vc = [BaseMethod baseViewController:_tableView];
     // 宝宝日记

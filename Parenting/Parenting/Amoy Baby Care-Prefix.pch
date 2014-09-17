@@ -196,8 +196,8 @@
 /**
  *  QQ
  */
-#define QQAPPID @"1101701660"
-#define QQAPPKEY @"UD8B7lZmh4FwpP79"
+#define QQAPPID @"1102906267"
+#define QQAPPKEY @"oZUPbkvArIQBGoxH"
 
 #define SUGGESTION_TYPE_TEMP    2
 #define SUGGESTION_TYPE_HUMI    1

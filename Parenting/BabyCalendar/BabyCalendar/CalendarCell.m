@@ -46,8 +46,11 @@
     _row = row;
     
     NSString* imageName = [NSString stringWithFormat:@"cell_bg_%d",_row];
+    NSString* imageSelectedName = [NSString stringWithFormat:@"cell_bg_%d",_row];
 //    NSString* selectedImageName = [NSString stringWithFormat:@"cell_bg_selected_%d",_row];
     [_btnCell setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [_btnCell setImage:[UIImage imageNamed:imageSelectedName] forState:UIControlStateSelected];
+    
 //    [_btnCell setImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateHighlighted];
     _btnCell.userInteractionEnabled = NO;
     
