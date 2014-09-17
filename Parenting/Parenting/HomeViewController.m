@@ -567,13 +567,13 @@
     
     isPushSocialView = YES;
     
-    BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:UMShareToTencent];
+    BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:UMShareToQQ];
     if (isOauth) {
         //TODO:有登录过，如何处理
         //return;
     }
     
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToTencent];
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
                                   {
                                       //加载登录进度条
@@ -583,16 +583,16 @@
                                       _hud.color = [UIColor grayColor];
                                       _hud.labelText = @"登录验证中...";
                                       
-                                      if ([[snsPlatform platformName] isEqualToString:UMShareToTencent])
+                                      if ([[snsPlatform platformName] isEqualToString:UMShareToQQ])
                                       {
                                           [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
-                                              if ([[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] == NULL) {
+                                              if ([[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] == NULL) {
                                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                   return;
                                               }
                                               
                                               //封装数据
-                                              NSMutableDictionary *dictBody = [[DataContract dataContract]UserCreateDict:RTYPE_TENCENT account:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"]  password:@""];
+                                              NSMutableDictionary *dictBody = [[DataContract dataContract]UserCreateDict:RTYPE_TENCENT account:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]  password:@""];
                                               //Http请求
                                               [[NetWorkConnect sharedRequest]
                                                httpRequestWithURL:USER_LOGIN_URL
@@ -604,13 +604,13 @@
                                                    //处理反馈信息: code=1为成功  code=99为失败
                                                    if ([[result objectForKey:@"code"]intValue] == 1) {
                                                        NSMutableDictionary *resultBody = [result objectForKey:@"body"];
-                                                       [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
                                                        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_TENCENT] forKey:@"ACCOUNT_TYPE"];
                                                        [[NSUserDefaults standardUserDefaults] setObject:[resultBody objectForKey:@"userId"] forKey:@"ACCOUNT_UID"];
                                                        [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
                                                        //数据库保存用户信息
                                                        if ([[UserDataDB dataBase] selectUser:[[resultBody objectForKey:@"userId"] intValue]] == nil){
-                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_TENCENT andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
+                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_TENCENT andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
                                                        } 
                                                        //提示是否同步数据
                                                                                     [_hud hide:YES];

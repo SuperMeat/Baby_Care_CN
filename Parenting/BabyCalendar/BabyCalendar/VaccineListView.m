@@ -119,6 +119,7 @@
 {
     return 72.0f;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString* identifier = @"VaccineListCell";

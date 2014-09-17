@@ -226,7 +226,7 @@
     
     FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
     if ([dataBase open]) {
-        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM vaccineTable ORDER BY completedDate DESC"];
+        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM vaccineTable where completed > 0 ORDER BY completedDate ASC"];
         while ([rs next]){
             VaccineModel* model = [[VaccineModel alloc]init];
             model.vaccine = [rs stringForColumn:@"vaccine"];
@@ -239,6 +239,21 @@
             model.id = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
             [datas addObject:model];
         }
+        
+        rs = [dataBase executeQuery:@"SELECT * FROM vaccineTable where completed = 0 ORDER BY completedDate DESC"];
+        while ([rs next]){
+            VaccineModel* model = [[VaccineModel alloc]init];
+            model.vaccine = [rs stringForColumn:@"vaccine"];
+            model.illness = [rs stringForColumn:@"illness"];
+            model.times = [rs stringForColumn:@"times"];
+            model.completedDate = [rs stringForColumn:@"completedDate"];
+            model.willDate = [rs stringForColumn:@"willDate"];
+            model.inplan = [NSNumber numberWithBool:[rs boolForColumn:@"inplan"]];
+            model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
+            model.id = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
+            [datas addObject:model];
+        }
+
         [rs close];
         [dataBase close];
     }
