@@ -224,7 +224,7 @@
     [shareView.shareInfoImageView setImage:detailImage];
     shareView.titleDetail.text = [NSString stringWithFormat:kShareMilestoneTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage],_milestoneView.contentView.labTitle.text];;
     UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:kDeviceHeight];
-    [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
+    [ACShare shareImage:self andshareTitle:shareView.titleDetail.text andshareImage:shareimage anddelegate:self];
 }
 
 - (void)dealloc

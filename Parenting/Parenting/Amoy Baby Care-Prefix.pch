@@ -188,7 +188,6 @@
 #define AMAP_KEY @"9a6333950c5bf17fdebaf72c68ef97eb"
 #define TESTIN_KEY @"508548bb4d5eea5d6dc1edb85ebb553d"
 
-
 /**
  *  微信
  */

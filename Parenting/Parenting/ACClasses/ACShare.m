@@ -24,9 +24,11 @@
     [UMSocialWechatHandler setWXAppId:WXAPPID appSecret:WXSECRETKEY url:url];
     [UMSocialData defaultData].extConfig.wechatSessionData.title = shareText;
     [UMSocialData defaultData].extConfig.qqData.url    = url;
-
+    [UMSocialData defaultData].extConfig.qqData.title  = shareText;
+    
     [UMSocialData defaultData].extConfig.qzoneData.url = url;
-
+    [UMSocialData defaultData].extConfig.qzoneData.title  = shareText;
+    
     [UMSocialData defaultData].extConfig.sinaData.shareText = [NSString stringWithFormat:@"%@\r\n%@",shareText ,url];
     [UMSocialData defaultData].extConfig.sinaData.shareImage = shareImage;
     
@@ -55,8 +57,7 @@
                                       shareText:title
                                      shareImage:shareImage
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,
-                                                 UMShareToQQ,
-                                                 UMShareToQzone,
+                                
                                                  nil]
                                        delegate:ctrldelete];
 }

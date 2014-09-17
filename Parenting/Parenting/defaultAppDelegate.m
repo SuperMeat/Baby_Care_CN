@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "SyncController.h"
 #import <TestinAgent/TestinAgent.h>
+#import "UMSocialTencentWeiboHandler.h"
 
 @implementation defaultAppDelegate
 
@@ -242,6 +243,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     //添加微信分享
     [UMSocialWechatHandler setWXAppId:WXAPPID appSecret:WXSECRETKEY url:@"http://www.umeng.com/social"];
     
+    [UMSocialTencentWeiboHandler openSSOWithRedirectUrl:@"http://sns.whalecloud.com/tencent2/callback"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

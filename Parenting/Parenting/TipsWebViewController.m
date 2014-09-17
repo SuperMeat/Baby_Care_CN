@@ -70,8 +70,6 @@
     [titleView addSubview:titleText];
     
     self.navigationItem.titleView = titleView;
-    
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
