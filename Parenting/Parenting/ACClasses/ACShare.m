@@ -21,7 +21,7 @@
          andUrl:(NSString*)url
     anddelegate:(id <UMSocialUIDelegate>)ctrldelete
 {
-    [UMSocialWechatHandler setWXAppId:WXAPPID url:url];
+    [UMSocialWechatHandler setWXAppId:WXAPPID appSecret:WXSECRETKEY url:url];
     [UMSocialData defaultData].extConfig.wechatSessionData.title = shareText;
     [UMSocialData defaultData].extConfig.qqData.url    = url;
 

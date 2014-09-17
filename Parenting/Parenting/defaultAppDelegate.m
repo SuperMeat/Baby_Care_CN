@@ -237,10 +237,10 @@ void UncaughtExceptionHandler(NSException *exception) {
     [UMSocialData setAppKey:UMENGAPPKEY];
     
     //添加QQ分享
-    [UMSocialQQHandler setQQWithAppId:@"1101701660" appKey:@"UD8B7lZmh4FwpP79" url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setQQWithAppId:QQAPPID appKey:QQAPPKEY url:@"http://www.umeng.com/social"];
     
     //添加微信分享
-    [UMSocialWechatHandler setWXAppId:@"wx8a04549b73aba34b" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:WXAPPID appSecret:WXSECRETKEY url:@"http://www.umeng.com/social"];
     
 }
 

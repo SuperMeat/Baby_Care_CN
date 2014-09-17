@@ -1251,6 +1251,7 @@
 
 #pragma 刷新贴士视图
 -(void)roadTipsView{
+    return;
     int categoryId;
     /*  chooseAdvise case
      *  0:玩耍    对应categoryID:1
