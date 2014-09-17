@@ -111,7 +111,8 @@
     [_graph addPlot:baseP75Plot toPlotSpace:plotSpace];
     
     //P75填充区域
-    CPTFill * P75areaGradientFill = [CPTFill fillWithImage:[CPTImage imageWithCGImage:[[UIImage imageNamed:@"phy_shadow"] CGImage]]];
+    CPTFill * P75areaGradientFill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:104/255.0 green:191/255.0 blue:204/255.0 alpha:0.3]];
+    //CPTFill * P75areaGradientFill = [CPTFill fillWithImage:[CPTImage imageWithCGImage:[[UIImage imageNamed:@"phy_shadow"] CGImage]]];
     baseP75Plot.areaFill = P75areaGradientFill;
     //0.1是为了避免填充区域覆盖XY轴
     baseP75Plot.areaBaseValue = [[NSDecimalNumber numberWithFloat:0.1] decimalValue];

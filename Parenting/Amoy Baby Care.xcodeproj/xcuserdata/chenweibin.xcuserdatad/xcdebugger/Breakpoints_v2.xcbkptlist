@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parenting/HomeViewController.m"
-            timestampString = "432530194.973254"
+            timestampString = "432615286.974277"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
+            startingLineNumber = "651"
+            endingLineNumber = "651"
             landmarkName = "-doSinaLogin"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parenting/HomeViewController.m"
-            timestampString = "432530197.96532"
+            timestampString = "432615286.974277"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "709"
-            endingLineNumber = "709"
+            startingLineNumber = "721"
+            endingLineNumber = "721"
             landmarkName = "-doRegister"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parenting/HomeViewController.m"
-            timestampString = "432530201.213618"
+            timestampString = "432615286.974277"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "751"
-            endingLineNumber = "751"
+            startingLineNumber = "763"
+            endingLineNumber = "763"
             landmarkName = "-checkBaby"
             landmarkType = "5">
          </BreakpointContent>

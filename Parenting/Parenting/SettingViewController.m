@@ -16,6 +16,7 @@
 #import "MyDevicesViewController.h"
 #import "LoginViewController.h"
 #import "UserProtocolViewController.h"
+#import "HomeViewController.h"
 
 @interface SettingViewController ()
 @property (strong, nonatomic) UITableView *settingTable;
@@ -471,10 +472,9 @@ messageView;
             [self makeArray];
             [self.settingTable reloadData];
             [[ASIController asiController] postLoginState:-1];*/
-            LoginViewController *loginViewController = [[LoginViewController alloc] init];
-            UINavigationController *loginNavigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-            loginViewController.mainViewController = self.tabBarController;
-            self.view.window.rootViewController = loginNavigationController;
+//            HomeViewController *homeViewController = [[HomeViewController alloc]init];
+            [self.tabBarController setSelectedIndex:0];
+            
             //end 20140829
         }
         else if (buttonIndex==2){

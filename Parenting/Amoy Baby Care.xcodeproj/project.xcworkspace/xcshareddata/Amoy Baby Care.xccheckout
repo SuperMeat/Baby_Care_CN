@@ -5,46 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>BBD55AE6-5FAE-42A7-9182-D415CA2FA8A0</string>
+	<string>8A5185D1-0FB6-4E8E-B299-79FC3D12C3AE</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Amoy Baby Care</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9D0876C7-4BD1-410E-8FC8-926530A12398</key>
-		<string>https://github.com/JammingLin/Baby_Care_CN.git</string>
+		<key>52D46DA3-AF98-43BF-836D-DDDB1A09B2EA</key>
+		<string>https://github.com/SuperMeat/Baby_Care_CN.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Parenting/Amoy Baby Care.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>625E6503-79DD-4972-A92B-D1B02C865A14</key>
-		<string>../../BabyCalendar</string>
-		<key>9D0876C7-4BD1-410E-8FC8-926530A12398</key>
+		<key>52D46DA3-AF98-43BF-836D-DDDB1A09B2EA</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/JammingLin/Baby_Care_CN.git</string>
+	<string>https://github.com/SuperMeat/Baby_Care_CN.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9D0876C7-4BD1-410E-8FC8-926530A12398</string>
+	<string>52D46DA3-AF98-43BF-836D-DDDB1A09B2EA</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9D0876C7-4BD1-410E-8FC8-926530A12398</string>
+			<string>52D46DA3-AF98-43BF-836D-DDDB1A09B2EA</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Baby_Care_CN</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>625E6503-79DD-4972-A92B-D1B02C865A14</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BabyCalendar</string>
 		</dict>
 	</array>
 </dict>

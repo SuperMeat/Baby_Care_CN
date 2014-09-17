@@ -71,6 +71,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
     //时间轴默认展示10条数据
     _timeLineShowCount = 5;
     
@@ -83,7 +85,15 @@
 } 
 
 -(void)viewWillAppear:(BOOL)animated    {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil){
+        [_photoAreaView removeFromSuperview];
+        [_mainScrollView removeFromSuperview];
+        _data = nil;
+        [self initView];
+        [self initData];
         isPushSocialView = NO;
         _loginView.hidden = NO;
     }
@@ -98,7 +108,6 @@
         [self initData];
     }
     [MobClick beginLogPageView:@"首页"];
-    self.navigationController.navigationBarHidden = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -106,6 +115,9 @@
         isPushSocialView = NO;
         _loginView.hidden = NO;
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
