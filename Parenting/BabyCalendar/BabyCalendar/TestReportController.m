@@ -76,7 +76,7 @@
     TestModel *testmodel = reportView.datas[_month];
     shareView.titleDetail.text = [NSString stringWithFormat:kShareTestTitle,[BabyinfoViewController getbabyname],_month+1,testmodel.score];
     UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:shareView.height];
-    [ACShare shareImage:self andshareTitle:@"" andshareImage:shareimage anddelegate:self];
+    [ACShare shareImage:self andshareTitle:shareView.titleDetail.text andshareImage:shareimage anddelegate:self];
 
 }
 

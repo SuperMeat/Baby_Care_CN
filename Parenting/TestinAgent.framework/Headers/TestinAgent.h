@@ -13,4 +13,5 @@
 
 +(void)init:(NSString*)appId;
 
++(void)setUserInfo:(NSString*) userInfo;
 @end

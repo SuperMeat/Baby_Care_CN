@@ -627,7 +627,11 @@
 
 
 //strDate格式 - 2014年06年12日
-+(int)getDiffFormNowToDateCN:(NSString*)strDate{
++(int)getDiffFormNowToDateCN:(NSString*)strDate
+{
+    if (strDate == nil) {
+        return 0;
+    }
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     

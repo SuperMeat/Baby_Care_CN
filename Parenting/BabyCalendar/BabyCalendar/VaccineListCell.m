@@ -34,11 +34,11 @@
     
     if ([_model.inplan boolValue]) {
         _labInplan.textColor = UIColorFromRGB(kColor_inplan);
-        _labInplan.text = @"计划";
+        _labInplan.text = @"第一类";
     }else
     {
         _labInplan.textColor = UIColorFromRGB(kColor_outplan);
-        _labInplan.text = @"计划外";
+        _labInplan.text = @"第二类";
     }
     
     if ([_model.completed boolValue]) {

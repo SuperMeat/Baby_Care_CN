@@ -26,7 +26,7 @@
     [self addSubview:_imageViewBG];
     
     _imageViewHeadPic = [[UIImageView alloc] initWithFrame:CGRectMake(160-57, 41, 114, 114)];
-    _imageViewHeadPic.image = [UIImage imageNamed:@"114.png"];
+    _imageViewHeadPic.image = [UIImage imageNamed:@"defaulthead.png"];
     _imageViewHeadPic.layer.masksToBounds = YES;
     _imageViewHeadPic.layer.cornerRadius = 57.0;
     _imageViewHeadPic.userInteractionEnabled=YES;

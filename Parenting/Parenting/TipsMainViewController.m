@@ -39,6 +39,7 @@
     if(_scrollView.contentOffset.x == 0){
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     }
+    
     [_scrollView setContentOffset:CGPointMake(0, 64) animated:NO];
 }
 
@@ -89,7 +90,7 @@
 
     self.navigationItem.rightBarButtonItem = rightbar;
     //加载ScrollView
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width * 2, kDeviceHeight-64)];
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width * 2, kDeviceHeight-64)];
  
     _scrollView.scrollEnabled = false;
     _scrollView.showsHorizontalScrollIndicator = false;

@@ -546,10 +546,10 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
         _tableView.hidden = YES;
         _backTodayView.hidden = NO;
         if (days > 0 || _m_init_page < _m_current_page) {
-            _backTodayView.infoLab.text = @"日子还没到来呢！";
+            _backTodayView.infoLab.text = @"日子还没到来呢!";
         }
         if (before_birthday > 0) {
-            _backTodayView.infoLab.text = @"宝宝还没出生呢！";
+            _backTodayView.infoLab.text = @"宝宝还没出生呢!";
         }
     }else
     {
@@ -619,6 +619,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     NSString* date = [userDef objectForKey:kSelectedDate];
     
     cell.row = indexPath.row;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.ckModel = [self eventsFromDicSQLWtihDate:date];
     cell.model = self.datas[indexPath.row];
 
@@ -630,7 +631,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     UIViewController* vc = [BaseMethod baseViewController:_tableView];
     // 宝宝日记

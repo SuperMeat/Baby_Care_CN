@@ -188,7 +188,6 @@
 #define AMAP_KEY @"9a6333950c5bf17fdebaf72c68ef97eb"
 #define TESTIN_KEY @"508548bb4d5eea5d6dc1edb85ebb553d"
 
-
 /**
  *  微信
  */
@@ -197,8 +196,8 @@
 /**
  *  QQ
  */
-#define QQAPPID @"1101701660"
-#define QQAPPKEY @"UD8B7lZmh4FwpP79"
+#define QQAPPID @"1102906267"
+#define QQAPPKEY @"oZUPbkvArIQBGoxH"
 
 #define SUGGESTION_TYPE_TEMP    2
 #define SUGGESTION_TYPE_HUMI    1

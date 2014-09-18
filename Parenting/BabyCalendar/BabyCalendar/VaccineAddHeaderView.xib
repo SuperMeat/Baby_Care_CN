@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,11 +10,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="xk8-KT-Tjk">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="xk8-KT-Tjk">
                     <rect key="frame" x="0.0" y="-5" width="320" height="125"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <string key="text">      计划外疫苗，是自费疫苗。可以根据宝宝自身情况、各地区不同状况及家长经济状况而定。如果选择注射二类疫苗应在不影响一类疫苗情况下进行选择性注射。要注意接种过活疫苗(麻疹疫苗、乙脑疫苗、脊灰糖丸)要间隔４周才能接种死疫苗(百白破、乙肝、流脑及所有二类疫苗)。</string>
+                    <string key="text">     第二类疫苗是指由公民自费并且自愿受种的疫苗。可以根据宝宝自身情况、各地区不同状况及家长经济状况而定。如果选择注射二类疫苗应在不影响一类疫苗情况下进行选择性注射。要注意接种过活疫苗(麻疹疫苗、乙脑疫苗、脊灰糖丸)要间隔４周才能接种死疫苗(百白破、乙肝、流脑及所有二类疫苗)。</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
@@ -26,9 +25,16 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.89690290179999999" green="0.89690290179999999" blue="0.89690290179999999" alpha="1" colorSpace="calibratedRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="_textView" destination="xk8-KT-Tjk" id="klf-lD-Dax"/>
             </connections>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

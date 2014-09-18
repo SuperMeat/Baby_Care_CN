@@ -918,6 +918,8 @@
 		4890DCE518F23DA000C498FB /* FeedActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4890DCE318F23DA000C498FB /* FeedActivityViewController.xib */; };
 		489AABF1180D2D1100EB607E /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AABF0180D2D1100EB607E /* ChineseToPinyin.m */; };
 		489AABF7180E8FCC00EB607E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489AABF6180E8FCC00EB607E /* Accelerate.framework */; };
+		48ADEB6919C984030005DC72 /* AdviseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 48ADEB6819C984030005DC72 /* AdviseData.m */; };
+		48ADEB6B19C987C40005DC72 /* defaulthead.png in Resources */ = {isa = PBXBuildFile; fileRef = 48ADEB6A19C987C40005DC72 /* defaulthead.png */; };
 		48B7813A182A1D500073EEBD /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B78139182A1D500073EEBD /* MBProgressHUD.m */; };
 		48B78141182A20610073EEBD /* CustomURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B7813D182A20610073EEBD /* CustomURLCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		48B78142182A20610073EEBD /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B78140182A20610073EEBD /* Util.m */; };
@@ -1244,7 +1246,6 @@
 		BEB4758418E572A20004B649 /* DataContract.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4758318E572A20004B649 /* DataContract.m */; };
 		BEB7D89A1904B1F800E13893 /* icon_sunny@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB7D8991904B1F800E13893 /* icon_sunny@2x.png */; };
 		BEB7E2C919230E4A00E752B7 /* TipsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2C819230E4A00E752B7 /* TipsMainViewController.m */; };
-		BEB7E2CC1923100B00E752B7 /* AdviseData.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2CB1923100B00E752B7 /* AdviseData.m */; };
 		BEB7E2D0192310D200E752B7 /* TipsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2CE192310D100E752B7 /* TipsWebViewController.m */; };
 		BEB7E2D1192310D200E752B7 /* TipsWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */; };
 		BEB7E2D41923167C00E752B7 /* TipCategoryDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */; };
@@ -2432,6 +2433,9 @@
 		489AABEF180D2D1100EB607E /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
 		489AABF0180D2D1100EB607E /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
 		489AABF6180E8FCC00EB607E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		48ADEB6719C984030005DC72 /* AdviseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviseData.h; sourceTree = "<group>"; };
+		48ADEB6819C984030005DC72 /* AdviseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviseData.m; sourceTree = "<group>"; };
+		48ADEB6A19C987C40005DC72 /* defaulthead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaulthead.png; path = ../defaulthead.png; sourceTree = "<group>"; };
 		48B78138182A1D500073EEBD /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		48B78139182A1D500073EEBD /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		48B7813C182A20610073EEBD /* CustomURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomURLCache.h; sourceTree = "<group>"; };
@@ -2870,8 +2874,6 @@
 		BEB7D8991904B1F800E13893 /* icon_sunny@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sunny@2x.png"; sourceTree = "<group>"; };
 		BEB7E2C719230E4A00E752B7 /* TipsMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsMainViewController.h; sourceTree = "<group>"; };
 		BEB7E2C819230E4A00E752B7 /* TipsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsMainViewController.m; sourceTree = "<group>"; };
-		BEB7E2CA1923100B00E752B7 /* AdviseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviseData.h; sourceTree = "<group>"; };
-		BEB7E2CB1923100B00E752B7 /* AdviseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviseData.m; sourceTree = "<group>"; };
 		BEB7E2CD192310D100E752B7 /* TipsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsWebViewController.h; sourceTree = "<group>"; };
 		BEB7E2CE192310D100E752B7 /* TipsWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsWebViewController.m; sourceTree = "<group>"; };
 		BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipsWebViewController.xib; sourceTree = "<group>"; };
@@ -4129,7 +4131,8 @@
 		4855BCA8183075B100F02A3E /* Tips */ = {
 			isa = PBXGroup;
 			children = (
-				BEE5397A1945B08B000703E6 /* old */,
+				48ADEB6719C984030005DC72 /* AdviseData.h */,
+				48ADEB6819C984030005DC72 /* AdviseData.m */,
 				BEB7E2CD192310D100E752B7 /* TipsWebViewController.h */,
 				BEB7E2CE192310D100E752B7 /* TipsWebViewController.m */,
 				BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */,
@@ -5869,6 +5872,7 @@
 		BE004CCE18FE2B7500E56833 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				48ADEB6A19C987C40005DC72 /* defaulthead.png */,
 				48D41F4019C7E743005A8E6B /* btn_tent_focus@2x.png */,
 				48D41F4119C7E743005A8E6B /* btn_tent@2x.png */,
 				BEEF30C219C6F05F006F0367 /* btn_login_focus@2x.png */,
@@ -6073,15 +6077,6 @@
 				BE900F2118ECFCEA00B06133 /* SyncController.m */,
 			);
 			name = NetWorkController;
-			sourceTree = "<group>";
-		};
-		BEE5397A1945B08B000703E6 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				BEB7E2CA1923100B00E752B7 /* AdviseData.h */,
-				BEB7E2CB1923100B00E752B7 /* AdviseData.m */,
-			);
-			name = old;
 			sourceTree = "<group>";
 		};
 		CE01679C174B059000462363 /* 设置 */ = {
@@ -6428,6 +6423,7 @@
 				BE25764018FE51CA0053683A /* slider@2x.png in Resources */,
 				48FCD5AC195D404F003DBA62 /* 婴儿奶瓶@2x.png in Resources */,
 				CE0167C2174B059000462363 /* input_single@2x.png in Resources */,
+				48ADEB6B19C987C40005DC72 /* defaulthead.png in Resources */,
 				48F91B0018FBB54E0038DC67 /* icon_rainy_heavy@2x.png in Resources */,
 				4828F40F19A495D700D04926 /* 14.4.3.jpg in Resources */,
 				480EFA5A18E5155C00D40903 /* btn_bath_play.png in Resources */,
@@ -7419,7 +7415,6 @@
 				48866F66199A12E6007B16AA /* CKCalendarView.m in Sources */,
 				48866FC1199A12E6007B16AA /* TrainModel.m in Sources */,
 				48866F8D199A12E6007B16AA /* VaccineModel.m in Sources */,
-				BEB7E2CC1923100B00E752B7 /* AdviseData.m in Sources */,
 				48866FA3199A12E6007B16AA /* AddIemView.m in Sources */,
 				48866F51199A12E6007B16AA /* PWSCalendarView.m in Sources */,
 				485749A4183205A3000D921B /* NotifyItem.m in Sources */,
@@ -7543,6 +7538,7 @@
 				CE0D0ECB17574AFF005A3200 /* Environmentitem.m in Sources */,
 				48866F52199A12E6007B16AA /* PWSCalendarViewCell.m in Sources */,
 				48866FC3199A12E6007B16AA /* NoteController.m in Sources */,
+				48ADEB6919C984030005DC72 /* AdviseData.m in Sources */,
 				48866FB7199A12E6007B16AA /* TrainList.m in Sources */,
 				48866F47199A12E6007B16AA /* BaseMethod.m in Sources */,
 				48866E8B199A12E6007B16AA /* Zheline.m in Sources */,
@@ -7695,8 +7691,8 @@
 					"$(PROJECT_DIR)/UartLib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
+				PROVISIONING_PROFILE = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -7740,8 +7736,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4F4DCDF3-D538-4164-A611-81F03B2FDF04";
+				PROVISIONING_PROFILE = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
