@@ -39,6 +39,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     application.applicationIconBadgeNumber = 0;
 
+    [self initializePlat];
     // Override point for customization after application launch.
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
        
@@ -109,9 +110,6 @@ void UncaughtExceptionHandler(NSException *exception) {
 
     _uncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
-
-    [MobClick startWithAppkey:UMENGAPPKEY];
-    [MobClick checkUpdate];
 
     // Required
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
@@ -222,8 +220,6 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
 //    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
     
-    [self initializePlat];
-    
     /*
      同步数据
      */
@@ -232,7 +228,19 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (void)initializePlat
 {
+    //Testin Crash
     [TestinAgent init:TESTIN_KEY];
+    
+    //UMeng 统计
+    [MobClick startWithAppkey:UMENGAPPKEY];
+    
+    [MobClick checkUpdate];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil)
+    {
+        [TestinAgent setUserInfo:[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"]];
+    }
+
     
     //添加新浪微博应用
     [UMSocialData setAppKey:UMENGAPPKEY];
