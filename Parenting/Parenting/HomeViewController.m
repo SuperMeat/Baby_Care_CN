@@ -32,6 +32,7 @@
 #import "TestModel.h"
 #import "PHYDetailViewController.h"
 #import "PhysiologyViewController.h"
+#import "TipsMainViewController.h"
 
 #import "LoginViewController.h"
 #import "LoginMainViewController.h"
@@ -82,7 +83,9 @@
         _initTimeLineData.targetViewController = self;
         [_initTimeLineData getTimeLineData];
     }
-} 
+}
+
+
 
 -(void)viewWillAppear:(BOOL)animated    {
     [self.navigationController setNavigationBarHidden:YES animated:YES];

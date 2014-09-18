@@ -376,7 +376,7 @@
     NSMutableArray* datas = [NSMutableArray array];
     FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
     if ([dataBase open]) {
-        NSString *sql = @"select * from vaccineTable";
+        NSString *sql = @"select * from vaccineTable where completed=0 and inplan=1";
         FMResultSet *rs = [dataBase executeQuery:sql];
         while ([rs next]){
             NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:11];

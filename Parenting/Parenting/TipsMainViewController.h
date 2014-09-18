@@ -18,9 +18,13 @@
     NSString *category_ids;
     
     int _tempOffset;
+    
+    UIView *_v1;
+    UIView *_v2;
+    
+    UIScrollView *_scrollView;
 }
 
-@property (nonatomic,strong) UIScrollView   *scrollView;
 @property (nonatomic,strong) UITableView    *tTableView;
 @property (nonatomic,strong) UITableView    *sTableView;
 @property (strong, nonatomic) UIButton *buttonBack;

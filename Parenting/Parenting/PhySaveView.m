@@ -225,6 +225,7 @@
     
     datepicker.frame=CGRectMake(0, 0, 320, 162);
     action.bounds=CGRectMake(0, 0, 320, 200);
+    
     [action addSubview:datepicker];
     [action showInView:self.superview];
 }
