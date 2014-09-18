@@ -39,11 +39,31 @@
     [self initView];
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [MobClick endLogPageView:@"生理页面"];
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // 禁用 iOS7 返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // 开启
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+    
+    [MobClick endLogPageView:@"生理页面"];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
     [MobClick beginLogPageView:@"生理页面"];
     self.navigationController.navigationBar.hidden = YES;
     [self initData];

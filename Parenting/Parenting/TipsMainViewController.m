@@ -39,7 +39,8 @@
     if(_scrollView.contentOffset.x == 0){
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     }
-    //[_scrollView setContentOffset:CGPointMake(0, 64) animated:NO];
+    
+    [_scrollView setContentOffset:CGPointMake(0, 64) animated:NO];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
