@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "FoodTypePickerView.h"
+#import "CustomIOS7AlertView.h"
+
 @protocol save_feedviewDelegate<NSObject>
 @optional
 -(void)sendFeedSaveChanged:(int)duration andIsFood:(BOOL)isfood andstarttime:(NSDate*)newstarttime;
 -(void)sendFeedReloadData;
 @end
 
-@interface save_feedview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate,FoodTypePickerViewDelegate>
+@interface save_feedview : UIView<UITextViewDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CustomIOS7AlertViewDelegate,FoodTypePickerViewDelegate>
 {
     UIImageView *imageview;
     UITextField *Oztext;
@@ -33,18 +35,18 @@
     UILabel *food;
     
     UIDatePicker *datepicker;
-    UIActionSheet *action;
+    CustomIOS7AlertView *action;
     
     UIDatePicker *starttimepicker;
-    UIActionSheet *action2;
+    CustomIOS7AlertView *action2;
     
     NSDate* curstarttime;
     long _createtime;
     long _updatetime;
-    DurationPickerView *durationpicker;
-    FoodTypePickerView *foodtypepicker;
-    UIActionSheet *action3;
-    UIActionSheet *action4;
+    DurationPickerView  *durationpicker;
+    FoodTypePickerView  *foodtypepicker;
+    CustomIOS7AlertView *action3;
+    CustomIOS7AlertView *action4;
     NSMutableArray *hours;
     NSMutableArray *minutes;
     UIImageView *remarkbg;

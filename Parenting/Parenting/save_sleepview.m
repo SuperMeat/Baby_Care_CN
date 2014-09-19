@@ -52,7 +52,6 @@
 
 -(void)makeSave
 {
-    
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 290, 30)];
     title.text=NSLocalizedString(@"Confirm your activity",nil);
     title.textAlignment=NSTextAlignmentCenter;
@@ -122,7 +121,6 @@
     [datetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
     [datetext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     
-    
     starttimetext=[[UITextField alloc]initWithFrame:CGRectMake(115, 80, 150, 30)];
     [starttimetext setBackground:[UIImage imageNamed:@"panels_input"]];
     [imageview addSubview:starttimetext];
@@ -169,12 +167,6 @@
     remarktext.font=[UIFont systemFontOfSize:13];
     [imageview addSubview:remarkbg];
     remarktext.delegate=self;
-    //    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
-    //    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingLeft"];
-    //    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
-    //    [remarktext setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
-    
-    
     
     UIButton *savebutton=[UIButton buttonWithType:UIButtonTypeCustom];
     savebutton.frame=CGRectMake(200, 220+30, 70, 30);
@@ -259,7 +251,8 @@
 {
     BabyDataDB *db=[BabyDataDB babyinfoDB];
     int duration=0;
-    if (select) {
+    if (select)
+    {
         NSArray *array = [durationtext.text componentsSeparatedByString:@":"];
         duration = [[array objectAtIndex:0] intValue]*60*60 + [[array objectAtIndex:1]intValue]*60+[[array objectAtIndex:2]intValue];
         if (curstarttime == nil) {
@@ -302,7 +295,7 @@
         }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:[NSNumber numberWithInt:(duration)]];
-        [self.sleepSaveDelegate sendSleepReloadData];
+    [self.sleepSaveDelegate sendSleepReloadData];
     }
     
     [self.sleepSaveDelegate sendSleepSaveChanged:duration andstarttime:curstarttime];
@@ -407,28 +400,6 @@
     datetext.text = [ACDate dateFomatdate:curstarttime];
 }
 
--(void)actionsheetShow
-{
-    action=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
-    if (datepicker==nil) {
-        datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
-        datepicker.datePickerMode=UIDatePickerModeDate;
-        [datepicker addTarget:self action:@selector(updatedate:) forControlEvents:UIControlEventValueChanged];
-    }
-    
-    datepicker.frame=CGRectMake(0, 0, 320, 100);
-    
-    action.bounds=CGRectMake(0, 0, 320, 200);
-    [action addSubview:datepicker];
-    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
-    if ([window.subviews containsObject:self]) {
-        [action showInView:self];
-    } else {
-        [action showInView:window];
-    }
-}
-
 
 -(void)updatestarttime:(UIDatePicker*)sender
 {
@@ -458,29 +429,86 @@
     starttimetext.text = [ACDate getStarttimefromdate:curstarttime];
 }
 
--(void)actionsheetStartTimeShow
+-(void)actionsheetShow
 {
-    action2=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
-    if (starttimepicker==nil) {
-        starttimepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 162)];
-        starttimepicker.datePickerMode=UIDatePickerModeTime;
-        [starttimepicker addTarget:self action:@selector(updatestarttime:) forControlEvents:UIControlEventValueChanged];
+    if (action == nil) {
+        action = [[CustomIOS7AlertView alloc] init];
+        [action setContainerView:[self createDateView]];
+        [action setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action setDelegate:self];
     }
     
-    starttimepicker.frame=CGRectMake(0, 0, 320, 162);
+    [action show];
+}
+
+-(void)actionsheetStartTimeShow
+{
+    if (action2 == nil) {
+        action2 = [[CustomIOS7AlertView alloc] init];
+        [action2 setContainerView:[self createStartimeView]];
+        [action2 setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action2 setDelegate:self];
+    }
     
-    action2.bounds=CGRectMake(0, 0, 320, 200);
-    [action2 addSubview:starttimepicker];
-    [action2 showInView:self.window];
+    [action2 show];
 }
 
 -(void)actionsheetDurationShow
 {
-    action3=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    if (action3 == nil) {
+        action3 = [[CustomIOS7AlertView alloc] init];
+        [action3 setContainerView:[self createDurationView]];
+        [action3 setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action3 setDelegate:self];
+    }
     
+    [action3 show];
+}
+
+- (void)customIOS7dialogButtonTouchUpInside: (CustomIOS7AlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
+{
+    // 确定
+    if (buttonIndex == 1)
+    {
+        if (alertView == action3) {
+            durationtext.text = [NSString stringWithFormat:@"%02d:%02d:%02d", self.durationhour,self.durationmin,self.durationsec];
+        }
+    }
+    
+    [alertView close];
+}
+
+- (UIDatePicker*)createDateView
+{
+    if (datepicker==nil) {
+        datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
+        datepicker.datePickerMode=UIDatePickerModeDate;
+        [datepicker addTarget:self action:@selector(updatedate:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    datepicker.frame=CGRectMake(0, 0, 320, 100);
+    
+    return datepicker;
+}
+
+- (UIDatePicker*)createStartimeView
+{
+    if (starttimepicker==nil) {
+        starttimepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
+        starttimepicker.datePickerMode=UIDatePickerModeTime;
+        [starttimepicker addTarget:self action:@selector(updatestarttime:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    starttimepicker.frame=CGRectMake(0, 0, 320, 100);
+    return starttimepicker;
+}
+
+
+
+- (DurationPickerView*)createDurationView
+{
     if (durationpicker==nil) {
-        durationpicker=[[DurationPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 162)];
+        durationpicker=[[DurationPickerView alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y, 320, 162)];
     }
     
     durationpicker.delegate   = self;
@@ -489,18 +517,8 @@
     durationpicker.frame=CGRectMake(0, 0, 320, 162);
     [durationpicker selectRow:self.durationmin inComponent:1 animated:NO];
     [durationpicker selectRow:self.durationhour inComponent:0 animated:NO];
-
-    action3.bounds=CGRectMake(0, 0, 320, 200);
-
-    [action3 addSubview:durationpicker];
-    [action3 showInView:self.window];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
-{
-    if (actionSheet == action3) {
-        durationtext.text = [NSString stringWithFormat:@"%02d:%02d:%02d", self.durationhour,self.durationmin,self.durationsec];
-    }
+    
+    return durationpicker;
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView

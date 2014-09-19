@@ -561,6 +561,7 @@
     labletip.text=[NSString stringWithFormat:NSLocalizedString(@"Over", nil),[dur floatValue]/3600];
     startButton.enabled = YES;
     addRecordBtn.enabled = YES;
+    [self loadData];
 }
 
 -(void)stop
@@ -572,6 +573,7 @@
     startButton.selected=NO;
     startButton.enabled = YES;
     addRecordBtn.enabled = YES;
+    [self loadData];
 }
 
 -(void)cancel

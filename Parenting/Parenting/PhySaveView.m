@@ -213,33 +213,47 @@
     return YES;
 }
 
--(void)actionsheetShow
-{
-    action=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
-    if (datepicker==nil) {
-        datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, textRecordDate.frame.origin.y+45+G_YADDONVERSION, 320, 162)];
-        datepicker.datePickerMode=UIDatePickerModeDate;
-        [datepicker addTarget:self action:@selector(updateRecordDate:) forControlEvents:UIControlEventValueChanged];
-    }
-    
-    datepicker.frame=CGRectMake(0, 0, 320, 162);
-    action.bounds=CGRectMake(0, 0, 320, 200);
-    [action addSubview:datepicker];
-    [action showInView:self.superview];
-}
-
 -(void)updateRecordDate:(UIDatePicker*)sender{
     measureTime = sender.date;
     textRecordDate.text= [ACDate dateDetailFomatdate3:measureTime];
 }
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+-(void)actionsheetShow
 {
-    if (actionSheet == action) {
+    if (action == nil) {
+        action = [[CustomIOS7AlertView alloc] init];
+        [action setContainerView:[self createDateView]];
+        [action setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action setDelegate:self];
+    }
+    
+    [action show];
+}
+
+- (void)customIOS7dialogButtonTouchUpInside: (CustomIOS7AlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
         [self updateRecordDate:datepicker];
     }
+    
+    [alertView close];
+    
 }
+
+- (UIDatePicker*)createDateView
+{
+    if (datepicker==nil) {
+        datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, textRecordDate.frame.origin.y+45+G_YADDONVERSION, 320, 162)];
+        datepicker.datePickerMode=UIDatePickerModeDateAndTime;
+        [datepicker addTarget:self action:@selector(updateRecordDate:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    datepicker.frame=CGRectMake(0, 0, 320, 162);
+    
+    return datepicker;
+}
+
 
 
 @end
