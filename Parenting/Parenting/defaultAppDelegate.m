@@ -10,7 +10,7 @@
 #import "APService.h"
 #import "LoginViewController.h"
 #import "SyncController.h"
-#import <TestinAgent/TestinAgent.h>
+//#import <TestinAgent/TestinAgent.h>
 #import "UMSocialTencentWeiboHandler.h"
 
 @implementation defaultAppDelegate
@@ -111,17 +111,31 @@ void UncaughtExceptionHandler(NSException *exception) {
     _uncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
 
-    // Required
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert)];
-    // Required
-    [APService setupWithOption:launchOptions];
-    
-    //[APService setAlias:@"test" callbackSelector:nil object:self];
-    
-    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
+    }
+    else
+    {
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
+#else
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
+#endif
+        // Required
+        [APService setupWithOption:launchOptions];
+    }
     
 //    [[NSUserDefaults standardUserDefaults] setObject:@"BLE_ENV"  forKey:@"BLE_ENV"];
 //    
@@ -229,7 +243,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 - (void)initializePlat
 {
     //Testin Crash
-    [TestinAgent init:TESTIN_KEY];
+    //[TestinAgent init:TESTIN_KEY];
     
     //UMeng 统计
     [MobClick startWithAppkey:UMENGAPPKEY];
@@ -238,7 +252,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil)
     {
-        [TestinAgent setUserInfo:[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"]];
+        //[TestinAgent setUserInfo:[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"]];
     }
 
     
@@ -374,7 +388,8 @@ void UncaughtExceptionHandler(NSException *exception) {
    
 }
 
-- (void)networkDidReceiveMessage:(NSNotification *)notification {
+- (void)networkDidReceiveMessage:(NSNotification *)notification
+{
     NSDictionary * userInfo = [notification userInfo];
     NSString *content = [userInfo valueForKey:@"content"];
     //NSString *extras = [userInfo valueForKey:@"extras"];

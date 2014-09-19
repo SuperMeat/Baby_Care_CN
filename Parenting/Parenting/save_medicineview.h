@@ -14,7 +14,7 @@
 -(void)sendMedicineSaveChanged:(NSString*)medicinename andAmount:(NSString*)amount andIsReminder:(BOOL)isReminder andstarttime:(NSDate*)newstarttime;
 -(void)sendMedicineReloadData;
 @end
-@interface save_medicineview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,ACTypeListPickerViewDelegate>
+@interface save_medicineview : UIView<UITextViewDelegate,UITextFieldDelegate,CustomIOS7AlertViewDelegate,ACTypeListPickerViewDelegate>
 {
 UIImageView *imageview;
 UITextField *medicinedesptext;
@@ -26,14 +26,14 @@ UITextField *timeinternaltext;
 
 UIButton    *setNextTimeButton;
 UIDatePicker *datepicker;
-UIActionSheet *action;
+CustomIOS7AlertView *action;
 
 NSDate* curstarttime;
 NSString* oldstarttime;
 NSString* oldmedicine;
-    
+NSString* olddanwei;
 ACTypeListPickerView *typelistPickerView;
-UIActionSheet *actionType;
+CustomIOS7AlertView *actionType;
     
 long _createtime;
 long _updatetime;

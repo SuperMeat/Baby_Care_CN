@@ -81,6 +81,7 @@
 		case 0:
             ret = [descripeList objectAtIndex:row];
             [lbl setBackgroundColor:[backgroundColorList objectAtIndex:row]];
+            [lbl setAlpha:0.6];
             break;
         default:
             break;
@@ -107,7 +108,7 @@
 
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return 280;
+    return 300;
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {

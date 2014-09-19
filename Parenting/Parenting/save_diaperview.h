@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DiaperPickerView.h"
+#import "CustomIOS7AlertView.h"
 
 @protocol save_diaperviewDelegate<NSObject>
 @optional
@@ -15,7 +16,7 @@
 -(void)sendDiaperReloadData;
 @end
 
-@interface save_diaperview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,DiaperPickerViewDelegate>
+@interface save_diaperview : UIView<UITextViewDelegate,UITextFieldDelegate,CustomIOS7AlertViewDelegate,DiaperPickerViewDelegate>
 {
     UIImageView *imageview;
     UITextView *remarktext;
@@ -29,17 +30,17 @@
     UIButton *wet;
 
     UIDatePicker *datepicker;
-    UIActionSheet *action;
+    CustomIOS7AlertView *action;
     
     UIDatePicker *starttimepicker;
-    UIActionSheet *action2;
+    CustomIOS7AlertView *action2;
     
     DiaperPickerView *diaperPickerView1;
     DiaperPickerView *diaperPickerView2;
     DiaperPickerView *diaperPickerView3;
-    UIActionSheet *action3;
-    UIActionSheet *action4;
-    UIActionSheet *action5;
+    CustomIOS7AlertView *action3;
+    CustomIOS7AlertView *action4;
+    CustomIOS7AlertView *action5;
     UILabel *Hard;
     long _createtime;
     long _updatetime;

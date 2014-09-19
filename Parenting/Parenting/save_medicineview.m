@@ -271,6 +271,7 @@
         oldIsReminder = [[array objectAtIndex:5]intValue];
         oldstarttime  = datetext.text;
         oldmedicine   = medicinenametext.text;
+        olddanwei     = danweitext.text;
         if ([[array objectAtIndex:5]intValue]==0) {
             setNextTimeButton.tag = 101;
             [setNextTimeButton setImage:[UIImage imageNamed:@"radio"] forState:UIControlStateNormal];
@@ -521,8 +522,43 @@
 
 -(void)actionsheetShow
 {
-    action=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    if (action == nil) {
+        action = [[CustomIOS7AlertView alloc] init];
+        [action setContainerView:[self createDateView]];
+        [action setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action setDelegate:self];
+    }
     
+    [action show];
+}
+
+
+-(void)actionsheetShowTypeList
+{
+    if (actionType == nil) {
+        actionType = [[CustomIOS7AlertView alloc] init];
+        [actionType setContainerView:[self createACTypeListView]];
+        [actionType setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [actionType setDelegate:self];
+    }
+    
+    [actionType show];
+
+}
+
+- (void)customIOS7dialogButtonTouchUpInside: (CustomIOS7AlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        danweitext.text = olddanwei;
+    }
+    
+    [alertView close];
+
+}
+
+- (UIDatePicker*)createDateView
+{
     if (datepicker==nil) {
         datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
         datepicker.datePickerMode=UIDatePickerModeDateAndTime;
@@ -530,22 +566,13 @@
     }
     
     datepicker.frame=CGRectMake(0, 0, 320, 100);
+
     
-    action.bounds=CGRectMake(0, 0, 320, 200);
-    [action addSubview:datepicker];
-    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
-    if ([window.subviews containsObject:self]) {
-        [action showInView:self];
-    } else {
-        [action showInView:window];
-    }
+    return datepicker;
 }
 
-
--(void)actionsheetShowTypeList
+- (ACTypeListPickerView*)createACTypeListView
 {
-    actionType=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
     if (typelistPickerView==nil) {
         typelistPickerView=[[ACTypeListPickerView alloc]initWithFrame:CGRectMake(0, danweitext.frame.origin.y+45, 320, 100) TypeList:danweiList];
         typelistPickerView.typeListPickerViewDelegate = self;
@@ -570,21 +597,9 @@
     
     typelistPickerView.frame=CGRectMake(0, 0, 320, 100);
     
-    actionType.bounds=CGRectMake(0, 0, 320, 200);
-    [actionType addSubview:typelistPickerView];
-    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
-    if ([window.subviews containsObject:self]) {
-        [actionType showInView:self];
-    } else {
-        [actionType showInView:window];
-    }
-
+    return typelistPickerView;
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
-{
-
-}
 
 - (UIView *)pickerView:(UIPickerView *)pickerView
             viewForRow:(NSInteger)row

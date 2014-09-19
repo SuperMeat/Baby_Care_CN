@@ -458,28 +458,6 @@
     datetext.text = [ACDate dateFomatdate:curstarttime];
 }
 
--(void)actionsheetShow
-{
-    action=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
-    if (datepicker==nil) {
-        datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
-        datepicker.datePickerMode=UIDatePickerModeDate;
-        [datepicker addTarget:self action:@selector(updatedate:) forControlEvents:UIControlEventValueChanged];
-    }
-    
-    datepicker.frame=CGRectMake(0, 0, 320, 100);
-    
-    action.bounds=CGRectMake(0, 0, 320, 200);
-    [action addSubview:datepicker];
-    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
-    if ([window.subviews containsObject:self]) {
-        [action showInView:self];
-    } else {
-        [action showInView:window];
-    }
-}
-
 
 -(void)updatestarttime:(UIDatePicker*)sender
 {
@@ -509,10 +487,104 @@
     starttimetext.text = [ACDate getStarttimefromdate:curstarttime];
 }
 
+-(void)actionsheetShow
+{
+    if (action == nil) {
+        action = [[CustomIOS7AlertView alloc] init];
+        [action setContainerView:[self createDateView]];
+        [action setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action setDelegate:self];
+    }
+    
+    [action show];
+}
+
 -(void)actionsheetStartTimeShow
 {
-    action2=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    if (action2 == nil) {
+        action2 = [[CustomIOS7AlertView alloc] init];
+        [action2 setContainerView:[self createStartimeView]];
+        [action2 setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action2 setDelegate:self];
+    }
     
+    [action2 show];}
+
+
+-(void)actionsheetDiaperPickerAmout
+{
+    if (action3 == nil) {
+        action3 = [[CustomIOS7AlertView alloc] init];
+        [action3 setContainerView:[self createAmountSelectView]];
+        [action3 setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action3 setDelegate:self];
+    }
+
+   [action3 show];
+}
+
+-(void)actionsheetDiaperPickerColor
+{
+    if (action4 == nil) {
+        action4 = [[CustomIOS7AlertView alloc] init];
+        [action4 setContainerView:[self createColorSelectView]];
+        [action4 setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action4 setDelegate:self];
+    }
+    
+    [action4 show];
+}
+
+-(void)actionsheetDiaperPickerHard
+{
+    if (action5 == nil) {
+        action5 = [[CustomIOS7AlertView alloc] init];
+        [action5 setContainerView:[self createHardSelectView]];
+        [action5 setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [action5 setDelegate:self];
+    }
+    
+    [action5 show];
+}
+
+#pragma mark - CustomIOS7AlertView delegate
+- (void)customIOS7dialogButtonTouchUpInside: (CustomIOS7AlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
+{
+    // 确定
+    if (buttonIndex == 1)
+    {
+        if (alertView == action3) {
+            amounttext.text = [NSString stringWithFormat:@"%@", self.amount];
+        }
+        
+        if (alertView == action4) {
+            colortext.text = [NSString stringWithFormat:@"%@", self.color];
+        }
+        
+        if (alertView == action5) {
+            hardtext.text = [NSString stringWithFormat:@"%@", self.hard];
+        }
+        
+    }
+    
+    [alertView close];
+}
+
+- (UIDatePicker*)createDateView
+{
+    if (datepicker==nil) {
+        datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
+        datepicker.datePickerMode=UIDatePickerModeDate;
+        [datepicker addTarget:self action:@selector(updatedate:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    datepicker.frame=CGRectMake(0, 0, 320, 100);
+
+    return datepicker;
+}
+
+- (UIDatePicker*)createStartimeView
+{
     if (starttimepicker==nil) {
         starttimepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
         starttimepicker.datePickerMode=UIDatePickerModeTime;
@@ -520,22 +592,17 @@
     }
     
     starttimepicker.frame=CGRectMake(0, 0, 320, 100);
-    
-    action2.bounds=CGRectMake(0, 0, 320, 200);
-    [action2 addSubview:starttimepicker];
-    [action2 showInView:self.window];
+    return starttimepicker;
 }
 
-
--(void)actionsheetDiaperPickerAmout
+- (DiaperPickerView *)createAmountSelectView
 {
-    action3=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
-    if (diaperPickerView1==nil) {
+    if (diaperPickerView1==nil)
+    {
         diaperPickerView1 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, amounttext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_AMOUNT Option:DIAPER_OPTION_XUXU];
         diaperPickerView1.diaperPickerViewDelegate = self;
     }
-   
+    
     if ([self.amount isEqualToString:@"无"]) {
         [diaperPickerView1 selectRow:0 inComponent:0 animated:YES];
     }
@@ -564,15 +631,11 @@
     diaperPickerView1.showsSelectionIndicator = YES;
     diaperPickerView1.frame=CGRectMake(0, 0, 320, 162);
     
-    action3.bounds=CGRectMake(0, 0, 320, 200);
-    [action3 addSubview:diaperPickerView1];
-    [action3 showInView:self.window];
+    return diaperPickerView1;
 }
 
--(void)actionsheetDiaperPickerColor
+-(DiaperPickerView*)createColorSelectView
 {
-    action4=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
     if (diaperPickerView2==nil) {
         diaperPickerView2 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, colortext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_COLOR Option:DIAPER_OPTION_XUXU];
         diaperPickerView2.diaperPickerViewDelegate = self;
@@ -604,18 +667,13 @@
     }
     
     diaperPickerView2.showsSelectionIndicator = YES;
-
-    diaperPickerView2.frame=CGRectMake(0, 0, 320, 162);
     
-    action4.bounds=CGRectMake(0, 0, 320, 200);
-    [action4 addSubview:diaperPickerView2];
-    [action4 showInView:self.window];
+    diaperPickerView2.frame=CGRectMake(0, 0, 320, 162);
+    return diaperPickerView2;
 }
 
--(void)actionsheetDiaperPickerHard
+-(DiaperPickerView*)createHardSelectView
 {
-    action5=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
     if (diaperPickerView3==nil) {
         diaperPickerView3 = [[DiaperPickerView alloc]initWithFrame:CGRectMake(0, hardtext.frame.origin.y+45, 320, 162) Type:DIAPER_TYPE_HARD Option:DIAPER_OPTION_XUXU];
         diaperPickerView3.diaperPickerViewDelegate = self;
@@ -649,24 +707,7 @@
     diaperPickerView3.showsSelectionIndicator = YES;
     diaperPickerView3.frame=CGRectMake(0, 0, 320, 162);
     
-    action5.bounds=CGRectMake(0, 0, 320, 200);
-    [action5 addSubview:diaperPickerView3];
-    [action5 showInView:self.window];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
-{
-    if (actionSheet == action3) {
-        amounttext.text = [NSString stringWithFormat:@"%@", self.amount];
-    }
-    
-    if (actionSheet == action4) {
-        colortext.text = [NSString stringWithFormat:@"%@", self.color];
-    }
-    
-    if (actionSheet == action5) {
-        hardtext.text = [NSString stringWithFormat:@"%@", self.hard];
-    }
+    return diaperPickerView3;
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView

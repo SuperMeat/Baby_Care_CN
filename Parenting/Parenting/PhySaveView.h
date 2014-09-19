@@ -12,7 +12,7 @@
 -(void)sendPhyReloadData;
 @end
 
-@interface PhySaveView : UIView<UITextFieldDelegate,UIActionSheetDelegate>
+@interface PhySaveView : UIView<UITextFieldDelegate,CustomIOS7AlertViewDelegate>
 {
     NSString *opType;
     int itemType;
@@ -28,7 +28,7 @@
     UIButton *buttonCancel;
     
     UIDatePicker *datepicker;
-    UIActionSheet *action;
+    CustomIOS7AlertView *action;
 }
 
 - (id)initWithFrame:(CGRect)frame Type:(int)type OpType:(NSString *)operateType CreateTime:(long)create_time;

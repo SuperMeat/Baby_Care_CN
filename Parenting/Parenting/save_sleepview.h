@@ -15,7 +15,7 @@
 -(void)sendSleepReloadData;
 @end
 
-@interface save_sleepview : UIView<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface save_sleepview : UIView<UITextViewDelegate,UITextFieldDelegate,CustomIOS7AlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIImageView *imageview;
     UITextView *remarktext;
@@ -24,16 +24,16 @@
     UITextField *starttimetext;
     
     UIDatePicker *datepicker;
-    UIActionSheet *action;
+    CustomIOS7AlertView *action;
     
     UIDatePicker *starttimepicker;
-    UIActionSheet *action2;
+    CustomIOS7AlertView *action2;
     
     NSDate* curstarttime;
     long _createtime;
     long _updatetime;
     DurationPickerView *durationpicker;
-    UIActionSheet *action3;
+    CustomIOS7AlertView *action3;
     NSMutableArray *hours;
     NSMutableArray *minutes;
     

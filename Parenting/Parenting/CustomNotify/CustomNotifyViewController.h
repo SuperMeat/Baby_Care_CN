@@ -10,14 +10,14 @@
 #import "LocalNotify.h"
 #import "CustonTimeViewController.h"
 
-@interface CustomNotifyViewController : UIViewController< UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIAlertViewDelegate, CustonTimeViewControllerDelegate>
+@interface CustomNotifyViewController : UIViewController< UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CustomIOS7AlertViewDelegate, CustonTimeViewControllerDelegate>
 {
     NSMutableArray *hours;
     NSMutableArray *minutes;
     BOOL isNew;
     
     UIPickerView *durationpicker;
-    UIActionSheet *action3;
+    CustomIOS7AlertView *action3;
     
     BOOL ischanged;
 }

@@ -169,13 +169,11 @@
     _textFiledSex.leftView=lable3;
     
     
-    [_buttonMale setTitle:NSLocalizedString(@"Male",nil) forState:UIControlStateNormal];
     _buttonMale.tag=101;
     _buttonFemale.tag=102;
     [_buttonMale setTitleColor:[UIColor colorWithRed:0xAF/255.0 green:0xAF/255.0 blue:0xAF/255.0 alpha:0xFF/255.0] forState:UIControlStateNormal];
     [_buttonFemale setTitleColor:[UIColor colorWithRed:0xAF/255.0 green:0xAF/255.0 blue:0xAF/255.0 alpha:0xFF/255.0]forState:UIControlStateNormal];
     
-    [_buttonFemale setTitle:NSLocalizedString(@"Female",nil) forState:UIControlStateNormal];
     [_buttonMale setImage:[UIImage imageNamed:@"radio.png"] forState:UIControlStateNormal];
     [_buttonFemale setImage:[UIImage imageNamed:@"radio.png"] forState:UIControlStateNormal];
     _buttonMale.contentMode=UIViewContentModeScaleAspectFit;
@@ -263,20 +261,42 @@
 
 -(void)actionsheetShow
 {
-    _action=[[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:nil otherButtonTitles: nil];
+    if (_action == nil) {
+        _action = [[CustomIOS7AlertView alloc] init];
+        [_action setContainerView:[self createDateView]];
+        [_action setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
+        [_action setDelegate:self];
+    }
     
+    [_action show];
+}
+
+- (void)customIOS7dialogButtonTouchUpInside: (CustomIOS7AlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        if (alertView == _action) {
+            [self updatebirsthday:_datepicker];
+            return;
+        }
+    }
+    
+    [alertView close];
+    
+}
+
+- (UIDatePicker*)createDateView
+{
     if (_datepicker==nil) {
-        _datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, _textFiledBirth.frame.origin.y+45+G_YADDONVERSION, 320, 100)];
+        _datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, _textFiledBirth.frame.origin.y+45+G_YADDONVERSION, 320, 162)];
         _datepicker.datePickerMode=UIDatePickerModeDate;
         _datepicker.maximumDate = [NSDate date];
         [_datepicker addTarget:self action:@selector(updatebirsthday:) forControlEvents:UIControlEventValueChanged];
     }
     
-    _datepicker.frame=CGRectMake(0, 0, 320, 100);
+    _datepicker.frame=CGRectMake(0, 0, 320, 162);
     
-    _action.bounds=CGRectMake(0, 0, 320, 200);
-    [_action addSubview:_datepicker];
-    [_action showFromTabBar:self.tabBarController.tabBar];
+    return _datepicker;
 }
 
 
@@ -348,12 +368,8 @@
     [action1 showInView:self.view];
 }
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (actionSheet == _action) {
-        [self updatebirsthday:_datepicker];
-        return;
-    }
-    
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     if (buttonIndex==[actionSheet destructiveButtonIndex]) {
         [self imageSelectFromCamera];
     }

@@ -12,7 +12,7 @@
 -(void)sendTempReloadData;
 @end
 
-@interface TempSaveView : UIView<UITextFieldDelegate,UIActionSheetDelegate>
+@interface TempSaveView : UIView<UITextFieldDelegate,CustomIOS7AlertViewDelegate>
 {
     NSString *opType;
     int itemType;
@@ -26,7 +26,7 @@
     UIButton *buttonCancel;
     
     UIDatePicker *datepicker;
-    UIActionSheet *action;
+    CustomIOS7AlertView *action;
 }
 
 - (id)initWithFrame:(CGRect)frame Type:(NSString *)type CreateTime:(long)create_time;

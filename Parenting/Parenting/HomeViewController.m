@@ -119,10 +119,10 @@
         isPushSocialView = NO;
         _loginView.hidden = NO;
     }
-    else{
-        [self ScoringTheApp];
-    }
-} 
+//    else{
+//        [self ScoringTheApp];
+//    }
+}
 
 -(void)viewDidDisappear:(BOOL)animated{
     if (isPushSocialView) {

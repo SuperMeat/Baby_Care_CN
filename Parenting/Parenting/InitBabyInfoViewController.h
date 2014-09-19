@@ -14,11 +14,11 @@
 -(void)initHomeData;
 @end
 
-@interface InitBabyInfoViewController : UIViewController<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
+@interface InitBabyInfoViewController : UIViewController<UIImagePickerControllerDelegate,CustomIOS7AlertViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 {
     UIImagePickerController *_imagePicker;
     UIDatePicker *_datepicker;
-    UIActionSheet *_action;
+    CustomIOS7AlertView *_action;
     
     __weak IBOutlet UIView *_TopView;
     __weak IBOutlet UIScrollView *_mainScrollView;
