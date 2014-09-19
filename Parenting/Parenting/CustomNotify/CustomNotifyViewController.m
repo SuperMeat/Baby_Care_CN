@@ -347,7 +347,7 @@
     
 }
 
-- (UIDatePicker*)createDateView
+- (UIPickerView*)createDateView
 {
     if (durationpicker==nil) {
         durationpicker=[[UIPickerView alloc]initWithFrame:CGRectMake(0, self.textfieldTimeTip.frame.origin.y+45, 320, 100)];
@@ -437,12 +437,12 @@
 
 - (void)keyboardWillShown:(NSNotification*)aNotification
 {
-    //[self keyboradshow];
+    [self keyboradshow];
 }
 
 -(void)keyboardWillHidden:(NSNotification*)aNotification
 {
-    //[self keyboradhidden];
+    [self keyboradhidden];
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView
@@ -498,23 +498,30 @@
 
 -(void)keyboradshow
 {
-    
-    NSTimeInterval animationDuration = 0.25f;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    _myScrollView.contentOffset=CGPointMake(_myScrollView.contentOffset.x, _myScrollView.contentOffset.y+20);
-    
-    [UIView commitAnimations];
+    if (!isShow)
+    {
+        NSTimeInterval animationDuration = 0.25f;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        _myScrollView.contentOffset=CGPointMake(_myScrollView.contentOffset.x, _myScrollView.contentOffset.y+20);
+        
+        [UIView commitAnimations];
+        isShow = YES;
+    }
     
 }
 
 -(void)keyboradhidden
 {
-    NSTimeInterval animationDuration = 0.25f;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    _myScrollView.contentOffset=CGPointMake(_myScrollView.contentOffset.x, _myScrollView.contentOffset.y-20);
-    [UIView commitAnimations];
+    if (isShow) {
+        NSTimeInterval animationDuration = 0.25f;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        _myScrollView.contentOffset=CGPointMake(_myScrollView.contentOffset.x, _myScrollView.contentOffset.y-20);
+        [UIView commitAnimations];
+        isShow = NO;
+    }
+    
 }
 
 -(void)sendSelected:(int)tag1 andbtn2tag:(int)tag2 andbtn3tag:(int)tag3 andbtn4tag:(int)tag4 andbtn5tag:(int)tag5 andbtn6tag:(int)tag6 andbtn7tag:(int)tag7
@@ -647,4 +654,5 @@
 
     }
 }
+
 @end
