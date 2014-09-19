@@ -41,7 +41,6 @@
 		480D467319AF12CC005AC58A /* 启动界面640-1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467119AF12CC005AC58A /* 启动界面640-1136.png */; };
 		480D467519B0234D005AC58A /* 启动界面320-480.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467419B0234D005AC58A /* 启动界面320-480.png */; };
 		480D6CEF19248D1700E5CAC7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CEE19248D1700E5CAC7 /* line.png */; };
-		480D6CF21924A75800E5CAC7 /* radio_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF01924A75800E5CAC7 /* radio_focus.png */; };
 		480D6CF31924A75800E5CAC7 /* radio.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF11924A75800E5CAC7 /* radio.png */; };
 		480D6CF81924ABE800E5CAC7 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF41924ABE800E5CAC7 /* arrow_down@2x.png */; };
 		480D6CF91924ABE800E5CAC7 /* arrow_flat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF51924ABE800E5CAC7 /* arrow_flat@2x.png */; };
@@ -135,7 +134,6 @@
 		48152E2F1848721F009A4900 /* GuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48152E2D1848721F009A4900 /* GuideViewController.xib */; };
 		48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */; };
 		48152E4F1851B842009A4900 /* MyLocalNofityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */; };
-		481859BA197E310B00589557 /* TestinAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481859B9197E310B00589557 /* TestinAgent.framework */; };
 		481968A31959378F003A9D37 /* AdviseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 481968A11959378F003A9D37 /* AdviseTableViewCell.m */; };
 		481968A41959378F003A9D37 /* AdviseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 481968A21959378F003A9D37 /* AdviseTableViewCell.xib */; };
 		481D0D4F195BC2680025281A /* 分界线@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 481D0D4A195BC2680025281A /* 分界线@2x.png */; };
@@ -1375,7 +1373,6 @@
 		480D467119AF12CC005AC58A /* 启动界面640-1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面640-1136.png"; sourceTree = "<group>"; };
 		480D467419B0234D005AC58A /* 启动界面320-480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面320-480.png"; sourceTree = "<group>"; };
 		480D6CEE19248D1700E5CAC7 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
-		480D6CF01924A75800E5CAC7 /* radio_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_focus.png; sourceTree = "<group>"; };
 		480D6CF11924A75800E5CAC7 /* radio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio.png; sourceTree = "<group>"; };
 		480D6CF41924ABE800E5CAC7 /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
 		480D6CF51924ABE800E5CAC7 /* arrow_flat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_flat@2x.png"; sourceTree = "<group>"; };
@@ -1477,7 +1474,6 @@
 		48152E4B1851B842009A4900 /* MyLocalNofityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLocalNofityViewController.h; path = LocalNofication/MyLocalNofityViewController.h; sourceTree = "<group>"; };
 		48152E4C1851B842009A4900 /* MyLocalNofityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLocalNofityViewController.m; path = LocalNofication/MyLocalNofityViewController.m; sourceTree = "<group>"; };
 		48152E4D1851B842009A4900 /* MyLocalNofityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyLocalNofityViewController.xib; path = LocalNofication/MyLocalNofityViewController.xib; sourceTree = "<group>"; };
-		481859B9197E310B00589557 /* TestinAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TestinAgent.framework; sourceTree = "<group>"; };
 		481859BB197E315600589557 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		481968A01959378F003A9D37 /* AdviseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviseTableViewCell.h; sourceTree = "<group>"; };
 		481968A11959378F003A9D37 /* AdviseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviseTableViewCell.m; sourceTree = "<group>"; };
@@ -3088,7 +3084,6 @@
 				48EF60F118C5BDAC006C3D5C /* OpenGLES.framework in Frameworks */,
 				BE7C69361867DCCE00C4B675 /* MobileCoreServices.framework in Frameworks */,
 				48D41FDC19C9285C005A8E6B /* TencentOpenAPI.framework in Frameworks */,
-				481859BA197E310B00589557 /* TestinAgent.framework in Frameworks */,
 				48FEAF9218E94ACE002425E2 /* libUartLib.a in Frameworks */,
 				48D41FB219C9206A005A8E6B /* libUMSocial_Sdk_Comment_4.1.a in Frameworks */,
 				48013D3D185AE47900F483A6 /* CoreBluetooth.framework in Frameworks */,
@@ -3422,7 +3417,6 @@
 				48DCDC081975061B00EA7875 /* label_breast_focus@2x.png */,
 				48DCDC0A1975061B00EA7875 /* label_food_focus@2x.png */,
 				48DCDC0B1975061B00EA7875 /* label_food@2x.png */,
-				480D6CF01924A75800E5CAC7 /* radio_focus.png */,
 				480D6CF11924A75800E5CAC7 /* radio.png */,
 				480EF98318E5155C00D40903 /* btn_feeding_pause@2x.png */,
 				480EF98418E5155C00D40903 /* btn_feeding_play@2x.png */,
@@ -5714,7 +5708,6 @@
 				48D41F9419C9206A005A8E6B /* UMSocial_Sdk_4.1 */,
 				486CD6E51998948D0026061E /* MAMAP */,
 				481859BB197E315600589557 /* CoreText.framework */,
-				481859B9197E310B00589557 /* TestinAgent.framework */,
 				4880A56F1919CFA3005D5E44 /* AdSupport.framework */,
 				48FEAF8F18E94ACE002425E2 /* UartLib */,
 				48EF60F218C5BDC8006C3D5C /* libstdc++.6.0.9.dylib */,
@@ -6341,7 +6334,6 @@
 				480D6CFA1924ABE800E5CAC7 /* arrow_up@2x.png in Resources */,
 				480EFA1718E5155C00D40903 /* panels@2x.png in Resources */,
 				48866EEF199A12E6007B16AA /* bg_headView.jpg in Resources */,
-				480D6CF21924A75800E5CAC7 /* radio_focus.png in Resources */,
 				BE1F0C6E19A1DE51000BFEED /* btn_tips_add.png in Resources */,
 				48866FD1199A12E6007B16AA /* FootView.xib in Resources */,
 				4828F4FC19A495D700D04926 /* 8.1.1.jpg in Resources */,

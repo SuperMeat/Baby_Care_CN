@@ -103,9 +103,9 @@
 {
     [super layoutSubviews];
     
-    if (_row > 0) {
-
-        [_tableView setContentOffset:CGPointMake(0, _row*72) animated:YES];
+    if (_row > 0)
+    {
+        [_tableView setContentOffset:CGPointMake(0, _row*72) animated:NO];
     }
 }
 
