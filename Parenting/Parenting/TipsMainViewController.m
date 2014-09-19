@@ -22,6 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.hidesBottomBarWhenPushed=YES;
+        self.navigationController.navigationBarHidden = NO;
     }
     return self;
 }
@@ -29,6 +30,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIButton *btnChange = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 60, 20)];
+    [btnChange setTitle:@"show" forState:UIControlStateNormal];
+    btnChange.backgroundColor = [UIColor redColor];
+    [btnChange addTarget:self action:@selector(showtest) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnChange];
+    
+}
+
+-(void)showtest{
+    if(_scrollView.contentOffset.x == 0){
+        [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
+    }
+    [_scrollView setContentOffset:CGPointMake(0, 64) animated:NO];
+    
     [self initView];
     [self initData];
 }
@@ -40,17 +55,8 @@
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];
     }
     
-    [_scrollView setContentOffset:CGPointMake(0, 64) animated:NO];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-}
-
-
--(void)viewDidAppear:(BOOL)animated{
-    
+    [self initView];
+    [self initData];
 }
 
 -(void)initView{
@@ -90,26 +96,27 @@
 
     self.navigationItem.rightBarButtonItem = rightbar;
     //加载ScrollView
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width * 2, kDeviceHeight-64)];
- 
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width * 2, kDeviceHeight-64)];
     _scrollView.scrollEnabled = false;
     _scrollView.showsHorizontalScrollIndicator = false;
     _scrollView.showsVerticalScrollIndicator = false;
-    [self.view addSubview:_scrollView];
     
     //加载已订阅TableView
     _tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, _scrollView.frame.size.width / 2,  _scrollView.frame.size.height) style:UITableViewStyleGrouped];
     _tTableView.dataSource = self;
     _tTableView.delegate = self;
-    [_scrollView addSubview:_tTableView];
+    
     
     //加载欲订阅TableView
     _sTableView = [[UITableView alloc]initWithFrame:CGRectMake(_scrollView.frame.size.width / 2, 0, _scrollView.frame.size.width / 2,  _scrollView.frame.size.height) style:UITableViewStyleGrouped];
     _sTableView.dataSource = self;
     _sTableView.delegate = self;
-    [_scrollView addSubview:_sTableView];
-    _scrollView.backgroundColor = _tTableView.backgroundColor;
     
+    [_scrollView addSubview:_tTableView];
+    [_scrollView addSubview:_sTableView];
+    [self.view addSubview:_scrollView];
+    
+    _scrollView.backgroundColor = _tTableView.backgroundColor;
 }
 
 -(void)initData{
@@ -274,10 +281,12 @@
         [cell addSubview:titleLabel];
         
         //加载类目描述
-        UILabel *describeLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, 200, 24)];
+        UILabel *describeLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 42, 160, 30)];
         describeLabel.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
         describeLabel.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         describeLabel.text = [[subArray objectAtIndex:indexPath.row] objectAtIndex:2];
+        describeLabel.lineBreakMode = UILineBreakModeWordWrap;
+        describeLabel.numberOfLines = 0;
         [cell addSubview:describeLabel];
         
         //TODO:订阅和取消订阅类目
@@ -302,7 +311,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80;
+    return 80; 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
