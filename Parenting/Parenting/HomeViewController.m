@@ -119,6 +119,9 @@
         isPushSocialView = NO;
         _loginView.hidden = NO;
     }
+    else{
+        [self ScoringTheApp];
+    }
 } 
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -783,6 +786,10 @@
              viewController:self];
         }
     }
+}
+
+-(void)ScoringTheApp{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
 }
 
 - (void)didReceiveMemoryWarning

@@ -268,6 +268,7 @@
     if (_datepicker==nil) {
         _datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, _textFiledBirth.frame.origin.y+45+G_YADDONVERSION, 320, 100)];
         _datepicker.datePickerMode=UIDatePickerModeDate;
+        _datepicker.maximumDate = [NSDate date];
         [_datepicker addTarget:self action:@selector(updatebirsthday:) forControlEvents:UIControlEventValueChanged];
     }
     

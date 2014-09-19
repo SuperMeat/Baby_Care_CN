@@ -170,7 +170,7 @@
         return NO;
     }
     else if (textField == textValue && ![self isLegal:textValue.text]){
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@数值异常,%@必须在正常范围内!",itemName,itemName]  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@数值必须在婴儿正常范围内!\n[身高范围:30~110cm]\n[体重范围:2~16kg]\n[头围范围:25~60cm]",itemName]  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         textValue.text = @"";
         return NO;
@@ -220,6 +220,10 @@
     if (datepicker==nil) {
         datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, textRecordDate.frame.origin.y+45+G_YADDONVERSION, 320, 162)];
         datepicker.datePickerMode=UIDatePickerModeDate;
+        BabyDataDB *babyDb = [[BabyDataDB alloc]init];
+        NSDictionary *dict = [babyDb selectBabyInfoByBabyId:BABYID];
+        long birthTime = [[dict objectForKey:@"birth"] longValue];
+        datepicker.minimumDate = [ACDate getDateFromTimeStamp:birthTime];
         [datepicker addTarget:self action:@selector(updateRecordDate:) forControlEvents:UIControlEventValueChanged];
     }
     
