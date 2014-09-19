@@ -57,7 +57,7 @@
     _labelBabyName.text = @"宝宝昵称";
     [self addSubview:_labelBabyName];
     
-    _btnTips = [[UIButton alloc] initWithFrame:CGRectMake(270, 10, 51, 51)];
+    _btnTips = [[UIButton alloc] initWithFrame:CGRectMake(270, 10, 51, 51)]; 
     [_btnTips setBackgroundImage:[UIImage imageNamed:@"btn_sum2.png"] forState:UIControlStateNormal];
     [_btnTips addTarget:self action:@selector(goTips:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_btnTips];
