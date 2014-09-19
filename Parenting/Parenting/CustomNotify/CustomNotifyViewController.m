@@ -108,11 +108,13 @@
     [self.textfieldTitleTip setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
     self.textfieldTitleTip.userInteractionEnabled = YES;
     [self.textfieldTitleTip setTextColor:[UIColor colorWithRed:0xAF/255.0 green:0xAF/255.0 blue:0xAF/255.0 alpha:0xFF/255.0]];
+    self.textfieldTitleTip.delegate = self;
     
     [self.btnredundant.titleLabel setTextAlignment:NSTextAlignmentCenter];
 
     
-    if (self.ln.createtime != nil) {
+    if (self.ln.createtime != nil)
+    {
         self.textfieldTitleTip.text = self.ln.title;
         self.textfieldTimeTip.text  = self.ln.time;
         
@@ -249,6 +251,28 @@
     
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+
+{
+    for (id key in self.view.subviews) {
+        if ([key isKindOfClass:[UITextField class]]) {
+            [key resignFirstResponder];
+        }
+        
+        if ([key isKindOfClass:[UIButton class]]) {
+            [key resignFirstResponder];
+        }
+    }
+    
+    [self.textfieldTitleTip resignFirstResponder];
+    [self.textfieldTimeTip resignFirstResponder];
+    
+    if ([UIApplication sharedApplication].statusBarStyle != UIStatusBarStyleLightContent)
+    {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+}
+
 #pragma mark UIPickerViewDelegate Methods
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -298,21 +322,6 @@
 }
 
 #pragma -mark textfield delegate
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    for (id view in self.view.subviews) {
-        if ([view isKindOfClass:[UITextField class]]) {
-            [view resignFirstResponder];
-        }
-    }
-
-    if ([UIApplication sharedApplication].statusBarStyle != UIStatusBarStyleLightContent)
-    {
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    }
-    
-
-}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -381,6 +390,7 @@
     }
     
     if (textField == self.textfieldTimeTip) {
+        [self keyboardWillHidden:nil];
         [self actionsheetDurationShow];
         [self.textfieldTimeTip resignFirstResponder];
     }
@@ -568,7 +578,6 @@
     if ([redundant isEqualToString:@"每周"]) {
         [self.labelredundant removeFromSuperview];
         self.ln.redundant = @"永不";
-        self.btnredundant.titleLabel.text = @"永不";
     }
     else
     {
@@ -598,7 +607,6 @@
         }
 
         [self.btnredundant addSubview:self.labelredundant];
-        self.btnredundant.titleLabel.text = @"";
         ischanged = YES;
     }
     
