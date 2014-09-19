@@ -107,7 +107,8 @@
         [self.navigationController pushViewController:ctr animated:NO];
         return;
     }
-    else{ 
+    else{
+        [_initTimeLineData getTimeLineData];
         [self initData];
     }
     [MobClick beginLogPageView:@"首页"];
@@ -118,10 +119,7 @@
         isPushSocialView = NO;
         _loginView.hidden = NO;
     }
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-}
+} 
 
 -(void)viewDidDisappear:(BOOL)animated{
     if (isPushSocialView) {
@@ -184,8 +182,10 @@
     [_mainScrollView addSubview:_timeLineTableView];
     
     _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _activityView.frame = CGRectMake(10,_photoAreaView.height - 25, 20.0f, 20.0f);
-    [_photoAreaView addSubview:_activityView];
+    _activityView.frame = CGRectMake(150 ,_timeLineTableView.height + 12, 20.0f, 20.0f);
+    [_mainScrollView addSubview:_activityView];
+//    [_photoAreaView addSubview:_activityView];
+    
 }
 
 -(void)initData{
@@ -219,7 +219,8 @@
     }
     
     _timeLineTableView.height = dTableHeight;
-    _mainScrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width,_timeLineTableView.height);
+    _mainScrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width,_timeLineTableView.height + 44); // 44是加载视图区域
+    [_activityView setFrame:CGRectMake(150 ,_timeLineTableView.height + 12, 20.0f, 20.0f)];
     [_timeLineTableView reloadData];
 }
 
