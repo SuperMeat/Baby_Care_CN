@@ -20,6 +20,7 @@
     CustomIOS7AlertView *action3;
     
     BOOL ischanged;
+    BOOL isShow;
 }
 @property (strong, nonatomic) IBOutlet UILabel *labelRedundant;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;

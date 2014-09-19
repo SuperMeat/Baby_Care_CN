@@ -275,9 +275,9 @@
 {
     if (buttonIndex == 1)
     {
-        if (alertView == _action) {
+        if (alertView == _action)
+        {
             [self updatebirsthday:_datepicker];
-            return;
         }
     }
     
