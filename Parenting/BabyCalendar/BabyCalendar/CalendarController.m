@@ -68,7 +68,7 @@
     [super viewDidLoad];
     
     // 标题日期
-    _titleView = [[CkCalendarTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 44)];
+    _titleView = [[CkCalendarTitleView alloc] initWithFrame:CGRectMake(0, 0, 220, 44)];
     _titleView.delegate = self;
     _titleView.backgroundColor = [UIColor clearColor];
     self.navigationItem.titleView = _titleView;

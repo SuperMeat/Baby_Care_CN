@@ -164,7 +164,7 @@
         LocalNotifyCell *Cell=[tableView dequeueReusableCellWithIdentifier:@"Notify"];
         if (Cell == nil) {
             Cell = [[[NSBundle mainBundle] loadNibNamed:@"LocalNotifyCell" owner:self options:nil] lastObject];
-            Cell.selectionStyle=UITableViewCellSelectionStyleGray;
+            Cell.selectionStyle=UITableViewCellSelectionStyleNone;
             
         }
         LocalNotify *ln      = [notifylist objectAtIndex:indexPath.section];
