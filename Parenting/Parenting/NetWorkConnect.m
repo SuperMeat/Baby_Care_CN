@@ -16,7 +16,7 @@
 
 static NetWorkConnect * _instance;
 
-#define request_timeout 2
+#define request_timeout 10
 
 @implementation NetWorkConnect
 @synthesize delegate;

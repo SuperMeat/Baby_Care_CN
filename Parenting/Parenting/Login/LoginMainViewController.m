@@ -189,6 +189,41 @@
 #pragma 检测or创建宝贝
 -(void)checkBaby{
     if (ACCOUNTUID) {
+        int babyId=0;
+        /*
+         *  判断该账户下是否已有宝宝,如有,则默认加载
+         */
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentDir = [documentPaths objectAtIndex:0];
+        NSError *error = nil;
+        NSArray *fileList = [[NSArray alloc] init];
+        fileList = [fileManager contentsOfDirectoryAtPath:documentDir error:&error];
+        BOOL isDir = NO;
+        for (NSString *file in fileList) {
+            NSString *path = [documentDir stringByAppendingPathComponent:file];
+            [fileManager fileExistsAtPath:path isDirectory:(&isDir)];
+            if (isDir) {
+                NSArray *split = [file componentsSeparatedByString:@"_"];
+                if ([split count] == 2 && [[split objectAtIndex:0] intValue] == ACCOUNTUID) {
+                    babyId = [[split objectAtIndex:1] intValue];
+                    break;
+                }
+            }
+            isDir = NO;
+        }
+        
+        if (babyId != 0) {
+            //保存Babyid
+            [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:babyId] forKey:@"BABYID"];
+            [[NSUserDefaults standardUserDefaults] setInteger:babyId forKey:@"cur_babyid"];
+            NSDictionary *dict = [[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:babyId];
+            [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"nickname"] forKey:@"kBabyNickname"];
+            _mainViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self.navigationController popToViewController:_mainViewController animated:NO];
+            return;
+        }
+        
         if (!BABYID) {
             //注册接口
             if (![hud isHidden]) {

@@ -1194,6 +1194,7 @@
 		BE3D75CB1889199F00E1C391 /* MyDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D75C91889199F00E1C391 /* MyDevicesViewController.m */; };
 		BE3D75CC1889199F00E1C391 /* MyDevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */; };
 		BE422ADB18C6B5580089219C /* ASIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE422ADA18C6B5580089219C /* ASIController.m */; };
+		BE47890C19CC219F008A3591 /* LoginMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = BE47890B19CC219F008A3591 /* LoginMethod.m */; };
 		BE4A8621197618AB00EB232B /* PHYHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4A8620197618AB00EB232B /* PHYHistoryViewController.m */; };
 		BE4A862319761B5800EB232B /* PHYHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4A862219761B5800EB232B /* PHYHistoryViewController.xib */; };
 		BE4DA7E519A3570300A46CC5 /* plot_area_title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4DA7E419A3570300A46CC5 /* plot_area_title@2x.png */; };
@@ -1248,6 +1249,21 @@
 		BEB7E2D1192310D200E752B7 /* TipsWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB7E2CF192310D100E752B7 /* TipsWebViewController.xib */; };
 		BEB7E2D41923167C00E752B7 /* TipCategoryDB.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */; };
 		BEBC12951953D31500C1A7E7 /* UIASYImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBC12941953D31500C1A7E7 /* UIASYImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BEC9331819CF138A007DF200 /* NSString+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC932F519CF138A007DF200 /* NSString+Trim.m */; };
+		BEC9331919CF138A007DF200 /* UIFont+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC932F719CF138A007DF200 /* UIFont+Alert.m */; };
+		BEC9331A19CF138A007DF200 /* UIView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC932F919CF138A007DF200 /* UIView+Alert.m */; };
+		BEC9331B19CF138A007DF200 /* MBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC932FC19CF138A007DF200 /* MBAlertView.m */; };
+		BEC9331C19CF138A007DF200 /* MBAlertViewButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC932FE19CF138A007DF200 /* MBAlertViewButton.m */; };
+		BEC9331D19CF138A007DF200 /* MBAlertViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9330019CF138A007DF200 /* MBAlertViewItem.m */; };
+		BEC9331E19CF138A007DF200 /* AutoLayoutHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9330419CF138A007DF200 /* AutoLayoutHelpers.m */; };
+		BEC9331F19CF138A007DF200 /* UIView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9330619CF138A007DF200 /* UIView+Autolayout.m */; };
+		BEC9332019CF138A007DF200 /* MBFlatAlertAbstract.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9330819CF138A007DF200 /* MBFlatAlertAbstract.m */; };
+		BEC9332119CF138A007DF200 /* MBFlatAlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9330A19CF138A007DF200 /* MBFlatAlertButton.m */; };
+		BEC9332219CF138A007DF200 /* MBFlatAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9330C19CF138A007DF200 /* MBFlatAlertView.m */; };
+		BEC9332319CF138A007DF200 /* MBCheckMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9330F19CF138A007DF200 /* MBCheckMarkView.m */; };
+		BEC9332419CF138A007DF200 /* MBHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9331119CF138A007DF200 /* MBHUDView.m */; };
+		BEC9332519CF138A007DF200 /* MBSpinningCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9331319CF138A007DF200 /* MBSpinningCircle.m */; };
+		BEC9332619CF138A007DF200 /* MBAlertAbstract.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9331519CF138A007DF200 /* MBAlertAbstract.m */; };
 		BEE3CEF019B0787F00ABC528 /* GetPhyAdvise.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3CEEF19B0787F00ABC528 /* GetPhyAdvise.m */; };
 		BEE3CEF519B07D9A00ABC528 /* icon_alerm_dialy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */; };
 		BEE3CEF619B07D9A00ABC528 /* icon_alerm_milstone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CEF219B07D9A00ABC528 /* icon_alerm_milstone@2x.png */; };
@@ -2785,6 +2801,8 @@
 		BE3D75CA1889199F00E1C391 /* MyDevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDevicesViewController.xib; sourceTree = "<group>"; };
 		BE422AD918C6B5580089219C /* ASIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIController.h; sourceTree = "<group>"; };
 		BE422ADA18C6B5580089219C /* ASIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIController.m; sourceTree = "<group>"; };
+		BE47890A19CC219F008A3591 /* LoginMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginMethod.h; sourceTree = "<group>"; };
+		BE47890B19CC219F008A3591 /* LoginMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginMethod.m; sourceTree = "<group>"; };
 		BE4A861F197618AB00EB232B /* PHYHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHYHistoryViewController.h; sourceTree = "<group>"; };
 		BE4A8620197618AB00EB232B /* PHYHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHYHistoryViewController.m; sourceTree = "<group>"; };
 		BE4A862219761B5800EB232B /* PHYHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PHYHistoryViewController.xib; sourceTree = "<group>"; };
@@ -2877,6 +2895,37 @@
 		BEB7E2D31923167C00E752B7 /* TipCategoryDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipCategoryDB.m; sourceTree = "<group>"; };
 		BEBC12931953D31500C1A7E7 /* UIASYImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIASYImageView.h; sourceTree = "<group>"; };
 		BEBC12941953D31500C1A7E7 /* UIASYImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIASYImageView.m; sourceTree = "<group>"; };
+		BEC932F419CF138A007DF200 /* NSString+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Trim.h"; sourceTree = "<group>"; };
+		BEC932F519CF138A007DF200 /* NSString+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Trim.m"; sourceTree = "<group>"; };
+		BEC932F619CF138A007DF200 /* UIFont+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Alert.h"; sourceTree = "<group>"; };
+		BEC932F719CF138A007DF200 /* UIFont+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Alert.m"; sourceTree = "<group>"; };
+		BEC932F819CF138A007DF200 /* UIView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Alert.h"; sourceTree = "<group>"; };
+		BEC932F919CF138A007DF200 /* UIView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Alert.m"; sourceTree = "<group>"; };
+		BEC932FB19CF138A007DF200 /* MBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertView.h; sourceTree = "<group>"; };
+		BEC932FC19CF138A007DF200 /* MBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlertView.m; sourceTree = "<group>"; };
+		BEC932FD19CF138A007DF200 /* MBAlertViewButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertViewButton.h; sourceTree = "<group>"; };
+		BEC932FE19CF138A007DF200 /* MBAlertViewButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlertViewButton.m; sourceTree = "<group>"; };
+		BEC932FF19CF138A007DF200 /* MBAlertViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertViewItem.h; sourceTree = "<group>"; };
+		BEC9330019CF138A007DF200 /* MBAlertViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlertViewItem.m; sourceTree = "<group>"; };
+		BEC9330319CF138A007DF200 /* AutoLayoutHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayoutHelpers.h; sourceTree = "<group>"; };
+		BEC9330419CF138A007DF200 /* AutoLayoutHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutHelpers.m; sourceTree = "<group>"; };
+		BEC9330519CF138A007DF200 /* UIView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Autolayout.h"; sourceTree = "<group>"; };
+		BEC9330619CF138A007DF200 /* UIView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Autolayout.m"; sourceTree = "<group>"; };
+		BEC9330719CF138A007DF200 /* MBFlatAlertAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFlatAlertAbstract.h; sourceTree = "<group>"; };
+		BEC9330819CF138A007DF200 /* MBFlatAlertAbstract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFlatAlertAbstract.m; sourceTree = "<group>"; };
+		BEC9330919CF138A007DF200 /* MBFlatAlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFlatAlertButton.h; sourceTree = "<group>"; };
+		BEC9330A19CF138A007DF200 /* MBFlatAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFlatAlertButton.m; sourceTree = "<group>"; };
+		BEC9330B19CF138A007DF200 /* MBFlatAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFlatAlertView.h; sourceTree = "<group>"; };
+		BEC9330C19CF138A007DF200 /* MBFlatAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFlatAlertView.m; sourceTree = "<group>"; };
+		BEC9330E19CF138A007DF200 /* MBCheckMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCheckMarkView.h; sourceTree = "<group>"; };
+		BEC9330F19CF138A007DF200 /* MBCheckMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCheckMarkView.m; sourceTree = "<group>"; };
+		BEC9331019CF138A007DF200 /* MBHUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBHUDView.h; sourceTree = "<group>"; };
+		BEC9331119CF138A007DF200 /* MBHUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBHUDView.m; sourceTree = "<group>"; };
+		BEC9331219CF138A007DF200 /* MBSpinningCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSpinningCircle.h; sourceTree = "<group>"; };
+		BEC9331319CF138A007DF200 /* MBSpinningCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSpinningCircle.m; sourceTree = "<group>"; };
+		BEC9331419CF138A007DF200 /* MBAlertAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertAbstract.h; sourceTree = "<group>"; };
+		BEC9331519CF138A007DF200 /* MBAlertAbstract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlertAbstract.m; sourceTree = "<group>"; };
+		BEC9331719CF138A007DF200 /* MBAlertViewSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertViewSubclass.h; sourceTree = "<group>"; };
 		BEE3CEEE19B0787F00ABC528 /* GetPhyAdvise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPhyAdvise.h; sourceTree = "<group>"; };
 		BEE3CEEF19B0787F00ABC528 /* GetPhyAdvise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPhyAdvise.m; sourceTree = "<group>"; };
 		BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_alerm_dialy@2x.png"; sourceTree = "<group>"; };
@@ -4176,6 +4225,7 @@
 		4855BCF21830AF3E00F02A3E /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				BEC932F219CF138A007DF200 /* MBAlertView */,
 				481DEDCC19B57DD800095826 /* SBJSON */,
 				481DEDC019B57D3800095826 /* DXAlertView */,
 				481DEDBC19B57C8E00095826 /* EGO_Refresh */,
@@ -6013,6 +6063,8 @@
 				BE75CD071872C3FC001EF1C1 /* LoginMainViewController.xib */,
 				BE301C2919C825780083BA10 /* InitCreateDB.h */,
 				BE301C2A19C825780083BA10 /* InitCreateDB.m */,
+				BE47890A19CC219F008A3591 /* LoginMethod.h */,
+				BE47890B19CC219F008A3591 /* LoginMethod.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -6070,6 +6122,92 @@
 				BE900F2118ECFCEA00B06133 /* SyncController.m */,
 			);
 			name = NetWorkController;
+			sourceTree = "<group>";
+		};
+		BEC932F219CF138A007DF200 /* MBAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				BEC932F319CF138A007DF200 /* Categories */,
+				BEC932FA19CF138A007DF200 /* Classic */,
+				BEC9330119CF138A007DF200 /* Flat */,
+				BEC9330D19CF138A007DF200 /* HUD */,
+				BEC9331419CF138A007DF200 /* MBAlertAbstract.h */,
+				BEC9331519CF138A007DF200 /* MBAlertAbstract.m */,
+				BEC9331619CF138A007DF200 /* Protected */,
+			);
+			path = MBAlertView;
+			sourceTree = "<group>";
+		};
+		BEC932F319CF138A007DF200 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BEC932F419CF138A007DF200 /* NSString+Trim.h */,
+				BEC932F519CF138A007DF200 /* NSString+Trim.m */,
+				BEC932F619CF138A007DF200 /* UIFont+Alert.h */,
+				BEC932F719CF138A007DF200 /* UIFont+Alert.m */,
+				BEC932F819CF138A007DF200 /* UIView+Alert.h */,
+				BEC932F919CF138A007DF200 /* UIView+Alert.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		BEC932FA19CF138A007DF200 /* Classic */ = {
+			isa = PBXGroup;
+			children = (
+				BEC932FB19CF138A007DF200 /* MBAlertView.h */,
+				BEC932FC19CF138A007DF200 /* MBAlertView.m */,
+				BEC932FD19CF138A007DF200 /* MBAlertViewButton.h */,
+				BEC932FE19CF138A007DF200 /* MBAlertViewButton.m */,
+				BEC932FF19CF138A007DF200 /* MBAlertViewItem.h */,
+				BEC9330019CF138A007DF200 /* MBAlertViewItem.m */,
+			);
+			path = Classic;
+			sourceTree = "<group>";
+		};
+		BEC9330119CF138A007DF200 /* Flat */ = {
+			isa = PBXGroup;
+			children = (
+				BEC9330219CF138A007DF200 /* AutolayoutHelpers */,
+				BEC9330719CF138A007DF200 /* MBFlatAlertAbstract.h */,
+				BEC9330819CF138A007DF200 /* MBFlatAlertAbstract.m */,
+				BEC9330919CF138A007DF200 /* MBFlatAlertButton.h */,
+				BEC9330A19CF138A007DF200 /* MBFlatAlertButton.m */,
+				BEC9330B19CF138A007DF200 /* MBFlatAlertView.h */,
+				BEC9330C19CF138A007DF200 /* MBFlatAlertView.m */,
+			);
+			path = Flat;
+			sourceTree = "<group>";
+		};
+		BEC9330219CF138A007DF200 /* AutolayoutHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				BEC9330319CF138A007DF200 /* AutoLayoutHelpers.h */,
+				BEC9330419CF138A007DF200 /* AutoLayoutHelpers.m */,
+				BEC9330519CF138A007DF200 /* UIView+Autolayout.h */,
+				BEC9330619CF138A007DF200 /* UIView+Autolayout.m */,
+			);
+			path = AutolayoutHelpers;
+			sourceTree = "<group>";
+		};
+		BEC9330D19CF138A007DF200 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				BEC9330E19CF138A007DF200 /* MBCheckMarkView.h */,
+				BEC9330F19CF138A007DF200 /* MBCheckMarkView.m */,
+				BEC9331019CF138A007DF200 /* MBHUDView.h */,
+				BEC9331119CF138A007DF200 /* MBHUDView.m */,
+				BEC9331219CF138A007DF200 /* MBSpinningCircle.h */,
+				BEC9331319CF138A007DF200 /* MBSpinningCircle.m */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		BEC9331619CF138A007DF200 /* Protected */ = {
+			isa = PBXGroup;
+			children = (
+				BEC9331719CF138A007DF200 /* MBAlertViewSubclass.h */,
+			);
+			path = Protected;
 			sourceTree = "<group>";
 		};
 		CE01679C174B059000462363 /* 设置 */ = {
@@ -7309,10 +7447,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEC9331E19CF138A007DF200 /* AutoLayoutHelpers.m in Sources */,
 				48866F54199A12E6007B16AA /* PWSCalendarViewFlowLayout.m in Sources */,
 				48866F48199A12E6007B16AA /* UINavigationBar+CustomImage.m in Sources */,
 				48EF612618C6FAC7006C3D5C /* ReGeocodeAnnotation.m in Sources */,
 				48B78141182A20610073EEBD /* CustomURLCache.m in Sources */,
+				BEC9332119CF138A007DF200 /* MBFlatAlertButton.m in Sources */,
 				48152E4E1851B842009A4900 /* MyLocalNofityViewController.m in Sources */,
 				481968A31959378F003A9D37 /* AdviseTableViewCell.m in Sources */,
 				48866FBD199A12E6007B16AA /* UnTrainView.m in Sources */,
@@ -7391,6 +7531,7 @@
 				48866F92199A12E6007B16AA /* VaccineAddContentView.m in Sources */,
 				48866FCE199A12E6007B16AA /* ContentView.m in Sources */,
 				485F3F4A17F07CDA00BD876F /* OpenFunction.m in Sources */,
+				BE47890C19CC219F008A3591 /* LoginMethod.m in Sources */,
 				BE301C2B19C825780083BA10 /* InitCreateDB.m in Sources */,
 				CE3826F8174DEB0B009AD8DA /* playViewController.m in Sources */,
 				CE3826FD174DEB22009AD8DA /* bathViewController.m in Sources */,
@@ -7399,14 +7540,17 @@
 				48EF612118C6FAC7006C3D5C /* FaceOverlay.m in Sources */,
 				4800B14518D9880B0093A6AF /* ACFunction.m in Sources */,
 				BE5997C91861930A008D3F6C /* LookingForDeviceViewController.m in Sources */,
+				BEC9331F19CF138A007DF200 /* UIView+Autolayout.m in Sources */,
 				CE638AB4174F4899009A60AB /* FMDatabaseAdditions.m in Sources */,
 				BE955F4D190102A400225029 /* PhyCPTTheme.m in Sources */,
+				BEC9331A19CF138A007DF200 /* UIView+Alert.m in Sources */,
 				482B34B118C032D500EFA963 /* UpLoadController.m in Sources */,
 				48866F43199A12E6007B16AA /* UIViewExt.m in Sources */,
 				BE7C69341867D87000C4B675 /* ASIHTTPController.m in Sources */,
 				48866F66199A12E6007B16AA /* CKCalendarView.m in Sources */,
 				48866FC1199A12E6007B16AA /* TrainModel.m in Sources */,
 				48866F8D199A12E6007B16AA /* VaccineModel.m in Sources */,
+				BEC9331C19CF138A007DF200 /* MBAlertViewButton.m in Sources */,
 				48866FA3199A12E6007B16AA /* AddIemView.m in Sources */,
 				48866F51199A12E6007B16AA /* PWSCalendarView.m in Sources */,
 				485749A4183205A3000D921B /* NotifyItem.m in Sources */,
@@ -7427,6 +7571,7 @@
 				48357E231846ED2A00BCF799 /* EnvironmentAdviceDB.m in Sources */,
 				4836F8A2190F5A490042006E /* DataCustomCell.m in Sources */,
 				CE638AB7174F4899009A60AB /* FMResultSet.m in Sources */,
+				BEC9331919CF138A007DF200 /* UIFont+Alert.m in Sources */,
 				48F6ABA4186D191C0032045E /* AlarmKey.m in Sources */,
 				481DEDE719B57DD800095826 /* NSObject+SBJson.m in Sources */,
 				BEB4758118E56DBE0004B649 /* NetWorkConnect.m in Sources */,
@@ -7447,7 +7592,9 @@
 				BE0677861998605200794A28 /* TempCorePlot.m in Sources */,
 				48866E91199A12E6007B16AA /* PHPageScrollView.m in Sources */,
 				48866FAB199A12E6007B16AA /* CreatMilestoneController.m in Sources */,
+				BEC9332519CF138A007DF200 /* MBSpinningCircle.m in Sources */,
 				CE075A3D1750821E00C57E27 /* save_sleepview.m in Sources */,
+				BEC9331D19CF138A007DF200 /* MBAlertViewItem.m in Sources */,
 				48866F9C199A12E6007B16AA /* MilestoneHeaderView.m in Sources */,
 				BE7C697E1867F1B300C4B675 /* ASINetworkQueue.m in Sources */,
 				BE67211C199CAD9C00EC5D1B /* PhySaveView.m in Sources */,
@@ -7507,12 +7654,14 @@
 				48EF612518C6FAC7006C3D5C /* POIAnnotation.m in Sources */,
 				48866F6F199A12E6007B16AA /* NoteInfoView.m in Sources */,
 				48866FA8199A12E6007B16AA /* AddMilestoneCell.m in Sources */,
+				BEC9332319CF138A007DF200 /* MBCheckMarkView.m in Sources */,
 				48866F81199A12E6007B16AA /* ZhuView.m in Sources */,
 				48866F63199A12E6007B16AA /* CKCalendarEvent.m in Sources */,
 				481DEDEC19B57DD800095826 /* SBJsonStreamParserState.m in Sources */,
 				48866FCB199A12E6007B16AA /* ImageViewTap.m in Sources */,
 				4880A58A191B27E7005D5E44 /* DiaperPickerView.m in Sources */,
 				48866E90199A12E6007B16AA /* LoadingView.m in Sources */,
+				BEC9332419CF138A007DF200 /* MBHUDView.m in Sources */,
 				BE14CC3319AB3AD000274DC7 /* PhotoAreaView.m in Sources */,
 				48EF612018C6FAC7006C3D5C /* CustomCalloutView.m in Sources */,
 				48866FB4199A12E6007B16AA /* TrainView.m in Sources */,
@@ -7538,9 +7687,11 @@
 				BEE539781945B079000703E6 /* TipTableViewCell.m in Sources */,
 				BE1EB96A199DEB3700C3ED0B /* BMITableViewCell.m in Sources */,
 				BEB4758418E572A20004B649 /* DataContract.m in Sources */,
+				BEC9332019CF138A007DF200 /* MBFlatAlertAbstract.m in Sources */,
 				48EF611F18C6FAC7006C3D5C /* CusAnnotationView.m in Sources */,
 				48866F7A199A12E6007B16AA /* TestQuestionModel.m in Sources */,
 				CE0C33CB176189CE00B1B683 /* MyCorePlot.m in Sources */,
+				BEC9332219CF138A007DF200 /* MBFlatAlertView.m in Sources */,
 				48866F60199A12E6007B16AA /* UIView+AnimatedFrame.m in Sources */,
 				CE0C33D017618A2100B1B683 /* MyCPTTheme.m in Sources */,
 				48866F83199A12E6007B16AA /* ZhuModel.m in Sources */,
@@ -7555,10 +7706,12 @@
 				48866F6A199A12E6007B16AA /* CKCalendarModel.m in Sources */,
 				BE7C69771867F1B300C4B675 /* ASIAuthenticationDialog.m in Sources */,
 				BE6938EA1909165200FC2BB4 /* PHYDetailViewController.m in Sources */,
+				BEC9331819CF138A007DF200 /* NSString+Trim.m in Sources */,
 				BE4A8621197618AB00EB232B /* PHYHistoryViewController.m in Sources */,
 				48866F6C199A12E6007B16AA /* CalendarCell.m in Sources */,
 				485749A01831C423000D921B /* MissionViewController.m in Sources */,
 				48F6AB931867D3AC0032045E /* LocalNotify.m in Sources */,
+				BEC9331B19CF138A007DF200 /* MBAlertView.m in Sources */,
 				CE0C33DC17618AF100B1B683 /* SummaryViewController.m in Sources */,
 				BE1EB96F199DEC0B00C3ED0B /* PHYTableViewCell.m in Sources */,
 				481DEDF219B57DD800095826 /* SBJsonWriter.m in Sources */,
@@ -7589,6 +7742,7 @@
 				48866FA1199A12E6007B16AA /* EditeView.m in Sources */,
 				CE1D69C81772958900561EBF /* AdviseScrollview.m in Sources */,
 				BEBC12951953D31500C1A7E7 /* UIASYImageView.m in Sources */,
+				BEC9332619CF138A007DF200 /* MBAlertAbstract.m in Sources */,
 				48866FB1199A12E6007B16AA /* CreatMilestoneAddphotoView.m in Sources */,
 				48866E8F199A12E6007B16AA /* PortraitImageView.m in Sources */,
 				481DEDE819B57DD800095826 /* SBJsonParser.m in Sources */,
@@ -7779,14 +7933,14 @@
 					"$(PROJECT_DIR)/UMSocial_Sdk_4.1",
 					"$(PROJECT_DIR)/UMSocial_Sdk_Extra_Frameworks/TencentWeibo",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = NO;
@@ -7837,14 +7991,14 @@
 					"$(PROJECT_DIR)/UMSocial_Sdk_4.1",
 					"$(PROJECT_DIR)/UMSocial_Sdk_Extra_Frameworks/TencentWeibo",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67ffe99d-cd42-4787-a2ce-d0e47c67c1d9";
+				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
