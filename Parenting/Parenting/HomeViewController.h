@@ -12,7 +12,7 @@
 #import "InitBabyInfoViewController.h"
 #import "InitTimeLineData.h"
 
-@interface HomeViewController : UIViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,InitBabyInfoDelegate>{
+@interface HomeViewController : UIViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,InitBabyInfoDelegate,UIAlertViewDelegate>{
     
 //    __weak IBOutlet UITableView *_timeLineTableView;
 //    __weak IBOutlet UIScrollView *_mainScrollView;
@@ -20,6 +20,7 @@
     UITableView *_timeLineTableView;
     UIScrollView *_mainScrollView;
     UIView *_loginView;
+    UIAlertView *_alertView;
     
     PhotoAreaView *_photoAreaView;
     MBProgressHUD *_hud;

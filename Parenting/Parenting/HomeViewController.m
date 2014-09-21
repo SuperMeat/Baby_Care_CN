@@ -94,6 +94,8 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil){
         [_photoAreaView removeFromSuperview];
         [_mainScrollView removeFromSuperview];
+        _photoAreaView = nil;
+        _mainScrollView = nil;
         _data = nil;
         [self initView];
         [self initData];
@@ -119,9 +121,9 @@
         isPushSocialView = NO;
         _loginView.hidden = NO;
     }
-//    else{
-//        [self ScoringTheApp];
-//    }
+    else{
+        [self ReviewTheApp];
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -788,9 +790,76 @@
     }
 }
 
--(void)ScoringTheApp{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
+#pragma 给APP评分
+-(void)ReviewTheApp{
+    /*
+     *  app_url                 :app地址
+     *  review_last_alert_time  :最后提醒评分时间
+     *  review_state            :评分状态 YES已评分
+     */
+    
+    //获取app_url信息
+    NSString *app_url = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"];
+    if ([app_url isEqual:@""] || app_url == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:0] forKey:@"review_last_alert_time"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"review_state"];
+        //get url
+        NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"unname",@"unname",nil];
+        
+        [[NetWorkConnect sharedRequest]httpRequestWithURL:GET_APP_INFO
+                                                     data:dictBody
+                                                     mode:@"POST"
+                                                      HUD:nil
+                                           didFinishBlock:^(NSDictionary *result)
+         {
+             //请求成功处理
+             NSDictionary *dict = [result objectForKey:@"body"];
+             [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_url"] forKey:@"app_url"];
+             [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_name"] forKey:@"app_name"];
+             [self showReviewAlert];
+         }
+                                             didFailBlock:^(NSString *error){}
+                                           isShowProgress:YES
+                                            isAsynchronic:YES
+                                            netWorkStatus:YES
+                                           viewController:nil];
+        
+        return;
+    }
+    
+    long review_last_alert_time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"review_last_alert_time"] longValue];
+    bool review_state = [[NSUserDefaults standardUserDefaults] boolForKey:@"review_state"];
+    
+    if (![app_url isEqualToString:@""] && !review_state && ([ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:review_last_alert_time]] >= 7 || review_last_alert_time == 0) ) {
+        //提示窗口
+        [self showReviewAlert];
+    }
 }
+
+-(void)showReviewAlert{
+    if (_alertView == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[NSDate date]]] forKey:@"review_last_alert_time"];
+        _alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"您的评价啊对我们非常重要,是我们努力和进步的动力!\n感谢您的支持!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"好的,让我来说点什么",@"稍后评价",@"以后不要提醒我", nil];
+        [_alertView show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        //评价跳转
+        NSLog(@"url:%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]);
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]]];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
+    }
+    else if (buttonIndex == 1){
+        //稍后评价
+    }
+    else{
+        //不在提示
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {

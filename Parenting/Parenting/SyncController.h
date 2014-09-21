@@ -46,4 +46,5 @@ ViewController:(UIViewController*) viewController;
                HUD:(MBProgressHUD*) hud
       SyncFinished:(SyncFinishBlockP) syncFinishBlockP
     ViewController:(UIViewController*) viewController;
+ 
 @end

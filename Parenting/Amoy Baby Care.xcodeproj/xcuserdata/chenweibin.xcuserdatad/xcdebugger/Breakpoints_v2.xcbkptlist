@@ -105,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Parenting/HomeViewController.m"
-            timestampString = "432790332.08955"
+            filePath = "Parenting/SyncController.m"
+            timestampString = "433004966.274095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "770"
-            endingLineNumber = "770"
-            landmarkName = "-checkBaby"
+            startingLineNumber = "317"
+            endingLineNumber = "317"
+            landmarkName = "-getTipsHome:LastCreateTime:BabyMonths:HUD:SyncFinished:ViewController:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
