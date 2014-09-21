@@ -25,17 +25,9 @@
         [_btnForward setImage:[UIImage imageNamed:@"icon_forward"] forState:UIControlStateNormal];
         [_btnForward addTarget:self action:@selector(forwardAction) forControlEvents:UIControlEventTouchUpInside];
         
-        
-        
-        
         _btnBackward = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnBackward setImage:[UIImage imageNamed:@"icon_backward"] forState:UIControlStateNormal];
         [_btnBackward addTarget:self action:@selector(backwardAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
-        
-        
         
     }
     return self;
@@ -45,15 +37,25 @@
 {
     [super layoutSubviews];
     
-    _labDate.frame = CGRectMake((self.width-_labDate.width)/4+5, 12, 200, 44);
+//    _labDate.frame = CGRectMake((self.width-_labDate.width)/4+5, 12, 200, 44);
+//    [_labDate sizeToFit];
+//    [self addSubview:_labDate];
+//    
+//    [_btnForward setFrame:CGRectMake(_labDate.right+15, (self.height-15)/2, 10, 15)];
+//    [self addSubview:_btnForward];
+//    
+//    [_btnBackward setFrame:CGRectMake(_labDate.left-30, (self.height-15)/2, 10, 15)];
+//    [self addSubview:_btnBackward];
+    _labDate.center = CGPointMake(self.width/2.0, self.height/2.0);
+    _labDate.size = CGSizeMake(200, 44);
     [_labDate sizeToFit];
     [self addSubview:_labDate];
     
-    [_btnForward setFrame:CGRectMake(_labDate.right+15, (self.height-15)/2, 10, 15)];
-    [self addSubview:_btnForward];
-    
-    [_btnBackward setFrame:CGRectMake(_labDate.left-30, (self.height-15)/2, 10, 15)];
+    [_btnBackward setFrame:CGRectMake(_labDate.left-30, (self.height-15)/2.0, 10, 15)];
     [self addSubview:_btnBackward];
+    
+    [_btnForward setFrame:CGRectMake(_labDate.right+15, (self.height-15)/2.0, 10, 15)];
+    [self addSubview:_btnForward];
 
     
 }

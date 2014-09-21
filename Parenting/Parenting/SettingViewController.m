@@ -113,7 +113,7 @@ messageView;
     //SettingItem *_item2 = [[SettingItem alloc]init];
     //SettingItem *_item3 = [[SettingItem alloc]init];
     SettingItem *_item4 = [[SettingItem alloc]init];
-    //SettingItem *_item5 = [[SettingItem alloc]init];
+    SettingItem *_item5 = [[SettingItem alloc]init];
     SettingItem *_item6 = [[SettingItem alloc]init];
     SettingItem *_item7 = [[SettingItem alloc]init];
     //SettingItem *_item8 = [[SettingItem alloc]init];
@@ -130,12 +130,15 @@ messageView;
     //用户协议
     SettingItem *_item13 = [[SettingItem alloc] init];
     
+    //宝宝生理
+    SettingItem *_item14 = [[SettingItem alloc] init];
+    
     _item1.name=NSLocalizedString(@"Baby information",nil);
    // _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
     //_item3.name=NSLocalizedString(@"Notifications",nil);
     _item4.name=NSLocalizedString(@"Submit feedback online",nil);
     //    _item4.name=NSLocalizedString(@"Facebook",nil);
-    //_item5.name=NSLocalizedString(@"My Devices",nil);
+    _item5.name=NSLocalizedString(@"My Devices",nil);
     _item6.name=NSLocalizedString(@"Submit feedback/improvements",nil);
     _item7.name=NSLocalizedString(@"Copyright",nil);
     //_item8.name=NSLocalizedString(@"Clear all logged data",nil);
@@ -145,6 +148,8 @@ messageView;
     //_item13.name = @"允许发布自己位置及状态";
     
     _item13.name=NSLocalizedString(@"用户协议",nil);
+
+    _item14.name=NSLocalizedString(@"宝宝生理",nil);
 
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil) {
         _item10.name=@"账号登录";
@@ -181,6 +186,10 @@ messageView;
     UIButton *myreminder=[UIButton buttonWithType:UIButtonTypeCustom];
     [myreminder setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
     myreminder.frame=CGRectMake(0, 0, 20, 20);
+    
+    UIButton *mybabyPhy=[UIButton buttonWithType:UIButtonTypeCustom];
+    [mybabyPhy setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
+    mybabyPhy.frame=CGRectMake(0, 0, 20, 20);
     
     UIButton *feedbackOnline=[UIButton buttonWithType:UIButtonTypeCustom];
     [feedbackOnline setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
@@ -297,7 +306,7 @@ messageView;
    // _item2.accessView=segementForMetric;
    //_item3.accessView=switchForNotifications;
     _item4.accessView=feedbackOnline;
-   // _item5.accessView=myDevices;
+    _item5.accessView=myDevices;
     _item6.accessView=detailforSubmit;
     _item7.accessView=detailforCopyright;
     //_item8.accessView=buttonForClear;
@@ -306,7 +315,7 @@ messageView;
     _item12.accessView = detailforMap;
     //_item13.accessView = switchForOpenwild;
     _item13.accessView = protocolforUser;
-    
+    _item14.accessView = mybabyPhy;
     //隐藏宝贝信息
     //[_array1 addObject:_item1];
     [_array1 addObject:_item9];
@@ -321,7 +330,9 @@ messageView;
     //[_array2 addObject:_item3];
     [_array2 addObject:_item4];
 
-    //[_array2 addObject:_item5];
+    if (ISBLE) {
+        [_array2 addObject:_item5];
+    }
     [_array2 addObject:_item6];
     [_array2 addObject:_item7];
     [_array2 addObject:_item13];
@@ -498,7 +509,8 @@ messageView;
     }
     else if([item.name isEqualToString:NSLocalizedString(@"Review App",nil)])
     {
-        
+      
+
     }
     else if ([item.name isEqualToString:NSLocalizedString(@"Submit feedback online", nil)]){
         //undone feedback

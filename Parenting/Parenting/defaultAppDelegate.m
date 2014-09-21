@@ -10,7 +10,7 @@
 #import "APService.h"
 #import "LoginViewController.h"
 #import "SyncController.h"
-//#import <TestinAgent/TestinAgent.h>
+#import <TestinAgent/TestinAgent.h>
 #import "UMSocialTencentWeiboHandler.h"
 
 @implementation defaultAppDelegate
@@ -164,6 +164,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     if (ISBLE)
     {
         envirViewController   = [[EnvironmentViewController alloc] init];
+        settingViewController = [[SettingViewController alloc] init];
     }
     else
     {
@@ -184,6 +185,8 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
     else
     {
+        settingNavigationViewController    = [[BaseNavigationController alloc]
+                                              initWithRootViewController:settingViewController];
         envirNavigationViewController    = [[BaseNavigationController alloc]
                                         initWithRootViewController:envirViewController];
     }
@@ -208,8 +211,9 @@ void UncaughtExceptionHandler(NSException *exception) {
         [controllers addObject:myPageNavigationViewController];
         [controllers addObject:calendarNavigationViewController];
         [controllers addObject:actNavigationViewController];
-        [controllers addObject:phyNavigationViewController];
+        //[controllers addObject:phyNavigationViewController];
         [controllers addObject:envirNavigationViewController];
+        [controllers addObject:settingNavigationViewController];
     }
     
     myTabController = [[MyTabBarController alloc] init];
@@ -243,7 +247,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 - (void)initializePlat
 {
     //Testin Crash
-    //[TestinAgent init:TESTIN_KEY];
+    [TestinAgent init:TESTIN_KEY];
     
     //UMeng 统计
     [MobClick startWithAppkey:UMENGAPPKEY];
@@ -252,7 +256,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] != nil)
     {
-        //[TestinAgent setUserInfo:[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"]];
+        [TestinAgent setUserInfo:[[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"]];
     }
 
     

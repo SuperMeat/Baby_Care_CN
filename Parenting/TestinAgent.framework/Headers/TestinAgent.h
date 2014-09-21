@@ -1,9 +1,7 @@
 //
 //  FRAppAgent.h
-//  FreshRelic
 //
-//  Created by nbzhou on 14-5-22.
-//  Copyright (c) 2014年 Lijinfeng. All rights reserved.
+//  Copyright (c) 2014 Testin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
