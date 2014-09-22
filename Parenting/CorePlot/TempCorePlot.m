@@ -137,7 +137,7 @@
         NSString *xLabel;
         xLabel = [NSString stringWithFormat:@"%@", [[XaxisAndValue objectAtIndex:j] objectAtIndex:1]];
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:xLabel textStyle:x.labelTextStyle];
-        label.rotation = 0.5f; //设置倾斜角度
+//        label.rotation = 0.5f; //设置倾斜角度
         CGFloat location = i++;
         label.tickLocation = CPTDecimalFromCGFloat(location);
         label.offset = x.majorTickLength;

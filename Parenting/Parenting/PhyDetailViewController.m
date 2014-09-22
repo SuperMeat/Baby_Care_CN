@@ -382,7 +382,7 @@
 
 -(void)AddRecord{
     if (phySaveView==nil) {
-        phySaveView = [[PhySaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:itemType OpType:@"SAVE" CreateTime:0];
+        phySaveView = [[PhySaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 50, self.view.frame.size.width, self.view.frame.size.height-64) Type:itemType OpType:@"SAVE" CreateTime:0];
         phySaveView.PhySaveDelegate = self;
     }
     [self.view addSubview:phySaveView];

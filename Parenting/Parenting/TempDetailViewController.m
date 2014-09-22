@@ -364,7 +364,7 @@
 
 -(void)AddRecord{
     if (tempSaveView==nil) {
-        tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"SAVE" CreateTime:0];
+        tempSaveView = [[TempSaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 50, self.view.frame.size.width, self.view.frame.size.height-64) Type:@"SAVE" CreateTime:0];
         tempSaveView.TempSaveDelegate = self;
     }
     [self.view addSubview:tempSaveView];

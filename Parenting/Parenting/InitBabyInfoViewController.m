@@ -272,6 +272,14 @@
     }
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    for (id view in _mainScrollView.subviews) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            [view resignFirstResponder];
+        }
+    }
+}
+
 -(void)actionsheetShow
 {
     if (_action == nil) {
