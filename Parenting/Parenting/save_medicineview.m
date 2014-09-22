@@ -565,7 +565,6 @@
 {
     if (datepicker==nil) {
         datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
-        datepicker.datePickerMode= UIDatePickerModeDateAndTime;
         [datepicker addTarget:self action:@selector(updatedate:) forControlEvents:UIControlEventValueChanged];
     }
     
