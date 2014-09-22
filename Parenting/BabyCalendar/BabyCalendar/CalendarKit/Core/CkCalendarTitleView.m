@@ -36,26 +36,33 @@
 {
     [super layoutSubviews];
     
-//    _labDate.frame = CGRectMake((self.width-_labDate.width)/4+5, 12, 200, 44);
-//    [_labDate sizeToFit];
-//    [self addSubview:_labDate];
-//    
-//    [_btnForward setFrame:CGRectMake(_labDate.right+15, (self.height-15)/2, 10, 15)];
-//    [self addSubview:_btnForward];
-//    
-//    [_btnBackward setFrame:CGRectMake(_labDate.left-30, (self.height-15)/2, 10, 15)];
-//    [self addSubview:_btnBackward];
-    _labDate.center = CGPointMake(self.width/2.0, self.height/2.0);
-    _labDate.size = CGSizeMake(200, 44);
-    [_labDate sizeToFit];
-    [self addSubview:_labDate];
-    
-    [_btnBackward setFrame:CGRectMake(_labDate.left-30, (self.height-15)/2.0, 10, 15)];
-    [self addSubview:_btnBackward];
-    
-    [_btnForward setFrame:CGRectMake(_labDate.right+15, (self.height-15)/2.0, 10, 15)];
-    [self addSubview:_btnForward];
+    if (ISSYSTEM8_0) {
+        _labDate.center = CGPointMake(self.width/2.0, self.height/2.0);
+        _labDate.size = CGSizeMake(200, 44);
+        [_labDate sizeToFit];
+        [self addSubview:_labDate];
+        
+        [_btnBackward setFrame:CGRectMake(_labDate.left-30, (self.height-15)/2.0, 10, 15)];
+        [self addSubview:_btnBackward];
+        
+        [_btnForward setFrame:CGRectMake(_labDate.right+15, (self.height-15)/2.0, 10, 15)];
+        [self addSubview:_btnForward];
 
+    }
+    else
+    {
+        _labDate.frame = CGRectMake((self.width-_labDate.width)/4+5, 12, 200, 44);
+        [_labDate sizeToFit];
+        [self addSubview:_labDate];
+        
+        [_btnForward setFrame:CGRectMake(_labDate.right+15, (self.height-15)/2, 10, 15)];
+        [self addSubview:_btnForward];
+        
+        [_btnBackward setFrame:CGRectMake(_labDate.left-30, (self.height-15)/2, 10, 15)];
+        [self addSubview:_btnBackward];
+        
+    }
+   
     
 }
 
