@@ -1037,7 +1037,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "570"
             endingLineNumber = "570"
-            landmarkName = "-doLogin"
+            landmarkName = "-getRecordDate:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
