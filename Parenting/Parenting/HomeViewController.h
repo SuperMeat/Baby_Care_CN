@@ -33,7 +33,8 @@
     int _timeLineShowCount;
     
     BOOL isPushSocialView;
-     
+    
+    UIButton *_buttonScrTop;
 }
 
 -(void)initTimeLineData;

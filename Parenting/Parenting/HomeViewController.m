@@ -192,6 +192,19 @@
     [_mainScrollView addSubview:_activityView];
 //    [_photoAreaView addSubview:_activityView];
     
+    //返回顶部按钮
+    _buttonScrTop = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width - 40, self.view.height - 64 - 25, 30, 30)];
+    [_buttonScrTop setTitle:@"↑" forState:UIControlStateNormal];
+    UIImage *imageScrTop = [UIImage imageNamed:@"arrow_up.png"];
+    [_buttonScrTop setBackgroundImage:imageScrTop forState:UIControlStateNormal];
+    [_buttonScrTop addTarget:self action:@selector(scrollTopTop) forControlEvents:UIControlEventTouchUpInside];
+    [_buttonScrTop setAlpha:0.3f];
+    [_buttonScrTop setHidden:YES];
+    [self.view addSubview:_buttonScrTop];
+}
+
+-(void)scrollTopTop{
+    [_mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 -(void)initData{
@@ -226,6 +239,13 @@
     
     _timeLineTableView.height = dTableHeight;
     _mainScrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width,_timeLineTableView.height + 44); // 44是加载视图区域
+    
+    if (_mainScrollView.contentSize.height >= self.view.height - _photoAreaView.height - 44) {
+        [_buttonScrTop setHidden:NO];
+    }else{
+        [_buttonScrTop setHidden:YES];
+    }
+    
     [_activityView setFrame:CGRectMake(150 ,_timeLineTableView.height + 12, 20.0f, 20.0f)];
     [_timeLineTableView reloadData];
 }

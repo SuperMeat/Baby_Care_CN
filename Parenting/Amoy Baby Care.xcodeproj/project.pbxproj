@@ -1265,6 +1265,7 @@
 		BEC9332419CF138A007DF200 /* MBHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9331119CF138A007DF200 /* MBHUDView.m */; };
 		BEC9332519CF138A007DF200 /* MBSpinningCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9331319CF138A007DF200 /* MBSpinningCircle.m */; };
 		BEC9332619CF138A007DF200 /* MBAlertAbstract.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC9331519CF138A007DF200 /* MBAlertAbstract.m */; };
+		BEE2DE6119D023F400DDE570 /* arrow_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE2DE6019D023F400DDE570 /* arrow_up@2x.png */; };
 		BEE3CEF019B0787F00ABC528 /* GetPhyAdvise.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3CEEF19B0787F00ABC528 /* GetPhyAdvise.m */; };
 		BEE3CEF519B07D9A00ABC528 /* icon_alerm_dialy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */; };
 		BEE3CEF619B07D9A00ABC528 /* icon_alerm_milstone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CEF219B07D9A00ABC528 /* icon_alerm_milstone@2x.png */; };
@@ -2928,6 +2929,7 @@
 		BEC9331419CF138A007DF200 /* MBAlertAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertAbstract.h; sourceTree = "<group>"; };
 		BEC9331519CF138A007DF200 /* MBAlertAbstract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlertAbstract.m; sourceTree = "<group>"; };
 		BEC9331719CF138A007DF200 /* MBAlertViewSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertViewSubclass.h; sourceTree = "<group>"; };
+		BEE2DE6019D023F400DDE570 /* arrow_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_up@2x.png"; sourceTree = "<group>"; };
 		BEE3CEEE19B0787F00ABC528 /* GetPhyAdvise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPhyAdvise.h; sourceTree = "<group>"; };
 		BEE3CEEF19B0787F00ABC528 /* GetPhyAdvise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPhyAdvise.m; sourceTree = "<group>"; };
 		BEE3CEF119B07D9A00ABC528 /* icon_alerm_dialy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_alerm_dialy@2x.png"; sourceTree = "<group>"; };
@@ -5919,6 +5921,7 @@
 		BE004CCE18FE2B7500E56833 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				BEE2DE6019D023F400DDE570 /* arrow_up@2x.png */,
 				48ADEB6A19C987C40005DC72 /* defaulthead.png */,
 				48D41F4019C7E743005A8E6B /* btn_tent_focus@2x.png */,
 				48D41F4119C7E743005A8E6B /* btn_tent@2x.png */,
@@ -7114,6 +7117,7 @@
 				48EC1DE01862F6E400965254 /* nofity_myadvise_day@2x.png in Resources */,
 				4828F45519A495D700D04926 /* 19.1.1.jpg in Resources */,
 				4828F4AB19A495D700D04926 /* 24.1.6.jpg in Resources */,
+				BEE2DE6119D023F400DDE570 /* arrow_up@2x.png in Resources */,
 				48FCD5A7195D404F003DBA62 /* 澡盆@2x.png in Resources */,
 				4828F3CB19A495D700D04926 /* 10.1.1.jpg in Resources */,
 				48866EE1199A12E6007B16AA /* btn_add.png in Resources */,
