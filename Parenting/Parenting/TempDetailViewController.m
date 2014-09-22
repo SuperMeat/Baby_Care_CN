@@ -137,10 +137,12 @@
     labelLastTitle.font = [UIFont fontWithName:@"Arial" size:10];
     labelLastTitle.textAlignment = NSTextAlignmentLeft;
     labelLastTitle.text = [NSString stringWithFormat:@"上次%@",itemName];
+    labelLastTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     _labelLastDate = [[UILabel alloc]initWithFrame:CGRectMake(10, 42, 120, 20)];
     _labelLastDate.font = [UIFont fontWithName:@"Arial" size:12];
     _labelLastDate.textAlignment = NSTextAlignmentLeft;
+    _labelLastDate.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     [_viewTop1 addSubview:_labelLastValue];
     [_viewTop1 addSubview:labelLastTitle];
@@ -156,10 +158,12 @@
     labelCURTitle.font = [UIFont fontWithName:@"Arial" size:10];
     labelCURTitle.textAlignment = NSTextAlignmentLeft;
     labelCURTitle.text = [NSString stringWithFormat:@"当前%@",itemName];
+    labelCURTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     _labelCURDate = [[UILabel alloc]initWithFrame:CGRectMake(135, 42, 120, 20)];
     _labelCURDate.font = [UIFont fontWithName:@"Arial" size:12];
     _labelCURDate.textAlignment = NSTextAlignmentLeft;
+    _labelCURDate.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     //_viewTop1_CHANGE
     _labelChangeValue = [[UILabel alloc]initWithFrame:CGRectMake(260, 10, 60, 20)];
@@ -171,6 +175,7 @@
     labelChangeTitle.font = [UIFont fontWithName:@"Arial" size:10];
     labelChangeTitle.textAlignment = NSTextAlignmentLeft;
     labelChangeTitle.text = @"变化";
+    labelChangeTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     [_viewTop1 addSubview:_labelCURValue];
     [_viewTop1 addSubview:labelCURTitle];
@@ -191,6 +196,7 @@
     labelHistory.font = [UIFont fontWithName:@"Arial" size:16];
     labelHistory.textAlignment = NSTextAlignmentLeft;
     labelHistory.text = @"查看所有记录";
+    labelHistory.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     [_viewHistroy addSubview:labelHistory];
     
     UILabel *labelHistoryArrow = [[UILabel alloc]initWithFrame:CGRectMake(285, 12, 25, 25)];
@@ -273,7 +279,7 @@
     
     UILabel *labelPoloTitle = [[UILabel alloc]initWithFrame:CGRectMake(120, 5, 80, 18)];
     labelPoloTitle.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
-    labelPoloTitle.textColor = [UIColor blackColor];
+    labelPoloTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     labelPoloTitle.textAlignment = NSTextAlignmentCenter;
     labelPoloTitle.text = @"最近三日体温记录";
     [_viewPlot addSubview:labelPoloTitle];
