@@ -16,7 +16,8 @@
 
 static NetWorkConnect * _instance;
 
-#define request_timeout 10
+#define request_timeout 5
+#define retry_count 3
 
 @implementation NetWorkConnect
 @synthesize delegate;
@@ -33,6 +34,15 @@ static NetWorkConnect * _instance;
 	
 	return _instance;
 }
+
+//-(id)init
+//{
+//    self=[super init];
+//    if (self) {
+//        
+//    }
+//    return self;
+//}
 
 #pragma mark - 
 
@@ -71,7 +81,7 @@ static NetWorkConnect * _instance;
     self.showNetworkStatus = isShowNetWorkStatus;
     
     NSURL *url = [NSURL URLWithString:str_url];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setURL:url];
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:postDict options:NSJSONWritingPrettyPrinted error:nil];
     NSMutableData *jsonMData = [NSMutableData dataWithData:jsonData];
@@ -79,9 +89,30 @@ static NetWorkConnect * _instance;
     [request addRequestHeader:@"Accept" value:@"application/json"];
     [request addRequestHeader:@"content-type" value:@"application/json"];
     [request setResponseEncoding:NSUTF8StringEncoding];
-    [request setDelegate:self];
+//    [request setDelegate:self];
     [request setRequestMethod:mode];
     [request setTimeOutSeconds:request_timeout];
+    [request setNumberOfTimesToRetryOnTimeout:retry_count];
+    
+    [request setCompletionBlock:
+     ^{
+         if (finishCallBackBlock) {
+             SBJsonParser *json = [[SBJsonParser alloc]init];
+             NSData *data = [request responseData];
+             NSDictionary *dict = [json objectWithData:data];
+             if (finishCallBackBlock){
+                 finishCallBackBlock (dict);
+             }
+         }
+     }];
+    
+    [request setFailedBlock:
+     ^{
+         if (failCallBackBlock) {
+             failCallBackBlock ([[request error] debugDescription]);
+         }
+     }];
+    
     if (isAsyn) {
         [request startAsynchronous];
     }else

@@ -201,9 +201,9 @@
     [_viewHistroy addSubview:labelHistoryArrow];
     
     //corePlot
-    plotHeight=200;
+    plotHeight=180;
     if (DEVICE_IS_IPHONE5) {
-        plotHeight = 248;
+        plotHeight = 268;
     }
     
     _viewPlot = [[UIView alloc]initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, plotHeight)];
@@ -302,13 +302,13 @@
     UIImageView *addIamge;
     UIImageView *cutline;
     if (DEVICE_IS_IPHONE5){
-        addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-110+7 - 40  , 130/2.0, 256/2.0)];
-        addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-100/2.0, frame.size.height-102/2.0 -40 , 171/2.0, 102/2.0)];
-        cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-110-40 , 320, 10)];
+        addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-110+7 - 40 + 20  , 130/2.0, 256/2.0)];
+        addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-100/2.0, frame.size.height-102/2.0 -40 + 20, 171/2.0, 102/2.0)];
+        cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-110-40 + 20, 320, 10)];
     }else{
-        addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-100/2.0, frame.size.height-102/2.0, 171/2.0, 102/2.0)];
-        addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-110+7, 130/2.0, 256/2.0)];
-        cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-110, 320, 10)];
+        addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width-100/2.0, frame.size.height-102/2.0 - 20, 171/2.0, 102/2.0)];
+        addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height-110+7 - 20, 130/2.0, 256/2.0)];
+        cutline = [[UIImageView alloc]initWithFrame:CGRectMake(0, WINDOWSCREEN-110- 20, 320, 10)];
     }
     [cutline setImage:[UIImage imageNamed:@"分界线"]];
     [addIamge1 setImage:[UIImage imageNamed:@"长颈鹿"]];

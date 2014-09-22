@@ -49,12 +49,6 @@
 {
     [super viewDidLoad];
     [self initView];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShown:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)initView{
@@ -248,16 +242,35 @@
     [self.initBabyInfoDelegate initHomeData];
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    _tempTextField = textField;
-    if (textField == _textFiledBirth)
-    {
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    //scrollview滚动适配输入
+    if (textField == _textFiledName) {
+        [_mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+    else if (textField == _textFiledHeight){
+        [_mainScrollView setContentOffset:CGPointMake(0, 90) animated:YES];
+    }
+    else if (textField == _textFiledWeight){
+        [_mainScrollView setContentOffset:CGPointMake(0, 135) animated:YES];
+    }
+    else if (textField == _textFiledHS){
+        [_mainScrollView setContentOffset:CGPointMake(0, 180) animated:YES];
+    }
+    
+    
+    if (textField == _textFiledBirth){
         [self actionsheetShow];
+        [_textFiledName resignFirstResponder];
         [_textFiledBirth resignFirstResponder];
+        [_textFiledHeight resignFirstResponder];
+        [_textFiledWeight resignFirstResponder];
+        [_textFiledHS resignFirstResponder];
+        return NO;
+    }
+    else{
+        return YES;
     }
 }
-
 
 -(void)actionsheetShow
 {
@@ -267,7 +280,7 @@
         [_action setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
         [_action setDelegate:self];
     }
-    
+    _datepicker.date = [NSDate date];
     [_action show];
 }
 
@@ -291,7 +304,6 @@
         _datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, _textFiledBirth.frame.origin.y+45+G_YADDONVERSION, 320, 162)];
         _datepicker.datePickerMode=UIDatePickerModeDate;
         _datepicker.maximumDate = [NSDate date];
-        [_datepicker addTarget:self action:@selector(updatebirsthday:) forControlEvents:UIControlEventValueChanged];
     }
     
     _datepicker.frame=CGRectMake(0, 0, 320, 162);
@@ -304,45 +316,6 @@
     NSDateFormatter *dateFormater=[[NSDateFormatter alloc]init];
     [dateFormater setDateFormat:@"yyyy-MM-dd"];
     _textFiledBirth.text=[dateFormater stringFromDate:sender.date];
-}
-
--(void)keyboradshow
-{
-    _oldYOffset = _mainScrollView.contentOffset.y;
-    _yOffset = 0;
-    if (_textFiledName == _tempTextField) {
-        _yOffset = 0;
-    }
-    else if (_textFiledHeight == _tempTextField){
-        _yOffset = 90;
-    }
-    else if (_textFiledWeight == _tempTextField){
-        _yOffset = 135;
-    }
-    else if (_textFiledHS == _tempTextField){
-        _yOffset = 180;
-    }
-    if (_yOffset != 0) {
-        [_mainScrollView setContentOffset:CGPointMake(0, _yOffset) animated:YES];
-    }
-}
-
--(void)keyboradhidden
-{
-    NSTimeInterval animationDuration = 0.25f;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    _mainScrollView.contentOffset=CGPointMake(_mainScrollView.contentOffset.x, _oldYOffset);
-    [UIView commitAnimations];
-}
-
-- (void)keyboardWillShown:(NSNotification*)aNotification{
-//    [self keyboradshow];
-}
-
--(void)keyboardWillHidden:(NSNotification*)aNotification
-{
-    //[self keyboradhidden];
 }
 
 - (IBAction)selectPic:(id)sender {

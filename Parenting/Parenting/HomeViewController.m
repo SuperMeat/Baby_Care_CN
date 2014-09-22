@@ -78,11 +78,11 @@
     _timeLineShowCount = 5;
     
     [self initView];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kBabyNickname"] != nil) {
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kBabyNickname"] != nil) {
         _initTimeLineData = [[InitTimeLineData alloc]init];
         _initTimeLineData.targetViewController = self;
-        [_initTimeLineData getTimeLineData];
-    }
+//        [_initTimeLineData getTimeLineData];
+//    }
 }
 
 
@@ -93,12 +93,15 @@
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil){
         [_photoAreaView removeFromSuperview];
+        [_timeLineTableView removeFromSuperview];
         [_mainScrollView removeFromSuperview];
+        
         _photoAreaView = nil;
         _mainScrollView = nil;
+        _timeLineTableView = nil;
         _data = nil;
+        
         [self initView];
-        [self initData];
         isPushSocialView = NO;
         _loginView.hidden = NO;
     }
@@ -133,8 +136,6 @@
 }
 
 -(void)initHomeData{
-    _initTimeLineData = [[InitTimeLineData alloc]init];
-    _initTimeLineData.targetViewController = self;
     [_initTimeLineData getTimeLineData];
     [self initData];
 }
@@ -326,7 +327,8 @@
         }
         
         labelContent.text = [curData objectAtIndex:1];
-        labelTime.text = [ACDate getMsgTimeSinceDate:[ACDate getDateFromTimeStamp:[[curData objectAtIndex:4]longValue]]];
+        NSString *cellTime = [ACDate getMsgTimeSinceDate:[ACDate getDateFromTimeStamp:[[curData objectAtIndex:4]longValue]]];
+        labelTime.text = cellTime;
     }
     else {
         /** init cell view **/
@@ -372,15 +374,13 @@
         
         imageViewIcon.image = [UIImage imageNamed:@"icon_message.png"];
         labelContent.text = [curData objectAtIndex:1];
-        labelTime.text = [ACDate getMsgTimeSinceDate:[ACDate getDateFromTimeStamp:[[curData objectAtIndex:4]longValue]]];
-//        labelTime.text = @"1天前";
+        NSString *cellTime = [ACDate getMsgTimeSinceDate:[ACDate getDateFromTimeStamp:[[curData objectAtIndex:4]longValue]]];
+        labelTime.text = cellTime;
         
         NSString *picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"Tip"),[curData objectAtIndex:2]];
         UIASYImageView *imageView = [[UIASYImageView alloc] initWithFrame:imagePic.frame];
         [imageView showImageWithUrl:picUrl];
         [imageViewContentBg addSubview:imageView];
-//        imagePic.image = imageView.image;
-        
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -799,14 +799,17 @@
      */
     
     //获取app_url信息
+    
     NSString *app_url = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"];
     if ([app_url isEqual:@""] || app_url == nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:0] forKey:@"review_last_alert_time"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"review_state"];
         //get url
         NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"unname",@"unname",nil];
         
-        [[NetWorkConnect sharedRequest]httpRequestWithURL:GET_APP_INFO
+        
+        NetWorkConnect *_netWorkConnect = [[NetWorkConnect alloc]init]; 
+        [_netWorkConnect httpRequestWithURL:GET_APP_INFO
                                                      data:dictBody
                                                      mode:@"POST"
                                                       HUD:nil
@@ -814,9 +817,12 @@
          {
              //请求成功处理
              NSDictionary *dict = [result objectForKey:@"body"];
-             [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_url"] forKey:@"app_url"];
-             [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_name"] forKey:@"app_name"];
-             [self showReviewAlert];
+             if (![[dict objectForKey:@"app_url"]  isEqual: @""])
+             {
+                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_url"] forKey:@"app_url"];
+                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_name"] forKey:@"app_name"];
+                    [self showReviewAlert];
+             }
          }
                                              didFailBlock:^(NSString *error){}
                                            isShowProgress:YES
