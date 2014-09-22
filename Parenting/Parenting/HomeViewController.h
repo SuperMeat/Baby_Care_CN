@@ -33,6 +33,7 @@
     int _timeLineShowCount;
     
     BOOL isPushSocialView;
+     
 }
 
 -(void)initTimeLineData;

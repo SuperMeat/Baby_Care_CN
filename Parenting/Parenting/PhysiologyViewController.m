@@ -9,6 +9,8 @@
 #import "PhysiologyViewController.h"
 #import "BabyDataDB.h"
 
+#define DEVICE_IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height == 568)
+
 @interface PhysiologyViewController ()
 
 @end
@@ -99,6 +101,21 @@
     _scorllView.scrollEnabled = NO;
     _scorllView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _scorllView.bounds.size.width, 0.01f)];
     [self.view addSubview:_scorllView];
+    
+    //bgImage
+    UIImageView *addIamge1;
+    UIImageView *addIamge;
+    if (DEVICE_IS_IPHONE5){
+        addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 400, 130/2.0, 256/2.0)];
+        addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.width-100/2.0, 400, 171/2.0, 102/2.0)];
+    }else{
+        addIamge = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.width-100/2.0, 400, 171/2.0, 102/2.0)];
+        addIamge1 = [[UIImageView alloc]initWithFrame:CGRectMake(0,400, 130/2.0, 256/2.0)];
+    }
+    [addIamge1 setImage:[UIImage imageNamed:@"长颈鹿"]];
+    [addIamge setImage:[UIImage imageNamed:@"大象"]];
+    [self.view addSubview: addIamge];
+    [self.view addSubview:addIamge1];
 }
 
 -(void)initData{

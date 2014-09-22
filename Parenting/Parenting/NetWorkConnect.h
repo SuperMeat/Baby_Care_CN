@@ -45,9 +45,12 @@ typedef void(^RequestDidFail)(NSString *strErrorMesg);
             netWorkStatus:(BOOL)isShowNetWorkStatus
            viewController:(UIViewController*)viewController;
 
+
 @property(nonatomic, assign) id<NetWorkConnectDelegate> delegate;
 
 + (NetWorkConnect *)sharedRequest;
+
+//-(id)init;
 
 -(BOOL)remoteFileExist:(NSString*)str_url;
 

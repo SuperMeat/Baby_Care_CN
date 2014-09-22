@@ -153,12 +153,17 @@
     [self removeFromSuperview];
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (textField == textRecordDate){
         [self actionsheetShow];
-        [textField resignFirstResponder];
+        [textRecordDate resignFirstResponder];
+        [textValue resignFirstResponder];
+        return NO;
     }
+    else{
+        return YES;
+    }
+    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -226,7 +231,7 @@
         [action setButtonTitles:[NSMutableArray arrayWithObjects:@"取消", @"确定", nil]];
         [action setDelegate:self];
     }
-    
+    datepicker.date = [NSDate date];
     [action show];
 }
 
@@ -235,6 +240,9 @@
     if (buttonIndex == 1)
     {
         [self updateRecordDate:datepicker];
+    }
+    else{
+        
     }
     
     [alertView close];
@@ -245,18 +253,16 @@
 {
     if (datepicker==nil) {
         datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, textRecordDate.frame.origin.y+45+G_YADDONVERSION, 320, 162)];
-        datepicker.datePickerMode=UIDatePickerModeDateAndTime;
+        datepicker.datePickerMode = UIDatePickerModeDate;
         BabyDataDB *babyDb = [[BabyDataDB alloc]init];
         NSDictionary *dict = [babyDb selectBabyInfoByBabyId:BABYID];
         long birthTime = [[dict objectForKey:@"birth"] longValue];
-        datepicker.minimumDate = [ACDate getDateFromTimeStamp:birthTime];
-        [datepicker addTarget:self action:@selector(updateRecordDate:) forControlEvents:UIControlEventValueChanged];
+        datepicker.minimumDate = [ACDate getDateFromTimeStamp:birthTime]; 
     }
-    
     datepicker.frame=CGRectMake(0, 0, 320, 162);
-    
     return datepicker;
 }
+
 
 
 
