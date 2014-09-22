@@ -52,6 +52,11 @@
     UIImageView *remarkbg;
     UILabel *remark;
     UILabel *foodtypeLabel;
+    
+    NSString *olddate;
+    NSString *oldstarttime;
+    NSString *oldduration;
+    NSString *oldfoodtype;
 }
 
 @property(nonatomic,strong)NSString *feedway;

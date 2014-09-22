@@ -18,7 +18,7 @@
 @interface save_sleepview : UIView<UITextViewDelegate,UITextFieldDelegate,CustomIOS7AlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIImageView *imageview;
-    UITextView *remarktext;
+    UITextView  *remarktext;
     UITextField *durationtext;
     UITextField *datetext;
     UITextField *starttimetext;
@@ -36,6 +36,10 @@
     CustomIOS7AlertView *action3;
     NSMutableArray *hours;
     NSMutableArray *minutes;
+    
+    NSString *olddate;
+    NSString *oldstarttime;
+    NSString *oldduartion;
     
 }
 @property(nonatomic,assign)BOOL select;

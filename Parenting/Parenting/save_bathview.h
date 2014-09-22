@@ -36,6 +36,10 @@
     NSMutableArray *hours;
     NSMutableArray *minutes;
 
+    NSString *olddate;
+    NSString *oldstarttime;
+    NSString *oldduartion;
+
 }
 @property(nonatomic,assign)BOOL select;
 @property(nonatomic,strong)NSDate *start;

@@ -51,7 +51,7 @@
 
 - (void)tapAction
 {
-        self.on = !self.on;
+    self.on = !self.on;
     if ([self.delegate respondsToSelector:@selector(customUISwitchViewTap:)]) {
         [self.delegate customUISwitchViewTap:self];
     }
