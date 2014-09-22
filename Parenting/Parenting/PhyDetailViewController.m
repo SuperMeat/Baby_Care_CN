@@ -134,10 +134,12 @@
     labelLastTitle.font = [UIFont fontWithName:@"Arial" size:10];
     labelLastTitle.textAlignment = NSTextAlignmentLeft;
     labelLastTitle.text = [NSString stringWithFormat:@"上次%@",itemName];
+    labelLastTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     _labelLastDate = [[UILabel alloc]initWithFrame:CGRectMake(10, 42, 80, 20)];
     _labelLastDate.font = [UIFont fontWithName:@"Arial" size:12];
     _labelLastDate.textAlignment = NSTextAlignmentLeft;
+    _labelLastDate.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     [_viewTop1 addSubview:_labelLastValue];
     [_viewTop1 addSubview:labelLastTitle];
@@ -153,10 +155,12 @@
     labelCURTitle.font = [UIFont fontWithName:@"Arial" size:10];
     labelCURTitle.textAlignment = NSTextAlignmentLeft;
     labelCURTitle.text = [NSString stringWithFormat:@"当前%@",itemName];
+    labelCURTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     _labelCURDate = [[UILabel alloc]initWithFrame:CGRectMake(135, 42, 80, 20)];
     _labelCURDate.font = [UIFont fontWithName:@"Arial" size:12];
     _labelCURDate.textAlignment = NSTextAlignmentLeft;
+    _labelCURDate.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     //_viewTop1_CHANGE
     _labelChangeValue = [[UILabel alloc]initWithFrame:CGRectMake(260, 10, 60, 20)];
@@ -168,6 +172,7 @@
     labelChangeTitle.font = [UIFont fontWithName:@"Arial" size:10];
     labelChangeTitle.textAlignment = NSTextAlignmentLeft;
     labelChangeTitle.text = @"变化";
+    labelChangeTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     [_viewTop1 addSubview:_labelCURValue];
     [_viewTop1 addSubview:labelCURTitle];
@@ -188,6 +193,7 @@
     labelHistory.font = [UIFont fontWithName:@"Arial" size:16];
     labelHistory.textAlignment = NSTextAlignmentLeft;
     labelHistory.text = @"查看所有记录";
+    labelHistory.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     [_viewHistroy addSubview:labelHistory];
     
     UILabel *labelHistoryArrow = [[UILabel alloc]initWithFrame:CGRectMake(285, 12, 25, 25)];
@@ -281,7 +287,7 @@
     
     UILabel *labelArea = [[UILabel alloc]initWithFrame:CGRectMake(195, 25, 30, 18)];
     labelArea.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
-    labelArea.textColor = [UIColor blackColor];
+    labelArea.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     labelArea.textAlignment = NSTextAlignmentCenter;
     labelArea.text = @"用户";
     [_viewPlot addSubview:labelArea];
@@ -292,7 +298,7 @@
     
     UILabel *labelUser = [[UILabel alloc]initWithFrame:CGRectMake(228, 25, 30, 18)];
     labelUser.font = [UIFont fontWithName:@"Arial" size:SMALLTEXT];
-    labelUser.textColor = [UIColor blackColor];
+    labelUser.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     labelUser.textAlignment = NSTextAlignmentCenter;
     labelUser.text = @"标准值";
     [_viewPlot addSubview:labelUser];
@@ -382,7 +388,7 @@
 
 -(void)AddRecord{
     if (phySaveView==nil) {
-        phySaveView = [[PhySaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height-64) Type:itemType OpType:@"SAVE" CreateTime:0];
+        phySaveView = [[PhySaveView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, 50, self.view.frame.size.width, self.view.frame.size.height-64) Type:itemType OpType:@"SAVE" CreateTime:0];
         phySaveView.PhySaveDelegate = self;
     }
     [self.view addSubview:phySaveView];

@@ -177,9 +177,13 @@
                 cell.labelDate.text = [ACDate dateDetailFomatdate2:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"measure_time"] longValue]]];
             }
             
+            cell.labelDate.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             cell.labelType.text = itemName;
+            cell.labelType.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             cell.labelValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"value"] doubleValue]];
+            cell.labelValue.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             cell.labelUnit.text = itemUnit;
+            cell.labelUnit.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         }
         return cell;
     }
@@ -192,10 +196,16 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             cell.labelBMIValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"value"] doubleValue]];
+            cell.labelBMIValue.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+            
             cell.labelHeightDate.text = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"h_measure_time"] longValue]]];
+            cell.labelHeightDate.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             cell.labelWeightDate.text = [dateFormatter stringFromDate:[ACDate getDateFromTimeStamp:[[dictCurrent objectForKey:@"w_measure_time"] longValue]]];
+            cell.labelWeightDate.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             cell.labelHeightValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"h_value"] doubleValue]];
+            cell.labelHeightValue.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             cell.labelWeightValue.text = [NSString stringWithFormat:@"%0.1f",[[dictCurrent objectForKey:@"w_value"] doubleValue]];
+            cell.labelWeightValue.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         }
         return cell;
     }

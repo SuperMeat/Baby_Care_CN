@@ -253,6 +253,7 @@
         labelTitle.font = [UIFont fontWithName:@"Arial" size:14];
         labelTitle.textAlignment = NSTextAlignmentLeft;
         labelTitle.text = [arrayCurrent objectAtIndex:2];
+        labelTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         
         UILabel *labelValue = [[UILabel alloc]init];
         labelValue.frame = CGRectMake(75, 35, 55, 20);

@@ -186,6 +186,14 @@
     }
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    for (id view in imageview.subviews) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            [view resignFirstResponder];
+        }
+    }
+}
+
 #pragma 判断是否为浮点数
 - (BOOL)isPureFloat:(NSString*)string{
     NSScanner* scan = [NSScanner scannerWithString:string];

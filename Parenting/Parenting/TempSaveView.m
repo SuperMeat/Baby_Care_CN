@@ -143,6 +143,14 @@
     
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    for (id view in imageview.subviews) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            [view resignFirstResponder];
+        }
+    }
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == textValue && ![self isPureFloat:textValue.text]) {
