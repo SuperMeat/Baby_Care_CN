@@ -607,7 +607,6 @@ messageView;
     if (sender.tag==101) {
         another=(UIButton*)[segementForMetric viewWithTag:102];
         [[NSUserDefaults standardUserDefaults]setObject:@"Mls:" forKey:@"metric" ];
-        
     }
     else
     {

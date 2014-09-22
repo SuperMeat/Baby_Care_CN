@@ -566,6 +566,21 @@
         }
         
     }
+    else
+    {
+        if (alertView == action3) {
+            amounttext.text = oldamount;
+        }
+        
+        if (alertView == action4) {
+            colortext.text = oldColor;
+        }
+        
+        if (alertView == action5) {
+            hardtext.text = oldHard;
+        }
+
+    }
     
     [alertView close];
 }
@@ -740,36 +755,54 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    // 此处编写弹出日期选择器的代码。
     if (textField == datetext)
     {
+        olddate = datetext.text;
         [self actionsheetShow];
+        [remarktext resignFirstResponder];
         [datetext resignFirstResponder];
     }
     
     if (textField == starttimetext) {
+        oldstarttime = starttimetext.text;
+        [remarktext resignFirstResponder];
         [self actionsheetStartTimeShow];
         [starttimetext resignFirstResponder];
     }
     
     if (textField == amounttext) {
+        oldamount = amounttext.text;
+        [remarktext resignFirstResponder];
         [self actionsheetDiaperPickerAmout];
         [amounttext resignFirstResponder];
     }
     
     if (textField == colortext) {
+        oldColor = colortext.text;
+        [remarktext resignFirstResponder];
         [self actionsheetDiaperPickerColor];
         [colortext resignFirstResponder];
     }
     
     if (textField == hardtext) {
+        oldHard = hardtext.text;
+        [remarktext resignFirstResponder];
         [self actionsheetDiaperPickerHard];
         [hardtext resignFirstResponder];
     }
-}
 
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-
+    
+    return NO;
 }
 
 -(void)keyboradshow
@@ -805,11 +838,6 @@
 -(void)keyboardWillHidden:(NSNotification*)aNotification
 {
     [self keyboradhidden];
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
 }
 
 -(void)sendDiaperSaveChanged:(int)type NewStatus:(NSString*)newstatus

@@ -64,7 +64,7 @@
     
     //200为UILabel的宽度，5000是预设的一个高度，表示在这个范围内
     self.contentLabel = [[UITextView alloc] init];
-    
+    self.contentLabel.selectable = NO;
     self.contentLabel.frame = CGRectMake(10 , 94, 300, labelSize.height);//保持原来Label的位置和宽度，只是改变高度。
     
     [self.contentLabel setText:copyright];

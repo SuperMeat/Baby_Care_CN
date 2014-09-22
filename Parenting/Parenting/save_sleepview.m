@@ -318,23 +318,36 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+  
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
     if (textField == datetext)
     {
+        [remarktext resignFirstResponder];
+        olddate = datetext.text;
         [self actionsheetShow];
         [datetext resignFirstResponder];
     }
     
     if (textField == starttimetext) {
+        [remarktext resignFirstResponder];
+        oldstarttime = starttimetext.text;
         [self actionsheetStartTimeShow];
         [starttimetext resignFirstResponder];
     }
     
     if (textField == durationtext) {
+        [remarktext resignFirstResponder];
+        oldduartion = durationtext.text;
         [self actionsheetDurationShow];
         [durationtext resignFirstResponder];
     }
 
+    return NO;
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
 
@@ -473,6 +486,21 @@
         if (alertView == action3) {
             durationtext.text = [NSString stringWithFormat:@"%02d:%02d:%02d", self.durationhour,self.durationmin,self.durationsec];
         }
+    }
+    else
+    {
+        if (alertView == action) {
+            datetext.text = olddate;
+        }
+        
+        if (alertView == action2) {
+            starttimetext.text = oldstarttime;
+        }
+        
+        if (alertView == action3) {
+            durationtext.text = oldduartion;
+        }
+
     }
     
     [alertView close];

@@ -295,8 +295,8 @@
 
 -(void)loaddata
 {
-    if (self.select) {
-        
+    if (self.select)
+    {
         SummaryDB *db=[SummaryDB dataBase];
         NSArray *array= [db searchFromfeed:start];
         NSDate *date=(NSDate*)[array objectAtIndex:0];
@@ -711,28 +711,52 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+
+
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
     if (textField == datetext)
     {
+        [Oztext resignFirstResponder];
+        [remarktext resignFirstResponder];
+        olddate =datetext.text;
         [self actionsheetShow];
         [datetext resignFirstResponder];
     }
     
     if (textField == starttimetext) {
+        [Oztext resignFirstResponder];
+        [remarktext resignFirstResponder];
+        oldstarttime = starttimetext.text;
         [self actionsheetStartTimeShow];
         [starttimetext resignFirstResponder];
     }
     
     if (textField == durationtext) {
+        [Oztext resignFirstResponder];
+        [remarktext resignFirstResponder];
+        oldduration = durationtext.text;
         [self actionsheetDurationShow];
         [durationtext resignFirstResponder];
     }
     
     if (textField == foodtypetext)
     {
+        [Oztext resignFirstResponder];
+        [remarktext resignFirstResponder];
+        oldfoodtype = foodtypetext.text;
         [self actionsheetFoodTypePicker];
         [foodtypetext resignFirstResponder];
     }
-
+    
+    if (textField == Oztext)
+    {
+        return YES;
+    }
+    
+    return NO;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
@@ -778,7 +802,6 @@
 #pragma -mark sleep change time
 -(void)updatedate:(UIDatePicker*)sender
 {
-    NSLog(@"updatedate:%@", sender);
     UIDatePicker *picker = sender;
     if (self.start == nil) {
         if (curstarttime == nil) {
@@ -806,7 +829,6 @@
 
 -(void)updatestarttime:(UIDatePicker*)sender
 {
-    NSLog(@"updatestarttime:%@", sender);
     UIDatePicker *picker = sender;
     if (self.start == nil)
     {
@@ -896,6 +918,24 @@
         }
 
     }
+    else
+    {
+        if (alertView == action) {
+            datetext.text = olddate;
+        }
+        
+        if (alertView == action2) {
+            starttimetext.text = oldstarttime;
+        }
+        
+        if (alertView == action3) {
+            durationtext.text = oldduration;
+        }
+        
+        if (alertView == action4) {
+            foodtypetext.text = oldfoodtype;
+        }
+    }
     
     [alertView close];
 }
@@ -924,8 +964,6 @@
     starttimepicker.frame=CGRectMake(0, 0, 320, 100);
     return starttimepicker;
 }
-
-
 
 - (DurationPickerView*)createDurationView
 {

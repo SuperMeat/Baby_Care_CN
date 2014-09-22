@@ -35,6 +35,9 @@
     CustomIOS7AlertView *action3;
     NSMutableArray *hours;
     NSMutableArray *minutes;
+    NSString *olddate;
+    NSString *oldstarttime;
+    NSString *oldduartion;
 
 }
 @property(nonatomic,assign)BOOL select;

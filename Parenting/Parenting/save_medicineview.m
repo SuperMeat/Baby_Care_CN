@@ -441,35 +441,39 @@
     [self removeFromSuperview];
 }
 
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
-    
-    
-}
 
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-    
-}
-
--(void)textFieldDidBeginEditing:(UITextField *)textField
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (textField == datetext)
     {
+        olddate = datetext.text;
+        [medicinedesptext resignFirstResponder];
+        [medicinenametext resignFirstResponder];
+        [timeinternaltext resignFirstResponder];
+        [amounttext resignFirstResponder];
         [self actionsheetShow];
         [datetext resignFirstResponder];
     }
     
-    if (textField == danweitext) {
+    if (textField == danweitext)
+    {
+        olddanwei = danweitext.text;
+        [medicinedesptext resignFirstResponder];
+        [medicinenametext resignFirstResponder];
+        [timeinternaltext resignFirstResponder];
+        [amounttext resignFirstResponder];
         [self actionsheetShowTypeList];
         [danweitext resignFirstResponder];
     }
-//    if (textField == medicinenametext) {
-//        [self actionsheetStartTimeShow];
-//        [medicinenametext resignFirstResponder];
-//    }
+    
+    if (textField == medicinenametext || textField == timeinternaltext || textField == medicinedesptext) {
+        return YES;
+    }
+    
+    return NO;
     
 }
+
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -561,7 +565,7 @@
 {
     if (datepicker==nil) {
         datepicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, datetext.frame.origin.y+45, 320, 100)];
-        datepicker.datePickerMode=UIDatePickerModeDateAndTime;
+        datepicker.datePickerMode= UIDatePickerModeDateAndTime;
         [datepicker addTarget:self action:@selector(updatedate:) forControlEvents:UIControlEventValueChanged];
     }
     

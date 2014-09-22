@@ -320,25 +320,34 @@
 {
 
 }
--(void)textFieldDidBeginEditing:(UITextField *)textField
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (textField == datetext)
     {
+        olddate = datetext.text;
+        [remarktext resignFirstResponder];
         [self actionsheetShow];
         [datetext resignFirstResponder];
     }
     
     if (textField == starttimetext) {
+        oldstarttime = starttimetext.text;
+        [remarktext resignFirstResponder];
         [self actionsheetStartTimeShow];
         [starttimetext resignFirstResponder];
     }
     
     if (textField == durationtext) {
+        oldduartion = durationtext.text;
+        [remarktext resignFirstResponder];
         [self actionsheetDurationShow];
         [durationtext resignFirstResponder];
     }
-
+    
+    return NO;
+    
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
 
@@ -479,7 +488,22 @@
             durationtext.text = [NSString stringWithFormat:@"%02d:%02d:%02d", self.durationhour,self.durationmin,self.durationsec];
         }
     }
-    
+    else
+    {
+        if (alertView == action) {
+            datetext.text = olddate;
+        }
+        
+        if (alertView == action2) {
+            starttimetext.text = oldstarttime;
+        }
+        
+        if (alertView == action3) {
+            durationtext.text = oldduartion;
+        }
+        
+    }
+
     [alertView close];
 }
 
@@ -593,7 +617,6 @@
 
 #pragma mark -
 #pragma mark UIPickerViewDataSource
-
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
 	return 2;
 }

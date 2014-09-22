@@ -41,6 +41,8 @@ BOOL isReminder;
 BOOL oldIsReminder;
     
 NSArray *danweiList;
+    
+    NSString *olddate;
 }
 
 @property(nonatomic,strong)NSString *feedway;

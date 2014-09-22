@@ -20,7 +20,6 @@
         _labDate.font = [UIFont fontWithName:kFont size:15.0f];
         [_labDate setTextColor:[UIColor whiteColor]];
         
-        
         _btnForward = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnForward setImage:[UIImage imageNamed:@"icon_forward"] forState:UIControlStateNormal];
         [_btnForward addTarget:self action:@selector(forwardAction) forControlEvents:UIControlEventTouchUpInside];

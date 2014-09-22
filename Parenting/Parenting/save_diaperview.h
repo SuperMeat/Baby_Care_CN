@@ -46,6 +46,12 @@
     long _updatetime;
     NSDate* curstarttime;
     
+    NSString *olddate;
+    NSString *oldstarttime;
+    NSString *oldamount;
+    NSString *oldColor;
+    NSString *oldHard;
+    
 }
 @property(nonatomic,strong)NSString *status;
 @property(nonatomic,assign)BOOL select;
