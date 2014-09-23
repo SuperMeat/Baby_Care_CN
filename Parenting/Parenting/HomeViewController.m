@@ -889,8 +889,6 @@
     
     NSString *app_url = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"];
     if ([app_url isEqual:@""] || app_url == nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"review_state"];
         //get url
         NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"unname",@"unname",nil];
         
@@ -908,6 +906,8 @@
              {
                  [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_url"] forKey:@"app_url"];
                  [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_name"] forKey:@"app_name"];
+                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
+                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"review_state"];
              }
          }
                                              didFailBlock:^(NSString *error){}
@@ -922,8 +922,7 @@
     long review_last_alert_time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"review_last_alert_time"] longValue];
     bool review_state = [[NSUserDefaults standardUserDefaults] boolForKey:@"review_state"];
     
-    if (![app_url isEqualToString:@""] && !review_state && ([ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:review_last_alert_time]] >= 7 || review_last_alert_time == 0) ) {
-        //提示窗口
+    if (![app_url isEqualToString:@""] && !review_state && ([ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:review_last_alert_time]] >= 7 || review_last_alert_time == 0) ){
         [self showReviewAlert];
     }
 }
@@ -931,7 +930,7 @@
 -(void)showReviewAlert{
     if (_alertView == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[NSDate date]]] forKey:@"review_last_alert_time"];
-        _alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"您的评价啊对我们非常重要,是我们努力和进步的动力!\n感谢您的支持!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"好的,让我来说点什么",@"稍后评价",@"以后不要提醒我", nil];
+        _alertView = [[UIAlertView alloc] initWithTitle:@"给宝贝计划好评" message:@"如果您喜欢宝贝计划,请给我们一个五星评价,您的鼓励是我们进步的最大动力!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"喜欢,我五星评价",@"稍后再说",@"不再提醒", nil];
         [_alertView show];
     }
 }
@@ -943,15 +942,14 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]]];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
     }
-    else if (buttonIndex == 1){
-        //稍后评价
+    else if(buttonIndex == 1){
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
     }
     else{
         //不在提示
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
     }
 }
-
 
 - (void)didReceiveMemoryWarning
 {
