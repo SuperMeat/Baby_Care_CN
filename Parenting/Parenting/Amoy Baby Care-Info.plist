@@ -29,6 +29,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>120</string>
 			<key>CFBundleURLName</key>
 			<string></string>
 			<key>CFBundleURLSchemes</key>
@@ -39,6 +41,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>120</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>QQ41BD039B</string>
@@ -47,6 +51,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>120</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wx8a04549b73aba34b</string>
@@ -55,6 +61,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>120</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>sina.52d8843456240b63fb07a8dc</string>
@@ -63,6 +71,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>120</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>tencent1102906267</string>

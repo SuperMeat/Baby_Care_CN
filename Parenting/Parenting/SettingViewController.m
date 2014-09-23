@@ -484,7 +484,7 @@ messageView;
             [self.settingTable reloadData];
             [[ASIController asiController] postLoginState:-1];*/
 //            HomeViewController *homeViewController = [[HomeViewController alloc]init];
-            [self.tabBarController setSelectedIndex:0];
+            [self.tabBarController setSelectedIndex:TABBAR_INDEX_HOME];
             
             //end 20140829
         }
