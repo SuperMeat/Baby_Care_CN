@@ -144,7 +144,7 @@ messageView;
     //_item8.name=NSLocalizedString(@"Clear all logged data",nil);
     _item9.name=NSLocalizedString(@"LocalNotify", nil);
     //_item11.name = @"2G/3G下自动备份";
-    _item12.name = NSLocalizedString(@"Look up around", nil);
+    //_item12.name = NSLocalizedString(@"Look up around", nil);
     //_item13.name = @"允许发布自己位置及状态";
     
     _item13.name=NSLocalizedString(@"用户协议",nil);
@@ -312,14 +312,14 @@ messageView;
     //_item8.accessView=buttonForClear;
     _item9.accessView=myreminder;
     //_item11.accessView = switchForBackup;
-    _item12.accessView = detailforMap;
+    //_item12.accessView = detailforMap;
     //_item13.accessView = switchForOpenwild;
     _item13.accessView = protocolforUser;
     _item14.accessView = mybabyPhy;
     //隐藏宝贝信息
     //[_array1 addObject:_item1];
     [_array1 addObject:_item9];
-    [_array1 addObject:_item12];
+    //[_array1 addObject:_item12];
     
     //[_array2 addObject:_item2];
     //默认是毫升

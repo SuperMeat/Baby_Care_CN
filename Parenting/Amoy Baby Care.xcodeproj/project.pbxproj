@@ -2459,6 +2459,7 @@
 		48B7813D182A20610073EEBD /* CustomURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomURLCache.m; sourceTree = "<group>"; };
 		48B7813F182A20610073EEBD /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		48B78140182A20610073EEBD /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		48C6253619D12C2000FE46ED /* Amoy Baby Care.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Amoy Baby Care.entitlements"; path = "Amoy Baby Care/Amoy Baby Care.entitlements"; sourceTree = "<group>"; };
 		48C9AD1218E2AB4800D04FF7 /* SummaryDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryDB.h; sourceTree = "<group>"; };
 		48C9AD1318E2AB4800D04FF7 /* SummaryDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryDB.m; sourceTree = "<group>"; };
 		48D41F4019C7E743005A8E6B /* btn_tent_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_tent_focus@2x.png"; sourceTree = "<group>"; };
@@ -5741,6 +5742,7 @@
 		7215971117453680006FD415 = {
 			isa = PBXGroup;
 			children = (
+				48C6253619D12C2000FE46ED /* Amoy Baby Care.entitlements */,
 				480D466A19AF04B6005AC58A /* Images.xcassets */,
 				7215972617453680006FD415 /* Parenting */,
 				7215971F17453680006FD415 /* Frameworks */,
@@ -6427,6 +6429,9 @@
 						DevelopmentTeam = D6MQ5ZWZVN;
 						SystemCapabilities = {
 							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
 								enabled = 0;
 							};
 						};
@@ -7845,8 +7850,8 @@
 					"$(PROJECT_DIR)/UartLib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10D42CBE-F276-4E7D-8E3F-E174EBB81597";
+				PROVISIONING_PROFILE = "aeb7607b-6209-4e02-bf81-cda5ba371ce8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "aeb7607b-6209-4e02-bf81-cda5ba371ce8";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -7890,8 +7895,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3B2FC42A-DCB8-4686-A9B4-192FA8F48EC6";
+				PROVISIONING_PROFILE = "2a792db1-5141-4e10-8c57-0ff4735c8048";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2a792db1-5141-4e10-8c57-0ff4735c8048";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -7947,8 +7952,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				PROVISIONING_PROFILE = "aeb7607b-6209-4e02-bf81-cda5ba371ce8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "aeb7607b-6209-4e02-bf81-cda5ba371ce8";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -8005,8 +8010,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				PROVISIONING_PROFILE = "2a792db1-5141-4e10-8c57-0ff4735c8048";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2a792db1-5141-4e10-8c57-0ff4735c8048";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
@@ -8024,7 +8029,7 @@
 				7215973F17453680006FD415 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		7215974017453680006FD415 /* Build configuration list for PBXNativeTarget "Amoy Baby Care" */ = {
 			isa = XCConfigurationList;
@@ -8033,7 +8038,7 @@
 				7215974217453680006FD415 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
