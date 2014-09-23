@@ -216,6 +216,7 @@
         
         title = [[UILabel alloc]initWithFrame:CGRectMake(25, 5, 48, 32)];
         title.text = [arrData objectAtIndex:indexPath.row];
+        title.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         input = [[UITextField alloc]initWithFrame:CGRectMake(80,7, 180, 32)];
         input.returnKeyType =UIReturnKeyDone;
         input.delegate = self;
@@ -244,6 +245,7 @@
             input.secureTextEntry = YES;
         }
         
+        input.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell addSubview:input];
         title.textAlignment = NSTextAlignmentCenter;

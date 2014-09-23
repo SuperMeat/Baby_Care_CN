@@ -81,7 +81,12 @@ static NetWorkConnect * _instance;
     self.showNetworkStatus = isShowNetWorkStatus;
     
     NSURL *url = [NSURL URLWithString:str_url];
-    __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    
+    //解决__block retain cycle
+    //__block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    __block ASIHTTPRequest *requestBlock = request;
+    
     [request setURL:url];
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:postDict options:NSJSONWritingPrettyPrinted error:nil];
     NSMutableData *jsonMData = [NSMutableData dataWithData:jsonData];
@@ -98,7 +103,7 @@ static NetWorkConnect * _instance;
      ^{
          if (finishCallBackBlock) {
              SBJsonParser *json = [[SBJsonParser alloc]init];
-             NSData *data = [request responseData];
+             NSData *data = [requestBlock responseData];
              NSDictionary *dict = [json objectWithData:data];
              if (finishCallBackBlock){
                  finishCallBackBlock (dict);
@@ -109,7 +114,7 @@ static NetWorkConnect * _instance;
     [request setFailedBlock:
      ^{
          if (failCallBackBlock) {
-             failCallBackBlock ([[request error] debugDescription]);
+             failCallBackBlock ([[requestBlock error] debugDescription]);
          }
      }];
     
