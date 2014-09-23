@@ -38,6 +38,8 @@
     
 }
 
+
+
 -(void)showtest{
     if(_scrollView.contentOffset.x == 0){
         [_buttonSubscribe setTitle:@"订阅" forState:UIControlStateNormal];

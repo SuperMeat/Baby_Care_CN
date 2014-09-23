@@ -60,6 +60,9 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSString *contentsOfFile = [self get_image_save_file_path:imagePath];
+    
+//    UIImage *tempImage = [[UIImage alloc] initWithContentsOfFile:contentsOfFile];
+//    UIImage *image = [self imageWithImage:tempImage scaledToSize:self.frame.size];
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:contentsOfFile];
     
     if (asyFlag)
@@ -170,6 +173,25 @@
     [self showImageWithPathStr:url];
     [request release];
     [pool drain];
+}
+
+-(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
 }
 
 - (void)dealloc

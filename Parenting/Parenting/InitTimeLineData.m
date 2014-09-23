@@ -209,9 +209,9 @@
                     break;
                 }
             }
-            HomeViewController *homeViewController = (HomeViewController*)_targetViewController;
-            [homeViewController initTimeLineData];
-        } 
+        }
+        HomeViewController *homeViewController = (HomeViewController*)_targetViewController;
+        [homeViewController initTimeLineData];
     }
                                   ViewController:_targetViewController];
 }
