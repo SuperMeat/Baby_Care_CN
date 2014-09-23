@@ -310,11 +310,13 @@
         if (indexPath.section == 1) {
             title = [[UILabel alloc]initWithFrame:CGRectMake(18, 5, 96, 32)];
             title.text = [[arrData objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+            title.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else{
             title = [[UILabel alloc]initWithFrame:CGRectMake(25, 5, 48, 32)];
             title.text = [[arrData objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+            title.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             input = [[UITextField alloc]initWithFrame:CGRectMake(80,7, 180, 32)];
             input.returnKeyType =UIReturnKeyDone;
             input.delegate = self;
@@ -336,7 +338,7 @@
                 input.placeholder = @"请输入密码";
                 input.secureTextEntry = YES;
             }
-            
+            input.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell addSubview:input];
         }
