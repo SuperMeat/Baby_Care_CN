@@ -55,6 +55,8 @@
 #define _CELL_CHANGE_MAXLEN 17
 #define _TIPS_ID 99
 
+#define _CELL_INIT_COUNT 5
+
 @interface HomeViewController ()
 
 @end
@@ -75,12 +77,12 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     //时间轴默认展示10条数据
-    _timeLineShowCount = 5;
+    _timeLineShowCount = _CELL_INIT_COUNT;
     
     [self initView];
 //    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kBabyNickname"] != nil) {
-        _initTimeLineData = [[InitTimeLineData alloc]init];
-        _initTimeLineData.targetViewController = self;
+//        _initTimeLineData = [[InitTimeLineData alloc]init];
+//        _initTimeLineData.targetViewController = self;
 //        [_initTimeLineData getTimeLineData];
 //    }
 }
@@ -112,7 +114,9 @@
         [self.navigationController pushViewController:ctr animated:NO];
         return;
     }
-    else{
+    else if(_initTimeLineData == nil){
+        _initTimeLineData = [[InitTimeLineData alloc]init];
+        _initTimeLineData.targetViewController = self;
         [_initTimeLineData getTimeLineData];
         [self initData];
     }
@@ -214,11 +218,37 @@
     [self initTimeLineData];
 }
 
+-(void)stopActivityAnimating{
+    [_activityView stopAnimating];
+    _mainScrollView.scrollEnabled = YES;
+}
+
 -(void)initTimeLineData{
     [_activityView stopAnimating];
     _mainScrollView.scrollEnabled = YES;
     
-    _data = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectByLast:0 Count:_timeLineShowCount]];
+//    _timeLineShowCount = 32;
+    
+    NSMutableArray *_tempData = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectByLast:0 Count:_timeLineShowCount]];
+    
+    if ([_data count] == [_tempData count] && _timeLineShowCount != _CELL_INIT_COUNT) {
+        [_mainScrollView setContentOffset:CGPointMake(0, _mainScrollView.contentSize.height - _mainScrollView.height - 44) animated:YES];
+        return;
+    }
+    
+    if ([_data count] == [_tempData count]) {
+        return;
+    }
+    
+    _data = [[NSMutableArray alloc]initWithArray:_tempData];
+    [_timeLineTableView removeFromSuperview];
+    _timeLineTableView = nil;
+    _timeLineTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320    ,0)];
+    _timeLineTableView.dataSource = self;
+    _timeLineTableView.delegate = self;
+    _timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _timeLineTableView.scrollEnabled= NO;
+    [_mainScrollView addSubview:_timeLineTableView];
     
     //计算表格高度
     double dTableHeight = 0;
@@ -493,7 +523,7 @@
 
 #pragma scrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollView.contentOffset.y + _mainScrollView.height > _timeLineTableView.bounds.size.height + 20 && !_activityView.isAnimating){
+    if (scrollView.contentOffset.y + _mainScrollView.height > _timeLineTableView.bounds.size.height + 44 && !_activityView.isAnimating){
         [_activityView startAnimating];
         _mainScrollView.scrollEnabled = NO;
         _timeLineShowCount = _timeLineShowCount + 3;

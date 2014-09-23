@@ -71,6 +71,12 @@
     
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [_scrollView removeFromSuperview];
+    _scrollView = nil;
+}
+
+
 -(void)initView{
     //加载头部Navigation 
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 160, 20)];

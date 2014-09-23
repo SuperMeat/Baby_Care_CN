@@ -38,5 +38,5 @@
 }
 
 -(void)initTimeLineData;
-
+-(void)stopActivityAnimating;
 @end
