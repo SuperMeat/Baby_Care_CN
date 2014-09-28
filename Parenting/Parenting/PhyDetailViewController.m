@@ -49,6 +49,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [MobClick beginLogPageView:@"生理详细页"];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.hidesBottomBarWhenPushed=YES;
     [self initData];
 }
