@@ -37,9 +37,9 @@
 		480D466719AEF9B1005AC58A /* 640-1136.4.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D465F19AEF9B1005AC58A /* 640-1136.4.png */; };
 		480D466919AEFFC5005AC58A /* 640-960.4.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D466819AEFFC5005AC58A /* 640-960.4.png */; };
 		480D466B19AF04B6005AC58A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 480D466A19AF04B6005AC58A /* Images.xcassets */; };
-		480D467219AF12CC005AC58A /* 启动界面640-960.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467019AF12CC005AC58A /* 启动界面640-960.png */; };
-		480D467319AF12CC005AC58A /* 启动界面640-1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467119AF12CC005AC58A /* 启动界面640-1136.png */; };
-		480D467519B0234D005AC58A /* 启动界面320-480.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467419B0234D005AC58A /* 启动界面320-480.png */; };
+		480D467219AF12CC005AC58A /* 640-960.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467019AF12CC005AC58A /* 640-960.png */; };
+		480D467319AF12CC005AC58A /* 640-1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467119AF12CC005AC58A /* 640-1136.png */; };
+		480D467519B0234D005AC58A /* 320-480.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467419B0234D005AC58A /* 320-480.png */; };
 		480D6CEF19248D1700E5CAC7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CEE19248D1700E5CAC7 /* line.png */; };
 		480D6CF31924A75800E5CAC7 /* radio.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF11924A75800E5CAC7 /* radio.png */; };
 		480D6CF81924ABE800E5CAC7 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF41924ABE800E5CAC7 /* arrow_down@2x.png */; };
@@ -1391,9 +1391,9 @@
 		480D465F19AEF9B1005AC58A /* 640-1136.4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640-1136.4.png"; sourceTree = "<group>"; };
 		480D466819AEFFC5005AC58A /* 640-960.4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640-960.4.png"; sourceTree = "<group>"; };
 		480D466A19AF04B6005AC58A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Amoy Baby Care/Images.xcassets"; sourceTree = "<group>"; };
-		480D467019AF12CC005AC58A /* 启动界面640-960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面640-960.png"; sourceTree = "<group>"; };
-		480D467119AF12CC005AC58A /* 启动界面640-1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面640-1136.png"; sourceTree = "<group>"; };
-		480D467419B0234D005AC58A /* 启动界面320-480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面320-480.png"; sourceTree = "<group>"; };
+		480D467019AF12CC005AC58A /* 640-960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640-960.png"; sourceTree = "<group>"; };
+		480D467119AF12CC005AC58A /* 640-1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640-1136.png"; sourceTree = "<group>"; };
+		480D467419B0234D005AC58A /* 320-480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "320-480.png"; sourceTree = "<group>"; };
 		480D6CEE19248D1700E5CAC7 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		480D6CF11924A75800E5CAC7 /* radio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio.png; sourceTree = "<group>"; };
 		480D6CF41924ABE800E5CAC7 /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
@@ -4356,9 +4356,9 @@
 		486B40D019B57F0E00749192 /* 启动 */ = {
 			isa = PBXGroup;
 			children = (
-				480D467419B0234D005AC58A /* 启动界面320-480.png */,
-				480D467019AF12CC005AC58A /* 启动界面640-960.png */,
-				480D467119AF12CC005AC58A /* 启动界面640-1136.png */,
+				480D467419B0234D005AC58A /* 320-480.png */,
+				480D467019AF12CC005AC58A /* 640-960.png */,
+				480D467119AF12CC005AC58A /* 640-1136.png */,
 			);
 			name = "启动";
 			sourceTree = "<group>";
@@ -6590,7 +6590,7 @@
 				BEEF30C819C6F05F006F0367 /* btn_login_focus@2x.png in Resources */,
 				48866EC9199A12E6007B16AA /* bg_addContent_2.png in Resources */,
 				48866F2E199A12E6007B16AA /* cell_bg_4.png in Resources */,
-				480D467219AF12CC005AC58A /* 启动界面640-960.png in Resources */,
+				480D467219AF12CC005AC58A /* 640-960.png in Resources */,
 				480EFA2618E5155C00D40903 /* panels_color6@2x.png in Resources */,
 				4828F4E219A495D700D04926 /* 6.2.1.jpg in Resources */,
 				BE004CE418FE2B7500E56833 /* top.png in Resources */,
@@ -6815,7 +6815,7 @@
 				4828F40719A495D700D04926 /* 14.2.2.jpg in Resources */,
 				4828F45419A495D700D04926 /* 18.4.3.jpg in Resources */,
 				BEE3CEF719B07D9A00ABC528 /* icon_alerm_test@2x.png in Resources */,
-				480D467519B0234D005AC58A /* 启动界面320-480.png in Resources */,
+				480D467519B0234D005AC58A /* 320-480.png in Resources */,
 				48866EF5199A12E6007B16AA /* btn_unselected.png in Resources */,
 				4828F43019A495D700D04926 /* 16.3.2.jpg in Resources */,
 				48801278199DED1700F6778B /* ShareInfoView.xib in Resources */,
@@ -6914,7 +6914,7 @@
 				484A0150196BE3BE00BBB085 /* MedicineViewController.xib in Resources */,
 				4828F49E19A495D700D04926 /* 23.2.3.jpg in Resources */,
 				48866F39199A12E6007B16AA /* point_0.png in Resources */,
-				480D467319AF12CC005AC58A /* 启动界面640-1136.png in Resources */,
+				480D467319AF12CC005AC58A /* 640-1136.png in Resources */,
 				48866F10199A12E6007B16AA /* btn_mood_2.png in Resources */,
 				48866EAD199A12E6007B16AA /* btn_can.png in Resources */,
 				48F91B0218FBB54E0038DC67 /* icon_snow_little@2x.png in Resources */,
