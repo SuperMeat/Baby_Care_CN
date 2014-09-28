@@ -157,5 +157,7 @@ typedef enum
     creatMilestoneType_new,
 }creatMilestoneType;
 
+//自定义里程碑id 统一999
+#define kMilestoneCustomId 999
 
 #endif

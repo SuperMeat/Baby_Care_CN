@@ -124,6 +124,7 @@
         success = [BaseSQL updateData_milestone:_model];
     }else if(_type == creatMilestoneType_new)
     {
+        _model.month = [NSNumber numberWithInt:999];
         success = [BaseSQL insertData_milestone:_model];
     }
     

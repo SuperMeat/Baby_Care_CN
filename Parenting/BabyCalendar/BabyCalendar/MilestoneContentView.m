@@ -115,5 +115,6 @@
 }
 
 - (IBAction)delelte_milestone:(id)sender {
+    [self.delegate milestone_delete];
 }
 @end

@@ -8,11 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MilestoneContentViewDelegate <NSObject>
+
+- (void)milestone_delete;
+
+@end
+
 @interface MilestoneContentView : UIView<UITextViewDelegate>
 {
 
     float _disMoveH;
 }
+
+@property(nonatomic,assign)id<MilestoneContentViewDelegate> delegate;
+
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet MyNoteView *textView;
 

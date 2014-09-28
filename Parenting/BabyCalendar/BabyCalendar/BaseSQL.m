@@ -68,7 +68,7 @@
     
     FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
     if ([dataBase open]) {
-        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM milestoneTable ORDER BY date"];
+        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM milestoneTable  where completed = 1 ORDER BY date desc"];
         while ([rs next]){
             MilestoneModel* model = [[MilestoneModel alloc]init];
             model.id = [rs stringForColumn:@"id"];
@@ -80,6 +80,20 @@
             model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
             [datas addObject:model];
         }
+        
+        rs = [dataBase executeQuery:@"SELECT * FROM milestoneTable  where completed = 0 ORDER BY month"];
+        while ([rs next]){
+            MilestoneModel* model = [[MilestoneModel alloc]init];
+            model.id = [rs stringForColumn:@"id"];
+            model.date = [rs stringForColumn:@"date"];
+            model.month = [NSNumber numberWithInt:[rs intForColumn:@"month"]];
+            model.title = [rs stringForColumn:@"title"];
+            model.content = [rs stringForColumn:@"content"];
+            model.photo_path = [rs stringForColumn:@"photo_path"];
+            model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
+            [datas addObject:model];
+        }
+
         [rs close];
         [dataBase close];
     }
@@ -140,7 +154,7 @@
 {
     FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
     [dataBase open];
-    BOOL success = [dataBase executeUpdate:@"DELETE milestoneTable where id = ?",model.id];
+    BOOL success = [dataBase executeUpdate:@"DELETE from milestoneTable where id = ?",model.id];
     [dataBase close];
     return success;
 

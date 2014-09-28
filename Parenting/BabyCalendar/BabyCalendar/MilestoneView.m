@@ -57,6 +57,7 @@
     
     _contentView.top = _headerView.bottom;
     _contentView.height = kDeviceHeight-64-_headerView.bottom;
+    _contentView.delegate = self;
     [self addSubview:_contentView];
     
     [self insertSubview:_loadingView aboveSubview:_contentView];
@@ -134,5 +135,22 @@
 {
     [self.delegate ShareToFriend];
 }
+
+#pragma -mark contentview delegate
+- (void)milestone_delete
+{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定删除该里程碑？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alertView show];
+    
+}
+
+#pragma mark - UIAlertView delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+    }
+}
+
 
 @end

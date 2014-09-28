@@ -8,11 +8,12 @@
 
 #import "BaseView.h"
 #import "MilestoneHeaderView.h"
+#import "MilestoneContentView.h"
 @class MilestoneContentView;
 @protocol MilestoneViewDelegate <NSObject>
 - (void)ShareToFriend;
 @end
-@interface MilestoneView : BaseView<MilestoneHeaderViewDelegate>
+@interface MilestoneView : BaseView<MilestoneHeaderViewDelegate,MilestoneContentViewDelegate,UIAlertViewDelegate>
 {
     
     
