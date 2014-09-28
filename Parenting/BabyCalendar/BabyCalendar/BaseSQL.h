@@ -33,8 +33,11 @@
 + (NSMutableArray*)queryData__milestone:(NSString*)date;
 // 插入数据
 +(BOOL)insertData_milestone:(MilestoneModel*)model;
-// 更新
+// 更新(模板里程碑更新数据,删除操作则为未完成里程碑)
 + (BOOL)updateData_milestone:(MilestoneModel* )model;
+// 删除里程碑(自定义删除条目)
++ (BOOL)delete_milestone:(MilestoneModel*)model;
+
 // 保存照片到数据库
 //+ (BOOL)update_photo_milestone:(NSString*)title wtihPhoto_path:(NSString*)photo_path;
 // 保存照片到本地和数据库

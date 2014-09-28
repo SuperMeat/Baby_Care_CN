@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet MyNoteView *textView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *notetipsView;
+@property (strong, nonatomic) IBOutlet UIButton *btnDelete;
+- (IBAction)delelte_milestone:(id)sender;
 
 @end

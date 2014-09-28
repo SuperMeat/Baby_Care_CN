@@ -134,6 +134,17 @@
     [dataBase close];
     return success;
 }
+
+
++ (BOOL)delete_milestone:(MilestoneModel*)model
+{
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    [dataBase open];
+    BOOL success = [dataBase executeUpdate:@"DELETE milestoneTable where id = ?",model.id];
+    [dataBase close];
+    return success;
+
+}
 //// 保存照片到数据库
 //+ (BOOL)update_photo_milestone:(NSString*)title wtihPhoto_path:(NSString*)photo_path
 //{

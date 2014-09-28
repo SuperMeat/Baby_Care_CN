@@ -72,8 +72,8 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    [_scrollView removeFromSuperview];
-    _scrollView = nil;
+    //[_scrollView removeFromSuperview];
+    //_scrollView = nil;
 }
 
 

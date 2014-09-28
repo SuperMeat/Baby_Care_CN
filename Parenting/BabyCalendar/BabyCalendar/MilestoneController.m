@@ -146,6 +146,7 @@
     _milestoneView.headerView.photoView.canTap = NO;
     _milestoneView.contentView.textView.editable = NO;
     _milestoneView.headerView.btnDate.enabled = NO;
+    _milestoneView.contentView.btnDelete.hidden = YES;
     if (_milestoneView.SQLDatas.count > 0) {
         MilestoneModel* model = _milestoneView.SQLDatas[_milestoneView.index];
         _milestoneView.contentView.textView.text = model.content;
@@ -163,6 +164,7 @@
     _milestoneView.headerView.photoView.canTap = NO;
     _milestoneView.contentView.textView.editable = NO;
     _milestoneView.headerView.btnDate.enabled = NO;
+    _milestoneView.contentView.btnDelete.hidden = YES;
     
        // 更新数据
     if (_milestoneView.SQLDatas.count > 0) {
@@ -194,8 +196,6 @@
         
         // 刷新日历
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_calendarView object:nil];
-
-        
     }
     
 }
@@ -208,6 +208,7 @@
     
     _milestoneView.headerView.photoView.canTap = YES;
     _milestoneView.contentView.textView.editable = YES;
+    _milestoneView.contentView.btnDelete.hidden = NO;
     _milestoneView.headerView.btnDate.enabled = YES;
 }
 - (void)addIemViewDidAdd

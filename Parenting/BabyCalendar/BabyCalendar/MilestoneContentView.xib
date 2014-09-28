@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1280" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -32,11 +33,22 @@
                     <rect key="frame" x="67" y="92" width="185" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fb2-cu-KOu">
+                    <rect key="frame" x="148" y="170" width="23" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button" image="btn_note_delete.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="delelte_milestone:" destination="wxi-Mv-xiR" eventType="touchUpInside" id="cEr-jp-5g5"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="btnDelete" destination="Fb2-cu-KOu" id="fDl-Kl-meX"/>
                 <outlet property="labTitle" destination="YMI-M9-xh3" id="Qx4-MN-L3x"/>
                 <outlet property="notetipsView" destination="AuC-0G-hUP" id="m5Y-oX-1y4"/>
                 <outlet property="textView" destination="s2i-fF-cB2" id="IrX-Yv-4zC"/>
@@ -45,6 +57,7 @@
     </objects>
     <resources>
         <image name="bg_headerContent_Milestone.png" width="1280" height="102"/>
+        <image name="btn_note_delete.png" width="46" height="59"/>
         <image name="notetips.png" width="370" height="31"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

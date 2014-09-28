@@ -45,6 +45,7 @@
         self.notetipsView.hidden = YES;
     }
 
+     self.btnDelete.hidden = YES;
 }
 
 - (void)addKeyboardNotif
@@ -113,4 +114,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (IBAction)delelte_milestone:(id)sender {
+}
 @end
