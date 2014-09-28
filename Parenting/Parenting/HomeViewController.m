@@ -142,6 +142,10 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 -(void)initHomeData{
     [_initTimeLineData getTimeLineData];
     [self initData];
