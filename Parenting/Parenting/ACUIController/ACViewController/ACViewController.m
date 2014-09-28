@@ -57,6 +57,9 @@
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
 #endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    
+    UIRotationGestureRecognizer *panRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(popViewControllerAnimated:)];
+    [self.view addGestureRecognizer:panRecognizer];
 }
 
 - (void)viewDidLoad
