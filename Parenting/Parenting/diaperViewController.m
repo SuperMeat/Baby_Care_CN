@@ -253,8 +253,15 @@
     }
 }
 
+-(void)testtap
+{
+    NSLog(@"testtap");
+}
 -(void)makeView
 {
+    UIRotationGestureRecognizer *panRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(testtap)];
+    [self.view addGestureRecognizer:panRecognizer];
+
     UIImageView *backIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [backIV setImage:[UIImage imageNamed:@"pattern1"]];
     [self.view addSubview:backIV];
