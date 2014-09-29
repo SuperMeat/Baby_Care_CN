@@ -15,13 +15,6 @@
                     <rect key="frame" x="10" y="7" width="300" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝宝会爬了" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YMI-M9-xh3">
-                    <rect key="frame" x="31" y="11" width="257" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="s2i-fF-cB2" customClass="MyNoteView">
                     <rect key="frame" x="20" y="45" width="280" height="144"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -33,31 +26,26 @@
                     <rect key="frame" x="67" y="92" width="185" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fb2-cu-KOu">
-                    <rect key="frame" x="148" y="170" width="23" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="宝宝出生了" textAlignment="center" minimumFontSize="17" id="vEr-qI-dSs">
+                    <rect key="frame" x="31" y="11" width="257" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button" image="btn_note_delete.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="delelte_milestone:" destination="wxi-Mv-xiR" eventType="touchUpInside" id="cEr-jp-5g5"/>
-                    </connections>
-                </button>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="btnDelete" destination="Fb2-cu-KOu" id="fDl-Kl-meX"/>
-                <outlet property="labTitle" destination="YMI-M9-xh3" id="Qx4-MN-L3x"/>
                 <outlet property="notetipsView" destination="AuC-0G-hUP" id="m5Y-oX-1y4"/>
                 <outlet property="textView" destination="s2i-fF-cB2" id="IrX-Yv-4zC"/>
+                <outlet property="textfield" destination="vEr-qI-dSs" id="h4N-Kf-vUj"/>
             </connections>
         </view>
     </objects>
     <resources>
         <image name="bg_headerContent_Milestone.png" width="1280" height="102"/>
-        <image name="btn_note_delete.png" width="46" height="59"/>
         <image name="notetips.png" width="370" height="31"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

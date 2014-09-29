@@ -41,6 +41,10 @@
 {
     _model = model;
     
+    if ([_model.month intValue] == kMilestoneCustomId) {
+        _textField.enabled = YES;
+    }
+    
     if (_model.title == nil) {
         _textField.text = _model.title;
     }

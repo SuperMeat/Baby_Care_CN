@@ -28,7 +28,9 @@
     [_textView setFont:[UIFont fontWithName:@"MicrosoftYaHei" size:14]];
     [_textView setTextColor:UIColorFromRGB(kColor_textViewText)];
     
-    _labTitle.font = [UIFont fontWithName:kFont size:15.f];
+    _textfield.delegate = self;
+    _textfield.enabled  = NO;
+    _textfield.font = [UIFont fontWithName:kFont size:15.f];
     
     [self addKeyboardNotif];
     
@@ -44,8 +46,6 @@
     {
         self.notetipsView.hidden = YES;
     }
-
-     self.btnDelete.hidden = YES;
 }
 
 - (void)addKeyboardNotif
@@ -58,7 +58,7 @@
 
 - (void)handleKeyboardDidShow:(NSNotification*)notification
 {
-    if (!_textView.isFirstResponder) {
+    if (!_textView.isFirstResponder && !_textfield.isFirstResponder) {
         return;
     }
     
@@ -68,13 +68,13 @@
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue].size;
     CGFloat distanceToMove = kbSize.height;
     
-    
     [UIView animateWithDuration:.3f animations:^{
         _disMoveH = kDeviceHeight-64-distanceToMove-10;
-        self.superview.top = -distanceToMove;
+        self.superview.top = -distanceToMove+44;
         
     }];
     [_textView setNeedsDisplay];
+    [_textfield setNeedsDisplay];
     
     
 }
@@ -86,6 +86,7 @@
         
     }];
     [_textView setNeedsDisplay];
+    [_textfield setNeedsDisplay];
     
 }
 #pragma mark - UITextView delegate
@@ -109,12 +110,15 @@
     return YES;
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (IBAction)delelte_milestone:(id)sender {
-    [self.delegate milestone_delete];
-}
 @end

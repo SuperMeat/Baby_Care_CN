@@ -13,7 +13,7 @@
 @protocol MilestoneViewDelegate <NSObject>
 - (void)ShareToFriend;
 @end
-@interface MilestoneView : BaseView<MilestoneHeaderViewDelegate,MilestoneContentViewDelegate,UIAlertViewDelegate>
+@interface MilestoneView : BaseView<MilestoneHeaderViewDelegate,UIAlertViewDelegate>
 {
     
     

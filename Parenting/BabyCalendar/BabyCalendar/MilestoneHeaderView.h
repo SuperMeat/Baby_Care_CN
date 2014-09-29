@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet PortraitImageView *photoView;
 @property (weak, nonatomic) IBOutlet UIButton *btnDate;
 @property (weak, nonatomic) IBOutlet UILabel *labWeekday;
+@property  BOOL isChangeImage;
 
 - (IBAction)shareToFriends:(UIButton *)sender;
 

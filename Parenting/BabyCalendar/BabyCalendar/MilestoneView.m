@@ -57,7 +57,6 @@
     
     _contentView.top = _headerView.bottom;
     _contentView.height = kDeviceHeight-64-_headerView.bottom;
-    _contentView.delegate = self;
     [self addSubview:_contentView];
     
     [self insertSubview:_loadingView aboveSubview:_contentView];
@@ -89,25 +88,36 @@
     _headerView.labWeekday.text = [BaseMethod weekdayFromDate:[BaseMethod dateFormString:model.date]];
     NSString* photoPath = [BaseMethod dataFilePath:model.photo_path];
     _headerView.photoView.image = [UIImage imageWithContentsOfFile:photoPath];
-    _contentView.labTitle.text = model.title;
-    _contentView.textView.text = model.content;
+    _contentView.textfield.text = model.title;
+    _contentView.textView.text  = model.content;
 }
 #pragma mark -  MilestoneHeaderViewDelegate
 
 - (void)MilestoneHeaderView_left
 {
+    if (_contentView.textView.editable == YES) {
+        [self alertView:kCloseModify];
+        return;
+    }
+    
     _index--;
+    
     if (_index < 0) {
       
         _index++;
         [self alertView:kPhoto_first];
         return;
     }
+    
     [self showAtIndex:_index];
     
 }
 - (void)MilestoneHeaderView_right
 {
+    if (_contentView.textView.editable == YES) {
+        [self alertView:kCloseModify];
+        return;
+    }
     _index++;
     if (_index > self.SQLDatas.count-1) {
         [self alertView:kPhoto_last];
@@ -135,22 +145,5 @@
 {
     [self.delegate ShareToFriend];
 }
-
-#pragma -mark contentview delegate
-- (void)milestone_delete
-{
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定删除该里程碑？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    [alertView show];
-    
-}
-
-#pragma mark - UIAlertView delegate
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-    }
-}
-
 
 @end

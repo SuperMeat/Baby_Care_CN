@@ -112,6 +112,9 @@
 #define kActive                         @"动作能力的培养"
 #define kLive                           @"习惯和生活能力的培养"
 #define kSociety                        @"社会交往能力的培养"
+
+#define kCloseModify                    @"请先取消编辑状态"
+
 // notifi
 #define kNotifi_milestone_home           @"kNotifi_milestone_home"
 #define kNotifi_milestone_initDatas      @"kNotifi_milestone_initDatas"
