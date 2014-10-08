@@ -45,6 +45,8 @@
 #import "UserDataDB.h"
 #import "SyncController.h"
 
+#import <TencentOpenAPI/QQApi.h>
+#import <UMSocial_Sdk_Extra_Frameworks/Wechat/WXApi.h>
 
 
 #define _SHOW_HEIGHT 185
@@ -157,17 +159,25 @@
     _loginView.backgroundColor = [UIColor blackColor];
     _loginView.alpha = 0.9;
     
-    UIButton *buttonLogin = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50-50, 230, 38)];
+    UIButton *buttonLogin = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50-50-50, 230, 38)];
     [buttonLogin setImage:[UIImage imageNamed:@"btn_login.png"] forState:UIControlStateNormal];
     [buttonLogin addTarget:self action:@selector(doLogin) forControlEvents:UIControlEventTouchUpInside];
     [_loginView addSubview:buttonLogin];
     
-    UIButton *buttonTen = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50, 230, 38)];
-    [buttonTen setImage:[UIImage imageNamed:@"btn_tentweibo"] forState:UIControlStateNormal];
-    [buttonTen addTarget:self action:@selector(doTentWeiboLogin) forControlEvents:UIControlEventTouchUpInside];
-    [_loginView addSubview:buttonTen];
+    UIButton *buttonTentWeibo = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50-50, 230, 38)];
+    [buttonTentWeibo setImage:[UIImage imageNamed:@"btn_tentweibo"] forState:UIControlStateNormal];
+    [buttonTentWeibo addTarget:self action:@selector(doTentWeiboLogin) forControlEvents:UIControlEventTouchUpInside];
+    [_loginView addSubview:buttonTentWeibo];
     
-    UIButton *buttonSina = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 - 40, 230, 38)];
+    UIButton *buttonQQ = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 40 -50, 230, 38)];
+    [buttonQQ setImage:[UIImage imageNamed:@"btn_tent"] forState:UIControlStateNormal];
+    [buttonQQ addTarget:self action:@selector(doTenLogin) forControlEvents:UIControlEventTouchUpInside];
+    if ([QQApi isQQInstalled])
+    {
+        [_loginView addSubview:buttonQQ];
+    }
+    
+    UIButton *buttonSina = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 - 40-50, 230, 38)];
     [buttonSina setImage:[UIImage imageNamed:@"btn_sina.png"] forState:UIControlStateNormal];
     [buttonSina addTarget:self action:@selector(doSinaLogin) forControlEvents:UIControlEventTouchUpInside];
     [_loginView addSubview:buttonSina];
