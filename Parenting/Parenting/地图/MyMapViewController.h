@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyMapViewController : UIViewController<MAMapViewDelegate,AMapSearchDelegate>
+@interface MyMapViewController : ACViewController<MAMapViewDelegate,AMapSearchDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) MAMapView *mapView;
 
 @property (nonatomic, strong) AMapSearchAPI *search;

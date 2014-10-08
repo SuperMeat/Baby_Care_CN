@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface BabyinfoViewController : UIViewController< UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface BabyinfoViewController : ACViewController< UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     UIDatePicker *datepicker;
     UIImagePickerController *imagePicker;

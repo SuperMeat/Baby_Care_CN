@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "UserProtocolViewController.h"
 #import "HomeViewController.h"
+#import "NotifyViewController.h"
 
 @interface SettingViewController ()
 @property (strong, nonatomic) UITableView *settingTable;
@@ -133,6 +134,9 @@ messageView;
     //宝宝生理
     SettingItem *_item14 = [[SettingItem alloc] init];
     
+    //消息中心
+    SettingItem *_item15 = [[SettingItem alloc] init];
+    
     _item1.name=NSLocalizedString(@"Baby information",nil);
    // _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
     //_item3.name=NSLocalizedString(@"Notifications",nil);
@@ -144,13 +148,15 @@ messageView;
     //_item8.name=NSLocalizedString(@"Clear all logged data",nil);
     _item9.name=NSLocalizedString(@"LocalNotify", nil);
     //_item11.name = @"2G/3G下自动备份";
-    //_item12.name = NSLocalizedString(@"Look up around", nil);
+    _item12.name = NSLocalizedString(@"Look up around", nil);
     //_item13.name = @"允许发布自己位置及状态";
     
     _item13.name=NSLocalizedString(@"用户协议",nil);
 
     _item14.name=NSLocalizedString(@"宝宝生理",nil);
 
+    _item15.name=NSLocalizedString(@"我的消息", nil);
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil) {
         _item10.name=@"账号登录";
         UIButton *buttonLogin=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -214,7 +220,6 @@ messageView;
     protocolforUser.frame=CGRectMake(0, 0, 20, 20);
     [protocolforUser addTarget:self action:@selector(showProtocol) forControlEvents:UIControlEventTouchUpInside];
 
-    
     segementForMetric=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
     
     UIButton *Metric=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -230,7 +235,6 @@ messageView;
     [Metric addTarget:self action:@selector(Metric:) forControlEvents:UIControlEventTouchUpInside];
     [self Metric:Metric];
     Metric.highlighted=NO;
-    
     
     UIButton *Imperial=[UIButton buttonWithType:UIButtonTypeCustom];
     Imperial.frame=CGRectMake(70, 0, 80, 30);
@@ -302,6 +306,11 @@ messageView;
     [buttonForClear addTarget:self action:@selector(clearAll) forControlEvents:UIControlEventTouchUpInside];
     buttonForClear.bounds=CGRectMake(0, 0, 95, 30);
     
+    UIButton *myMessage=[UIButton buttonWithType:UIButtonTypeCustom];
+    [myMessage setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
+    myMessage.frame=CGRectMake(0, 0, 20, 20);
+    [myMessage addTarget:self action:@selector(myMessage) forControlEvents:UIControlEventTouchUpInside];
+    
     _item1.accessView=detailforbaby;
    // _item2.accessView=segementForMetric;
    //_item3.accessView=switchForNotifications;
@@ -312,14 +321,17 @@ messageView;
     //_item8.accessView=buttonForClear;
     _item9.accessView=myreminder;
     //_item11.accessView = switchForBackup;
-    //_item12.accessView = detailforMap;
+    _item12.accessView = detailforMap;
     //_item13.accessView = switchForOpenwild;
     _item13.accessView = protocolforUser;
     _item14.accessView = mybabyPhy;
+    _item15.accessView = myMessage;
+    
     //隐藏宝贝信息
     //[_array1 addObject:_item1];
     [_array1 addObject:_item9];
-    //[_array1 addObject:_item12];
+    //[_array1 addObject:_item15];
+    [_array1 addObject:_item12];
     
     //[_array2 addObject:_item2];
     //默认是毫升
@@ -509,8 +521,7 @@ messageView;
     }
     else if([item.name isEqualToString:NSLocalizedString(@"Review App",nil)])
     {
-      
-
+       
     }
     else if ([item.name isEqualToString:NSLocalizedString(@"Submit feedback online", nil)]){
         //undone feedback
@@ -533,6 +544,10 @@ messageView;
     else if([item.name isEqualToString:NSLocalizedString(@"Copyright",nil)])
     {
         [self showCopyright];
+    }
+    else if([item.name isEqualToString:NSLocalizedString(@"我的消息",nil)])
+    {
+        [self myMessage];
     }
     else if([item.name isEqualToString:NSLocalizedString(@"用户协议",nil)])
     {
@@ -640,6 +655,13 @@ messageView;
 //在线反馈
 -(void)onlineFeedBack{
     
+}
+
+-(void)myMessage
+{
+    NSLog(@"my Message");
+    NotifyViewController *notify = [[NotifyViewController alloc] initWithNibName:@"NotifyViewController" bundle:nil];
+    [self.navigationController pushViewController:notify animated:YES];
 }
 
 -(void)showMap

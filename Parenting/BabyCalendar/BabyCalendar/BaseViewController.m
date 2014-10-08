@@ -36,10 +36,58 @@
     return self;
 }
 
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
+        
+        NSLog(@"swipe down");
+        //执行程序
+    }
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionUp) {
+        
+        NSLog(@"swipe up");
+        //执行程序
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
+        
+        
+        NSLog(@"swipe left");
+        //执行程序
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
+        [self.navigationController popViewControllerAnimated:YES];
+        NSLog(@"swipe right");
+        //执行程序
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    UISwipeGestureRecognizer *recognizer;
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self view] addGestureRecognizer:recognizer];
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self view] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    [[self view] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [[self view] addGestureRecognizer:recognizer];
+
     
     self.view.backgroundColor = [UIColor whiteColor];
     

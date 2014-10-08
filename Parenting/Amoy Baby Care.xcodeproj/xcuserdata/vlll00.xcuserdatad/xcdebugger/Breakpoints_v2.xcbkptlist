@@ -536,11 +536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parenting/SettingViewController.m"
-            timestampString = "432846395.752759"
+            timestampString = "433755012.628913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "541"
-            endingLineNumber = "541"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1559,22 +1559,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Parenting/SettingViewController.m"
-            timestampString = "432846395.752759"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BabyCalendar/BabyCalendar/CalendarKit/Core/CkCalendarTitleView.m"
             timestampString = "433067132.301745"
             startingColumnNumber = "9223372036854775807"
@@ -1630,22 +1614,6 @@
             startingLineNumber = "909"
             endingLineNumber = "909"
             landmarkName = "-customIOS7dialogButtonTouchUpInside:clickedButtonAtIndex:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Parenting/SettingViewController.m"
-            timestampString = "433047612.680688"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
-            landmarkName = "-makeArray"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1848,11 +1816,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabyCalendar/BabyCalendar/MilestoneController.m"
-            timestampString = "433667826.34189"
+            timestampString = "433736761.625535"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "-editeViewDidDone"
             landmarkType = "5">
          </BreakpointContent>
@@ -1864,12 +1832,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabyCalendar/BabyCalendar/MilestoneController.m"
-            timestampString = "433667826.34189"
+            timestampString = "433736761.625535"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-editeViewDidDone"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parenting/HomeViewController.m"
+            timestampString = "434433529.538307"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "650"
+            endingLineNumber = "650"
+            landmarkName = "-doTenLogin"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabyCalendar/BabyCalendar/TestReportController.m"
+            timestampString = "434436717.10416"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-handleSwipeFrom:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

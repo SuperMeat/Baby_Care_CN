@@ -10,7 +10,7 @@
 
 @protocol UMContactViewControllerDelegate;
 
-@interface UMContactViewController : UIViewController
+@interface UMContactViewController : ACViewController
 
 @property(nonatomic, retain) IBOutlet UITextView *textView;
 @property(nonatomic, assign) id <UMContactViewControllerDelegate> delegate;

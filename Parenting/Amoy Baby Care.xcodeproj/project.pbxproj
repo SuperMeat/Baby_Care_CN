@@ -586,6 +586,8 @@
 		485749A4183205A3000D921B /* NotifyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 485749A3183205A3000D921B /* NotifyItem.m */; };
 		48574A6A183B33E8000D921B /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48574A68183B33E8000D921B /* libPushSDK.a */; };
 		485F3F4A17F07CDA00BD876F /* OpenFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F3F4917F07CDA00BD876F /* OpenFunction.m */; };
+		486587C119DA4FA100CE9D08 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 486587C019DA4FA100CE9D08 /* README.md */; };
+		486587C319DD960200CE9D08 /* btn_tentweibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 486587C219DD960200CE9D08 /* btn_tentweibo@2x.png */; };
 		486CD6DE1998625A0026061E /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486CD6DD1998625A0026061E /* AMapSearchKit.framework */; };
 		486CD6E2199894570026061E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E1199894570026061E /* AMap.bundle */; };
 		486CD6E4199894820026061E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486CD6E3199894820026061E /* MAMapKit.framework */; };
@@ -1989,6 +1991,9 @@
 		48574A68183B33E8000D921B /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
 		485F3F4817F07CDA00BD876F /* OpenFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenFunction.h; sourceTree = "<group>"; };
 		485F3F4917F07CDA00BD876F /* OpenFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenFunction.m; sourceTree = "<group>"; };
+		486587BF19DA4FA100CE9D08 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
+		486587C019DA4FA100CE9D08 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		486587C219DD960200CE9D08 /* btn_tentweibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_tentweibo@2x.png"; sourceTree = "<group>"; };
 		486CD6DD1998625A0026061E /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = AMap_iOS_API_Lib_V2.2.1/Search/AMapSearchKit.framework; sourceTree = "<group>"; };
 		486CD6E1199894570026061E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework/Versions/2.2.1.1650.60159/Resources/AMap.bundle; sourceTree = "<group>"; };
 		486CD6E3199894820026061E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework; sourceTree = "<group>"; };
@@ -3222,6 +3227,7 @@
 		4800B0E118D9392B0093A6AF /* ACBaseSDK */ = {
 			isa = PBXGroup;
 			children = (
+				486587BE19DA4FA100CE9D08 /* Macro-master */,
 				4800B13618D9880B0093A6AF /* ACClasses */,
 				4800B13B18D9880B0093A6AF /* ACConfig */,
 				4800B13D18D9880B0093A6AF /* ACUIController */,
@@ -4351,6 +4357,15 @@
 				72159747174536B8006FD415 /* Images */,
 			);
 			name = Resource;
+			sourceTree = "<group>";
+		};
+		486587BE19DA4FA100CE9D08 /* Macro-master */ = {
+			isa = PBXGroup;
+			children = (
+				486587BF19DA4FA100CE9D08 /* MacroDefinition.h */,
+				486587C019DA4FA100CE9D08 /* README.md */,
+			);
+			path = "Macro-master";
 			sourceTree = "<group>";
 		};
 		486B40D019B57F0E00749192 /* 启动 */ = {
@@ -5890,8 +5905,8 @@
 				481968A01959378F003A9D37 /* AdviseTableViewCell.h */,
 				481968A11959378F003A9D37 /* AdviseTableViewCell.m */,
 				481968A21959378F003A9D37 /* AdviseTableViewCell.xib */,
-				CE69F1B5176AAAF600E26333 /* SummaryItem.m */,
 				CE69F1B4176AAAF600E26333 /* SummaryItem.h */,
+				CE69F1B5176AAAF600E26333 /* SummaryItem.m */,
 				CE0C33D917618AF100B1B683 /* SummaryViewController.h */,
 				CE0C33DA17618AF100B1B683 /* SummaryViewController.m */,
 				CE0C33DB17618AF100B1B683 /* SummaryViewController.xib */,
@@ -5935,6 +5950,7 @@
 		BE004CCE18FE2B7500E56833 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				486587C219DD960200CE9D08 /* btn_tentweibo@2x.png */,
 				BEE2DE6019D023F400DDE570 /* arrow_up@2x.png */,
 				48ADEB6A19C987C40005DC72 /* defaulthead.png */,
 				48D41F4019C7E743005A8E6B /* btn_tent_focus@2x.png */,
@@ -6790,6 +6806,7 @@
 				BE6938DB19090C4B00FC2BB4 /* icon_height@2x.png in Resources */,
 				48866ED1199A12E6007B16AA /* btn_dog_focus_unabled.png in Resources */,
 				BEE539791945B079000703E6 /* TipTableViewCell.xib in Resources */,
+				486587C319DD960200CE9D08 /* btn_tentweibo@2x.png in Resources */,
 				4828F4DD19A495D700D04926 /* 6.1.1.jpg in Resources */,
 				48866EB7199A12E6007B16AA /* bg_header_testReport.png in Resources */,
 				48FEAF0818E91423002425E2 /* recent_records_line@2x.png in Resources */,
@@ -7498,6 +7515,7 @@
 				48866F5B199A12E6007B16AA /* NSDate+Components.m in Sources */,
 				48EF612718C6FAC7006C3D5C /* CommonUtility.m in Sources */,
 				48EC1DD01861772300965254 /* CustomNotifyViewController.m in Sources */,
+				486587C119DA4FA100CE9D08 /* README.md in Sources */,
 				48866F59199A12E6007B16AA /* NSCalendar+Juncture.m in Sources */,
 				BE900F2218ECFCEA00B06133 /* SyncController.m in Sources */,
 				48866F55199A12E6007B16AA /* PWSHelper.m in Sources */,
@@ -7914,7 +7932,7 @@
 				PROVISIONING_PROFILE = "449edb83-8eb6-4f4b-ae1f-20ab2db4a859";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "449edb83-8eb6-4f4b-ae1f-20ab2db4a859";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -8029,7 +8047,7 @@
 				PROVISIONING_PROFILE = "449edb83-8eb6-4f4b-ae1f-20ab2db4a859";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "449edb83-8eb6-4f4b-ae1f-20ab2db4a859";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

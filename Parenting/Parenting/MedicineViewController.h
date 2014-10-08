@@ -9,7 +9,7 @@
 #import "ACViewController.h"
 #import "SummaryViewController.h"
 @class save_medicineview;
-@interface MedicineViewController : UIViewController<save_medicineviewDelegate>
+@interface MedicineViewController : ACViewController<save_medicineviewDelegate>
 {
     AdviseScrollview *ad;
     UIImageView *adviseImageView;
