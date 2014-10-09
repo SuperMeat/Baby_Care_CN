@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NotifyViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface NotifyViewController : ACViewController<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 {
-    UITableView *tableview;
-    NSArray     *notifyArray;
+    UITableView        *_notifytableview;
+    NSMutableArray     *notifyArray;
 }
 @end

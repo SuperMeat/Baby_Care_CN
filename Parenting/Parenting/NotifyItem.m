@@ -8,6 +8,6 @@
 
 #import "NotifyItem.h"
 
-@implementation NotifyItem
+@implementation NotifyModel
 
 @end

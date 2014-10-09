@@ -896,7 +896,6 @@
     return (rc == SQLITE_DONE || rc == SQLITE_OK);
 }
 
-
 - (BOOL)executeUpdate:(NSString*)sql, ... {
     va_list args;
     va_start(args, sql);

@@ -330,7 +330,7 @@ messageView;
     //隐藏宝贝信息
     //[_array1 addObject:_item1];
     [_array1 addObject:_item9];
-    //[_array1 addObject:_item15];
+    [_array1 addObject:_item15];
     [_array1 addObject:_item12];
     
     //[_array2 addObject:_item2];

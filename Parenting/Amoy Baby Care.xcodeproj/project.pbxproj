@@ -592,6 +592,8 @@
 		486CD6E2199894570026061E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E1199894570026061E /* AMap.bundle */; };
 		486CD6E4199894820026061E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486CD6E3199894820026061E /* MAMapKit.framework */; };
 		486CD6E71998A4970026061E /* pin_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E61998A4970026061E /* pin_red@2x.png */; };
+		486CF4E119E538CC001789A8 /* NotifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 486CF4DF19E538CC001789A8 /* NotifyCell.m */; };
+		486CF4E219E538CC001789A8 /* NotifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 486CF4E019E538CC001789A8 /* NotifyCell.xib */; };
 		4876AE9119C02C33009135E8 /* FZKaTong-M19S.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4876AE9019C02C33009135E8 /* FZKaTong-M19S.ttf */; };
 		4880059B1929EAA400817919 /* FoodTypePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4880059A1929EAA400817919 /* FoodTypePickerView.m */; };
 		4880059F192B33E600817919 /* ACLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4880059E192B33E600817919 /* ACLabel.m */; };
@@ -1998,6 +2000,9 @@
 		486CD6E1199894570026061E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework/Versions/2.2.1.1650.60159/Resources/AMap.bundle; sourceTree = "<group>"; };
 		486CD6E3199894820026061E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework; sourceTree = "<group>"; };
 		486CD6E61998A4970026061E /* pin_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin_red@2x.png"; sourceTree = "<group>"; };
+		486CF4DE19E538CC001789A8 /* NotifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifyCell.h; sourceTree = "<group>"; };
+		486CF4DF19E538CC001789A8 /* NotifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifyCell.m; sourceTree = "<group>"; };
+		486CF4E019E538CC001789A8 /* NotifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyCell.xib; sourceTree = "<group>"; };
 		4876AE9019C02C33009135E8 /* FZKaTong-M19S.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZKaTong-M19S.ttf"; sourceTree = "<group>"; };
 		488005991929EAA400817919 /* FoodTypePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTypePickerView.h; sourceTree = "<group>"; };
 		4880059A1929EAA400817919 /* FoodTypePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTypePickerView.m; sourceTree = "<group>"; };
@@ -4191,6 +4196,9 @@
 				485749951831C3D1000D921B /* NotifyViewController.xib */,
 				485749A2183205A3000D921B /* NotifyItem.h */,
 				485749A3183205A3000D921B /* NotifyItem.m */,
+				486CF4DE19E538CC001789A8 /* NotifyCell.h */,
+				486CF4DF19E538CC001789A8 /* NotifyCell.m */,
+				486CF4E019E538CC001789A8 /* NotifyCell.xib */,
 			);
 			name = PushNotify;
 			sourceTree = "<group>";
@@ -6544,6 +6552,7 @@
 				48152E1A18486C66009A4900 /* messages_tableview_background@2x.png in Resources */,
 				481D0D52195BC2680025281A /* 玩具棒@2x.png in Resources */,
 				48866EFC199A12E6007B16AA /* mood_ naughty_selected.png in Resources */,
+				486CF4E219E538CC001789A8 /* NotifyCell.xib in Resources */,
 				48F6AB9A186AD7470032045E /* task_top_delet.png in Resources */,
 				48866ED9199A12E6007B16AA /* btn_dou_focus.png in Resources */,
 				48866F1F199A12E6007B16AA /* icon_ measurement.png in Resources */,
@@ -7609,6 +7618,7 @@
 				48866F79199A12E6007B16AA /* TestModel.m in Sources */,
 				BEE3CEF019B0787F00ABC528 /* GetPhyAdvise.m in Sources */,
 				48866FBC199A12E6007B16AA /* UnTrainController.m in Sources */,
+				486CF4E119E538CC001789A8 /* NotifyCell.m in Sources */,
 				48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */,
 				48866F7B199A12E6007B16AA /* TestReportController.m in Sources */,
 				BE955F4C190102A400225029 /* PhyCorePlot.m in Sources */,

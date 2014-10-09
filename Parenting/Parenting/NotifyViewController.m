@@ -8,6 +8,7 @@
 
 #import "NotifyViewController.h"
 #import "NotifyItem.h"
+#import "NotifyCell.h"
 
 @interface NotifyViewController ()
 
@@ -32,16 +33,7 @@
         
         self.navigationItem.titleView = titleView;
         self.hidesBottomBarWhenPushed = YES;
-#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
-        
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        if ( IOS7_OR_LATER )
-        {
-            self.edgesForExtendedLayout = UIRectEdgeNone;
-            self.extendedLayoutIncludesOpaqueBars = NO;
-            self.modalPresentationCapturesStatusBarAppearance = NO;
-        }
-#endif  // #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+
     }
     return self;
 }
@@ -59,21 +51,33 @@
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
-    if (tableview) {
-        [tableview reloadData];
+    
+    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setTitle:@"清空" forState:UIControlStateNormal];
+    rightButton.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
+    rightButton.titleLabel.text = @"清空";
+    [rightButton addTarget:self action:@selector(deleteAll) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame=CGRectMake(0, 0, 51, 51);
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -40);
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBar;
+    if (_notifytableview) {
+        [_notifytableview reloadData];
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    notifyArray = [DataBase selectNotifyMessage:0];
-    tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
-    tableview.backgroundColor=[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
-    [self.view addSubview:tableview];
-    tableview.delegate   = self;
-    tableview.dataSource = self;
-    tableview.separatorStyle=UITableViewCellSeparatorStyleNone;
+    
+    notifyArray = [[UserDataDB dataBase] selectNotifyMessage:0];
+    _notifytableview = [[UITableView alloc] init];
+    [_notifytableview setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-92)];
+    _notifytableview.backgroundColor=[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
+    [self.view addSubview:_notifytableview];
+    _notifytableview.delegate   = self;
+    _notifytableview.dataSource = self;
+    _notifytableview.separatorStyle=UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -83,40 +87,51 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)deleteAll
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"是否要清空所有消息" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [[UserDataDB dataBase] deleteNotifyMessage:[ACDate date]];
+        [notifyArray removeAllObjects];
+        [_notifytableview reloadData];
+
+    }
+}
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return [notifyArray count];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return 1;
+   return [notifyArray count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 115.0f;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"NotifyCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NotifyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NotifyCell"];
-        cell.textLabel.font=[UIFont systemFontOfSize:17];
-        cell.textLabel.textColor=[UIColor colorWithRed:0xAF/255.0 green:0xAF/255.0 blue:0xAF/255.0 alpha:0xFF/255.0];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"NotifyCell" owner:self options:nil] lastObject];
     }
     
     // Configure the cell...
-    NotifyItem *item=[notifyArray objectAtIndex:indexPath.section];
-    cell.textLabel.text=item.content;
+    NotifyModel *model=[notifyArray objectAtIndex:indexPath.row];
+    cell.notifymodel = model;
     
     return cell;
+}
+
+-(void)tableView:(UITableView*)tableView  willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    [cell setBackgroundColor:[UIColor clearColor]];
 }
 
 /*
@@ -128,19 +143,35 @@
  }
  */
 
-/*
+
  // Override to support editing the table view.
  - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        // Delete the row from the data source
+        NotifyModel *item = [notifyArray objectAtIndex:indexPath.row];
+        
+        [[UserDataDB dataBase] deleteNotifyMessageById:item.notifyid];
+        
+        [notifyArray removeAllObjects];
+        
+        notifyArray  = [[UserDataDB dataBase] selectNotifyMessage:0];
+        
+        [_notifytableview reloadData];
+    }
  }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == _notifytableview) {
+        return UITableViewCellEditingStyleDelete;
+    }
+    else
+    {
+        return UITableViewCellEditingStyleNone;
+    }
+}
 
 /*
  // Override to support rearranging the table view.

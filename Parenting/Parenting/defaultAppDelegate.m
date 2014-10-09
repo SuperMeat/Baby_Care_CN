@@ -33,12 +33,30 @@ void UncaughtExceptionHandler(NSException *exception) {
     return;
 }
 
+
+- (void)getRemoteNotify:(NSDictionary*)notifyDic
+{
+    NSDictionary* pushNotification = [notifyDic objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSDictionary *aps = [pushNotification valueForKey:@"aps"];
+    NSString *content = [aps valueForKey:@"alert"]; //推送显示的
+    if (![content isEqualToString:@""] && content != nil) {
+        [[UserDataDB dataBase] insertNotifyMessage:content andTitle:content];
+    }
+    
+    int badgeCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeCount];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     application.applicationIconBadgeNumber = 0;
 
+    [self getRemoteNotify:launchOptions];
+    
     [self initializePlat];
     // Override point for customization after application launch.
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
@@ -382,7 +400,8 @@ void UncaughtExceptionHandler(NSException *exception) {
         [alertView show];
     }
 
-    [DataBase insertNotifyMessage:content];
+    [[UserDataDB dataBase] insertNotifyMessage:content andTitle:content];
+    
     [APService handleRemoteNotification:userInfo];
 }
 
@@ -398,7 +417,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSString *content = [userInfo valueForKey:@"content"];
     //NSString *extras = [userInfo valueForKey:@"extras"];
     //NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
-    [DataBase insertNotifyMessage:content];
+    [[UserDataDB dataBase] insertNotifyMessage:content andTitle:content];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification

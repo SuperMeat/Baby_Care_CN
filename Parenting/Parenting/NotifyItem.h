@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NotifyItem : NSObject
+@interface NotifyModel : NSObject
 @property int notifyid;
 @property int status;
 @property(nonatomic,strong)NSDate *notify_time;
