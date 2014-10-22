@@ -107,17 +107,6 @@ updatingLocation:(BOOL)updatingLocation
 {
     [super viewWillAppear: animated];
     
-    UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    
-    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
-    backbutton.frame=CGRectMake(0, 0, 50, 41);
-    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
-    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
-    self.navigationItem.leftBarButtonItem=backbar;
-
     
     self.mapView=[[MAMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
     

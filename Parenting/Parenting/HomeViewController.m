@@ -134,7 +134,7 @@
         _loginView.hidden = NO;
     }
     else{
-        //[self ReviewTheApp];
+        [self ReviewTheApp];
     }
 }
 
@@ -975,43 +975,10 @@
      */
     
     //获取app_url信息
-    
-    NSString *app_url = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"];
-    if ([app_url isEqual:@""] || app_url == nil) {
-        //get url
-        NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"unname",@"unname",nil];
-        
-        
-        NetWorkConnect *_netWorkConnect = [[NetWorkConnect alloc]init]; 
-        [_netWorkConnect httpRequestWithURL:GET_APP_INFO
-                                                     data:dictBody
-                                                     mode:@"POST"
-                                                      HUD:nil
-                                           didFinishBlock:^(NSDictionary *result)
-         {
-             //请求成功处理
-             NSDictionary *dict = [result objectForKey:@"body"];
-             if (![[dict objectForKey:@"app_url"]  isEqual: @""])
-             {
-                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_url"] forKey:@"app_url"];
-                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_name"] forKey:@"app_name"];
-                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
-                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"review_state"];
-             }
-         }
-                                             didFailBlock:^(NSString *error){}
-                                           isShowProgress:YES
-                                            isAsynchronic:YES
-                                            netWorkStatus:YES
-                                           viewController:nil];
-        
-        return;
-    }
-    
     long review_last_alert_time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"review_last_alert_time"] longValue];
     bool review_state = [[NSUserDefaults standardUserDefaults] boolForKey:@"review_state"];
     
-    if (![app_url isEqualToString:@""] && !review_state && ([ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:review_last_alert_time]] >= 7 || review_last_alert_time == 0) ){
+    if (!review_state && ([ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:review_last_alert_time]] >= 7 || review_last_alert_time == 0) ){
         [self showReviewAlert];
     }
 }
@@ -1027,8 +994,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         //评价跳转
-        NSLog(@"url:%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]);
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
     }
     else if(buttonIndex == 1){

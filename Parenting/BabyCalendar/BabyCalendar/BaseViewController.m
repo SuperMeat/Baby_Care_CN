@@ -99,6 +99,11 @@
         
     }
     
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+        
+    }
+    
     _loadingView = [[LoadingView alloc] init];
     
 }

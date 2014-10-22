@@ -41,17 +41,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.view setBackgroundColor:[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1]];
-    UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    
-    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
-    backbutton.frame=CGRectMake(0, 0, 50, 41);
-    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
-    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
-    self.navigationItem.leftBarButtonItem=backbar;
-    
+        
     UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setTitle:@"清空" forState:UIControlStateNormal];
     rightButton.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
@@ -75,9 +65,9 @@
     [_notifytableview setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-92)];
     _notifytableview.backgroundColor=[UIColor colorWithRed:239.0/255 green:239.0/255 blue:239.0/255 alpha:1];
     [self.view addSubview:_notifytableview];
-    _notifytableview.delegate   = self;
-    _notifytableview.dataSource = self;
-    _notifytableview.separatorStyle=UITableViewCellSeparatorStyleNone;
+    _notifytableview.delegate       = self;
+    _notifytableview.dataSource     = self;
+    _notifytableview.separatorStyle =UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view from its nib.
 }
 
