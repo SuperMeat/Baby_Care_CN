@@ -65,7 +65,7 @@
         _timeLineTableView = nil;
         [_timeLineTableView removeFromSuperview];
         
-        [_homeScrollView setContentOffset:CGPointMake(0, 0)];
+        [_homeScrollView setContentOffset:CGPointMake(0, -64)];
         
         //加载login视图
         if (_loginView == nil){
@@ -139,7 +139,7 @@
     [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
     titleText.textColor = [UIColor whiteColor];
     [titleText setTextAlignment:NSTextAlignmentCenter];
-    [titleText setText:@"宝贝计划"];
+    [titleText setText:@"首页"];
     [titleView addSubview:titleText];
     
     self.navigationItem.titleView = titleView;
