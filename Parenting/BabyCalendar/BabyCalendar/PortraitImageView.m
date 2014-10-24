@@ -11,7 +11,7 @@
 @implementation PortraitImageView
 
 
-#define ORIGINAL_MAX_WIDTH 640.0f
+#define ORIGINAL_MAX_WIDTH 1080.0f
 
 - (id)initWithFrame:(CGRect)frame
 {
