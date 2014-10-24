@@ -36,5 +36,6 @@
 -(id)initWithFrame:(CGRect)frame;
 -(void)refreshWithBabyInfo:(BCBaby *)babyInfo;
 -(void)refreshBabyPic;
+-(void)resetBabyPhoto;
 
 @end

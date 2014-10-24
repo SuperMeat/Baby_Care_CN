@@ -26,6 +26,8 @@
     UIActionSheet *_action;
     
     MBProgressHUD *_hud;
+    
+    UIAlertView *_alertView;
 }
 
 #pragma mark 宝宝数据对象类

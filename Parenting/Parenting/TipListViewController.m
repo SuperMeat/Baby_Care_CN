@@ -67,21 +67,6 @@
                                  ViewController:self];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    
-}
-
--(void)viewDidDisappear:(BOOL)animated{
-<<<<<<< HEAD
-//    [_scrollView removeFromSuperview];
-//    _scrollView = nil;
-=======
-    //[_scrollView removeFromSuperview];
-    //_scrollView = nil;
->>>>>>> 1eddceeaed5df67ca7bd275bcaba33510ca2047f
-}
-
-
 -(void)initView{
     //加载头部Navigation 
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 160, 20)];

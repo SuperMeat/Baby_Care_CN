@@ -116,6 +116,10 @@ static const double kBabyPhotoImageHeight = kBabyPhotoImageWS;
     }
 }
 
+-(void)resetBabyPhoto{
+    _babyPhotoImageView.image = [UIImage imageNamed:@"defaulthead.png"];
+}
+
 #pragma mark 选择宝贝头像照片
 -(void)selectBabyPhoto{ 
     [self.delegate willSelectBabyPhoto];

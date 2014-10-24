@@ -128,14 +128,12 @@
     //_viewTop1_LAST
     _labelLastValue = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 80, 20)];
     _labelLastValue.font = [UIFont fontWithName:@"Arial" size:20];
-    _labelLastValue.textColor = [ACFunction colorWithHexString:[arrayCurrent objectAtIndex:7]];
     _labelLastValue.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *labelLastTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 80, 20)];
-    labelLastTitle.font = [UIFont fontWithName:@"Arial" size:10];
-    labelLastTitle.textAlignment = NSTextAlignmentLeft;
-    labelLastTitle.text = [NSString stringWithFormat:@"上次%@",itemName];
-    labelLastTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    _labelLastTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 80, 20)];
+    _labelLastTitle.font = [UIFont fontWithName:@"Arial" size:10];
+    _labelLastTitle.textAlignment = NSTextAlignmentLeft;
+    _labelLastTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     _labelLastDate = [[UILabel alloc]initWithFrame:CGRectMake(10, 42, 80, 20)];
     _labelLastDate.font = [UIFont fontWithName:@"Arial" size:12];
@@ -143,20 +141,19 @@
     _labelLastDate.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     [_viewTop1 addSubview:_labelLastValue];
-    [_viewTop1 addSubview:labelLastTitle];
+    [_viewTop1 addSubview:_labelLastTitle];
     [_viewTop1 addSubview:_labelLastDate];
     
     //_viewTop1_CURRENT
     _labelCURValue = [[UILabel alloc]initWithFrame:CGRectMake(135, 10, 80, 20)];
     _labelCURValue.font = [UIFont fontWithName:@"Arial" size:20];
-    _labelCURValue.textColor = [ACFunction colorWithHexString:[arrayCurrent objectAtIndex:7]];
+    
     _labelCURValue.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *labelCURTitle = [[UILabel alloc]initWithFrame:CGRectMake(135, 30, 80, 20)];
-    labelCURTitle.font = [UIFont fontWithName:@"Arial" size:10];
-    labelCURTitle.textAlignment = NSTextAlignmentLeft;
-    labelCURTitle.text = [NSString stringWithFormat:@"当前%@",itemName];
-    labelCURTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
+    _labelCURTitle = [[UILabel alloc]initWithFrame:CGRectMake(135, 30, 80, 20)];
+    _labelCURTitle.font = [UIFont fontWithName:@"Arial" size:10];
+    _labelCURTitle.textAlignment = NSTextAlignmentLeft;
+    _labelCURTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     _labelCURDate = [[UILabel alloc]initWithFrame:CGRectMake(135, 42, 80, 20)];
     _labelCURDate.font = [UIFont fontWithName:@"Arial" size:12];
@@ -176,7 +173,7 @@
     labelChangeTitle.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
     
     [_viewTop1 addSubview:_labelCURValue];
-    [_viewTop1 addSubview:labelCURTitle];
+    [_viewTop1 addSubview:_labelCURTitle];
     [_viewTop1 addSubview:_labelCURDate];
     [_viewTop1 addSubview:_labelChangeValue];
     [_viewTop1 addSubview:labelChangeTitle];
@@ -274,6 +271,11 @@
         //CHANGE
         _labelChangeValue.text = @"-";
     }
+    
+    _labelLastTitle.text = [NSString stringWithFormat:@"上次%@",itemName];
+    _labelCURTitle.text = [NSString stringWithFormat:@"当前%@",itemName];
+    _labelCURValue.textColor = [ACFunction colorWithHexString:[arrayCurrent objectAtIndex:7]];
+    _labelLastValue.textColor = [ACFunction colorWithHexString:[arrayCurrent objectAtIndex:7]];
     
     //加载CorePlot
     [self drawLine:CGRectMake(0, 0, self.view.bounds.size.width, plotHeight)];
