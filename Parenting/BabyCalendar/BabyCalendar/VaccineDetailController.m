@@ -102,6 +102,10 @@
         
         if (success) {
             [self alertView:kSave_success];
+            
+            /**  edit by cwb  **/
+            /**  刷新首页时间轴及数据源  **/
+            [[InitTimeLineData initTimeLine]refreshByFinishItemsWithTypeID:10 ProTime:[ACDate getTimeStampFromDate:[BaseMethod dateFormString:model.completedDate]] Key:[NSString stringWithFormat:@"%@",model.id  ] Content:[NSString stringWithFormat:@"宝宝于%@接种%@(%@)。",model.completedDate,model.vaccine,model.times]];
         }else
         {
             [self alertView:kSave_fail];
@@ -118,8 +122,6 @@
     
     
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(back:) userInfo:nil repeats:NO];
-    
-    
 }
 
 - (void)back:(NSTimer*)timer

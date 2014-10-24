@@ -336,8 +336,7 @@
 #define WEATHERICONSCALE 0.55
 
 #define G_WEBVIEWY (([UIScreen mainScreen].bounds.size.height) >= 568.0 ? 49:150)
-
-#define HOME_TIPSTEXT 14
+ 
 #define SMALLTEXT 10
 #define MIDTEXT   15
 #define MOREMIDTEXT   20

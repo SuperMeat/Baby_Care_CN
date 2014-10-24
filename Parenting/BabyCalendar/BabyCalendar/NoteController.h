@@ -12,6 +12,8 @@
 {
     UIScrollView* _scrollView;
     NSInteger _index;
+    
+    bool isNew;
 }
 @property(nonatomic,retain)NSMutableArray* datas;
 @end

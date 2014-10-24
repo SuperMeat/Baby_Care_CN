@@ -56,7 +56,14 @@
     textValue.textColor=[UIColor grayColor];
     textValue.delegate = self;
     textValue.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    [textValue setValue:[NSNumber numberWithInt:15] forKey:@"paddingLeft"];
     [textValue setBackground:[UIImage imageNamed:@"save_text.png"]];
+    
+    //单位
+    labelUnit = [[UILabel alloc] initWithFrame:CGRectMake(170, 82, 36, 24)];
+    labelUnit.textColor = [UIColor grayColor];
+    labelUnit.font = [UIFont fontWithName:@"Arial" size:MIDTEXT];
+    labelUnit.text = @"°C";
     
     //saveButton
     buttonSave = [[UIButton alloc]initWithFrame:CGRectMake(42, 123, 94, 28)];
@@ -85,6 +92,7 @@
     [imageview addSubview:labelValue];
     [imageview addSubview:textRecordDate];
     [imageview addSubview:textValue];
+    [imageview addSubview:labelUnit];
     [imageview addSubview:buttonSave];
     [imageview addSubview:buttonCancel];
 }

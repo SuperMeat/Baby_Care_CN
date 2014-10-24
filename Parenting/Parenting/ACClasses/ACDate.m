@@ -684,4 +684,47 @@
     return ([nowComps year] - [dateComps year]) * 12 + ([nowComps month] - [dateComps month]);
 }
 
+#pragma mark 获取出生日数文本
++(NSString*)getBabyBirthOfDaysStr:(long)birth
+{
+    //时间戳转date
+    NSDate *birthDate = [ACDate getDateFromTimeStamp:birth];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat: @"yyyy-MM-dd"];
+    NSString *age = [dateFormatter stringFromDate:birthDate];
+    
+    NSDateFormatter *fomatter=[[NSDateFormatter alloc]init];
+    [fomatter setLocale:[NSLocale currentLocale]];
+    [fomatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date=[fomatter dateFromString:age];
+    //NSLog(@"getbabyage: %@",date);
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
+    comps=  [calendar components:unitFlags fromDate:date toDate:[ACDate date] options:nil];
+    if ([comps year] == 0 && [comps month] == 0 && [comps day]==0) {
+        return @"1天";
+    }
+    else if ([comps year]==0 && [comps month] == 0)
+    {
+        return [NSString stringWithFormat:@"%d天",[comps day]];
+    }
+    else if ([comps year]==0)
+    {
+        return [NSString stringWithFormat:@"%d月%d天",[comps month],[comps day]];
+    }
+    else if ([comps year]!=0 && [comps month] == 0 && [comps day] != 0){
+        return [NSString stringWithFormat:@"%d年%d天",[comps year],[comps day]];
+    }
+    else if ([comps year]!=0 && [comps month] == 0 && [comps day] == 0){
+        return [NSString stringWithFormat:@"%d年整",[comps year]];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"%d年%d月\n%d天",[comps year],[comps month],[comps day]];
+    }
+    
+}
+
 @end

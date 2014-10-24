@@ -1,29 +1,13 @@
-/*
- *  2014/08/25 - 时间轴内容
- *
- *  0:系统消息 
- *
- *  **** 提醒根据时间节点判断进行添删 ****
- *  key:-1代表该提醒事项未完成 1代表该提醒事项已经完成
- *  1:用户自定义提醒
- *  10:疫苗提醒
- *  11:评测提醒
- *  12:日志提醒
- *  20:生理-身高记录提醒
- *  21:生理-体重记录提醒
- *  22:生理-头围记录提醒
- *
- *  **** 贴士推送 ****
- *  key:代表该贴士ID
- *  99:贴士推送-（根据用户及贴士属性推送）
- *
- */
+//
+//  HomeViewController.m
+//  Amoy Baby Care
+//
+//  Created by CHEN WEIBIN on 14-9-29.
+//  Copyright (c) 2014年 爱摩科技有限公司. All rights reserved.
+//
 
 #import "HomeViewController.h"
-#import "InitTimeLineData.h"
-#import "NetWorkConnect.h"
-#import "DataContract.h"
-#import "InitBabyInfoViewController.h"
+#import "BabyMsgTableViewCell.h"
 
 #import "NoteController.h"
 #import "VaccineController.h"
@@ -34,28 +18,17 @@
 #import "PhysiologyViewController.h"
 #import "TipsMainViewController.h"
 
-#import "LoginViewController.h"
-#import "LoginMainViewController.h"
-#import "UMSocial.h"
-#import "MBProgressHUD.h"
-#import "MD5.h"
-#import "APService.h"
-#import "DataContract.h"
-#import "NetWorkConnect.h"
-#import "UserDataDB.h"
-#import "SyncController.h"
 
+//**  获取时间轴数据默认条数  **
+#define kHomeTimeLineInitCount 5
+//**  获取时间轴数据增长条数  **
+#define kHomeTimeLinePerIncCount 5
 
+#define kHomeBottomActivityViewWeight 20
+#define kHomeBottomActivityViewHeight kHomeBottomActivityViewWeight
+#define kHomeBottomActivitySpaceHeight 44
 
-#define _SHOW_HEIGHT 185
-#define _CELL_NORMAL_BASEHEIGHT 52.0f
-#define _CELL_NORMAL_INSHEIGHT  18.0f
-#define _CELL_TIPS_BASEHEIGHT 223.0f
-
-#define _CELL_CHANGE_MAXLEN 17
-#define _TIPS_ID 99
-
-#define _CELL_INIT_COUNT 5
+#define kHomeTopNavigationBarHeight 64
 
 @interface HomeViewController ()
 
@@ -63,406 +36,531 @@
 
 @implementation HomeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    // Do any additional setup after loading the view from its nib.
+    [self.view setBackgroundColor:UIColorFromRGB(kColor_baseView)];
+    _imagePicker=[[UIImagePickerController alloc]init];
     
-    //时间轴默认展示10条数据
-    _timeLineShowCount = _CELL_INIT_COUNT;
+    //**  加载子view  **
+    [self initSubView];
     
-    [self initView];
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kBabyNickname"] != nil) {
-//        _initTimeLineData = [[InitTimeLineData alloc]init];
-//        _initTimeLineData.targetViewController = self;
-//        [_initTimeLineData getTimeLineData];
-//    }
+    //**  未创建宝宝前不加载数据  **
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kBabyNickname"] != nil){
+        [self getTimeLineData];
+    }
 }
 
-
-
--(void)viewWillAppear:(BOOL)animated    {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    
+    //未登陆跳转
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil){
-        [_photoAreaView removeFromSuperview];
-        [_timeLineTableView removeFromSuperview];
-        [_mainScrollView removeFromSuperview];
-        
-        _photoAreaView = nil;
-        _mainScrollView = nil;
+        //清空原始baby信息
+        _bcBaby = nil;
+        //清空原始时间轴数据
+        [_timeLineDS removeAllObjects];
+        [_timeLineCells removeAllObjects];
         _timeLineTableView = nil;
-        _data = nil;
+        [_timeLineTableView removeFromSuperview];
         
-        [self initView];
-        isPushSocialView = NO;
-        _loginView.hidden = NO;
+        [_homeScrollView setContentOffset:CGPointMake(0, 0)];
         
-        _timeLineShowCount = _CELL_INIT_COUNT;
-        _initTimeLineData = nil;
+        //加载login视图
+        if (_loginView == nil){
+            _loginView = [[LoginView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight)];
+            _loginView.mainViewController = self;
+            _loginView.hud = _hud;
+            [self.tabBarController.view.superview addSubview:_loginView];
+        }
+        [_loginView setHidden:NO];
+        
+        //加载hub
+        if (_isLogining) {
+            _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            _hud.mode = MBProgressHUDModeIndeterminate;
+            _hud.alpha = 1;
+            _hud.color = [UIColor grayColor];
+            _hud.labelText = @"数据验证中...";
+        }
     }
     //未初始化宝宝基本信息时跳转
     else if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kBabyNickname"] == nil) {
+        //卸载login视图
+        if (_loginView != nil) {
+            _loginView = nil;
+            [_loginView removeFromSuperview];
+        }
+        
         InitBabyInfoViewController *ctr = [[InitBabyInfoViewController alloc]init];
-        ctr.initBabyInfoDelegate = self;
         [self.navigationController pushViewController:ctr animated:NO];
         return;
     }
-    else if(_initTimeLineData == nil){
-        _initTimeLineData = [[InitTimeLineData alloc]init];
-        _initTimeLineData.targetViewController = self;
-        [_initTimeLineData getTimeLineData];
-        [self initData];
-    }
-    [MobClick beginLogPageView:@"首页"];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil){
-        isPushSocialView = NO;
-        _loginView.hidden = NO;
-    }
     else{
-        [self ReviewTheApp];
+        //卸载login视图
+        if (_loginView != nil) {
+            _loginView = nil;
+            [_loginView removeFromSuperview];
+        }
+        //隐藏hud
+        [_hud hide:YES];
+        
+        if (_timeLineTableView == nil) {
+            _timeLineTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, _homeHeadView.height, kDeviceWidth, kDeviceHeight - _homeHeadView.bounds.origin.y)];
+            _timeLineTableView.dataSource = self;
+            _timeLineTableView.delegate = self;
+            _timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            _timeLineTableView.scrollEnabled= NO;
+            [_timeLineTableView setBackgroundColor:UIColorFromRGB(kColor_baseView)];
+            [_homeScrollView addSubview:_timeLineTableView];
+        }
+        
+        
+        if (_bcBaby == nil) {
+            //**  加载时间轴数据  **
+            [self getTimeLineData];
+            //**  加载头部view数据  **
+            [self initBabyInfoData];
+        }
     }
+
+    //初始化
+    
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    if (isPushSocialView) {
-        isPushSocialView = NO;
-    }
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-
--(void)initHomeData{
-    [_initTimeLineData getTimeLineData];
-    [self initData];
-}
-
--(void)initView{
-    //LoginView
-    _loginView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-    _loginView.backgroundColor = [UIColor blackColor];
-    _loginView.alpha = 0.9;
+#pragma mark 初始化子view
+-(void)initSubView{
+    //**  头部导航栏  **
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 100, 20)];
+    titleView.backgroundColor=[UIColor clearColor];
+    UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+    titleText.backgroundColor = [UIColor clearColor];
+    [titleText setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
+    titleText.textColor = [UIColor whiteColor];
+    [titleText setTextAlignment:NSTextAlignmentCenter];
+    [titleText setText:@"宝贝计划"];
+    [titleView addSubview:titleText];
     
-    UIButton *buttonLogin = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50-50, 230, 38)];
-    [buttonLogin setImage:[UIImage imageNamed:@"btn_login.png"] forState:UIControlStateNormal];
-    [buttonLogin addTarget:self action:@selector(doLogin) forControlEvents:UIControlEventTouchUpInside];
-    [_loginView addSubview:buttonLogin];
+    self.navigationItem.titleView = titleView;
     
-    UIButton *buttonTen = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50, 230, 38)];
-    [buttonTen setImage:[UIImage imageNamed:@"btn_tent"] forState:UIControlStateNormal];
-    [buttonTen addTarget:self action:@selector(doTenLogin) forControlEvents:UIControlEventTouchUpInside];
-    [_loginView addSubview:buttonTen];
+    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setImage:[UIImage imageNamed:@"btn_sum2"] forState:UIControlStateNormal];
+    rightButton.frame=CGRectMake(0, 0, 51, 51);
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -40);
+    [rightButton addTarget:self action:@selector(goTips) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBar;
     
-    UIButton *buttonSina = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 - 40, 230, 38)];
-    [buttonSina setImage:[UIImage imageNamed:@"btn_sina.png"] forState:UIControlStateNormal];
-    [buttonSina addTarget:self action:@selector(doSinaLogin) forControlEvents:UIControlEventTouchUpInside];
-    [_loginView addSubview:buttonSina];
+    //**  滚动  **
+    _homeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight)];
+    _homeScrollView.delegate = self;
+    _homeScrollView.scrollEnabled = NO;
+    [_homeScrollView setContentSize:CGSizeMake(_homeScrollView.width, _homeScrollView.height)];
+    [self.view addSubview:_homeScrollView];
     
-    UIButton *buttonRegister = [[UIButton alloc]initWithFrame:CGRectMake(200,[UIScreen mainScreen].bounds.size.height - 50, 120, 38)];
-    [buttonRegister setTitle:@"注册账号" forState:UIControlStateNormal];
-    [buttonRegister.titleLabel setFont:[UIFont systemFontOfSize:MIDTEXT]];
-    [buttonRegister setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [buttonRegister addTarget:self action:@selector(doRegister) forControlEvents:UIControlEventTouchUpInside];
+    //**  头部view  **
+    _homeHeadView = [[HomeHeadView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kHomeheadViewHeight + kBabyPhotoImageWS / 2)];
+    _homeHeadView.delegate = self;
+    [_homeScrollView addSubview:_homeHeadView];
     
-    [self.tabBarController.view.superview addSubview:_loginView];
-    _loginView.hidden = YES;
-    //LoginView end
-
-    _photoAreaView = [[PhotoAreaView alloc]initWithFrame:CGRectMake(0, 0, 320, _SHOW_HEIGHT)];
-//    _photoAreaView.top = _SHOW_HEIGHT - _photoAreaView.height; 
-    [self.view addSubview:_photoAreaView];
-    
-    _mainScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, _SHOW_HEIGHT, 320, [UIScreen mainScreen].bounds.size.height - _SHOW_HEIGHT - 49)];
-    _mainScrollView.scrollEnabled = YES;
-    _mainScrollView.delegate = self;
-    [self.view addSubview:_mainScrollView];
-    
-    _timeLineTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320    ,0)];
+    //**  时间轴  **
+    _timeLineTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, _homeHeadView.height, kDeviceWidth, kDeviceHeight - _homeHeadView.bounds.origin.y)];
     _timeLineTableView.dataSource = self;
     _timeLineTableView.delegate = self;
     _timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _timeLineTableView.scrollEnabled= NO;
-    [_mainScrollView addSubview:_timeLineTableView];
+    [_timeLineTableView setBackgroundColor:UIColorFromRGB(kColor_baseView)];
+    [_homeScrollView addSubview:_timeLineTableView];
     
-    _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _activityView.frame = CGRectMake(150 ,_timeLineTableView.height + 12, 20.0f, 20.0f);
-    [_mainScrollView addSubview:_activityView];
-//    [_photoAreaView addSubview:_activityView];
-    
-    //返回顶部按钮
-    _buttonScrTop = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width - 40, self.view.height - 64 - 25, 30, 30)];
-    [_buttonScrTop setTitle:@"↑" forState:UIControlStateNormal];
-    UIImage *imageScrTop = [UIImage imageNamed:@"arrow_up.png"];
-    [_buttonScrTop setBackgroundImage:imageScrTop forState:UIControlStateNormal];
-    [_buttonScrTop addTarget:self action:@selector(scrollTopTop) forControlEvents:UIControlEventTouchUpInside];
-    [_buttonScrTop setAlpha:0.3f];
-    [_buttonScrTop setHidden:YES];
-    [self.view addSubview:_buttonScrTop];
+    //**  活动指示控件  **
+    _actView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [_homeScrollView addSubview:_actView];
 }
 
--(void)scrollTopTop{
-    [_mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-}
-
--(void)initData{
-    [_photoAreaView initData];
-    
-    //加载时间轴数据源
-    [self initTimeLineData];
-}
-
--(void)stopActivityAnimating{
-    [_activityView stopAnimating];
-    _mainScrollView.scrollEnabled = YES;
-}
-
--(void)initTimeLineData{
-    [_activityView stopAnimating];
-    _mainScrollView.scrollEnabled = YES;
-    
-//    _timeLineShowCount = 32;
-    
-    NSMutableArray *_tempData = [[NSMutableArray alloc]initWithArray:[[BabyMessageDataDB babyMessageDB]selectByLast:0 Count:_timeLineShowCount]];
-    
-    if ([_data count] == [_tempData count] && _timeLineShowCount != _CELL_INIT_COUNT) {
-        [_mainScrollView setContentOffset:CGPointMake(0, _mainScrollView.contentSize.height - _mainScrollView.height - 44) animated:YES];
-        return;
+#pragma mark 初始化头部数据
+-(void)initBabyInfoData{
+    NSDictionary *dic = [[BabyDataDB babyinfoDB]selectBabyInfoByBabyId:BABYID];
+    _bcBaby = [BCBaby
+               initWithBabyId:[dic[@"baby_id"] intValue]
+               andCreateTime:[dic[@"create_time"] longValue]
+               andBabyName:dic[@"nickname"]
+               andBabySex:([dic[@"sex"] intValue] == 1 ? @"男" : @"女")
+               andBirthTime:[dic[@"birth"] longValue]
+               andBirthOfDays:[ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:[dic[@"birth"] longValue]]]
+               andBirthOfDaysStr:[ACDate getBabyBirthOfDaysStr:[dic[@"birth"] longValue]]
+               andGrowthStage:[self getGrowthState:[dic[@"birth"] longValue]]
+               andBabyPhotoPath:BABYICONPATH(ACCOUNTUID, BABYID)];
+    [_homeHeadView refreshWithBabyInfo:_bcBaby];
+} 
+#pragma mark 获取宝贝当前阶段
+-(NSString*)getGrowthState:(long)birth{
+    NSString *statusStr;
+    int birthDays = [ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:birth]];
+    if (birthDays <= 28) {
+        statusStr = @"新生儿期";
     }
-    
-    if ([_data count] == [_tempData count]) {
-        return;
+    else if (birthDays > 28 && birthDays <= 60*6){
+        statusStr = @"婴儿期";
     }
-    
-    _data = [[NSMutableArray alloc]initWithArray:_tempData];
-    [_timeLineTableView removeFromSuperview];
-    _timeLineTableView = nil;
-    _timeLineTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320    ,0)];
-    _timeLineTableView.dataSource = self;
-    _timeLineTableView.delegate = self;
-    _timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _timeLineTableView.scrollEnabled= NO;
-    [_mainScrollView addSubview:_timeLineTableView];
-    
-    //计算表格高度
-    double dTableHeight = 0;
-    for (int i = 0; i<[_data count];i++ ) {
-        if ([[[_data objectAtIndex:i] objectAtIndex:0] intValue] != _TIPS_ID) {
-            int tLen = [[[_data objectAtIndex:i] objectAtIndex:1] length];
-            if (tLen <= _CELL_CHANGE_MAXLEN) {
-                dTableHeight = dTableHeight + _CELL_NORMAL_BASEHEIGHT;
-            }
-            else {
-                dTableHeight = dTableHeight + _CELL_NORMAL_BASEHEIGHT + _CELL_NORMAL_INSHEIGHT;
-            }
-        }
-        else{
-            dTableHeight = dTableHeight + _CELL_TIPS_BASEHEIGHT;
-        }
-    }
-    
-    _timeLineTableView.height = dTableHeight;
-    _mainScrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width,_timeLineTableView.height + 44); // 44是加载视图区域
-    
-    if (_mainScrollView.contentSize.height >= self.view.height - _photoAreaView.height - 44) {
-        [_buttonScrTop setHidden:NO];
-    }else{
-        [_buttonScrTop setHidden:YES];
-    }
-    
-    [_activityView setFrame:CGRectMake(150 ,_timeLineTableView.height + 12, 20.0f, 20.0f)];
-    [_timeLineTableView reloadData];
-}
-
-#pragma tableView datasource Delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_data count];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //labelTitle 如果大于_CELL_CHANGE_MAXLEN个字需要换行
-    if ([[[_data objectAtIndex:indexPath.row] objectAtIndex:0] intValue] != _TIPS_ID) {
-        int tLen = [[[_data objectAtIndex:indexPath.row] objectAtIndex:1] length];
-        
-        if (tLen <= _CELL_CHANGE_MAXLEN) {
-            return _CELL_NORMAL_BASEHEIGHT ;
-        }
-        else {
-            return _CELL_NORMAL_BASEHEIGHT + _CELL_NORMAL_INSHEIGHT;
-        }
-        
+    else if (birthDays > 60*6 && birthDays <= 365*2){
+        statusStr = @"幼儿期";
     }
     else{
-        return _CELL_TIPS_BASEHEIGHT;
+        statusStr = @"学龄前期";
     }
+    return [NSString stringWithFormat:@"现在处于%@",statusStr];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+#pragma mark 跳转到贴士页面
+-(void)goTips{
+    TipsMainViewController *tipsMasterViewController = [[TipsMainViewController alloc] init];
+    [self.navigationController pushViewController:tipsMasterViewController animated:YES];
+}
+
+#pragma mark 刷新头像
+-(void)refreshBabyPic{
+    [_homeHeadView refreshBabyPic];
+}
+
+#pragma mark 初始化时间轴数据源
+-(void)getTimeLineData{
+    //**  初始化变量  **
+    _timeLineCells = [[NSMutableArray alloc]initWithCapacity:5];
     
-    NSArray *curData = [_data objectAtIndex:indexPath.row];
-    
-    if ([[curData objectAtIndex:0]intValue] != _TIPS_ID) {
-        
-        /** init cell view **/
-        UIImageView *imageViewIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
-        [cell addSubview:imageViewIcon];
-        
-        UIImageView *imageViewContentBg = [[UIImageView alloc] init];
-        [cell addSubview:imageViewContentBg];
-        
-        UILabel *labelContent = [[UILabel alloc] init];
-        labelContent.font = [UIFont systemFontOfSize:HOME_TIPSTEXT];
-        labelContent.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-        [imageViewContentBg addSubview:labelContent];
-        
-        UILabel *labelTime = [[UILabel alloc] init];
-        labelTime.font = [UIFont systemFontOfSize:SMALLTEXT];
-        labelTime.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-        labelTime.textAlignment = NSTextAlignmentRight;
-        [imageViewContentBg addSubview:labelTime];
-        
-        /** init cell data **/
-        switch ([[curData objectAtIndex:0]intValue]) {
+    [[InitTimeLineData initTimeLine] setTargetViewController:self];
+    [[InitTimeLineData initTimeLine] setDelegate:self];
+    [[InitTimeLineData initTimeLine] getTimeLineData];
+}
+
+//FIXME:临时处理timelineDS
+-(NSMutableArray*)proTimeLineDS:(NSMutableArray*)ds{
+    for (int i = 0; i<[ds count]; i++) {
+        NSMutableDictionary *dic = ds[i];
+        //addtion:icon time
+        switch ([dic[@"msg_type"] intValue]) {
             case 0:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_news.png"];
+                [dic setValue:@"icon_news.png" forKey:@"icon"];
                 break;
             case 1:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_alarm.png"];
+                [dic setValue:@"icon_alarm.png" forKey:@"icon"];
                 break;
             case 10:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_alerm_vaccine.png"];
+                [dic setValue:@"icon_alerm_vaccine.png" forKey:@"icon"];
                 break;
             case 11:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_alerm_milstone.png"];
+                [dic setValue:@"icon_alerm_milstone.png" forKey:@"icon"];
                 break;
             case 12:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_alerm_dialy.png"];
+                [dic setValue:@"icon_alerm_dialy.png" forKey:@"icon"];
                 break;
             case 20:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_height.png"];
+                [dic setValue:@"icon_height.png" forKey:@"icon"];
                 break;
             case 21:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_weight.png"];
+                [dic setValue:@"icon_weight.png" forKey:@"icon"];
                 break;
             default:
-                imageViewIcon.image = [UIImage imageNamed:@"icon_news.png"];
+                [dic setValue:@"icon_news.png" forKey:@"icon"];
                 break;
         }
-        
-        //根据标题长度判断是否需要拉升
-        if ([[curData objectAtIndex:1] length] <= _CELL_CHANGE_MAXLEN) {
-            imageViewContentBg.frame = CGRectMake(57, 6, 246, 40);
-            imageViewContentBg.image = [UIImage imageNamed:@"input_word.png"];
-            labelContent.frame = CGRectMake(10, 5, 230, 16);
-            labelTime.frame = CGRectMake(193, 22, 48, 15);
+        if ([dic[@"create_time"] longValue] != 0) {
+            NSString *cellTime = [ACDate getMsgTimeSinceDate:[ACDate getDateFromTimeStamp:[dic[@"create_time"] longValue]]];
+            [dic setValue:cellTime forKey:@"time"];
         }
-        else {
-            imageViewContentBg.frame = CGRectMake(57, 6, 246, 58);
-            imageViewContentBg.image = [[UIImage imageNamed:@"input_word.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:30];
-            labelContent.frame = CGRectMake(10, 5, 230, 36);
-            labelContent.lineBreakMode = NSLineBreakByWordWrapping;
-            labelContent.numberOfLines = 0;
-            labelTime.frame = CGRectMake(193, 40, 48, 15);
+        else{
+            [dic setValue:@"未知" forKey:@"time"];
         }
-        
-        labelContent.text = [curData objectAtIndex:1];
-        NSString *cellTime = [ACDate getMsgTimeSinceDate:[ACDate getDateFromTimeStamp:[[curData objectAtIndex:4]longValue]]];
-        labelTime.text = cellTime;
     }
-    else {
-        /** init cell view **/
-        UIImageView *imageViewIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
-        [cell addSubview:imageViewIcon];
-        UIImageView *imageViewContentBg = [[UIImageView alloc] init];
-        imageViewContentBg.frame = CGRectMake(57, 6, 246, 211);
-        imageViewContentBg.image = [[UIImage imageNamed:@"input_word.png"]stretchableImageWithLeftCapWidth:10 topCapHeight:30];
-        [cell addSubview:imageViewContentBg];
-        
-        UILabel *labelContent = [[UILabel alloc] init];
-        labelContent.frame = CGRectMake(10, 5, 230, 16);
-        labelContent.font = [UIFont systemFontOfSize:HOME_TIPSTEXT];
-        labelContent.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-        [imageViewContentBg addSubview:labelContent];
-        
-        UIImageView *imagePic = [[UIImageView alloc] init];
-        imagePic.frame = CGRectMake(10, 26, 230, 161);
-        imagePic.image = [UIImage imageNamed:@"tip_demo.jpg"];
-//        [imageViewContentBg addSubview:imagePic];
-        
-        UILabel *labelTime = [[UILabel alloc] init];
-        labelTime.frame = CGRectMake(193, 192, 48, 15);
-        labelTime.font = [UIFont systemFontOfSize:SMALLTEXT];
-        labelTime.textColor = [ACFunction colorWithHexString:TEXTCOLOR];
-        labelTime.textAlignment = NSTextAlignmentRight;
-        [imageViewContentBg addSubview:labelTime];
-        
-        /** init cell data **/
-        
-        /*
-        NSString *key = [curData objectAtIndex:5];
-        NSArray *keySplit = [key componentsSeparatedByString:@","];
-        int category_id = [[keySplit objectAtIndex:0] intValue];
-        int tip_id = [[keySplit objectAtIndex:1] intValue];
-        
-        NSArray* arrCategory = [TipCategoryDB selectCategoryById:category_id];
-        NSString *imageUrl = [NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),[arrCategory objectAtIndex:3]];
-        UIImage *imagea = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageUrl]];
-        imageViewIcon = [[UIImageView alloc]initWithImage:imagea];
-        [imageViewIcon setFrame:CGRectMake(10, 10, 60, 60)];
-         */
-        
-        imageViewIcon.image = [UIImage imageNamed:@"icon_message.png"];
-        labelContent.text = [curData objectAtIndex:1];
-        NSString *cellTime = [ACDate getMsgTimeSinceDate:[ACDate getDateFromTimeStamp:[[curData objectAtIndex:4]longValue]]];
-        labelTime.text = cellTime;
-        
-        NSString *picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"Tip"),[curData objectAtIndex:2]];
-        UIASYImageView *imageView = [[UIASYImageView alloc] initWithFrame:imagePic.frame];
-        [imageView showImageWithUrl:picUrl];
-        [imageViewContentBg addSubview:imageView];
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+    return ds;
 }
 
-#pragma tableView Delegate
+#pragma mark InitTimeLineData RefreshTimeLineDelegate
+#pragma mark 刷新时间轴
+-(void)willRefreshTimeLine{
+    //**  Step-1:获取时间轴数据源  **
+    int oldDSCount = [_timeLineDS count];
+
+    //中间变量,用以获取更新条数
+    NSMutableArray *compDS = [[NSMutableArray alloc]initWithCapacity:5];
+    if (oldDSCount == 0) {
+        compDS = [[BabyMessageDataDB babyMessageDB]selectByLast:0 Count:kHomeTimeLineInitCount];
+    }
+    else{
+        compDS = [[BabyMessageDataDB babyMessageDB]selectByLast:0 Count:oldDSCount + kHomeTimeLinePerIncCount];
+    }
+    
+    //单次实际增长数量
+    int incTimeLineCount = [compDS count] - oldDSCount;
+    if (incTimeLineCount == 0) {
+        //scroll to bottom except activity controller
+        [_homeScrollView setContentOffset:CGPointMake(0, _homeScrollView.contentSize.height - _homeScrollView.height) animated:YES];
+        
+        [_actView stopAnimating];
+        _homeScrollView.scrollEnabled = YES;
+        return;
+    }
+    else{
+        _timeLineDS = [self proTimeLineDS:compDS];
+    }
+    
+    NSMutableArray *incArr = [[NSMutableArray alloc]initWithCapacity:kHomeTimeLineInitCount];
+    if (oldDSCount == 0) {
+        //初始化时tableview insert 0 至 kHomeTimeLineInitCount 条
+        for (int i=0; i<kHomeTimeLineInitCount; i++) {
+            [incArr addObject:[_timeLineDS objectAtIndex:i]];
+        }
+    }
+    else{
+        //获取新增条数
+        for (int i=[_timeLineDS count] - incTimeLineCount; i<[_timeLineDS count]; i++) {
+            [incArr addObject:[_timeLineDS objectAtIndex:i]];
+        }
+    }
+    for (int i = 0; i<[_timeLineDS count]; i++) {
+        //替换成BabyMsg实体
+        [_timeLineDS replaceObjectAtIndex:i withObject:[BCBabyMsg babyMsgWithDictionary:_timeLineDS[i]]];
+    }
+    
+    [self insertIntoTimeLine:incArr];
+    [self resetTimeLineFrame];
+    
+    [_actView stopAnimating];
+    _homeScrollView.scrollEnabled = YES;
+}
+
+#pragma mark 时间轴插入记录
+-(void)insertIntoTimeLine:(NSMutableArray*)incArr{
+    //**  Step-2:Insert into TableView **
+    NSMutableArray *insertion = [[NSMutableArray alloc] init];
+    int cellCount = [_timeLineCells count];
+    for (int i=0; i<[incArr count]; i++) {
+        BabyMsgTableViewCell *cell = [[BabyMsgTableViewCell alloc]init];
+        [_timeLineCells addObject:cell];
+        [insertion addObject:[NSIndexPath indexPathForRow:(cellCount + i) inSection:0]];
+    }
+    [_timeLineTableView insertRowsAtIndexPaths:insertion withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark 重画时间轴
+-(void)resetTimeLineFrame{
+    //**  Step-3:Change tableview & scrollview's state
+    CGFloat timeLineTableViewHeight = 0;
+    for (int i=0; i<[_timeLineCells count]; i++) {
+        BabyMsgTableViewCell *cell = _timeLineCells[i];
+        timeLineTableViewHeight += cell.height;
+    }
+    _timeLineTableView.height = timeLineTableViewHeight;
+    _homeScrollView.contentSize = CGSizeMake(kDeviceWidth,_homeHeadView.height + _timeLineTableView.height + kHomeBottomActivitySpaceHeight);
+}
+
+#pragma mark 根据条件删除时间轴中已显示的某些数据
+-(void)willDeleteMsgsWithTypeID:(int)typeID Key:(NSString*)key{
+    if ([_timeLineDS count] != 0) {
+        NSMutableArray *deletion = [[NSMutableArray alloc] initWithCapacity:5];
+        
+        //删除提醒
+        for (int i = [_timeLineDS count] - 1; i >= 0; i--) {
+            BCBabyMsg *msg = _timeLineDS[i];
+            if (msg.msgType == typeID && [msg.key isEqualToString:key]) {
+                [deletion addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                //删除数据源
+                [_timeLineCells removeObjectAtIndex:i];
+                [_timeLineDS removeObjectAtIndex:i];
+            }
+        }
+        [_timeLineTableView deleteRowsAtIndexPaths:deletion withRowAnimation:NO];
+        
+        [self resetTimeLineFrame];
+    }
+}
+
+#pragma mark 根据条件在时间轴中插入数据
+-(void)willInsertMsg{
+    if ([_timeLineDS count] != 0) {
+        NSMutableArray *insertion = [[NSMutableArray alloc] initWithCapacity:1];
+        NSMutableArray *ds = [[BabyMessageDataDB babyMessageDB]selectLastest];
+        if ([ds count] != 0) {
+            BabyMsgTableViewCell *cell = [[BabyMsgTableViewCell alloc]init];
+            [_timeLineCells insertObject:cell atIndex:0];
+            
+            BCBabyMsg *msg = [BCBabyMsg babyMsgWithDictionary:[[self proTimeLineDS:ds] objectAtIndex:0]];
+            [_timeLineDS insertObject:msg atIndex:0];
+            
+            [insertion addObject:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [_timeLineTableView insertRowsAtIndexPaths:insertion withRowAnimation:NO];
+            [self resetTimeLineFrame];
+        }
+    }
+}
+
+#pragma mark SelectBabyPhotoDelegate 选择照片
+-(void)willSelectBabyPhoto{
+    _action = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancle",nil) destructiveButtonTitle:NSLocalizedString(@"Camera",nil) otherButtonTitles:NSLocalizedString(@"Photo",nil), nil];
+    [_action showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==[actionSheet destructiveButtonIndex]) {
+        [self imageSelectFromCamera];
+    }
+    else if (buttonIndex==1)
+    {
+        [self imageSelect];
+    }
+}
+
+-(void)imageSelectFromCamera
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        _imagePicker.sourceType=UIImagePickerControllerSourceTypeCamera;
+        _imagePicker.allowsEditing=YES;
+        _imagePicker.delegate=self;
+        
+        if ([ACFunction getSystemVersion] >= 7.0) {
+            [_imagePicker.view setFrame:CGRectMake(0, 0, 320, 480)];
+            if ([UIScreen mainScreen].bounds.size.height == 568) {
+                [_imagePicker.view setFrame:CGRectMake(0, 0, 320, 568)];
+            }
+            
+            [self.tabBarController.tabBar setHidden:YES];
+            [self.navigationController.navigationBar setHidden:YES];
+            [self.view.superview addSubview:_imagePicker.view];
+        }
+        else
+        {
+            [_imagePicker.view setFrame:CGRectMake(0, 0, 320, 480)];
+            if ([UIScreen mainScreen].bounds.size.height == 568) {
+                [_imagePicker.view setFrame:CGRectMake(0, 0, 320, 568)];
+            }
+            
+            [self.tabBarController.tabBar setHidden:YES];
+            [self.navigationController.navigationBar setHidden:YES];
+            [self.view.superview addSubview:_imagePicker.view];
+            
+        }
+    }
+    else
+    {
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:nil message:@"相机不可用" delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+-(void)imageSelect
+{
+    //NSLog(@"imageselect");
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        _imagePicker.allowsEditing = YES;
+        _imagePicker.delegate = self;
+        if ([ACFunction getSystemVersion] >= 7.0) {
+            [_imagePicker.view setFrame:CGRectMake(0, 0, 320, 480)];
+            if ([UIScreen mainScreen].bounds.size.height == 568) {
+                [_imagePicker.view setFrame:CGRectMake(0, 0, 320, 568)];
+            }
+            [self.tabBarController.tabBar setHidden:YES];
+            [self.navigationController.navigationBar setHidden:YES];
+            [self.view.superview  addSubview:_imagePicker.view];
+        }
+        else
+        {
+            //[self presentViewController:imagePicker animated:NO completion:nil];
+            [_imagePicker.view setFrame:CGRectMake(0, -20, 320, 480)];
+            if ([UIScreen mainScreen].bounds.size.height == 568) {
+                [_imagePicker.view setFrame:CGRectMake(0, -20, 320, 568)];
+            }
+            [self.tabBarController.tabBar setHidden:YES];
+            [self.navigationController.navigationBar setHidden:YES];
+            [self.view.superview  addSubview:_imagePicker.view];
+            
+        }
+    }
+    else
+    {
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:nil message:@"相册不可用" delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    if ([UIApplication sharedApplication].statusBarStyle != UIStatusBarStyleLightContent) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+    UIImage* image = [info objectForKey: @"UIImagePickerControllerEditedImage"];
+    if (picker.sourceType==UIImagePickerControllerSourceTypeCamera) {
+        UIImageWriteToSavedPhotosAlbum(image, self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
+        //NSLog(@"camare");
+    }
+    
+    //创建BABYID 路径 照片
+    NSData *imagedata=UIImagePNGRepresentation(image);
+    [imagedata writeToFile:BABYICONPATH(ACCOUNTUID,BABYID) atomically:NO];
+    [[BabyDataDB babyinfoDB]updateBabyIcon:[NSString stringWithFormat:@"%d_%d.png",ACCOUNTUID,BABYID] BabyId:BABYID];
+    
+    if ([ACFunction getSystemVersion] < 7.0) {
+        [_imagePicker.view removeFromSuperview];
+    }
+    else
+    {
+        [_imagePicker.view removeFromSuperview];
+    }
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController.navigationBar setHidden:NO];
+    
+    if (picker.sourceType==UIImagePickerControllerSourceTypePhotoLibrary) {
+        [self refreshBabyPic];
+    }
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    //[imagePicker dismissViewControllerAnimated:YES completion:nil];
+    if ([UIApplication sharedApplication].statusBarStyle != UIStatusBarStyleLightContent) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController.navigationBar setHidden:NO];
+    [_imagePicker.view removeFromSuperview];
+}
+
+
+-(void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    UIAlertView *alert;
+    if (error == nil)
+    {
+        [self refreshBabyPic];
+    }
+    else
+    {
+        alert = [[UIAlertView alloc] initWithTitle:nil message:@"添加头像出错,请重新尝试" delegate:nil cancelButtonTitle:@"OK." otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+
+#pragma mark 选择照片相关
+
+#pragma mark TableViewDelegate
+#pragma mark 选中行
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     /*  1:用户自定义提醒
-    *  10:疫苗提醒
-    *  11:评测提醒
-    *  12:日志提醒
-    *  20:生理-身高记录提醒
-    *  21:生理-体重记录提醒
-    *  22:生理-头围记录提醒
-    */
-    
-    NSArray *curArr = [_data objectAtIndex:indexPath.row];
-    if ([[curArr objectAtIndex:0] intValue] == 10) {
+     *  10:疫苗提醒
+     *  11:评测提醒
+     *  12:日志提醒
+     *  20:生理-身高记录提醒
+     *  21:生理-体重记录提醒
+     *  22:生理-头围记录提醒
+     */
+    BCBabyMsg *curData = [_timeLineDS objectAtIndex:indexPath.row];
+    if (curData.msgType == 10) {
         VaccineController* vaccineVc = [[VaccineController alloc] init];
         [self.navigationController pushViewController:vaccineVc animated:YES];
     }
-    else if ([[curArr objectAtIndex:0] intValue] == 11) {
+    else if (curData.msgType  == 11) {
         NSDate* birthDate = [BaseMethod dateFormString:kBirthday];
-        NSDate* selectedDate = [BaseMethod beijingDate:[ACDate getDateFromTimeStamp:[[curArr objectAtIndex:4] longValue]]];
+        NSDate* selectedDate = [BaseMethod beijingDate:[ACDate getDateFromTimeStamp:curData.createTime]];
         
         int days = [BaseMethod fromStartDate:birthDate withEndDate:selectedDate];
         int month = days/30; // 第几个月
@@ -488,57 +586,91 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"暂无该月份的测评题" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
-
+        
     }
-    else if ([[curArr objectAtIndex:0] intValue] == 12) {
-        NoteController* noteVc = [[NoteController alloc] init];
-        [self.navigationController pushViewController:noteVc animated:YES];
+    else if (curData.msgType  == 12) {
+        if ([curData.key isEqualToString:@""]) {
+            NoteController* noteVc = [[NoteController alloc] init];
+            [self.navigationController pushViewController:noteVc animated:YES];
+        }
+        else{
+            NSArray *arrSplit = [curData.key componentsSeparatedByString:@"|"];
+            [BaseMethod saveSelectedDate:[BaseMethod dateFormString:[arrSplit lastObject]]];
+            NoteController* noteVc = [[NoteController alloc] init];
+            [self.navigationController pushViewController:noteVc animated:YES];
+        }
     }
-    else if ([[curArr objectAtIndex:0] intValue] == 20) {
+    else if (curData.msgType  == 20) {
         NSArray *arrayHeight = @[@0,@"icon_height.png",@"当前身高",[self getValues:0],[self getIncrease:0],@"CM",[self getRecordDate:0],@"#84c082"];
         PHYDetailViewController *pHYDetailViewController = [[PHYDetailViewController alloc] init];
         [pHYDetailViewController setVar:arrayHeight];
         [self.navigationController pushViewController:pHYDetailViewController animated:YES];
     }
-    else if ([[curArr objectAtIndex:0] intValue] == 21) {
+    else if (curData.msgType  == 21) {
         NSArray *arrayWeight = @[@1,@"icon_weight.png",@"当前体重",[self getValues:1],[self getIncrease:1],@"KG",[self getRecordDate:1],@"#efc654"];
         PHYDetailViewController *pHYDetailViewController = [[PHYDetailViewController alloc] init];
         [pHYDetailViewController setVar:arrayWeight];
         [self.navigationController pushViewController:pHYDetailViewController animated:YES];
     }
-    else if ([[curArr objectAtIndex:0] intValue] == 22) {
+    else if (curData.msgType  == 22) {
         NSArray *arrayCRI = @[@3,@"icon_CIR.png",@"当前头围",[self getValues:3],[self getIncrease:3],@"CM",[self getRecordDate:3],@"#69b3e0"];
         PHYDetailViewController *pHYDetailViewController = [[PHYDetailViewController alloc] init];
         [pHYDetailViewController setVar:arrayCRI];
         [self.navigationController pushViewController:pHYDetailViewController animated:YES];
     }
-    else if ([[curArr objectAtIndex:0] intValue] == 99) {
-        NSString *str = [curArr objectAtIndex:5];
+    else if (curData.msgType == 99) {
+        NSString *str = curData.key;
         NSArray *arrSplit = [str componentsSeparatedByString:@","];
         int tip_id = [[arrSplit lastObject] intValue];
         
         TipsWebViewController *tipsWeb = [[TipsWebViewController alloc]init];
         NSString *Url = [NSString stringWithFormat:@"%@tips/showTip.aspx?id=%d",BASE_URL,tip_id];
         [tipsWeb setTipsUrl:Url];
-        [tipsWeb setTipsTitle:[curArr objectAtIndex:1]];
-        NSString *picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"Tip"),[curArr objectAtIndex:2]];
+        [tipsWeb setTipsTitle:curData.msgContent];
+        NSString *picUrl = [NSString stringWithFormat:@"%@/%@",WEBPHOTO(@"Tip"),curData.picUrl];
         [tipsWeb setShowImage:picUrl];
         [tipsWeb setFlag:1];
         [self.navigationController pushViewController:tipsWeb animated:YES];
     }
 }
+#pragma mark 重新设置单元格高度
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    BabyMsgTableViewCell *cell = _timeLineCells[indexPath.row];
+    cell.babyMsg = _timeLineDS[indexPath.row];
+    return cell.height;
+}
 
-#pragma scrollViewDelegate
+#pragma mark TableViewDataSourceDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [_timeLineDS count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellIdentifier=@"Cell";
+    BabyMsgTableViewCell *cell;
+    cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(!cell){
+        cell=[[BabyMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    cell.babyMsg = _timeLineDS[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone; 
+    return cell;
+}
+
+#pragma mark scrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollView.contentOffset.y + _mainScrollView.height > _timeLineTableView.bounds.size.height + 44 && !_activityView.isAnimating){
-        [_activityView startAnimating];
-        _mainScrollView.scrollEnabled = NO;
-        _timeLineShowCount = _timeLineShowCount + 3;
+    if (_homeScrollView.contentOffset.y > kHomeTopNavigationBarHeight + _homeScrollView.contentSize.height - _homeScrollView.height - kHomeBottomActivitySpaceHeight && !_actView.isAnimating){
+        _homeScrollView.scrollEnabled = NO;
+        _actView.frame = CGRectMake(kDeviceWidth / 2 - kHomeBottomActivityViewWeight / 2,_homeHeadView.height +_timeLineTableView.height + 12, kHomeBottomActivityViewHeight, kHomeBottomActivityViewHeight);
+        [_actView startAnimating];
         //获取当前列表最后一条的createTime
-        [_initTimeLineData checkTips:[[[_data lastObject] objectAtIndex:4] longValue]];
+        BCBabyMsg *babyMsg = [_timeLineDS lastObject];
+        [[InitTimeLineData initTimeLine] checkTips:babyMsg.createTime];
     }
 }
 
+#pragma mark 原来乱七八糟的东西
 #pragma PHY methods
 -(NSString*)getIncrease:(int)index{
     if (index != 2) {
@@ -631,336 +763,9 @@
     }
 }
 
-#pragma 登陆相关
--(void)doLogin{
-    _loginView.hidden = YES;
-    
-    LoginMainViewController *loginMainViewController = [[LoginMainViewController alloc]initWithNibName:@"LoginMainViewController" bundle:nil];
-    loginMainViewController.mainViewController = self;
-    [self.navigationController pushViewController:loginMainViewController animated:NO];
-}
-
--(void)doTenLogin{
-    _loginView.hidden = YES;
-    
-    isPushSocialView = YES;
-    
-    BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:UMShareToQQ];
-    if (isOauth) {
-        //TODO:有登录过，如何处理
-        //return;
-    }
-    
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
-                                  {
-                                      //加载登录进度条
-                                      _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                                      _hud.mode = MBProgressHUDModeIndeterminate;
-                                      _hud.alpha = 0.5;
-                                      _hud.color = [UIColor grayColor];
-                                      _hud.labelText = @"登录验证中...";
-                                      
-                                      if ([[snsPlatform platformName] isEqualToString:UMShareToQQ])
-                                      {
-                                          [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
-                                              if ([[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] == NULL) {
-                                                  [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                  return;
-                                              }
-                                              
-                                              //封装数据
-                                              NSMutableDictionary *dictBody = [[DataContract dataContract]UserCreateDict:RTYPE_TENCENT account:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]  password:@""];
-                                              //Http请求
-                                              [[NetWorkConnect sharedRequest]
-                                               httpRequestWithURL:USER_LOGIN_URL
-                                               data:dictBody
-                                               mode:@"POST"
-                                               HUD:_hud
-                                               didFinishBlock:^(NSDictionary *result){
-                                                   _hud.labelText = [result objectForKey:@"msg"];
-                                                   //处理反馈信息: code=1为成功  code=99为失败
-                                                   if ([[result objectForKey:@"code"]intValue] == 1) {
-                                                       NSMutableDictionary *resultBody = [result objectForKey:@"body"];
-                                                       [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
-                                                       [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_TENCENT] forKey:@"ACCOUNT_TYPE"];
-                                                       [[NSUserDefaults standardUserDefaults] setObject:[resultBody objectForKey:@"userId"] forKey:@"ACCOUNT_UID"];
-                                                       [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
-                                                       //数据库保存用户信息
-                                                       if ([[UserDataDB dataBase] selectUser:[[resultBody objectForKey:@"userId"] intValue]] == nil){
-                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_TENCENT andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
-                                                       } 
-                                                       //提示是否同步数据
-                                                                                    [_hud hide:YES];
-                                                       [self performSelector:@selector(isSyncData) withObject:nil afterDelay:0.8];
-                                                   }
-                                                   else{
-                                                       [_hud hide:YES afterDelay:1.2];
-                                                   }
-                                               }
-                                               didFailBlock:^(NSString *error){
-                                                   //请求失败处理
-                                                   _hud.labelText = http_error;
-                                                   [_hud hide:YES afterDelay:1];
-                                               }
-                                               isShowProgress:YES
-                                               isAsynchronic:YES
-                                               netWorkStatus:YES
-                                               viewController:self];
-                                              
-                                          }];
-                                      }
-                                  });
-}
-
--(void)doSinaLogin{
-    _loginView.hidden = YES;
-    
-    isPushSocialView = YES;
-    BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:UMShareToSina];
-    if (isOauth) {
-        //TODO:有登录过，如何处理
-        //return;
-    }
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
-                                  {
-                                      //加载登录进度条
-                                      _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                                      _hud.mode = MBProgressHUDModeIndeterminate;
-                                      _hud.alpha = 0.5;
-                                      _hud.color = [UIColor grayColor];
-                                      _hud.labelText = @"登录验证中...";
-                                      
-                                      if ([[snsPlatform platformName] isEqualToString:UMShareToSina])
-                                      {
-                                          [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
-                                              if ([[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] == NULL) {
-                                                  [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                  return;
-                                              }
-                                              //封装数据
-                                              NSMutableDictionary *dictBody = [[DataContract dataContract]UserCreateDict:RTYPE_SINA account:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"]  password:@""];
-                                              //Http请求
-                                              [[NetWorkConnect sharedRequest]
-                                               httpRequestWithURL:USER_LOGIN_URL
-                                               data:dictBody
-                                               mode:@"POST"
-                                               HUD:_hud
-                                               didFinishBlock:^(NSDictionary *result){
-                                                   _hud.labelText = [result objectForKey:@"msg"];
-                                                   //处理反馈信息: code=1为成功  code=99为失败
-                                                   if ([[result objectForKey:@"code"]intValue] == 1) {
-                                                       NSMutableDictionary *resultBody = [result objectForKey:@"body"];
-                                                       [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
-                                                       [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_TENCENT] forKey:@"ACCOUNT_TYPE"];
-                                                       [[NSUserDefaults standardUserDefaults] setObject:[resultBody objectForKey:@"userId"] forKey:@"ACCOUNT_UID"];
-                                                       [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
-                                                       //数据库保存用户信息
-                                                       if ([[UserDataDB dataBase] selectUser:[[resultBody objectForKey:@"userId"] intValue]] == nil){
-                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_SINA andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
-                                                       }
-                                                       //提示是否同步数据
-                                                       [_hud hide:YES];
-                                                       [self performSelector:@selector(isSyncData) withObject:nil afterDelay:0.8];
-                                                   }
-                                                   else{
-                                                       [_hud hide:YES afterDelay:1.2];
-                                                   }
-                                               }
-                                               didFailBlock:^(NSString *error){
-                                                   //请求失败处理
-                                                   _hud.labelText = http_error;
-                                                   [_hud hide:YES afterDelay:1];
-                                               }
-                                               isShowProgress:YES
-                                               isAsynchronic:YES
-                                               netWorkStatus:YES
-                                               viewController:self];
-                                          }];
-                                      }
-                                  });
-
-}
-
--(void)doRegister{
-    _loginView.hidden = YES;
-    
-}
-
--(void)isSyncData{
-    [self checkBaby];
-    
-    /*UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否同步该账户数据" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
-     alertView.tag = 10109;
-     [alertView show];
-     */
-}
-
-#pragma 检测or创建宝贝
--(void)checkBaby{
-    if (ACCOUNTUID) {
-        int babyId=0;
-        /*
-         *  判断该账户下是否已有宝宝,如有,则默认加载
-         */
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentDir = [documentPaths objectAtIndex:0];
-        NSError *error = nil;
-        NSArray *fileList = [[NSArray alloc] init];
-        fileList = [fileManager contentsOfDirectoryAtPath:documentDir error:&error];
-        BOOL isDir = NO;
-        for (NSString *file in fileList) {
-            NSString *path = [documentDir stringByAppendingPathComponent:file];
-            [fileManager fileExistsAtPath:path isDirectory:(&isDir)];
-            if (isDir) {
-                NSArray *split = [file componentsSeparatedByString:@"_"];
-                if ([split count] == 2 && [[split objectAtIndex:0] intValue] == ACCOUNTUID) {
-                    babyId = [[split objectAtIndex:1] intValue];
-                    break;
-                }
-            }
-            isDir = NO;
-        }
-        
-        if (babyId != 0) {
-            //保存Babyid
-            [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:babyId] forKey:@"BABYID"];
-            [[NSUserDefaults standardUserDefaults] setInteger:babyId forKey:@"cur_babyid"];
-            NSDictionary *dict = [[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:babyId];
-            [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"nickname"] forKey:@"kBabyNickname"];
-            [self viewWillAppear:NO];
-            return;
-        }
-        
-        if (!BABYID) {
-            //注册接口
-            _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            //隐藏键盘
-            _hud.mode = MBProgressHUDModeIndeterminate;
-            _hud.alpha = 0.5;
-            _hud.color = [UIColor grayColor];
-            _hud.labelText = http_requesting;
-            //封装数据
-            NSMutableDictionary *dictBody = [[DataContract dataContract]BabyCreateByUserIdDict:ACCOUNTUID];
-            //Http请求
-            [[NetWorkConnect sharedRequest]
-             httpRequestWithURL:BABY_CREATEBYUSERID_URL
-             data:dictBody
-             mode:@"POST"
-             HUD:_hud
-             didFinishBlock:^(NSDictionary *result){
-                 _hud.labelText = [result objectForKey:@"msg"];
-                 //处理反馈信息: code=1为成功  code=99为失败
-                 if ([[result objectForKey:@"code"]intValue] == 1) {
-                     NSMutableDictionary *resultBody = [result objectForKey:@"body"];
-                     //保存Babyid
-                     [[NSUserDefaults standardUserDefaults]setObject:[resultBody objectForKey:@"babyId"] forKey:@"BABYID"];
-                     //数据库保存Baby信息
-                     [BabyDataDB createNewBabyInfo:ACCOUNTUID BabyId:BABYID Nickname:@"" Birthday:nil Sex:nil HeadPhoto:@"" RelationShip:@"" RelationShipNickName:@"" Permission:nil CreateTime:[resultBody objectForKey:@"create_time"] UpdateTime:nil];
-                     [_hud hide:YES afterDelay:0.5];
-                     _loginView.hidden = YES;
-                     [self viewWillAppear:NO];
-                 }
-                 else{
-                     _hud.labelText = http_error;
-                     [_hud hide:YES afterDelay:1];
-                 }
-             }
-             didFailBlock:^(NSString *error){
-                 //请求失败处理
-                 _hud.labelText = http_error;
-                 [_hud hide:YES afterDelay:1];
-             }
-             isShowProgress:YES
-             isAsynchronic:NO
-             netWorkStatus:YES
-             viewController:self];
-        }
-    }
-}
-
-#pragma 给APP评分
--(void)ReviewTheApp{
-    /*
-     *  app_url                 :app地址
-     *  review_last_alert_time  :最后提醒评分时间
-     *  review_state            :评分状态 YES已评分
-     */
-    
-    //获取app_url信息
-    
-    NSString *app_url = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"];
-    if ([app_url isEqual:@""] || app_url == nil) {
-        //get url
-        NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"unname",@"unname",nil];
-        
-        
-        NetWorkConnect *_netWorkConnect = [[NetWorkConnect alloc]init]; 
-        [_netWorkConnect httpRequestWithURL:GET_APP_INFO
-                                                     data:dictBody
-                                                     mode:@"POST"
-                                                      HUD:nil
-                                           didFinishBlock:^(NSDictionary *result)
-         {
-             //请求成功处理
-             NSDictionary *dict = [result objectForKey:@"body"];
-             if (![[dict objectForKey:@"app_url"]  isEqual: @""])
-             {
-                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_url"] forKey:@"app_url"];
-                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_name"] forKey:@"app_name"];
-                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
-                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"review_state"];
-             }
-         }
-                                             didFailBlock:^(NSString *error){}
-                                           isShowProgress:YES
-                                            isAsynchronic:YES
-                                            netWorkStatus:YES
-                                           viewController:nil];
-        
-        return;
-    }
-    
-    long review_last_alert_time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"review_last_alert_time"] longValue];
-    bool review_state = [[NSUserDefaults standardUserDefaults] boolForKey:@"review_state"];
-    
-    if (![app_url isEqualToString:@""] && !review_state && ([ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:review_last_alert_time]] >= 7 || review_last_alert_time == 0) ){
-        [self showReviewAlert];
-    }
-}
-
--(void)showReviewAlert{
-    if (_alertView == nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[NSDate date]]] forKey:@"review_last_alert_time"];
-        _alertView = [[UIAlertView alloc] initWithTitle:@"给宝贝计划好评" message:@"如果您喜欢宝贝计划,请给我们一个五星评价,您的鼓励是我们进步的最大动力!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"喜欢,我五星评价",@"稍后再说",@"不再提醒", nil];
-        [_alertView show];
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 0) {
-        //评价跳转
-        NSLog(@"url:%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]);
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]]];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
-    }
-    else if(buttonIndex == 1){
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
-    }
-    else{
-        //不在提示
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
+#pragma mark Sys
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-
-
+ 
 @end

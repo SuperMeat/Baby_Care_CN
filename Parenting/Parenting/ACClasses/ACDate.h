@@ -56,4 +56,7 @@
 +(int)getDiffMonthFromBirth:(NSDate*)birthDate;
 +(int)getDiffDayFormNowToDate:(NSDate*)date;
 +(int)getDiffMonthFromDate:(NSDate*)date;
+
+#pragma mark 获取出生日数文本
++(NSString*)getBabyBirthOfDaysStr:(long)birth;
 @end

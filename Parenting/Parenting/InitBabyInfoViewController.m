@@ -63,7 +63,7 @@
     }
     
     
-    _mainScrollView.frame = CGRectMake(0, _TopView.height,  [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - _TopView.height);
+    _mainScrollView.frame = CGRectMake(0, _TopView.height + 5,  [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - _TopView.height);
     
     _imageViewPic.layer.masksToBounds = YES;
     _imageViewPic.layer.cornerRadius = 57.0;
@@ -238,8 +238,6 @@
     [self.navigationController popViewControllerAnimated:NO];
     //日历相关数据创建
     [InitCreateDB create_CalendarDB];
-    
-    [self.initBabyInfoDelegate initHomeData];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{

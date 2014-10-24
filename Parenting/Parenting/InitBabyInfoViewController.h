@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol InitBabyInfoDelegate <NSObject>
-
-@optional
--(void)initHomeData;
-@end
-
 @interface InitBabyInfoViewController : UIViewController<UIImagePickerControllerDelegate,CustomIOS7AlertViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 {
     UIImagePickerController *_imagePicker;
@@ -45,6 +39,5 @@
 
 
 - (IBAction)Radiobuttonselect:(id)sender;
-
-@property (assign) id<InitBabyInfoDelegate> initBabyInfoDelegate;
+ 
 @end

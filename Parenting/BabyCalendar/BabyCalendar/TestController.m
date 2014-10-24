@@ -104,6 +104,10 @@
         TestReportController* reportVc = [[TestReportController alloc] init];
         reportVc.month = _month;
         [self.navigationController pushViewController:reportVc animated:YES];
+        
+        /**  edit by cwb  **/
+        /**  刷新首页时间轴及数据源  **/
+        [[InitTimeLineData initTimeLine]refreshByFinishItemsWithTypeID:11 ProTime:[ACDate getTimeStampFromDate:[ACDate date]] Key:[NSString stringWithFormat:@"%@",model.month] Content:[NSString stringWithFormat:@"宝宝已完成%@月份测评,评分为%@分哦!",model.month,model.score]];
     }
 
 }
