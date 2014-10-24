@@ -53,5 +53,13 @@
 -(long)getMsgTipLastCreateTime;
 /** 获取应插入的最后一条贴士消息时间 **/
 -(long)getMsgTipLastInsertCreateTime:(NSArray*)timeList;
+
+#pragma mark 获取最新一条数据
+-(NSMutableArray*)selectLastest;
+
+#pragma mark 根据typeID及key删除消息
+-(BOOL)deleteBabyMessageWithTypeID:(int)typeID Key:(NSString*)key;
+#pragma mark 根据typeID删除除了已完成消息以外的记录
+-(BOOL)deleteBabyMessageWithoutDone:(int)typeID;
 @end
 

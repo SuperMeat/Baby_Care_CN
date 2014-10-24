@@ -7,6 +7,7 @@
 //
 
 #import "PhySaveView.h"
+#import "BaseMethod.h"
 
 @implementation PhySaveView
 
@@ -73,7 +74,14 @@
     textValue.textColor=[UIColor grayColor];
     textValue.delegate = self;
     textValue.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    [textValue setValue:[NSNumber numberWithInt:15] forKey:@"paddingLeft"];
     [textValue setBackground:[UIImage imageNamed:@"save_text.png"]];
+    
+    //单位
+    labelUnit = [[UILabel alloc] initWithFrame:CGRectMake(170, 82, 36, 24)];
+    labelUnit.textColor = [UIColor grayColor];
+    labelUnit.font = [UIFont fontWithName:@"Arial" size:MIDTEXT];
+    labelUnit.text = itemUnit;
     
     //saveButton
     buttonSave = [[UIButton alloc]initWithFrame:CGRectMake(42, 123, 94, 28)];
@@ -102,6 +110,7 @@
     [imageview addSubview:labelValue];
     [imageview addSubview:textRecordDate];
     [imageview addSubview:textValue];
+    [imageview addSubview:labelUnit];
     [imageview addSubview:buttonSave];
     [imageview addSubview:buttonCancel];
 }
@@ -111,6 +120,7 @@
     measureTime = [ACDate getDateFromTimeStamp:[[dict objectForKey:@"measure_time"] longValue]];
     textRecordDate.text=[ACDate dateDetailFomatdate3:measureTime];
     textValue.text = [NSString stringWithFormat:@"%0.1f",[[dict objectForKey:@"value"] doubleValue]];
+    
 }
 
 -(void)saveRecord{
@@ -125,6 +135,15 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"添加成功!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
             [self.PhySaveDelegate sendPhyReloadData];
+            
+            /**  edit by cwb  **/
+            /**  刷新首页时间轴及数据源  **/
+            if (itemType == 0) {
+                [[InitTimeLineData initTimeLine]refreshByFinishItemsWithTypeID:20 ProTime:[ACDate getTimeStampFromDate:[datepicker date]] Key:@"" Content:[NSString stringWithFormat:@"记录了宝宝于%@时的身高: %@ cm。",[BaseMethod stringFromDate:[datepicker date]],textValue.text]];
+            }else if (itemType == 1){
+                [[InitTimeLineData initTimeLine]refreshByFinishItemsWithTypeID:21 ProTime:[ACDate getTimeStampFromDate:[datepicker date]] Key:@"" Content:[NSString stringWithFormat:@"记录了宝宝于%@时的体重: %@ kg。",[BaseMethod stringFromDate:[datepicker date]],textValue.text]];
+            }
+            
         }
         else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"添加失败!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

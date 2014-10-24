@@ -40,7 +40,9 @@
 @property (strong, nonatomic) UILabel *labelLastDate;
 @property (strong, nonatomic) UILabel *labelCURValue;
 @property (strong, nonatomic) UILabel *labelCURDate;
-@property (strong, nonatomic) UILabel *labelChangeValue;
+@property (strong, nonatomic) UILabel *labelChangeValue; 
+@property (strong, nonatomic) UILabel *labelLastTitle;
+@property (strong, nonatomic) UILabel *labelCURTitle;
 
 //详细数值视图
 @property (strong, nonatomic) UIView *viewHistroy;

@@ -287,11 +287,12 @@ ViewController:(UIViewController*) viewController{
     //提示消息
     hud.labelText = @"接收数据中";
     
-    [[NetWorkConnect sharedRequest]httpRequestWithURL:GETTIPSHOME_SYNC_URL
-                                                 data:dictBody
-                                                 mode:@"POST"
-                                                  HUD:hud
-                                       didFinishBlock:^(NSDictionary *result)
+    NetWorkConnect *net = [[NetWorkConnect alloc] init];
+    [net httpRequestWithURL:GETTIPSHOME_SYNC_URL
+                       data:dictBody
+                       mode:@"POST"
+                        HUD:hud
+             didFinishBlock:^(NSDictionary *result)
      {
          //请求成功处理
          NSMutableArray *categoryArr = [[result objectForKey:@"body"] objectForKey:@"Bc_Tips"];
@@ -311,16 +312,19 @@ ViewController:(UIViewController*) viewController{
              }
          }
      }
-                                         didFailBlock:^(NSString *error)
+               didFailBlock:^(NSString *error)
      {
          //请求失败处理
          hud.labelText = http_error;
          [hud hide:YES afterDelay:0.8];
+         if (syncFinishBlockP) {
+             syncFinishBlockP(nil);
+         }
      }
-                                       isShowProgress:YES
-                                        isAsynchronic:YES
-                                        netWorkStatus:YES
-                                       viewController:viewController];
+             isShowProgress:YES
+              isAsynchronic:YES
+              netWorkStatus:YES
+             viewController:viewController];
 }
 
 #pragma 同步基本内容:小窍门
@@ -333,7 +337,8 @@ ViewController:(UIViewController*) viewController{
     long lastUpdateTime = [UserLittleTips getLastUpdateTime];
     NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:ACCOUNTUID],@"userId",[NSNumber numberWithLong:lastUpdateTime],@"lastUpdateTime",[NSNumber numberWithInt:LITTLETIPS_MAXGETNUMBER],@"maxGetNumber",nil];
     
-    [[NetWorkConnect sharedRequest]httpRequestWithURL:LITTLETIPS_SYNC_URL
+    NetWorkConnect *net = [[NetWorkConnect alloc] init];
+    [net httpRequestWithURL:LITTLETIPS_SYNC_URL
                                                  data:dictBody
                                                  mode:@"POST"
                                                   HUD:nil

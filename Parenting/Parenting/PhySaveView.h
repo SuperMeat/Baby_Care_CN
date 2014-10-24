@@ -24,6 +24,7 @@
     UIImageView *imageview;
     UITextField *textRecordDate; 
     UITextField *textValue;
+    UILabel *labelUnit;
     UIButton *buttonSave;
     UIButton *buttonCancel;
     

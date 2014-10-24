@@ -25,7 +25,7 @@
 
 @implementation InitTimeLineData
 
-+(id)initTimeLineData
++(InitTimeLineData*)initTimeLine
 {
     static dispatch_once_t pred = 0;
     __strong static id _sharedObject = nil;
@@ -190,7 +190,6 @@
         //取出获取到数据的ids
         int iArrCount = [retArr count];
         if (iArrCount !=0){
-            
             NSArray *insertTimeList = [self getLastMsgTipInsertTime:date];
             
             for (int i = 0; i < iArrCount; i++) {
@@ -208,10 +207,9 @@
                 else {
                     break;
                 }
-            }
+            } 
         }
-        HomeViewController *homeViewController = (HomeViewController*)_targetViewController;
-        [homeViewController initTimeLineData];
+        [_delegate willRefreshTimeLine];
     }
                                   ViewController:_targetViewController];
 }
@@ -337,6 +335,56 @@
     else{
         return 0;
     }
+}
+
+
+#pragma mark 完成提醒事项后处理
+-(void)refreshByFinishItemsWithTypeID:(int)typeID
+                              ProTime:(long)proTime
+                                  Key:(NSString*)key
+                              Content:(NSString*)content{
+    //**  step1:删除消息表中关于该事项的提醒  **
+    //**  step2:添加消息表完成该事项的记录  **
+    
+    NSString *msg_key;
+    switch (typeID) {
+        case 10:
+            //删除测疫苗提醒10:delete msg_type=10 and key=key
+            [[BabyMessageDataDB babyMessageDB]deleteBabyMessageWithTypeID:typeID Key:key];
+            //添加消息
+            msg_key = [NSString stringWithFormat:@"已完成|%@",key];
+            [[BabyMessageDataDB babyMessageDB] insertBabyMessageNormal:[ACDate getTimeStampFromDate:[NSDate date]] UpdateTime:[ACDate getTimeStampFromDate:[NSDate date]] key:msg_key type:typeID content:content];
+            break;
+        case 11 : case 12 : case 20 :case 21:
+            //删除评测提醒11:delete msg_type=11 and key not like "已完成%"
+            [[BabyMessageDataDB babyMessageDB]deleteBabyMessageWithoutDone:typeID];
+            //添加消息
+            msg_key = [NSString stringWithFormat:@"已完成|%@",key];
+            [[BabyMessageDataDB babyMessageDB] insertBabyMessageNormal:[ACDate getTimeStampFromDate:[NSDate date]] UpdateTime:[ACDate getTimeStampFromDate:[NSDate date]] key:msg_key type:typeID content:content];
+            break;
+        default:
+            break;
+    }
+    
+    //**  step3:删除时间轴TableView中该条提醒记录  **
+    //**  step4:添加时间轴tableview中完成事项的记录  **
+    
+    //判断tableview是否为空
+    if (self.delegate != nil) {
+        switch (typeID) {
+            case 10 : case 11:
+                [self.delegate willDeleteMsgsWithTypeID:typeID Key:key];
+                break;
+            case 12: case 20 : case 21:
+                [self.delegate willDeleteMsgsWithTypeID:typeID Key:@""];
+            default:
+                break;
+        }
+        
+        //刷新时间轴
+        [self.delegate willInsertMsg];
+    }
+    
 }
 
 @end

@@ -91,20 +91,52 @@
         NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
         while ([resultset next])
         {
-            NSMutableArray *singleData = [[NSMutableArray alloc]initWithCapacity:0];
-            [singleData addObject:[NSNumber numberWithInt:[resultset intForColumn:@"msg_type"]]];
-            [singleData addObject:[resultset stringForColumn:@"msg_content"]];
-            [singleData addObject:[resultset stringForColumn:@"pic_url"]];
-            [singleData addObject:@""]; //keyword
-            [singleData addObject:[NSNumber numberWithInt:[resultset intForColumn:@"create_time"]]]; //create_time
-            [singleData addObject:[resultset stringForColumn:@"key"]];
-            [array addObject:singleData];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:5];
+            [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"msg_type"]] forKey:@"msg_type"];
+            [dic setValue:[resultset stringForColumn:@"msg_content"] forKey:@"msg_content"];
+            [dic setValue:[resultset stringForColumn:@"pic_url"] forKey:@"pic_url"];
+            [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"create_time"]] forKey:@"create_time"];
+            [dic setValue:[resultset stringForColumn:@"key"] forKey:@"key"];
+            [array addObject:dic];
         }
         return array;
         [db close];
     }
     return nil;
 }
+
+-(NSMutableArray*)selectLastest{
+    BOOL res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return nil;
+    }
+    
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
+    if (res) {
+        NSString *sql;
+        sql = @"select * from bc_baby_msg order by create_time desc limit 0,1";
+        FMResultSet *resultset=[db executeQuery:sql];
+        while ([resultset next])
+        {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:5];
+            [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"msg_type"]] forKey:@"msg_type"];
+            [dic setValue:[resultset stringForColumn:@"msg_content"] forKey:@"msg_content"];
+            [dic setValue:[resultset stringForColumn:@"pic_url"] forKey:@"pic_url"];
+            [dic setValue:[NSNumber numberWithInt:[resultset intForColumn:@"create_time"]] forKey:@"create_time"];
+            [dic setValue:[resultset stringForColumn:@"key"] forKey:@"key"];
+            [db close];
+            [array addObject:dic];
+        }
+    }
+    [db close];
+    return array;
+}
+
 
 -(BOOL)insertBabyMessageNormal:(int)create_time
                     UpdateTime:(int)update_time
@@ -198,6 +230,51 @@
     [db close];
     return res;
 }
+
+#pragma mark 根据typeID及key删除消息
+-(BOOL)deleteBabyMessageWithTypeID:(int)typeID Key:(NSString*)key
+{
+    BOOL res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    res=[db executeUpdate:@"delete from bc_baby_msg where msg_type=? and key = ?", [NSNumber numberWithInt:typeID],key];
+    if (!res) {
+        NSLog(@"数据库删除失败");
+        [db close];
+        return res;
+    }
+    [db close];
+    return res;
+}
+
+#pragma mark 根据typeID删除除了已完成消息以外的记录
+-(BOOL)deleteBabyMessageWithoutDone:(int)typeID{
+    BOOL res;
+    res = [self checkBabyMsgTable];
+    FMDatabase *db=[FMDatabase databaseWithPath:USERDBPATH(ACCOUNTUID,BABYID)];
+    res=[db open];
+    if (!res) {
+        NSLog(@"数据库打开失败");
+        [db close];
+        return res;
+    }
+    res=[db executeUpdate:@"delete from bc_baby_msg where msg_type=? and key not like '已完成%'", [NSNumber numberWithInt:typeID]];
+    if (!res) {
+        NSLog(@"数据库删除失败");
+        [db close];
+        return res;
+    }
+    
+    [db close];
+    return res;
+}
+
 
 
 /** vaccineExist **/

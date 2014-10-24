@@ -172,8 +172,16 @@
         BOOL success = [BaseSQL insertData_note:model];
         if (success) {
             NSLog(@"=========保存成功");
+            
+            /**  edit by cwb  **/
+            /**  刷新首页时间轴及数据源  **/
+            NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+            NSString* selectedDateStr = [userDef objectForKey:kSelectedDate];
+            if ([model.date isEqualToString:selectedDateStr] && isNew) {
+                [[InitTimeLineData initTimeLine]refreshByFinishItemsWithTypeID:12 ProTime:[ACDate getTimeStampFromDate:[ACDate date]] Key:model.date Content:[NSString stringWithFormat:@"麻麻记录了%@的一篇心情日记。",model.date]];
+                isNew = NO;
+            }
         }
-        
     }
 }
 
@@ -226,6 +234,7 @@
     NSString* selectedDateStr = [userDef objectForKey:kSelectedDate];
     model.date = selectedDateStr;
     model.content = @"";
+    isNew = YES;    //edit by cwb 时间轴改动需要
     [BaseSQL insertData_note:model];
 }
 

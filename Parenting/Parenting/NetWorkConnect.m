@@ -16,7 +16,7 @@
 
 static NetWorkConnect * _instance;
 
-#define request_timeout 5
+#define request_timeout 3
 #define retry_count 3
 
 @implementation NetWorkConnect
@@ -66,7 +66,7 @@ static NetWorkConnect * _instance;
                 [hud hide:YES afterDelay:1];
             }
             
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:http_error delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:http_error delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alertView show];
             return;
         }
@@ -96,8 +96,9 @@ static NetWorkConnect * _instance;
     [request setResponseEncoding:NSUTF8StringEncoding];
 //    [request setDelegate:self];
     [request setRequestMethod:mode];
+    [request setShouldAttemptPersistentConnection:NO];
     [request setTimeOutSeconds:request_timeout];
-    [request setNumberOfTimesToRetryOnTimeout:retry_count];
+//    [request setNumberOfTimesToRetryOnTimeout:retry_count];
     
     [request setCompletionBlock:
      ^{

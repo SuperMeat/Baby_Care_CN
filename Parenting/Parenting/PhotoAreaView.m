@@ -84,6 +84,8 @@
     }
 }
 
+
+
 #pragma 获取view所属viewController
 - (UIViewController *)viewController {
     for (UIView* next = [self superview]; next; next = next.superview) {
