@@ -196,7 +196,7 @@
 #pragma mark 获取宝贝当前阶段
 -(NSString*)getGrowthState:(long)birth{
     NSString *statusStr;
-    int birthDays = [ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:birth]];
+    int birthDays = 0 - [ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:birth]];
     if (birthDays <= 28) {
         statusStr = @"新生儿期";
     }
