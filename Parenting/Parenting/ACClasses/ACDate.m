@@ -712,13 +712,18 @@
     }
     else if ([comps year]==0)
     {
+        if  ([comps day] == 0){
+            return [NSString stringWithFormat:@"%d月",[comps month]];
+        }
+        else{
         return [NSString stringWithFormat:@"%d月%d天",[comps month],[comps day]];
+        }
     }
     else if ([comps year]!=0 && [comps month] == 0 && [comps day] != 0){
-        return [NSString stringWithFormat:@"%d年%d天",[comps year],[comps day]];
+        return [NSString stringWithFormat:@"%d岁%d天",[comps year],[comps day]];
     }
     else if ([comps year]!=0 && [comps month] == 0 && [comps day] == 0){
-        return [NSString stringWithFormat:@"%d年整",[comps year]];
+        return [NSString stringWithFormat:@"%d岁整",[comps year]];
     }
     else
     {
