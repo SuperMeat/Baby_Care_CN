@@ -129,7 +129,6 @@
     }
 }
 
-
 #pragma mark 初始化子view
 -(void)initSubView{
     //**  头部导航栏  **

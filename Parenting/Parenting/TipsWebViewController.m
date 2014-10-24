@@ -46,17 +46,7 @@
     self.navigationController.navigationBarHidden = NO;
     [MobClick beginLogPageView:[NSString stringWithFormat:@"tips_%@", _url]];
     
-    UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    
-    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
-    backbutton.frame=CGRectMake(0, 0, 50, 41);
-    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
-    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
-    self.navigationItem.leftBarButtonItem=backbar;
-    
+       
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem customForTarget:self image:@"item_share" title:nil action:@selector(ShareBtn)];
     
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 110, 160, 20)];

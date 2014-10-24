@@ -112,7 +112,8 @@
     _scaleView.top = 160.0f;
     [UIView animateWithDuration:.3f animations:^{
         _scaleView.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
-    } completion:^(BOOL finished) {
+    } completion:^(BOOL finished)
+     {
         
         [self.window addSubview:_scaleView];
         [self.window addSubview:_btnDelete];

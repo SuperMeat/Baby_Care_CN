@@ -81,18 +81,6 @@
     
     self.navigationItem.titleView = titleView;
     
-    UIButton *backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    
-    backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backbutton setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
-    backbutton.frame=CGRectMake(0, 0, 50, 41);
-    backbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
-    [backbutton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
-    self.navigationItem.leftBarButtonItem=backbar;
-
-    
     //加载ScrollView 
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
     _scrollView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:240.0/255.0 blue:236.0/255.0 alpha:1.0];

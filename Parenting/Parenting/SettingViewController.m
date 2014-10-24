@@ -137,6 +137,9 @@ messageView;
     //消息中心
     SettingItem *_item15 = [[SettingItem alloc] init];
     
+    //跳转评论
+    SettingItem *_item16 = [[SettingItem alloc] init];
+    
     _item1.name=NSLocalizedString(@"Baby information",nil);
    // _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
     //_item3.name=NSLocalizedString(@"Notifications",nil);
@@ -156,6 +159,8 @@ messageView;
     _item14.name=NSLocalizedString(@"宝宝生理",nil);
 
     _item15.name=NSLocalizedString(@"我的消息", nil);
+    
+    _item16.name=NSLocalizedString(@"去点赞吧", nil);
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ACCOUNT_NAME"] == nil) {
         _item10.name=@"账号登录";
@@ -179,7 +184,6 @@ messageView;
         buttonLoginOut.bounds=CGRectMake(0, 0, 95, 30);
         _item10.accessView = buttonLoginOut;
     }
-    
     
     UIButton *detailforbaby=[UIButton buttonWithType:UIButtonTypeCustom];
     [detailforbaby setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
@@ -311,6 +315,11 @@ messageView;
     myMessage.frame=CGRectMake(0, 0, 20, 20);
     [myMessage addTarget:self action:@selector(myMessage) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *myReview=[UIButton buttonWithType:UIButtonTypeCustom];
+    [myReview setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
+    myReview.frame=CGRectMake(0, 0, 20, 20);
+    [myReview addTarget:self action:@selector(showReview) forControlEvents:UIControlEventTouchUpInside];
+    
     _item1.accessView=detailforbaby;
    // _item2.accessView=segementForMetric;
    //_item3.accessView=switchForNotifications;
@@ -326,6 +335,7 @@ messageView;
     _item13.accessView = protocolforUser;
     _item14.accessView = mybabyPhy;
     _item15.accessView = myMessage;
+    _item16.accessView = myReview;
     
     //隐藏宝贝信息
     //[_array1 addObject:_item1];
@@ -340,8 +350,8 @@ messageView;
     //[_array2 addObject:_item11];
     //[_array2 addObject:_item13];
     //[_array2 addObject:_item3];
+    [_array2 addObject:_item16];
     [_array2 addObject:_item4];
-
     if (ISBLE) {
         [_array2 addObject:_item5];
     }
@@ -541,6 +551,10 @@ messageView;
     {
         [self sendEMail];
     }
+    else if([item.name isEqualToString:NSLocalizedString(@"去点赞吧",nil)])
+    {
+        [self showReview];
+    }
     else if([item.name isEqualToString:NSLocalizedString(@"Copyright",nil)])
     {
         [self showCopyright];
@@ -564,6 +578,14 @@ messageView;
     }
     
 }
+
+-(void)showReview
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
+}
+
 -(void)showCopyright
 {
     CopyrightViewController *copyright=[[CopyrightViewController alloc]initWithNibName:@"CopyrightViewController" bundle:nil];
@@ -584,13 +606,13 @@ messageView;
     else
     {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"OpenWild"];
-        
     }
 }
 
 -(void)chageBackUp:(UISwitch*)sender
 {
-    if (sender.isOn) {
+    if (sender.isOn)
+    {
         NSLog(@"on");
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"2G/3GBackUp"];
     }
@@ -737,7 +759,7 @@ messageView;
     mailPicker.mailComposeDelegate = self;
     
     //设置主题
-    [mailPicker setSubject:NSLocalizedString(@"Feedback",nil)];
+    [mailPicker setSubject:NSLocalizedString(@"发送邮件反馈",nil)];
     
     // 添加发送者
     NSArray *toRecipients = [NSArray arrayWithObject: @"amoycaretech@gmail.com"];
