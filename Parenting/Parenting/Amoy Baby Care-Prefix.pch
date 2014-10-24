@@ -12,6 +12,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+#import "Macro-master/MacroDefinition.h"
 #import "ACLabel.h"
 #import "ACViewController.h"
 #import "SuggestView.h"
@@ -150,10 +151,6 @@
 #define PM25_MAX_VALUE 300
 
 //去log
-#ifdef DEBUG
-#else
-#define NSLog(...){};
-#endif
 #define G_YADDONVERSION ([ACFunction getSystemVersion] >= 7.0 ?0:0)
 
 #define SAVEVIEW_YADDONVERSION ([ACFunction getSystemVersion] >= 7.0 ?64:0)
@@ -188,19 +185,20 @@
 #endif
 
 #define ASIHTTPTOKEN @"5788024"  //令牌
-#define AMAP_KEY @"9a6333950c5bf17fdebaf72c68ef97eb"
-#define TESTIN_KEY @"508548bb4d5eea5d6dc1edb85ebb553d"
+#define AMAP_KEY     @"9a6333950c5bf17fdebaf72c68ef97eb"
+#define TESTIN_KEY   @"508548bb4d5eea5d6dc1edb85ebb553d"
 
 /**
  *  微信
  */
-#define WXAPPID @"wx8a04549b73aba34b"
-#define WXSECRETKEY @"ae94a8ed5e29aaca5352be122ef69c8f"
+#define WXAPPID     @"wx95da6412ec0c8439"
+#define WXSECRETKEY @"e2ab3084305465428d00fa1959c04f46"
 /**
  *  QQ
  */
-#define QQAPPID @"1102906267"
-#define QQAPPKEY @"oZUPbkvArIQBGoxH"
+#define QQAPPID     @"1102906267"
+#define QQAPPKEY    @"oZUPbkvArIQBGoxH"
+#define QQURL       @"QQ41BD039B"
 
 #define SUGGESTION_TYPE_TEMP    2
 #define SUGGESTION_TYPE_HUMI    1

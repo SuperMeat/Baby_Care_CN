@@ -87,7 +87,7 @@
  *
  *	@return	封装好的数组对象
  */
--(NSArray*)selectNotifyMessage:(int)flagid;
+-(NSMutableArray*)selectNotifyMessage:(int)flagid;
 
 /**
  *  删除通知,系统控制

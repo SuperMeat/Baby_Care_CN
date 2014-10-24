@@ -14,6 +14,9 @@
 @end
 
 @implementation MyMapViewController
+{
+    CLLocationManager * locationManager;
+}
 
 -(id)init
 {
@@ -60,10 +63,21 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    // Enable iOS 7 back gesture
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
+
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -110,6 +124,12 @@ updatingLocation:(BOOL)updatingLocation
     self.mapView.frame    = self.view.bounds;
     
     self.mapView.delegate = self;
+    locationManager =[[CLLocationManager alloc] init];
+    
+    //[locationManager requestAlwaysAuthorization];//用这个方法，plist中需要NSLocationAlwaysUsageDescription
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        [locationManager requestWhenInUseAuthorization];//用这个方法，plist里要加字段NSLocationWhenInUseUsageDescriptio
+    }
     self.mapView.showsUserLocation = YES;    //YES 为打开定位，NO为关闭定位
     self.mapView.showsCompass  = NO;          //关闭指南针
     self.mapView.showsScale    = NO;         //关闭比例尺
@@ -122,10 +142,14 @@ updatingLocation:(BOOL)updatingLocation
     self.mapView.rotateEnabled = NO;
 }
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return NO;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self modeAction];
     // Do any additional setup after loading the view from its nib.
 }
@@ -137,7 +161,6 @@ updatingLocation:(BOOL)updatingLocation
 }
 
 #pragma mark - Utility
-
 - (void)clearMapView
 {
     self.mapView.showsUserLocation = NO;

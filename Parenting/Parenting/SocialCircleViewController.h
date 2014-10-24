@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SocialCircleViewController : UIViewController
+@interface SocialCircleViewController : ACViewController
 
 @end

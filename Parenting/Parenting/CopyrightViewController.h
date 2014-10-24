@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CopyrightViewController : UIViewController
+@interface CopyrightViewController : ACViewController
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UITextView *contentLabel;
 @end

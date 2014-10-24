@@ -88,25 +88,36 @@
     _headerView.labWeekday.text = [BaseMethod weekdayFromDate:[BaseMethod dateFormString:model.date]];
     NSString* photoPath = [BaseMethod dataFilePath:model.photo_path];
     _headerView.photoView.image = [UIImage imageWithContentsOfFile:photoPath];
-    _contentView.labTitle.text = model.title;
-    _contentView.textView.text = model.content;
+    _contentView.textfield.text = model.title;
+    _contentView.textView.text  = model.content;
 }
 #pragma mark -  MilestoneHeaderViewDelegate
 
 - (void)MilestoneHeaderView_left
 {
+    if (_contentView.textView.editable == YES) {
+        [self alertView:kCloseModify];
+        return;
+    }
+    
     _index--;
+    
     if (_index < 0) {
       
         _index++;
         [self alertView:kPhoto_first];
         return;
     }
+    
     [self showAtIndex:_index];
     
 }
 - (void)MilestoneHeaderView_right
 {
+    if (_contentView.textView.editable == YES) {
+        [self alertView:kCloseModify];
+        return;
+    }
     _index++;
     if (_index > self.SQLDatas.count-1) {
         [self alertView:kPhoto_last];

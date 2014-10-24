@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyLocalNofityViewController : UIViewController<UIActionSheetDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface MyLocalNofityViewController : ACViewController<UIActionSheetDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     NSDate* notifyDate;
     

@@ -27,6 +27,8 @@
     _photoView.delegate = self;
 
     _btnDate.enabled = NO;
+    
+    _isChangeImage = NO;
 
 }
 
@@ -95,6 +97,7 @@
 
 - (void)PortraitImageView_changeImage:(PortraitImageView*)portraitImageView
 {
+    self.isChangeImage = YES;
     if ([self.delegate respondsToSelector:@selector(PortraitImageView_changeImage:)]) {
         [self.delegate PortraitImageView_changeImage:self];
     }

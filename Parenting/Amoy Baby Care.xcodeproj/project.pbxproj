@@ -37,9 +37,9 @@
 		480D466719AEF9B1005AC58A /* 640-1136.4.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D465F19AEF9B1005AC58A /* 640-1136.4.png */; };
 		480D466919AEFFC5005AC58A /* 640-960.4.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D466819AEFFC5005AC58A /* 640-960.4.png */; };
 		480D466B19AF04B6005AC58A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 480D466A19AF04B6005AC58A /* Images.xcassets */; };
-		480D467219AF12CC005AC58A /* 启动界面640-960.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467019AF12CC005AC58A /* 启动界面640-960.png */; };
-		480D467319AF12CC005AC58A /* 启动界面640-1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467119AF12CC005AC58A /* 启动界面640-1136.png */; };
-		480D467519B0234D005AC58A /* 启动界面320-480.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467419B0234D005AC58A /* 启动界面320-480.png */; };
+		480D467219AF12CC005AC58A /* 640-960.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467019AF12CC005AC58A /* 640-960.png */; };
+		480D467319AF12CC005AC58A /* 640-1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467119AF12CC005AC58A /* 640-1136.png */; };
+		480D467519B0234D005AC58A /* 320-480.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D467419B0234D005AC58A /* 320-480.png */; };
 		480D6CEF19248D1700E5CAC7 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CEE19248D1700E5CAC7 /* line.png */; };
 		480D6CF31924A75800E5CAC7 /* radio.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF11924A75800E5CAC7 /* radio.png */; };
 		480D6CF81924ABE800E5CAC7 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480D6CF41924ABE800E5CAC7 /* arrow_down@2x.png */; };
@@ -586,10 +586,14 @@
 		485749A4183205A3000D921B /* NotifyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 485749A3183205A3000D921B /* NotifyItem.m */; };
 		48574A6A183B33E8000D921B /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48574A68183B33E8000D921B /* libPushSDK.a */; };
 		485F3F4A17F07CDA00BD876F /* OpenFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F3F4917F07CDA00BD876F /* OpenFunction.m */; };
+		486587C119DA4FA100CE9D08 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 486587C019DA4FA100CE9D08 /* README.md */; };
+		486587C319DD960200CE9D08 /* btn_tentweibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 486587C219DD960200CE9D08 /* btn_tentweibo@2x.png */; };
 		486CD6DE1998625A0026061E /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486CD6DD1998625A0026061E /* AMapSearchKit.framework */; };
 		486CD6E2199894570026061E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E1199894570026061E /* AMap.bundle */; };
 		486CD6E4199894820026061E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486CD6E3199894820026061E /* MAMapKit.framework */; };
 		486CD6E71998A4970026061E /* pin_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 486CD6E61998A4970026061E /* pin_red@2x.png */; };
+		486CF4E119E538CC001789A8 /* NotifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 486CF4DF19E538CC001789A8 /* NotifyCell.m */; };
+		486CF4E219E538CC001789A8 /* NotifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 486CF4E019E538CC001789A8 /* NotifyCell.xib */; };
 		4876AE9119C02C33009135E8 /* FZKaTong-M19S.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4876AE9019C02C33009135E8 /* FZKaTong-M19S.ttf */; };
 		4880059B1929EAA400817919 /* FoodTypePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4880059A1929EAA400817919 /* FoodTypePickerView.m */; };
 		4880059F192B33E600817919 /* ACLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4880059E192B33E600817919 /* ACLabel.m */; };
@@ -1400,9 +1404,9 @@
 		480D465F19AEF9B1005AC58A /* 640-1136.4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640-1136.4.png"; sourceTree = "<group>"; };
 		480D466819AEFFC5005AC58A /* 640-960.4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640-960.4.png"; sourceTree = "<group>"; };
 		480D466A19AF04B6005AC58A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Amoy Baby Care/Images.xcassets"; sourceTree = "<group>"; };
-		480D467019AF12CC005AC58A /* 启动界面640-960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面640-960.png"; sourceTree = "<group>"; };
-		480D467119AF12CC005AC58A /* 启动界面640-1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面640-1136.png"; sourceTree = "<group>"; };
-		480D467419B0234D005AC58A /* 启动界面320-480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动界面320-480.png"; sourceTree = "<group>"; };
+		480D467019AF12CC005AC58A /* 640-960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640-960.png"; sourceTree = "<group>"; };
+		480D467119AF12CC005AC58A /* 640-1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640-1136.png"; sourceTree = "<group>"; };
+		480D467419B0234D005AC58A /* 320-480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "320-480.png"; sourceTree = "<group>"; };
 		480D6CEE19248D1700E5CAC7 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		480D6CF11924A75800E5CAC7 /* radio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio.png; sourceTree = "<group>"; };
 		480D6CF41924ABE800E5CAC7 /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
@@ -1998,10 +2002,16 @@
 		48574A68183B33E8000D921B /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
 		485F3F4817F07CDA00BD876F /* OpenFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenFunction.h; sourceTree = "<group>"; };
 		485F3F4917F07CDA00BD876F /* OpenFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenFunction.m; sourceTree = "<group>"; };
+		486587BF19DA4FA100CE9D08 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
+		486587C019DA4FA100CE9D08 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		486587C219DD960200CE9D08 /* btn_tentweibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_tentweibo@2x.png"; sourceTree = "<group>"; };
 		486CD6DD1998625A0026061E /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = AMap_iOS_API_Lib_V2.2.1/Search/AMapSearchKit.framework; sourceTree = "<group>"; };
 		486CD6E1199894570026061E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework/Versions/2.2.1.1650.60159/Resources/AMap.bundle; sourceTree = "<group>"; };
 		486CD6E3199894820026061E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = AMap_iOS_API_Lib_V2.2.1/3D/MAMapKit.framework; sourceTree = "<group>"; };
 		486CD6E61998A4970026061E /* pin_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin_red@2x.png"; sourceTree = "<group>"; };
+		486CF4DE19E538CC001789A8 /* NotifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifyCell.h; sourceTree = "<group>"; };
+		486CF4DF19E538CC001789A8 /* NotifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifyCell.m; sourceTree = "<group>"; };
+		486CF4E019E538CC001789A8 /* NotifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyCell.xib; sourceTree = "<group>"; };
 		4876AE9019C02C33009135E8 /* FZKaTong-M19S.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZKaTong-M19S.ttf"; sourceTree = "<group>"; };
 		488005991929EAA400817919 /* FoodTypePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTypePickerView.h; sourceTree = "<group>"; };
 		4880059A1929EAA400817919 /* FoodTypePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTypePickerView.m; sourceTree = "<group>"; };
@@ -3246,6 +3256,7 @@
 		4800B0E118D9392B0093A6AF /* ACBaseSDK */ = {
 			isa = PBXGroup;
 			children = (
+				486587BE19DA4FA100CE9D08 /* Macro-master */,
 				4800B13618D9880B0093A6AF /* ACClasses */,
 				4800B13B18D9880B0093A6AF /* ACConfig */,
 				4800B13D18D9880B0093A6AF /* ACUIController */,
@@ -4209,6 +4220,9 @@
 				485749951831C3D1000D921B /* NotifyViewController.xib */,
 				485749A2183205A3000D921B /* NotifyItem.h */,
 				485749A3183205A3000D921B /* NotifyItem.m */,
+				486CF4DE19E538CC001789A8 /* NotifyCell.h */,
+				486CF4DF19E538CC001789A8 /* NotifyCell.m */,
+				486CF4E019E538CC001789A8 /* NotifyCell.xib */,
 			);
 			name = PushNotify;
 			sourceTree = "<group>";
@@ -4377,12 +4391,21 @@
 			name = Resource;
 			sourceTree = "<group>";
 		};
+		486587BE19DA4FA100CE9D08 /* Macro-master */ = {
+			isa = PBXGroup;
+			children = (
+				486587BF19DA4FA100CE9D08 /* MacroDefinition.h */,
+				486587C019DA4FA100CE9D08 /* README.md */,
+			);
+			path = "Macro-master";
+			sourceTree = "<group>";
+		};
 		486B40D019B57F0E00749192 /* 启动 */ = {
 			isa = PBXGroup;
 			children = (
-				480D467419B0234D005AC58A /* 启动界面320-480.png */,
-				480D467019AF12CC005AC58A /* 启动界面640-960.png */,
-				480D467119AF12CC005AC58A /* 启动界面640-1136.png */,
+				480D467419B0234D005AC58A /* 320-480.png */,
+				480D467019AF12CC005AC58A /* 640-960.png */,
+				480D467119AF12CC005AC58A /* 640-1136.png */,
 			);
 			name = "启动";
 			sourceTree = "<group>";
@@ -5910,8 +5933,8 @@
 				481968A01959378F003A9D37 /* AdviseTableViewCell.h */,
 				481968A11959378F003A9D37 /* AdviseTableViewCell.m */,
 				481968A21959378F003A9D37 /* AdviseTableViewCell.xib */,
-				CE69F1B5176AAAF600E26333 /* SummaryItem.m */,
 				CE69F1B4176AAAF600E26333 /* SummaryItem.h */,
+				CE69F1B5176AAAF600E26333 /* SummaryItem.m */,
 				CE0C33D917618AF100B1B683 /* SummaryViewController.h */,
 				CE0C33DA17618AF100B1B683 /* SummaryViewController.m */,
 				CE0C33DB17618AF100B1B683 /* SummaryViewController.xib */,
@@ -5955,9 +5978,13 @@
 		BE004CCE18FE2B7500E56833 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				BE7F92BF19ECBA4C00B788CD /* tip_loading@2x.png */,
 				BE8A485E19D93DE400650709 /* home_whatstate@2x.png */,
 				BE8A485F19D93DE400650709 /* new_home_bg@2x.png */,
+=======
+				486587C219DD960200CE9D08 /* btn_tentweibo@2x.png */,
+>>>>>>> 1eddceeaed5df67ca7bd275bcaba33510ca2047f
 				BEE2DE6019D023F400DDE570 /* arrow_up@2x.png */,
 				48ADEB6A19C987C40005DC72 /* defaulthead.png */,
 				48D41F4019C7E743005A8E6B /* btn_tent_focus@2x.png */,
@@ -6623,6 +6650,7 @@
 				48152E1A18486C66009A4900 /* messages_tableview_background@2x.png in Resources */,
 				481D0D52195BC2680025281A /* 玩具棒@2x.png in Resources */,
 				48866EFC199A12E6007B16AA /* mood_ naughty_selected.png in Resources */,
+				486CF4E219E538CC001789A8 /* NotifyCell.xib in Resources */,
 				48F6AB9A186AD7470032045E /* task_top_delet.png in Resources */,
 				48866ED9199A12E6007B16AA /* btn_dou_focus.png in Resources */,
 				48866F1F199A12E6007B16AA /* icon_ measurement.png in Resources */,
@@ -6685,7 +6713,7 @@
 				BEEF30C819C6F05F006F0367 /* btn_login_focus@2x.png in Resources */,
 				48866EC9199A12E6007B16AA /* bg_addContent_2.png in Resources */,
 				48866F2E199A12E6007B16AA /* cell_bg_4.png in Resources */,
-				480D467219AF12CC005AC58A /* 启动界面640-960.png in Resources */,
+				480D467219AF12CC005AC58A /* 640-960.png in Resources */,
 				480EFA2618E5155C00D40903 /* panels_color6@2x.png in Resources */,
 				4828F4E219A495D700D04926 /* 6.2.1.jpg in Resources */,
 				BE004CE418FE2B7500E56833 /* top.png in Resources */,
@@ -6886,6 +6914,7 @@
 				BE6938DB19090C4B00FC2BB4 /* icon_height@2x.png in Resources */,
 				48866ED1199A12E6007B16AA /* btn_dog_focus_unabled.png in Resources */,
 				BEE539791945B079000703E6 /* TipTableViewCell.xib in Resources */,
+				486587C319DD960200CE9D08 /* btn_tentweibo@2x.png in Resources */,
 				4828F4DD19A495D700D04926 /* 6.1.1.jpg in Resources */,
 				48866EB7199A12E6007B16AA /* bg_header_testReport.png in Resources */,
 				48FEAF0818E91423002425E2 /* recent_records_line@2x.png in Resources */,
@@ -6911,7 +6940,7 @@
 				4828F40719A495D700D04926 /* 14.2.2.jpg in Resources */,
 				4828F45419A495D700D04926 /* 18.4.3.jpg in Resources */,
 				BEE3CEF719B07D9A00ABC528 /* icon_alerm_test@2x.png in Resources */,
-				480D467519B0234D005AC58A /* 启动界面320-480.png in Resources */,
+				480D467519B0234D005AC58A /* 320-480.png in Resources */,
 				48866EF5199A12E6007B16AA /* btn_unselected.png in Resources */,
 				4828F43019A495D700D04926 /* 16.3.2.jpg in Resources */,
 				48801278199DED1700F6778B /* ShareInfoView.xib in Resources */,
@@ -7010,7 +7039,7 @@
 				484A0150196BE3BE00BBB085 /* MedicineViewController.xib in Resources */,
 				4828F49E19A495D700D04926 /* 23.2.3.jpg in Resources */,
 				48866F39199A12E6007B16AA /* point_0.png in Resources */,
-				480D467319AF12CC005AC58A /* 启动界面640-1136.png in Resources */,
+				480D467319AF12CC005AC58A /* 640-1136.png in Resources */,
 				48866F10199A12E6007B16AA /* btn_mood_2.png in Resources */,
 				48866EAD199A12E6007B16AA /* btn_can.png in Resources */,
 				48F91B0218FBB54E0038DC67 /* icon_snow_little@2x.png in Resources */,
@@ -7597,6 +7626,7 @@
 				48866F5B199A12E6007B16AA /* NSDate+Components.m in Sources */,
 				48EF612718C6FAC7006C3D5C /* CommonUtility.m in Sources */,
 				48EC1DD01861772300965254 /* CustomNotifyViewController.m in Sources */,
+				486587C119DA4FA100CE9D08 /* README.md in Sources */,
 				48866F59199A12E6007B16AA /* NSCalendar+Juncture.m in Sources */,
 				BE900F2218ECFCEA00B06133 /* SyncController.m in Sources */,
 				48866F55199A12E6007B16AA /* PWSHelper.m in Sources */,
@@ -7692,6 +7722,7 @@
 				48866F79199A12E6007B16AA /* TestModel.m in Sources */,
 				BEE3CEF019B0787F00ABC528 /* GetPhyAdvise.m in Sources */,
 				48866FBC199A12E6007B16AA /* UnTrainController.m in Sources */,
+				486CF4E119E538CC001789A8 /* NotifyCell.m in Sources */,
 				48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */,
 				48866F7B199A12E6007B16AA /* TestReportController.m in Sources */,
 				BE955F4C190102A400225029 /* PhyCorePlot.m in Sources */,
@@ -8018,7 +8049,7 @@
 				PROVISIONING_PROFILE = "449edb83-8eb6-4f4b-ae1f-20ab2db4a859";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "449edb83-8eb6-4f4b-ae1f-20ab2db4a859";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -8072,8 +8103,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				PROVISIONING_PROFILE = "68689e8f-4fd0-453c-83ef-683e5599c688";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "68689e8f-4fd0-453c-83ef-683e5599c688";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -8130,10 +8161,10 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D3CEC25-47FF-4BC2-B96B-B3C492E56C91";
+				PROVISIONING_PROFILE = "449edb83-8eb6-4f4b-ae1f-20ab2db4a859";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "449edb83-8eb6-4f4b-ae1f-20ab2db4a859";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

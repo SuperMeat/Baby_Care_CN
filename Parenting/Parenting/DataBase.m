@@ -1962,7 +1962,7 @@
         FMResultSet *set=[db executeQuery:@"select * from  notify_message order by notify_time desc"];
         while ([set next])
         {
-            NotifyItem *item = [[NotifyItem alloc]init];
+            NotifyModel *item = [[NotifyModel alloc]init];
             item.notifyid = [set intForColumn:@"msgid"];
             item.content  = [set stringForColumn:@"message"];
             item.status   = [set intForColumn:@"status"];
@@ -1976,7 +1976,7 @@
         FMResultSet *set=[db executeQuery:@"select * from  notify_message where msgid=? order by notify_time desc", [NSNumber numberWithInt:flagid]];
         while ([set next])
         {
-            NotifyItem *item = [[NotifyItem alloc]init];
+            NotifyModel *item = [[NotifyModel alloc]init];
             item.notifyid = [set intForColumn:@"msgid"];
             item.content  = [set stringForColumn:@"message"];
             item.status   = [set intForColumn:@"status"];

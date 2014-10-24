@@ -106,21 +106,21 @@ static int age = 0;
 }
 -(void)loaddataForstandard:(int)age
 {
-    NSArray *array=[DataBase selectbabyinfo:age];
-    if ([array count]>0) {
-        
-        if ([array objectAtIndex:0]) {
-             self.standardheighttextfield.text=[array objectAtIndex:0];
-        }
-        
-        if ([array objectAtIndex:1]) {
-            self.standardweighttextfield.text=[array objectAtIndex:1];
-        }
-        
-        if([array objectAtIndex:2]){
-            self.standardhctextfield.text=[array objectAtIndex:2];
-        }
-    }
+//    NSArray *array=[DataBase selectbabyinfo:age];
+//    if ([array count]>0) {
+//        
+//        if ([array objectAtIndex:0]) {
+//             self.standardheighttextfield.text=[array objectAtIndex:0];
+//        }
+//        
+//        if ([array objectAtIndex:1]) {
+//            self.standardweighttextfield.text=[array objectAtIndex:1];
+//        }
+//        
+//        if([array objectAtIndex:2]){
+//            self.standardhctextfield.text=[array objectAtIndex:2];
+//        }
+//    }
 
 }
 -(void)viewWillDisappear:(BOOL)animated

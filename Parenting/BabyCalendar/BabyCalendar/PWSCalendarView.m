@@ -139,6 +139,7 @@ UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,BackTodayView
     [_tableView reloadData];
     [_m_view_calendar reloadData];
 }
+
 - (void)tableDatas
 {
     NSArray* icons = @[@"icon_note",@"icon_ milestone",@"icon_ vaccine",@"icon_ training",@"icon_ measurement"/*,@"icon_setting"*/];

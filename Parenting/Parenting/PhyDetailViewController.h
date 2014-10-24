@@ -10,7 +10,7 @@
 #import "PhyCorePlot.h"
 #import "PhySaveView.h"
 
-@interface PHYDetailViewController : UIViewController<PhySaveViewDelegate>{
+@interface PHYDetailViewController : ACViewController<PhySaveViewDelegate>{
     NSArray *arrayCurrent;
     NSArray *arrValues;
     

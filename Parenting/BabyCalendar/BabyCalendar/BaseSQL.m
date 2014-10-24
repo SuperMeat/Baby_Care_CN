@@ -68,7 +68,7 @@
     
     FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
     if ([dataBase open]) {
-        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM milestoneTable ORDER BY date"];
+        FMResultSet *rs = [dataBase executeQuery:@"SELECT * FROM milestoneTable  where completed = 1 ORDER BY date desc"];
         while ([rs next]){
             MilestoneModel* model = [[MilestoneModel alloc]init];
             model.id = [rs stringForColumn:@"id"];
@@ -80,6 +80,20 @@
             model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
             [datas addObject:model];
         }
+        
+        rs = [dataBase executeQuery:@"SELECT * FROM milestoneTable  where completed = 0 ORDER BY month"];
+        while ([rs next]){
+            MilestoneModel* model = [[MilestoneModel alloc]init];
+            model.id = [rs stringForColumn:@"id"];
+            model.date = [rs stringForColumn:@"date"];
+            model.month = [NSNumber numberWithInt:[rs intForColumn:@"month"]];
+            model.title = [rs stringForColumn:@"title"];
+            model.content = [rs stringForColumn:@"content"];
+            model.photo_path = [rs stringForColumn:@"photo_path"];
+            model.completed = [NSNumber numberWithBool:[rs boolForColumn:@"completed"]];
+            [datas addObject:model];
+        }
+
         [rs close];
         [dataBase close];
     }
@@ -133,6 +147,17 @@
     BOOL success = [dataBase executeUpdate:@"UPDATE milestoneTable SET title = ?,date = ?,content = ?,photo_path = ?,completed = ? WHERE id = ? ",model.title,model.date,model.content,model.photo_path,model.completed,model.id];
     [dataBase close];
     return success;
+}
+
+
++ (BOOL)delete_milestone:(MilestoneModel*)model
+{
+    FMDatabase* dataBase = [FMDatabase databaseWithPath:[BaseMethod getSQLPath]];
+    [dataBase open];
+    BOOL success = [dataBase executeUpdate:@"DELETE from milestoneTable where id = ?",model.id];
+    [dataBase close];
+    return success;
+
 }
 //// 保存照片到数据库
 //+ (BOOL)update_photo_milestone:(NSString*)title wtihPhoto_path:(NSString*)photo_path

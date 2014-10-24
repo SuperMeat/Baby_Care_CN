@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MilestoneContentView : UIView<UITextViewDelegate>
+@interface MilestoneContentView : UIView<UITextViewDelegate,UITextFieldDelegate>
 {
-
     float _disMoveH;
 }
-@property (weak, nonatomic) IBOutlet UILabel *labTitle;
+
+@property (weak, nonatomic) IBOutlet UITextField *textfield;
 @property (weak, nonatomic) IBOutlet MyNoteView *textView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *notetipsView;

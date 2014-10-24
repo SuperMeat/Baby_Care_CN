@@ -35,7 +35,7 @@ typedef enum apiCall {
     kAPIGraphUserPhotosPost,
     kAPIGraphUserVideosPost,
 } apiCall;
-@interface SettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,UMFeedbackDataDelegate>
+@interface SettingViewController : ACViewController<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,UMFeedbackDataDelegate>
 {
     UIView *segementForMetric;
     UIAlertView *clearalert;

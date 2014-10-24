@@ -72,8 +72,13 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
+<<<<<<< HEAD
 //    [_scrollView removeFromSuperview];
 //    _scrollView = nil;
+=======
+    //[_scrollView removeFromSuperview];
+    //_scrollView = nil;
+>>>>>>> 1eddceeaed5df67ca7bd275bcaba33510ca2047f
 }
 
 

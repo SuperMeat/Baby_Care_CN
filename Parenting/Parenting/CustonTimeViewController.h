@@ -12,7 +12,7 @@
 -(void)sendSelected:(int)tag1 andbtn2tag:(int)tag2 andbtn3tag:(int)tag3 andbtn4tag:(int)tag4 andbtn5tag:(int)tag5 andbtn6tag:(int)tag6 andbtn7tag:(int)tag7;
 @end
 
-@interface CustonTimeViewController : UIViewController
+@interface CustonTimeViewController : ACViewController
 {
     int _tag1;
     int _tag2;

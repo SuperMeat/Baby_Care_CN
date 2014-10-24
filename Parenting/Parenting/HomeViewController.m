@@ -19,10 +19,15 @@
 #import "TipsMainViewController.h"
 
 
+<<<<<<< HEAD
 //**  获取时间轴数据默认条数  **
 #define kHomeTimeLineInitCount 5
 //**  获取时间轴数据增长条数  **
 #define kHomeTimeLinePerIncCount 5
+=======
+#import <TencentOpenAPI/QQApi.h>
+#import <UMSocial_Sdk_Extra_Frameworks/Wechat/WXApi.h>
+>>>>>>> 1eddceeaed5df67ca7bd275bcaba33510ca2047f
 
 #define kHomeBottomActivityViewWeight 20
 #define kHomeBottomActivityViewHeight kHomeBottomActivityViewWeight
@@ -97,6 +102,7 @@
         return;
     }
     else{
+<<<<<<< HEAD
         //卸载login视图
         if (_loginView != nil) {
             _loginView = nil;
@@ -122,11 +128,66 @@
             //**  加载头部view数据  **
             [self initBabyInfoData];
         }
+=======
+        //[self ReviewTheApp];
+    }
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    if (isPushSocialView) {
+        isPushSocialView = NO;
+>>>>>>> 1eddceeaed5df67ca7bd275bcaba33510ca2047f
     }
 
+<<<<<<< HEAD
     //初始化
     
 }
+=======
+-(void)initHomeData{
+    [_initTimeLineData getTimeLineData];
+    [self initData];
+}
+
+-(void)initView{
+    //LoginView
+    _loginView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    _loginView.backgroundColor = [UIColor blackColor];
+    _loginView.alpha = 0.9;
+    
+    UIButton *buttonLogin = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50-50-50, 230, 38)];
+    [buttonLogin setImage:[UIImage imageNamed:@"btn_login.png"] forState:UIControlStateNormal];
+    [buttonLogin addTarget:self action:@selector(doLogin) forControlEvents:UIControlEventTouchUpInside];
+    [_loginView addSubview:buttonLogin];
+    
+    UIButton *buttonTentWeibo = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 -40 -50-50, 230, 38)];
+    [buttonTentWeibo setImage:[UIImage imageNamed:@"btn_tentweibo"] forState:UIControlStateNormal];
+    [buttonTentWeibo addTarget:self action:@selector(doTentWeiboLogin) forControlEvents:UIControlEventTouchUpInside];
+    [_loginView addSubview:buttonTentWeibo];
+    
+    UIButton *buttonQQ = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 40 -50, 230, 38)];
+    [buttonQQ setImage:[UIImage imageNamed:@"btn_tent"] forState:UIControlStateNormal];
+    [buttonQQ addTarget:self action:@selector(doTenLogin) forControlEvents:UIControlEventTouchUpInside];
+    if ([QQApi isQQInstalled])
+    {
+        [_loginView addSubview:buttonQQ];
+    }
+    
+    UIButton *buttonSina = [[UIButton alloc]initWithFrame:CGRectMake(45, [UIScreen mainScreen].bounds.size.height - 50 - 40-50, 230, 38)];
+    [buttonSina setImage:[UIImage imageNamed:@"btn_sina.png"] forState:UIControlStateNormal];
+    [buttonSina addTarget:self action:@selector(doSinaLogin) forControlEvents:UIControlEventTouchUpInside];
+    [_loginView addSubview:buttonSina];
+    
+    UIButton *buttonRegister = [[UIButton alloc]initWithFrame:CGRectMake(200,[UIScreen mainScreen].bounds.size.height - 50, 120, 38)];
+    [buttonRegister setTitle:@"注册账号" forState:UIControlStateNormal];
+    [buttonRegister.titleLabel setFont:[UIFont systemFontOfSize:MIDTEXT]];
+    [buttonRegister setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [buttonRegister addTarget:self action:@selector(doRegister) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.tabBarController.view.superview addSubview:_loginView];
+    _loginView.hidden = YES;
+    //LoginView end
+>>>>>>> 1eddceeaed5df67ca7bd275bcaba33510ca2047f
 
 #pragma mark 初始化子view
 -(void)initSubView{
@@ -763,8 +824,412 @@
     }
 }
 
+<<<<<<< HEAD
 #pragma mark Sys
 - (void)didReceiveMemoryWarning {
+=======
+#pragma 登陆相关
+-(void)doLogin{
+    _loginView.hidden = YES;
+    
+    LoginMainViewController *loginMainViewController = [[LoginMainViewController alloc]initWithNibName:@"LoginMainViewController" bundle:nil];
+    loginMainViewController.mainViewController = self;
+    [self.navigationController pushViewController:loginMainViewController animated:NO];
+}
+
+-(void)doTenLogin{
+    _loginView.hidden = YES;
+    
+    isPushSocialView = YES;
+    
+    BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:UMShareToQQ];
+    
+    if (isOauth) {
+        //TODO:有登录过，如何处理
+        //return;
+    }
+//    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
+                                  {
+                                      //加载登录进度条
+                                      _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                      _hud.mode = MBProgressHUDModeIndeterminate;
+                                      _hud.alpha = 0.5;
+                                      _hud.color = [UIColor grayColor];
+                                      _hud.labelText = @"登录验证中...";
+                                      
+                                      if ([[snsPlatform platformName] isEqualToString:UMShareToQQ])
+                                      {
+                                          [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
+                                              if ([[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] == NULL) {
+                                                  [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                  return;
+                                              }
+                                              
+                                              //封装数据
+                                              NSMutableDictionary *dictBody = [[DataContract dataContract]UserCreateDict:RTYPE_TENCENT account:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]  password:@""];
+                                              //Http请求
+                                              [[NetWorkConnect sharedRequest]
+                                               httpRequestWithURL:USER_LOGIN_URL
+                                               data:dictBody
+                                               mode:@"POST"
+                                               HUD:_hud
+                                               didFinishBlock:^(NSDictionary *result){
+                                                   _hud.labelText = [result objectForKey:@"msg"];
+                                                   //处理反馈信息: code=1为成功  code=99为失败
+                                                   if ([[result objectForKey:@"code"]intValue] == 1) {
+                                                       NSMutableDictionary *resultBody = [result objectForKey:@"body"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_TENCENT] forKey:@"ACCOUNT_TYPE"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[resultBody objectForKey:@"userId"] forKey:@"ACCOUNT_UID"];
+                                                       [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
+                                                       //数据库保存用户信息
+                                                       if ([[UserDataDB dataBase] selectUser:[[resultBody objectForKey:@"userId"] intValue]] == nil){
+                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_TENCENT andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToQQ] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
+                                                       } 
+                                                       //提示是否同步数据
+                                                                                    [_hud hide:YES];
+                                                       [self performSelector:@selector(isSyncData) withObject:nil afterDelay:0.8];
+                                                   }
+                                                   else{
+                                                       [_hud hide:YES afterDelay:1.2];
+                                                   }
+                                               }
+                                               didFailBlock:^(NSString *error){
+                                                   //请求失败处理
+                                                   _hud.labelText = http_error;
+                                                   [_hud hide:YES afterDelay:1];
+                                               }
+                                               isShowProgress:YES
+                                               isAsynchronic:YES
+                                               netWorkStatus:YES
+                                               viewController:self];
+                                              
+                                          }];
+                                      }
+                                  });
+}
+
+-(void)doTentWeiboLogin{
+    _loginView.hidden = YES;
+    
+    isPushSocialView = YES;
+    
+    BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:UMShareToTencent];
+    if (isOauth) {
+        //TODO:有登录过，如何处理
+        //return;
+    }
+    //
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToTencent];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
+                                  {
+                                      //加载登录进度条
+                                      _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                      _hud.mode = MBProgressHUDModeIndeterminate;
+                                      _hud.alpha = 0.5;
+                                      _hud.color = [UIColor grayColor];
+                                      _hud.labelText = @"登录验证中...";
+                                      
+                                      if ([[snsPlatform platformName] isEqualToString:UMShareToTencent])
+                                      {
+                                          [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
+                                              if ([[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] == NULL) {
+                                                  [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                  return;
+                                              }
+                                              
+                                              //封装数据
+                                              NSMutableDictionary *dictBody = [[DataContract dataContract]UserCreateDict:RTYPE_TENCENT account:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"]  password:@""];
+                                              //Http请求
+                                              [[NetWorkConnect sharedRequest]
+                                               httpRequestWithURL:USER_LOGIN_URL
+                                               data:dictBody
+                                               mode:@"POST"
+                                               HUD:_hud
+                                               didFinishBlock:^(NSDictionary *result){
+                                                   _hud.labelText = [result objectForKey:@"msg"];
+                                                   //处理反馈信息: code=1为成功  code=99为失败
+                                                   if ([[result objectForKey:@"code"]intValue] == 1) {
+                                                       NSMutableDictionary *resultBody = [result objectForKey:@"body"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_TENCENT] forKey:@"ACCOUNT_TYPE"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[resultBody objectForKey:@"userId"] forKey:@"ACCOUNT_UID"];
+                                                       [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
+                                                       //数据库保存用户信息
+                                                       if ([[UserDataDB dataBase] selectUser:[[resultBody objectForKey:@"userId"] intValue]] == nil){
+                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_TENCENT andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToTencent] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
+                                                       }
+                                                       //提示是否同步数据
+                                                       [_hud hide:YES];
+                                                       [self performSelector:@selector(isSyncData) withObject:nil afterDelay:0.8];
+                                                   }
+                                                   else{
+                                                       [_hud hide:YES afterDelay:1.2];
+                                                   }
+                                               }
+                                               didFailBlock:^(NSString *error){
+                                                   //请求失败处理
+                                                   _hud.labelText = http_error;
+                                                   [_hud hide:YES afterDelay:1];
+                                               }
+                                               isShowProgress:YES
+                                               isAsynchronic:YES
+                                               netWorkStatus:YES
+                                               viewController:self];
+                                              
+                                          }];
+                                      }
+                                  });
+}
+
+
+-(void)doSinaLogin{
+    _loginView.hidden = YES;
+    
+    isPushSocialView = YES;
+    BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:UMShareToSina];
+    if (isOauth) {
+        //TODO:有登录过，如何处理
+        //return;
+    }
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
+                                  {
+                                      //加载登录进度条
+                                      _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                      _hud.mode = MBProgressHUDModeIndeterminate;
+                                      _hud.alpha = 0.5;
+                                      _hud.color = [UIColor grayColor];
+                                      _hud.labelText = @"登录验证中...";
+                                      
+                                      if ([[snsPlatform platformName] isEqualToString:UMShareToSina])
+                                      {
+                                          [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
+                                              if ([[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] == NULL) {
+                                                  [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                  return;
+                                              }
+                                              //封装数据
+                                              NSMutableDictionary *dictBody = [[DataContract dataContract]UserCreateDict:RTYPE_SINA account:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"]  password:@""];
+                                              //Http请求
+                                              [[NetWorkConnect sharedRequest]
+                                               httpRequestWithURL:USER_LOGIN_URL
+                                               data:dictBody
+                                               mode:@"POST"
+                                               HUD:_hud
+                                               didFinishBlock:^(NSDictionary *result){
+                                                   _hud.labelText = [result objectForKey:@"msg"];
+                                                   //处理反馈信息: code=1为成功  code=99为失败
+                                                   if ([[result objectForKey:@"code"]intValue] == 1) {
+                                                       NSMutableDictionary *resultBody = [result objectForKey:@"body"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"]  forKey:@"ACCOUNT_NAME"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:RTYPE_SINA] forKey:@"ACCOUNT_TYPE"];
+                                                       [[NSUserDefaults standardUserDefaults] setObject:[resultBody objectForKey:@"userId"] forKey:@"ACCOUNT_UID"];
+                                                       [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"BABYID"];
+                                                       //数据库保存用户信息
+                                                       if ([[UserDataDB dataBase] selectUser:[[resultBody objectForKey:@"userId"] intValue]] == nil){
+                                                           [[UserDataDB dataBase] createNewUser:[[resultBody objectForKey:@"userId"]intValue] andCategoryIds:@"" andIcon:@"" andUserType:RTYPE_SINA andUserAccount:[[[accountResponse.data objectForKey:@"accounts"] objectForKey:UMShareToSina] objectForKey:@"username"]   andAppVer:PROVERSION andCreateTime:[[resultBody objectForKey:@"createTime"] longValue] andUpdateTime:[[resultBody objectForKey:@"updateTime"] longValue]];
+                                                       }
+                                                       //提示是否同步数据
+                                                       [_hud hide:YES];
+                                                       [self performSelector:@selector(isSyncData) withObject:nil afterDelay:0.8];
+                                                   }
+                                                   else{
+                                                       [_hud hide:YES afterDelay:1.2];
+                                                   }
+                                               }
+                                               didFailBlock:^(NSString *error){
+                                                   //请求失败处理
+                                                   _hud.labelText = http_error;
+                                                   [_hud hide:YES afterDelay:1];
+                                               }
+                                               isShowProgress:YES
+                                               isAsynchronic:YES
+                                               netWorkStatus:YES
+                                               viewController:self];
+                                          }];
+                                      }
+                                  });
+
+}
+
+-(void)doRegister{
+    _loginView.hidden = YES;
+    
+}
+
+-(void)isSyncData{
+    [self checkBaby];
+    
+    /*UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否同步该账户数据" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+     alertView.tag = 10109;
+     [alertView show];
+     */
+}
+
+#pragma 检测or创建宝贝
+-(void)checkBaby{
+    if (ACCOUNTUID) {
+        int babyId=0;
+        /*
+         *  判断该账户下是否已有宝宝,如有,则默认加载
+         */
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentDir = [documentPaths objectAtIndex:0];
+        NSError *error = nil;
+        NSArray *fileList = [[NSArray alloc] init];
+        fileList = [fileManager contentsOfDirectoryAtPath:documentDir error:&error];
+        BOOL isDir = NO;
+        for (NSString *file in fileList) {
+            NSString *path = [documentDir stringByAppendingPathComponent:file];
+            [fileManager fileExistsAtPath:path isDirectory:(&isDir)];
+            if (isDir) {
+                NSArray *split = [file componentsSeparatedByString:@"_"];
+                if ([split count] == 2 && [[split objectAtIndex:0] intValue] == ACCOUNTUID) {
+                    babyId = [[split objectAtIndex:1] intValue];
+                    break;
+                }
+            }
+            isDir = NO;
+        }
+        
+        if (babyId != 0) {
+            //保存Babyid
+            [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:babyId] forKey:@"BABYID"];
+            [[NSUserDefaults standardUserDefaults] setInteger:babyId forKey:@"cur_babyid"];
+            NSDictionary *dict = [[BabyDataDB babyinfoDB] selectBabyInfoByBabyId:babyId];
+            [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"nickname"] forKey:@"kBabyNickname"];
+            [self viewWillAppear:NO];
+            return;
+        }
+        
+        if (!BABYID) {
+            //注册接口
+            _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            //隐藏键盘
+            _hud.mode = MBProgressHUDModeIndeterminate;
+            _hud.alpha = 0.5;
+            _hud.color = [UIColor grayColor];
+            _hud.labelText = http_requesting;
+            //封装数据
+            NSMutableDictionary *dictBody = [[DataContract dataContract]BabyCreateByUserIdDict:ACCOUNTUID];
+            //Http请求
+            [[NetWorkConnect sharedRequest]
+             httpRequestWithURL:BABY_CREATEBYUSERID_URL
+             data:dictBody
+             mode:@"POST"
+             HUD:_hud
+             didFinishBlock:^(NSDictionary *result){
+                 _hud.labelText = [result objectForKey:@"msg"];
+                 //处理反馈信息: code=1为成功  code=99为失败
+                 if ([[result objectForKey:@"code"]intValue] == 1) {
+                     NSMutableDictionary *resultBody = [result objectForKey:@"body"];
+                     //保存Babyid
+                     [[NSUserDefaults standardUserDefaults]setObject:[resultBody objectForKey:@"babyId"] forKey:@"BABYID"];
+                     //数据库保存Baby信息
+                     [BabyDataDB createNewBabyInfo:ACCOUNTUID BabyId:BABYID Nickname:@"" Birthday:nil Sex:nil HeadPhoto:@"" RelationShip:@"" RelationShipNickName:@"" Permission:nil CreateTime:[resultBody objectForKey:@"create_time"] UpdateTime:nil];
+                     [_hud hide:YES afterDelay:0.5];
+                     _loginView.hidden = YES;
+                     [self viewWillAppear:NO];
+                 }
+                 else{
+                     _hud.labelText = http_error;
+                     [_hud hide:YES afterDelay:1];
+                 }
+             }
+             didFailBlock:^(NSString *error){
+                 //请求失败处理
+                 _hud.labelText = http_error;
+                 [_hud hide:YES afterDelay:1];
+             }
+             isShowProgress:YES
+             isAsynchronic:NO
+             netWorkStatus:YES
+             viewController:self];
+        }
+    }
+}
+
+#pragma 给APP评分
+-(void)ReviewTheApp{
+    /*
+     *  app_url                 :app地址
+     *  review_last_alert_time  :最后提醒评分时间
+     *  review_state            :评分状态 YES已评分
+     */
+    
+    //获取app_url信息
+    
+    NSString *app_url = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"];
+    if ([app_url isEqual:@""] || app_url == nil) {
+        //get url
+        NSMutableDictionary *dictBody = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"unname",@"unname",nil];
+        
+        
+        NetWorkConnect *_netWorkConnect = [[NetWorkConnect alloc]init]; 
+        [_netWorkConnect httpRequestWithURL:GET_APP_INFO
+                                                     data:dictBody
+                                                     mode:@"POST"
+                                                      HUD:nil
+                                           didFinishBlock:^(NSDictionary *result)
+         {
+             //请求成功处理
+             NSDictionary *dict = [result objectForKey:@"body"];
+             if (![[dict objectForKey:@"app_url"]  isEqual: @""])
+             {
+                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_url"] forKey:@"app_url"];
+                 [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:@"app_name"] forKey:@"app_name"];
+                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
+                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"review_state"];
+             }
+         }
+                                             didFailBlock:^(NSString *error){}
+                                           isShowProgress:YES
+                                            isAsynchronic:YES
+                                            netWorkStatus:YES
+                                           viewController:nil];
+        
+        return;
+    }
+    
+    long review_last_alert_time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"review_last_alert_time"] longValue];
+    bool review_state = [[NSUserDefaults standardUserDefaults] boolForKey:@"review_state"];
+    
+    if (![app_url isEqualToString:@""] && !review_state && ([ACDate getDiffDayFormNowToDate:[ACDate getDateFromTimeStamp:review_last_alert_time]] >= 7 || review_last_alert_time == 0) ){
+        [self showReviewAlert];
+    }
+}
+
+-(void)showReviewAlert{
+    if (_alertView == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[NSDate date]]] forKey:@"review_last_alert_time"];
+        _alertView = [[UIAlertView alloc] initWithTitle:@"给宝贝计划好评" message:@"如果您喜欢宝贝计划,请给我们一个五星评价,您的鼓励是我们进步的最大动力!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"喜欢,我五星评价",@"稍后再说",@"不再提醒", nil];
+        [_alertView show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        //评价跳转
+        NSLog(@"url:%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]);
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"app_url"]]];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
+    }
+    else if(buttonIndex == 1){
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[ACDate getTimeStampFromDate:[ACDate date]]] forKey:@"review_last_alert_time"];
+    }
+    else{
+        //不在提示
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"review_state"];
+    }
+}
+
+- (void)didReceiveMemoryWarning
+{
+>>>>>>> 1eddceeaed5df67ca7bd275bcaba33510ca2047f
     [super didReceiveMemoryWarning];
 }
  

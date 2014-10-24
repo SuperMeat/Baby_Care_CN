@@ -231,6 +231,53 @@
     [vc.navigationController pushViewController:creatMilestoneVc animated:YES];
     
 }
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == _completedTable) {
+        return UITableViewCellEditingStyleDelete;
+    }
+    else
+    {
+        return UITableViewCellEditingStyleNone;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == _completedTable)
+    {
+        if (editingStyle==UITableViewCellEditingStyleDelete) {
+            
+            
+            MilestoneModel *model = self.completedDatas[indexPath.row];
+            
+            if ([model.month intValue] == 999) {
+                [BaseSQL delete_milestone:model];
+            }
+            else
+            {
+                model.content    = @"";
+                model.photo_path = @"";
+                model.date       = @"";
+                model.completed  = [NSNumber numberWithBool:NO];
+                [BaseSQL updateData_milestone:model];
+            }
+         
+            [self _initDatas];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_milestone_reloadTab object:nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_milestone_initDatas object:nil userInfo:nil];
+            
+            // 刷新日历列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_SQLDatas object:nil];
+            
+            // 刷新日历
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_calendarView object:nil];
+        }
+    }
+}
+
 -(void)tableView:(UITableView*)tableView  willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath
 {
     [cell setBackgroundColor:[UIColor clearColor]];

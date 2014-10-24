@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>   
 
-@interface PHYHistoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TempSaveViewDelegate,PhySaveViewDelegate>
+@interface PHYHistoryViewController : ACViewController<UITableViewDataSource,UITableViewDelegate,TempSaveViewDelegate,PhySaveViewDelegate>
 {
     NSMutableArray *arrDS;
     NSString* itemName;

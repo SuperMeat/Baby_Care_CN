@@ -47,6 +47,35 @@
 //
 //    
 //}
+
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
+        
+        NSLog(@"swipe down");
+        //执行程序
+    }
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionUp) {
+        
+        NSLog(@"swipe up");
+        //执行程序
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
+        
+        
+        NSLog(@"swipe left");
+        //执行程序
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        NSLog(@"swipe right");
+        //执行程序
+    }
+    
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];

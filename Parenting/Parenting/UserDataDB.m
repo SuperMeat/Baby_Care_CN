@@ -142,17 +142,16 @@
 -(BOOL)insertNotifyMessage:(NSString *)msg andTitle:(NSString *)title
 {
     BOOL res;
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
-
-    FMDatabase *db=[FMDatabase databaseWithPath:path];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
     res=[db open];
     if (!res) {
         NSLog(@"数据库打开失败");
         [db close];
         return res;
     }
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_msg (msgid INTEGER PRIMARY KEY AUTOINCREMENT,user_id integer not null, create_time INTEGER default 0,update integer default 0, message Varchar DEFAULT NULL, tilte message Varchar DEFAULT NULL, status INTEGER NOT NULL)"];
+    
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_sys_msg (msgid INTEGER PRIMARY KEY AUTOINCREMENT,user_id integer not null, create_time INTEGER default 0,update_time integer default 0, message Varchar DEFAULT NULL, title message Varchar DEFAULT NULL, status INTEGER NOT NULL)"];
     
     if (!res) {
         NSLog(@"表格创建失败");
@@ -160,15 +159,14 @@
         return res;
     }
     
-    
-    res=[db executeUpdate:@"insert into bc_msg (user_id, create_time, update_time, message, title,  status) values(?,?,0,?,?,0)",
+    res=[db executeUpdate:@"insert into bc_sys_msg (user_id, create_time, update_time, message, title,  status) values(?,?,?,?,?,?)",
          [NSNumber numberWithInt:user_id],
-         [NSNumber numberWithLong:
-          [ACDate getTimeStampFromDate:
-           [ACDate date]
-           ]],
+         [NSNumber numberWithInt:
+         [ACDate getTimeStampFromDate:[ACDate date]]],
+         [NSNumber numberWithInt:0],
          msg,
-         title
+         title,
+         [NSNumber numberWithInt:0]
     ];
     
     if (!res) {
@@ -192,7 +190,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"update bc_msg set status = 1 where user_id=? and create_time = ?",[NSNumber numberWithInt:userid], [NSNumber numberWithLong:create_time]];
+    res=[db executeUpdate:@"update bc_sys_msg set status = 1 where user_id=? and create_time = ?",[NSNumber numberWithInt:userid], [NSNumber numberWithLong:create_time]];
     if (!res) {
         NSLog(@"数据库更新失败");
         [db close];
@@ -205,11 +203,8 @@
 -(BOOL)updateNotifyMessageAll
 {
     BOOL res;
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
-    
     int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
-    
-    FMDatabase *db=[FMDatabase databaseWithPath:path];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
 
     res=[db open];
     if (!res) {
@@ -219,7 +214,7 @@
     }
     
     
-    res=[db executeUpdate:@"update notify_message set status = 1 where status=0 where user_id=?",user_id];
+    res=[db executeUpdate:@"update bc_sys_msg set status = 1 where status=0 where user_id=?",user_id];
     if (!res) {
         NSLog(@"数据库更新失败");
         [db close];
@@ -229,7 +224,7 @@
     return res;
 }
 
--(NSArray*)selectNotifyMessage:(int)flagid;
+-(NSMutableArray*)selectNotifyMessage:(int)flagid;
 {
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:0];
     BOOL res;
@@ -242,42 +237,44 @@
         [db close];
         return nil;
     }
-    res=[db executeUpdate:@"CREATE TABLE if not exists bc_msg (msgid INTEGER PRIMARY KEY AUTOINCREMENT,user_id integer  not null, create_time INTEGER default 0,update integer default 0, message Varchar DEFAULT NULL, tilte message Varchar DEFAULT NULL, status INTEGER NOT NULL)"];
-    
+    res=[db executeUpdate:@"CREATE TABLE if not exists bc_sys_msg (msgid INTEGER PRIMARY KEY AUTOINCREMENT,user_id integer  not null, create_time INTEGER default 0,update_time integer default 0, message Varchar DEFAULT NULL, title message Varchar DEFAULT NULL, status INTEGER NOT NULL)"];
     
     if (!res) {
         NSLog(@"表格创建失败");
         [db close];
         return nil;
-        
     }
     
     if (flagid == 0)
     {
-        FMResultSet *set=[db executeQuery:@"select * from  bc_msg where user_id = ? order by create_time desc", [NSNumber numberWithInt:user_id]];
+        FMResultSet *set=[db executeQuery:@"select * from  bc_sys_msg where user_id = ? order by create_time desc", [NSNumber numberWithInt:user_id]];
         while ([set next])
         {
-            NotifyItem *item = [[NotifyItem alloc]init];
-            item.notifyid    = [set longForColumn:@"create_time"];
-            item.content     = [set stringForColumn:@"message"];
-            item.status      = [set intForColumn:@"status"];
-            item.notify_time = [ACDate getDateFromTimeStamp:[set longForColumn:@"create_time"]];
-            [array addObject:item];
+            if (![[set stringForColumn:@"message"] isEqualToString:@""]) {
+                NotifyModel *item = [[NotifyModel alloc]init];
+                item.notifyid    = [set intForColumn:@"msgid"];
+                item.content     = [set stringForColumn:@"message"];
+                item.status      = [set intForColumn:@"status"];
+                item.notify_time = [ACDate getDateFromTimeStamp:[set longForColumn:@"create_time"]];
+                [array addObject:item];
+            }
         }
         
     }
     else
     {
-        FMResultSet *set=[db executeQuery:@"select * from  bc_msg where msgid=? where user_id = ? order by create_time desc", [NSNumber numberWithInt:flagid], [NSNumber numberWithInt:user_id]];
+        FMResultSet *set=[db executeQuery:@"select * from  bc_sys_msg where msgid=? where user_id = ? order by create_time desc", [NSNumber numberWithInt:flagid], [NSNumber numberWithInt:user_id]];
 
         while ([set next])
         {
-            NotifyItem *item = [[NotifyItem alloc]init];
-            item.notifyid    = [set intForColumn:@"msgid"];
-            item.content     = [set stringForColumn:@"message"];
-            item.status      = [set intForColumn:@"status"];
-            item.notify_time = [ACDate getDateFromTimeStamp:[set longForColumn:@"create_time"]];
-            [array addObject:item];
+            if (![[set stringForColumn:@"message"] isEqualToString:@""]) {
+                NotifyModel *item = [[NotifyModel alloc]init];
+                item.notifyid    = [set intForColumn:@"msgid"];
+                item.content     = [set stringForColumn:@"message"];
+                item.status      = [set intForColumn:@"status"];
+                item.notify_time = [ACDate getDateFromTimeStamp:[set longForColumn:@"create_time"]];
+                [array addObject:item];
+            }
         }
         
     }
@@ -299,7 +296,7 @@
         return res;
     }
     
-    res=[db executeUpdate:@"delete from notify_message where notify_time < ?",date];
+    res=[db executeUpdate:@"delete from bc_sys_msg"];
     if (!res) {
         NSLog(@"数据库删除失败");
         [db close];
@@ -313,9 +310,8 @@
 -(BOOL)deleteNotifyMessageById:(int)msgid
 {
     BOOL res;
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BC_Info" ofType:@"sqlite"];
     int user_id = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cur_userid"] integerValue];
-    FMDatabase *db=[FMDatabase databaseWithPath:path];
+    FMDatabase *db=[FMDatabase databaseWithPath:UDBPATH];
 
     res=[db open];
     if (!res) {
@@ -324,9 +320,10 @@
         return res;
     }
     
-    res=[db executeUpdate:@"delete from notify_message where msgid = ? and user_id = ?", [NSNumber numberWithInt:msgid], [NSNumber numberWithInt:user_id]];
+    res=[db executeUpdate:@"delete from bc_sys_msg where msgid = ? and user_id = ?", [NSNumber numberWithInt:msgid], [NSNumber numberWithInt:user_id]];
 
-    if (!res) {
+    if (!res)
+    {
         NSLog(@"数据库删除失败");
         [db close];
         return res;

@@ -10,7 +10,7 @@
 #import "LocalNotify.h"
 #import "CustonTimeViewController.h"
 
-@interface CustomNotifyViewController : UIViewController< UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CustomIOS7AlertViewDelegate, CustonTimeViewControllerDelegate>
+@interface CustomNotifyViewController : ACViewController< UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CustomIOS7AlertViewDelegate, CustonTimeViewControllerDelegate>
 {
     NSMutableArray *hours;
     NSMutableArray *minutes;

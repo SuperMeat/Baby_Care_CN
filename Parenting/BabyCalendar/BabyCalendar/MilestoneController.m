@@ -145,7 +145,9 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addItemView];
     _milestoneView.headerView.photoView.canTap = NO;
     _milestoneView.contentView.textView.editable = NO;
+    _milestoneView.contentView.textfield.enabled = NO;
     _milestoneView.headerView.btnDate.enabled = NO;
+    
     if (_milestoneView.SQLDatas.count > 0) {
         MilestoneModel* model = _milestoneView.SQLDatas[_milestoneView.index];
         _milestoneView.contentView.textView.text = model.content;
@@ -154,6 +156,11 @@
 }
 - (void)editeViewDidDone
 {
+    if ([_milestoneView.contentView.textfield.text  isEqualToString:@""]) {
+        [self alertView:kTitle_none];
+        return;
+    }
+    
     if ([_milestoneView.contentView.textView.text isEqualToString:@""]) {
         [self alertView:kContent_none];
         return;
@@ -162,6 +169,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addItemView];
     _milestoneView.headerView.photoView.canTap = NO;
     _milestoneView.contentView.textView.editable = NO;
+    _milestoneView.contentView.textfield.enabled = NO;
     _milestoneView.headerView.btnDate.enabled = NO;
     
        // 更新数据
@@ -174,28 +182,31 @@
         
         MilestoneModel* model = _milestoneView.SQLDatas[_milestoneView.index];
         model.content = _milestoneView.contentView.textView.text;
+
         NSString* old_photo = model.photo_path;
         model.photo_path    = photoName;
+        model.title         = _milestoneView.contentView.textfield.text;
         model.date = _milestoneView.headerView.btnDate.titleLabel.text;
         
         [_milestoneView.SQLDatas replaceObjectAtIndex:_milestoneView.index withObject:model];
         
-        
         // 更新数据库
         [BaseSQL updateData_milestone:model];
         
+        NSLog(@"%@",photoName);
+        
         // 保存新照片
         [BaseMethod saveNewPhoto:_milestoneView.headerView.photoView.image withPhotoName:photoName];
+        
         // 删除旧照片
         [BaseMethod deleteOldPhoto:old_photo];
+
         
-        // 刷新日历列表
+        // 刷新日历列表                        
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_SQLDatas object:nil];
         
         // 刷新日历
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotifi_reload_calendarView object:nil];
-
-        
     }
     
 }
@@ -208,8 +219,13 @@
     
     _milestoneView.headerView.photoView.canTap = YES;
     _milestoneView.contentView.textView.editable = YES;
+    MilestoneModel *model = [_milestoneView.SQLDatas objectAtIndex:_milestoneView.index];
+    if ([model.month intValue] == 999) {
+        _milestoneView.contentView.textfield.enabled = YES;
+    }
     _milestoneView.headerView.btnDate.enabled = YES;
 }
+
 - (void)addIemViewDidAdd
 {
     [self addAction];
@@ -222,11 +238,10 @@
     ShareInfoView *shareView = [[[NSBundle mainBundle] loadNibNamed:@"ShareInfoView" owner:self options:nil] lastObject];
     [shareView.shareInfoImageView setFrame:CGRectMake((320-217)/2.0, shareView.shareInfoImageView.origin.y, 217, (kDeviceHeight-64)*217/320.0)];
     [shareView.shareInfoImageView setImage:detailImage];
-    shareView.titleDetail.text = [NSString stringWithFormat:kShareMilestoneTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage],_milestoneView.contentView.labTitle.text];;
+    shareView.titleDetail.text = [NSString stringWithFormat:kShareMilestoneTitle,[BabyinfoViewController getbabyname],[BabyinfoViewController getbabyage],_milestoneView.contentView.textfield.text];;
     UIImage *shareimage = [ACFunction cutView:shareView andWidth:shareView.width andHeight:kDeviceHeight];
     [ACShare shareImage:self andshareTitle:shareView.titleDetail.text andshareImage:shareimage anddelegate:self];
 }
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
