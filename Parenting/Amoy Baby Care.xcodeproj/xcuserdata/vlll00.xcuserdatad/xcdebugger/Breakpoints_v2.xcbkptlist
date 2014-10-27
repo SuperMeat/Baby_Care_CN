@@ -968,12 +968,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parenting/HomeViewController.m"
-            timestampString = "434443154.763237"
+            timestampString = "435832201.207028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "580"
-            endingLineNumber = "580"
-            landmarkName = "-getIncrease:"
+            startingLineNumber = "578"
+            endingLineNumber = "578"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1832,12 +1832,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parenting/HomeViewController.m"
-            timestampString = "434443154.763237"
+            timestampString = "435832201.207028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "660"
-            endingLineNumber = "660"
-            landmarkName = "-doTenLogin"
+            startingLineNumber = "658"
+            endingLineNumber = "658"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
